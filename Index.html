@@ -1,435 +1,378 @@
-<!DOCTYPE html>
-<html lang="sw">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SadeGPT - Msaidizi Wako wa AI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0a0a0f;
-            --surface: #12121a;
-            --card: #1a1a26;
-            --border: #2a2a3d;
-            --accent: #6c63ff;
-            --accent2: #ff6b9d;
-            --accent3: #00d4aa;
-            --text: #e8e8f0;
-            --text-muted: #7a7a9a;
-            --glow: rgba(108, 99, 255, 0.3);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 50% at 20% 20%, rgba(108,99,255,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,212,170,0.06) 0%, transparent 60%),
-                radial-gradient(ellipse 40% 60% at 60% 10%, rgba(255,107,157,0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
+import { useState, useEffect, useRef } from "react";
 
-        /* LOADING */
-        #loading-screen {
-            position: fixed; inset: 0;
-            background: var(--bg);
-            z-index: 300;
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column; gap: 16px;
-        }
-        .loading-spinner {
-            width: 50px; height: 50px;
-            border: 3px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .loading-text { color: var(--text-muted); font-size: 14px; }
+const COLORS = {
+  bg: "#050c14",
+  surface: "#0a1628",
+  card: "#0e1e35",
+  border: "#1a3050",
+  accent: "#00d4ff",
+  gold: "#f5c842",
+  green: "#00e676",
+  red: "#ff4f6a",
+  text: "#e8f4ff",
+  muted: "#6a8fb0",
+  gradient1: "linear-gradient(135deg, #00d4ff22, #00e67622)",
+  gradientGold: "linear-gradient(135deg, #f5c84222, #ff8c0022)",
+};
 
-        /* LOGIN */
-        #login-screen {
-            position: fixed; inset: 0;
-            background: var(--bg);
-            z-index: 200;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .login-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 48px 40px;
-            max-width: 420px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 60px var(--glow);
-            animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .login-icon {
-            width: 80px; height: 80px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            border-radius: 24px;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Syne', sans-serif;
-            font-weight: 800; font-size: 32px; color: white;
-            margin: 0 auto 24px;
-            box-shadow: 0 0 40px var(--glow);
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        .login-card h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: 28px; font-weight: 800; margin-bottom: 8px;
-            background: linear-gradient(135deg, #fff 30%, var(--accent));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .login-card p { color: var(--text-muted); font-size: 14px; margin-bottom: 32px; line-height: 1.6; }
-        .btn-google {
-            width: 100%;
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            background: white;
-            border: none; border-radius: 14px;
-            padding: 15px 20px;
-            font-family: 'Syne', sans-serif;
-            font-weight: 700; font-size: 15px; color: #333;
-            cursor: pointer; transition: all 0.2s;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-        .btn-google:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
-        .btn-google img { width: 22px; height: 22px; }
-        .login-footer { margin-top: 20px; font-size: 11px; color: var(--text-muted); }
+const courses = [
+  { id:1, title:"Program ya Siku 30 — Kupunguza Uzito", emoji:"🔥", price:3000, duration:"30 siku", lessons:24, premium:true, category:"uzito", desc:"Mpango kamili wa mwili — lishe, mazoezi, na akili moja kwa moja." },
+  { id:2, title:"Udhibiti wa Kisukari", emoji:"💉", price:5000, duration:"6 wiki", lessons:18, premium:true, category:"magonjwa", desc:"Jifunza kudhibiti sukari ya damu kwa lishe na mtindo wa maisha." },
+  { id:3, title:"Mental Discipline Mastery", emoji:"🧠", price:4000, duration:"21 siku", lessons:15, premium:true, category:"akili", desc:"Nguvu ya akili, utulivu, na nguvu ya kuamua vizuri." },
+  { id:4, title:"Emergency Health Training", emoji:"🚑", price:2500, duration:"2 wiki", lessons:12, premium:true, category:"dharura", desc:"First aid, CPR, na jinsi ya kushughulikia dharura za afya." },
+  { id:5, title:"Afya ya Moyo — Misingi", emoji:"❤️", price:0, duration:"1 wiki", lessons:8, premium:false, category:"moyo", desc:"Jinsi moyo unavyofanya kazi na hatua za kulinda afya ya moyo." },
+  { id:6, title:"Lishe ya Msingi Tanzania", emoji:"🥗", price:0, duration:"5 siku", lessons:6, premium:false, category:"lishe", desc:"Chakula bora kwa afya nzuri — matunda, mboga, na nafaka za Tanzania." },
+  { id:7, title:"First Aid Basics", emoji:"🩹", price:0, duration:"3 siku", lessons:5, premium:false, category:"dharura", desc:"Hatua za kwanza za dharura — majeraha, moto, na kuanguka." },
+  { id:8, title:"Magonjwa ya Kawaida Tanzania", emoji:"🦟", price:0, duration:"4 siku", lessons:7, premium:false, category:"magonjwa", desc:"Malaria, kipindupindu, na magonjwa ya kawaida — kinga na matibabu." },
+];
 
-        /* HEADER */
-        header {
-            position: relative; z-index: 10;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 20px;
-            background: rgba(18,18,26,0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-        }
-        .logo { display: flex; align-items: center; gap: 10px; }
-        .logo-icon {
-            width: 38px; height: 38px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Syne', sans-serif;
-            font-weight: 800; font-size: 16px; color: white;
-            box-shadow: 0 0 15px var(--glow);
-        }
-        .logo-text {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800; font-size: 18px;
-            background: linear-gradient(135deg, #fff 30%, var(--accent));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .logo-subtitle { font-size: 10px; color: var(--text-muted); }
-        .header-right { display: flex; align-items: center; gap: 10px; }
-        .user-info {
-            display: flex; align-items: center; gap: 8px;
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 20px; padding: 5px 12px 5px 5px;
-        }
-        .user-avatar {
-            width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
-        }
-        .user-avatar-placeholder {
-            width: 28px; height: 28px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            display: flex; align-items: center; justify-content: center;
-            font-size: 12px; color: white; font-weight: 700;
-        }
-        .user-name { font-size: 12px; color: var(--text); max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .btn-logout {
-            background: rgba(255,80,80,0.1); border: 1px solid rgba(255,80,80,0.3);
-            border-radius: 8px; padding: 6px 12px;
-            color: #ff8080; font-size: 11px; cursor: pointer;
-            font-family: 'DM Sans', sans-serif; transition: all 0.2s;
-        }
-        .btn-logout:hover { background: rgba(255,80,80,0.2); }
-        .btn-menu {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 8px; padding: 7px 10px;
-            color: var(--text); cursor: pointer; font-size: 16px; transition: all 0.2s;
-        }
+const tips = [
+  { emoji:"💧", tip:"Kunywa maji glasi 8 kila siku. Mwili unahitaji maji kwa kila kazi.", category:"maji" },
+  { emoji:"🌅", tip:"Amka mapema. Asubuhi saa 12 ni wakati mzuri wa mazoezi ya mwili.", category:"mazoezi" },
+  { emoji:"🥑", tip:"Avocado ina mafuta mazuri sana kwa moyo na ubongo. Kula mara 3 kwa wiki.", category:"lishe" },
+  { emoji:"😴", tip:"Lala masaa 7-8 kila usiku. Usingizi ndio dawa bora ya mwili.", category:"usingizi" },
+  { emoji:"🚶", tip:"Tembea dakika 30 kila siku. Hata hatua 10,000 zinaboresha afya sana.", category:"mazoezi" },
+  { emoji:"🧘", tip:"Pumzika akili dakika 10 kila siku. Meditation inasaidia kupunguza msongo wa mawazo.", category:"akili" },
+];
 
-        /* SIDEBAR */
-        #sidebar {
-            position: fixed; left: 0; top: 61px; bottom: 0;
-            width: 260px;
-            background: var(--surface);
-            border-right: 1px solid var(--border);
-            z-index: 50;
-            display: flex; flex-direction: column;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
-        #sidebar.open { transform: translateX(0); }
-        .sidebar-header {
-            padding: 16px; border-bottom: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .sidebar-header span { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; }
-        .btn-new-chat {
-            background: linear-gradient(135deg, var(--accent), #8b5cf6);
-            border: none; border-radius: 8px; padding: 7px 12px;
-            color: white; font-size: 12px; cursor: pointer;
-            font-family: 'DM Sans', sans-serif; transition: all 0.2s;
-        }
-        #chat-history { flex: 1; overflow-y: auto; padding: 8px; }
-        #chat-history::-webkit-scrollbar { width: 3px; }
-        #chat-history::-webkit-scrollbar-thumb { background: var(--border); }
-        .history-item {
-            padding: 10px 12px; border-radius: 10px; cursor: pointer;
-            font-size: 13px; color: var(--text-muted); transition: all 0.2s;
-            margin-bottom: 4px; display: flex; align-items: center; gap: 8px;
-        }
-        .history-item:hover { background: var(--card); color: var(--text); }
-        .history-item.active { background: rgba(108,99,255,0.15); color: var(--text); border: 1px solid rgba(108,99,255,0.3); }
-        .history-item .del-btn {
-            margin-left: auto; flex-shrink: 0; opacity: 0;
-            font-size: 14px; transition: opacity 0.2s;
-            background: none; border: none; color: #ff8080; cursor: pointer;
-        }
-        .history-item:hover .del-btn { opacity: 1; }
-        .history-empty { text-align: center; padding: 30px 16px; color: var(--text-muted); font-size: 13px; line-height: 1.6; }
+const coaches = [
+  { id:1, name:"Dk. Amina Rashid", title:"Daktari wa Lishe", emoji:"👩‍⚕️", price:3000, rating:4.9, sessions:240, specialty:"Lishe & Uzito" },
+  { id:2, name:"Bw. Kevin Mwamba", title:"Fitness Coach", emoji:"💪", price:2000, rating:4.8, sessions:180, specialty:"Mazoezi & Nguvu" },
+  { id:3, name:"Bi. Sarah Ouma", title:"Mental Health Coach", emoji:"🧠", price:4000, rating:5.0, sessions:95, specialty:"Afya ya Akili" },
+  { id:4, name:"Dk. Hassan Juma", title:"Daktari wa Jumla", emoji:"👨‍⚕️", price:5000, rating:4.7, sessions:320, specialty:"Afya ya Jumla" },
+];
 
-        /* MAIN */
-        #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+const forumPosts = [
+  { user:"Mama Grace", time:"saa 2 zilizopita", msg:"Nimepoteza kg 4 kwa wiki 2! Program ya uzito inafanya kazi! 🙌", likes:24 },
+  { user:"Juma B.", time:"saa 5 zilizopita", msg:"Swali: Kisukari na ndizi — ni salama kula ngapi kwa siku?", likes:8 },
+  { user:"Fatuma A.", time:"jana", msg:"Meditation ya dakika 10 asubuhi imebadilisha maisha yangu. Jaribu!", likes:41 },
+  { user:"Bakari T.", time:"jana", msg:"Coach Kevin amenisaidia kupanga ratiba ya mazoezi — recommended 💯", likes:19 },
+];
 
-        /* OVERLAY */
-        #overlay {
-            display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,0.5); z-index: 40;
-        }
-        #overlay.show { display: block; }
+const healthMetrics = [
+  { label:"Maji Leo", value:"6/8", unit:"glasi", color:COLORS.accent, pct:75 },
+  { label:"Hatua", value:"7,240", unit:"hatua", color:COLORS.green, pct:72 },
+  { label:"Usingizi", value:"7.5", unit:"masaa", color:COLORS.gold, pct:94 },
+  { label:"Kalori", value:"1,820", unit:"kcal", color:COLORS.red, pct:60 },
+];
 
-        /* CHAT */
-        #chat-container {
-            flex: 1; overflow-y: auto; padding: 20px;
-            display: flex; flex-direction: column; gap: 16px;
-        }
-        #chat-container::-webkit-scrollbar { width: 4px; }
-        #chat-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+const aiResponses = {
+  default: "Habari! Mimi ni AI Health Assistant wa Sade Health Pro. Niulize swali lolote kuhusu afya, lishe, mazoezi, au first aid. ⚠️ Kumbuka: Mimi si mbadala wa daktari halisi.",
+  moyo: "❤️ Afya ya Moyo: Kula matunda na mboga kila siku, pumzika vizuri, epuka chumvi nyingi, na fanya mazoezi angalau dakika 30 kwa siku. Pima shinikizo la damu mara kwa mara.",
+  uzito: "⚖️ Kupunguza Uzito: Pumzua kalori polepole — punguza 300-500 kcal kwa siku. Kula proteni nyingi, mboga, na epuka sukari. Fanya mazoezi ya nguvu + cardio wiki 3-4.",
+  kisukari: "💉 Kisukari: Epuka vyakula vya sukari nyingi na wanga mweupe. Kula mara kwa wakati maalum. Fanya mazoezi kila siku. Pima sukari mara kwa mara. Tembelea daktari wako mara kwa mara.",
+  maji: "💧 Kuhusu Maji: Unahitaji glasi 8 (lita 2) kwa siku. Ongeza kama unafanya mazoezi au ni joto. Dalili za upungufu wa maji: kiu, mkojo wa njano giza, maumivu ya kichwa.",
+  usingizi: "😴 Usingizi Bora: Lala masaa 7-9. Zima simu saa 1 kabla ya kulala. Epuka kahawa baada ya saa 12 mchana. Chumba kiwe giza na baridi. Usingizi mbaya unasababisha uzito, msongo, na ugonjwa.",
+  mazoezi: "🏃 Mazoezi: Anza polepole — tembea dakika 20-30 kila siku. Ongeza nguvu pole pole. Changanya cardio (kutembea, kukimbia) na nguvu (push-ups, squats). Pumzika siku 1-2 kwa wiki.",
+  first: "🚑 First Aid — Majeraha: 1) Simamisha damu kwa shinikizo. 2) Safisha jeraha kwa maji safi. 3) Funika kwa bandeji safi. 4) Kama jeraha ni kubwa, nenda hospitali haraka.",
+};
 
-        #welcome {
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            flex: 1; text-align: center; padding: 30px 20px; min-height: 50vh;
-        }
-        .welcome-icon {
-            width: 70px; height: 70px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            border-radius: 20px;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Syne', sans-serif; font-weight: 800; font-size: 28px; color: white;
-            margin-bottom: 20px; box-shadow: 0 0 30px var(--glow);
-            animation: float 3s ease-in-out infinite;
-        }
-        #welcome h1 {
-            font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 10px;
-            background: linear-gradient(135deg, #fff 40%, var(--accent));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        #welcome p { color: var(--text-muted); font-size: 15px; max-width: 340px; line-height: 1.7; margin-bottom: 28px; }
-        .suggestions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 500px; }
-        .suggestion-chip {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 8px 14px;
-            font-size: 12px; color: var(--text-muted); cursor: pointer; transition: all 0.2s;
-        }
-        .suggestion-chip:hover { border-color: var(--accent); color: var(--text); background: rgba(108,99,255,0.1); transform: translateY(-2px); }
+function getAIResponse(msg) {
+  const m = msg.toLowerCase();
+  if (m.includes("moyo") || m.includes("pressure") || m.includes("shinikizo")) return aiResponses.moyo;
+  if (m.includes("uzito") || m.includes("nona") || m.includes("pumzua")) return aiResponses.uzito;
+  if (m.includes("kisukari") || m.includes("sukari") || m.includes("diabetes")) return aiResponses.kisukari;
+  if (m.includes("maji") || m.includes("kunywa")) return aiResponses.maji;
+  if (m.includes("usingizi") || m.includes("lala") || m.includes("kulala")) return aiResponses.usingizi;
+  if (m.includes("mazoezi") || m.includes("gym") || m.includes("kukimbia")) return aiResponses.mazoezi;
+  if (m.includes("first aid") || m.includes("dharura") || m.includes("jeraha")) return aiResponses.first;
+  return "Asante kwa swali lako! 🩺 Hili ni suala zuri la afya. Nakushauri kuwasiliana na daktari wetu wa coaching kwa ushauri wa kina zaidi. Unaweza piga booking kwenye sehemu ya Coaching. ⚠️ Kumbuka: AI hii si mbadala wa daktari halisi.";
+}
 
-        .message { display: flex; gap: 12px; animation: msgIn 0.3s ease; max-width: 750px; }
-        @keyframes msgIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .message.user { flex-direction: row-reverse; align-self: flex-end; }
-        .message-avatar {
-            width: 32px; height: 32px; border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 14px; flex-shrink: 0;
-            font-family: 'Syne', sans-serif; font-weight: 800; overflow: hidden;
-        }
-        .message.ai .message-avatar {
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            color: white; font-size: 11px; box-shadow: 0 0 12px var(--glow);
-        }
-        .message.user .message-avatar { background: var(--card); border: 1px solid var(--border); }
-        .message.user .message-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .message-bubble { padding: 12px 16px; border-radius: 14px; font-size: 14px; line-height: 1.7; max-width: 620px; }
-        .message.ai .message-bubble { background: var(--card); border: 1px solid var(--border); border-top-left-radius: 4px; }
-        .message.user .message-bubble {
-            background: linear-gradient(135deg, var(--accent), #8b5cf6);
-            color: white; border-top-right-radius: 4px; box-shadow: 0 4px 12px var(--glow);
-        }
-
-        .typing-indicator { display: flex; gap: 5px; align-items: center; padding: 4px 0; }
-        .typing-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: typingBounce 1.2s infinite; }
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes typingBounce {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-            30% { transform: translateY(-5px); opacity: 1; }
-        }
-
-        /* INPUT */
-        #input-area {
-            position: relative; z-index: 10;
-            padding: 12px 20px 20px;
-            background: rgba(18,18,26,0.9);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid var(--border);
-        }
-        .input-wrapper {
-            display: flex; align-items: flex-end; gap: 10px;
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 10px 14px; transition: all 0.2s;
-        }
-        .input-wrapper:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(108,99,255,0.1); }
-        #user-input {
-            flex: 1; background: transparent; border: none; outline: none;
-            color: var(--text); font-family: 'DM Sans', sans-serif;
-            font-size: 15px; resize: none; max-height: 120px; line-height: 1.5;
-        }
-        #user-input::placeholder { color: var(--text-muted); }
-        #send-btn {
-            width: 38px; height: 38px;
-            background: linear-gradient(135deg, var(--accent), #8b5cf6);
-            border: none; border-radius: 10px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s; flex-shrink: 0; box-shadow: 0 2px 10px var(--glow);
-        }
-        #send-btn:hover { transform: scale(1.08); }
-        #send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-        #send-btn svg { width: 16px; height: 16px; fill: white; }
-        .input-hint { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 8px; }
-    </style>
-</head>
-<body>
-
-<div id="loading-screen">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">Inapakia SadeGPT...</div>
-</div>
-
-<div id="login-screen">
-    <div class="login-card">
-        <div class="login-icon">S</div>
-        <h1>Karibu SadeGPT</h1>
-        <p>Msaidizi wa AI wa Kiswahili. Ingia ili mazungumzo yako yahifadhiwe na uendelee mahali ulipoacha.</p>
-        <button class="btn-google" onclick="loginWithGoogle()">
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-            Ingia na Google
+const NavBar = ({ active, setActive }) => {
+  const items = [
+    { id:"home", icon:"🏠", label:"Nyumbani" },
+    { id:"courses", icon:"📚", label:"Kozi" },
+    { id:"ai", icon:"🤖", label:"AI" },
+    { id:"coach", icon:"👨‍⚕️", label:"Coach" },
+    { id:"more", icon:"⋯", label:"Zaidi" },
+  ];
+  return (
+    <div style={{
+      position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)",
+      width:"100%", maxWidth:430,
+      background:"#070f1c", borderTop:`1px solid ${COLORS.border}`,
+      display:"flex", zIndex:200,
+      backdropFilter:"blur(20px)",
+    }}>
+      {items.map(n => (
+        <button key={n.id} onClick={() => setActive(n.id)}
+          style={{
+            flex:1, padding:"10px 4px 8px", border:"none", background:"transparent",
+            cursor:"pointer", display:"flex", flexDirection:"column", alignItems:"center", gap:2,
+            color: active===n.id ? COLORS.accent : COLORS.muted,
+            fontSize:10, fontFamily:"'Trebuchet MS', sans-serif",
+            transition:"color 0.2s",
+            borderTop: active===n.id ? `2px solid ${COLORS.accent}` : "2px solid transparent",
+          }}>
+          <span style={{ fontSize:20 }}>{n.icon}</span>
+          {n.label}
         </button>
-        <div class="login-footer">Imetengenezwa na Herman Sade</div>
+      ))}
     </div>
-</div>
+  );
+};
 
-<div id="overlay" onclick="closeSidebar()"></div>
+const Card = ({ children, style={}, gold=false }) => (
+  <div style={{
+    background: gold ? "linear-gradient(145deg, #1a1500, #1e1c00)" : COLORS.card,
+    border: `1px solid ${gold ? "#f5c84244" : COLORS.border}`,
+    borderRadius:16, padding:16,
+    ...style
+  }}>
+    {children}
+  </div>
+);
 
-<div id="sidebar">
-    <div class="sidebar-header">
-        <span>💬 Mazungumzo</span>
-        <button class="btn-new-chat" onclick="newChat()">+ Mpya</button>
-    </div>
-    <div id="chat-history">
-        <div class="history-empty">Bado hakuna mazungumzo.<br>Anza mazungumzo mapya! 💬</div>
-    </div>
-</div>
+const Badge = ({ children, color=COLORS.accent }) => (
+  <span style={{
+    background: color+"22", border:`1px solid ${color}44`,
+    color, fontSize:10, fontWeight:700, borderRadius:6,
+    padding:"2px 8px", letterSpacing:0.5,
+  }}>{children}</span>
+);
 
-<div id="main">
-    <header>
-        <div style="display:flex;align-items:center;gap:10px;">
-            <button class="btn-menu" onclick="toggleSidebar()">☰</button>
-            <div class="logo">
-                <div class="logo-icon">S</div>
-                <div>
-                    <div class="logo-text">SadeGPT</div>
-                    <div class="logo-subtitle">Imetengenezwa na Herman Sade</div>
-                </div>
+const ProgressRing = ({ pct, color, size=54 }) => {
+  const r = (size-8)/2;
+  const circ = 2*Math.PI*r;
+  return (
+    <svg width={size} height={size} style={{ transform:"rotate(-90deg)" }}>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#1a3050" strokeWidth={5}/>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={color} strokeWidth={5}
+        strokeDasharray={circ} strokeDashoffset={circ*(1-pct/100)}
+        strokeLinecap="round" style={{ transition:"stroke-dashoffset 1s ease" }}/>
+    </svg>
+  );
+};
+
+// ============ PAGES ============
+
+function HomePage({ setActive, isPro }) {
+  const [tipIdx, setTipIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setTipIdx(i => (i+1)%tips.length), 4000);
+    return () => clearInterval(t);
+  }, []);
+  const tip = tips[tipIdx];
+
+  return (
+    <div style={{ padding:"16px 16px 0" }}>
+      {/* Header */}
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:20 }}>
+        <div>
+          <div style={{ fontSize:13, color:COLORS.muted, letterSpacing:2, marginBottom:4 }}>HABARI YAKO</div>
+          <div style={{ fontSize:26, fontWeight:800, color:COLORS.text, fontFamily:"'Georgia', serif" }}>
+            Karibu, Rafiki 👋
+          </div>
+          <div style={{ fontSize:13, color:COLORS.muted, marginTop:2 }}>Sade Health Pro · Tanzania</div>
+        </div>
+        <div style={{
+          background: isPro ? COLORS.gradientGold : COLORS.gradient1,
+          border:`1px solid ${isPro ? COLORS.gold+"44" : COLORS.accent+"44"}`,
+          borderRadius:12, padding:"6px 14px", textAlign:"center",
+        }}>
+          <div style={{ fontSize:11, color: isPro ? COLORS.gold : COLORS.accent, fontWeight:700 }}>
+            {isPro ? "⭐ PRO" : "🆓 FREE"}
+          </div>
+        </div>
+      </div>
+
+      {/* Daily Tip Ticker */}
+      <Card style={{ marginBottom:16, background:"linear-gradient(135deg, #001a2e, #002040)" }}>
+        <div style={{ fontSize:11, color:COLORS.accent, letterSpacing:2, marginBottom:8 }}>💡 KIDOKEZO CHA LEO</div>
+        <div style={{ display:"flex", gap:12, alignItems:"center" }}>
+          <div style={{ fontSize:32 }}>{tip.emoji}</div>
+          <div style={{ fontSize:14, color:COLORS.text, lineHeight:1.6, flex:1 }}>{tip.tip}</div>
+        </div>
+        <div style={{ display:"flex", gap:6, marginTop:10 }}>
+          {tips.map((_, i) => (
+            <div key={i} style={{
+              height:3, flex:1, borderRadius:2,
+              background: i===tipIdx ? COLORS.accent : COLORS.border,
+              transition:"background 0.4s",
+            }}/>
+          ))}
+        </div>
+      </Card>
+
+      {/* Health Tracker */}
+      <div style={{ fontSize:13, color:COLORS.muted, letterSpacing:2, marginBottom:10 }}>📊 AFYA YAKO LEO</div>
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:16 }}>
+        {healthMetrics.map(m => (
+          <Card key={m.label} style={{ display:"flex", alignItems:"center", gap:12, padding:12 }}>
+            <ProgressRing pct={m.pct} color={m.color} />
+            <div>
+              <div style={{ fontSize:16, fontWeight:800, color:m.color }}>{m.value}</div>
+              <div style={{ fontSize:11, color:COLORS.muted }}>{m.unit}</div>
+              <div style={{ fontSize:11, color:COLORS.text, marginTop:2 }}>{m.label}</div>
             </div>
-        </div>
-        <div class="header-right">
-            <div class="user-info">
-                <div class="user-avatar-placeholder" id="user-avatar-placeholder">?</div>
-                <img id="user-avatar-img" class="user-avatar" style="display:none;" src="" alt="">
-                <span class="user-name" id="user-name">...</span>
+          </Card>
+        ))}
+      </div>
+
+      {/* Quick Actions */}
+      <div style={{ fontSize:13, color:COLORS.muted, letterSpacing:2, marginBottom:10 }}>⚡ HARAKA</div>
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:16 }}>
+        {[
+          { icon:"🤖", label:"AI Assistant", sub:"Uliza swali", tab:"ai", color:COLORS.accent },
+          { icon:"👨‍⚕️", label:"Piga Booking", sub:"Coach wa kweli", tab:"coach", color:COLORS.green },
+          { icon:"📚", label:"Kozi Zangu", sub:"Endelea kusoma", tab:"courses", color:COLORS.gold },
+          { icon:"👥", label:"Community", sub:"Zungumza na wengine", tab:"more", color:"#c084fc" },
+        ].map(a => (
+          <button key={a.tab} onClick={() => setActive(a.tab)}
+            style={{
+              background:"linear-gradient(145deg, #0e1e35, #111e30)",
+              border:`1px solid ${a.color}33`,
+              borderRadius:14, padding:"14px 12px", cursor:"pointer", textAlign:"left",
+            }}>
+            <div style={{ fontSize:24, marginBottom:6 }}>{a.icon}</div>
+            <div style={{ fontSize:13, fontWeight:700, color:a.color }}>{a.label}</div>
+            <div style={{ fontSize:11, color:COLORS.muted }}>{a.sub}</div>
+          </button>
+        ))}
+      </div>
+
+      {/* Subscription CTA */}
+      {!isPro && (
+        <button onClick={() => setActive("sub")}
+          style={{
+            width:"100%", marginBottom:16,
+            background:"linear-gradient(135deg, #1a1200, #2a1e00)",
+            border:`1px solid ${COLORS.gold}55`,
+            borderRadius:16, padding:"18px 20px", cursor:"pointer", textAlign:"left",
+          }}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+            <div>
+              <div style={{ fontSize:14, fontWeight:800, color:COLORS.gold, marginBottom:4 }}>
+                ⭐ Kuwa PRO Member
+              </div>
+              <div style={{ fontSize:12, color:"#c9a44a", lineHeight:1.5 }}>
+                Content yote · AI Assistant · Kozi zote
+              </div>
             </div>
-            <button class="btn-logout" onclick="logout()">Toka</button>
-        </div>
-    </header>
-
-    <div id="chat-container">
-        <div id="welcome">
-            <div class="welcome-icon">S</div>
-            <h1>Habari! Mimi ni SadeGPT</h1>
-            <p>Msaidizi wako wa AI. Ingia ili mazungumzo yako yahifadhiwe kwenye akaunti yako!</p>
-            <div class="suggestions">
-                <div class="suggestion-chip" onclick="askSuggestion(this)">📚 Nifundishe kitu kipya leo</div>
-                <div class="suggestion-chip" onclick="askSuggestion(this)">✍️ Nisaidie kuandika barua pepe</div>
-                <div class="suggestion-chip" onclick="askSuggestion(this)">💡 Nipe mawazo ya biashara</div>
-                <div class="suggestion-chip" onclick="askSuggestion(this)">🔢 Nisaidie na hesabu</div>
-                <div class="suggestion-chip" onclick="askSuggestion(this)">🌍 Niambie kuhusu historia ya Afrika</div>
-                <div class="suggestion-chip" onclick="askSuggestion(this)">💻 Nisaidie na code ya programu</div>
+            <div style={{ textAlign:"right" }}>
+              <div style={{ fontSize:18, fontWeight:800, color:COLORS.gold }}>Tsh 500</div>
+              <div style={{ fontSize:10, color:"#c9a44a" }}>kwa siku</div>
             </div>
-        </div>
+          </div>
+        </button>
+      )}
     </div>
+  );
+}
 
-    <div id="input-area">
-        <div class="input-wrapper">
-            <textarea id="user-input" placeholder="Andika swali lako hapa..." rows="1"
-                onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-            <button id="send-btn" onclick="sendMessage()">
-                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-            </button>
-        </div>
-        <div class="input-hint">SadeGPT inaweza kukosea. Hakikisha taarifa muhimu.</div>
+function CoursesPage({ isPro, setActive }) {
+  const [filter, setFilter] = useState("zote");
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [purchased, setPurchased] = useState([]);
+
+  const filters = ["zote","free","premium"];
+  const filtered = courses.filter(c => {
+    if (filter==="free") return !c.premium;
+    if (filter==="premium") return c.premium;
+    return true;
+  });
+
+  if (selectedCourse) return (
+    <div style={{ padding:16 }}>
+      <button onClick={() => setSelectedCourse(null)}
+        style={{ background:"none", border:"none", color:COLORS.accent, fontSize:16, cursor:"pointer", marginBottom:16, padding:0 }}>
+        ← Rudi
+      </button>
+      <div style={{ fontSize:48, textAlign:"center", marginBottom:12 }}>{selectedCourse.emoji}</div>
+      <div style={{ fontSize:22, fontWeight:800, color:COLORS.text, textAlign:"center", marginBottom:6, fontFamily:"Georgia,serif" }}>
+        {selectedCourse.title}
+      </div>
+      <div style={{ display:"flex", justifyContent:"center", gap:8, marginBottom:20 }}>
+        <Badge color={selectedCourse.premium ? COLORS.gold : COLORS.green}>
+          {selectedCourse.premium ? "⭐ PREMIUM" : "🆓 FREE"}
+        </Badge>
+        <Badge>{selectedCourse.duration}</Badge>
+        <Badge>{selectedCourse.lessons} masomo</Badge>
+      </div>
+      <Card style={{ marginBottom:16 }}>
+        <div style={{ fontSize:14, color:COLORS.text, lineHeight:1.8 }}>{selectedCourse.desc}</div>
+      </Card>
+      <Card style={{ marginBottom:20 }}>
+        <div style={{ fontSize:12, color:COLORS.muted, marginBottom:8 }}>MUHTASARI WA KOZI</div>
+        {Array.from({length: Math.min(4, selectedCourse.lessons)}, (_,i) => (
+          <div key={i} style={{ display:"flex", gap:10, alignItems:"center", padding:"8px 0", borderBottom:`1px solid ${COLORS.border}` }}>
+            <div style={{ width:28, height:28, borderRadius:"50%", background:COLORS.border, display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, color:COLORS.muted, flexShrink:0 }}>
+              {i+1}
+            </div>
+            <div style={{ fontSize:13, color:COLORS.text }}>Somo {i+1}: {["Utangulizi","Misingi ya Afya","Hatua za Vitendo","Mazoezi ya Kila Siku"][i]}</div>
+            {(isPro || !selectedCourse.premium || purchased.includes(selectedCourse.id) || i===0) ? (
+              <div style={{ marginLeft:"auto", fontSize:11, color:COLORS.green }}>✓ Wazi</div>
+            ) : (
+              <div style={{ marginLeft:"auto", fontSize:12 }}>🔒</div>
+            )}
+          </div>
+        ))}
+        {selectedCourse.lessons > 4 && (
+          <div style={{ fontSize:12, color:COLORS.muted, textAlign:"center", marginTop:8 }}>
+            + masomo {selectedCourse.lessons - 4} mengine...
+          </div>
+        )}
+      </Card>
+      {selectedCourse.premium && !isPro && !purchased.includes(selectedCourse.id) ? (
+        <button onClick={() => setPurchased(p => [...p, selectedCourse.id])}
+          style={{
+            width:"100%", padding:16, borderRadius:14, border:"none",
+            background:`linear-gradient(145deg, #1a1200, #2a1e00)`,
+            border:`1px solid ${COLORS.gold}55`,
+            color:COLORS.gold, fontSize:15, fontWeight:800, cursor:"pointer",
+            fontFamily:"Georgia,serif",
+          }}>
+          <div style={{ marginBottom:6 }}>💰 Lipa Kwa Tsh {selectedCourse.price.toLocaleString()}</div>
+          <div style={{ fontSize:12, color:"#c9a44a", fontWeight:400 }}>
+            📱 +255 712 655 957 · Herman Sade · YAS / MIX BY YAS
+          </div>
+        </button>
+      ) : (
+        <button style={{
+          width:"100%", padding:16, borderRadius:14, border:"none",
+          background:`linear-gradient(90deg, #003300, #004400)`,
+          color:COLORS.green, fontSize:16, fontWeight:800, cursor:"pointer",
+        }}>
+          ▶ Anza Kusoma Sasa
+        </button>
+      )}
     </div>
-</div>
+  );
 
-<script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
-        from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, orderBy, query, serverTimestamp, updateDoc }
-        from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+  return (
+    <div style={{ padding:16 }}>
+      <div style={{ fontSize:22, fontWeight:800, color:COLORS.text, marginBottom:4, fontFamily:"Georgia,serif" }}>📚 Kozi za Afya</div>
+      <div style={{ fontSize:13, color:COLORS.muted, marginBottom:16 }}>Jifunza afya bora kwa Kiswahili</div>
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDCKHDp1VpDTRr4-HGqgE1OFkEwWIDZyqI",
-        authDomain: "sadegpt-f79d7.firebaseapp.com",
-        projectId: "sadegpt-f79d7",
-        storageBucket: "sadegpt-f79d7.firebasestorage.app",
-        messagingSenderId: "474328809093",
-        appId: "1:474328809093:web:e94c3af5eca2e7949fb3ec"
-    };
+      <div style={{ display:"flex", gap:8, marginBottom:16 }}>
+        {filters.map(f => (
+          <button key={f} onClick={() => setFilter(f)}
+            style={{
+              padding:"7px 16px", borderRadius:20, border:"none", cursor:"pointer",
+              background: filter===f ? COLORS.accent : COLORS.card,
+              color: filter===f ? "#000" : COLORS.muted,
+              fontSize:12, fontWeight:700, fontFamily:"Trebuchet MS,sans-serif",
+            }}>
+            {f==="zote"?"🏥 Zote":f==="free"?"🆓 Free":"⭐ Premium"}
+          </button>
+        ))}
+      </div>
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const provider = new GoogleAuthProvider();
-
-    const API_KEY = 'gsk_0CffLm54yFBnn
+      <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+        {filtered.map(c => (
+          <button key={c.id} onClick={() => setSelectedCourse(c)}
+            style={{
+              background:"linear-gradient(145deg, #0e1e35, #0a1628)",
+              border:`1px solid ${c.premium ? COLORS.gold+"33" : COLORS.border}`,
+              borderRadius:16, padding:14, cursor:"pointer", textAlign:"left",
+              display:"flex", gap:14, alignItems:"center",
+            }}>
+            <div style={{ fontSize:36, flexShrink:0 }}>{c.emoji}</div>
+            <div style={{ flex:1 }}>
+              <div style={{ display:"flex", gap:6, marginBottom:5, flexWrap:"wrap" }}>
+                <Badge color={c.premium ? COLORS.gold : COLORS.green}>
+                  {c.premium ? "PREMIUM" : "FREE"}
+                </Badge>
+              </div>
+        
