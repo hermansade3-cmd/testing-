@@ -1,870 +1,631 @@
-import { useState, useEffect, useRef } from "react";
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jamii \u2016 Sadeshoi</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-const COLORS = {
-  bg: "#050c14",
-  surface: "#0a1628",
-  card: "#0e1e35",
-  border: "#1a3050",
-  accent: "#00d4ff",
-  gold: "#f5c842",
-  green: "#00e676",
-  red: "#ff4f6a",
-  text: "#e8f4ff",
-  muted: "#6a8fb0",
-  gradient1: "linear-gradient(135deg, #00d4ff22, #00e67622)",
-  gradientGold: "linear-gradient(135deg, #f5c84222, #ff8c0022)",
-};
+  :root {
+    --primary: #1a6ef5;
+    --primary-dark: #0f4fc4;
+    --primary-light: #e8f0fe;
+    --accent: #ff6b35;
+    --bg: #f0f2f5;
+    --card: #ffffff;
+    --sidebar-bg: #ffffff;
+    --text: #1c1e21;
+    --text-secondary: #65676b;
+    --border: #dde1e7;
+    --hover: #f0f2f5;
+    --online: #31a24c;
+    --story-gradient: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    --sidebar-w: 280px;
+    --right-sidebar-w: 300px;
+  }
 
-const courses = [
-  { id:1, title:"Program ya Siku 30 — Kupunguza Uzito", emoji:"🔥", price:3000, duration:"30 siku", lessons:24, premium:true, category:"uzito", desc:"Mpango kamili wa mwili — lishe, mazoezi, na akili moja kwa moja." },
-  { id:2, title:"Udhibiti wa Kisukari", emoji:"💉", price:5000, duration:"6 wiki", lessons:18, premium:true, category:"magonjwa", desc:"Jifunza kudhibiti sukari ya damu kwa lishe na mtindo wa maisha." },
-  { id:3, title:"Mental Discipline Mastery", emoji:"🧠", price:4000, duration:"21 siku", lessons:15, premium:true, category:"akili", desc:"Nguvu ya akili, utulivu, na nguvu ya kuamua vizuri." },
-  { id:4, title:"Emergency Health Training", emoji:"🚑", price:2500, duration:"2 wiki", lessons:12, premium:true, category:"dharura", desc:"First aid, CPR, na jinsi ya kushughulikia dharura za afya." },
-  { id:5, title:"Afya ya Moyo — Misingi", emoji:"❤️", price:0, duration:"1 wiki", lessons:8, premium:false, category:"moyo", desc:"Jinsi moyo unavyofanya kazi na hatua za kulinda afya ya moyo." },
-  { id:6, title:"Lishe ya Msingi Tanzania", emoji:"🥗", price:0, duration:"5 siku", lessons:6, premium:false, category:"lishe", desc:"Chakula bora kwa afya nzuri — matunda, mboga, na nafaka za Tanzania." },
-  { id:7, title:"First Aid Basics", emoji:"🩹", price:0, duration:"3 siku", lessons:5, premium:false, category:"dharura", desc:"Hatua za kwanza za dharura — majeraha, moto, na kuanguka." },
-  { id:8, title:"Magonjwa ya Kawaida Tanzania", emoji:"🦟", price:0, duration:"4 siku", lessons:7, premium:false, category:"magonjwa", desc:"Malaria, kipindupindu, na magonjwa ya kawaida — kinga na matibabu." },
-];
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
 
-const tips = [
-  { emoji:"💧", tip:"Kunywa maji glasi 8 kila siku. Mwili unahitaji maji kwa kila kazi.", category:"maji" },
-  { emoji:"🌅", tip:"Amka mapema. Asubuhi saa 12 ni wakati mzuri wa mazoezi ya mwili.", category:"mazoezi" },
-  { emoji:"🥑", tip:"Avocado ina mafuta mazuri sana kwa moyo na ubongo. Kula mara 3 kwa wiki.", category:"lishe" },
-  { emoji:"😴", tip:"Lala masaa 7-8 kila usiku. Usingizi ndio dawa bora ya mwili.", category:"usingizi" },
-  { emoji:"🚶", tip:"Tembea dakika 30 kila siku. Hata hatua 10,000 zinaboresha afya sana.", category:"mazoezi" },
-  { emoji:"🧘", tip:"Pumzika akili dakika 10 kila siku. Meditation inasaidia kupunguza msongo wa mawazo.", category:"akili" },
-];
+  /* \u2500\u2500\u2500 AUTH PAGES \u2500\u2500\u2500 */
+  .auth-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a1628 0%, #1a3a6e 50%, #0d2547 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .auth-page::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,110,245,0.15) 0%, transparent 70%);
+    top: -200px; left: -200px;
+  }
+  .auth-page::after {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,53,0.1) 0%, transparent 70%);
+    bottom: -150px; right: -150px;
+  }
 
-const coaches = [
-  { id:1, name:"Dk. Amina Rashid", title:"Daktari wa Lishe", emoji:"👩‍⚕️", price:3000, rating:4.9, sessions:240, specialty:"Lishe & Uzito" },
-  { id:2, name:"Bw. Kevin Mwamba", title:"Fitness Coach", emoji:"💪", price:2000, rating:4.8, sessions:180, specialty:"Mazoezi & Nguvu" },
-  { id:3, name:"Bi. Sarah Ouma", title:"Mental Health Coach", emoji:"🧠", price:4000, rating:5.0, sessions:95, specialty:"Afya ya Akili" },
-  { id:4, name:"Dk. Hassan Juma", title:"Daktari wa Jumla", emoji:"👨‍⚕️", price:5000, rating:4.7, sessions:320, specialty:"Afya ya Jumla" },
-];
+  .auth-container {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+    z-index: 1;
+  }
 
-const forumPosts = [
-  { user:"Mama Grace", time:"saa 2 zilizopita", msg:"Nimepoteza kg 4 kwa wiki 2! Program ya uzito inafanya kazi! 🙌", likes:24 },
-  { user:"Juma B.", time:"saa 5 zilizopita", msg:"Swali: Kisukari na ndizi — ni salama kula ngapi kwa siku?", likes:8 },
-  { user:"Fatuma A.", time:"jana", msg:"Meditation ya dakika 10 asubuhi imebadilisha maisha yangu. Jaribu!", likes:41 },
-  { user:"Bakari T.", time:"jana", msg:"Coach Kevin amenisaidia kupanga ratiba ya mazoezi — recommended 💯", likes:19 },
-];
+  .auth-brand {
+    flex: 1;
+    color: white;
+  }
+  .auth-brand .logo-text {
+    font-family: 'Sora', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -2px;
+    line-height: 1;
+  }
+  .auth-brand .tagline {
+    font-size: 22px;
+    font-weight: 300;
+    margin-top: 12px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.4;
+  }
+  .auth-brand .features {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+  }
+  .feature-item .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    flex-shrink: 0;
+  }
 
-const healthMetrics = [
-  { label:"Maji Leo", value:"6/8", unit:"glasi", color:COLORS.accent, pct:75 },
-  { label:"Hatua", value:"7,240", unit:"hatua", color:COLORS.green, pct:72 },
-  { label:"Usingizi", value:"7.5", unit:"masaa", color:COLORS.gold, pct:94 },
-  { label:"Kalori", value:"1,820", unit:"kcal", color:COLORS.red, pct:60 },
-];
+  .auth-card {
+    background: white;
+    border-radius: 20px;
+    padding: 36px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .auth-card h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .auth-card .sub {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
 
-const aiResponses = {
-  default: "Habari! Mimi ni AI Health Assistant wa Sade Health Pro. Niulize swali lolote kuhusu afya, lishe, mazoezi, au first aid. ⚠️ Kumbuka: Mimi si mbadala wa daktari halisi.",
-  moyo: "❤️ Afya ya Moyo: Kula matunda na mboga kila siku, pumzika vizuri, epuka chumvi nyingi, na fanya mazoezi angalau dakika 30 kwa siku. Pima shinikizo la damu mara kwa mara.",
-  uzito: "⚖️ Kupunguza Uzito: Pumzua kalori polepole — punguza 300-500 kcal kwa siku. Kula proteni nyingi, mboga, na epuka sukari. Fanya mazoezi ya nguvu + cardio wiki 3-4.",
-  kisukari: "💉 Kisukari: Epuka vyakula vya sukari nyingi na wanga mweupe. Kula mara kwa wakati maalum. Fanya mazoezi kila siku. Pima sukari mara kwa mara. Tembelea daktari wako mara kwa mara.",
-  maji: "💧 Kuhusu Maji: Unahitaji glasi 8 (lita 2) kwa siku. Ongeza kama unafanya mazoezi au ni joto. Dalili za upungufu wa maji: kiu, mkojo wa njano giza, maumivu ya kichwa.",
-  usingizi: "😴 Usingizi Bora: Lala masaa 7-9. Zima simu saa 1 kabla ya kulala. Epuka kahawa baada ya saa 12 mchana. Chumba kiwe giza na baridi. Usingizi mbaya unasababisha uzito, msongo, na ugonjwa.",
-  mazoezi: "🏃 Mazoezi: Anza polepole — tembea dakika 20-30 kila siku. Ongeza nguvu pole pole. Changanya cardio (kutembea, kukimbia) na nguvu (push-ups, squats). Pumzika siku 1-2 kwa wiki.",
-  first: "🚑 First Aid — Majeraha: 1) Simamisha damu kwa shinikizo. 2) Safisha jeraha kwa maji safi. 3) Funika kwa bandeji safi. 4) Kama jeraha ni kubwa, nenda hospitali haraka.",
-};
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 13px 16px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    background: #fafafa;
+  }
+  .form-group input:focus, .form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(26,110,245,0.1);
+    background: white;
+  }
 
-function getAIResponse(msg) {
-  const m = msg.toLowerCase();
-  if (m.includes("moyo") || m.includes("pressure") || m.includes("shinikizo")) return aiResponses.moyo;
-  if (m.includes("uzito") || m.includes("nona") || m.includes("pumzua")) return aiResponses.uzito;
-  if (m.includes("kisukari") || m.includes("sukari") || m.includes("diabetes")) return aiResponses.kisukari;
-  if (m.includes("maji") || m.includes("kunywa")) return aiResponses.maji;
-  if (m.includes("usingizi") || m.includes("lala") || m.includes("kulala")) return aiResponses.usingizi;
-  if (m.includes("mazoezi") || m.includes("gym") || m.includes("kukimbia")) return aiResponses.mazoezi;
-  if (m.includes("first aid") || m.includes("dharura") || m.includes("jeraha")) return aiResponses.first;
-  return "Asante kwa swali lako! 🩺 Hili ni suala zuri la afya. Nakushauri kuwasiliana na daktari wetu wa coaching kwa ushauri wa kina zaidi. Unaweza piga booking kwenye sehemu ya Coaching. ⚠️ Kumbuka: AI hii si mbadala wa daktari halisi.";
-}
+  .form-row { display: flex; gap: 12px; }
+  .form-row .form-group { flex: 1; }
 
-const NavBar = ({ active, setActive }) => {
-  const items = [
-    { id:"home", icon:"🏠", label:"Nyumbani" },
-    { id:"courses", icon:"📚", label:"Kozi" },
-    { id:"ai", icon:"🤖", label:"AI" },
-    { id:"coach", icon:"👨‍⚕️", label:"Coach" },
-    { id:"more", icon:"⋯", label:"Zaidi" },
-  ];
-  return (
-    <div style={{
-      position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)",
-      width:"100%", maxWidth:430,
-      background:"#070f1c", borderTop:`1px solid ${COLORS.border}`,
-      display:"flex", zIndex:200,
-      backdropFilter:"blur(20px)",
-    }}>
-      {items.map(n => (
-        <button key={n.id} onClick={() => setActive(n.id)}
-          style={{
-            flex:1, padding:"10px 4px 8px", border:"none", background:"transparent",
-            cursor:"pointer", display:"flex", flexDirection:"column", alignItems:"center", gap:2,
-            color: active===n.id ? COLORS.accent : COLORS.muted,
-            fontSize:10, fontFamily:"'Trebuchet MS', sans-serif",
-            transition:"color 0.2s",
-            borderTop: active===n.id ? `2px solid ${COLORS.accent}` : "2px solid transparent",
-          }}>
-          <span style={{ fontSize:20 }}>{n.icon}</span>
-          {n.label}
-        </button>
-      ))}
-    </div>
-  );
-};
+  .btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 8px;
+  }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-primary:active { transform: scale(0.98); }
 
-const Card = ({ children, style={}, gold=false }) => (
-  <div style={{
-    background: gold ? "linear-gradient(145deg, #1a1500, #1e1c00)" : COLORS.card,
-    border: `1px solid ${gold ? "#f5c84244" : COLORS.border}`,
-    borderRadius:16, padding:16,
-    ...style
-  }}>
-    {children}
-  </div>
-);
+  .btn-secondary {
+    padding: 11px 20px;
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--primary-light); }
 
-const Badge = ({ children, color=COLORS.accent }) => (
-  <span style={{
-    background: color+"22", border:`1px solid ${color}44`,
-    color, fontSize:10, fontWeight:700, borderRadius:6,
-    padding:"2px 8px", letterSpacing:0.5,
-  }}>{children}</span>
-);
+  .auth-switch {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .auth-switch a {
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .auth-switch a:hover { text-decoration: underline; }
 
-const ProgressRing = ({ pct, color, size=54 }) => {
-  const r = (size-8)/2;
-  const circ = 2*Math.PI*r;
-  return (
-    <svg width={size} height={size} style={{ transform:"rotate(-90deg)" }}>
-      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#1a3050" strokeWidth={5}/>
-      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={color} strokeWidth={5}
-        strokeDasharray={circ} strokeDashoffset={circ*(1-pct/100)}
-        strokeLinecap="round" style={{ transition:"stroke-dashoffset 1s ease" }}/>
-    </svg>
-  );
-};
+  .divider {
+    text-align: center;
+    position: relative;
+    margin: 20px 0;
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+  .divider::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 0; right: 0;
+    height: 1px;
+    background: var(--border);
+  }
+  .divider span {
+    background: white;
+    padding: 0 12px;
+    position: relative;
+  }
 
-// ============ PAGES ============
+  /* \u2500\u2500\u2500 MAIN APP \u2500\u2500\u2500 */
+  .app { display: none; }
+  .app.active { display: block; }
+  .auth-page.hidden { display: none; }
 
-function HomePage({ setActive, isPro }) {
-  const [tipIdx, setTipIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setTipIdx(i => (i+1)%tips.length), 4000);
-    return () => clearInterval(t);
-  }, []);
-  const tip = tips[tipIdx];
+  /* \u2500\u2500\u2500 NAVBAR \u2500\u2500\u2500 */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 56px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 1000;
+    gap: 8px;
+  }
+  .nav-logo {
+    font-family: 'Sora', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -1px;
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+  }
+  .nav-search {
+    flex: 0 0 240px;
+    position: relative;
+  }
+  .nav-search input {
+    width: 100%;
+    padding: 8px 16px 8px 38px;
+    border: none;
+    border-radius: 20px;
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+  }
+  .nav-search input:focus { background: #e4e6e9; }
+  .nav-search .search-icon {
+    position: absolute;
+    left: 12px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 16px;
+  }
+  .nav-tabs {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+  .nav-tab {
+    padding: 8px 32px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 22px;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .nav-tab:hover { background: var(--hover); color: var(--primary); }
+  .nav-tab.active { color: var(--primary); }
+  .nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -9px; left: 0; right: 0;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 2px 2px 0 0;
+  }
+  .nav-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: var(--right-sidebar-w);
+    justify-content: flex-end;
+  }
+  .nav-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .nav-btn:hover { background: #e4e6e9; }
+  .nav-btn .badge {
+    position: absolute;
+    top: 2px; right: 2px;
+    width: 16px; height: 16px;
+    background: #e4473c;
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+  }
+  .nav-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+  }
 
-  return (
-    <div style={{ padding:"16px 16px 0" }}>
-      {/* Header */}
-      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:20 }}>
-        <div>
-          <div style={{ fontSize:13, color:COLORS.muted, letterSpacing:2, marginBottom:4 }}>HABARI YAKO</div>
-          <div style={{ fontSize:26, fontWeight:800, color:COLORS.text, fontFamily:"'Georgia', serif" }}>
-            Karibu, Rafiki 👋
-          </div>
-          <div style={{ fontSize:13, color:COLORS.muted, marginTop:2 }}>Sade Health Pro · Tanzania</div>
-        </div>
-        <div style={{
-          background: isPro ? COLORS.gradientGold : COLORS.gradient1,
-          border:`1px solid ${isPro ? COLORS.gold+"44" : COLORS.accent+"44"}`,
-          borderRadius:12, padding:"6px 14px", textAlign:"center",
-        }}>
-          <div style={{ fontSize:11, color: isPro ? COLORS.gold : COLORS.accent, fontWeight:700 }}>
-            {isPro ? "⭐ PRO" : "🆓 FREE"}
-          </div>
-        </div>
-      </div>
+  /* \u2500\u2500\u2500 LAYOUT \u2500\u2500\u2500 */
+  .main-layout {
+    display: flex;
+    margin-top: 56px;
+    min-height: calc(100vh - 56px);
+  }
 
-      {/* Daily Tip Ticker */}
-      <Card style={{ marginBottom:16, background:"linear-gradient(135deg, #001a2e, #002040)" }}>
-        <div style={{ fontSize:11, color:COLORS.accent, letterSpacing:2, marginBottom:8 }}>💡 KIDOKEZO CHA LEO</div>
-        <div style={{ display:"flex", gap:12, alignItems:"center" }}>
-          <div style={{ fontSize:32 }}>{tip.emoji}</div>
-          <div style={{ fontSize:14, color:COLORS.text, lineHeight:1.6, flex:1 }}>{tip.tip}</div>
-        </div>
-        <div style={{ display:"flex", gap:6, marginTop:10 }}>
-          {tips.map((_, i) => (
-            <div key={i} style={{
-              height:3, flex:1, borderRadius:2,
-              background: i===tipIdx ? COLORS.accent : COLORS.border,
-              transition:"background 0.4s",
-            }}/>
-          ))}
-        </div>
-      </Card>
+  /* \u2500\u2500\u2500 LEFT SIDEBAR \u2500\u2500\u2500 */
+  .left-sidebar {
+    position: fixed;
+    top: 56px;
+    width: var(--sidebar-w);
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+    padding: 8px 12px;
+    scrollbar-width: none;
+  }
+  .left-sidebar::-webkit-scrollbar { display: none; }
 
-      {/* Health Tracker */}
-      <div style={{ fontSize:13, color:COLORS.muted, letterSpacing:2, marginBottom:10 }}>📊 AFYA YAKO LEO</div>
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:16 }}>
-        {healthMetrics.map(m => (
-          <Card key={m.label} style={{ display:"flex", alignItems:"center", gap:12, padding:12 }}>
-            <ProgressRing pct={m.pct} color={m.color} />
-            <div>
-              <div style={{ fontSize:16, fontWeight:800, color:m.color }}>{m.value}</div>
-              <div style={{ fontSize:11, color:COLORS.muted }}>{m.unit}</div>
-              <div style={{ fontSize:11, color:COLORS.text, marginTop:2 }}>{m.label}</div>
-            </div>
-          </Card>
-        ))}
-      </div>
+  .sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .sidebar-user:hover { background: var(--hover); }
+  .sidebar-user img {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .sidebar-user span {
+    font-weight: 600;
+    font-size: 15px;
+  }
 
-      {/* Quick Actions */}
-      <div style={{ fontSize:13, color:COLORS.muted, letterSpacing:2, marginBottom:10 }}>⚡ HARAKA</div>
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:16 }}>
-        {[
-          { icon:"🤖", label:"AI Assistant", sub:"Uliza swali", tab:"ai", color:COLORS.accent },
-          { icon:"👨‍⚕️", label:"Piga Booking", sub:"Coach wa kweli", tab:"coach", color:COLORS.green },
-          { icon:"📚", label:"Kozi Zangu", sub:"Endelea kusoma", tab:"courses", color:COLORS.gold },
-          { icon:"👥", label:"Community", sub:"Zungumza na wengine", tab:"more", color:"#c084fc" },
-        ].map(a => (
-          <button key={a.tab} onClick={() => setActive(a.tab)}
-            style={{
-              background:"linear-gradient(145deg, #0e1e35, #111e30)",
-              border:`1px solid ${a.color}33`,
-              borderRadius:14, padding:"14px 12px", cursor:"pointer", textAlign:"left",
-            }}>
-            <div style={{ fontSize:24, marginBottom:6 }}>{a.icon}</div>
-            <div style={{ fontSize:13, fontWeight:700, color:a.color }}>{a.label}</div>
-            <div style={{ fontSize:11, color:COLORS.muted }}>{a.sub}</div>
-          </button>
-        ))}
-      </div>
+  .sidebar-nav { margin-top: 4px; }
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .sidebar-item:hover { background: var(--hover); }
+  .sidebar-item .icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
 
-      {/* Subscription CTA */}
-      {!isPro && (
-        <button onClick={() => setActive("sub")}
-          style={{
-            width:"100%", marginBottom:16,
-            background:"linear-gradient(135deg, #1a1200, #2a1e00)",
-            border:`1px solid ${COLORS.gold}55`,
-            borderRadius:16, padding:"18px 20px", cursor:"pointer", textAlign:"left",
-          }}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-            <div>
-              <div style={{ fontSize:14, fontWeight:800, color:COLORS.gold, marginBottom:4 }}>
-                ⭐ Kuwa PRO Member
-              </div>
-              <div style={{ fontSize:12, color:"#c9a44a", lineHeight:1.5 }}>
-                Content yote · AI Assistant · Kozi zote
-              </div>
-            </div>
-            <div style={{ textAlign:"right" }}>
-              <div style={{ fontSize:18, fontWeight:800, color:COLORS.gold }}>Tsh 500</div>
-              <div style={{ fontSize:10, color:"#c9a44a" }}>kwa siku</div>
-            </div>
-          </div>
-        </button>
-      )}
-    </div>
-  );
-}
+  .sidebar-section {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .sidebar-section-title {
+    font-size: 17px;
+    font-weight: 700;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
 
-function CoursesPage({ isPro, setActive }) {
-  const [filter, setFilter] = useState("zote");
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [purchased, setPurchased] = useState([]);
+  /* \u2500\u2500\u2500 FEED \u2500\u2500\u2500 */
+  .feed-area {
+    margin-left: var(--sidebar-w);
+    margin-right: var(--right-sidebar-w);
+    flex: 1;
+    padding: 24px 20px;
+    max-width: 680px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0;
+    padding-left: calc(var(--sidebar-w) + 20px);
+    padding-right: calc(var(--right-sidebar-w) + 20px);
+    box-sizing: border-box;
+    max-width: 100%;
+  }
 
-  const filters = ["zote","free","premium"];
-  const filtered = courses.filter(c => {
-    if (filter==="free") return !c.premium;
-    if (filter==="premium") return c.premium;
-    return true;
-  });
+  /* \u2500\u2500\u2500 STORIES \u2500\u2500\u2500 */
+  .stories-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    scrollbar-width: none;
+  }
+  .stories-row::-webkit-scrollbar { display: none; }
 
-  if (selectedCourse) return (
-    <div style={{ padding:16 }}>
-      <button onClick={() => setSelectedCourse(null)}
-        style={{ background:"none", border:"none", color:COLORS.accent, fontSize:16, cursor:"pointer", marginBottom:16, padding:0 }}>
-        ← Rudi
-      </button>
-      <div style={{ fontSize:48, textAlign:"center", marginBottom:12 }}>{selectedCourse.emoji}</div>
-      <div style={{ fontSize:22, fontWeight:800, color:COLORS.text, textAlign:"center", marginBottom:6, fontFamily:"Georgia,serif" }}>
-        {selectedCourse.title}
-      </div>
-      <div style={{ display:"flex", justifyContent:"center", gap:8, marginBottom:20 }}>
-        <Badge color={selectedCourse.premium ? COLORS.gold : COLORS.green}>
-          {selectedCourse.premium ? "⭐ PREMIUM" : "🆓 FREE"}
-        </Badge>
-        <Badge>{selectedCourse.duration}</Badge>
-        <Badge>{selectedCourse.lessons} masomo</Badge>
-      </div>
-      <Card style={{ marginBottom:16 }}>
-        <div style={{ fontSize:14, color:COLORS.text, lineHeight:1.8 }}>{selectedCourse.desc}</div>
-      </Card>
-      <Card style={{ marginBottom:20 }}>
-        <div style={{ fontSize:12, color:COLORS.muted, marginBottom:8 }}>MUHTASARI WA KOZI</div>
-        {Array.from({length: Math.min(4, selectedCourse.lessons)}, (_,i) => (
-          <div key={i} style={{ display:"flex", gap:10, alignItems:"center", padding:"8px 0", borderBottom:`1px solid ${COLORS.border}` }}>
-            <div style={{ width:28, height:28, borderRadius:"50%", background:COLORS.border, display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, color:COLORS.muted, flexShrink:0 }}>
-              {i+1}
-            </div>
-            <div style={{ fontSize:13, color:COLORS.text }}>Somo {i+1}: {["Utangulizi","Misingi ya Afya","Hatua za Vitendo","Mazoezi ya Kila Siku"][i]}</div>
-            {(isPro || !selectedCourse.premium || purchased.includes(selectedCourse.id) || i===0) ? (
-              <div style={{ marginLeft:"auto", fontSize:11, color:COLORS.green }}>✓ Wazi</div>
-            ) : (
-              <div style={{ marginLeft:"auto", fontSize:12 }}>🔒</div>
-            )}
-          </div>
-        ))}
-        {selectedCourse.lessons > 4 && (
-          <div style={{ fontSize:12, color:COLORS.muted, textAlign:"center", marginTop:8 }}>
-            + masomo {selectedCourse.lessons - 4} mengine...
-          </div>
-        )}
-      </Card>
-      {selectedCourse.premium && !isPro && !purchased.includes(selectedCourse.id) ? (
-        <button onClick={() => setPurchased(p => [...p, selectedCourse.id])}
-          style={{
-            width:"100%", padding:16, borderRadius:14, border:"none",
-            background:`linear-gradient(145deg, #1a1200, #2a1e00)`,
-            border:`1px solid ${COLORS.gold}55`,
-            color:COLORS.gold, fontSize:15, fontWeight:800, cursor:"pointer",
-            fontFamily:"Georgia,serif",
-          }}>
-          <div style={{ marginBottom:6 }}>💰 Lipa Kwa Tsh {selectedCourse.price.toLocaleString()}</div>
-          <div style={{ fontSize:12, color:"#c9a44a", fontWeight:400 }}>
-            📱 +255 712 655 957 · Herman Sade · YAS / MIX BY YAS
-          </div>
-        </button>
-      ) : (
-        <button style={{
-          width:"100%", padding:16, borderRadius:14, border:"none",
-          background:`linear-gradient(90deg, #003300, #004400)`,
-          color:COLORS.green, fontSize:16, fontWeight:800, cursor:"pointer",
-        }}>
-          ▶ Anza Kusoma Sasa
-        </button>
-      )}
-    </div>
-  );
+  .story-card {
+    flex-shrink: 0;
+    width: 112px;
+    height: 200px;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+  .story-card:hover { transform: scale(1.03); }
+  .story-card .story-bg {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .story-card .story-gradient {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  }
+  .story-card .story-name {
+    position: absolute;
+    bottom: 10px; left: 8px; right: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .story-card .story-avatar {
+    position: absolute;
+    top: 10px; left: 10px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    object-fit: cover;
+  }
+  .story-card.add-story {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 14px;
+    gap: 6px;
+  }
+  .story-card.add-story .add-icon-wrap {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 4px;
+  }
+  .story-card.add-story .top-half {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 55%;
+    background: var(--bg);
+  }
+  .story-add-label { font-size: 13px; font-weight: 600; color: var(--text); }
 
-  return (
-    <div style={{ padding:16 }}>
-      <div style={{ fontSize:22, fontWeight:800, color:COLORS.text, marginBottom:4, fontFamily:"Georgia,serif" }}>📚 Kozi za Afya</div>
-      <div style={{ fontSize:13, color:COLORS.muted, marginBottom:16 }}>Jifunza afya bora kwa Kiswahili</div>
+  /* \u2500\u2500\u2500 POST BOX \u2500\u2500\u2500 */
+  .post-box {
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  .post-box-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .post-box-top img {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .post-input-area {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: 20px;
+    background: var(--bg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 0.2s;
+    border: none;
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .post-input-area:hover { background: #e4e6e9; }
+  .post-actions-row {
+    display: flex;
+    gap: 2px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .post-action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: background 0.2s;
+    border: none;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .post-action-btn:hover { background: var(--hover); }
 
-      <div style={{ display:"flex", gap:8, marginBottom:16 }}>
-        {filters.map(f => (
-          <button key={f} onClick={() => setFilter(f)}
-            style={{
-              padding:"7px 16px", borderRadius:20, border:"none", cursor:"pointer",
-              background: filter===f ? COLORS.accent : COLORS.card,
-              color: filter===f ? "#000" : COLORS.muted,
-              fontSize:12, fontWeight:700, fontFamily:"Trebuchet MS,sans-serif",
-            }}>
-            {f==="zote"?"🏥 Zote":f==="free"?"🆓 Free":"⭐ Premium"}
-          </button>
-        ))}
-      </div>
+  /* \u2500\u2500\u2500 POST CARD \u2500\u2500\u2500 */
+  .post-card {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    overflow: hidden;
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-      <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
-        {filtered.map(c => (
-          <button key={c.id} onClick={() => setSelectedCourse(c)}
-            style={{
-              background:"linear-gradient(145deg, #0e1e35, #0a1628)",
-              border:`1px solid ${c.premium ? COLORS.gold+"33" : COLORS.border}`,
-              borderRadius:16, padding:14, cursor:"pointer", textAlign:"left",
-              display:"flex", gap:14, alignItems:"center",
-            }}>
-            <div style={{ fontSize:36, flexShrink:0 }}>{c.emoji}</div>
-            <div style={{ flex:1 }}>
-              <div style={{ display:"flex", gap:6, marginBottom:5, flexWrap:"wrap" }}>
-                <Badge color={c.premium ? COLORS.gold : COLORS.green}>
-                  {c.premium ? "PREMIUM" : "FREE"}
-                </Badge>
-              </div>
-              <div style={{ fontSize:14, fontWeight:700, color:COLORS.text, marginBottom:3 }}>{c.title}</div>
-              <div style={{ fontSize:12, color:COLORS.muted }}>{c.duration} · {c.lessons} masomo</div>
-              {c.premium && <div style={{ fontSize:13, color:COLORS.gold, fontWeight:700, marginTop:4 }}>Tsh {c.price.toLocaleString()}</div>}
-            </div>
-            <div style={{ fontSize:18, color:COLORS.muted }}>›</div>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
+  .post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px 10px;
+  }
+  .post-header img {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .post-author { flex: 1; }
+  .post-author .name {
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .post-author .name:hover { text-decoration: underline; }
+  .post-author .meta {
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .post-more {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .post-more:hover { background: var(--hover); }
 
-function AIPage() {
-  const [messages, setMessages] = useState([
-    { role:"ai", text:aiResponses.default }
-  ]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const bottomRef = useRef(null);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior:"smooth" });
-  }, [messages]);
-
-  const send = () => {
-    if (!input.trim()) return;
-    const userMsg = input.trim();
-    setMessages(m => [...m, { role:"user", text:userMsg }]);
-    setInput("");
-    setLoading(true);
-    setTimeout(() => {
-      setMessages(m => [...m, { role:"ai", text:getAIResponse(userMsg) }]);
-      setLoading(false);
-    }, 1200);
-  };
-
-  const quickQuestions = ["Afya ya moyo", "Kupunguza uzito", "Kisukari", "Mazoezi bora", "Usingizi", "First Aid"];
-
-  return (
-    <div style={{ display:"flex", flexDirection:"column", height:"calc(100vh - 140px)" }}>
-      {/* Header */}
-      <div style={{ padding:"16px 16px 10px", flexShrink:0 }}>
-        <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:8 }}>
-          <div style={{
-            width:44, height:44, borderRadius:"50%",
-            background:`linear-gradient(135deg, ${COLORS.accent}44, ${COLORS.green}44)`,
-            border:`1px solid ${COLORS.accent}55`,
-            display:"flex", alignItems:"center", justifyContent:"center", fontSize:22
-          }}>🤖</div>
-          <div>
-            <div style={{ fontSize:16, fontWeight:800, color:COLORS.text }}>AI Health Assistant</div>
-            <div style={{ fontSize:11, color:COLORS.green }}>● Mtandaoni · Jibu haraka</div>
-          </div>
-        </div>
-        <div style={{
-          background:"#200000", border:"1px solid #ff4f6a44",
-          borderRadius:10, padding:"8px 12px", fontSize:11, color:"#ff8fa0"
-        }}>
-          ⚠️ AI hii ni kwa elimu tu. Daima wasiliana na daktari halisi kwa matibabu.
-        </div>
-      </div>
-
-      {/* Messages */}
-      <div style={{ flex:1, overflowY:"auto", padding:"0 16px" }}>
-        {messages.map((m, i) => (
-          <div key={i} style={{
-            display:"flex", justifyContent: m.role==="user" ? "flex-end" : "flex-start",
-            marginBottom:12,
-          }}>
-            <div style={{
-              maxWidth:"82%", padding:"12px 14px", borderRadius:16,
-              background: m.role==="user"
-                ? `linear-gradient(135deg, #003366, #004499)`
-                : COLORS.card,
-              border:`1px solid ${m.role==="user" ? COLORS.accent+"44" : COLORS.border}`,
-              fontSize:14, color:COLORS.text, lineHeight:1.6,
-              borderBottomRightRadius: m.role==="user" ? 4 : 16,
-              borderBottomLeftRadius: m.role==="ai" ? 4 : 16,
-            }}>
-              {m.text}
-            </div>
-          </div>
-        ))}
-        {loading && (
-          <div style={{ display:"flex", gap:5, padding:"12px 16px" }}>
-            {[0,1,2].map(i => (
-              <div key={i} style={{
-                width:8, height:8, borderRadius:"50%", background:COLORS.accent,
-                animation:`bounce 1.2s ease-in-out ${i*0.2}s infinite alternate`,
-              }}/>
-            ))}
-          </div>
-        )}
-        <div ref={bottomRef}/>
-      </div>
-
-      {/* Quick Questions */}
-      <div style={{ padding:"8px 16px", flexShrink:0 }}>
-        <div style={{ display:"flex", gap:6, overflowX:"auto", paddingBottom:4 }}>
-          {quickQuestions.map(q => (
-            <button key={q} onClick={() => { setInput(q); }}
-              style={{
-                padding:"6px 12px", borderRadius:16, border:`1px solid ${COLORS.border}`,
-                background:COLORS.card, color:COLORS.muted, fontSize:11, cursor:"pointer",
-                whiteSpace:"nowrap", fontFamily:"Trebuchet MS,sans-serif",
-              }}>
-              {q}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Input */}
-      <div style={{ padding:"8px 16px 16px", display:"flex", gap:8, flexShrink:0 }}>
-        <input
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={e => e.key==="Enter" && send()}
-          placeholder="Uliza swali la afya..."
-          style={{
-            flex:1, padding:"12px 16px", borderRadius:14,
-            background:COLORS.card, border:`1px solid ${COLORS.border}`,
-            color:COLORS.text, fontSize:14, outline:"none",
-            fontFamily:"Trebuchet MS,sans-serif",
-          }}
-        />
-        <button onClick={send}
-          style={{
-            width:46, height:46, borderRadius:14, border:"none",
-            background:`linear-gradient(135deg, ${COLORS.accent}, #0099bb)`,
-            color:"#000", fontSize:18, cursor:"pointer",
-          }}>
-          ➤
-        </button>
-      </div>
-      <style>{`@keyframes bounce { from{transform:translateY(0)} to{transform:translateY(-6px)} }`}</style>
-    </div>
-  );
-}
-
-function CoachPage() {
-  const [booking, setBooking] = useState(null);
-  const [booked, setBooked] = useState(false);
-  const [selectedTime, setSelectedTime] = useState("");
-
-  const times = ["Saa 3 Asubuhi","Saa 4 Asubuhi","Saa 5 Asubuhi","Saa 2 Alasiri","Saa 3 Alasiri","Saa 4 Alasiri"];
-
-  if (booking) return (
-    <div style={{ padding:16 }}>
-      <button onClick={() => { setBooking(null); setBooked(false); setSelectedTime(""); }}
-        style={{ background:"none", border:"none", color:COLORS.accent, fontSize:16, cursor:"pointer", marginBottom:16, padding:0 }}>
-        ← Rudi
-      </button>
-      {!booked ? (
-        <>
-          <div style={{ textAlign:"center", marginBottom:20 }}>
-            <div style={{ fontSize:48 }}>{booking.emoji}</div>
-            <div style={{ fontSize:18, fontWeight:800, color:COLORS.text, marginTop:8 }}>{booking.name}</div>
-            <div style={{ fontSize:13, color:COLORS.muted }}>{booking.title} · {booking.specialty}</div>
-            <div style={{ fontSize:20, fontWeight:800, color:COLORS.gold, marginTop:8 }}>Tsh {booking.price.toLocaleString()} / dakika 30</div>
-          </div>
-          <Card style={{ marginBottom:16 }}>
-            <div style={{ fontSize:12, color:COLORS.muted, marginBottom:10 }}>CHAGUA WAKATI — LEO</div>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:8 }}>
-              {times.map(t => (
-                <button key={t} onClick={() => setSelectedTime(t)}
-                  style={{
-                    padding:"10px 6px", borderRadius:10, border:"none", cursor:"pointer", fontSize:11,
-                    background: selectedTime===t ? COLORS.accent : COLORS.surface,
-                    color: selectedTime===t ? "#000" : COLORS.muted,
-                    border:`1px solid ${selectedTime===t ? COLORS.accent : COLORS.border}`,
-                    fontWeight: selectedTime===t ? 700 : 400,
-                  }}>
-                  {t}
-                </button>
-              ))}
-            </div>
-          </Card>
-          <Card style={{ marginBottom:20, background:"linear-gradient(145deg, #001a00, #002200)" }}>
-            <div style={{ fontSize:12, color:COLORS.muted, marginBottom:8 }}>💳 MAELEZO YA MALIPO</div>
-            <div style={{ display:"flex", gap:10, alignItems:"center", marginBottom:8 }}>
-              <div style={{ fontSize:24 }}>📱</div>
-              <div>
-                <div style={{ fontSize:15, fontWeight:800, color:COLORS.green }}>+255 712 655 957</div>
-                <div style={{ fontSize:12, color:COLORS.gold, fontWeight:700 }}>Herman Sade</div>
-              </div>
-            </div>
-            <div style={{ background:"#002800", borderRadius:8, padding:"6px 10px", marginBottom:6 }}>
-              <div style={{ fontSize:11, color:COLORS.muted }}>Mtandao</div>
-              <div style={{ fontSize:13, color:COLORS.green, fontWeight:700 }}>YAS · MIX BY YAS</div>
-            </div>
-            <div style={{ fontSize:11, color:COLORS.muted, marginTop:4 }}>Tuma malipo halafu thibitisha booking yako.</div>
-          </Card>
-          <button onClick={() => setBooked(true)} disabled={!selectedTime}
-            style={{
-              width:"100%", padding:16, borderRadius:14, border:"none",
-              background: selectedTime ? `linear-gradient(90deg, #004400, #006600)` : COLORS.card,
-              color: selectedTime ? COLORS.green : COLORS.muted,
-              fontSize:16, fontWeight:800, cursor: selectedTime ? "pointer" : "not-allowed",
-            }}>
-            📅 Thibitisha Booking — Tsh {booking.price.toLocaleString()}
-          </button>
-        </>
-      ) : (
-        <div style={{ textAlign:"center", padding:"40px 20px" }}>
-          <div style={{ fontSize:70 }}>✅</div>
-          <div style={{ fontSize:22, fontWeight:800, color:COLORS.green, margin:"16px 0 8px" }}>Booking Imefanikiwa!</div>
-          <div style={{ fontSize:14, color:COLORS.muted, lineHeight:1.8 }}>
-            {booking.name} atakupigia simu saa {selectedTime}.<br/>Utapata SMS ya uthibitisho.
-          </div>
-        </div>
-      )}
-    </div>
-  );
-
-  return (
-    <div style={{ padding:16 }}>
-      <div style={{ fontSize:22, fontWeight:800, color:COLORS.text, marginBottom:4, fontFamily:"Georgia,serif" }}>👨‍⚕️ Coaching Binafsi</div>
-      <div style={{ fontSize:13, color:COLORS.muted, marginBottom:16 }}>Pata ushauri wa kitaalamu — dakika 30</div>
-
-      <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
-        {coaches.map(c => (
-          <Card key={c.id} style={{ cursor:"pointer" }}>
-            <div style={{ display:"flex", gap:14, alignItems:"center" }}>
-              <div style={{ fontSize:42 }}>{c.emoji}</div>
-              <div style={{ flex:1 }}>
-                <div style={{ fontSize:15, fontWeight:800, color:COLORS.text }}>{c.name}</div>
-                <div style={{ fontSize:12, color:COLORS.muted, marginBottom:6 }}>{c.title}</div>
-                <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
-                  <Badge color={COLORS.accent}>{c.specialty}</Badge>
-                  <Badge color={COLORS.gold}>⭐ {c.rating}</Badge>
-                  <Badge color={COLORS.muted}>{c.sessions} sessions</Badge>
-                </div>
-              </div>
-            </div>
-            <div style={{ marginTop:12, display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-              <div>
-                <span style={{ fontSize:18, fontWeight:800, color:COLORS.gold }}>Tsh {c.price.toLocaleString()}</span>
-                <span style={{ fontSize:11, color:COLORS.muted }}> / dakika 30</span>
-              </div>
-              <button onClick={() => setBooking(c)}
-                style={{
-                  padding:"10px 20px", borderRadius:12, border:"none",
-                  background:`linear-gradient(90deg, #1b3a00, #254f00)`,
-                  color:COLORS.green, fontSize:13, fontWeight:700, cursor:"pointer",
-                  border:`1px solid ${COLORS.green}44`,
-                }}>
-                📅 Piga Booking
-              </button>
-            </div>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function MorePage({ setActive, isPro, setIsPro }) {
-  const [subView, setSubView] = useState(null);
-  const [forumInput, setForumInput] = useState("");
-  const [posts, setPosts] = useState(forumPosts);
-  const [payStep, setPayStep] = useState(0);
-  const [payPhone, setPayPhone] = useState("");
-
-  if (subView === "sub") return (
-    <div style={{ padding:16 }}>
-      <button onClick={() => setSubView(null)}
-        style={{ background:"none", border:"none", color:COLORS.accent, fontSize:16, cursor:"pointer", marginBottom:16, padding:0 }}>
-        ← Rudi
-      </button>
-      <div style={{ textAlign:"center", marginBottom:24 }}>
-        <div style={{ fontSize:50, marginBottom:10 }}>⭐</div>
-        <div style={{ fontSize:24, fontWeight:800, color:COLORS.gold, fontFamily:"Georgia,serif" }}>Sade Health PRO</div>
-        <div style={{ fontSize:13, color:COLORS.muted, marginTop:4 }}>Fikia yote bila kikwazo</div>
-      </div>
-
-      {[
-        { plan:"Kila Siku", price:"Tsh 500", period:"kwa siku", desc:"Jaribu leo hii" },
-        { plan:"Kila Mwezi", price:"Tsh 5,000", period:"kwa mwezi", desc:"Okoa Tsh 10,000", best:true },
-      ].map(p => (
-        <Card key={p.plan} gold={p.best} style={{ marginBottom:12 }}>
-          {p.best && <Badge color={COLORS.gold} style={{ marginBottom:8, display:"inline-block" }}>⭐ BORA ZAIDI</Badge>}
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-            <div>
-              <div style={{ fontSize:16, fontWeight:800, color:p.best ? COLORS.gold : COLORS.text }}>{p.plan}</div>
-              <div style={{ fontSize:12, color:COLORS.muted }}>{p.desc}</div>
-            </div>
-            <div style={{ textAlign:"right" }}>
-              <div style={{ fontSize:20, fontWeight:800, color:p.best ? COLORS.gold : COLORS.accent }}>{p.price}</div>
-              <div style={{ fontSize:11, color:COLORS.muted }}>{p.period}</div>
-            </div>
-          </div>
-        </Card>
-      ))}
-
-      <Card style={{ marginBottom:16, background:"#001500" }}>
-        <div style={{ fontSize:12, color:COLORS.muted, marginBottom:8 }}>UNACHOPATA NA PRO</div>
-        {["✅ Kozi zote bila kizuizi","✅ AI Health Assistant bila kikomo","✅ Discount 20% kwa coaching","✅ Program mpya kila mwezi","✅ Health reminders za kila siku","✅ Community ya PRO members"].map(f => (
-          <div key={f} style={{ fontSize:13, color:COLORS.text, padding:"5px 0", borderBottom:`1px solid ${COLORS.border}` }}>{f}</div>
-        ))}
-      </Card>
-
-      {payStep === 0 && (
-        <>
-          <div style={{ marginBottom:12 }}>
-            <div style={{ fontSize:13, color:COLORS.muted, marginBottom:6 }}>💳 Tuma Malipo Hapa:</div>
-            <div style={{ background:"#001a00", border:`1px solid ${COLORS.green}44`, borderRadius:12, padding:"12px 14px", marginBottom:12 }}>
-              <div style={{ display:"flex", gap:10, alignItems:"center" }}>
-                <div style={{ fontSize:28 }}>📱</div>
-                <div>
-                  <div style={{ fontSize:17, fontWeight:800, color:COLORS.green }}>+255 712 655 957</div>
-                  <div style={{ fontSize:13, color:COLORS.gold, fontWeight:700 }}>Herman Sade</div>
-                  <div style={{ fontSize:11, color:COLORS.muted, marginTop:2 }}>YAS · MIX BY YAS</div>
-                </div>
-              </div>
-            </div>
-            <div style={{ fontSize:13, color:COLORS.muted, marginBottom:8 }}>Namba yako ya malipo (uthibitisho):</div>
-            <input value={payPhone} onChange={e => setPayPhone(e.target.value)}
-              placeholder="0712 XXX XXX"
-              style={{ width:"100%", padding:"13px 16px", background:COLORS.card, border:`1px solid ${COLORS.border}`, borderRadius:12, color:COLORS.text, fontSize:14, outline:"none", boxSizing:"border-box" }}/>
-          </div>
-          <button onClick={() => payPhone && setPayStep(1)} disabled={!payPhone}
-            style={{
-              width:"100%", padding:16, borderRadius:14, border:"none",
-              background: payPhone ? `linear-gradient(90deg, #2a1a00, #3d2600)` : COLORS.card,
-              border:`1px solid ${payPhone ? COLORS.gold+"55" : "transparent"}`,
-              color: payPhone ? COLORS.gold : COLORS.muted,
-              fontSize:16, fontWeight:800, cursor: payPhone ? "pointer" : "not-allowed",
-            }}>
-            💰 Lipa Tsh 5,000 kwa M-Pesa
-          </button>
-        </>
-      )}
-      {payStep === 1 && (
-        <div style={{ textAlign:"center" }}>
-          <div style={{ fontSize:60, marginBottom:12 }}>🎉</div>
-          <div style={{ fontSize:20, fontWeight:800, color:COLORS.gold }}>Hongera! Wewe ni PRO!</div>
-          <div style={{ fontSize:13, color:COLORS.muted, margin:"10px 0 20px", lineHeight:1.7 }}>
-            Umeunganishwa na Sade Health PRO.<br/>Furahia content yote bila kikwazo!
-          </div>
-          <button onClick={() => { setIsPro(true); setSubView(null); setActive("home"); setPayStep(0); }}
-            style={{ padding:"14px 32px", borderRadius:14, border:"none", background:`linear-gradient(90deg, #1a1200, #2e1e00)`, color:COLORS.gold, fontSize:15, fontWeight:800, cursor:"pointer" }}>
-            🏠 Nenda Nyumbani
-          </button>
-        </div>
-      )}
-    </div>
-  );
-
-  if (subView === "forum") return (
-    <div style={{ padding:16 }}>
-      <button onClick={() => setSubView(null)}
-        style={{ background:"none", border:"none", color:COLORS.accent, fontSize:16, cursor:"pointer", marginBottom:16, padding:0 }}>
-        ← Rudi
-      </button>
-      <div style={{ fontSize:20, fontWeight:800, color:COLORS.text, marginBottom:16, fontFamily:"Georgia,serif" }}>👥 Community Forum</div>
-      <div style={{ display:"flex", flexDirection:"column", gap:10, marginBottom:16 }}>
-        {posts.map((p,i) => (
-          <Card key={i}>
-            <div style={{ display:"flex", justifyContent:"space-between", marginBottom:6 }}>
-              <div style={{ fontSize:13, fontWeight:700, color:COLORS.accent }}>{p.user}</div>
-              <div style={{ fontSize:11, color:COLORS.muted }}>{p.time}</div>
-            </div>
-            <div style={{ fontSize:14, color:COLORS.text, lineHeight:1.6, marginBottom:8 }}>{p.msg}</div>
-            <div style={{ fontSize:12, color:COLORS.muted }}>❤️ {p.likes} likes</div>
-          </Card>
-        ))}
-      </div>
-      <div style={{ display:"flex", gap:8 }}>
-        <input value={forumInput} onChange={e => setForumInput(e.target.value)}
-          placeholder="Andika ujumbe..."
-          style={{ flex:1, padding:"12px 14px", background:COLORS.card, border:`1px solid ${COLORS.border}`, borderRadius:12, color:COLORS.text, fontSize:14, outline:"none" }}/>
-        <button onClick={() => { if(forumInput.trim()){ setPosts(p => [{user:"Wewe", time:"Sasa hivi", msg:forumInput, likes:0}, ...p]); setForumInput(""); }}}
-          style={{ padding:"0 16px", borderRadius:12, border:"none", background:COLORS.accent, color:"#000", fontSize:16, fontWeight:800, cursor:"pointer" }}>
-          ➤
-        </button>
-      </div>
-    </div>
-  );
-
-  if (subView === "tracker") return (
-    <div style={{ padding:16 }}>
-      <button onClick={() => setSubView(null)}
-        style={{ background:"none", border:"none", color:COLORS.accent, fontSize:16, cursor:"pointer", marginBottom:16, padding:0 }}>
-        ← Rudi
-      </button>
-      <div style={{ fontSize:20, fontWeight:800, color:COLORS.text, marginBottom:16, fontFamily:"Georgia,serif" }}>📊 Health Tracker</div>
-      {healthMetrics.map(m => (
-        <Card key={m.label} style={{ marginBottom:12 }}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:10 }}>
-            <div style={{ fontSize:14, fontWeight:700, color:COLORS.text }}>{m.label}</div>
-            <div style={{ fontSize:18, fontWeight:800, color:m.color }}>{m.value} <span style={{ fontSize:12, color:COLORS.muted }}>{m.unit}</span></div>
-          </div>
-          <div style={{ background:COLORS.border, borderRadius:99, height:10, overflow:"hidden" }}>
-            <div style={{ width:m.pct+"%", height:"100%", background:m.color, borderRadius:99, transition:"width 1s" }}/>
-          </div>
-          <div style={{ fontSize:11, color:COLORS.muted, marginTop:6 }}>{m.pct}% ya lengo la leo</div>
-        </Card>
-      ))}
-    </div>
-  );
-
-  return (
-    <div style={{ padding:16 }}>
-      <div style={{ fontSize:22, fontWeight:800, color:COLORS.text, marginBottom:4, fontFamily:"Georgia,serif" }}>⋯ Zaidi</div>
-      <div style={{ fontSize:13, color:COLORS.muted, marginBottom:20 }}>Vipengele vyote vya Sade Health Pro</div>
-
-      {[
-        { icon:"⭐", label:"Jiunge na PRO", sub:"Kozi zote + AI + Discounts", action:() => setSubView("sub"), color:COLORS.gold, show:!isPro },
-        { icon:"👥", label:"Community Forum", sub:"Zungumza na wanachama wengine", action:() => setSubView("forum"), color:"#c084fc" },
-        { icon:"📊", label:"Health Tracker", sub:"Fuatilia afya yako kila siku", action:() => setSubView("tracker"), color:COLORS.green },
-        { icon:"📖", label:"Ebooks za Afya", sub:"PDF bora za kupakua", action:() => {}, color:COLORS.accent },
-        { icon:"🔔", label:"Health Reminders", sub:"Vikumbusho vya afya kila siku", action:() => {}, color:COLORS.red },
-        { icon:"👤", label:"Wasifu Wangu", sub:"Mipango na mwendo wangu", action:() => {}, color:COLORS.muted },
-      ].filter(i => i.show !== false).map(item => (
-        <button key={item.label} onClick={item.action}
-          style={{
-            width:"100%", marginBottom:10,
-            background:COLORS.card, border:`1px solid ${item.color}33`,
-            borderRadius:14, padding:"14px 16px", cursor:"pointer",
-            display:"flex", alignItems:"center", gap:14, textAlign:"left",
-          }}>
-          <div style={{ fontSize:28 }}>{item.icon}</div>
-          <div style={{ flex:1 }}>
-            <div style={{ fontSize:14, fontWeight:700, color:item.color }}>{item.label}</div>
-            <div style={{ fontSize:12, color:COLORS.muted, marginTop:2 }}>{item.sub}</div>
-          </div>
-          <div style={{ fontSize:16, color:COLORS.muted }}>›</div>
-        </button>
-      ))}
-    </div>
-  );
-}
-
-// ============ MAIN APP ============
-export default function SadeHealthPro() {
-  const [active, setActive] = useState("home");
-  const [isPro, setIsPro] = useState(false);
-
-  const pageMap = {
-    home: <HomePage setActive={setActive} isPro={isPro} />,
-    courses: <CoursesPage isPro={isPro} setActive={setActive} />,
-    ai: <AIPage />,
-    coach: <CoachPage />,
-    more: <MorePage setActive={setActive} isPro={isPro} setIsPro={setIsPro} />,
-    sub: <MorePage setActive={setActive} isPro={isPro} setIsPro={setIsPro} />,
-  };
-
-  return (
-    <div style={{
-      fontFamily:"'Trebuchet MS', 'Gill Sans', sans-serif",
-      background:COLORS.bg,
-      minHeight:"100vh",
-      color:COLORS.text,
-      maxWidth:430,
-      margin:"0 auto",
-      position:"relative",
-      overflowX:"hidden",
-    }}>
-      {/* Top Bar */}
-      <div style={{
-        background:"#070f1c",
-        borderBottom:`1px solid ${COLORS.border}`,
-        padding:"12px 16px",
-        display:"flex", alignItems:"center", justifyContent:"space-between",
-        position:"sticky", top:0, zIndex:100,
-      }}>
-        <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-          <div style={{
-            width:36, height:36, borderRadius:10,
-            background:`linear-gradient(135deg, ${COLORS.accent}, ${COLORS.green})`,
-            display:"flex", alignItems:"center", justifyContent:"center", fontSize:18
-          }}>🩺</div>
-          <div>
-            <div style={{ fontSize:16, fontWeight:800, color:COLORS.text, letterSpacing:0.5 }}>Sade Health Pro</div>
-            <div style={{ fontSize:10, color:COLORS.muted, letterSpacing:1.5 }}>AFYA BORA · TANZANIA</div>
-          </div>
-        </div>
-        <div style={{ display:"flex", gap:8, alignItems:"center" }}>
-          {isPro && <Badge color={COLORS.gold}>⭐ PRO</Badge>}
-          <div style={{ fontSize:18, cursor:"pointer" }}>🔔</div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div style={{ paddingBottom:80, minHeight:"calc(100vh - 60px)", overflowY:"auto" }}>
-        {pageMap[active] || pageMap.home}
-      </div>
-
-      <NavBar active={active} setActive={setActive} />
-    </div>
-  );
-}
+  .post-text {
+    padding: 0 16px 12px;
+    font-size: 15px;
+    line-height: 1.5
