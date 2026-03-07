@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sade Books</title>
+</head>
+
+<body>
+
+<h1>Karibu Sade Books</h1>
+
+<h2>Kitabu: Jifunze Biashara</h2>
+<p>Bei: TSH 5,000</p>
+
+<a href="malipo.html">
+<button>Nunua Kitabu</button>
+</a>
+
+</body>
+</html>
