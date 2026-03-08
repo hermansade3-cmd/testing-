@@ -4,443 +4,130 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sade Books – Mkusanyiko Wetu</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--cream:#f5ede0;--cream2:#fdf8f0;--ink:#1c1710;--gold:#c9962a;--gold2:#e8c46a;--muted:#7a6a52;--border:#e0d0b8;--white:#ffffff}
+    html{scroll-behavior:smooth}
+    body{font-family:'Source Sans 3',sans-serif;background:var(--cream2);color:var(--ink)}
 
-    :root {
-      --cream:   #f5ede0;
-      --cream2:  #fdf8f0;
-      --ink:     #1c1710;
-      --gold:    #c9962a;
-      --gold2:   #e8c46a;
-      --muted:   #7a6a52;
-      --border:  #e0d0b8;
-      --white:   #ffffff;
-      --blue:    #2d4a7a;
-      --teal:    #1e6b5e;
-      --rose:    #8b3a3a;
-      --forest:  #2d5a2d;
-      --purple:  #5a3a7a;
-      --ocean:   #1a4a6b;
-    }
+    nav{background:var(--cream2);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    .nav-logo{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--ink)}
+    .nav-logo span{color:var(--gold)}
+    .nav-btn{background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:11px 22px;font-weight:700;font-size:.9rem;cursor:pointer}
 
-    html { scroll-behavior: smooth; }
+    .hero{text-align:center;padding:50px 20px 30px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:50px;padding:8px 18px;font-size:.78rem;font-weight:700;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.4rem);margin-bottom:12px}
+    .hero h1 em{color:var(--gold);font-style:italic}
+    .hero p{font-family:'Lora',serif;color:var(--muted);font-size:1rem;max-width:460px;margin:0 auto 28px;line-height:1.7}
 
-    body {
-      font-family: 'Source Sans 3', sans-serif;
-      background: var(--cream2);
-      color: var(--ink);
-      min-height: 100vh;
-    }
+    .search-wrap{display:flex;justify-content:center;padding:0 20px 24px}
+    .search-box{display:flex;align-items:center;background:var(--white);border:1.5px solid var(--border);border-radius:50px;padding:10px 18px;gap:10px;width:100%;max-width:400px}
+    .search-box:focus-within{border-color:var(--gold)}
+    .search-box input{border:none;outline:none;font-size:.9rem;background:transparent;width:100%;font-family:'Source Sans 3',sans-serif;color:var(--ink)}
 
-    /* ── NAV (matching Sade Books style) ── */
-    nav {
-      background: var(--cream2);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 2px 12px rgba(0,0,0,.06);
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--ink);
-    }
-    .nav-logo span { color: var(--gold); }
-    .nav-btn {
-      background: var(--gold);
-      color: var(--ink);
-      border: none;
-      border-radius: 50px;
-      padding: 11px 22px;
-      font-family: 'Source Sans 3', sans-serif;
-      font-weight: 700;
-      font-size: .9rem;
-      cursor: pointer;
-      transition: background .2s, transform .15s;
-    }
-    .nav-btn:hover { background: var(--gold2); transform: translateY(-1px); }
+    .filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:0 20px 28px}
+    .filter-btn{background:var(--white);border:1.5px solid var(--border);border-radius:50px;padding:8px 16px;font-size:.83rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s}
+    .filter-btn:hover,.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--ink)}
 
-    /* ── HERO SECTION ── */
-    .hero {
-      text-align: center;
-      padding: 60px 20px 40px;
-      background: var(--cream2);
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 8px 18px;
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 6vw, 3.8rem);
-      line-height: 1.15;
-      color: var(--ink);
-      margin-bottom: 16px;
-    }
-    .hero h1 em { color: var(--gold); font-style: italic; }
-    .hero p {
-      font-family: 'Lora', serif;
-      color: var(--muted);
-      font-size: 1rem;
-      max-width: 480px;
-      margin: 0 auto 30px;
-      line-height: 1.7;
-    }
+    .books-section{max-width:1100px;margin:0 auto;padding:0 16px 60px}
+    .books-count{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:20px;font-family:'Lora',serif;font-style:italic}
+    .books-count strong{color:var(--gold)}
 
-    /* ── FILTERS ── */
-    .filters {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 0 20px 30px;
-    }
-    .filter-btn {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 50px;
-      padding: 8px 18px;
-      font-size: .84rem;
-      font-weight: 600;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--ink);
-    }
+    .books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:16px}
 
-    /* ── SEARCH ── */
-    .search-wrap {
-      display: flex;
-      justify-content: center;
-      padding: 0 20px 36px;
-    }
-    .search-box {
-      display: flex;
-      align-items: center;
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 50px;
-      padding: 10px 18px;
-      gap: 10px;
-      width: 100%;
-      max-width: 420px;
-      transition: border-color .2s;
-    }
-    .search-box:focus-within { border-color: var(--gold); }
-    .search-box input {
-      border: none; outline: none;
-      font-size: .9rem;
-      font-family: 'Source Sans 3', sans-serif;
-      color: var(--ink);
-      background: transparent;
-      width: 100%;
-    }
-    .search-box span { color: var(--muted); font-size: 1.1rem; }
+    .book-card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.07);cursor:pointer;transition:transform .25s,box-shadow .25s;display:block;opacity:1;visibility:visible}
+    .book-card:hover{transform:translateY(-5px);box-shadow:0 10px 28px rgba(0,0,0,.13)}
 
-    /* ── BOOKS GRID ── */
-    .books-section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 16px 60px;
-    }
-    .books-count {
-      text-align: center;
-      color: var(--muted);
-      font-size: .85rem;
-      margin-bottom: 24px;
-      font-family: 'Lora', serif;
-      font-style: italic;
-    }
-    .books-count strong { color: var(--gold); }
+    .book-cover{height:170px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+    .badge-tag{position:absolute;top:10px;right:10px;background:var(--gold);color:var(--ink);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:20px}
+    .lock-overlay{position:absolute;inset:0;background:rgba(28,23,16,.42);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s}
+    .book-card:hover .lock-overlay{opacity:1}
+    .lock-overlay span{font-size:2rem}
 
-    .books-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 20px;
-    }
+    .book-info{padding:12px 12px 14px}
+    .book-cat{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+    .book-title{font-family:'Playfair Display',serif;font-size:.92rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .book-desc{font-size:.74rem;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:11px;font-family:'Lora',serif;font-style:italic}
+    .book-footer{display:flex;align-items:center;justify-content:space-between}
+    .book-price{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--ink)}
+    .book-price small{font-size:.63rem;font-family:'Source Sans 3',sans-serif;font-weight:400;color:var(--muted);display:block}
+    .buy-btn{background:var(--ink);color:var(--white);border:none;border-radius:50px;padding:7px 13px;font-size:.77rem;font-weight:700;cursor:pointer;transition:background .2s}
+    .buy-btn:hover{background:var(--gold);color:var(--ink)}
 
-    /* ── BOOK CARD ── */
-    .book-card {
-      background: var(--white);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,.07);
-      transition: transform .25s, box-shadow .25s;
-      cursor: pointer;
-    }
-    .book-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 32px rgba(0,0,0,.14);
-    }
+    .no-results{text-align:center;padding:60px 20px;display:none}
+    .no-results.show{display:block}
+    .no-results p{font-family:'Lora',serif;font-style:italic;color:var(--muted);font-size:1.1rem;margin-top:12px}
 
-    .book-cover {
-      position: relative;
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-    }
-    .book-cover .badge-tag {
-      position: absolute;
-      top: 10px; right: 10px;
-      background: var(--gold);
-      color: var(--ink);
-      font-size: .6rem;
-      font-weight: 800;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-    .book-cover .lock-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(28,23,16,.45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity .25s;
-      border-radius: 0;
-    }
-    .book-card:hover .lock-overlay { opacity: 1; }
-    .lock-overlay span {
-      font-size: 2rem;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,.4));
-    }
+    /* MODAL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(10,8,3,.72);backdrop-filter:blur(5px);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+    .modal-overlay.active{opacity:1;pointer-events:all}
+    .modal-box{background:var(--white);border-radius:20px;max-width:400px;width:100%;overflow:hidden;transform:translateY(30px) scale(.95);transition:transform .35s cubic-bezier(.22,1,.36,1);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+    .modal-overlay.active .modal-box{transform:translateY(0) scale(1)}
+    .modal-cover{height:180px;display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative}
+    .modal-cover::after{content:"🔒";position:absolute;top:14px;right:14px;font-size:1.3rem;background:rgba(255,255,255,.9);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .modal-body{padding:22px 24px 26px}
+    .modal-cat{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+    .modal-title{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:900;color:var(--ink);margin-bottom:9px}
+    .modal-desc{font-family:'Lora',serif;font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:18px}
+    .modal-price-row{display:flex;align-items:center;justify-content:space-between;background:var(--cream2);border-radius:12px;padding:13px 16px;margin-bottom:14px}
+    .modal-price-label{font-size:.78rem;color:var(--muted);margin-bottom:2px}
+    .modal-price-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--ink)}
+    .modal-lock-msg{display:flex;align-items:center;gap:8px;background:#fff8e6;border:1px solid #f0d080;border-radius:10px;padding:9px 13px;font-size:.81rem;color:#7a5a10;font-family:'Lora',serif;font-style:italic;margin-bottom:16px}
+    .modal-pay-btn{width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:14px;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s}
+    .modal-pay-btn:hover{background:var(--gold2)}
+    .modal-close-btn{width:100%;background:none;border:1.5px solid var(--border);border-radius:50px;padding:11px;font-size:.87rem;color:var(--muted);cursor:pointer;margin-top:10px}
+    .modal-close-btn:hover{border-color:var(--ink);color:var(--ink)}
 
-    .book-info { padding: 14px 14px 16px; }
-    .book-cat {
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 5px;
-    }
-    .book-title {
-      font-family: 'Playfair Display', serif;
-      font-size: .95rem;
-      font-weight: 700;
-      color: var(--ink);
-      line-height: 1.3;
-      margin-bottom: 6px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .book-desc {
-      font-size: .75rem;
-      color: var(--muted);
-      line-height: 1.5;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      margin-bottom: 12px;
-      font-family: 'Lora', serif;
-      font-style: italic;
-    }
-    .book-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .book-price {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--ink);
-    }
-    .book-price small {
-      font-size: .65rem;
-      font-family: 'Source Sans 3', sans-serif;
-      font-weight: 400;
-      color: var(--muted);
-      display: block;
-      margin-bottom: 1px;
-    }
-    .buy-btn {
-      background: var(--ink);
-      color: var(--white);
-      border: none;
-      border-radius: 50px;
-      padding: 7px 14px;
-      font-size: .78rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background .2s, transform .15s;
-      white-space: nowrap;
-    }
-    .buy-btn:hover { background: var(--gold); color: var(--ink); transform: scale(1.05); }
+    /* PAYMENT PAGE */
+    .fullpage{display:none;position:fixed;inset:0;background:var(--cream2);z-index:1000;overflow-y:auto}
+    .fullpage-inner{max-width:480px;margin:0 auto;padding:20px 20px 60px}
+    .back-btn{background:var(--white);border:1.5px solid var(--border);border-radius:50%;width:40px;height:40px;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
-    /* ── MODAL ── */
-    .modal-overlay {
-      position: fixed; inset: 0;
-      background: rgba(10,8,3,.7);
-      backdrop-filter: blur(6px);
-      z-index: 999;
-      display: flex; align-items: center; justify-content: center;
-      padding: 20px;
-      opacity: 0; pointer-events: none;
-      transition: opacity .3s;
-    }
-    .modal-overlay.active { opacity: 1; pointer-events: all; }
-    .modal-box {
-      background: var(--white);
-      border-radius: 20px;
-      max-width: 420px; width: 100%;
-      overflow: hidden;
-      transform: translateY(30px) scale(.95);
-      transition: transform .35s cubic-bezier(.22,1,.36,1);
-      box-shadow: 0 30px 80px rgba(0,0,0,.3);
-    }
-    .modal-overlay.active .modal-box { transform: translateY(0) scale(1); }
+    .lipa-box{background:linear-gradient(135deg,#003087,#0057c8);border-radius:16px;padding:20px;margin-bottom:20px;text-align:center}
+    .lipa-number{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:#fff;letter-spacing:.06em;margin-bottom:4px}
+    .lipa-name{font-size:.8rem;color:rgba(255,255,255,.7);font-family:'Lora',serif;font-style:italic}
+    .lipa-badges{display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap}
+    .lipa-badge{background:rgba(255,255,255,.15);border-radius:50px;padding:5px 12px;font-size:.72rem;color:#fff;font-weight:600}
 
-    .modal-cover {
-      height: 180px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 5rem;
-      position: relative;
-    }
-    .modal-cover::after {
-      content: '🔒';
-      position: absolute;
-      top: 14px; right: 14px;
-      font-size: 1.4rem;
-      background: rgba(255,255,255,.9);
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .modal-body { padding: 24px 26px 28px; }
-    .modal-cat {
-      font-size: .7rem; font-weight: 700;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 6px;
-    }
-    .modal-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; font-weight: 900;
-      color: var(--ink); margin-bottom: 10px;
-    }
-    .modal-desc {
-      font-family: 'Lora', serif;
-      font-size: .9rem; color: var(--muted);
-      line-height: 1.7; margin-bottom: 20px;
-    }
-    .modal-price-row {
-      display: flex; align-items: center;
-      justify-content: space-between;
-      background: var(--cream2);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 16px;
-    }
-    .modal-price-label { font-size: .8rem; color: var(--muted); margin-bottom: 2px; }
-    .modal-price-val {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem; font-weight: 900; color: var(--ink);
-    }
-    .modal-lock-msg {
-      display: flex; align-items: center; gap: 8px;
-      background: #fff8e6;
-      border: 1px solid #f0d080;
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-size: .82rem;
-      color: #7a5a10;
-      font-family: 'Lora', serif;
-      font-style: italic;
-      margin-bottom: 18px;
-    }
-    .modal-pay-btn {
-      width: 100%;
-      background: var(--gold);
-      color: var(--ink);
-      border: none;
-      border-radius: 50px;
-      padding: 15px;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background .2s, transform .15s;
-    }
-    .modal-pay-btn:hover { background: var(--gold2); transform: translateY(-2px); }
-    .modal-close-btn {
-      width: 100%;
-      background: none;
-      border: 1.5px solid var(--border);
-      border-radius: 50px;
-      padding: 11px;
-      font-size: .88rem;
-      color: var(--muted);
-      cursor: pointer;
-      margin-top: 10px;
-      transition: border-color .2s, color .2s;
-    }
-    .modal-close-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .step-box{display:flex;align-items:flex-start;gap:12px;background:var(--cream2);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+    .step-num{width:28px;height:28px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem;color:var(--ink);flex-shrink:0}
+    .step-text{font-size:.88rem;color:var(--ink);line-height:1.5}
 
-    /* ── NO RESULTS ── */
-    .no-results {
-      text-align: center;
-      padding: 60px 20px;
-      display: none;
-    }
-    .no-results.show { display: block; }
-    .no-results p { font-family: 'Lora', serif; font-style: italic; color: var(--muted); font-size: 1.1rem; margin-top: 12px; }
+    .pay-input-wrap{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px}
+    .pay-input-wrap input{border:none;outline:none;font-size:1rem;font-family:'Source Sans 3',sans-serif;color:var(--ink);background:transparent;width:100%}
+    .pay-input-wrap:focus-within{border-color:var(--gold)}
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    .total-box{background:var(--white);border-radius:16px;padding:16px 20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+    .total-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:.88rem}
+    .total-row.final{border-top:1px solid var(--border);padding-top:10px;margin-bottom:0}
+    .total-row.final span:first-child{font-weight:700}
+    .total-row.final span:last-child{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900}
 
-    @media (max-width: 480px) {
-      .books-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-      .hero h1 { font-size: 2rem; }
-    }
+    .confirm-btn{width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:16px;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;cursor:pointer;margin-bottom:10px}
+    .cancel-btn{width:100%;background:none;border:1.5px solid var(--border);border-radius:50px;padding:12px;font-size:.88rem;color:var(--muted);cursor:pointer}
+    .err-msg{display:none;background:#fff0f0;border:1px solid #ffb0b0;border-radius:10px;padding:10px 14px;font-size:.83rem;color:#c00;font-family:'Lora',serif;margin-bottom:14px}
+
+    /* SUCCESS PAGE */
+    .success-inner{max-width:380px;margin:0 auto;padding:40px 20px}
+
+    @media(max-width:480px){.books-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">Sade <span>Books</span></div>
   <button class="nav-btn">Angalia Vitabu</button>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-badge">📚 Mkusanyiko Wetu</div>
   <h1>Vitabu <em>Vyetu</em> Bora</h1>
   <p>Chagua kutoka kwa vitabu vya hali ya juu vinavyokusaidia kukua kibinafsi na kibiashara</p>
 </section>
 
-<!-- SEARCH -->
 <div class="search-wrap">
   <div class="search-box">
     <span>🔍</span>
@@ -448,25 +135,23 @@
   </div>
 </div>
 
-<!-- FILTERS -->
-<div class="filters" id="filters">
-  <button class="filter-btn active" onclick="setFilter('Zote', this)">Zote (100)</button>
-  <button class="filter-btn" onclick="setFilter('Biashara & Fedha', this)">💼 Biashara</button>
-  <button class="filter-btn" onclick="setFilter('Maendeleo Binafsi', this)">🌱 Maendeleo</button>
-  <button class="filter-btn" onclick="setFilter('Dini & Imani', this)">🕌 Dini</button>
-  <button class="filter-btn" onclick="setFilter('Afya & Lishe', this)">❤️ Afya</button>
-  <button class="filter-btn" onclick="setFilter('Teknolojia', this)">💻 Teknolojia</button>
-  <button class="filter-btn" onclick="setFilter('Historia', this)">📜 Historia</button>
-  <button class="filter-btn" onclick="setFilter('Elimu', this)">🎓 Elimu</button>
-  <button class="filter-btn" onclick="setFilter('Hadithi', this)">📖 Hadithi</button>
-  <button class="filter-btn" onclick="setFilter('Familia', this)">👨‍👩‍👧 Familia</button>
-  <button class="filter-btn" onclick="setFilter('Ushairi', this)">✍️ Ushairi</button>
-  <button class="filter-btn" onclick="setFilter('Mazingira', this)">🌳 Mazingira</button>
-  <button class="filter-btn" onclick="setFilter('Michezo', this)">⚽ Michezo</button>
-  <button class="filter-btn" onclick="setFilter('Sanaa & Utamaduni', this)">🎨 Sanaa</button>
+<div class="filters">
+  <button class="filter-btn active" onclick="setFilter('Zote',this)">Zote (100)</button>
+  <button class="filter-btn" onclick="setFilter('Biashara & Fedha',this)">💼 Biashara</button>
+  <button class="filter-btn" onclick="setFilter('Maendeleo Binafsi',this)">🌱 Maendeleo</button>
+  <button class="filter-btn" onclick="setFilter('Dini & Imani',this)">🕌 Dini</button>
+  <button class="filter-btn" onclick="setFilter('Afya & Lishe',this)">❤️ Afya</button>
+  <button class="filter-btn" onclick="setFilter('Teknolojia',this)">💻 Teknolojia</button>
+  <button class="filter-btn" onclick="setFilter('Historia',this)">📜 Historia</button>
+  <button class="filter-btn" onclick="setFilter('Elimu',this)">🎓 Elimu</button>
+  <button class="filter-btn" onclick="setFilter('Hadithi',this)">📖 Hadithi</button>
+  <button class="filter-btn" onclick="setFilter('Familia',this)">👨‍👩‍👧 Familia</button>
+  <button class="filter-btn" onclick="setFilter('Ushairi',this)">✍️ Ushairi</button>
+  <button class="filter-btn" onclick="setFilter('Mazingira',this)">🌳 Mazingira</button>
+  <button class="filter-btn" onclick="setFilter('Michezo',this)">⚽ Michezo</button>
+  <button class="filter-btn" onclick="setFilter('Sanaa & Utamaduni',this)">🎨 Sanaa</button>
 </div>
 
-<!-- BOOKS -->
 <section class="books-section">
   <p class="books-count" id="books-count">Inaonyesha vitabu <strong>100</strong> kati ya 100</p>
   <div class="books-grid" id="books-grid"></div>
@@ -476,8 +161,8 @@
   </div>
 </section>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modal" onclick="closeOnBg(event)">
+<!-- BOOK MODAL -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal-box">
     <div class="modal-cover" id="m-cover"></div>
     <div class="modal-body">
@@ -491,269 +176,95 @@
         </div>
         <div style="font-size:1.8rem">📲</div>
       </div>
-      <div class="modal-lock-msg">
-        🔐 Kitabu hiki kinalindwa. Lipa TSH 2,000 kupata ufikiaji kamili.
-      </div>
-      <button class="modal-pay-btn" onclick="simulatePay()">Nunua Sasa – TSH 2,000 →</button>
+      <div class="modal-lock-msg">🔐 Lipa TSH 2,000 kupata ufikiaji kamili wa kitabu hiki.</div>
+      <button class="modal-pay-btn" onclick="goToPayment()">Nunua Sasa – TSH 2,000 →</button>
       <button class="modal-close-btn" onclick="closeModal()">Rudi kwenye Orodha</button>
     </div>
   </div>
 </div>
 
-<script>
-const books = [
-  // BIASHARA & FEDHA
-  { id:1,  emoji:'💼', bg:'linear-gradient(135deg,#2d4a7a,#1a2d5a)', cat:'Biashara & Fedha',    title:'Jifunze Biashara',         desc:'Mwongozo kamili wa kuanza na kukuza biashara yako kwa mafanikio ya kweli.', hot:true  },
-  { id:2,  emoji:'💰', bg:'linear-gradient(135deg,#5a3a00,#c9962a)', cat:'Biashara & Fedha',    title:'Akili ya Fedha',           desc:'Jinsi ya kusimamia, kuwekeza na kukuza fedha zako kwa busara.',             hot:false },
-  { id:3,  emoji:'📈', bg:'linear-gradient(135deg,#1e6b5e,#0d3d35)', cat:'Biashara & Fedha',    title:'Mwekezaji Hodari',         desc:'Misingi ya uwekezaji wa hisa, ardhi na biashara ndogo ndogo.',              hot:true  },
-  { id:4,  emoji:'🏪', bg:'linear-gradient(135deg,#8b3a1a,#5a1a00)', cat:'Biashara & Fedha',    title:'Duka Lako Mtandaoni',      desc:'Hatua za kuanzisha biashara ya mtandaoni yenye mafanikio.',                 hot:false },
-  { id:5,  emoji:'🤝', bg:'linear-gradient(135deg,#2d5a2d,#1a3a1a)', cat:'Biashara & Fedha',    title:'Mazungumzo ya Biashara',   desc:'Ustadi wa kujadiliana na kushinda mikataba ya biashara.',                   hot:false },
+<!-- PAYMENT PAGE -->
+<div class="fullpage" id="payment-page">
+  <div class="fullpage-inner">
+    <div style="display:flex;align-items:center;gap:14px;padding:20px 0 24px">
+      <button class="back-btn" onclick="closePayment()">←</button>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink)">Ukurasa wa Malipo</div>
+        <div style="font-size:.8rem;color:var(--muted);font-family:'Lora',serif;font-style:italic">Kamilisha ununuzi wako salama</div>
+      </div>
+    </div>
 
-  // MAENDELEO BINAFSI
-  { id:6,  emoji:'🌱', bg:'linear-gradient(135deg,#2d5a2d,#4a8a4a)', cat:'Maendeleo Binafsi',   title:'Amka na Kutenda',          desc:'Jinsi ya kuacha uvivu na kuanza safari yako ya mafanikio.',                 hot:true  },
-  { id:7,  emoji:'🧠', bg:'linear-gradient(135deg,#5a3a7a,#3a1a5a)', cat:'Maendeleo Binafsi',   title:'Nguvu ya Akili',           desc:'Mbinu za kisaikolojia za kuimarisha nguvu ya akili yako.',                  hot:false },
-  { id:8,  emoji:'⏰', bg:'linear-gradient(135deg,#1a4a6b,#0d2d45)', cat:'Maendeleo Binafsi',   title:'Simamia Wakati Wako',      desc:'Mfumo wa kipekee wa kutumia kila saa kwa ufanisi mkubwa.',                  hot:false },
-  { id:9,  emoji:'🎯', bg:'linear-gradient(135deg,#8b3a3a,#5a1a1a)', cat:'Maendeleo Binafsi',   title:'Lengo na Mwelekeo',        desc:'Jinsi ya kuweka malengo na kuyafuata hadi kuyafikia.',                      hot:true  },
-  { id:10, emoji:'💪', bg:'linear-gradient(135deg,#4a2d00,#8b6a1a)', cat:'Maendeleo Binafsi',   title:'Nguvu ya Ndani',           desc:'Gundua uwezo mkubwa uliofichwa ndani yako.',                                hot:false },
-  { id:11, emoji:'😊', bg:'linear-gradient(135deg,#1e6b5e,#2d8a7a)', cat:'Maendeleo Binafsi',   title:'Furaha ya Kweli',          desc:'Jinsi ya kuishi maisha ya furaha na amani ya kweli.',                       hot:false },
-  { id:12, emoji:'🗣️', bg:'linear-gradient(135deg,#2d4a7a,#4a6aaa)', cat:'Maendeleo Binafsi',   title:'Sanaa ya Kuongea',         desc:'Mbinu za kuzungumza kwa ushawishi na ujasiri mbele ya watu.',                hot:true  },
+    <!-- Book summary -->
+    <div style="background:var(--white);border-radius:16px;padding:16px;display:flex;gap:14px;align-items:center;margin-bottom:22px;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+      <div id="pay-cover" style="width:60px;height:60px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0"></div>
+      <div>
+        <div id="pay-cat" style="font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:3px"></div>
+        <div id="pay-title" style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink)"></div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--ink);margin-top:4px">TSH 2,000</div>
+      </div>
+    </div>
 
-  // DINI & IMANI
-  { id:13, emoji:'🕌', bg:'linear-gradient(135deg,#1a3a1a,#2d6b2d)', cat:'Dini & Imani',        title:'Nguvu ya Sala',            desc:'Jinsi sala inavyobadilisha maisha yako na kuleta baraka.',                  hot:true  },
-  { id:14, emoji:'📿', bg:'linear-gradient(135deg,#3a2d1a,#6b5a2d)', cat:'Dini & Imani',        title:'Imani Inayosogea Milima',  desc:'Hadithi za kweli za imani na miujiza inayotokea maishani.',                 hot:false },
-  { id:15, emoji:'🌙', bg:'linear-gradient(135deg,#1a1a3a,#2d2d6b)', cat:'Dini & Imani',        title:'Amani ya Moyo',            desc:'Kupata amani ya kweli kupitia dua, tafakari na kumkumbuka Mwenyezi Mungu.', hot:false },
-  { id:16, emoji:'✝️', bg:'linear-gradient(135deg,#4a1a1a,#8b3a3a)', cat:'Dini & Imani',        title:'Imani na Matendo',         desc:'Uhusiano kati ya imani yako na jinsi unavyoishi maisha yako.',              hot:false },
-  { id:17, emoji:'🙏', bg:'linear-gradient(135deg,#2d4a2d,#5a8a5a)', cat:'Dini & Imani',        title:'Ukweli wa Maisha',         desc:'Maswali makubwa ya maisha yaliyojibiwa kupitia mwanga wa imani.',           hot:true  },
+    <!-- Lipa Namba Box -->
+    <div class="lipa-box">
+      <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:6px">Lipa Namba ya Sade Books</div>
+      <div class="lipa-number">16284801</div>
+      <div class="lipa-name">HERMAN ONESMO SADE</div>
+      <div class="lipa-badges">
+        <span class="lipa-badge">📱 M-Pesa</span>
+        <span class="lipa-badge">📱 Tigo Pesa</span>
+        <span class="lipa-badge">📱 Airtel</span>
+        <span class="lipa-badge">📱 Halo Pesa</span>
+        <span class="lipa-badge">📱 T-Pesa</span>
+      </div>
+    </div>
 
-  // AFYA & LISHE
-  { id:18, emoji:'❤️', bg:'linear-gradient(135deg,#8b1a2d,#c93a5a)', cat:'Afya & Lishe',        title:'Mwili Bora, Akili Bora',   desc:'Uhusiano kati ya afya ya mwili na ufanisi wa akili yako.',                  hot:true  },
-  { id:19, emoji:'🥗', bg:'linear-gradient(135deg,#2d6b1a,#5aaa2d)', cat:'Afya & Lishe',        title:'Lishe Sahihi ya Mwafrika', desc:'Vyakula bora vya Afrika vinavyokuimarisha mwili na akili.',                 hot:false },
-  { id:20, emoji:'🏃', bg:'linear-gradient(135deg,#1a4a6b,#2d6aaa)', cat:'Afya & Lishe',        title:'Mazoezi ya Kila Siku',     desc:'Mpango rahisi wa mazoezi unaofaa kwa mtu yeyote nyumbani.',                 hot:false },
-  { id:21, emoji:'😴', bg:'linear-gradient(135deg,#2d1a4a,#5a3a8b)', cat:'Afya & Lishe',        title:'Nguvu ya Usingizi',        desc:'Sayansi ya usingizi bora na jinsi unavyoathiri maisha yako.',               hot:false },
-  { id:22, emoji:'🧘', bg:'linear-gradient(135deg,#1e5a4a,#2d8a6b)', cat:'Afya & Lishe',        title:'Tiba Asilia',              desc:'Dawa za asili za Afrika zinazotibu magonjwa ya kawaida.',                   hot:true  },
+    <!-- Steps -->
+    <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:12px">Hatua za Kulipa:</div>
+    <div class="step-box"><div class="step-num">1</div><div class="step-text">Fungua App ya simu yako <strong>(M-Pesa / Tigo / Airtel / Halo)</strong> au piga <strong>*150#</strong></div></div>
+    <div class="step-box"><div class="step-num">2</div><div class="step-text">Chagua <strong>"Lipa Namba"</strong> kisha ingiza <strong style="color:#003087;font-size:1rem">16284801</strong></div></div>
+    <div class="step-box"><div class="step-num">3</div><div class="step-text">Ingiza kiasi <strong>TSH 2,000</strong> kisha thibitisha na PIN yako</div></div>
+    <div class="step-box" style="margin-bottom:20px"><div class="step-num">4</div><div class="step-text">Ingiza nambari yako ya simu na <strong>Transaction ID</strong> iliyotumwa kwa SMS hapa chini</div></div>
 
-  // TEKNOLOJIA
-  { id:23, emoji:'💻', bg:'linear-gradient(135deg,#0d1a2d,#1a3a5a)', cat:'Teknolojia',           title:'Coding kwa Waanzishi',     desc:'Jifunze kuprogramu kutoka sifuri bila uzoefu wowote wa awali.',             hot:true  },
-  { id:24, emoji:'🤖', bg:'linear-gradient(135deg,#1a2d1a,#2d5a2d)', cat:'Teknolojia',           title:'Akili Bandia Inayokuja',   desc:'Jinsi AI inavyobadilisha ulimwengu na nafasi zake kwa Waafrika.',           hot:true  },
-  { id:25, emoji:'📱', bg:'linear-gradient(135deg,#2d1a00,#5a3a00)', cat:'Teknolojia',           title:'Biashara ya Simu',         desc:'Pata kipato kutoka kwa simu yako ya mkononi kwa njia halali.',              hot:false },
-  { id:26, emoji:'🔐', bg:'linear-gradient(135deg,#1a1a1a,#3a3a3a)', cat:'Teknolojia',           title:'Usalama Mtandaoni',        desc:'Linda taarifa zako na biashara yako dhidi ya wadanganyifu mtandaoni.',       hot:false },
-  { id:27, emoji:'📊', bg:'linear-gradient(135deg,#0d2d4a,#1a5a8b)', cat:'Teknolojia',           title:'Data na Maamuzi Bora',     desc:'Tumia data kusimamia biashara na maisha yako kwa hekima.',                  hot:false },
+    <!-- Inputs -->
+    <label style="font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:8px;display:block">Nambari ya Simu Uliyolipa Nayo</label>
+    <div class="pay-input-wrap" style="margin-bottom:12px">
+      <span style="color:var(--muted);font-size:.9rem">🇹🇿 +255</span>
+      <input id="pay-phone" type="tel" placeholder="7XX XXX XXX" maxlength="9"/>
+    </div>
 
-  // HISTORIA
-  { id:28, emoji:'🌍', bg:'linear-gradient(135deg,#2d1a00,#6b4a1a)', cat:'Historia',             title:'Afrika ya Kale',           desc:'Utukufu wa falme za Afrika kabla ya ukoloni — hadithi ambazo hazifundishwi.', hot:true },
-  { id:29, emoji:'⚔️', bg:'linear-gradient(135deg,#3a1a1a,#6b2d2d)', cat:'Historia',             title:'Mashujaa wa Tanzania',     desc:'Wapiganaji na viongozi wa Tanzania waliobadilisha historia yetu.',          hot:false },
-  { id:30, emoji:'🏛️', bg:'linear-gradient(135deg,#1a1a2d,#2d2d5a)', cat:'Historia',             title:'Ustaarabu wa Waswahili',   desc:'Historia ya utamaduni wa pwani na biashara ya Waswahili wa kale.',          hot:false },
-  { id:31, emoji:'📜', bg:'linear-gradient(135deg,#1a2d1a,#3a5a3a)', cat:'Historia',             title:'Uhuru wa Afrika Mashariki',desc:'Safari ya ukombozi kutoka ukoloni hadi uhuru wa kisasa.',                    hot:false },
-  { id:32, emoji:'🗺️', bg:'linear-gradient(135deg,#2d2d1a,#5a5a2d)', cat:'Historia',             title:'Ramani ya Mababu',         desc:'Hadithi za makabila ya Tanzania na mila zao za kipekee.',                   hot:true  },
+    <label style="font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:8px;display:block">Transaction ID (Nambari ya Uthibitisho)</label>
+    <div class="pay-input-wrap" style="margin-bottom:6px">
+      <input id="pay-ref" type="text" placeholder="mfano: BCA123456789" style="text-transform:uppercase"/>
+    </div>
+    <div style="font-size:.75rem;color:var(--muted);margin-bottom:20px;font-family:'Lora',serif;font-style:italic">💡 Inatumwa kwa SMS baada ya malipo kukamilika</div>
 
-  // ELIMU
-  { id:33, emoji:'🎓', bg:'linear-gradient(135deg,#1a3a5a,#2d6aaa)', cat:'Elimu',                title:'Soma kwa Ufanisi',         desc:'Mbinu za kisayansi za kujifunza haraka na kukumbuka kwa muda mrefu.',        hot:true  },
-  { id:34, emoji:'✏️', bg:'linear-gradient(135deg,#3a2d1a,#8b6a2d)', cat:'Elimu',                title:'Mwalimu Bora',             desc:'Jinsi ya kufundisha na kuelimisha watoto na vijana kwa ufanisi.',            hot:false },
-  { id:35, emoji:'📐', bg:'linear-gradient(135deg,#1a3a1a,#3a8a3a)', cat:'Elimu',                title:'Hisabati Kwa Urahisi',     desc:'Njia mpya za kuelewa hisabati bila hofu wala msongo wa mawazo.',            hot:false },
-  { id:36, emoji:'🔬', bg:'linear-gradient(135deg,#1a1a3a,#3a3a8b)', cat:'Elimu',                title:'Sayansi ya Maisha',        desc:'Gundua miujiza ya sayansi inayokuathiri kila siku ya maisha yako.',          hot:false },
-  { id:37, emoji:'🌐', bg:'linear-gradient(135deg,#0d2d2d,#1a6b6b)', cat:'Elimu',                title:'Lugha za Dunia',           desc:'Mbinu za kujifunza lugha mpya kwa muda mfupi na kwa furaha.',               hot:true  },
+    <!-- Total -->
+    <div class="total-box">
+      <div class="total-row"><span style="color:var(--muted)">Bei ya Kitabu</span><span style="font-weight:600">TSH 2,000</span></div>
+      <div class="total-row"><span style="color:var(--muted)">Ada ya Huduma</span><span style="font-weight:600;color:#2d6b2d">Bure</span></div>
+      <div class="total-row final"><span>Jumla</span><span>TSH 2,000</span></div>
+    </div>
 
-  // HADITHI
-  { id:38, emoji:'📖', bg:'linear-gradient(135deg,#3a1a2d,#6b2d5a)', cat:'Hadithi',              title:'Usiku wa Nairobi',         desc:'Riwaya ya kuvutia ya mapenzi, uaminifu na msalaba wa tamaduni mbili.',        hot:true  },
-  { id:39, emoji:'🌺', bg:'linear-gradient(135deg,#4a1a00,#8b3a00)', cat:'Hadithi',              title:'Maua ya Jangwani',         desc:'Hadithi ya msichana aliyeishi miaka 20 jangwani na kupata uhuru wake.',       hot:false },
-  { id:40, emoji:'🌊', bg:'linear-gradient(135deg,#0d2d4a,#1a5a7a)', cat:'Hadithi',              title:'Bahari ya Matumaini',      desc:'Safari ya baharini inayogusa mioyo — upendo, hasara na ushindi.',            hot:false },
-  { id:41, emoji:'🦁', bg:'linear-gradient(135deg,#3a2d00,#6b5a00)', cat:'Hadithi',              title:'Simba wa Serengeti',       desc:'Hadithi ya kishujaa ya kijana wa Maasai anayepigana na fate yake.',           hot:true  },
-  { id:42, emoji:'🌟', bg:'linear-gradient(135deg,#1a1a2d,#3a3a6b)', cat:'Hadithi',              title:'Nyota za Usiku',           desc:'Riwaya ya kisayansi — Tanzania 2080, dunia mpya na changamoto mpya.',         hot:false },
+    <div style="display:flex;align-items:center;gap:8px;background:#f0faf0;border:1px solid #a0d0a0;border-radius:10px;padding:10px 14px;margin-bottom:18px;font-size:.82rem;color:#2d6b2d;font-family:'Lora',serif;font-style:italic">
+      🔒 Malipo yako yanalindwa na mfumo wa usalama wa SSL
+    </div>
 
-  // FAMILIA
-  { id:43, emoji:'👨‍👩‍👧', bg:'linear-gradient(135deg,#2d3a1a,#5a7a2d)', cat:'Familia',           title:'Ndoa Yenye Furaha',        desc:'Siri za kujenga ndoa imara, yenye upendo na heshima ya kudumu.',             hot:true  },
-  { id:44, emoji:'👶', bg:'linear-gradient(135deg,#4a2d1a,#8b5a2d)', cat:'Familia',              title:'Malezi Bora ya Watoto',    desc:'Jinsi ya kumlea mtoto mwenye adabu, ujasiri na akili nzuri.',               hot:false },
-  { id:45, emoji:'💑', bg:'linear-gradient(135deg,#3a1a2d,#7a3a5a)', cat:'Familia',              title:'Upendo wa Kweli',          desc:'Jinsi ya kupata, kulinda na kukuza upendo wa kweli maishani mwako.',         hot:false },
-  { id:46, emoji:'🏠', bg:'linear-gradient(135deg,#1a2d1a,#3a6b3a)', cat:'Familia',              title:'Nyumba ya Amani',          desc:'Mbinu za kutatua migogoro ya familia na kujenga mahusiano madhubuti.',        hot:false },
-  { id:47, emoji:'👴', bg:'linear-gradient(135deg,#2d2d1a,#6b6b3a)', cat:'Familia',              title:'Hekima ya Wazee',          desc:'Mafunzo ya maisha kutoka kwa wazee wa Tanzania — busara ya kizazi.',         hot:true  },
+    <div class="err-msg" id="pay-err"></div>
+    <button class="confirm-btn" id="confirm-btn" onclick="confirmPayment()">Nimetuma Malipo – Thibitisha ✓</button>
+    <button class="cancel-btn" onclick="closePayment()">Rudi nyuma</button>
+  </div>
+</div>
 
-  // USHAIRI
-  { id:48, emoji:'✍️', bg:'linear-gradient(135deg,#1a0d2d,#3a1a6b)', cat:'Ushairi',              title:'Maneno ya Moyo',           desc:'Diwani ya upendo, huzuni na furaha — mashairi yanayogusa roho.',             hot:false },
-  { id:49, emoji:'🎵', bg:'linear-gradient(135deg,#2d1a00,#5a3a00)', cat:'Ushairi',              title:'Wimbo wa Maisha',          desc:'Ushairi wa kisasa wa Kiswahili unaosema ukweli wa maisha ya leo.',           hot:true  },
-  { id:50, emoji:'🌸', bg:'linear-gradient(135deg,#3a0d1a,#6b1a2d)', cat:'Ushairi',              title:'Maua ya Maneno',           desc:'Mkusanyo wa mashairi mazuri ya Tanzania yanayoinua roho na akili.',          hot:false },
-
-  // BIASHARA & FEDHA (ziada)
-  { id:51, emoji:'🏦', bg:'linear-gradient(135deg,#0d2d1a,#1a6b3a)', cat:'Biashara & Fedha',    title:'Benki Yako Mfukoni',       desc:'Jinsi ya kutumia huduma za benki na simu kufanya biashara ya kisasa.',        hot:true  },
-  { id:52, emoji:'📦', bg:'linear-gradient(135deg,#3a1a00,#7a3a00)', cat:'Biashara & Fedha',    title:'Usafirishaji na Faida',    desc:'Biashara ya usafirishaji na logistics — jinsi ya kuanza na kupata faida.',    hot:false },
-  { id:53, emoji:'🌾', bg:'linear-gradient(135deg,#2d3a00,#5a7a00)', cat:'Biashara & Fedha',    title:'Kilimo Biashara',          desc:'Geuza shamba lako kuwa chanzo cha kipato kikubwa cha kudumu.',               hot:true  },
-  { id:54, emoji:'🧾', bg:'linear-gradient(135deg,#1a2d3a,#2d6b8b)', cat:'Biashara & Fedha',    title:'Hesabu za Biashara',       desc:'Jinsi ya kusimamia vitabu vya hesabu bila kuwa mhasibu.',                    hot:false },
-  { id:55, emoji:'🎪', bg:'linear-gradient(135deg,#3a001a,#8b004a)', cat:'Biashara & Fedha',    title:'Masoko na Uuzaji',         desc:'Mbinu za kisasa za uuzaji zinazofanya bidhaa yako kuuzwa haraka.',            hot:true  },
-
-  // MAENDELEO BINAFSI (ziada)
-  { id:56, emoji:'🦅', bg:'linear-gradient(135deg,#1a1a2d,#2d2d6b)', cat:'Maendeleo Binafsi',   title:'Ndege wa Mafanikio',       desc:'Fikira za viongozi wakubwa wa dunia zilizobadilisha historia.',              hot:true  },
-  { id:57, emoji:'🔥', bg:'linear-gradient(135deg,#3a1a00,#8b3a00)', cat:'Maendeleo Binafsi',   title:'Moto wa Ndani',            desc:'Jinsi ya kuwasha hamasa na kuiongoza kwenye mafanikio ya kweli.',             hot:false },
-  { id:58, emoji:'🪞', bg:'linear-gradient(135deg,#1e4a4a,#2d8a8a)', cat:'Maendeleo Binafsi',   title:'Jijue Mwenyewe',           desc:'Safari ya kujigundua — nguvu zako, udhaifu wako na hatua zijazo.',           hot:false },
-  { id:59, emoji:'🧩', bg:'linear-gradient(135deg,#2d1a3a,#5a2d7a)', cat:'Maendeleo Binafsi',   title:'Tatua Matatizo Kwa Akili', desc:'Mfumo wa kisayansi wa kutatua changamoto ngumu kwa ubunifu.',                hot:true  },
-  { id:60, emoji:'🤑', bg:'linear-gradient(135deg,#1a3a1a,#3a8b3a)', cat:'Maendeleo Binafsi',   title:'Tabia za Matajiri',        desc:'Tabia 10 za watu wenye utajiri ambao wengi hawajui.',                        hot:true  },
-
-  // DINI & IMANI (ziada)
-  { id:61, emoji:'📖', bg:'linear-gradient(135deg,#1a2d1a,#2d6b2d)', cat:'Dini & Imani',        title:'Quran na Maisha ya Leo',   desc:'Jinsi mafunzo ya Quran yanavyojibu changamoto za maisha ya kisasa.',         hot:true  },
-  { id:62, emoji:'✝️', bg:'linear-gradient(135deg,#2d1a1a,#6b2d2d)', cat:'Dini & Imani',        title:'Injili na Mabadiliko',     desc:'Ujumbe wa Injili unaobadilisha maisha ya watu wa leo.',                      hot:false },
-  { id:63, emoji:'🌿', bg:'linear-gradient(135deg,#1a3a2d,#2d8b6b)', cat:'Dini & Imani',        title:'Shukrani na Baraka',       desc:'Nguvu ya shukrani na jinsi inavyovutia baraka nyingi maishani.',             hot:false },
-  { id:64, emoji:'🕯️', bg:'linear-gradient(135deg,#2d2d00,#6b6b00)', cat:'Dini & Imani',        title:'Mwanga wa Gizani',         desc:'Hadithi za imani zilizosaidia watu kupita majaribu makubwa maishani.',        hot:true  },
-
-  // AFYA & LISHE (ziada)
-  { id:65, emoji:'🫀', bg:'linear-gradient(135deg,#4a001a,#8b003a)', cat:'Afya & Lishe',        title:'Moyo Wako ni Hazina',      desc:'Jinsi ya kulinda moyo wako dhidi ya magonjwa ya kisasa.',                    hot:true  },
-  { id:66, emoji:'🧃', bg:'linear-gradient(135deg,#1a4a00,#3a8b00)', cat:'Afya & Lishe',        title:'Juisi za Uponyaji',        desc:'Matunda na mboga za Afrika zinazotibu na kuimarisha mwili wako.',             hot:false },
-  { id:67, emoji:'🧬', bg:'linear-gradient(135deg,#00002d,#00006b)', cat:'Afya & Lishe',        title:'Jeni na Afya Yako',        desc:'Jinsi DNA yako inavyoathiri afya na hatua za kujilinda.',                    hot:false },
-  { id:68, emoji:'🌿', bg:'linear-gradient(135deg,#003a1a,#006b3a)', cat:'Afya & Lishe',        title:'Dawa za Mitishamba',       desc:'Mimea ya Tanzania inayotibu magonjwa — mwongozo kamili wa dawa asilia.',     hot:true  },
-
-  // TEKNOLOJIA (ziada)
-  { id:69, emoji:'🌐', bg:'linear-gradient(135deg,#001a3a,#003a7a)', cat:'Teknolojia',           title:'Mtandao wa Pesa',          desc:'Cryptocurrency, Bitcoin na fedha za dijitali — mwongozo wa Mtanzania.',      hot:true  },
-  { id:70, emoji:'🎮', bg:'linear-gradient(135deg,#1a001a,#3a003a)', cat:'Teknolojia',           title:'Michezo na Kipato',        desc:'Jinsi ya kupata kipato kupitia michezo ya video na eSports.',               hot:false },
-  { id:71, emoji:'📡', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Teknolojia',           title:'IoT na Kilimo Bora',       desc:'Teknolojia ya kisasa inayobadilisha kilimo cha Tanzania.',                   hot:false },
-  { id:72, emoji:'🖥️', bg:'linear-gradient(135deg,#1a1a00,#3a3a00)', cat:'Teknolojia',           title:'Freelancing Mtandaoni',    desc:'Pata kazi za kimataifa mtandaoni na kulipwa dola bila kuacha nyumbani.',     hot:true  },
-
-  // HISTORIA (ziada)
-  { id:73, emoji:'👑', bg:'linear-gradient(135deg,#3a2d00,#8b6a00)', cat:'Historia',             title:'Wafalme wa Afrika',        desc:'Hadithi za wafalme wakubwa wa Afrika — utajiri, nguvu na hekima yao.',       hot:true  },
-  { id:74, emoji:'🚢', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Historia',             title:'Biashara ya Bahari Hindi', desc:'Historia ya biashara kati ya Afrika Mashariki na Asia — karne za nyuma.',    hot:false },
-  { id:75, emoji:'🏔️', bg:'linear-gradient(135deg,#1a1a1a,#3a3a3a)', cat:'Historia',             title:'Kilimanjaro — Hadithi',    desc:'Historia, utamaduni na hadithi za watu wanaoishi pembezoni mwa Kilimanjaro.', hot:false },
-  { id:76, emoji:'✊', bg:'linear-gradient(135deg,#1a0000,#3a0000)', cat:'Historia',             title:'Mapinduzi ya Zanzibar',    desc:'Hadithi kamili ya mapinduzi ya 1964 na athari yake kwa Tanzania ya leo.',    hot:true  },
-
-  // ELIMU (ziada)
-  { id:77, emoji:'🏫', bg:'linear-gradient(135deg,#00002d,#00006b)', cat:'Elimu',                title:'Shule ya Biashara',        desc:'Elimu ya MBA kwa lugha rahisi — bila kulipa ada za chuo kikuu.',             hot:true  },
-  { id:78, emoji:'📝', bg:'linear-gradient(135deg,#1a2d00,#3a6b00)', cat:'Elimu',                title:'Jinsi ya Kuandika Vizuri', desc:'Sanaa ya uandishi bora wa insha, ripoti na barua za kitaaluma.',             hot:false },
-  { id:79, emoji:'🎨', bg:'linear-gradient(135deg,#2d001a,#6b003a)', cat:'Elimu',                title:'Sanaa na Ubunifu',         desc:'Gundua kipaji chako cha sanaa na ukigeuze kuwa chanzo cha kipato.',           hot:false },
-  { id:80, emoji:'🔭', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Elimu',                title:'Astronomia ya Afrika',     desc:'Nyota, sayari na historia ya uchunguzi wa anga kutoka mtazamo wa Afrika.',   hot:true  },
-
-  // HADITHI (ziada)
-  { id:81, emoji:'🏙️', bg:'linear-gradient(135deg,#1a1a2d,#3a3a6b)', cat:'Hadithi',              title:'Dar es Salaam Usiku',      desc:'Riwaya ya kusisimua iliyopita katika mitaa ya Dar es Salaam — siri na hatari.', hot:true },
-  { id:82, emoji:'🌴', bg:'linear-gradient(135deg,#003a00,#007a00)', cat:'Hadithi',              title:'Paradiso ya Kaskazini',    desc:'Safari ya mapenzi na uvumbuzi katika visiwa vya Zanzibar.',                  hot:false },
-  { id:83, emoji:'🐘', bg:'linear-gradient(135deg,#2d2d00,#6b6b00)', cat:'Hadithi',              title:'Tembo wa Mwisho',          desc:'Hadithi ya mazingira — mapambano ya mtu mmoja kulinda tembo wa mwisho.',      hot:false },
-  { id:84, emoji:'👻', bg:'linear-gradient(135deg,#1a001a,#3a003a)', cat:'Hadithi',              title:'Pepo wa Pemba',            desc:'Hadithi ya kutisha ya kijiji kidogo cha Pemba — siri za kizazi.',             hot:true  },
-  { id:85, emoji:'🌅', bg:'linear-gradient(135deg,#3a1a00,#8b3a00)', cat:'Hadithi',              title:'Alfajiri ya Mpya',         desc:'Msichana wa vijijini anayetafuta ndoto zake mjini Dar es Salaam.',            hot:false },
-
-  // FAMILIA (ziada)
-  { id:86, emoji:'👩‍👦', bg:'linear-gradient(135deg,#3a001a,#7a003a)', cat:'Familia',             title:'Mama Shujaa',              desc:'Nguvu ya mama — hadithi za ajabu na mwongozo wa mama wa kisasa.',             hot:true  },
-  { id:87, emoji:'👨‍👧', bg:'linear-gradient(135deg,#001a3a,#003a7a)', cat:'Familia',             title:'Baba wa Kweli',            desc:'Jukumu la baba katika familia ya Afrika ya kisasa.',                         hot:false },
-  { id:88, emoji:'💔', bg:'linear-gradient(135deg,#2d001a,#6b003a)', cat:'Familia',              title:'Baada ya Talaka',          desc:'Jinsi ya kupona, kusimama na kuanza upya baada ya ndoa kuvunjika.',          hot:false },
-  { id:89, emoji:'🧒', bg:'linear-gradient(135deg,#1a2d1a,#3a6b3a)', cat:'Familia',              title:'Vijana wa Leo',            desc:'Jinsi ya kuwaelewa na kuwaongoza vijana wa kizazi cha intaneti.',             hot:true  },
-
-  // USHAIRI (ziada)
-  { id:90, emoji:'🌙', bg:'linear-gradient(135deg,#1a001a,#3a003a)', cat:'Ushairi',              title:'Usiku wa Mashairi',        desc:'Diwani ya usiku — mashairi ya upweke, fikira na ndoto za alfajiri.',          hot:false },
-  { id:91, emoji:'⚡', bg:'linear-gradient(135deg,#1a1a00,#3a3a00)', cat:'Ushairi',              title:'Mashairi ya Mapinduzi',    desc:'Ushairi wa kisiasa na kijamii unaosema ukweli uliofichwa.',                  hot:true  },
-
-  // MAZINGIRA
-  { id:92, emoji:'🌳', bg:'linear-gradient(135deg,#002d00,#005a00)', cat:'Mazingira',            title:'Hifadhi Dunia Yetu',       desc:'Jinsi Watanzania wanavyoweza kulinda mazingira na kupata faida.',             hot:false },
-  { id:93, emoji:'💧', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Mazingira',            title:'Maji ni Uhai',             desc:'Tatizo la maji Tanzania na suluhisho zinazoweza kutekelezwa sasa.',           hot:true  },
-  { id:94, emoji:'☀️', bg:'linear-gradient(135deg,#2d1a00,#6b3a00)', cat:'Mazingira',            title:'Nishati ya Jua',           desc:'Jinsi ya kutumia nishati ya jua nyumbani na kuokoa pesa nyingi.',             hot:false },
-
-  // MICHEZO
-  { id:95, emoji:'⚽', bg:'linear-gradient(135deg,#003a1a,#007a3a)', cat:'Michezo',              title:'Soka na Maisha',           desc:'Masomo ya maisha kutoka uwanjani — nidhamu, timu na ushindi.',               hot:true  },
-  { id:96, emoji:'🏋️', bg:'linear-gradient(135deg,#1a1a1a,#4a4a4a)', cat:'Michezo',              title:'Nguvu ya Mwili',           desc:'Mpango kamili wa mazoezi ya nguvu kwa wanaume na wanawake.',                 hot:false },
-  { id:97, emoji:'🧗', bg:'linear-gradient(135deg,#2d1a00,#5a3a00)', cat:'Michezo',              title:'Ushindi wa Akili',         desc:'Jinsi michezo inavyofundisha mafanikio ya biashara na maisha.',              hot:false },
-
-  // SANAA & UTAMADUNI
-  { id:98, emoji:'🎭', bg:'linear-gradient(135deg,#1a003a,#3a007a)', cat:'Sanaa & Utamaduni',    title:'Ngoma za Tanzania',        desc:'Historia na maana ya ngoma za makabila mbalimbali ya Tanzania.',             hot:true  },
-  { id:99, emoji:'🍲', bg:'linear-gradient(135deg,#3a1a00,#7a3a00)', cat:'Sanaa & Utamaduni',    title:'Mapishi ya Bibi',          desc:'Mapishi 100 ya vyakula vya Tanzania kutoka kanda zote — ladha ya asili.',    hot:true  },
-  { id:100,emoji:'🎨', bg:'linear-gradient(135deg,#2d002d,#6b006b)', cat:'Sanaa & Utamaduni',    title:'Uchoraji wa Tingatinga',   desc:'Historia ya sanaa ya Tingatinga na jinsi ya kujifunza mtindo huu wa kipekee.', hot:false},
-];
-
-let currentFilter = 'Zote';
-let currentSearch = '';
-let selectedBook = null;
-
-function renderBooks() {
-  const grid = document.getElementById('books-grid');
-  const noRes = document.getElementById('no-results');
-  const countEl = document.getElementById('books-count');
-
-  const filtered = books.filter(b => {
-    const matchCat = currentFilter === 'Zote' || b.cat === currentFilter;
-    const matchSearch = b.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
-                        b.cat.toLowerCase().includes(currentSearch.toLowerCase()) ||
-                        b.desc.toLowerCase().includes(currentSearch.toLowerCase());
-    return matchCat && matchSearch;
-  });
-
-  grid.innerHTML = '';
-
-  if (filtered.length === 0) {
-    noRes.classList.add('show');
-    countEl.innerHTML = 'Hakuna kitabu kinachofanana';
-  } else {
-    noRes.classList.remove('show');
-    countEl.innerHTML = `Inaonyesha vitabu <strong>${filtered.length}</strong> kati ya ${books.length}`;
-    filtered.forEach((b, i) => {
-      const card = document.createElement('div');
-      card.className = 'book-card';
-      card.style.animation = `fadeUp 0.35s ease both`;
-      card.innerHTML = `
-        <div class="book-cover" style="background:${b.bg}">
-          ${b.emoji}
-          ${b.hot ? '<div class="badge-tag">Maarufu</div>' : ''}
-          <div class="lock-overlay"><span>🔒</span></div>
-        </div>
-        <div class="book-info">
-          <div class="book-cat">${b.cat}</div>
-          <div class="book-title">${b.title}</div>
-          <div class="book-desc">${b.desc}</div>
-          <div class="book-footer">
-            <div class="book-price"><small>Bei</small>TSH 2,000</div>
-            <button class="buy-btn">Nunua →</button>
-          </div>
-        </div>
-      `;
-      card.addEventListener('click', () => openModal(b.id));
-      grid.appendChild(card);
-      void card.offsetWidth;
-    });
-  }
-}
-
-function setFilter(cat, btn) {
-  currentFilter = cat;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderBooks();
-}
-
-function filterBooks() {
-  currentSearch = document.getElementById('search-input').value;
-  renderBooks();
-}
-
-function openModal(id) {
-  
-  selectedBook = books.find(b => b.id === id);
-  document.getElementById('m-cover').style.background = selectedBook.bg;
-  document.getElementById('m-cover').innerHTML = `<span style="font-size:5rem">${selectedBook.emoji}</span>`;
-  document.getElementById('m-cat').textContent   = selectedBook.cat;
-  document.getElementById('m-title').textContent = selectedBook.title;
-  document.getElementById('m-desc').textContent  = selectedBook.desc;
-  document.getElementById('modal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-function closeOnBg(e) {
-  if (e.target.id === 'modal') closeModal();
-}
-
-function simulatePay() {
-  const btn = document.querySelector('.modal-pay-btn');
-  btn.textContent = '⏳ Inashughulikiwa…';
-  btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent = '✅ Malipo Yamepokewa!';
-    btn.style.background = '#2d6b2d';
-    setTimeout(() => {
-      closeModal();
-      btn.textContent = 'Nunua Sasa – TSH 2,000 →';
-      btn.style.background = '';
-      btn.disabled = false;
-    }, 1800);
-  }, 1500);
-}
-
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-// Init
-renderBooks();
-</script>
-</body>
-</html>
+<!-- SUCCESS PAGE -->
+<div class="fullpage" id="success-page">
+  <div class="success-inner" style="text-align:center">
+    <div style="font-size:5rem;margin-bottom:20px">🎉</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--ink);margin-bottom:10px">Malipo Yamefanikiwa!</div>
+    <div id="success-book" style="font-family:'Lora',serif;font-size:1rem;color:var(--muted);margin-bottom:8px;font-style:italic"></div>
+    <div style="font-size:.9rem;color:var(--muted);font-family:'Lora',serif;margin-bottom:8px">Kitabu chako kimeunlockiwa! Utapokea link ya kupakua hivi karibuni.</div>
+    <div style="font-size:.85rem;color:var(--muted);font-family:'Lora',serif;margin-bottom:28px">📱 Simu: <strong id="success-phone"></strong></div>
+    <div style="background:var(--white);border-radius:16px;padding:20px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.07)">
+      <div style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px">Transaction ID</div>
+      <div id="success-ref" style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink)"></div>
+    </div>
+    <button onclick="closeSuccess()" style="width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:15px;font-family:'Playfai
