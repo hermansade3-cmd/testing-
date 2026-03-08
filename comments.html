@@ -107,7 +107,9 @@
       padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,.06);
       border: 1px solid var(--border);
       transition: transform .22s, box-shadow .22s;
-      animation: fadeUp .5s ease both;
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
     }
     .comment-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,.11); }
 
@@ -186,10 +188,7 @@
     .submit-btn:hover { background: var(--gold2); }
     .submit-msg { color: var(--gold2); font-family: 'Lora', serif; font-style: italic; font-size: .88rem; margin-top: 12px; min-height: 20px; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+
     @media (max-width: 500px) {
       .comments-grid { grid-template-columns: 1fr; }
       .stars-summary { flex-direction: column; align-items: flex-start; gap: 20px; }
@@ -296,4 +295,4 @@ var comments = [
   { name:'Anita Mhagama',     location:'Njombe',        avatar:'AM', color:'#6b1a3a', stars:5, book:'Afya ya Mwili Bora',     date:'Feb 15, 2026',     text:'Nilikuwa na uzito wa ziada sana — kilo 95. Baada ya miezi 4 ya kufuata mpango wa kitabu hiki, sasa niko kilo 72! Ninahisi vizuri sana. Kitabu hiki ni thamani ya maisha.' },
   { name:'Yusuf Mwandoe',     location:'Pwani',         avatar:'YM', color:'#00396b', stars:5, book:'Quran na Maisha ya Leo', date:'Feb 14, 2026',     text:'Kitabu kimenisaidia kuelewa Quran vizuri zaidi na kuihusisha na changamoto za maisha ya leo ya kisasa. Ninaomba dua kila siku sasa na maisha yangu yamepata mwelekeo.' },
   { name:'Consolata Mrema',   location:'Kilimanjaro',   avatar:'CM', color:'#3a5a00', stars:4, book:'Soma kwa Ufanisi',       date:'Feb 13, 2026',     text:'Mbinu za kusoma haraka zimenigeuza. Nilikuwa nasoma kitabu kimoja kwa wiki mbili. Sasa ninasoma vitabu vitatu kwa wiki moja! Ingawa ningependa vitabu zaidi vya sayansi.' },
-  { name:'Jumanne Sikudhani',  location:'Geita',        avatar:'JS', color:'#4a2d6b', stars:5, book:'Ushairi wa Maisha'
+  { name:'Jumanne Sikudhani',  location:'Geita',        avatar:'JS', color:'#4a2d6b', stars:5, book:'Ushairi wa Maisha',      date:'Feb 12, 2026',     text:'Maneno ya mashairi yanagusa moyo na naf
