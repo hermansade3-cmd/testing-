@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sade Books – Mkusanyiko Wetu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #f5ede0;
+      --cream2:  #fdf8f0;
+      --ink:     #1c1710;
+      --gold:    #c9962a;
+      --gold2:   #e8c46a;
+      --muted:   #7a6a52;
+      --border:  #e0d0b8;
+      --white:   #ffffff;
+      --blue:    #2d4a7a;
+      --teal:    #1e6b5e;
+      --rose:    #8b3a3a;
+      --forest:  #2d5a2d;
+      --purple:  #5a3a7a;
+      --ocean:   #1a4a6b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--cream2);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── NAV (matching Sade Books style) ── */
+    nav {
+      background: var(--cream2);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--ink);
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-btn {
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      border-radius: 50px;
+      padding: 11px 22px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .nav-btn:hover { background: var(--gold2); transform: translateY(-1px); }
+
+    /* ── HERO SECTION ── */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: var(--cream2);
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero p {
+      font-family: 'Lora', serif;
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+
+    /* ── FILTERS ── */
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 20px 30px;
+    }
+    .filter-btn {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--ink);
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 0 20px 36px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 18px;
+      gap: 10px;
+      width: 100%;
+      max-width: 420px;
+      transition: border-color .2s;
+    }
+    .search-box:focus-within { border-color: var(--gold); }
+    .search-box input {
+      border: none; outline: none;
+      font-size: .9rem;
+      font-family: 'Source Sans 3', sans-serif;
+      color: var(--ink);
+      background: transparent;
+      width: 100%;
+    }
+    .search-box span { color: var(--muted); font-size: 1.1rem; }
+
+    /* ── BOOKS GRID ── */
+    .books-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+    .books-count {
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+      margin-bottom: 24px;
+      font-family: 'Lora', serif;
+      font-style: italic;
+    }
+    .books-count strong { color: var(--gold); }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── BOOK CARD ── */
+    .book-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      transition: transform .25s, box-shadow .25s;
+      cursor: pointer;
+      animation: fadeUp .5s ease both;
+    }
+    .book-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0,0,0,.14);
+    }
+
+    .book-cover {
+      position: relative;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .book-cover .badge-tag {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: .6rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .book-cover .lock-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(28,23,16,.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .25s;
+      border-radius: 0;
+    }
+    .book-card:hover .lock-overlay { opacity: 1; }
+    .lock-overlay span {
+      font-size: 2rem;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.4));
+    }
+
+    .book-info { padding: 14px 14px 16px; }
+    .book-cat {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+    .book-title {
+      font-family: 'Playfair Display', serif;
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .book-desc {
+      font-size: .75rem;
+      color: var(--muted);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 12px;
+      font-family: 'Lora', serif;
+      font-style: italic;
+    }
+    .book-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .book-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .book-price small {
+      font-size: .65rem;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 1px;
+    }
+    .buy-btn {
+      background: var(--ink);
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      padding: 7px 14px;
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      white-space: nowrap;
+    }
+    .buy-btn:hover { background: var(--gold); color: var(--ink); transform: scale(1.05); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(10,8,3,.7);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: var(--white);
+      border-radius: 20px;
+      max-width: 420px; width: 100%;
+      overflow: hidden;
+      transform: translateY(30px) scale(.95);
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
+      box-shadow: 0 30px 80px rgba(0,0,0,.3);
+    }
+    .modal-overlay.active .modal-box { transform: translateY(0) scale(1); }
+
+    .modal-cover {
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      position: relative;
+    }
+    .modal-cover::after {
+      content: '🔒';
+      position: absolute;
+      top: 14px; right: 14px;
+      font-size: 1.4rem;
+      background: rgba(255,255,255,.9);
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-body { padding: 24px 26px 28px; }
+    .modal-cat {
+      font-size: .7rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 6px;
+    }
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--ink); margin-bottom: 10px;
+    }
+    .modal-desc {
+      font-family: 'Lora', serif;
+      font-size: .9rem; color: var(--muted);
+      line-height: 1.7; margin-bottom: 20px;
+    }
+    .modal-price-row {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      background: var(--cream2);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+    .modal-price-label { font-size: .8rem; color: var(--muted); margin-bottom: 2px; }
+    .modal-price-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900; color: var(--ink);
+    }
+    .modal-lock-msg {
+      display: flex; align-items: center; gap: 8px;
+      background: #fff8e6;
+      border: 1px solid #f0d080;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: .82rem;
+      color: #7a5a10;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      margin-bottom: 18px;
+    }
+    .modal-pay-btn {
+      width: 100%;
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      border-radius: 50px;
+      padding: 15px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .modal-pay-btn:hover { background: var(--gold2); transform: translateY(-2px); }
+    .modal-close-btn {
+      width: 100%;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      padding: 11px;
+      font-size: .88rem;
+      color: var(--muted);
+      cursor: pointer;
+      margin-top: 10px;
+      transition: border-color .2s, color .2s;
+    }
+    .modal-close-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+    /* ── NO RESULTS ── */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      display: none;
+    }
+    .no-results.show { display: block; }
+    .no-results p { font-family: 'Lora', serif; font-style: italic; color: var(--muted); font-size: 1.1rem; margin-top: 12px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .books-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sade <span>Books</span></div>
+  <button class="nav-btn">Angalia Vitabu</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">📚 Mkusanyiko Wetu</div>
+  <h1>Vitabu <em>Vyetu</em> Bora</h1>
+  <p>Chagua kutoka kwa vitabu vya hali ya juu vinavyokusaidia kukua kibinafsi na kibiashara</p>
+</section>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <div class="search-box">
+    <span>🔍</span>
+    <input type="text" id="search-input" placeholder="Tafuta kitabu…" oninput="filterBooks()"/>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters" id="filters">
+  <button class="filter-btn active" onclick="setFilter('Zote', this)">Zote (100)</button>
+  <button class="filter-btn" onclick="setFilter('Biashara & Fedha', this)">💼 Biashara</button>
+  <button class="filter-btn" onclick="setFilter('Maendeleo Binafsi', this)">🌱 Maendeleo</button>
+  <button class="filter-btn" onclick="setFilter('Dini & Imani', this)">🕌 Dini</button>
+  <button class="filter-btn" onclick="setFilter('Afya & Lishe', this)">❤️ Afya</button>
+  <button class="filter-btn" onclick="setFilter('Teknolojia', this)">💻 Teknolojia</button>
+  <button class="filter-btn" onclick="setFilter('Historia', this)">📜 Historia</button>
+  <button class="filter-btn" onclick="setFilter('Elimu', this)">🎓 Elimu</button>
+  <button class="filter-btn" onclick="setFilter('Hadithi', this)">📖 Hadithi</button>
+  <button class="filter-btn" onclick="setFilter('Familia', this)">👨‍👩‍👧 Familia</button>
+  <button class="filter-btn" onclick="setFilter('Ushairi', this)">✍️ Ushairi</button>
+  <button class="filter-btn" onclick="setFilter('Mazingira', this)">🌳 Mazingira</button>
+  <button class="filter-btn" onclick="setFilter('Michezo', this)">⚽ Michezo</button>
+  <button class="filter-btn" onclick="setFilter('Sanaa & Utamaduni', this)">🎨 Sanaa</button>
+</div>
+
+<!-- BOOKS -->
+<section class="books-section">
+  <p class="books-count" id="books-count">Inaonyesha vitabu <strong>100</strong> kati ya 100</p>
+  <div class="books-grid" id="books-grid"></div>
+  <div class="no-results" id="no-results">
+    <div style="font-size:3rem">📭</div>
+    <p>Hakuna kitabu kinachofanana na utafutaji wako.</p>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeOnBg(event)">
+  <div class="modal-box">
+    <div class="modal-cover" id="m-cover"></div>
+    <div class="modal-body">
+      <div class="modal-cat" id="m-cat"></div>
+      <div class="modal-title" id="m-title"></div>
+      <div class="modal-desc" id="m-desc"></div>
+      <div class="modal-price-row">
+        <div>
+          <div class="modal-price-label">Bei ya Kitabu</div>
+          <div class="modal-price-val">TSH 2,000</div>
+        </div>
+        <div style="font-size:1.8rem">📲</div>
+      </div>
+      <div class="modal-lock-msg">
+        🔐 Kitabu hiki kinalindwa. Lipa TSH 2,000 kupata ufikiaji kamili.
+      </div>
+      <button class="modal-pay-btn" onclick="simulatePay()">Nunua Sasa – TSH 2,000 →</button>
+      <button class="modal-close-btn" onclick="closeModal()">Rudi kwenye Orodha</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const books = [
+  // BIASHARA & FEDHA
+  { id:1,  emoji:'💼', bg:'linear-gradient(135deg,#2d4a7a,#1a2d5a)', cat:'Biashara & Fedha',    title:'Jifunze Biashara',         desc:'Mwongozo kamili wa kuanza na kukuza biashara yako kwa mafanikio ya kweli.', hot:true  },
+  { id:2,  emoji:'💰', bg:'linear-gradient(135deg,#5a3a00,#c9962a)', cat:'Biashara & Fedha',    title:'Akili ya Fedha',           desc:'Jinsi ya kusimamia, kuwekeza na kukuza fedha zako kwa busara.',             hot:false },
+  { id:3,  emoji:'📈', bg:'linear-gradient(135deg,#1e6b5e,#0d3d35)', cat:'Biashara & Fedha',    title:'Mwekezaji Hodari',         desc:'Misingi ya uwekezaji wa hisa, ardhi na biashara ndogo ndogo.',              hot:true  },
+  { id:4,  emoji:'🏪', bg:'linear-gradient(135deg,#8b3a1a,#5a1a00)', cat:'Biashara & Fedha',    title:'Duka Lako Mtandaoni',      desc:'Hatua za kuanzisha biashara ya mtandaoni yenye mafanikio.',                 hot:false },
+  { id:5,  emoji:'🤝', bg:'linear-gradient(135deg,#2d5a2d,#1a3a1a)', cat:'Biashara & Fedha',    title:'Mazungumzo ya Biashara',   desc:'Ustadi wa kujadiliana na kushinda mikataba ya biashara.',                   hot:false },
+
+  // MAENDELEO BINAFSI
+  { id:6,  emoji:'🌱', bg:'linear-gradient(135deg,#2d5a2d,#4a8a4a)', cat:'Maendeleo Binafsi',   title:'Amka na Kutenda',          desc:'Jinsi ya kuacha uvivu na kuanza safari yako ya mafanikio.',                 hot:true  },
+  { id:7,  emoji:'🧠', bg:'linear-gradient(135deg,#5a3a7a,#3a1a5a)', cat:'Maendeleo Binafsi',   title:'Nguvu ya Akili',           desc:'Mbinu za kisaikolojia za kuimarisha nguvu ya akili yako.',                  hot:false },
+  { id:8,  emoji:'⏰', bg:'linear-gradient(135deg,#1a4a6b,#0d2d45)', cat:'Maendeleo Binafsi',   title:'Simamia Wakati Wako',      desc:'Mfumo wa kipekee wa kutumia kila saa kwa ufanisi mkubwa.',                  hot:false },
+  { id:9,  emoji:'🎯', bg:'linear-gradient(135deg,#8b3a3a,#5a1a1a)', cat:'Maendeleo Binafsi',   title:'Lengo na Mwelekeo',        desc:'Jinsi ya kuweka malengo na kuyafuata hadi kuyafikia.',                      hot:true  },
+  { id:10, emoji:'💪', bg:'linear-gradient(135deg,#4a2d00,#8b6a1a)', cat:'Maendeleo Binafsi',   title:'Nguvu ya Ndani',           desc:'Gundua uwezo mkubwa uliofichwa ndani yako.',                                hot:false },
+  { id:11, emoji:'😊', bg:'linear-gradient(135deg,#1e6b5e,#2d8a7a)', cat:'Maendeleo Binafsi',   title:'Furaha ya Kweli',          desc:'Jinsi ya kuishi maisha ya furaha na amani ya kweli.',                       hot:false },
+  { id:12, emoji:'🗣️', bg:'linear-gradient(135deg,#2d4a7a,#4a6aaa)', cat:'Maendeleo Binafsi',   title:'Sanaa ya Kuongea',         desc:'Mbinu za kuzungumza kwa ushawishi na ujasiri mbele ya watu.',                hot:true  },
+
+  // DINI & IMANI
+  { id:13, emoji:'🕌', bg:'linear-gradient(135deg,#1a3a1a,#2d6b2d)', cat:'Dini & Imani',        title:'Nguvu ya Sala',            desc:'Jinsi sala inavyobadilisha maisha yako na kuleta baraka.',                  hot:true  },
+  { id:14, emoji:'📿', bg:'linear-gradient(135deg,#3a2d1a,#6b5a2d)', cat:'Dini & Imani',        title:'Imani Inayosogea Milima',  desc:'Hadithi za kweli za imani na miujiza inayotokea maishani.',                 hot:false },
+  { id:15, emoji:'🌙', bg:'linear-gradient(135deg,#1a1a3a,#2d2d6b)', cat:'Dini & Imani',        title:'Amani ya Moyo',            desc:'Kupata amani ya kweli kupitia dua, tafakari na kumkumbuka Mwenyezi Mungu.', hot:false },
+  { id:16, emoji:'✝️', bg:'linear-gradient(135deg,#4a1a1a,#8b3a3a)', cat:'Dini & Imani',        title:'Imani na Matendo',         desc:'Uhusiano kati ya imani yako na jinsi unavyoishi maisha yako.',              hot:false },
+  { id:17, emoji:'🙏', bg:'linear-gradient(135deg,#2d4a2d,#5a8a5a)', cat:'Dini & Imani',        title:'Ukweli wa Maisha',         desc:'Maswali makubwa ya maisha yaliyojibiwa kupitia mwanga wa imani.',           hot:true  },
+
+  // AFYA & LISHE
+  { id:18, emoji:'❤️', bg:'linear-gradient(135deg,#8b1a2d,#c93a5a)', cat:'Afya & Lishe',        title:'Mwili Bora, Akili Bora',   desc:'Uhusiano kati ya afya ya mwili na ufanisi wa akili yako.',                  hot:true  },
+  { id:19, emoji:'🥗', bg:'linear-gradient(135deg,#2d6b1a,#5aaa2d)', cat:'Afya & Lishe',        title:'Lishe Sahihi ya Mwafrika', desc:'Vyakula bora vya Afrika vinavyokuimarisha mwili na akili.',                 hot:false },
+  { id:20, emoji:'🏃', bg:'linear-gradient(135deg,#1a4a6b,#2d6aaa)', cat:'Afya & Lishe',        title:'Mazoezi ya Kila Siku',     desc:'Mpango rahisi wa mazoezi unaofaa kwa mtu yeyote nyumbani.',                 hot:false },
+  { id:21, emoji:'😴', bg:'linear-gradient(135deg,#2d1a4a,#5a3a8b)', cat:'Afya & Lishe',        title:'Nguvu ya Usingizi',        desc:'Sayansi ya usingizi bora na jinsi unavyoathiri maisha yako.',               hot:false },
+  { id:22, emoji:'🧘', bg:'linear-gradient(135deg,#1e5a4a,#2d8a6b)', cat:'Afya & Lishe',        title:'Tiba Asilia',              desc:'Dawa za asili za Afrika zinazotibu magonjwa ya kawaida.',                   hot:true  },
+
+  // TEKNOLOJIA
+  { id:23, emoji:'💻', bg:'linear-gradient(135deg,#0d1a2d,#1a3a5a)', cat:'
