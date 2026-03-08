@@ -4,42 +4,855 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sade Books - Vitabu vya Kidigitali</title>
-    <link rel="stylesheet" href="style.css"> <!-- Hapa unaweza kuunganishia file yako ya CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C96A;
+            --gold-pale: #FDF6E3;
+            --dark: #1A1208;
+            --dark-mid: #2D2010;
+            --brown: #5C3D1E;
+            --cream: #FAF4E8;
+            --white: #FFFFFF;
+            --text: #3A2A10;
+            --text-light: #7A6540;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: relative;
+            background: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 80% 100%, rgba(201,168,76,0.10) 0%, transparent 60%);
+        }
+
+        /* Decorative lines */
+        header::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(700px, 90vw);
+            height: min(700px, 90vw);
+            border: 1px solid rgba(201,168,76,0.12);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .header-inner { position: relative; z-index: 2; }
+
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(201,168,76,0.12);
+            border: 1px solid rgba(201,168,76,0.35);
+            border-radius: 100px;
+            padding: 0.45rem 1.2rem;
+            margin-bottom: 2.5rem;
+            animation: fadeDown 0.8s ease forwards;
+        }
+
+        .logo-badge span {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .logo-dot {
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 9vw, 7rem);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.0;
+            letter-spacing: -0.02em;
+            animation: fadeUp 0.9s 0.2s ease both;
+        }
+
+        header h1 span {
+            color: var(--gold);
+            display: block;
+        }
+
+        .header-sub {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255,255,255,0.55);
+            font-weight: 300;
+            margin-top: 1.2rem;
+            letter-spacing: 0.04em;
+            animation: fadeUp 0.9s 0.4s ease both;
+        }
+
+        .header-cta {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 0.9s 0.6s ease both;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--dark);
+            padding: 0.9rem 2.2rem;
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201,168,76,0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: rgba(255,255,255,0.75);
+            padding: 0.9rem 2.2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* Scroll indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: fadeUp 1s 1s ease both;
+        }
+
+        .scroll-hint span {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, rgba(201,168,76,0.6), transparent);
+            animation: scrollPulse 2s infinite;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            background: var(--dark-mid);
+            padding: 1.4rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: clamp(2rem, 6vw, 5rem);
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 0.1rem;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250,244,232,0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .nav-brand em { color: var(--gold); font-style: normal; }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        /* ===== SECTION TITLE ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: rgba(201,168,76,0.1);
+            border: 1px solid rgba(201,168,76,0.25);
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.15;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .section-desc {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-top: 0.8rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        /* ===== BOOKS SECTION ===== */
+        #books {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .book-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(201,168,76,0.15);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            group: true;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(26,18,8,0.15), 0 0 0 1px rgba(201,168,76,0.3);
+        }
+
+        .book-cover {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .book-card:hover .book-cover img {
+            transform: scale(1.06);
+        }
+
+        .book-cover-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .cover-1 { background: linear-gradient(135deg, #2D1B69 0%, #11998e 100%); }
+        .cover-2 { background: linear-gradient(135deg, #834d9b 0%, #d04ed6 100%); }
+        .cover-3 { background: linear-gradient(135deg, #c94b4b 0%, #4b134f 100%); }
+        .cover-4 { background: linear-gradient(135deg, #1a6b3c 0%, #2d9cdb 100%); }
+
+        .book-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gold);
+            color: var(--dark);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.7rem;
+            border-radius: 100px;
+        }
+
+        .book-body {
+            padding: 1.5rem;
+        }
+
+        .book-category {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .book-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-desc {
+            font-size: 0.84rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+
+        .book-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .book-price {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .price-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .price-currency {
+            font-size: 0.8rem;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .btn-buy {
+            background: var(--dark);
+            color: var(--white);
+            padding: 0.65rem 1.4rem;
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-buy:hover {
+            background: var(--gold);
+            color: var(--dark);
+            transform: scale(1.05);
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        #features {
+            background: var(--dark);
+            padding: 6rem 2rem;
+        }
+
+        .features-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border: 1px solid rgba(201,168,76,0.15);
+            border-radius: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(201,168,76,0.4);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(201,168,76,0.12);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .feature-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.87rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.7;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            border-top: 1px solid rgba(201,168,76,0.15);
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand h3 em {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.88rem;
+            max-width: 220px;
+            line-height: 1.6;
+        }
+
+        .footer-links h5 {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--gold); }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.25);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.6; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(0.7); }
+        }
+
+        /* Entrance animation for cards */
+        .book-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .book-card:nth-child(1) { animation-delay: 0.1s; }
+        .book-card:nth-child(2) { animation-delay: 0.2s; }
+        .book-card:nth-child(3) { animation-delay: 0.3s; }
+        .book-card:nth-child(4) { animation-delay: 0.4s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .stats-bar { gap: 1.5rem; }
+            .footer-inner { gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Nav -->
+    <nav>
+        <div class="nav-brand">Sade <em>Books</em></div>
+        <ul class="nav-links">
+            <li><a href="#books">Vitabu</a></li>
+            <li><a href="#features">Huduma</a></li>
+            <li><a href="contact.html">Mawasiliano</a></li>
+        </ul>
+        <a href="#books" class="btn-primary" style="padding:0.6rem 1.5rem;font-size:0.85rem;">Angalia Vitabu</a>
+    </nav>
+
+    <!-- Hero Header -->
     <header>
-        <h1>Karibu Sade Books</h1>
-        <p>Nunua vitabu vya kidigitali (PDF) kwa urahisi!</p>
+        <div class="header-inner">
+            <div class="logo-badge">
+                <div class="logo-dot"></div>
+                <span>Duka la Vitabu vya Kidigitali</span>
+                <div class="logo-dot"></div>
+            </div>
+            <h1>
+                Sade
+                <span>Books</span>
+            </h1>
+            <p class="header-sub">Nunua vitabu vya kidigitali (PDF) kwa urahisi na bei nafuu</p>
+            <div class="header-cta">
+                <a href="#books" class="btn-primary">Tazama Vitabu</a>
+                <a href="contact.html" class="btn-outline">Wasiliana Nasi</a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>Shuka</span>
+            <div class="scroll-line"></div>
+        </div>
     </header>
 
-    <!-- Sehemu ya Vitabu -->
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-num">50+</div>
+            <div class="stat-label">Vitabu</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">1,200+</div>
+            <div class="stat-label">Wateja</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Usalama</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">Upatikanaji</div>
+        </div>
+    </div>
+
+    <!-- Books Section -->
     <section id="books">
-        <h2>Vitabu Vyetu</h2>
-        <div class="book">
-            <img src="path-to-book-cover.jpg" alt="Jifunze Biashara">
-            <h3>Jifunze Biashara</h3>
-            <p>Bei: TSH 5,000</p>
-            <a href="malipo.html">
-                <button>Nunua Kitabu</button>
-            </a>
+        <div class="section-header">
+            <div class="section-tag">📚 Mkusanyiko Wetu</div>
+            <h2 class="section-title">Vitabu <em>Vyetu</em> Bora</h2>
+            <p class="section-desc">Chagua kutoka kwa vitabu vya hali ya juu vinavyokusaidia kukua kibinafsi na kibiashara</p>
         </div>
-        <div class="book">
-            <img src="path-to-book-cover2.jpg" alt="Afya Bora">
-            <h3>Afya Bora</h3>
-            <p>Bei: TSH 4,000</p>
-            <a href="malipo.html">
-                <button>Nunua Kitabu</button>
-            </a>
+
+        <div class="books-grid">
+            <!-- Kitabu 1 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-placeholder cover-1">
+                        <span>💼</span>
+                    </div>
+                    <div class="book-badge">Maarufu</div>
+                </div>
+                <div class="book-body">
+                    <div class="book-category">Biashara &amp; Fedha</div>
+                    <h3>Jifunze Biashara</h3>
+                    <p class="book-desc">Mwongozo kamili wa kuanza na kukuza biashara yako kwa mafanikio ya kweli.</p>
+                    <div class="book-footer">
+                        <div class="book-price">
+                            <span class="price-label">Bei</span>
+                            <span class="price-value"><span class="price-currency">TSH </span>5,000</span>
+                        </div>
+                        <a href="malipo.html" class="btn-buy">Nunua →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kitabu 2 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-placeholder cover-2">
+                        <span>🌿</span>
+                    </div>
+                </div>
+                <div class="book-body">
+                    <div class="book-category">Afya &amp; Ustawi</div>
+                    <h3>Afya Bora</h3>
+                    <p class="book-desc">Jifunze jinsi ya kuishi maisha ya afya na furaha kupitia mwongozo huu wa kipekee.</p>
+                    <div class="book-footer">
+                        <div class="book-price">
+                            <span class="price-label">Bei</span>
+                            <span class="price-value"><span class="price-currency">TSH </span>4,000</span>
+                        </div>
+                        <a href="malipo.html" class="btn-buy">Nunua →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kitabu 3 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-placeholder cover-3">
+                        <span>🧠</span>
+                    </div>
+                    <div class="book-badge">Mpya</div>
+                </div>
+                <div class="book-body">
+                    <div class="book-category">Maendeleo Binafsi</div>
+                    <h3>Akili Timamu</h3>
+                    <p class="book-desc">Gundua nguvu za akili yako na ujifunze mbinu za kukufanya ufanikiwe zaidi.</p>
+                    <div class="book-footer">
+                        <div class="book-price">
+                            <span class="price-label">Bei</span>
+                            <span class="price-value"><span class="price-currency">TSH </span>6,000</span>
+                        </div>
+                        <a href="malipo.html" class="btn-buy">Nunua →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kitabu 4 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-placeholder cover-4">
+                        <span>💻</span>
+                    </div>
+                </div>
+                <div class="book-body">
+                    <div class="book-category">Teknolojia</div>
+                    <h3>Teknolojia ya Leo</h3>
+                    <p class="book-desc">Elewa teknolojia ya kisasa na jinsi ya kuitumia kukufikisha mbali zaidi maishani.</p>
+                    <div class="book-footer">
+                        <div class="book-price">
+                            <span class="price-label">Bei</span>
+                            <span class="price-value"><span class="price-currency">TSH </span>7,000</span>
+                        </div>
+                        <a href="malipo.html" class="btn-buy">Nunua →</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Ongeza vitabu zaidi hapa kama inahitajika -->
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="features-inner">
+            <div class="section-header">
+                <div class="section-tag" style="color:var(--gold)">✨ Kwa Nini Sisi</div>
+                <h2 class="section-title" style="color:var(--white)">Huduma Zetu <em>Bora</em></h2>
+                <p class="section-desc" style="color:rgba(255,255,255,0.45)">Tunakupa uzoefu bora wa ununuzi wa vitabu vya kidigitali</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Upakuaji wa Haraka</h4>
+                    <p>Pata kitabu chako papo hapo baada ya malipo kukamilika kwa sekunde chache.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Malipo Salama</h4>
+                    <p>Mfumo wetu wa malipo una usalama wa hali ya juu kulinda fedha na taarifa zako.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h4>Soma Popote</h4>
+                    <p>Vitabu vya PDF vinaweza kusomwa kwenye simu, kompyuta au tablet yoyote.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h4>Msaada wa Haraka</h4>
+                    <p>Timu yetu iko tayari kukusaidia masaa 24 kwa siku, siku 7 kwa wiki.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Sade Books. Haki zote zimehifadhiwa.</p>
-        <p><a href="contact.html">Mawasiliano</a></p>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>Sade <em>Books</em></h3>
+                <p>Duka lako la kwanza la vitabu vya kidigitali kwa Kiswahili.</p>
+            </div>
+            <div class="footer-links">
+                <h5>Viungo</h5>
+                <ul>
+                    <li><a href="#books">Vitabu</a></li>
+                    <li><a href="#features">Huduma</a></li>
+                    <li><a href="malipo.html">Malipo</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5>Msaada</h5>
+                <ul>
+                    <li><a href="contact.html">Mawasiliano</a></li>
+                    <li><a href="#">Maswali Yanayoulizwa</a></li>
+                    <li><a href="#">Sera ya Faragha</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sade Books. Haki zote zimehifadhiwa.</p>
+            <p>Imetengenezwa kwa ❤️ Tanzania</p>
+        </div>
     </footer>
 
 </body>
