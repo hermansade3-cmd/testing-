@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sade Books – Maoni ya Wateja</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream:  #f5ede0;
+      --cream2: #fdf8f0;
+      --ink:    #1c1710;
+      --gold:   #c9962a;
+      --gold2:  #e8c46a;
+      --muted:  #7a6a52;
+      --border: #e0d0b8;
+      --white:  #ffffff;
+      --green:  #2d6b2d;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--cream2); color: var(--ink); min-height: 100vh; }
+
+    /* NAV */
+    nav {
+      background: var(--cream2); border-bottom: 1px solid var(--border);
+      padding: 16px 24px; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--ink); }
+    .nav-logo span { color: var(--gold); }
+    .nav-btn { background: var(--gold); color: var(--ink); border: none; border-radius: 50px; padding: 11px 22px; font-weight: 700; font-size: .9rem; cursor: pointer; }
+
+    /* HERO */
+    .hero {
+      background: var(--ink);
+      padding: 60px 24px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(201,150,42,.18) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 50%, rgba(201,150,42,.12) 0%, transparent 60%);
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(201,150,42,.4); border-radius: 50px;
+      padding: 7px 18px; font-size: .75rem; font-weight: 700;
+      letter-spacing: .14em; color: var(--gold2); text-transform: uppercase; margin-bottom: 20px;
+    }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,5vw,3.2rem); color: var(--white); line-height: 1.2; margin-bottom: 14px; }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero p { font-family: 'Lora', serif; color: rgba(255,255,255,.6); font-size: 1rem; line-height: 1.7; margin-bottom: 30px; }
+
+    /* STATS ROW */
+    .stats-row {
+      display: flex; justify-content: center; gap: 40px;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--gold); }
+    .stat-label { font-size: .75rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .1em; margin-top: 2px; }
+
+    /* STARS SUMMARY */
+    .stars-summary {
+      max-width: 700px; margin: -30px auto 0;
+      background: var(--white); border-radius: 20px;
+      padding: 28px 32px; position: relative; z-index: 2;
+      box-shadow: 0 8px 40px rgba(0,0,0,.1);
+      display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+    }
+    .big-rating { text-align: center; min-width: 90px; }
+    .big-rating .num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--ink); line-height: 1; }
+    .big-rating .stars { font-size: 1.3rem; color: var(--gold); margin: 6px 0 4px; }
+    .big-rating .total { font-size: .78rem; color: var(--muted); }
+    .rating-bars { flex: 1; min-width: 200px; }
+    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
+    .bar-label { font-size: .78rem; color: var(--muted); width: 40px; text-align: right; }
+    .bar-track { flex: 1; background: var(--cream); border-radius: 50px; height: 8px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--gold); border-radius: 50px; transition: width 1s ease; }
+    .bar-count { font-size: .75rem; color: var(--muted); width: 24px; }
+
+    /* SECTION */
+    .section-wrap { max-width: 900px; margin: 48px auto 0; padding: 0 16px 60px; }
+    .section-title {
+      font-family: 'Playfair Display', serif; font-size: 1.5rem;
+      font-weight: 700; color: var(--ink); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* COMMENTS GRID */
+    .comments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 18px;
+    }
+
+    .comment-card {
+      background: var(--white); border-radius: 16px;
+      padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      border: 1px solid var(--border);
+      transition: transform .22s, box-shadow .22s;
+      animation: fadeUp .5s ease both;
+    }
+    .comment-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,.11); }
+
+    .card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 700; color: var(--white);
+      flex-shrink: 0; font-family: 'Playfair Display', serif;
+    }
+    .card-meta { flex: 1; }
+    .card-name { font-weight: 700; font-size: .95rem; color: var(--ink); }
+    .card-location { font-size: .75rem; color: var(--muted); margin-top: 1px; }
+    .card-stars { font-size: .9rem; color: var(--gold); }
+
+    .card-book {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--cream2); border: 1px solid var(--border);
+      border-radius: 50px; padding: 4px 12px; font-size: .72rem;
+      color: var(--muted); margin-bottom: 12px; font-family: 'Lora', serif; font-style: italic;
+    }
+    .card-text {
+      font-family: 'Lora', serif; font-size: .88rem; color: #3a2e1c;
+      line-height: 1.75; position: relative;
+    }
+    .card-text::before {
+      content: '"';
+      font-family: 'Playfair Display', serif; font-size: 3rem;
+      color: var(--gold); opacity: .25; position: absolute;
+      top: -10px; left: -6px; line-height: 1;
+    }
+    .card-date { font-size: .72rem; color: var(--muted); margin-top: 12px; text-align: right; }
+
+    /* verified badge */
+    .verified {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: #e8f5e8; color: var(--green); font-size: .65rem;
+      font-weight: 700; padding: 3px 8px; border-radius: 20px; margin-left: 6px;
+    }
+
+    /* ADD COMMENT */
+    .add-comment-wrap {
+      background: var(--ink); border-radius: 20px; padding: 32px;
+      margin-top: 48px; position: relative; overflow: hidden;
+    }
+    .add-comment-wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 80% 20%, rgba(201,150,42,.15) 0%, transparent 50%);
+    }
+    .add-comment-inner { position: relative; z-index: 1; }
+    .add-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .add-sub { font-family: 'Lora', serif; font-size: .88rem; color: rgba(255,255,255,.5); font-style: italic; margin-bottom: 22px; }
+    .form-row { display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .form-input {
+      flex: 1; min-width: 140px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 10px; padding: 12px 14px; color: var(--white);
+      font-family: 'Source Sans 3', sans-serif; font-size: .9rem; outline: none;
+      transition: border-color .2s;
+    }
+    .form-input::placeholder { color: rgba(255,255,255,.3); }
+    .form-input:focus { border-color: var(--gold); }
+    textarea.form-input { resize: none; min-height: 90px; }
+    .star-select { display: flex; gap: 6px; margin-bottom: 16px; }
+    .star-select span {
+      font-size: 1.6rem; cursor: pointer; transition: transform .15s;
+      filter: grayscale(1) opacity(.4);
+    }
+    .star-select span.on { filter: none; transform: scale(1.15); }
+    .submit-btn {
+      background: var(--gold); color: var(--ink); border: none;
+      border-radius: 50px; padding: 13px 28px; font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .2s;
+    }
+    .submit-btn:hover { background: var(--gold2); }
+    .submit-msg { color: var(--gold2); font-family: 'Lora', serif; font-style: italic; font-size: .88rem; margin-top: 12px; min-height: 20px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 500px) {
+      .comments-grid { grid-template-columns: 1fr; }
+      .stars-summary { flex-direction: column; align-items: flex-start; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sade <span>Books</span></div>
+  <button class="nav-btn">Angalia Vitabu</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">⭐ Maoni ya Wateja</div>
+    <h1>Wanasema <em>Nini</em> Wateja Wetu?</h1>
+    <p>Zaidi ya wateja 53 wameshiriki uzoefu wao na Sade Books — soma maoni yao ya kweli.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">53</div><div class="stat-label">Maoni</div></div>
+      <div class="stat"><div class="stat-num">4.9</div><div class="stat-label">Wastani wa Nyota</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Waliridhika</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RATING SUMMARY -->
+<div style="padding: 0 16px;">
+  <div class="stars-summary">
+    <div class="big-rating">
+      <div class="num">4.9</div>
+      <div class="stars">★★★★★</div>
+      <div class="total">kati ya 5.0</div>
+    </div>
+    <div class="rating-bars">
+      <div class="bar-row"><span class="bar-label">5 ★</span><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div><span class="bar-count">49</span></div>
+      <div class="bar-row"><span class="bar-label">4 ★</span><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div><span class="bar-count">3</span></div>
+      <div class="bar-row"><span class="bar-label">3 ★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span class="bar-count">1</span></div>
+      <div class="bar-row"><span class="bar-label">2 ★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-count">0</span></div>
+      <div class="bar-row"><span class="bar-label">1 ★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-count">0</span></div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-family:'Playfair Display',serif; font-size:.85rem; color:var(--ink); font-weight:700; margin-bottom:6px;">Wateja Walioridhika</div>
+      <div style="font-size:2rem;">😍</div>
+      <div style="font-size:.75rem; color:var(--muted); margin-top:4px; font-family:'Lora',serif; font-style:italic;">Huduma bora Tanzania</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMENTS -->
+<div class="section-wrap">
+  <div class="section-title">Maoni Yote (53)</div>
+  <div class="comments-grid" id="comments-grid"></div>
+
+  <!-- ADD COMMENT -->
+  <div class="add-comment-wrap">
+    <div class="add-comment-inner">
+      <div class="add-title">✍️ Acha Maoni Yako</div>
+      <div class="add-sub">Je, umeshanunua kitabu? Tushirikishe uzoefu wako!</div>
+      <div class="form-row">
+        <input class="form-input" id="c-name" type="text" placeholder="Jina lako kamili"/>
+        <input class="form-input" id="c-location" type="text" placeholder="Mji wako (mfano: Dar es Salaam)"/>
+      </div>
+      <input class="form-input" id="c-book" type="text" placeholder="Kitabu ulichonunua" style="width:100%; margin-bottom:12px;"/>
+      <div style="color:rgba(255,255,255,.6); font-size:.82rem; margin-bottom:8px;">Piga kura ya nyota:</div>
+      <div class="star-select" id="star-select">
+        <span onclick="rateStar(1)">★</span>
+        <span onclick="rateStar(2)">★</span>
+        <span onclick="rateStar(3)">★</span>
+        <span onclick="rateStar(4)">★</span>
+        <span onclick="rateStar(5)">★</span>
+      </div>
+      <textarea class="form-input" id="c-text" placeholder="Andika maoni yako hapa… (angalau maneno 10)" style="width:100%; margin-bottom:14px;"></textarea>
+      <button class="submit-btn" onclick="submitComment()">Tuma Maoni →</button>
+      <div class="submit-msg" id="submit-msg"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var userRating = 0;
+
+var comments = [
+  { name:'Amina Hassan',      location:'Dar es Salaam', avatar:'AH', color:'#c9962a', stars:5, book:'Jifunze Biashara',       date:'Machi 5, 2026',    text:'Nimepata kitabu changu ndani ya masaa 2 tu! Huduma ya Sade Books ni ya kipekee kabisa. Kitabu cha Jifunze Biashara kimenigeuza kabisa — ninaweza sasa kusimamia biashara yangu vizuri zaidi.' },
+  { name:'John Mwakasege',    location:'Moshi',         avatar:'JM', color:'#2d4a7a', stars:5, book:'Akili ya Fedha',         date:'Machi 4, 2026',    text:'Umenunua eBook ya Akili ya Fedha leo asubuhi, saa 2 baadaye tayari ninasoma! Mfumo wa malipo ni rahisi na salama. Asante sana Herman Sade!' },
+  { name:'Fatuma Ally',       location:'Zanzibar',      avatar:'FA', color:'#8b3a3a', stars:5, book:'Amka na Kutenda',        date:'Machi 3, 2026',    text:'Kitabu cha Amka na Kutenda kimebadilisha mtazamo wangu wa maisha. Nilikuwa mtu wa uvivu sana, lakini sasa ninaamka saa 11 usiku na kufanya kazi. Maudhui ni ya hali ya juu sana!' },
+  { name:'Peter Kimaro',      location:'Arusha',        avatar:'PK', color:'#1e6b5e', stars:5, book:'Nguvu ya Sala',          date:'Machi 2, 2026',    text:'Nimeamini kweli kweli nguvu ya sala baada ya kusoma kitabu hiki. Herman anaandika kwa moyo wa kweli. Nitatoa zawadi vitabu hivi kwa familia yangu yote.' },
+  { name:'Grace Msigwa',      location:'Dodoma',        avatar:'GM', color:'#5a3a7a', stars:5, book:'Mwekezaji Hodari',       date:'Machi 1, 2026',    text:'Nimewekeza pesa zangu kwenye hisa mara ya kwanza baada ya kusoma Mwekezaji Hodari. Mwezi mmoja baadaye, mapato yamesogea 30%! Asante kwa maarifa haya ya dhahabu.' },
+  { name:'Ibrahim Rashid',    location:'Tanga',         avatar:'IR', color:'#3a6b2d', stars:5, book:'Coding kwa Waanzishi',   date:'Feb 28, 2026',     text:'Nilikuwa sijui kabisa coding. Baada ya wiki 3 za kusoma Coding kwa Waanzishi, nimeweza kutengeneza website yangu ya kwanza! Kitabu kimeandikwa kwa lugha rahisi sana.' },
+  { name:'Rehema Mwanga',     location:'Morogoro',      avatar:'RM', color:'#6b4a1a', stars:5, book:'Ndoa Yenye Furaha',      date:'Feb 27, 2026',     text:'Mimi na mumewe tulisoma kitabu hiki pamoja. Mahusiano yetu yamekuwa mazuri sana tangu hapo. Mapendekezo yangu kwa kila mke na mume — nunueni leo hii!' },
+  { name:'David Mchome',      location:'Mwanza',        avatar:'DM', color:'#1a3a6b', stars:5, book:'Afrika ya Kale',         date:'Feb 26, 2026',     text:'Nilijua kidogo sana kuhusu historia ya Afrika. Baada ya kusoma Afrika ya Kale, nimejivunia zaidi kuwa Mwafrika! Vitabu kama hivi vinahitajika kwenye kila shule Tanzania.' },
+  { name:'Zuwena Kombo',      location:'Pemba',         avatar:'ZK', color:'#7a2d5a', stars:5, book:'Usiku wa Nairobi',       date:'Feb 25, 2026',     text:'Riwaya bora kabisa niliyowahi kusoma! Nilisoma mpaka usiku wa manane bila kulala. Ustadi wa Herman wa kuandika hadithi ni wa ajabu. Nasubiri vitabu vingine vya hadithi.' },
+  { name:'Salim Abdallah',    location:'Lindi',         avatar:'SA', color:'#2d3a1a', stars:5, book:'Benki Yako Mfukoni',     date:'Feb 24, 2026',     text:'Nilifungua akaunti ya benki na kuanza kutumia M-Pesa vizuri zaidi baada ya kusoma kitabu hiki. Fedha zangu zinaongezeka kila mwezi. Nimeweza kujenga akiba yangu ya kwanza!' },
+  { name:'Neema Tarimo',      location:'Iringa',        avatar:'NT', color:'#6b2d1a', stars:5, book:'Malezi Bora ya Watoto',  date:'Feb 23, 2026',     text:'Mtoto wangu alikuwa na tabia mbaya sana. Baada ya miezi 2 ya kutumia mbinu za kitabu hiki, amebadilika kabisa! Sasa ni mtoto mzuri na mwenye adabu. Asante Herman!' },
+  { name:'Hassan Mselem',     location:'Kibaha',        avatar:'HM', color:'#1a4a3a', stars:5, book:'Kilimo Biashara',        date:'Feb 22, 2026',     text:'Nilikuwa nifanye kilimo cha kawaida. Sasa baada ya kusoma Kilimo Biashara, shamba langu linaleta faida mara tatu zaidi! Nimehire wafanyakazi wanne wa ziada. Ahsante sana!' },
+  { name:'Lucia Swai',        location:'Mbeya',         avatar:'LS', color:'#4a1a6b', stars:5, book:'Nguvu ya Akili',         date:'Feb 21, 2026',     text:'Mtihani wa chuo nilifeli mara mbili. Baada ya kusoma Nguvu ya Akili na kutumia mbinu zake, nilifaulu kwa darasa la kwanza! Pia nilikuwa na wasiwasi sana — sasa amani kabisa.' },
+  { name:'Omar Juma',         location:'Singida',       avatar:'OJ', color:'#3a1a00', stars:5, book:'Freelancing Mtandaoni',  date:'Feb 20, 2026',     text:'Nilikuwa sina kazi miaka 2. Leo ninapata kazi za kimataifa mtandaoni na kulipwa dola kila wiki! Kitabu hiki kimebadilisha maisha yangu kabisa. Ninashukuru Mungu na Herman Sade.' },
+  { name:'Mwanaidi Chande',   location:'Tabora',        avatar:'MC', color:'#1a5a5a', stars:5, book:'Mama Shujaa',            date:'Feb 19, 2026',     text:'Kama mama wa watoto watano bila muume, kitabu hiki kilinipa nguvu kubwa sana. Nimejifunza kusimamia familia yangu na kujiamini. Sasa nina biashara ndogo ndogo na inaenda vizuri.' },
+  { name:'Benjamin Kahama',   location:'Shinyanga',     avatar:'BK', color:'#5a4a00', stars:5, book:'Mtandao wa Pesa',        date:'Feb 18, 2026',     text:'Niliwekeza kwenye crypto baada ya kusoma kitabu hiki. Nilianza na TZS 50,000 tu. Miezi sita baadaye, nina TZS 300,000! Maarifa ni nguvu kweli kweli. Asante Herman.' },
+  { name:'Zawadi Mkumbo',     location:'Kagera',        avatar:'ZM', color:'#2d1a4a', stars:5, book:'Hifadhi Dunia Yetu',     date:'Feb 17, 2026',     text:'Nimejiunga na kikundi cha uhifadhi wa mazingira baada ya kusoma kitabu hiki. Tunapanda miti 1000 kila mwezi! Vizazi vijavyo vitashukuru kazi tunayofanya sasa.' },
+  { name:'Ramadhani Nkwabi',  location:'Rukwa',         avatar:'RN', color:'#1a3a00', stars:5, book:'Soka na Maisha',         date:'Feb 16, 2026',     text:'Kocha wa timu ya shule yetu. Nimetumia mafunzo ya kitabu hiki kufundisha vijana. Timu yetu imeshinda mashindano ya mkoa mwaka huu! Michezo na masomo vinaweza kwenda pamoja.' },
+  { name:'Anita Mhagama',     location:'Njombe',        avatar:'AM', color:'#6b1a3a', stars:5, book:'Afya ya Mwili Bora',     date:'Feb 15, 2026',     text:'Nilikuwa na uzito wa ziada sana — kilo 95. Baada ya miezi 4 ya kufuata mpango wa kitabu hiki, sasa niko kilo 72! Ninahisi vizuri sana. Kitabu hiki ni thamani ya maisha.' },
+  { name:'Yusuf Mwandoe',     location:'Pwani',         avatar:'YM', color:'#00396b', stars:5, book:'Quran na Maisha ya Leo', date:'Feb 14, 2026',     text:'Kitabu kimenisaidia kuelewa Quran vizuri zaidi na kuihusisha na changamoto za maisha ya leo ya kisasa. Ninaomba dua kila siku sasa na maisha yangu yamepata mwelekeo.' },
+  { name:'Consolata Mrema',   location:'Kilimanjaro',   avatar:'CM', color:'#3a5a00', stars:4, book:'Soma kwa Ufanisi',       date:'Feb 13, 2026',     text:'Mbinu za kusoma haraka zimenigeuza. Nilikuwa nasoma kitabu kimoja kwa wiki mbili. Sasa ninasoma vitabu vitatu kwa wiki moja! Ingawa ningependa vitabu zaidi vya sayansi.' },
+  { name:'Jumanne Sikudhani',  location:'Geita',        avatar:'JS', color:'#4a2d6b', stars:5, book:'Ushairi wa Maisha'
