@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agiza Kitabu – Sade Books</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --blue:    #002B7F;
+      --blue2:   #003DA5;
+      --blue3:   #1A5DCC;
+      --yellow:  #FFD000;
+      --yellow2: #FFC200;
+      --green:   #00875A;
+      --green2:  #E6F7F1;
+      --green3:  #00A651;
+      --bg:      #F2F5FB;
+      --white:   #FFFFFF;
+      --ink:     #0C1A3A;
+      --muted:   #6B7A99;
+      --border:  #DDE3EF;
+    }
+    html{background:var(--bg)}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;max-width:430px;margin:0 auto}
+
+    /* ── TOP NAV ── */
+    .top-nav{
+      background:linear-gradient(160deg,var(--blue) 0%,var(--blue3) 100%);
+      padding:52px 20px 22px;
+      position:relative;overflow:hidden;
+    }
+    .top-nav::after{
+      content:'';position:absolute;
+      width:260px;height:260px;border-radius:50%;
+      background:rgba(255,208,0,.07);
+      top:-100px;right:-80px;pointer-events:none;
+    }
+    .nav-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+    .nav-back{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.13);border:none;color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .nav-logo{font-size:1rem;font-weight:800;color:#fff;letter-spacing:.01em}
+    .nav-logo span{color:var(--yellow)}
+    .nav-spacer{width:36px}
+    .nav-subtitle{position:relative;z-index:1;text-align:center;color:rgba(255,255,255,.6);font-size:.78rem;margin-top:4px}
+
+    /* ── STEPS INDICATOR ── */
+    .steps-bar{
+      display:flex;align-items:center;justify-content:center;
+      gap:0;padding:18px 20px 14px;background:var(--white);
+      border-bottom:1px solid var(--border);
+    }
+    .step-dot{
+      display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;
+    }
+    .step-circle{
+      width:32px;height:32px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:.8rem;font-weight:800;
+      border:2px solid var(--border);color:var(--muted);background:var(--bg);
+      transition:all .3s;
+    }
+    .step-circle.active{background:var(--blue2);border-color:var(--blue2);color:#fff}
+    .step-circle.done{background:var(--green);border-color:var(--green);color:#fff}
+    .step-lbl{font-size:.62rem;font-weight:700;color:var(--muted);text-align:center;letter-spacing:.04em;text-transform:uppercase}
+    .step-lbl.active{color:var(--blue2)}
+    .step-lbl.done{color:var(--green)}
+    .step-line{flex:1;height:2px;background:var(--border);margin:0 4px;margin-bottom:16px;transition:background .3s;max-width:40px}
+    .step-line.done{background:var(--green)}
+
+    /* ── PAGES ── */
+    .page{display:none;padding:20px 16px 40px;animation:fadeUp .3s ease}
+    .page.active{display:block}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ── CARDS ── */
+    .card{background:var(--white);border-radius:18px;box-shadow:0 2px 16px rgba(0,43,127,.07);margin-bottom:14px;overflow:hidden}
+    .card-head{padding:16px 18px 12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+    .card-head-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+    .card-head-title{font-size:.92rem;font-weight:800;color:var(--ink)}
+    .card-head-sub{font-size:.72rem;color:var(--muted);margin-top:1px}
+    .card-body{padding:16px 18px}
+
+    /* ── FORM FIELDS ── */
+    .field{margin-bottom:14px}
+    .field:last-child{margin-bottom:0}
+    .field-label{font-size:.78rem;font-weight:700;color:var(--ink);margin-bottom:7px;display:flex;align-items:center;gap:5px}
+    .required{color:#E04040;font-size:.7rem}
+    .field-wrap{display:flex;align-items:center;gap:10px;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:12px 15px;transition:all .2s}
+    .field-wrap:focus-within{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(0,61,165,.1);background:#fff}
+    .field-wrap input,.field-wrap textarea{border:none;outline:none;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:500;color:var(--ink);width:100%}
+    .field-wrap textarea{resize:none;min-height:80px;line-height:1.6}
+    .field-wrap input::placeholder,.field-wrap textarea::placeholder{color:#B8C3D9;font-weight:400}
+    .field-prefix{font-size:.82rem;font-weight:700;color:var(--muted);white-space:nowrap;flex-shrink:0}
+    .field-hint{font-size:.7rem;color:var(--muted);margin-top:5px;font-family:'Lora',serif;font-style:italic;padding-left:2px}
+
+    /* ── BOOK SEARCH ── */
+    .book-search-wrap{position:relative}
+    .book-suggestions{
+      position:absolute;top:calc(100% + 4px);left:0;right:0;
+      background:var(--white);border:1.5px solid var(--border);
+      border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);
+      z-index:100;max-height:200px;overflow-y:auto;display:none;
+    }
+    .book-suggestions.open{display:block}
+    .suggestion-item{padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:background .15s}
+    .suggestion-item:last-child{border-bottom:none}
+    .suggestion-item:hover{background:var(--bg)}
+    .sug-emoji{font-size:1.2rem;flex-shrink:0}
+    .sug-name{font-size:.85rem;font-weight:700;color:var(--ink)}
+    .sug-cat{font-size:.7rem;color:var(--muted)}
+
+    /* ── SELECTED BOOK CARD ── */
+    .selected-book{
+      display:none;background:linear-gradient(135deg,#EEF4FF,#F5F8FF);
+      border:1.5px solid #B8D0FF;border-radius:14px;
+      padding:14px 16px;margin-top:10px;
+    }
+    .selected-book.show{display:flex;align-items:center;gap:12px}
+    .sel-emoji{font-size:2rem;flex-shrink:0}
+    .sel-info{flex:1}
+    .sel-title{font-size:.9rem;font-weight:800;color:var(--ink)}
+    .sel-cat{font-size:.72rem;color:var(--blue2);margin-top:2px;font-weight:600}
+    .sel-price{font-size:.82rem;font-weight:800;color:var(--ink);margin-top:4px}
+    .sel-remove{background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:4px}
+
+    /* ── NOTICE BOX ── */
+    .notice{
+      display:flex;align-items:flex-start;gap:10px;
+      background:#FFF9E6;border:1.5px solid #FFD000;
+      border-radius:14px;padding:14px 16px;margin-bottom:14px;
+    }
+    .notice-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+    .notice-text{font-size:.78rem;color:#5A4A00;line-height:1.6}
+    .notice-text strong{color:var(--ink)}
+
+    .notice.green{background:var(--green2);border-color:#80D0B0}
+    .notice.green .notice-text{color:#004030}
+
+    /* ── ERR ── */
+    .err-box{display:none;background:#FFF0F0;border:1.5px solid #FFBABA;border-radius:10px;padding:10px 14px;font-size:.8rem;color:#C00;font-weight:600;margin-bottom:12px}
+
+    /* ── BUTTONS ── */
+    .btn-yellow{
+      width:100%;background:linear-gradient(135deg,var(--yellow2),var(--yellow));
+      color:var(--blue);border:none;border-radius:14px;padding:16px;
+      font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;
+      cursor:pointer;box-shadow:0 6px 20px rgba(255,194,0,.4);
+      transition:transform .15s,box-shadow .2s;letter-spacing:.01em;
+    }
+    .btn-yellow:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,194,0,.5)}
+    .btn-yellow:disabled{background:#D0D8E8;color:#8896B0;box-shadow:none;transform:none;cursor:not-allowed}
+    .btn-blue{
+      width:100%;background:linear-gradient(135deg,var(--blue),var(--blue3));
+      color:#fff;border:none;border-radius:14px;padding:16px;
+      font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;
+      cursor:pointer;box-shadow:0 6px 20px rgba(0,43,127,.3);
+      transition:transform .15s;margin-bottom:8px;
+    }
+    .btn-blue:hover{transform:translateY(-2px)}
+    .btn-ghost{width:100%;background:none;border:none;padding:12px;font-size:.88rem;font-weight:600;color:var(--muted);cursor:pointer}
+
+    /* ── RESERVATION CONFIRMED CARD ── */
+    .reservation-card{
+      background:linear-gradient(160deg,var(--blue) 0%,var(--blue3) 100%);
+      border-radius:20px;padding:22px;margin-bottom:14px;
+      position:relative;overflow:hidden;
+    }
+    .reservation-card::before{
+      content:'';position:absolute;
+      width:180px;height:180px;border-radius:50%;
+      background:rgba(255,208,0,.1);top:-60px;right:-50px;
+    }
+    .res-badge{
+      display:inline-flex;align-items:center;gap:6px;
+      background:rgba(255,208,0,.15);border:1px solid rgba(255,208,0,.3);
+      border-radius:50px;padding:5px 14px;
+      font-size:.68rem;font-weight:700;color:var(--yellow);
+      letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;
+    }
+    .res-book-row{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .res-emoji{
+      width:52px;height:52px;border-radius:14px;
+      background:rgba(255,255,255,.12);
+      display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;
+    }
+    .res-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;color:#fff}
+    .res-cat{font-size:.72rem;color:rgba(255,255,255,.6);margin-top:2px}
+    .res-id{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:4px;font-family:'Lora',serif;font-style:italic}
+    .res-divider{height:1px;background:rgba(255,255,255,.1);margin:0 0 14px}
+    .res-info-row{display:flex;justify-content:space-between;margin-bottom:8px}
+    .res-info-label{font-size:.72rem;color:rgba(255,255,255,.55);font-weight:600}
+    .res-info-val{font-size:.78rem;font-weight:700;color:#fff}
+    .res-info-val.yellow{color:var(--yellow)}
+
+    /* ── PAYMENT SECTION ── */
+    .lipa-box{
+      background:linear-gradient(135deg,var(--blue),var(--blue3));
+      border-radius:16px;padding:18px;margin-bottom:14px;
+    }
+    .lipa-tag{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:5px}
+    .lipa-num-row{display:flex;align-items:center;justify-content:space-between}
+    .lipa-number{font-size:2.2rem;font-weight:800;color:#fff;letter-spacing:.1em;line-height:1}
+    .lipa-name{font-size:.72rem;color:rgba(255,255,255,.5);font-family:'Lora',serif;font-style:italic;margin-top:3px}
+    .copy-btn{
+      background:var(--yellow);color:var(--blue);
+      border:none;border-radius:10px;padding:9px 15px;
+      font-size:.78rem;font-weight:800;cursor:pointer;
+      display:flex;align-items:center;gap:5px;flex-shrink:0;
+      transition:all .15s;
+    }
+    .copy-btn:active{transform:scale(.95)}
+    .networks-row{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}
+    .net-chip{display:flex;align-items:center;gap:5px;border-radius:50px;padding:5px 10px;font-size:.67rem;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,.15)}
+    .net-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+    .step-mini{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+    .step-mini:last-child{border-bottom:none}
+    .step-mini-num{width:24px;height:24px;border-radius:50%;background:var(--blue2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0;margin-top:1px}
+    .step-mini-text{font-size:.8rem;color:var(--ink);line-height:1.5}
+    .step-mini-text strong{color:var(--blue)}
+
+    .num-badge{display:inline-block;background:#EEF4FF;border:1.5px solid #B8D0FF;border-radius:7px;padding:2px 10px;font-weight:800;font-size:.88rem;color:var(--blue);margin-top:3px;letter-spacing:.05em}
+
+    /* ── SUCCESS FULLPAGE ── */
+    .fullpage{display:none;position:fixed;inset:0;background:var(--bg);z-index:999;overflow-y:auto;max-width:430px;left:50%;transform:translateX(-50%)}
+
+    .success-top{
+      background:linear-gradient(160deg,var(--blue) 0%,var(--blue3) 100%);
+      padding:60px 24px 80px;text-align:center;position:relative;overflow:hidden;
+    }
+    .success-top::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 130%,rgba(255,208,0,.18) 0%,transparent 55%)}
+    .s-anim{
+      width:80px;height:80px;border-radius:50%;background:var(--yellow);
+      display:flex;align-items:center;justify-content:center;
+      margin:0 auto 16px;font-size:2.2rem;
+      box-shadow:0 8px 24px rgba(255,208,0,.5);position:relative;z-index:1;
+    }
+    .s-title{font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:6px;position:relative;z-index:1}
+    .s-sub{font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.6;position:relative;z-index:1}
+
+    .delivery-choice{
+      margin:-36px 16px 0;background:var(--white);border-radius:20px;
+      box-shadow:0 8px 32px rgba(0,43,127,.12);padding:22px;margin-bottom:14px;
+    }
+    .dc-title{font-size:.88rem;font-weight:800;color:var(--ink);margin-bottom:14px}
+    .dc-option{
+      display:flex;align-items:center;gap:12px;
+      background:var(--bg);border:1.5px solid var(--border);
+      border-radius:14px;padding:14px 16px;cursor:pointer;
+      transition:all .2s;margin-bottom:10px;
+    }
+    .dc-option:last-child{margin-bottom:0}
+    .dc-option:hover,.dc-option.chosen{background:#EEF4FF;border-color:var(--blue3)}
+    .dc-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+    .dc-icon.wa{background:#25D366;box-shadow:0 3px 10px rgba(37,211,102,.3)}
+    .dc-icon.dl{background:var(--blue2);box-shadow:0 3px 10px rgba(0,61,165,.25)}
+    .dc-text strong{font-size:.88rem;font-weight:800;color:var(--ink);display:block}
+    .dc-text span{font-size:.74rem;color:var(--muted)}
+
+    .receipt-card{background:var(--white);margin:0 16px 14px;border-radius:18px;box-shadow:0 4px 20px rgba(0,43,127,.09);overflow:hidden}
+    .receipt-hdr{background:linear-gradient(90deg,var(--blue),var(--blue3));padding:13px 18px;display:flex;align-items:center;gap:9px}
+    .receipt-hdr-icon{width:28px;height:28px;background:rgba(255,255,255,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+    .receipt-hdr-title{font-size:.85rem;font-weight:700;color:#fff}
+    .r-row{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-bottom:1px solid var(--border)}
+    .r-row:last-child{border-bottom:none}
+    .r-label{font-size:.73rem;font-weight:600;color:var(--muted)}
+    .r-val{font-size:.83rem;font-weight:700;color:var(--ink);text-align:right;max-width:55%}
+    .r-val.ref{color:var(--blue2);letter-spacing:.03em}
+    .r-val.big{font-size:1.05rem;font-weight:800}
+
+    .wa-btn{
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      width:calc(100% - 32px);margin:0 16px 10px;
+      background:linear-gradient(135deg,#128C7E,#25D366);
+      color:#fff;border:none;border-radius:14px;padding:15px;
+      font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;font-weight:800;
+      cursor:pointer;box-shadow:0 6px 18px rgba(37,211,102,.3);
+      text-decoration:none;
+    }
+    .dl-btn{
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      width:calc(100% - 32px);margin:0 16px 10px;
+      background:linear-gradient(135deg,var(--blue),var(--blue3));
+      color:#fff;border:none;border-radius:14px;padding:15px;
+      font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;font-weight:800;
+      cursor:pointer;box-shadow:0 6px 18px rgba(0,43,127,.25);
+    }
+    .home-btn-s{width:calc(100% - 32px);display:block;margin:0 16px 24px;background:none;border:1.5px solid var(--border);border-radius:14px;padding:13px;font-size:.88rem;font-weight:700;color:var(--muted);cursor:pointer;text-align:center}
+
+    /* ── TOAST ── */
+    .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--ink);color:#fff;padding:11px 24px;border-radius:50px;font-size:.82rem;font-weight:700;opacity:0;transition:all .3s;pointer-events:none;z-index:9999;white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="top-nav">
+  <div class="nav-row">
+    <button class="nav-back" onclick="goBack()">←</button>
+    <div class="nav-logo">Sade <span>Books</span></div>
+    <div class="nav-spacer"></div>
+  </div>
+  <div class="nav-subtitle">Agiza Kitabu Chochote</div>
+</div>
+
+<!-- STEPS BAR -->
+<div class="steps-bar">
+  <div class="step-dot">
+    <div class="step-circle active" id="sc1">1</div>
+    <div class="step-lbl active" id="sl1">Chagua</div>
+  </div>
+  <div class="step-line" id="line1"></div>
+  <div class="step-dot">
+    <div class="step-circle" id="sc2">2</div>
+    <div class="step-lbl" id="sl2">Hifadhi</div>
+  </div>
+  <div class="step-line" id="line2"></div>
+  <div class="step-dot">
+    <div class="step-circle" id="sc3">3</div>
+    <div class="step-lbl" id="sl3">Lipa</div>
+  </div>
+  <div class="step-line" id="line3"></div>
+  <div class="step-dot">
+    <div class="step-circle" id="sc4">✓</div>
+    <div class="step-lbl" id="sl4">Pokea</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- PAGE 1: CHAGUA KITABU         -->
+<!-- ══════════════════════════════ -->
+<div class="page active" id="page1">
+
+  <div class="notice">
+    <div class="notice-icon">💡</div>
+    <div class="notice-text"><strong>Jinsi inavyofanya kazi:</strong> Andika jina la kitabu unalotaka → Hifadhi nafasi yako → Lipa TSH 2,000 → Pokea kitabu kwa WhatsApp au Download moja kwa moja!</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">📚</div>
+      <div>
+        <div class="card-head-title">Tafuta Kitabu</div>
+        <div class="card-head-sub">Andika jina au aina ya kitabu unachotaka</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label class="field-label">Jina la Kitabu <span class="required">*</span></label>
+        <div class="book-search-wrap">
+          <div class="field-wrap">
+            <span class="field-prefix">📖</span>
+            <input type="text" id="book-input" placeholder="mfano: Nguvu ya Akili, Biashara Ndogo..." autocomplete="off" oninput="searchBooks(this.value)"/>
+          </div>
+          <div class="book-suggestions" id="suggestions"></div>
+        </div>
+        <div class="selected-book" id="selected-book-card">
+          <div class="sel-emoji" id="sel-emoji"></div>
+          <div class="sel-info">
+            <div class="sel-title" id="sel-title"></div>
+            <div class="sel-cat" id="sel-cat"></div>
+            <div class="sel-price">TSH 2,000 · Lipa baada ya kuhifadhi</div>
+          </div>
+          <button class="sel-remove" onclick="clearBook()" title="Ondoa">✕</button>
+        </div>
+        <div class="field-hint">Pia unaweza andika kitabu chochote, hata kama hakipo kwenye orodha</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Nambari ya Simu <span class="required">*</span></label>
+        <div class="field-wrap">
+          <span class="field-prefix">🇹🇿 +255</span>
+          <input type="tel" id="p1-phone" placeholder="7XX XXX XXX" maxlength="9" oninput="this.value=this.value.replace(/\D/g,'')"/>
+        </div>
+        <div class="field-hint">Nambari hii itatumika kupokea kitabu kwa WhatsApp</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Maelezo Zaidi <span style="color:var(--muted);font-weight:400;font-size:.72rem">(si lazima)</span></label>
+     
