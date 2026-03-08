@@ -379,4 +379,458 @@
 
       <div class="field">
         <label class="field-label">Maelezo Zaidi <span style="color:var(--muted);font-weight:400;font-size:.72rem">(si lazima)</span></label>
-     
+        <div class="field-wrap">
+          <textarea id="p1-notes" placeholder="mfano: Nataka toleo la Kiswahili, au ningetaka vitabu vya biashara..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="err-box" id="err1"></div>
+
+  <button class="btn-yellow" onclick="step1Next()">
+    Hifadhi Nafasi Yangu →
+  </button>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- PAGE 2: IMEHIFADHIWA          -->
+<!-- ══════════════════════════════ -->
+<div class="page" id="page2">
+
+  <div class="notice green">
+    <div class="notice-icon">✅</div>
+    <div class="notice-text">
+      <strong>Kitabu kimehifadhiwa kama kumbukumbu!</strong><br/>
+      Ombi lako limesajiliwa. Lipa sasa ili kupokea kitabu chako hivi karibuni.
+    </div>
+  </div>
+
+  <!-- Reservation card -->
+  <div class="reservation-card">
+    <div class="res-badge">🔖 Imehifadhiwa</div>
+    <div class="res-book-row">
+      <div class="res-emoji" id="r2-emoji">📚</div>
+      <div>
+        <div class="res-title" id="r2-title"></div>
+        <div class="res-cat" id="r2-cat"></div>
+        <div class="res-id" id="r2-id"></div>
+      </div>
+    </div>
+    <div class="res-divider"></div>
+    <div class="res-info-row">
+      <span class="res-info-label">Simu</span>
+      <span class="res-info-val" id="r2-phone"></span>
+    </div>
+    <div class="res-info-row">
+      <span class="res-info-label">Hali</span>
+      <span class="res-info-val yellow">⏳ Inasubiri Malipo</span>
+    </div>
+    <div class="res-info-row">
+      <span class="res-info-label">Bei</span>
+      <span class="res-info-val yellow">TSH 2,000</span>
+    </div>
+  </div>
+
+  <div class="notice">
+    <div class="notice-icon">⚠️</div>
+    <div class="notice-text"><strong>Kumbuka:</strong> Nafasi yako imehifadhiwa kwa masaa 24. Lipa ndani ya muda huu ili kupata kitabu chako.</div>
+  </div>
+
+  <button class="btn-yellow" onclick="goToPayment()">
+    💳 &nbsp;Lipa Sasa – TSH 2,000
+  </button>
+  <button class="btn-ghost" onclick="goBack()">← Rudi nyuma</button>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- PAGE 3: MALIPO                -->
+<!-- ══════════════════════════════ -->
+<div class="page" id="page3">
+
+  <!-- Lipa Namba -->
+  <div class="lipa-box">
+    <div class="lipa-tag">Lipa Namba ya Sade Books · Mix by YAS</div>
+    <div class="lipa-num-row">
+      <div>
+        <div class="lipa-number">16284801</div>
+        <div class="lipa-name">HERMAN ONESMO SADE · Merchant</div>
+      </div>
+      <button class="copy-btn" onclick="copyNum()">📋 Nakili</button>
+    </div>
+    <div class="networks-row">
+      <div class="net-chip"><div class="net-dot" style="background:#00A651"></div>M-Pesa</div>
+      <div class="net-chip"><div class="net-dot" style="background:#0066CC"></div>Tigo</div>
+      <div class="net-chip"><div class="net-dot" style="background:#E40000"></div>Airtel</div>
+      <div class="net-chip"><div class="net-dot" style="background:#FF6B00"></div>Halo</div>
+      <div class="net-chip"><div class="net-dot" style="background:#009900"></div>T-Pesa</div>
+    </div>
+  </div>
+
+  <!-- Mini steps -->
+  <div class="card" style="margin-bottom:14px">
+    <div class="card-head">
+      <div class="card-head-icon">📋</div>
+      <div class="card-head-title">Hatua za Kulipa</div>
+    </div>
+    <div style="padding:10px 18px 16px">
+      <div class="step-mini"><div class="step-mini-num">1</div><div class="step-mini-text">Fungua App yako au piga <strong>*150#</strong></div></div>
+      <div class="step-mini"><div class="step-mini-num">2</div><div class="step-mini-text">Chagua <strong>"Lipa Namba"</strong> kisha ingiza:<br/><div class="num-badge">16284801</div></div></div>
+      <div class="step-mini"><div class="step-mini-num">3</div><div class="step-mini-text">Ingiza kiasi <strong>TSH 2,000</strong> → thibitisha na PIN</div></div>
+      <div class="step-mini"><div class="step-mini-num">4</div><div class="step-mini-text">Ingiza <strong>Transaction ID</strong> kutoka SMS hapa chini</div></div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">✍️</div>
+      <div class="card-head-title">Thibitisha Malipo</div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label class="field-label">Nambari ya Simu Uliyolipa Nayo <span class="required">*</span></label>
+        <div class="field-wrap">
+          <span class="field-prefix">🇹🇿 +255</span>
+          <input type="tel" id="p3-phone" placeholder="7XX XXX XXX" maxlength="9" oninput="this.value=this.value.replace(/\D/g,'')"/>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Transaction ID (Ref. No. kutoka SMS) <span class="required">*</span></label>
+        <div class="field-wrap">
+          <span class="field-prefix">🔑</span>
+          <input type="text" id="p3-ref" placeholder="mfano: BCA123456789" oninput="this.value=this.value.toUpperCase()"/>
+        </div>
+        <div class="field-hint">💡 Inatumwa kwa SMS mara baada ya malipo kukamilika</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="err-box" id="err3"></div>
+
+  <button class="btn-yellow" id="pay-btn" onclick="confirmPayment()">
+    ✅ &nbsp;Nimetuma Malipo — Thibitisha
+  </button>
+  <button class="btn-ghost" onclick="showPage(2)">← Rudi nyuma</button>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SUCCESS FULLPAGE                               -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="fullpage" id="success-pg">
+
+  <div class="success-top">
+    <div class="s-anim">✓</div>
+    <div class="s-title">Malipo Yamefanikiwa!</div>
+    <div class="s-sub">Asante sana! Kitabu chako <span id="s-bookname"></span><br/>kiko tayari kupokea.</div>
+  </div>
+
+  <!-- Delivery choice -->
+  <div class="delivery-choice">
+    <div class="dc-title">📲 Pata Kitabu Chako Vipi?</div>
+
+    <div class="dc-option" id="dc-wa" onclick="chooseDc('wa')">
+      <div class="dc-icon wa">💬</div>
+      <div class="dc-text">
+        <strong>Tuma kwa WhatsApp</strong>
+        <span>Herman atakutumia kitabu moja kwa moja kwenye WhatsApp yako</span>
+      </div>
+    </div>
+
+    <div class="dc-option" id="dc-dl" onclick="chooseDc('dl')">
+      <div class="dc-icon dl">⬇️</div>
+      <div class="dc-text">
+        <strong>Download Moja Kwa Moja</strong>
+        <span>Pakua kitabu mara moja kwenye simu yako sasa hivi</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Receipt -->
+  <div class="receipt-card">
+    <div class="receipt-hdr">
+      <div class="receipt-hdr-icon">🧾</div>
+      <div class="receipt-hdr-title">Risiti ya Ununuzi</div>
+    </div>
+    <div class="r-row"><span class="r-label">Kitabu</span><span class="r-val" id="s-r-book"></span></div>
+    <div class="r-row"><span class="r-label">Mlipaji (Simu)</span><span class="r-val" id="s-r-phone"></span></div>
+    <div class="r-row"><span class="r-label">Transaction ID</span><span class="r-val ref" id="s-r-ref"></span></div>
+    <div class="r-row"><span class="r-label">Kiasi</span><span class="r-val big">TSH 2,000</span></div>
+    <div class="r-row"><span class="r-label">Mpokeaji</span><span class="r-val">HERMAN ONESMO SADE</span></div>
+    <div class="r-row"><span class="r-label">Tarehe</span><span class="r-val" id="s-r-date"></span></div>
+  </div>
+
+  <!-- Action buttons shown after choosing -->
+  <div id="action-wa" style="display:none">
+    <a id="wa-link" href="#" class="wa-btn">
+      💬 &nbsp;Fungua WhatsApp — Tuma Uthibitisho
+    </a>
+    <div style="font-size:.72rem;color:var(--muted);text-align:center;margin:0 16px 14px;font-family:'Lora',serif;font-style:italic">
+      Utaelekeza kwa WhatsApp wa Herman Sade. Tuma picha ya SMS ya malipo yako ili apeleke kitabu.
+    </div>
+  </div>
+
+  <div id="action-dl" style="display:none">
+    <button class="dl-btn" onclick="fakeDownload()">
+      ⬇️ &nbsp;Pakua Kitabu Chako Sasa
+    </button>
+    <div style="font-size:.72rem;color:var(--muted);text-align:center;margin:0 16px 14px;font-family:'Lora',serif;font-style:italic">
+      Download itaanza hivi karibuni. Kitabu kitatumwa pia kwa WhatsApp kwa uhakika.
+    </div>
+  </div>
+
+  <button class="home-btn-s" onclick="resetAll()">← Agiza Kitabu Kingine</button>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── BOOKS DATA (simplified) ──
+var bookList = [
+  {id:1,title:'Nguvu ya Akili',cat:'Maendeleo Binafsi',emoji:'🧠'},
+  {id:2,title:'Biashara Ndogo Faida Kubwa',cat:'Biashara & Fedha',emoji:'💼'},
+  {id:3,title:'Imani Inayobadilisha Maisha',cat:'Dini & Imani',emoji:'🕌'},
+  {id:4,title:'Afya ni Utajiri',cat:'Afya & Lishe',emoji:'❤️'},
+  {id:5,title:'Teknolojia na Mustakabali',cat:'Teknolojia',emoji:'💻'},
+  {id:6,title:'Historia ya Tanzania',cat:'Historia',emoji:'📜'},
+  {id:7,title:'Elimu ya Kibinafsi',cat:'Elimu',emoji:'🎓'},
+  {id:8,title:'Hadithi za Usiku',cat:'Hadithi',emoji:'📖'},
+  {id:9,title:'Familia Bora',cat:'Familia',emoji:'👨‍👩‍👧'},
+  {id:10,title:'Mashairi ya Moyo',cat:'Ushairi',emoji:'✍️'},
+  {id:11,title:'Pesa na Akili',cat:'Biashara & Fedha',emoji:'💰'},
+  {id:12,title:'Amani ya Rohoni',cat:'Dini & Imani',emoji:'🌙'},
+  {id:13,title:'Lishe Bora Maisha Bora',cat:'Afya & Lishe',emoji:'🥗'},
+  {id:14,title:'Ujasiriamali Tanzania',cat:'Biashara & Fedha',emoji:'🚀'},
+  {id:15,title:'Mazingira Yetu',cat:'Mazingira',emoji:'🌳'},
+  {id:16,title:'Michezo na Afya',cat:'Michezo',emoji:'⚽'},
+  {id:17,title:'Sanaa ya Maisha',cat:'Sanaa & Utamaduni',emoji:'🎨'},
+  {id:18,title:'Uongozi Bora',cat:'Maendeleo Binafsi',emoji:'👑'},
+  {id:19,title:'Upendo wa Kweli',cat:'Familia',emoji:'💕'},
+  {id:20,title:'Mafanikio ya Haraka',cat:'Maendeleo Binafsi',emoji:'⚡'}
+];
+
+var state = {
+  page: 1,
+  selectedBook: null,
+  customBook: '',
+  phone: '',
+  reservationId: '',
+  dcChoice: ''
+};
+
+// ── BOOK SEARCH ──
+function searchBooks(val) {
+  var sugg = document.getElementById('suggestions');
+  if (!val || val.length < 2) { sugg.classList.remove('open'); return; }
+
+  var matches = bookList.filter(function(b) {
+    return b.title.toLowerCase().indexOf(val.toLowerCase()) !== -1 ||
+           b.cat.toLowerCase().indexOf(val.toLowerCase()) !== -1;
+  });
+
+  if (matches.length === 0) {
+    sugg.innerHTML = '<div class="suggestion-item"><div class="sug-emoji">✍️</div><div><div class="sug-name">' + val + '</div><div class="sug-cat">Kitabu kipya (nje ya orodha)</div></div></div>';
+    sugg.querySelector('.suggestion-item').onclick = function() { selectCustomBook(val); };
+    sugg.classList.add('open');
+    return;
+  }
+
+  sugg.innerHTML = '';
+  matches.slice(0, 5).forEach(function(b) {
+    var item = document.createElement('div');
+    item.className = 'suggestion-item';
+    item.innerHTML = '<div class="sug-emoji">' + b.emoji + '</div><div><div class="sug-name">' + b.title + '</div><div class="sug-cat">' + b.cat + '</div></div>';
+    item.onclick = (function(book) { return function() { selectBook(book); }; })(b);
+    sugg.appendChild(item);
+  });
+  sugg.classList.add('open');
+}
+
+function selectBook(book) {
+  state.selectedBook = book;
+  document.getElementById('book-input').value = book.title;
+  document.getElementById('suggestions').classList.remove('open');
+  var card = document.getElementById('selected-book-card');
+  document.getElementById('sel-emoji').textContent = book.emoji;
+  document.getElementById('sel-title').textContent = book.title;
+  document.getElementById('sel-cat').textContent = book.cat;
+  card.classList.add('show');
+}
+
+function selectCustomBook(name) {
+  state.selectedBook = {id:'custom', title: name, cat: 'Agizo Maalum', emoji: '📚'};
+  document.getElementById('book-input').value = name;
+  document.getElementById('suggestions').classList.remove('open');
+  var card = document.getElementById('selected-book-card');
+  document.getElementById('sel-emoji').textContent = '📚';
+  document.getElementById('sel-title').textContent = name;
+  document.getElementById('sel-cat').textContent = 'Agizo Maalum';
+  card.classList.add('show');
+}
+
+function clearBook() {
+  state.selectedBook = null;
+  document.getElementById('book-input').value = '';
+  document.getElementById('selected-book-card').classList.remove('show');
+}
+
+// Close suggestions on outside click
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.book-search-wrap')) {
+    document.getElementById('suggestions').classList.remove('open');
+  }
+});
+
+// ── STEP 1 → 2 ──
+function step1Next() {
+  var bookVal = document.getElementById('book-input').value.trim();
+  var phone   = document.getElementById('p1-phone').value.trim();
+  var err     = document.getElementById('err1');
+
+  if (!bookVal) { err.textContent = '⚠️ Tafadhali andika jina la kitabu unalotaka.'; err.style.display='block'; return; }
+  if (phone.length < 9) { err.textContent = '⚠️ Ingiza nambari yako ya simu (tarakimu 9).'; err.style.display='block'; return; }
+  err.style.display = 'none';
+
+  if (!state.selectedBook) { selectCustomBook(bookVal); }
+
+  state.phone = phone;
+  state.reservationId = 'SB-RES-' + Date.now().toString().slice(-8);
+
+  // Fill page 2
+  document.getElementById('r2-emoji').textContent = state.selectedBook.emoji;
+  document.getElementById('r2-title').textContent = state.selectedBook.title;
+  document.getElementById('r2-cat').textContent   = state.selectedBook.cat;
+  document.getElementById('r2-id').textContent    = 'Nambari ya Kumbukumbu: ' + state.reservationId;
+  document.getElementById('r2-phone').textContent = '+255 ' + phone;
+
+  // Pre-fill payment phone
+  document.getElementById('p3-phone').value = phone;
+
+  showPage(2);
+}
+
+// ── STEP 2 → 3 ──
+function goToPayment() { showPage(3); }
+
+// ── STEP 3: CONFIRM PAYMENT ──
+function confirmPayment() {
+  var phone = document.getElementById('p3-phone').value.trim();
+  var ref   = document.getElementById('p3-ref').value.trim();
+  var err   = document.getElementById('err3');
+
+  if (phone.length < 9) { err.textContent = '⚠️ Ingiza nambari ya simu sahihi.'; err.style.display='block'; return; }
+  if (ref.length < 5)   { err.textContent = '⚠️ Ingiza Transaction ID uliyopokea kwa SMS.'; err.style.display='block'; return; }
+
+  err.style.display = 'none';
+  var btn = document.getElementById('pay-btn');
+  btn.textContent = '⏳ Inathibitisha...';
+  btn.disabled = true;
+
+  setTimeout(function() {
+    showSuccess(phone, ref);
+  }, 2000);
+}
+
+function showSuccess(phone, ref) {
+  var months = ['Jan','Feb','Machi','Apr','Mei','Jun','Jul','Ago','Sep','Okt','Nov','Des'];
+  var d = new Date();
+  var dateStr = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear() +
+                '  ' + d.getHours() + ':' + String(d.getMinutes()).padStart(2,'0');
+
+  var bookTitle = state.selectedBook ? state.selectedBook.title : '';
+
+  document.getElementById('s-bookname').textContent = '"' + bookTitle + '"';
+  document.getElementById('s-r-book').textContent   = bookTitle;
+  document.getElementById('s-r-phone').textContent  = '+255 ' + phone;
+  document.getElementById('s-r-ref').textContent    = ref.toUpperCase();
+  document.getElementById('s-r-date').textContent   = dateStr;
+
+  // WhatsApp link
+  var waMsg = 'Habari Herman! Nimelipa TSH 2,000 kwa kitabu: *' + bookTitle + '*\n' +
+              'Transaction ID: *' + ref.toUpperCase() + '*\n' +
+              'Nambari yangu: +255 ' + phone + '\n' +
+              'Reservation ID: ' + state.reservationId + '\n' +
+              'Tafadhali nipeleke kitabu. Asante!';
+  document.getElementById('wa-link').href = 'https://wa.me/255' + state.phone.replace(/^0/,'') +
+    '?text=' + encodeURIComponent(waMsg);
+  // (In real use, replace with Herman's actual WhatsApp number)
+  document.getElementById('wa-link').href = 'https://wa.me/255XXXXXXXXXXX?text=' + encodeURIComponent(waMsg);
+
+  var sp = document.getElementById('success-pg');
+  sp.style.display = 'block';
+  sp.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function chooseDc(type) {
+  state.dcChoice = type;
+  document.getElementById('dc-wa').classList.toggle('chosen', type==='wa');
+  document.getElementById('dc-dl').classList.toggle('chosen', type==='dl');
+  document.getElementById('action-wa').style.display = type==='wa' ? 'block' : 'none';
+  document.getElementById('action-dl').style.display = type==='dl' ? 'block' : 'none';
+}
+
+function fakeDownload() {
+  showToast('⬇️  Kitabu kinapakuliwa... Itumwa pia WhatsApp!');
+}
+
+function resetAll() {
+  document.getElementById('success-pg').style.display = 'none';
+  document.body.style.overflow = '';
+  clearBook();
+  document.getElementById('p1-phone').value = '';
+  document.getElementById('p1-notes').value = '';
+  document.getElementById('p3-ref').value = '';
+  var btn = document.getElementById('pay-btn');
+  btn.textContent = '✅ \u00A0Nimetuma Malipo — Thibitisha';
+  btn.disabled = false;
+  document.getElementById('action-wa').style.display = 'none';
+  document.getElementById('action-dl').style.display = 'none';
+  showPage(1);
+}
+
+// ── PAGE NAVIGATION ──
+function showPage(n) {
+  state.page = n;
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('page' + n).classList.add('active');
+  updateSteps(n);
+  window.scrollTo(0,0);
+}
+
+function goBack() {
+  if (state.page > 1) showPage(state.page - 1);
+}
+
+function updateSteps(n) {
+  for (var i = 1; i <= 4; i++) {
+    var c = document.getElementById('sc' + i);
+    var l = document.getElementById('sl' + i);
+    c.classList.remove('active','done');
+    l.classList.remove('active','done');
+    if (i < n)      { c.classList.add('done'); c.textContent='✓'; l.classList.add('done'); }
+    else if (i===n) { c.classList.add('active'); c.textContent=i; l.classList.add('active'); }
+    else            { c.textContent=i; }
+  }
+  for (var j = 1; j <= 3; j++) {
+    var line = document.getElementById('line' + j);
+    if (line) line.classList.toggle('done', j < n);
+  }
+}
+
+// ── HELPERS ──
+function copyNum() {
+  navigator.clipboard.writeText('16284801').catch(function(){});
+  showToast('✅  Nambari 16284801 imenakiliwa!');
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2800);
+}
+</script>
+</body>
+</html>
