@@ -1,178 +1,719 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sade Books – Maoni ya Wateja</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--cream:#f5ede0;--cream2:#fdf8f0;--ink:#1c1710;--gold:#c9962a;--gold2:#e8c46a;--muted:#7a6a52;--border:#e0d0b8;--white:#ffffff;--green:#2d6b2d}
-    html{scroll-behavior:smooth}
-    body{font-family:'Source Sans 3',sans-serif;background:var(--cream2);color:var(--ink);min-height:100vh}
-    nav{background:var(--cream2);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-    .nav-logo{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--ink);text-decoration:none}
-    .nav-logo span{color:var(--gold)}
-    .nav-btn{background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:11px 22px;font-weight:700;font-size:.9rem;cursor:pointer;text-decoration:none;display:inline-block}
-    .hero{background:var(--ink);padding:60px 24px 50px;text-align:center;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(201,150,42,.18) 0%,transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(201,150,42,.12) 0%,transparent 60%)}
-    .hero-inner{position:relative;z-index:1;max-width:600px;margin:0 auto}
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(201,150,42,.4);border-radius:50px;padding:7px 18px;font-size:.75rem;font-weight:700;letter-spacing:.14em;color:var(--gold2);text-transform:uppercase;margin-bottom:20px}
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);color:var(--white);line-height:1.2;margin-bottom:14px}
-    .hero h1 em{color:var(--gold);font-style:italic}
-    .hero p{font-family:'Lora',serif;color:rgba(255,255,255,.6);font-size:1rem;line-height:1.7;margin-bottom:30px}
-    .stats-row{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
-    .stat{text-align:center}
-    .stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold)}
-    .stat-label{font-size:.75rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
-    .stars-summary{max-width:700px;margin:-30px auto 0;background:var(--white);border-radius:20px;padding:28px 32px;position:relative;z-index:2;box-shadow:0 8px 40px rgba(0,0,0,.1);display:flex;align-items:center;gap:32px;flex-wrap:wrap}
-    .big-rating{text-align:center;min-width:90px}
-    .big-rating .num{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:var(--ink);line-height:1}
-    .big-rating .stars{font-size:1.3rem;color:var(--gold);margin:6px 0 4px}
-    .big-rating .total{font-size:.78rem;color:var(--muted)}
-    .rating-bars{flex:1;min-width:200px}
-    .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}
-    .bar-label{font-size:.78rem;color:var(--muted);width:40px;text-align:right}
-    .bar-track{flex:1;background:var(--cream);border-radius:50px;height:8px;overflow:hidden}
-    .bar-fill{height:100%;background:var(--gold);border-radius:50px}
-    .bar-count{font-size:.75rem;color:var(--muted);width:24px}
-    .section-wrap{max-width:900px;margin:48px auto 0;padding:0 16px 60px}
-    .section-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:24px;display:flex;align-items:center;gap:12px}
-    .section-title::after{content:'';flex:1;height:1px;background:var(--border)}
-    .comments-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
-    .comment-card{background:var(--white);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--border);transition:transform .22s,box-shadow .22s}
-    .comment-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.11)}
-    .card-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-    .avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;color:var(--white);flex-shrink:0;font-family:'Playfair Display',serif}
-    .card-meta{flex:1}
-    .card-name{font-weight:700;font-size:.95rem;color:var(--ink)}
-    .card-location{font-size:.75rem;color:var(--muted);margin-top:1px}
-    .card-stars{font-size:.9rem;color:var(--gold)}
-    .card-book{display:inline-flex;align-items:center;gap:6px;background:var(--cream2);border:1px solid var(--border);border-radius:50px;padding:4px 12px;font-size:.72rem;color:var(--muted);margin-bottom:12px;font-family:'Lora',serif;font-style:italic}
-    .card-text{font-family:'Lora',serif;font-size:.88rem;color:#3a2e1c;line-height:1.75;position:relative;padding-left:8px}
-    .card-text::before{content:'"';font-family:'Playfair Display',serif;font-size:3rem;color:var(--gold);opacity:.25;position:absolute;top:-10px;left:-6px;line-height:1}
-    .card-date{font-size:.72rem;color:var(--muted);margin-top:12px;text-align:right}
-    .verified{display:inline-flex;align-items:center;gap:4px;background:#e8f5e8;color:var(--green);font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:20px;margin-left:6px}
-    .add-comment-wrap{background:var(--ink);border-radius:20px;padding:32px;margin-top:48px;position:relative;overflow:hidden}
-    .add-comment-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(201,150,42,.15) 0%,transparent 50%)}
-    .add-comment-inner{position:relative;z-index:1}
-    .add-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:6px}
-    .add-sub{font-family:'Lora',serif;font-size:.88rem;color:rgba(255,255,255,.5);font-style:italic;margin-bottom:22px}
-    .form-row{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
-    .form-input{flex:1;min-width:140px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:12px 14px;color:var(--white);font-family:'Source Sans 3',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s}
-    .form-input::placeholder{color:rgba(255,255,255,.3)}
-    .form-input:focus{border-color:var(--gold)}
-    textarea.form-input{resize:none;min-height:90px}
-    .star-select{display:flex;gap:6px;margin-bottom:16px}
-    .star-select span{font-size:1.6rem;cursor:pointer;transition:transform .15s;filter:grayscale(1) opacity(.4)}
-    .star-select span.on{filter:none;transform:scale(1.15)}
-    .submit-btn{background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:13px 28px;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s}
-    .submit-btn:hover{background:var(--gold2)}
-    .submit-msg{color:var(--gold2);font-family:'Lora',serif;font-style:italic;font-size:.88rem;margin-top:12px;min-height:20px}
-    @media(max-width:500px){.comments-grid{grid-template-columns:1fr}.stars-summary{flex-direction:column;align-items:flex-start;gap:20px}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sade Books - Vitabu vya Kidigitali</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+            --gold: #C9A84C;
+            --gold-light: #E8C96A;
+            --gold-pale: #FDF6E3;
+            --dark: #1A1208;
+            --dark-mid: #2D2010;
+            --brown: #5C3D1E;
+            --cream: #FAF4E8;
+            --white: #FFFFFF;
+            --text: #3A2A10;
+            --text-light: #7A6540;
+        }
+
+html { scroll-behavior: smooth; }
+
+body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+/* ===== HEADER ===== */
+        header {
+            position: relative;
+            background: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 80% 100%, rgba(201,168,76,0.10) 0%, transparent 60%);
+        }
+
+/* Decorative lines */
+        header::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(700px, 90vw);
+            height: min(700px, 90vw);
+            border: 1px solid rgba(201,168,76,0.12);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+.header-inner { position: relative; z-index: 2; }
+
+.logo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(201,168,76,0.12);
+            border: 1px solid rgba(201,168,76,0.35);
+            border-radius: 100px;
+            padding: 0.45rem 1.2rem;
+            margin-bottom: 2.5rem;
+            animation: fadeDown 0.8s ease forwards;
+        }
+
+.logo-badge span {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+.logo-dot {
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 9vw, 7rem);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.0;
+            letter-spacing: -0.02em;
+            animation: fadeUp 0.9s 0.2s ease both;
+        }
+
+header h1 span {
+            color: var(--gold);
+            display: block;
+        }
+
+.header-sub {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255,255,255,0.55);
+            font-weight: 300;
+            margin-top: 1.2rem;
+            letter-spacing: 0.04em;
+            animation: fadeUp 0.9s 0.4s ease both;
+        }
+
+.header-cta {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 0.9s 0.6s ease both;
+        }
+
+.btn-primary {
+            background: var(--gold);
+            color: var(--dark);
+            padding: 0.9rem 2.2rem;
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.02em;
+        }
+
+.btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201,168,76,0.35);
+        }
+
+.btn-outline {
+            background: transparent;
+            color: rgba(255,255,255,0.75);
+            padding: 0.9rem 2.2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+.btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+/* Scroll indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: fadeUp 1s 1s ease both;
+        }
+
+.scroll-hint span {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+        }
+
+.scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, rgba(201,168,76,0.6), transparent);
+            animation: scrollPulse 2s infinite;
+        }
+
+/* Stats bar */
+        .stats-bar {
+            background: var(--dark-mid);
+            padding: 1.4rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: clamp(2rem, 6vw, 5rem);
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+        }
+
+.stat {
+            text-align: center;
+        }
+
+.stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+.stat-label {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 0.1rem;
+        }
+
+/* ===== NAV ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250,244,232,0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          
+        }
+
+.nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+.nav-brand em { color: var(--gold); font-style: normal; }
+
+.nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+.nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+.nav-links a:hover { color: var(--gold); }
+
+/* ===== SECTION TITLE ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+.section-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: rgba(201,168,76,0.1);
+            border: 1px solid rgba(201,168,76,0.25);
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+        }
+
+.section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.15;
+        }
+
+.section-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+.section-desc {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-top: 0.8rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+/* ===== BOOKS SECTION ===== */
+        #books {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+.books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+.book-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(201,168,76,0.15);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            group: true;
+        }
+
+.book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(26,18,8,0.15), 0 0 0 1px rgba(201,168,76,0.3);
+        }
+
+.book-cover {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+
+.book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+.book-card:hover .book-cover img {
+            transform: scale(1.06);
+        }
+
+.book-cover-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+.cover-1 { background: linear-gradient(135deg, #2D1B69 0%, #11998e 100%); }
+        .cover-2 { background: linear-gradient(135deg, #834d9b 0%, #d04ed6 100%); }
+        .cover-3 { background: linear-gradient(135deg, #c94b4b 0%, #4b134f 100%); }
+        .cover-4 { background: linear-gradient(135deg, #1a6b3c 0%, #2d9cdb 100%); }
+
+.book-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gold);
+            color: var(--dark);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.7rem;
+            border-radius: 100px;
+        }
+
+.book-body {
+            padding: 1.5rem;
+        }
+
+.book-category {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+.book-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+.book-desc {
+            font-size: 0.84rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+
+.book-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+.book-price {
+            display: flex;
+            flex-direction: column;
+        }
+
+.price-label {
+            font-size: 0.68rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+.price-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+.price-currency {
+            font-size: 0.8rem;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+.btn-buy {
+            background: var(--dark);
+            color: var(--white);
+            padding: 0.65rem 1.4rem;
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.02em;
+        }
+
+.btn-buy:hover {
+            background: var(--gold);
+            color: var(--dark);
+            transform: scale(1.05);
+        }
+
+/* ===== FEATURES SECTION ===== */
+        #features {
+            background: var(--dark);
+            padding: 6rem 2rem;
+        }
+
+.features-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+.features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+.feature-card {
+            padding: 2rem;
+            border: 1px solid rgba(201,168,76,0.15);
+            border-radius: 16px;
+            transition: border-color 0.3s;
+        }
+
+.feature-card:hover {
+            border-color: rgba(201,168,76,0.4);
+        }
+
+.feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(201,168,76,0.12);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+.feature-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+.feature-card p {
+            font-size: 0.87rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.7;
+        }
+
+/* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            border-top: 1px solid rgba(201,168,76,0.15);
+            padding: 3rem 2rem 2rem;
+        }
+
+.footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+.footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+.footer-brand h3 em {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+.footer-brand p {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.88rem;
+            max-width: 220px;
+            line-height: 1.6;
+        }
+
+.footer-links h5 {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+.footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+.footer-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+.footer-links a:hover { color: var(--gold); }
+
+.footer-bottom {
+            max-width: 1100px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+.footer-bottom p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.25);
+        }
+
+/* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+@keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+@keyframes scrollPulse {
+            0%, 100% { opacity: 0.6; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(0.7); }
+        }
+
+/* Entrance animation for cards */
+        .book-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+.book-card:nth-child(1) { animation-delay: 0.1s; }
+        .book-card:nth-child(2) { animation-delay: 0.2s; }
+        .book-card:nth-child(3) { animation-delay: 0.3s; }
+        .book-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .stats-bar { gap: 1.5rem; }
+            .footer-inner { gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">Sade <span>Books</span></a>
-  <a href="sade-books-catalog.html" class="nav-btn">Angalia Vitabu</a>
-</nav>
+<!-- Nav -->
+    <nav>
+        <div class="nav-brand">Sade <em>Books</em></div>
+        <ul class="nav-links">
+            <li><a href="#books">Vitabu</a></li>
+            <li><a href="#features">Huduma</a></li>
+            <li><a href="contact.html">Mawasiliano</a></li>
+        </ul>
+        <a href="#books" class="btn-primary" style="padding:0.6rem 1.5rem;font-size:0.85rem;">Angalia Vitabu</a>
+    </nav>
 
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">⭐ Maoni ya Wateja</div>
-    <h1>Wanasema <em>Nini</em> Wateja Wetu?</h1>
-    <p>Zaidi ya wateja 53 wameshiriki uzoefu wao na Sade Books — soma maoni yao ya kweli.</p>
-    <div class="stats-row">
-      <div class="stat"><div class="stat-num">53</div><div class="stat-label">Maoni</div></div>
-      <div class="stat"><div class="stat-num">4.9</div><div class="stat-label">Wastani wa Nyota</div></div>
-      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Waliridhika</div></div>
+<!-- Hero Header -->
+    <header>
+        <div class="header-inner">
+            <div class="logo-badge">
+                <div class="logo-dot"></div>
+                <span>Duka la Vitabu vya Kidigitali</span>
+                <div class="logo-dot"></div>
+            </div>
+            <h1>
+                Sade
+                <span>Books</span>
+            </h1>
+            <p class="header-sub">Nunua vitabu vya kidigitali (PDF) kwa urahisi na bei nafuu</p>
+            <div class="header-cta">
+                <a href="#books" class="btn-primary">Tazama Vitabu</a>
+                <a href="sadebooks.html">sadebooks</a>
+                  <a href="malipo.html">malipo</a>
+                <a href="comments.html">comment</a>
+                <a href="lipa-namba-mix-by-yas.html">lipa-namba-mix-by-yas</a>
+                <a href="menu.html">menu</a>
+            <a href="contact.html">contact</a>
+                <a href="contact.html" class="btn-outline">Wasiliana Nasi</a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>Shuka</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+<!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-num">50+</div>
+            <div class="stat-label">Vitabu</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">1,200+</div>
+            <div class="stat-label">Wateja</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Usalama</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">Upatikanaji</div>
+        </div>
     </div>
-  </div>
-</section>
 
-<div style="padding:0 16px">
-  <div class="stars-summary">
-    <div class="big-rating">
-      <div class="num">4.9</div>
-      <div class="stars">★★★★★</div>
-      <div class="total">kati ya 5.0</div>
-    </div>
-    <div class="rating-bars">
-      <div class="bar-row"><span class="bar-label">5 ★</span><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div><span class="bar-count">49</span></div>
-      <div class="bar-row"><span class="bar-label">4 ★</span><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div><span class="bar-count">3</span></div>
-      <div class="bar-row"><span class="bar-label">3 ★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span class="bar-count">1</span></div>
-      <div class="bar-row"><span class="bar-label">2 ★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-count">0</span></div>
-      <div class="bar-row"><span class="bar-label">1 ★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-count">0</span></div>
-    </div>
-    <div style="text-align:center">
-      <div style="font-family:'Playfair Display',serif;font-size:.85rem;color:var(--ink);font-weight:700;margin-bottom:6px">Wateja Walioridhika</div>
-      <div style="font-size:2rem">😍</div>
-      <div style="font-size:.75rem;color:var(--muted);margin-top:4px;font-family:'Lora',serif;font-style:italic">Huduma bora Tanzania</div>
-    </div>
-  </div>
-</div>
+<!-- Books Section -->
+    <section id="books">
+        <div class="section-header">
+            <div class="section-tag">📚 Mkusanyiko Wetu</div>
+            <h2 class="section-title">Vitabu <em>Vyetu</em> Bora</h2>
+            <p class="section-desc">Chagua kutoka kwa vitabu vya hali ya juu vinavyokusaidia kukua kibinafsi na kibiashara</p>
+        </div>
 
-<div class="section-wrap">
-  <div class="section-title">Maoni Yote (53)</div>
-  <div class="comments-grid" id="comments-grid"></div>
-
-  <div class="add-comment-wrap">
-    <div class="add-comment-inner">
-      <div class="add-title">✍️ Acha Maoni Yako</div>
-      <div class="add-sub">Je, umeshanunua kitabu? Tushirikishe uzoefu wako!</div>
-      <div class="form-row">
-        <input class="form-input" id="c-name" type="text" placeholder="Jina lako kamili"/>
-        <input class="form-input" id="c-location" type="text" placeholder="Mji wako (mfano: Dar es Salaam)"/>
-      </div>
-      <input class="form-input" id="c-book" type="text" placeholder="Kitabu ulichonunua" style="width:100%;margin-bottom:12px"/>
-      <div style="color:rgba(255,255,255,.6);font-size:.82rem;margin-bottom:8px">Piga kura ya nyota:</div>
-      <div class="star-select" id="star-select">
-        <span onclick="rateStar(1)">★</span>
-        <span onclick="rateStar(2)">★</span>
-        <span onclick="rateStar(3)">★</span>
-        <span onclick="rateStar(4)">★</span>
-        <span onclick="rateStar(5)">★</span>
-      </div>
-      <textarea class="form-input" id="c-text" placeholder="Andika maoni yako hapa…" style="width:100%;margin-bottom:14px"></textarea>
-      <button class="submit-btn" onclick="submitComment()">Tuma Maoni →</button>
-      <div class="submit-msg" id="submit-msg"></div>
-    </div>
-  </div>
-</div>
-
-<script>
-var userRating = 0;
-
-var comments = [
-  {name:'Amina Hassan',location:'Dar es Salaam',avatar:'AH',color:'#c9962a',stars:5,book:'Jifunze Biashara',date:'Machi 5, 2026',text:'Nimepata kitabu changu ndani ya masaa 2 tu! Huduma ya Sade Books ni ya kipekee kabisa. Kitabu cha Jifunze Biashara kimenigeuza — ninaweza sasa kusimamia biashara yangu vizuri zaidi.'},
-  {name:'John Mwakasege',location:'Moshi',avatar:'JM',color:'#2d4a7a',stars:5,book:'Akili ya Fedha',date:'Machi 4, 2026',text:'Umenunua eBook ya Akili ya Fedha leo asubuhi, saa 2 baadaye tayari ninasoma! Mfumo wa malipo ni rahisi na salama. Asante sana Herman Sade!'},
-  {name:'Fatuma Ally',location:'Zanzibar',avatar:'FA',color:'#8b3a3a',stars:5,book:'Amka na Kutenda',date:'Machi 3, 2026',text:'Kitabu cha Amka na Kutenda kimebadilisha mtazamo wangu wa maisha. Nilikuwa mtu wa uvivu sana, lakini sasa ninaamka mapema na kufanya kazi. Maudhui ni ya hali ya juu sana!'},
-  {name:'Peter Kimaro',location:'Arusha',avatar:'PK',color:'#1e6b5e',stars:5,book:'Nguvu ya Sala',date:'Machi 2, 2026',text:'Nimeamini kweli kweli nguvu ya sala baada ya kusoma kitabu hiki. Herman anaandika kwa moyo wa kweli. Nitatoa zawadi vitabu hivi kwa familia yangu yote.'},
-  {name:'Grace Msigwa',location:'Dodoma',avatar:'GM',color:'#5a3a7a',stars:5,book:'Mwekezaji Hodari',date:'Machi 1, 2026',text:'Nimewekeza pesa zangu kwenye hisa mara ya kwanza baada ya kusoma Mwekezaji Hodari. Mwezi mmoja baadaye, mapato yamesogea 30%! Asante kwa maarifa haya ya dhahabu.'},
-  {name:'Ibrahim Rashid',location:'Tanga',avatar:'IR',color:'#3a6b2d',stars:5,book:'Coding kwa Waanzishi',date:'Feb 28, 2026',text:'Nilikuwa sijui kabisa coding. Baada ya wiki 3 za kusoma Coding kwa Waanzishi, nimeweza kutengeneza website yangu ya kwanza! Kimeandikwa kwa lugha rahisi sana.'},
-  {name:'Rehema Mwanga',location:'Morogoro',avatar:'RM',color:'#6b4a1a',stars:5,book:'Ndoa Yenye Furaha',date:'Feb 27, 2026',text:'Mimi na mumewe tulisoma kitabu hiki pamoja. Mahusiano yetu yamekuwa mazuri sana tangu hapo. Mapendekezo yangu kwa kila mke na mume — nunueni leo hii!'},
-  {name:'David Mchome',location:'Mwanza',avatar:'DM',color:'#1a3a6b',stars:5,book:'Afrika ya Kale',date:'Feb 26, 2026',text:'Nilijua kidogo sana kuhusu historia ya Afrika. Baada ya kusoma Afrika ya Kale, nimejivunia zaidi kuwa Mwafrika! Vitabu kama hivi vinahitajika kwenye kila shule Tanzania.'},
-  {name:'Zuwena Kombo',location:'Pemba',avatar:'ZK',color:'#7a2d5a',stars:5,book:'Usiku wa Nairobi',date:'Feb 25, 2026',text:'Riwaya bora kabisa niliyowahi kusoma! Nilisoma mpaka usiku wa manane bila kulala. Ustadi wa Herman wa kuandika hadithi ni wa ajabu. Nasubiri vitabu vingine vya hadithi.'},
-  {name:'Salim Abdallah',location:'Lindi',avatar:'SA',color:'#2d3a1a',stars:5,book:'Benki Yako Mfukoni',date:'Feb 24, 2026',text:'Nilifungua akaunti ya benki na kuanza kutumia M-Pesa vizuri zaidi baada ya kusoma kitabu hiki. Fedha zangu zinaongezeka kila mwezi. Nimeweza kujenga akiba yangu ya kwanza!'},
-  {name:'Neema Tarimo',location:'Iringa',avatar:'NT',color:'#6b2d1a',stars:5,book:'Malezi Bora ya Watoto',date:'Feb 23, 2026',text:'Mtoto wangu alikuwa na tabia mbaya sana. Baada ya miezi 2 ya kutumia mbinu za kitabu hiki, amebadilika kabisa! Sasa ni mtoto mzuri na mwenye adabu. Asante Herman!'},
-  {name:'Hassan Mselem',location:'Kibaha',avatar:'HM',color:'#1a4a3a',stars:5,book:'Kilimo Biashara',date:'Feb 22, 2026',text:'Nilikuwa nifanye kilimo cha kawaida. Sasa baada ya kusoma Kilimo Biashara, shamba langu linaleta faida mara tatu zaidi! Nimehire wafanyakazi wanne wa ziada. Ahsante sana!'},
-  {name:'Lucia Swai',location:'Mbeya',avatar:'LS',color:'#4a1a6b',stars:5,book:'Nguvu ya Akili',date:'Feb 21, 2026',text:'Mtihani wa chuo nilifeli mara mbili. Baada ya kusoma Nguvu ya Akili na kutumia mbinu zake, nilifaulu kwa darasa la kwanza! Pia nilikuwa na wasiwasi sana — sasa amani kabisa.'},
-  {name:'Omar Juma',location:'Singida',avatar:'OJ',color:'#3a1a00',stars:5,book:'Freelancing Mtandaoni',date:'Feb 20, 2026',text:'Nilikuwa sina kazi miaka 2. Leo ninapata kazi za kimataifa mtandaoni na kulipwa dola kila wiki! Kitabu hiki kimebadilisha maisha yangu kabisa. Ninashukuru Mungu na Herman Sade.'},
-  {name:'Mwanaidi Chande',location:'Tabora',avatar:'MC',color:'#1a5a5a',stars:5,book:'Mama Shujaa',date:'Feb 19, 2026',text:'Kama mama wa watoto watano bila muume, kitabu hiki kilinipa nguvu kubwa sana. Nimejifunza kusimamia familia yangu na kujiamini. Sasa nina biashara ndogo ndogo inayoenda vizuri.'},
-  {name:'Benjamin Kahama',location:'Shinyanga',avatar:'BK',color:'#5a4a00',stars:5,book:'Mtandao wa Pesa',date:'Feb 18, 2026',text:'Niliwekeza kwenye crypto baada ya kusoma kitabu hiki. Nilianza na TZS 50,000 tu. Miezi sita baadaye, nina TZS 300,000! Maarifa ni nguvu kweli kweli. Asante Herman.'},
-  {name:'Zawadi Mkumbo',location:'Kagera',avatar:'ZM',color:'#2d1a4a',stars:5,book:'Hifadhi Dunia Yetu',date:'Feb 17, 2026',text:'Nimejiunga na kikundi cha uhifadhi wa mazingira baada ya kusoma kitabu hiki. Tunapanda miti 1000 kila mwezi! Vizazi vijavyo vitashukuru kazi tunayofanya sasa.'},
-  {name:'Ramadhani Nkwabi',location:'Rukwa',avatar:'RN',color:'#1a3a00',stars:5,book:'Soka na Maisha',date:'Feb 16, 2026',text:'Kocha wa timu ya shule yetu. Nimetumia mafunzo ya kitabu hiki kufundisha vijana. Timu yetu imeshinda mashindano ya mkoa mwaka huu! Michezo na masomo vinaweza kwenda pamoja.'},
-  {name:'Anita Mhagama',location:'Njombe',avatar:'AM',color:'#6b1a3a',stars:5,book:'Afya ya Mwili Bora',date:'Feb 15, 2026',text:'Nilikuwa na uzito wa ziada sana — kilo 95. Baada ya miezi 4 ya kufuata mpango wa kitabu hiki, sasa niko kilo 72! Ninahisi vizuri sana. Kitabu hiki ni thamani ya maisha.'},
-  {name:'Yusuf Mwandoe',location:'Pwani',avatar:'YM',color:'#00396b',stars:5,book:'Quran na Maisha ya Leo',date:'Feb 14, 2026',text:'Kitabu kimenisaidia kuelewa Quran vizuri zaidi na kuihusisha na changamoto za maisha ya leo ya kisasa. Ninaomba dua kila siku sasa na maisha yangu yamepata mwelekeo.'},
-  {name:'Consolata Mrema',location:'Kilimanjaro',avatar:'CM',color:'#3a5a00',stars:4,book:'Soma kwa Ufanisi',date:'Feb 13, 2026',text:'Mbinu za kusoma haraka zimenigeuza. Nilikuwa nasoma kitabu kimoja kwa wiki mbili. Sasa ninasoma vitabu vitatu kwa wiki! Ingawa ningependa vitabu zaidi vya sayansi.'},
-  {name:'Jumanne Sikudhani',location:'Geita',avatar:'JS',color:'#4a2d6b',stars:5,book:'Ushairi wa Maisha',date:'Feb 12, 2026',text:'Maneno ya mashairi yanagusa moyo na nafsi. Nilisoma kwa machozi ya furaha. Herman ana kipaji cha ajabu cha lugha. Sasa mimi pia nimeanza kuandika mashairi yangu.'},
-  {name:'Mariamu Pangani',location:'Tanga',avatar:'MP',color:'#6b2d00',stars:5,book:'Lishe ya Watoto',date:'Feb 11, 2026',text:'Watoto wangu walikuwa wagonjwa mara nyingi. Baada ya kutumia mbinu za kitabu hiki cha lishe, afya zao zimekuwa bora sana. Asante kwa kuandika vitabu vinavyosaidia familia.'},
-  {name:'Erick Mallya',location:'Moshi',avatar:'EM',color:'#004a4a',stars:5,book:'Ubunifu wa Biashara',date:'Feb 10, 2026',text:'Nimefungua duka la nguo baada ya kusoma kitabu hiki. Mwezi wa kwanza nilipata wateja 45! Maarifa ya masoko na uuzaji ni ya thamani kubwa sana. Kitabu kinauzwa bei nafuu sana.'},
-  {name:'Seraphina Mugisha',location:'Mwanza',avatar:'SM',color:'#5a0000',stars:5,book:'Nguvu ya Mwanamke',date:'Feb 9, 2026',text:'Kama mwanamke katika jamii ya Tanzania, kitabu hiki kimenichomosha. Sasa nasimama imara mbele ya wanaume wote. Ninaendesha biashara yangu kwa ujasiri mkubwa.'},
-  {name:'Abdallah Komba',location:'Njombe',avatar:'AK',color:'#003a3a',stars:5,book:'Historia ya Tanganyika',date:'Feb 8, 2026',text:'Sijawahi kujua sana historia ya nchi yangu. Baada ya kusoma kitabu hiki, ninahisi damu ya uzalendo inatiririka mwilini! Kila Mtanzania anapaswa kusoma kitabu hiki.'},
-  {name:'Veronica Shio',location:'Arusha',avatar:'VS',color:'#4a004a',stars:5,book:'Mapumziko ya Roho',date:'Feb 7, 2026',text:'Nilikuwa na msongo wa mawazo sana kwa miaka 3. Kitabu hiki kilinichosha machozi ya amani. Sasa ninaweza kulala vizuri usiku na kuamka nikifurahi. Asante sana Herman.'},
-  {name:'Tumaini Mwita',location:'Musoma',avatar:'TM',color:'#3a2d00',stars:5,book:'Mwalimu Bora',date:'Feb 6, 2026',text:'Mwalimu wa shule ya msingi hapa Musoma. Kitabu hiki kimenichosha kama mwalimu. Sasa wanafunzi wangu wanapenda masomo zaidi. Darasa langu limekuwa bora kuliko yote.'},
-  {name:'Florencia Mbele',location:'Dodoma',avatar:'FM',color:'#006b00',stars:5,book:'Dawa za Asili',date:'Feb 5, 2026',text:'Mama yangu alikuwa mgonjwa. Madaktari walisema hataweza kupona. Baada ya kutumia dawa za asili kutoka katika kitabu hiki, leo mama yangu ni mzima! Mungu akubariki Herman.'},
-  {name:'Augustino Taratibu',location:'Ruvuma',avatar:'AT',color:'#002d6b',stars:5,book:'Kilimo cha Kisasa',date:'Feb 4, 2026',text:'Shamba langu sasa li
+<div class="books-grid">
+            <!-- Kitabu 1 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-placeholder cover-1">
+                        <span>💼</span>
+                   
