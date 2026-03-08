@@ -203,14 +203,9 @@ header h1 span{color:var(--gold);display:block}
 .book-card{
   background:var(--white);border-radius:20px;overflow:hidden;
   border:1px solid rgba(201,168,76,0.15);
-  transition:all 0.4s cubic-bezier(0.23,1,0.32,1);
-  opacity:0;transform:translateY(30px);
-  animation:fadeUp 0.6s ease forwards;
+  transition:transform 0.4s cubic-bezier(0.23,1,0.32,1),box-shadow 0.4s ease;
+  opacity:1;
 }
-.book-card:nth-child(1){animation-delay:0.1s}
-.book-card:nth-child(2){animation-delay:0.2s}
-.book-card:nth-child(3){animation-delay:0.3s}
-.book-card:nth-child(4){animation-delay:0.4s}
 .book-card:hover{transform:translateY(-10px);box-shadow:0 28px 56px rgba(26,18,8,0.14),0 0 0 1px rgba(201,168,76,0.3)}
 
 .bk-cover{position:relative;height:260px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:3.5rem}
@@ -391,15 +386,15 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:3.5rem 
 <nav>
   <a href="index.html" class="nav-brand">Sade <em>Books</em></a>
   <div class="nav-right">
-    <a href="sadebooks.html" class="nav-link">📚 Vitabu</a>
-    <a href="malipo.html" class="nav-link">💳 Malipo</a>
+    <a href="sade-books-catalog.html" class="nav-link">📚 Vitabu</a>
+    <a href="lipa-namba-yas.html" class="nav-link">💳 Malipo</a>
     <a href="sade-order.html" class="nav-link">🛒 Agiza</a>
-    <a href="comments.html" class="nav-link">💬 Maoni</a>
+    <a href="sade-books-comments.html" class="nav-link">💬 Maoni</a>
     <a href="lipa-namba-yas.html" class="nav-link">📱 Lipa Namba</a>
     <div class="nav-div"></div>
     <a href="menu.html" class="nav-link">☰ Menu</a>
     <a href="contact.html" class="nav-link">✉️ Mawasiliano</a>
-    <a href="sadebooks.html" class="nav-cta">Angalia Vitabu</a>
+    <a href="sade-books-catalog.html" class="nav-cta">Angalia Vitabu</a>
   </div>
   <button class="hamburger" id="hbg" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -408,14 +403,14 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:3.5rem 
 
 <!-- Mobile Menu -->
 <div class="mob-menu" id="mob">
-  <a href="sadebooks.html" class="nav-link">📚 Vitabu</a>
-  <a href="malipo.html" class="nav-link">💳 Malipo</a>
+  <a href="sade-books-catalog.html" class="nav-link">📚 Vitabu</a>
+  <a href="lipa-namba-yas.html" class="nav-link">💳 Malipo</a>
   <a href="sade-order.html" class="nav-link">🛒 Agiza Kitabu</a>
-  <a href="comments.html" class="nav-link">💬 Maoni</a>
+  <a href="sade-books-comments.html" class="nav-link">💬 Maoni</a>
   <a href="lipa-namba-yas.html" class="nav-link">📱 Lipa Namba</a>
   <a href="menu.html" class="nav-link">☰ Menu</a>
   <a href="contact.html" class="nav-link">✉️ Mawasiliano</a>
-  <a href="sadebooks.html" class="nav-cta">Angalia Vitabu →</a>
+  <a href="sade-books-catalog.html" class="nav-cta">Angalia Vitabu →</a>
 </div>
 
 <!-- ══ HERO ══ -->
@@ -433,17 +428,17 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:3.5rem 
     <p class="hero-sub">Nunua vitabu vya kidigitali (PDF) kwa urahisi na bei nafuu — Tanzania 🇹🇿</p>
 
     <div class="hero-pills">
-      <a href="sadebooks.html" class="hero-pill">📚 Vitabu</a>
-      <a href="malipo.html" class="hero-pill">💳 Malipo</a>
+      <a href="sade-books-catalog.html" class="hero-pill">📚 Vitabu</a>
+      <a href="lipa-namba-yas.html" class="hero-pill">💳 Malipo</a>
       <a href="sade-order.html" class="hero-pill">🛒 Agiza</a>
-      <a href="comments.html" class="hero-pill">💬 Maoni</a>
+      <a href="sade-books-comments.html" class="hero-pill">💬 Maoni</a>
       <a href="lipa-namba-yas.html" class="hero-pill">📱 Lipa Namba</a>
       <a href="menu.html" class="hero-pill">☰ Menu</a>
       <a href="contact.html" class="hero-pill">✉️ Wasiliana</a>
     </div>
 
     <div class="hero-cta">
-      <a href="sadebooks.html" class="btn-gold">Tazama Vitabu →</a>
+      <a href="sade-books-catalog.html" class="btn-gold">Tazama Vitabu →</a>
       <a href="contact.html" class="btn-ghost">Wasiliana Nasi</a>
     </div>
   </div>
@@ -464,4 +459,6 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:3.5rem 
 <!-- ══ BOOKS ══ -->
 <section id="books">
   <div class="sec-head">
-    <span class="sec-tag">Mkusanyiko Wetu</spa
+    <span class="sec-tag">Mkusanyiko Wetu</span>
+    <h2 class="sec-title">Vitabu Vya <em>Hali ya Juu</em></h2>
+    <p class="sec-desc">Chagua kutoka kwa vita
