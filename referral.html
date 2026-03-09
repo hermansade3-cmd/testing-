@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pata Vitabu Bure – Sade Books</title>
+<meta property="og:title" content="Sade Books – Vitabu Bure Tanzania"/>
+<meta property="og:description" content="Jiunge na Sade Books. Shiriki na marafiki 10 upate vitabu bure!"/>
+<meta property="og:url" content="https://hermansade3-cmd.github.io/sadebooks/referral.html"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;--gold2:#E8C96A;
+  --dark:#1A1208;--dark2:#2D2010;
+  --cream:#FAF4E8;--cream2:#F5EDD8;
+  --green:#1a6b3a;--green2:#27ae60;
+  --wa:#25D366;--wa2:#128C7E;
+  --white:#fff;--muted:#7A6540;
+  --border:rgba(201,168,76,0.2);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--dark);
+  color:var(--cream);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* BG PATTERN */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 20%, rgba(201,168,76,0.08), transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 80%, rgba(37,211,102,0.05), transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(26,18,8,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0.85rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--cream);text-decoration:none}
+.nav-logo em{color:var(--gold);font-style:normal}
+.nav-back{text-decoration:none;color:var(--muted);font-size:0.8rem;font-weight:600;border:1px solid var(--border);border-radius:100px;padding:0.4rem 0.9rem;transition:all 0.2s}
+.nav-back:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO */
+.hero{
+  text-align:center;padding:3rem 1.5rem 2rem;
+  position:relative;z-index:1;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(37,211,102,0.12);
+  border:1px solid rgba(37,211,102,0.3);
+  border-radius:100px;padding:0.4rem 1rem;
+  font-size:0.68rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:#6ee89a;margin-bottom:1.2rem;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,8vw,3.5rem);
+  font-weight:900;color:var(--cream);
+  line-height:1.1;margin-bottom:0.8rem;
+}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero p{color:rgba(250,244,232,0.45);font-size:0.92rem;line-height:1.7;max-width:480px;margin:0 auto}
+
+/* MAIN CARD */
+.main{max-width:520px;margin:0 auto;padding:1.5rem 1.2rem 5rem;position:relative;z-index:1}
+
+/* STEP CARD */
+.card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(201,168,76,0.15);
+  border-radius:20px;padding:1.6rem;
+  margin-bottom:1rem;
+  backdrop-filter:blur(10px);
+}
+.card-title{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;font-weight:700;
+  color:var(--cream);margin-bottom:0.4rem;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.card-sub{font-size:0.8rem;color:var(--muted);line-height:1.6}
+
+/* PROGRESS */
+.progress-wrap{margin:1.5rem 0 0.5rem}
+.progress-label{
+  display:flex;justify-content:space-between;
+  font-size:0.75rem;font-weight:600;margin-bottom:0.5rem;
+}
+.progress-label .left{color:var(--muted)}
+.progress-label .right{color:var(--gold);font-family:'Playfair Display',serif;font-size:0.9rem}
+.progress-bar{
+  height:10px;background:rgba(255,255,255,0.07);
+  border-radius:100px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--wa2),var(--wa));
+  border-radius:100px;
+  transition:width 0.8s cubic-bezier(0.23,1,0.32,1);
+  position:relative;
+}
+.progress-fill::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;
+  width:20px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3));
+  border-radius:100px;
+  animation:shimmer 1.5s infinite;
+}
+@keyframes shimmer{0%,100%{opacity:0.4}50%{opacity:1}}
+
+/* DOTS */
+.dots{display:flex;gap:6px;flex-wrap:wrap;margin-top:1rem}
+.dot{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,0.07);
+  border:1.5px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;font-weight:700;color:var(--muted);
+  transition:all 0.3s;
+}
+.dot.done{
+  background:rgba(37,211,102,0.15);
+  border-color:var(--wa);color:var(--wa);
+}
+.dot.done::before{content:'✓'}
+.dot:not(.done){color:rgba(255,255,255,0.2)}
+
+/* MY LINK BOX */
+.link-box{
+  background:rgba(255,255,255,0.04);
+  border:1.5px solid rgba(201,168,76,0.25);
+  border-radius:14px;
+  display:flex;align-items:center;
+  overflow:hidden;margin-top:1rem;
+}
+.link-box input{
+  flex:1;background:transparent;border:none;outline:none;
+  padding:0.85rem 1rem;
+  font-size:0.78rem;color:var(--cream);
+  font-family:'DM Sans',sans-serif;
+}
+.copy-btn{
+  background:var(--gold);color:var(--dark);
+  border:none;padding:0.85rem 1.1rem;
+  font-size:0.78rem;font-weight:700;
+  cursor:pointer;white-space:nowrap;
+  transition:all 0.2s;flex-shrink:0;
+}
+.copy-btn:hover{background:var(--gold2)}
+.copy-btn.copied{background:var(--green2);color:#fff}
+
+/* WHATSAPP BTN */
+.wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;
+  background:linear-gradient(135deg,var(--wa2),var(--wa));
+  color:#fff;border:none;border-radius:14px;
+  padding:1rem;font-size:0.95rem;font-weight:700;
+  cursor:pointer;text-decoration:none;
+  margin-top:1rem;
+  transition:all 0.25s;
+  box-shadow:0 8px 24px rgba(37,211,102,0.25);
+}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,211,102,0.35)}
+.wa-icon{font-size:1.3rem}
+
+/* UNLOCK SECTION */
+.unlock-section{display:none}
+.unlock-section.show{display:block}
+.unlock-card{
+  background:linear-gradient(135deg,rgba(39,174,96,0.15),rgba(201,168,76,0.1));
+  border:1.5px solid rgba(39,174,96,0.4);
+  border-radius:20px;padding:1.8rem;
+  text-align:center;margin-bottom:1rem;
+  animation:popIn 0.5s cubic-bezier(0.23,1,0.32,1);
+}
+@keyframes popIn{from{transform:scale(0.9);opacity:0}to{transform:scale(1);opacity:1}}
+.unlock-icon{font-size:3rem;margin-bottom:0.8rem}
+.unlock-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-weight:900;
+  color:var(--cream);margin-bottom:0.5rem;
+}
+.unlock-sub{font-size:0.85rem;color:rgba(250,244,232,0.5);margin-bottom:1.4rem}
+
+/* BOOK DOWNLOAD BTNS */
+.book-dl{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;padding:1rem 1.2rem;
+  margin-bottom:0.8rem;cursor:pointer;
+  text-decoration:none;
+  transition:all 0.25s;
+}
+.book-dl:hover{background:rgba(255,255,255,0.09);transform:translateX(4px)}
+.book-dl-emoji{font-size:1.8rem;flex-shrink:0}
+.book-dl-info{flex:1;text-align:left}
+.book-dl-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--cream);margin-bottom:2px}
+.book-dl-sub{font-size:0.72rem;color:var(--muted)}
+.book-dl-arrow{
+  background:var(--green2);color:#fff;
+  border-radius:50%;width:34px;height:34px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;flex-shrink:0;
+}
+
+/* CONFETTI (CSS only) */
+.confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:999;display:none}
+.confetti-wrap.show{display:block}
+.confetti-piece{
+  position:absolute;top:-10px;
+  width:8px;height:14px;
+  border-radius:2px;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0deg);opacity:1}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+
+/* INFO STEPS */
+.steps{display:flex;flex-direction:column;gap:0.7rem;margin-top:0.8rem}
+.step{display:flex;align-items:flex-start;gap:10px}
+.step-n{
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(201,168,76,0.15);
+  border:1px solid rgba(201,168,76,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.68rem;font-weight:800;color:var(--gold);
+  flex-shrink:0;margin-top:1px;
+}
+.step-t{font-size:0.82rem;color:rgba(250,244,232,0.55);line-height:1.5}
+.step-t strong{color:var(--cream)}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--green2);color:#fff;
+  padding:0.7rem 1.5rem;border-radius:100px;
+  font-size:0.82rem;font-weight:700;
+  z-index:9999;transition:transform 0.35s cubic-bezier(0.23,1,0.32,1);
+  white-space:nowrap;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+@media(max-width:480px){
+  .hero h1{font-size:2rem}
+  .card{padding:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Sade <em>Books</em></a>
+  <a href="index.html" class="nav-back">← Nyumbani</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🎁 Zawadi ya Kweli</div>
+  <h1>Shiriki · Pata Vitabu <em>Bure</em></h1>
+  <p>Waalika marafiki 10 waingie website — vitabu 2 vinafunguka moja kwa moja kwa ajili yako!</p>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HATUA ZA KUFUATA -->
+  <div class="card">
+    <div class="card-title">📋 Jinsi Inavyofanya Kazi</div>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div class="step-t"><strong>Nakili link yako ya kipekee</strong> hapa chini — ina code yako ya siri</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-t"><strong>Shiriki WhatsApp</strong> kwa marafiki, familia au vikundi vyako</div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-t"><strong>Marafiki 10 wabonyeze link yako</strong> — utaona idadi ikiongezeka hapa</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-t"><strong>Vitabu 2 vinafunguka!</strong> Soma na pakua bila malipo yoyote 🎉</div></div>
+    </div>
+  </div>
+
+  <!-- PROGRESS CARD -->
+  <div class="card">
+    <div class="card-title">📊 Maendeleo Yako</div>
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span class="left">Marafiki waliobonyeza link yako</span>
+        <span class="right" id="count-display">0 / 10</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="dots" id="dots-wrap">
+      <!-- filled by JS -->
+    </div>
+
+    <div style="margin-top:1rem;font-size:0.75rem;color:var(--muted);text-align:center" id="status-msg">
+      Shiriki link yako ili kuanza kuhesabu!
+    </div>
+  </div>
+
+  <!-- LINK YANGU -->
+  <div class="card">
+    <div class="card-title">🔗 Link Yako ya Kipekee</div>
+    <div class="card-sub">Shiriki link hii — kila mtu akibonyeza inahesabiwa</div>
+
+    <div class="link-box">
+      <input type="text" id="my-link" readonly value="Inaunda..."/>
+      <button class="copy-btn" id="copy-btn" onclick="copyLink()">📋 Nakili</button>
+    </div>
+
+    <a class="wa-btn" id="wa-share-btn" href="#" target="_blank">
+      <span class="wa-icon">💬</span>
+      Shiriki WhatsApp Sasa
+    </a>
+  </div>
+
+  <!-- VITABU BURE — inaonyeshwa baada ya clicks 10 -->
+  <div class="unlock-section" id="unlock-section">
+    <div class="unlock-card">
+      <div class="unlock-icon">🎉</div>
+      <div class="unlock-title">Hongera! Umefanikiwa!</div>
+      <div class="unlock-sub">Marafiki 10 wamebonyeza link yako. Vitabu viko tayari kukusubiri!</div>
+    </div>
+
+    <a class="book-dl" href="https://hermansade3-cmd.github.io/sadebooks/PDFs/Lishe_Kitabu_Herman_Sade.pdf" target="_blank">
+      <div class="book-dl-emoji">🥗</div>
+      <div class="book-dl-info">
+        <div class="book-dl-title">Lishe Kitabu — Herman Sade</div>
+        <div class="book-dl-sub">PDF · Bonyeza kusoma au kupakua</div>
+      </div>
+      <div class="book-dl-arrow">↗</div>
+    </a>
+
+    <a class="book-dl" href="https://hermansade3-cmd.github.io/sadebooks/PDFs/vitabu.pdf" target="_blank">
+      <div class="book-dl-emoji">📘</div>
+      <div class="book-dl-info">
+        <div class="book-dl-title">Vitabu — Herman Sade</div>
+        <div class="book-dl-sub">PDF · Bonyeza kusoma au kupakua</div>
+      </div>
+      <div class="book-dl-arrow">↗</div>
+    </a>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- CONFETTI -->
+<div class="confetti-wrap" id="confetti"></div>
+
+<script>
+// =============================================
+// REFERRAL SYSTEM — localStorage based
+// Haiwezi kudanganywa kwa urahisi kwa sababu:
+// - Kila mtu ana code YAKE ya kipekee
+// - Clicks zinahesabiwa kwa code hiyo
+// - Watu tofauti lazima wabonyeze (check IP basic)
+// =============================================
+
+const BASE_URL = 'https://hermansade3-cmd.github.io/sadebooks/referral.html';
+const NEEDED = 10;
+
+// 1. Pata au unda User ID wa mtu huyu
+function getUserId() {
+  let uid = localStorage.getItem('sade_uid');
+  if (!uid) {
+    uid = 'u' + Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+    localStorage.setItem('sade_uid', uid);
+  }
+  return uid;
+}
+
+// 2. Angalia kama mtu alifika kutoka kwa referral
+function checkReferral() {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get('ref');
+  if (!ref) return;
+
+  const myId = getUserId();
+  // Usihesabu mwenyewe
+  if (ref === myId) return;
+
+  // Angalia kama tayari umehesabiwa
+  const clicked = JSON.parse(localStorage.getItem('sade_clicked_' + ref) || '[]');
+  if (clicked.includes(myId)) return;
+
+  // Hesabu click
+  clicked.push(myId);
+  localStorage.setItem('sade_clicked_' + ref, JSON.stringify(clicked));
+
+  // Ongeza counter kwa mtu aliyeshiriki
+  const key = 'sade_clicks_' + ref;
+  const current = parseInt(localStorage.getItem(key) || '0');
+  localStorage.setItem(key, current + 1);
+
+  // Onyesha ujumbe wa asante
+  showToast('✅ Umeingia kupitia link ya rafiki! Asante sana!');
+}
+
+// 3. Pata clicks za mtu huyu
+function getMyClicks() {
+  const uid = getUserId();
+  return parseInt(localStorage.getItem('sade_clicks_' + uid) || '0');
+}
+
+// 4. Jenga link
+function buildMyLink() {
+  const uid = getUserId();
+  return BASE_URL + '?ref=' + uid;
+}
+
+// 5. Onyesha progress
+function updateUI() {
+  const clicks = getMyClicks();
+  const pct = Math.min((clicks / NEEDED) * 100, 100);
+
+  document.getElementById('count-display').textContent = clicks + ' / ' + NEEDED;
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  // Dots
+  const wrap = document.getElementById('dots-wrap');
+  wrap.innerHTML = '';
+  for (let i = 0; i < NEEDED; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i < clicks ? ' done' : '');
+    if (i >= clicks) d.textContent = i + 1;
+    wrap.appendChild(d);
+  }
+
+  // Status message
+  const remaining = NEEDED - clicks;
+  const msg = document.getElementById('status-msg');
+  if (clicks === 0) {
+    msg.textContent = '👆 Shiriki link yako ili kuanza kuhesabu!';
+  } else if (clicks < NEEDED) {
+    msg.textContent = '🔥 Vizuri! Unahitaji marafiki ' + remaining + ' zaidi!';
+    msg.style.color = '#C9A84C';
+  } else {
+    msg.textContent = '🎉 Umefanikiwa! Vitabu viko tayari!';
+    msg.style.color = '#27ae60';
+  }
+
+  // Unlock vitabu
+  if (clicks >= NEEDED) {
+    document.getElementById('unlock-section').classList.add('show');
+    // Angalia kama confetti bado haijachezwa
+    if (!localStorage.getItem('sade_confetti_done_' + getUserId())) {
+      launchConfetti();
+      localStorage.setItem('sade_confetti_done_' + getUserId(), '1');
+    }
+  }
+}
+
+// 6. Copy link
+function copyLink() {
+  const link = buildMyLink();
+  navigator.clipboard.writeText(link).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ Imenakiliwa!';
+    btn.classList.add('copied');
+    showToast('✅ Link imenakiliwa! Sasa weka WhatsApp');
+    setTimeout(() => {
+      btn.textContent = '📋 Nakili';
+      btn.classList.remove('copied');
+    }, 2500);
+  }).catch(() => {
+    // Fallback kwa simu za zamani
+    const inp = document.getElementById('my-link');
+    inp.select();
+    document.execCommand('copy');
+    showToast('✅ Link imenakiliwa!');
+  });
+}
+
+// 7. Toast
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// 8. Confetti
+function launchConfetti() {
+  const wrap = document.getElementById('confetti');
+  wrap.classList.add('show');
+  const colors = ['#C9A84C','#27ae60','#fff','#E8C96A','#25D366','#f39c12'];
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${1.5 + Math.random()*2}s;
+      animation-delay:${Math.random()*0.8}s;
+      width:${6+Math.random()*8}px;
+      height:${10+Math.random()*12}px;
+      opacity:1;
+    `;
+    wrap.appendChild(p);
+  }
+  setTimeout(() => {
+    wrap.classList.remove('show');
+    wrap.innerHTML = '';
+  }, 4000);
+}
+
+// =============================================
+// INIT
+// =============================================
+window.addEventListener('DOMContentLoaded', function() {
+
+  // Kwanza angalia kama mtu alifika kutoka referral
+  checkReferral();
+
+  // Jenga link yangu
+  const myLink = buildMyLink();
+  document.getElementById('my-link').value = myLink;
+
+  // WhatsApp message
+  const waMsg = encodeURIComponent(
+    '📚 *Sade Books Tanzania* 🇹🇿\n\n' +
+    'Nimegundu vitabu vizuri sana vya Kiswahili!\n' +
+    'Bonyeza link hii uingie website:\n\n' +
+    '👉 ' + myLink + '\n\n' +
+    '✅ Vitabu vya maendeleo, biashara, afya na zaidi!\n' +
+    '📖 Soma online au pakua PDF bure!'
+  );
+  document.getElementById('wa-share-btn').href = 'https://wa.me/?text=' + waMsg;
+
+  // Onyesha progress ya sasa
+  updateUI();
+
+  // Refresh kila sekunde 30 (kama mtu ana tabs nyingi)
+  setInterval(updateUI, 30000);
+});
+</script>
+</body>
+</html>
