@@ -80,6 +80,23 @@
     .modal-close-btn{width:100%;background:none;border:1.5px solid var(--border);border-radius:50px;padding:11px;font-size:.87rem;color:var(--muted);cursor:pointer;margin-top:10px}
     .modal-close-btn:hover{border-color:var(--ink);color:var(--ink)}
 
+
+    /* PDF PREVIEW */
+    .preview-btn{width:100%;background:var(--cream2);border:1.5px solid var(--border);border-radius:50px;padding:9px;font-size:.8rem;font-weight:700;color:var(--muted);cursor:pointer;margin-bottom:8px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+    .preview-btn:hover{border-color:var(--gold);color:var(--gold)}
+    .pdf-preview-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;display:none;flex-direction:column;align-items:center;padding:20px}
+    .pdf-preview-overlay.active{display:flex}
+    .pdf-header{width:100%;max-width:700px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+    .pdf-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700}
+    .pdf-close{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:50%;width:38px;height:38px;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .pdf-frame-wrap{width:100%;max-width:700px;flex:1;background:#fff;border-radius:16px;overflow:hidden;position:relative}
+    .pdf-frame-wrap iframe{width:100%;height:100%;border:none}
+    .pdf-lock-bar{background:var(--ink);border-radius:0 0 16px 16px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .pdf-lock-msg{font-family:'Lora',serif;font-style:italic;color:rgba(255,255,255,.7);font-size:.85rem}
+    .pdf-buy-btn{background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:10px 22px;font-weight:700;font-size:.9rem;cursor:pointer;white-space:nowrap}
+    .pdf-buy-btn:hover{background:var(--gold2)}
+    .pdf-pages-note{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:4px}
+
     /* PAYMENT PAGE */
     .fullpage{display:none;position:fixed;inset:0;background:var(--cream2);z-index:1000;overflow-y:auto}
     .fullpage-inner{max-width:480px;margin:0 auto;padding:20px 20px 60px}
@@ -267,4 +284,369 @@
       <div style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px">Transaction ID</div>
       <div id="success-ref" style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink)"></div>
     </div>
-    <button onclick="closeSuccess()" style="width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:15px;font-family:'Playfai
+    <button onclick="closeSuccess()" style="width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:15px;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;cursor:pointer">
+      Rudi kwenye Vitabu 📚
+    </button>
+  </div>
+</div>
+
+<script>
+var currentBookId = null;
+
+const books = [
+  // BIASHARA & FEDHA
+  { id:1,  emoji:'💼', bg:'linear-gradient(135deg,#2d4a7a,#1a2d5a)', cat:'Biashara & Fedha',    title:'Jifunze Biashara', pdf:'https://hermansade3-cmd.github.io/testing-/PDFs/vitabu.pdf',         desc:'Mwongozo kamili wa kuanza na kukuza biashara yako kwa mafanikio ya kweli.', hot:true  },
+  { id:2,  emoji:'💰', bg:'linear-gradient(135deg,#5a3a00,#c9962a)', cat:'Biashara & Fedha',    title:'Akili ya Fedha',           desc:'Jinsi ya kusimamia, kuwekeza na kukuza fedha zako kwa busara.',             hot:false },
+  { id:3,  emoji:'📈', bg:'linear-gradient(135deg,#1e6b5e,#0d3d35)', cat:'Biashara & Fedha',    title:'Mwekezaji Hodari',         desc:'Misingi ya uwekezaji wa hisa, ardhi na biashara ndogo ndogo.',              hot:true  },
+  { id:4,  emoji:'🏪', bg:'linear-gradient(135deg,#8b3a1a,#5a1a00)', cat:'Biashara & Fedha',    title:'Duka Lako Mtandaoni',      desc:'Hatua za kuanzisha biashara ya mtandaoni yenye mafanikio.',                 hot:false },
+  { id:5,  emoji:'🤝', bg:'linear-gradient(135deg,#2d5a2d,#1a3a1a)', cat:'Biashara & Fedha',    title:'Mazungumzo ya Biashara',   desc:'Ustadi wa kujadiliana na kushinda mikataba ya biashara.',                   hot:false },
+
+  // MAENDELEO BINAFSI
+  { id:6,  emoji:'🌱', bg:'linear-gradient(135deg,#2d5a2d,#4a8a4a)', cat:'Maendeleo Binafsi',   title:'Amka na Kutenda',          desc:'Jinsi ya kuacha uvivu na kuanza safari yako ya mafanikio.',                 hot:true  },
+  { id:7,  emoji:'🧠', bg:'linear-gradient(135deg,#5a3a7a,#3a1a5a)', cat:'Maendeleo Binafsi',   title:'Nguvu ya Akili',           desc:'Mbinu za kisaikolojia za kuimarisha nguvu ya akili yako.',                  hot:false },
+  { id:8,  emoji:'⏰', bg:'linear-gradient(135deg,#1a4a6b,#0d2d45)', cat:'Maendeleo Binafsi',   title:'Simamia Wakati Wako',      desc:'Mfumo wa kipekee wa kutumia kila saa kwa ufanisi mkubwa.',                  hot:false },
+  { id:9,  emoji:'🎯', bg:'linear-gradient(135deg,#8b3a3a,#5a1a1a)', cat:'Maendeleo Binafsi',   title:'Lengo na Mwelekeo',        desc:'Jinsi ya kuweka malengo na kuyafuata hadi kuyafikia.',                      hot:true  },
+  { id:10, emoji:'💪', bg:'linear-gradient(135deg,#4a2d00,#8b6a1a)', cat:'Maendeleo Binafsi',   title:'Nguvu ya Ndani',           desc:'Gundua uwezo mkubwa uliofichwa ndani yako.',                                hot:false },
+  { id:11, emoji:'😊', bg:'linear-gradient(135deg,#1e6b5e,#2d8a7a)', cat:'Maendeleo Binafsi',   title:'Furaha ya Kweli',          desc:'Jinsi ya kuishi maisha ya furaha na amani ya kweli.',                       hot:false },
+  { id:12, emoji:'🗣️', bg:'linear-gradient(135deg,#2d4a7a,#4a6aaa)', cat:'Maendeleo Binafsi',   title:'Sanaa ya Kuongea',         desc:'Mbinu za kuzungumza kwa ushawishi na ujasiri mbele ya watu.',                hot:true  },
+
+  // DINI & IMANI
+  { id:13, emoji:'🕌', bg:'linear-gradient(135deg,#1a3a1a,#2d6b2d)', cat:'Dini & Imani',        title:'Nguvu ya Sala',            desc:'Jinsi sala inavyobadilisha maisha yako na kuleta baraka.',                  hot:true  },
+  { id:14, emoji:'📿', bg:'linear-gradient(135deg,#3a2d1a,#6b5a2d)', cat:'Dini & Imani',        title:'Imani Inayosogea Milima',  desc:'Hadithi za kweli za imani na miujiza inayotokea maishani.',                 hot:false },
+  { id:15, emoji:'🌙', bg:'linear-gradient(135deg,#1a1a3a,#2d2d6b)', cat:'Dini & Imani',        title:'Amani ya Moyo',            desc:'Kupata amani ya kweli kupitia dua, tafakari na kumkumbuka Mwenyezi Mungu.', hot:false },
+  { id:16, emoji:'✝️', bg:'linear-gradient(135deg,#4a1a1a,#8b3a3a)', cat:'Dini & Imani',        title:'Imani na Matendo',         desc:'Uhusiano kati ya imani yako na jinsi unavyoishi maisha yako.',              hot:false },
+  { id:17, emoji:'🙏', bg:'linear-gradient(135deg,#2d4a2d,#5a8a5a)', cat:'Dini & Imani',        title:'Ukweli wa Maisha',         desc:'Maswali makubwa ya maisha yaliyojibiwa kupitia mwanga wa imani.',           hot:true  },
+
+  // AFYA & LISHE
+  { id:18, emoji:'❤️', bg:'linear-gradient(135deg,#8b1a2d,#c93a5a)', cat:'Afya & Lishe',        title:'Mwili Bora, Akili Bora',   desc:'Uhusiano kati ya afya ya mwili na ufanisi wa akili yako.',                  hot:true  },
+  { id:19, emoji:'🥗', bg:'linear-gradient(135deg,#2d6b1a,#5aaa2d)', cat:'Afya & Lishe',        title:'Lishe Sahihi ya Mwafrika', pdf:'https://hermansade3-cmd.github.io/testing-/PDFs/Lishe_Kitabu_Herman_Sade.pdf', desc:'Vyakula bora vya Afrika vinavyokuimarisha mwili na akili.',                 hot:false },
+  { id:20, emoji:'🏃', bg:'linear-gradient(135deg,#1a4a6b,#2d6aaa)', cat:'Afya & Lishe',        title:'Mazoezi ya Kila Siku',     desc:'Mpango rahisi wa mazoezi unaofaa kwa mtu yeyote nyumbani.',                 hot:false },
+  { id:21, emoji:'😴', bg:'linear-gradient(135deg,#2d1a4a,#5a3a8b)', cat:'Afya & Lishe',        title:'Nguvu ya Usingizi',        desc:'Sayansi ya usingizi bora na jinsi unavyoathiri maisha yako.',               hot:false },
+  { id:22, emoji:'🧘', bg:'linear-gradient(135deg,#1e5a4a,#2d8a6b)', cat:'Afya & Lishe',        title:'Tiba Asilia',              desc:'Dawa za asili za Afrika zinazotibu magonjwa ya kawaida.',                   hot:true  },
+
+  // TEKNOLOJIA
+  { id:23, emoji:'💻', bg:'linear-gradient(135deg,#0d1a2d,#1a3a5a)', cat:'Teknolojia',           title:'Coding kwa Waanzishi',     desc:'Jifunze kuprogramu kutoka sifuri bila uzoefu wowote wa awali.',             hot:true  },
+  { id:24, emoji:'🤖', bg:'linear-gradient(135deg,#1a2d1a,#2d5a2d)', cat:'Teknolojia',           title:'Akili Bandia Inayokuja',   desc:'Jinsi AI inavyobadilisha ulimwengu na nafasi zake kwa Waafrika.',           hot:true  },
+  { id:25, emoji:'📱', bg:'linear-gradient(135deg,#2d1a00,#5a3a00)', cat:'Teknolojia',           title:'Biashara ya Simu',         desc:'Pata kipato kutoka kwa simu yako ya mkononi kwa njia halali.',              hot:false },
+  { id:26, emoji:'🔐', bg:'linear-gradient(135deg,#1a1a1a,#3a3a3a)', cat:'Teknolojia',           title:'Usalama Mtandaoni',        desc:'Linda taarifa zako na biashara yako dhidi ya wadanganyifu mtandaoni.',       hot:false },
+  { id:27, emoji:'📊', bg:'linear-gradient(135deg,#0d2d4a,#1a5a8b)', cat:'Teknolojia',           title:'Data na Maamuzi Bora',     desc:'Tumia data kusimamia biashara na maisha yako kwa hekima.',                  hot:false },
+
+  // HISTORIA
+  { id:28, emoji:'🌍', bg:'linear-gradient(135deg,#2d1a00,#6b4a1a)', cat:'Historia',             title:'Afrika ya Kale',           desc:'Utukufu wa falme za Afrika kabla ya ukoloni — hadithi ambazo hazifundishwi.', hot:true },
+  { id:29, emoji:'⚔️', bg:'linear-gradient(135deg,#3a1a1a,#6b2d2d)', cat:'Historia',             title:'Mashujaa wa Tanzania',     desc:'Wapiganaji na viongozi wa Tanzania waliobadilisha historia yetu.',          hot:false },
+  { id:30, emoji:'🏛️', bg:'linear-gradient(135deg,#1a1a2d,#2d2d5a)', cat:'Historia',             title:'Ustaarabu wa Waswahili',   desc:'Historia ya utamaduni wa pwani na biashara ya Waswahili wa kale.',          hot:false },
+  { id:31, emoji:'📜', bg:'linear-gradient(135deg,#1a2d1a,#3a5a3a)', cat:'Historia',             title:'Uhuru wa Afrika Mashariki',desc:'Safari ya ukombozi kutoka ukoloni hadi uhuru wa kisasa.',                    hot:false },
+  { id:32, emoji:'🗺️', bg:'linear-gradient(135deg,#2d2d1a,#5a5a2d)', cat:'Historia',             title:'Ramani ya Mababu',         desc:'Hadithi za makabila ya Tanzania na mila zao za kipekee.',                   hot:true  },
+
+  // ELIMU
+  { id:33, emoji:'🎓', bg:'linear-gradient(135deg,#1a3a5a,#2d6aaa)', cat:'Elimu',                title:'Soma kwa Ufanisi',         desc:'Mbinu za kisayansi za kujifunza haraka na kukumbuka kwa muda mrefu.',        hot:true  },
+  { id:34, emoji:'✏️', bg:'linear-gradient(135deg,#3a2d1a,#8b6a2d)', cat:'Elimu',                title:'Mwalimu Bora',             desc:'Jinsi ya kufundisha na kuelimisha watoto na vijana kwa ufanisi.',            hot:false },
+  { id:35, emoji:'📐', bg:'linear-gradient(135deg,#1a3a1a,#3a8a3a)', cat:'Elimu',                title:'Hisabati Kwa Urahisi',     desc:'Njia mpya za kuelewa hisabati bila hofu wala msongo wa mawazo.',            hot:false },
+  { id:36, emoji:'🔬', bg:'linear-gradient(135deg,#1a1a3a,#3a3a8b)', cat:'Elimu',                title:'Sayansi ya Maisha',        desc:'Gundua miujiza ya sayansi inayokuathiri kila siku ya maisha yako.',          hot:false },
+  { id:37, emoji:'🌐', bg:'linear-gradient(135deg,#0d2d2d,#1a6b6b)', cat:'Elimu',                title:'Lugha za Dunia',           desc:'Mbinu za kujifunza lugha mpya kwa muda mfupi na kwa furaha.',               hot:true  },
+
+  // HADITHI
+  { id:38, emoji:'📖', bg:'linear-gradient(135deg,#3a1a2d,#6b2d5a)', cat:'Hadithi',              title:'Usiku wa Nairobi',         desc:'Riwaya ya kuvutia ya mapenzi, uaminifu na msalaba wa tamaduni mbili.',        hot:true  },
+  { id:39, emoji:'🌺', bg:'linear-gradient(135deg,#4a1a00,#8b3a00)', cat:'Hadithi',              title:'Maua ya Jangwani',         desc:'Hadithi ya msichana aliyeishi miaka 20 jangwani na kupata uhuru wake.',       hot:false },
+  { id:40, emoji:'🌊', bg:'linear-gradient(135deg,#0d2d4a,#1a5a7a)', cat:'Hadithi',              title:'Bahari ya Matumaini',      desc:'Safari ya baharini inayogusa mioyo — upendo, hasara na ushindi.',            hot:false },
+  { id:41, emoji:'🦁', bg:'linear-gradient(135deg,#3a2d00,#6b5a00)', cat:'Hadithi',              title:'Simba wa Serengeti',       desc:'Hadithi ya kishujaa ya kijana wa Maasai anayepigana na fate yake.',           hot:true  },
+  { id:42, emoji:'🌟', bg:'linear-gradient(135deg,#1a1a2d,#3a3a6b)', cat:'Hadithi',              title:'Nyota za Usiku',           desc:'Riwaya ya kisayansi — Tanzania 2080, dunia mpya na changamoto mpya.',         hot:false },
+
+  // FAMILIA
+  { id:43, emoji:'👨‍👩‍👧', bg:'linear-gradient(135deg,#2d3a1a,#5a7a2d)', cat:'Familia',           title:'Ndoa Yenye Furaha',        desc:'Siri za kujenga ndoa imara, yenye upendo na heshima ya kudumu.',             hot:true  },
+  { id:44, emoji:'👶', bg:'linear-gradient(135deg,#4a2d1a,#8b5a2d)', cat:'Familia',              title:'Malezi Bora ya Watoto',    desc:'Jinsi ya kumlea mtoto mwenye adabu, ujasiri na akili nzuri.',               hot:false },
+  { id:45, emoji:'💑', bg:'linear-gradient(135deg,#3a1a2d,#7a3a5a)', cat:'Familia',              title:'Upendo wa Kweli',          desc:'Jinsi ya kupata, kulinda na kukuza upendo wa kweli maishani mwako.',         hot:false },
+  { id:46, emoji:'🏠', bg:'linear-gradient(135deg,#1a2d1a,#3a6b3a)', cat:'Familia',              title:'Nyumba ya Amani',          desc:'Mbinu za kutatua migogoro ya familia na kujenga mahusiano madhubuti.',        hot:false },
+  { id:47, emoji:'👴', bg:'linear-gradient(135deg,#2d2d1a,#6b6b3a)', cat:'Familia',              title:'Hekima ya Wazee',          desc:'Mafunzo ya maisha kutoka kwa wazee wa Tanzania — busara ya kizazi.',         hot:true  },
+
+  // USHAIRI
+  { id:48, emoji:'✍️', bg:'linear-gradient(135deg,#1a0d2d,#3a1a6b)', cat:'Ushairi',              title:'Maneno ya Moyo',           desc:'Diwani ya upendo, huzuni na furaha — mashairi yanayogusa roho.',             hot:false },
+  { id:49, emoji:'🎵', bg:'linear-gradient(135deg,#2d1a00,#5a3a00)', cat:'Ushairi',              title:'Wimbo wa Maisha',          desc:'Ushairi wa kisasa wa Kiswahili unaosema ukweli wa maisha ya leo.',           hot:true  },
+  { id:50, emoji:'🌸', bg:'linear-gradient(135deg,#3a0d1a,#6b1a2d)', cat:'Ushairi',              title:'Maua ya Maneno',           desc:'Mkusanyo wa mashairi mazuri ya Tanzania yanayoinua roho na akili.',          hot:false },
+
+  // BIASHARA & FEDHA (ziada)
+  { id:51, emoji:'🏦', bg:'linear-gradient(135deg,#0d2d1a,#1a6b3a)', cat:'Biashara & Fedha',    title:'Benki Yako Mfukoni',       desc:'Jinsi ya kutumia huduma za benki na simu kufanya biashara ya kisasa.',        hot:true  },
+  { id:52, emoji:'📦', bg:'linear-gradient(135deg,#3a1a00,#7a3a00)', cat:'Biashara & Fedha',    title:'Usafirishaji na Faida',    desc:'Biashara ya usafirishaji na logistics — jinsi ya kuanza na kupata faida.',    hot:false },
+  { id:53, emoji:'🌾', bg:'linear-gradient(135deg,#2d3a00,#5a7a00)', cat:'Biashara & Fedha',    title:'Kilimo Biashara',          desc:'Geuza shamba lako kuwa chanzo cha kipato kikubwa cha kudumu.',               hot:true  },
+  { id:54, emoji:'🧾', bg:'linear-gradient(135deg,#1a2d3a,#2d6b8b)', cat:'Biashara & Fedha',    title:'Hesabu za Biashara',       desc:'Jinsi ya kusimamia vitabu vya hesabu bila kuwa mhasibu.',                    hot:false },
+  { id:55, emoji:'🎪', bg:'linear-gradient(135deg,#3a001a,#8b004a)', cat:'Biashara & Fedha',    title:'Masoko na Uuzaji',         desc:'Mbinu za kisasa za uuzaji zinazofanya bidhaa yako kuuzwa haraka.',            hot:true  },
+
+  // MAENDELEO BINAFSI (ziada)
+  { id:56, emoji:'🦅', bg:'linear-gradient(135deg,#1a1a2d,#2d2d6b)', cat:'Maendeleo Binafsi',   title:'Ndege wa Mafanikio',       desc:'Fikira za viongozi wakubwa wa dunia zilizobadilisha historia.',              hot:true  },
+  { id:57, emoji:'🔥', bg:'linear-gradient(135deg,#3a1a00,#8b3a00)', cat:'Maendeleo Binafsi',   title:'Moto wa Ndani',            desc:'Jinsi ya kuwasha hamasa na kuiongoza kwenye mafanikio ya kweli.',             hot:false },
+  { id:58, emoji:'🪞', bg:'linear-gradient(135deg,#1e4a4a,#2d8a8a)', cat:'Maendeleo Binafsi',   title:'Jijue Mwenyewe',           desc:'Safari ya kujigundua — nguvu zako, udhaifu wako na hatua zijazo.',           hot:false },
+  { id:59, emoji:'🧩', bg:'linear-gradient(135deg,#2d1a3a,#5a2d7a)', cat:'Maendeleo Binafsi',   title:'Tatua Matatizo Kwa Akili', desc:'Mfumo wa kisayansi wa kutatua changamoto ngumu kwa ubunifu.',                hot:true  },
+  { id:60, emoji:'🤑', bg:'linear-gradient(135deg,#1a3a1a,#3a8b3a)', cat:'Maendeleo Binafsi',   title:'Tabia za Matajiri',        desc:'Tabia 10 za watu wenye utajiri ambao wengi hawajui.',                        hot:true  },
+
+  // DINI & IMANI (ziada)
+  { id:61, emoji:'📖', bg:'linear-gradient(135deg,#1a2d1a,#2d6b2d)', cat:'Dini & Imani',        title:'Quran na Maisha ya Leo',   desc:'Jinsi mafunzo ya Quran yanavyojibu changamoto za maisha ya kisasa.',         hot:true  },
+  { id:62, emoji:'✝️', bg:'linear-gradient(135deg,#2d1a1a,#6b2d2d)', cat:'Dini & Imani',        title:'Injili na Mabadiliko',     desc:'Ujumbe wa Injili unaobadilisha maisha ya watu wa leo.',                      hot:false },
+  { id:63, emoji:'🌿', bg:'linear-gradient(135deg,#1a3a2d,#2d8b6b)', cat:'Dini & Imani',        title:'Shukrani na Baraka',       desc:'Nguvu ya shukrani na jinsi inavyovutia baraka nyingi maishani.',             hot:false },
+  { id:64, emoji:'🕯️', bg:'linear-gradient(135deg,#2d2d00,#6b6b00)', cat:'Dini & Imani',        title:'Mwanga wa Gizani',         desc:'Hadithi za imani zilizosaidia watu kupita majaribu makubwa maishani.',        hot:true  },
+
+  // AFYA & LISHE (ziada)
+  { id:65, emoji:'🫀', bg:'linear-gradient(135deg,#4a001a,#8b003a)', cat:'Afya & Lishe',        title:'Moyo Wako ni Hazina',      desc:'Jinsi ya kulinda moyo wako dhidi ya magonjwa ya kisasa.',                    hot:true  },
+  { id:66, emoji:'🧃', bg:'linear-gradient(135deg,#1a4a00,#3a8b00)', cat:'Afya & Lishe',        title:'Juisi za Uponyaji',        desc:'Matunda na mboga za Afrika zinazotibu na kuimarisha mwili wako.',             hot:false },
+  { id:67, emoji:'🧬', bg:'linear-gradient(135deg,#00002d,#00006b)', cat:'Afya & Lishe',        title:'Jeni na Afya Yako',        desc:'Jinsi DNA yako inavyoathiri afya na hatua za kujilinda.',                    hot:false },
+  { id:68, emoji:'🌿', bg:'linear-gradient(135deg,#003a1a,#006b3a)', cat:'Afya & Lishe',        title:'Dawa za Mitishamba',       desc:'Mimea ya Tanzania inayotibu magonjwa — mwongozo kamili wa dawa asilia.',     hot:true  },
+
+  // TEKNOLOJIA (ziada)
+  { id:69, emoji:'🌐', bg:'linear-gradient(135deg,#001a3a,#003a7a)', cat:'Teknolojia',           title:'Mtandao wa Pesa',          desc:'Cryptocurrency, Bitcoin na fedha za dijitali — mwongozo wa Mtanzania.',      hot:true  },
+  { id:70, emoji:'🎮', bg:'linear-gradient(135deg,#1a001a,#3a003a)', cat:'Teknolojia',           title:'Michezo na Kipato',        desc:'Jinsi ya kupata kipato kupitia michezo ya video na eSports.',               hot:false },
+  { id:71, emoji:'📡', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Teknolojia',           title:'IoT na Kilimo Bora',       desc:'Teknolojia ya kisasa inayobadilisha kilimo cha Tanzania.',                   hot:false },
+  { id:72, emoji:'🖥️', bg:'linear-gradient(135deg,#1a1a00,#3a3a00)', cat:'Teknolojia',           title:'Freelancing Mtandaoni',    desc:'Pata kazi za kimataifa mtandaoni na kulipwa dola bila kuacha nyumbani.',     hot:true  },
+
+  // HISTORIA (ziada)
+  { id:73, emoji:'👑', bg:'linear-gradient(135deg,#3a2d00,#8b6a00)', cat:'Historia',             title:'Wafalme wa Afrika',        desc:'Hadithi za wafalme wakubwa wa Afrika — utajiri, nguvu na hekima yao.',       hot:true  },
+  { id:74, emoji:'🚢', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Historia',             title:'Biashara ya Bahari Hindi', desc:'Historia ya biashara kati ya Afrika Mashariki na Asia — karne za nyuma.',    hot:false },
+  { id:75, emoji:'🏔️', bg:'linear-gradient(135deg,#1a1a1a,#3a3a3a)', cat:'Historia',             title:'Kilimanjaro — Hadithi',    desc:'Historia, utamaduni na hadithi za watu wanaoishi pembezoni mwa Kilimanjaro.', hot:false },
+  { id:76, emoji:'✊', bg:'linear-gradient(135deg,#1a0000,#3a0000)', cat:'Historia',             title:'Mapinduzi ya Zanzibar',    desc:'Hadithi kamili ya mapinduzi ya 1964 na athari yake kwa Tanzania ya leo.',    hot:true  },
+
+  // ELIMU (ziada)
+  { id:77, emoji:'🏫', bg:'linear-gradient(135deg,#00002d,#00006b)', cat:'Elimu',                title:'Shule ya Biashara',        desc:'Elimu ya MBA kwa lugha rahisi — bila kulipa ada za chuo kikuu.',             hot:true  },
+  { id:78, emoji:'📝', bg:'linear-gradient(135deg,#1a2d00,#3a6b00)', cat:'Elimu',                title:'Jinsi ya Kuandika Vizuri', desc:'Sanaa ya uandishi bora wa insha, ripoti na barua za kitaaluma.',             hot:false },
+  { id:79, emoji:'🎨', bg:'linear-gradient(135deg,#2d001a,#6b003a)', cat:'Elimu',                title:'Sanaa na Ubunifu',         desc:'Gundua kipaji chako cha sanaa na ukigeuze kuwa chanzo cha kipato.',           hot:false },
+  { id:80, emoji:'🔭', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Elimu',                title:'Astronomia ya Afrika',     desc:'Nyota, sayari na historia ya uchunguzi wa anga kutoka mtazamo wa Afrika.',   hot:true  },
+
+  // HADITHI (ziada)
+  { id:81, emoji:'🏙️', bg:'linear-gradient(135deg,#1a1a2d,#3a3a6b)', cat:'Hadithi',              title:'Dar es Salaam Usiku',      desc:'Riwaya ya kusisimua iliyopita katika mitaa ya Dar es Salaam — siri na hatari.', hot:true },
+  { id:82, emoji:'🌴', bg:'linear-gradient(135deg,#003a00,#007a00)', cat:'Hadithi',              title:'Paradiso ya Kaskazini',    desc:'Safari ya mapenzi na uvumbuzi katika visiwa vya Zanzibar.',                  hot:false },
+  { id:83, emoji:'🐘', bg:'linear-gradient(135deg,#2d2d00,#6b6b00)', cat:'Hadithi',              title:'Tembo wa Mwisho',          desc:'Hadithi ya mazingira — mapambano ya mtu mmoja kulinda tembo wa mwisho.',      hot:false },
+  { id:84, emoji:'👻', bg:'linear-gradient(135deg,#1a001a,#3a003a)', cat:'Hadithi',              title:'Pepo wa Pemba',            desc:'Hadithi ya kutisha ya kijiji kidogo cha Pemba — siri za kizazi.',             hot:true  },
+  { id:85, emoji:'🌅', bg:'linear-gradient(135deg,#3a1a00,#8b3a00)', cat:'Hadithi',              title:'Alfajiri ya Mpya',         desc:'Msichana wa vijijini anayetafuta ndoto zake mjini Dar es Salaam.',            hot:false },
+
+  // FAMILIA (ziada)
+  { id:86, emoji:'👩‍👦', bg:'linear-gradient(135deg,#3a001a,#7a003a)', cat:'Familia',             title:'Mama Shujaa',              desc:'Nguvu ya mama — hadithi za ajabu na mwongozo wa mama wa kisasa.',             hot:true  },
+  { id:87, emoji:'👨‍👧', bg:'linear-gradient(135deg,#001a3a,#003a7a)', cat:'Familia',             title:'Baba wa Kweli',            desc:'Jukumu la baba katika familia ya Afrika ya kisasa.',                         hot:false },
+  { id:88, emoji:'💔', bg:'linear-gradient(135deg,#2d001a,#6b003a)', cat:'Familia',              title:'Baada ya Talaka',          desc:'Jinsi ya kupona, kusimama na kuanza upya baada ya ndoa kuvunjika.',          hot:false },
+  { id:89, emoji:'🧒', bg:'linear-gradient(135deg,#1a2d1a,#3a6b3a)', cat:'Familia',              title:'Vijana wa Leo',            desc:'Jinsi ya kuwaelewa na kuwaongoza vijana wa kizazi cha intaneti.',             hot:true  },
+
+  // USHAIRI (ziada)
+  { id:90, emoji:'🌙', bg:'linear-gradient(135deg,#1a001a,#3a003a)', cat:'Ushairi',              title:'Usiku wa Mashairi',        desc:'Diwani ya usiku — mashairi ya upweke, fikira na ndoto za alfajiri.',          hot:false },
+  { id:91, emoji:'⚡', bg:'linear-gradient(135deg,#1a1a00,#3a3a00)', cat:'Ushairi',              title:'Mashairi ya Mapinduzi',    desc:'Ushairi wa kisiasa na kijamii unaosema ukweli uliofichwa.',                  hot:true  },
+
+  // MAZINGIRA
+  { id:92, emoji:'🌳', bg:'linear-gradient(135deg,#002d00,#005a00)', cat:'Mazingira',            title:'Hifadhi Dunia Yetu',       desc:'Jinsi Watanzania wanavyoweza kulinda mazingira na kupata faida.',             hot:false },
+  { id:93, emoji:'💧', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Mazingira',            title:'Maji ni Uhai',             desc:'Tatizo la maji Tanzania na suluhisho zinazoweza kutekelezwa sasa.',           hot:true  },
+  { id:94, emoji:'☀️', bg:'linear-gradient(135deg,#2d1a00,#6b3a00)', cat:'Mazingira',            title:'Nishati ya Jua',           desc:'Jinsi ya kutumia nishati ya jua nyumbani na kuokoa pesa nyingi.',             hot:false },
+
+  // MICHEZO
+  { id:95, emoji:'⚽', bg:'linear-gradient(135deg,#003a1a,#007a3a)', cat:'Michezo',              title:'Soka na Maisha',           desc:'Masomo ya maisha kutoka uwanjani — nidhamu, timu na ushindi.',               hot:true  },
+  { id:96, emoji:'🏋️', bg:'linear-gradient(135deg,#1a1a1a,#4a4a4a)', cat:'Michezo',              title:'Nguvu ya Mwili',           desc:'Mpango kamili wa mazoezi ya nguvu kwa wanaume na wanawake.',                 hot:false },
+  { id:97, emoji:'🧗', bg:'linear-gradient(135deg,#2d1a00,#5a3a00)', cat:'Michezo',              title:'Ushindi wa Akili',         desc:'Jinsi michezo inavyofundisha mafanikio ya biashara na maisha.',              hot:false },
+
+  // SANAA & UTAMADUNI
+  { id:98, emoji:'🎭', bg:'linear-gradient(135deg,#1a003a,#3a007a)', cat:'Sanaa & Utamaduni',    title:'Ngoma za Tanzania',        desc:'Historia na maana ya ngoma za makabila mbalimbali ya Tanzania.',             hot:true  },
+  { id:99, emoji:'🍲', bg:'linear-gradient(135deg,#3a1a00,#7a3a00)', cat:'Sanaa & Utamaduni',    title:'Mapishi ya Bibi',          desc:'Mapishi 100 ya vyakula vya Tanzania kutoka kanda zote — ladha ya asili.',    hot:true  },
+  { id:100,emoji:'🎨', bg:'linear-gradient(135deg,#2d002d,#6b006b)', cat:'Sanaa & Utamaduni',    title:'Uchoraji wa Tingatinga',   desc:'Historia ya sanaa ya Tingatinga na jinsi ya kujifunza mtindo huu wa kipekee.', hot:false},
+];
+
+var currentFilter = 'Zote';
+var currentSearch = '';
+
+function renderBooks() {
+  var grid = document.getElementById('books-grid');
+  var noRes = document.getElementById('no-results');
+  var countEl = document.getElementById('books-count');
+
+  var filtered = books.filter(function(b) {
+    var matchCat = currentFilter === 'Zote' || b.cat === currentFilter;
+    var matchSearch = currentSearch === '' ||
+      b.title.toLowerCase().indexOf(currentSearch.toLowerCase()) !== -1 ||
+      b.cat.toLowerCase().indexOf(currentSearch.toLowerCase()) !== -1 ||
+      b.desc.toLowerCase().indexOf(currentSearch.toLowerCase()) !== -1;
+    return matchCat && matchSearch;
+  });
+
+  grid.innerHTML = '';
+
+  if (filtered.length === 0) {
+    noRes.classList.add('show');
+    countEl.innerHTML = 'Hakuna kitabu kinachofanana';
+    return;
+  }
+
+  noRes.classList.remove('show');
+  countEl.innerHTML = 'Inaonyesha vitabu <strong>' + filtered.length + '</strong> kati ya ' + books.length;
+
+  filtered.forEach(function(b) {
+    var card = document.createElement('div');
+    card.className = 'book-card';
+    var hotBadge = b.hot ? '<div class="badge-tag">Maarufu</div>' : '';
+    card.innerHTML =
+      '<div class="book-cover" style="background:' + b.bg + '">' +
+        '<span style="font-size:3rem">' + b.emoji + '</span>' +
+        hotBadge +
+        '<div class="lock-overlay"><span>🔒</span></div>' +
+      '</div>' +
+      '<div class="book-info">' +
+        '<div class="book-cat">' + b.cat + '</div>' +
+        '<div class="book-title">' + b.title + '</div>' +
+        '<div class="book-desc">' + b.desc + '</div>' +
+        '<div class="book-footer">' +
+          '<div class="book-price"><small>Bei</small>TSH 2,000</div>' +
+          '<button class="buy-btn">Nunua →</button>' +
+        '</div>' +
+      '</div>';
+    (function(id){ card.addEventListener('click', function(){ openModal(id); }); })(b.id);
+    grid.appendChild(card);
+  });
+}
+
+function setFilter(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderBooks();
+}
+
+function filterBooks() {
+  currentSearch = document.getElementById('search-input').value;
+  renderBooks();
+}
+
+function openModal(id) {
+  currentBookId = id;
+  var book = books.find(function(b){ return b.id === id; });
+  if (!book) return;
+  var cover = document.getElementById('m-cover');
+  cover.style.background = book.bg;
+  cover.innerHTML = '<span style="font-size:5rem">' + book.emoji + '</span>';
+  document.getElementById('m-cat').textContent = book.cat;
+  document.getElementById('m-title').textContent = book.title;
+  document.getElementById('m-desc').textContent = book.desc;
+  // Show/hide preview button based on PDF availability
+  var previewBtn = document.getElementById('m-preview-btn');
+  if (previewBtn) {
+    if (book.pdf) {
+      previewBtn.style.display = 'flex';
+      previewBtn.onclick = function() {
+        window._previewBookIdx = id;
+        openPdfPreview(book.pdf, book.title, book.id);
+      };
+    } else {
+      previewBtn.style.display = 'none';
+    }
+  }
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function goToPayment() {
+  var book = books.find(function(b){ return b.id === currentBookId; });
+  if (!book) return;
+  closeModal();
+  document.getElementById('pay-cover').style.background = book.bg;
+  document.getElementById('pay-cover').textContent = book.emoji;
+  document.getElementById('pay-cat').textContent = book.cat;
+  document.getElementById('pay-title').textContent = book.title;
+  document.getElementById('pay-phone').value = '';
+  document.getElementById('pay-ref').value = '';
+  document.getElementById('pay-err').style.display = 'none';
+  var btn = document.getElementById('confirm-btn');
+  btn.textContent = 'Nimetuma Malipo – Thibitisha ✓';
+  btn.disabled = false;
+  btn.style.background = '';
+  document.getElementById('payment-page').style.display = 'block';
+  document.getElementById('payment-page').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closePayment() {
+  document.getElementById('payment-page').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function confirmPayment() {
+  var phone = document.getElementById('pay-phone').value.trim();
+  var ref   = document.getElementById('pay-ref').value.trim();
+  var err   = document.getElementById('pay-err');
+
+  if (phone.length < 9) {
+    err.textContent = '⚠️ Tafadhali ingiza nambari yako ya simu sahihi (tarakimu 9).';
+    err.style.display = 'block';
+    return;
+  }
+  if (ref.length < 6) {
+    err.textContent = '⚠️ Tafadhali ingiza Transaction ID uliyopokea kwa SMS.';
+    err.style.display = 'block';
+    return;
+  }
+
+  err.style.display = 'none';
+  var btn = document.getElementById('confirm-btn');
+  btn.textContent = '⏳ Inathibitisha…';
+  btn.disabled = true;
+  btn.style.background = '#aaa';
+
+  setTimeout(function() {
+    closePayment();
+    showSuccess(phone, ref);
+  }, 2000);
+}
+
+function showSuccess(phone, ref) {
+  var book = books.find(function(b){ return b.id === currentBookId; });
+  document.getElementById('success-book').textContent = book ? '"' + book.title + '"' : '';
+  document.getElementById('success-phone').textContent = '+255 ' + phone;
+  document.getElementById('success-ref').textContent = ref.toUpperCase();
+  var sp = document.getElementById('success-page');
+  sp.style.display = 'flex';
+  sp.style.alignItems = 'center';
+  sp.style.justifyContent = 'center';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSuccess() {
+  var sp = document.getElementById('success-page');
+  sp.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeModal(); closePayment(); } });
+
+renderBooks();
+
+function openPdfPreview(pdfUrl, title, buyUrl) {
+  document.getElementById('pdf-preview-title').textContent = '👁 Hakiki: ' + title;
+  document.getElementById('pdf-iframe').src = pdfUrl + '#page=1&toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+  document.getElementById('pdf-buy-btn').onclick = function(){ 
+    closePdfPreview(); 
+    openModal(window._previewBookIdx || 0); 
+  };
+  document.getElementById('pdf-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closePdfPreview() {
+  document.getElementById('pdf-overlay').classList.remove('active');
+  document.getElementById('pdf-iframe').src = '';
+  document.body.style.overflow = '';
+}
+
+</script>
+
+<!-- PDF PREVIEW OVERLAY -->
+<div class="pdf-preview-overlay" id="pdf-overlay">
+  <div class="pdf-header">
+    <div class="pdf-title" id="pdf-preview-title">Hakiki ya Kitabu</div>
+    <button class="pdf-close" onclick="closePdfPreview()">✕</button>
+  </div>
+  <div class="pdf-frame-wrap">
+    <iframe id="pdf-iframe" src="" title="PDF Preview"></iframe>
+    <div class="pdf-lock-bar">
+      <div>
+        <div class="pdf-lock-msg">🔒 Unaona kurasa 1-3 tu. Lipa kupata kitabu chote.</div>
+        <div class="pdf-pages-note" id="pdf-pages-note"></div>
+      </div>
+      <button class="pdf-buy-btn" id="pdf-buy-btn" onclick="closePdfPreview()">💳 Nunua Sasa →</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
