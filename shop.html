@@ -319,7 +319,7 @@
     <li><a href="about.html">Kuhusu</a></li>
     <li><a href="contact.html">Wasiliana</a></li>
   </ul>
-  <button class="cart-btn" onclick="openCart()">
+  <button class="cart-btn" id="cartBtn">
     🛒 Kikapu <div class="cart-count" id="cartCount">0</div>
   </button>
 </nav>
@@ -350,8 +350,8 @@
       </div>
     </div>
     <div class="card-actions">
-      <button class="btn-cart" onclick="addCart(1,'Uzazi wa Mpango',2000,'🤱','linear-gradient(135deg,#1a4a2e,#0d2b1a)',this)">🛒 Kikapu</button>
-      <button class="btn-buy" onclick="buyNow('Uzazi wa Mpango',2000)">⚡ Nunua</button>
+      <button class="btn-cart" data-id="1">🛒 Kikapu</button>
+      <button class="btn-buy" data-id="1">⚡ Nunua</button>
     </div>
   </div>
 
@@ -372,8 +372,8 @@
       </div>
     </div>
     <div class="card-actions">
-      <button class="btn-cart" onclick="addCart(2,'Lishe Bora kwa Familia',2000,'🥗','linear-gradient(135deg,#2a3a1a,#162010)',this)">🛒 Kikapu</button>
-      <button class="btn-buy" onclick="buyNow('Lishe Bora kwa Familia',2000)">⚡ Nunua</button>
+      <button class="btn-cart" data-id="2">🛒 Kikapu</button>
+      <button class="btn-buy" data-id="2">⚡ Nunua</button>
     </div>
   </div>
 
@@ -395,8 +395,8 @@
       </div>
     </div>
     <div class="card-actions">
-      <button class="btn-cart" onclick="addCart(3,'Biashara Ndogo Tanzania',2000,'💼','linear-gradient(135deg,#2a1a0a,#1a0f05)',this)">🛒 Kikapu</button>
-      <button class="btn-buy" onclick="buyNow('Biashara Ndogo Tanzania',2000)">⚡ Nunua</button>
+      <button class="btn-cart" data-id="3">🛒 Kikapu</button>
+      <button class="btn-buy" data-id="3">⚡ Nunua</button>
     </div>
   </div>
 
@@ -417,8 +417,8 @@
       </div>
     </div>
     <div class="card-actions">
-      <button class="btn-cart" onclick="addCart(4,'Malezi ya Mtoto 0-5',2000,'👶','linear-gradient(135deg,#1a2a3a,#0d1520)',this)">🛒 Kikapu</button>
-      <button class="btn-buy" onclick="buyNow('Malezi ya Mtoto 0-5',2000)">⚡ Nunua</button>
+      <button class="btn-cart" data-id="4">🛒 Kikapu</button>
+      <button class="btn-buy" data-id="4">⚡ Nunua</button>
     </div>
   </div>
 
@@ -433,4 +433,257 @@
     <div class="card-body">
       <div class="card-cat">🏥 Afya</div>
       <div class="card-title">Afya ya Akili</div>
-      <div class="ca
+      <div class="card-desc">Jinsi ya kudhibiti msongo wa mawazo, wasiwasi na huzuni. Mwongozo wa afya ya akili kwa Watanzania.</div>
+      <div class="card-price-row">
+        <div class="card-price">TZS 2,000 <small>/kitabu</small></div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="btn-cart" data-id="5">🛒 Kikapu</button>
+      <button class="btn-buy" data-id="5">⚡ Nunua</button>
+    </div>
+  </div>
+
+  <div class="book-card">
+    <div class="book-cover">
+      <div class="cover-inner" style="background:linear-gradient(135deg,#2a2a0a,#151505)">
+        <div class="cover-icon">💰</div>
+        <div class="cover-title">Elimu ya Fedha Binafsi</div>
+        <div class="cover-brand">Sade Books</div>
+      </div>
+      <div class="badge bg">Mpya</div>
+    </div>
+    <div class="card-body">
+      <div class="card-cat">💼 Biashara</div>
+      <div class="card-title">Elimu ya Fedha Binafsi</div>
+      <div class="card-desc">Jinsi ya kuhifadhi, kuwekeza na kukua mali zako. Masomo ya fedha kwa lugha ya Kiswahili.</div>
+      <div class="card-price-row">
+        <div class="card-price">TZS 2,000 <small>/kitabu</small></div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="btn-cart" data-id="6">🛒 Kikapu</button>
+      <button class="btn-buy" data-id="6">⚡ Nunua</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>🛒 Kikapu Chako</h3>
+    <button class="close-btn" id="btnCartClose">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty"><span>🛒</span><p>Kikapu kiko tupu.<br>Ongeza vitabu!</p></div>
+  </div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="total-row"><span>Jumla:</span><strong id="cartTotal">TZS 0</strong></div>
+    <button class="btn-checkout" id="btnLipa">💳 Lipa Sasa</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-wrap" id="modalWrap">
+  <div class="modal">
+    <div class="step show" id="s1">
+      <h3>Chagua Njia ya Malipo</h3>
+      <p class="modal-sub">Unalipa: <b id="mBookName"></b></p>
+      <div class="pay-methods">
+        <button class="pay-opt" data-method="M-Pesa">
+          <span class="p-icon">📱</span>
+          <div class="p-info"><b>M-Pesa</b><span>Vodacom Tanzania</span></div>
+          <div class="p-check">✓</div>
+        </button>
+        <button class="pay-opt" data-method="Tigo Pesa">
+          <span class="p-icon">📲</span>
+          <div class="p-info"><b>Tigo Pesa</b><span>Tigo Tanzania</span></div>
+          <div class="p-check">✓</div>
+        </button>
+        <button class="pay-opt" data-method="Airtel Money">
+          <span class="p-icon">💳</span>
+          <div class="p-info"><b>Airtel Money</b><span>Airtel Tanzania</span></div>
+          <div class="p-check">✓</div>
+        </button>
+      </div>
+      <div class="m-actions">
+        <button class="btn-back" id="btnRudiModal">Rudi</button>
+        <button class="btn-ok" id="btnEndelea">Endelea →</button>
+      </div>
+    </div>
+    <div class="step" id="s2">
+      <h3 id="s2Title">Malipo ya M-Pesa</h3>
+      <p class="modal-sub">Tuma pesa kwa Lipa Namba hii:</p>
+      <div class="pay-box">
+        <p>Lipa Namba (Merchant):</p>
+        <div class="pay-num">16284801</div>
+        <div class="pay-name-lbl">Herman Onesmo Sade — Merchant</div>
+        <div class="pay-amnt">Kiasi: <b id="mAmount">TZS 2,000</b></div>
+      </div>
+      <input class="m-input" type="tel" id="phoneIn" placeholder="Namba yako ya simu (0712345678)"/>
+      <input class="m-input" type="text" id="refIn" placeholder="Transaction ID (mfano: SI89ABC123)"/>
+      <div class="m-actions">
+        <button class="btn-back" id="btnRudiS1">← Rudi</button>
+        <button class="btn-ok" id="btnThibitisha">✓ Thibitisha</button>
+      </div>
+    </div>
+    <div class="step" id="s3">
+      <div class="success-box">
+        <div class="s-icon">✅</div>
+        <h4>Malipo Yamepokelewa!</h4>
+        <p>Asante sana! Tutakutumia kiungo cha kupakua kitabu chako hivi karibuni kupitia WhatsApp.</p>
+        <p style="margin-top:0.8rem;font-size:0.82rem;color:var(--gold)">📱 WhatsApp: 0712 665 957</p>
+        <button class="btn-done" id="btnMaliza">Sawa, Asante! 🎉</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 <em>Sade Books</em> — Vitabu Bora vya Kiswahili | Tanzania 🇹🇿</p>
+</footer>
+
+<script>
+var vitabu = {
+  1: {jina:'Uzazi wa Mpango',      bei:2000, icon:'🤱', bg:'linear-gradient(135deg,#1a4a2e,#0d2b1a)'},
+  2: {jina:'Lishe Bora kwa Familia',bei:2000, icon:'🥗', bg:'linear-gradient(135deg,#2a3a1a,#162010)'},
+  3: {jina:'Biashara Ndogo Tanzania',bei:2000,icon:'💼', bg:'linear-gradient(135deg,#2a1a0a,#1a0f05)'},
+  4: {jina:'Malezi ya Mtoto 0-5',   bei:2000, icon:'👶', bg:'linear-gradient(135deg,#1a2a3a,#0d1520)'},
+  5: {jina:'Afya ya Akili',          bei:2000, icon:'🧠', bg:'linear-gradient(135deg,#2a1a3a,#150d20)'},
+  6: {jina:'Elimu ya Fedha Binafsi', bei:2000, icon:'💰', bg:'linear-gradient(135deg,#2a2a0a,#151505)'}
+};
+
+var cart = [];
+var curMethod = null;
+
+// Attach events after page loads
+document.addEventListener('DOMContentLoaded', function() {
+
+  // CART buttons
+  document.querySelectorAll('.btn-cart').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var id = parseInt(this.getAttribute('data-id'));
+      var book = vitabu[id];
+      if (!cart.find(function(c){ return c.id===id; })) {
+        cart.push({id:id, jina:book.jina, bei:book.bei, icon:book.icon, bg:book.bg});
+        updateCart();
+        this.textContent = '✓ Imeongezwa';
+        this.style.color = 'var(--gold)';
+        this.style.borderColor = 'var(--gold)';
+      }
+    });
+  });
+
+  // BUY NOW buttons
+  document.querySelectorAll('.btn-buy').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var id = parseInt(this.getAttribute('data-id'));
+      var book = vitabu[id];
+      fungaModalWazi(book.jina, book.bei);
+    });
+  });
+
+  // Cart overlay close
+  document.getElementById('cartOverlay').addEventListener('click', fungaCart);
+
+  // Step buttons
+  document.getElementById('btnRudiModal').addEventListener('click', fungaModal);
+  document.getElementById('btnEndelea').addEventListener('click', nendaS2);
+  document.getElementById('btnRudiS1').addEventListener('click', nendaS1);
+  document.getElementById('btnThibitisha').addEventListener('click', thibitisha);
+  document.getElementById('btnMaliza').addEventListener('click', fungaModal);
+  document.getElementById('btnCartClose').addEventListener('click', fungaCart);
+  document.getElementById('btnLipa').addEventListener('click', lipaCart);
+  document.getElementById('cartBtn').addEventListener('click', fungaCartWazi);
+
+  // Payment method buttons
+  document.querySelectorAll('.pay-opt').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.pay-opt').forEach(function(b){ b.classList.remove('sel'); });
+      this.classList.add('sel');
+      curMethod = this.getAttribute('data-method');
+      document.getElementById('s2Title').textContent = 'Malipo ya ' + curMethod;
+    });
+  });
+});
+
+function updateCart() {
+  document.getElementById('cartCount').textContent = cart.length;
+  var body = document.getElementById('cartBody');
+  var foot = document.getElementById('cartFoot');
+  if (cart.length === 0) {
+    body.innerHTML = '<div class="cart-empty"><span>🛒</span><p>Kikapu kiko tupu.<br>Ongeza vitabu!</p></div>';
+    foot.style.display = 'none';
+  } else {
+    var html = '';
+    for (var i=0; i<cart.length; i++) {
+      var c = cart[i];
+      html += '<div class="c-item"><div class="c-icon" style="background:'+c.bg+'">'+c.icon+'</div><div class="c-info"><h4>'+c.jina+'</h4><p>TZS '+c.bei.toLocaleString()+'</p></div><button class="c-remove" data-rid="'+c.id+'">🗑</button></div>';
+    }
+    body.innerHTML = html;
+    var total = 0;
+    for (var j=0; j<cart.length; j++) total += cart[j].bei;
+    document.getElementById('cartTotal').textContent = 'TZS ' + total.toLocaleString();
+    foot.style.display = 'block';
+    // Attach remove buttons
+    document.querySelectorAll('.c-remove').forEach(function(rb) {
+      rb.addEventListener('click', function() {
+        var rid = parseInt(this.getAttribute('data-rid'));
+        cart = cart.filter(function(c){ return c.id !== rid; });
+        updateCart();
+      });
+    });
+  }
+}
+
+function fungaCartWazi() {
+  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartDrawer').classList.add('open');
+}
+function fungaCart() {
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartDrawer').classList.remove('open');
+}
+function lipaCart() {
+  if (cart.length === 0) return;
+  var names = cart.map(function(c){ return c.jina; }).join(', ');
+  var total = cart.reduce(function(s,c){ return s+c.bei; }, 0);
+  fungaCart();
+  fungaModalWazi(names, total);
+}
+function fungaModalWazi(jina, bei) {
+  document.getElementById('mBookName').textContent = jina;
+  document.getElementById('mAmount').textContent = 'TZS ' + bei.toLocaleString();
+  document.getElementById('phoneIn').value = '';
+  document.getElementById('refIn').value = '';
+  document.querySelectorAll('.pay-opt').forEach(function(b){ b.classList.remove('sel'); });
+  curMethod = null;
+  onyeshaHatua('s1');
+  document.getElementById('modalWrap').classList.add('open');
+}
+function fungaModal() {
+  document.getElementById('modalWrap').classList.remove('open');
+}
+function onyeshaHatua(id) {
+  ['s1','s2','s3'].forEach(function(s){ document.getElementById(s).classList.remove('show'); });
+  document.getElementById(id).classList.add('show');
+}
+function nendaS2() {
+  if (!curMethod) { alert('Tafadhali chagua njia ya malipo kwanza.'); return; }
+  onyeshaHatua('s2');
+}
+function nendaS1() { onyeshaHatua('s1'); }
+function thibitisha() {
+  var phone = document.getElementById('phoneIn').value.trim();
+  var ref = document.getElementById('refIn').value.trim();
+  if (!phone) { alert('Tafadhali weka namba yako ya simu.'); return; }
+  if (!ref) { alert('Tafadhali weka Transaction ID.'); return; }
+  cart = [];
+  updateCart();
+  onyeshaHatua('s3');
+}
+</script>
+</body>
+</html>
