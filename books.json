@@ -1,14 +1,14 @@
 [
   {
-    "title": "Biashara ya Mafanikio",
-    "description": "Mbinu za kuanzisha biashara ndogo hadi kubwa.",
+    "title": "Lishe_Kitabu_Herman_sade.pdf",
+    "description": "Mwongozo kamili wa lishe bora kwa afya njema.",
     "price": "BURE",
-    "file": "PDFs/biashara.pdf"
+    "file": "PDFs/lishe_herman_sade.pdf"
   },
   {
-    "title": "Maarifa ya Fedha",
-    "description": "Jifunze kusimamia fedha zako vizuri.",
+    "title": "Uzazi_wa_Mpango_wa_Vijiti_na_IUD_Kamili",
+    "description": "Maelezo ya aina za uzazi wa mpango, faida na madhara yake.",
     "price": "BURE",
-    "file": "PDFs/fedha.pdf"
+    "file": "PDFs/uzazi_wa_mpango.pdf"
   }
 ]
