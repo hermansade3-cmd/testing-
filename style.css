@@ -1,180 +1,30 @@
-/* ==================================
-   RESET & GENERAL
-================================== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Arial', sans-serif;
-}
+</head>
+<body>
 
-body{
-    background:#f5f6fa;
-    color:#333;
-}
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-/* ==================================
-   SIDEBAR (LEFT MENU)
-================================== */
-.sidebar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:220px;
-    height:100vh;
-    background:#0a3d62;
-    color:white;
-    padding-top:20px;
-    overflow-y:auto;
-}
-
-.sidebar .sidebar-brand{
-    font-size:22px;
-    font-weight:bold;
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.sidebar .sidebar-nav a{
-    display:block;
-    color:white;
-    padding:12px 20px;
-    text-decoration:none;
-    font-weight:500;
-    font-size:14px;
-    transition:0.3s;
-}
-
-.sidebar .sidebar-nav a span{
-    margin-right:10px;
-}
-
-.sidebar .sidebar-nav a:hover{
-    background:#1e5f8c;
-    border-radius:5px;
-}
-
-/* FOOTER INSIDE SIDEBAR */
-.sidebar .sidebar-footer{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    text-align:center;
-    padding:10px;
-    font-size:12px;
-    color:#d1d8e0;
-}
-
-/* ==================================
-   MAIN CONTENT
-================================== */
-.main-content{
-    margin-left:220px; /* space for sidebar */
-    padding:20px;
-}
-
-/* PAGE TITLE */
-.main-content h1{
-    font-size:28px;
-    color:#0a3d62;
-    margin-bottom:20px;
-}
-
-/* ==================================
-   BOOK GRID
-================================== */
-#books-container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
-    gap:15px;
-}
-
-/* BOOK CARD */
-.book-card{
-    background:white;
-    border-radius:10px;
-    padding:15px;
-    text-align:center;
-    box-shadow:0 4px 8px rgba(0,0,0,0.1);
-    transition:0.3s;
-}
-
-.book-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 8px 15px rgba(0,0,0,0.2);
-}
-
-/* BOOK TITLE */
-.book-card h3{
-    font-size:16px;
-    color:#0a3d62;
-    margin:10px 0 5px 0;
-}
-
-/* DESCRIPTION */
-.book-card p{
-    font-size:13px;
-    margin-bottom:8px;
-    color:#555;
-}
-
-/* PRICE */
-.price{
-    font-weight:bold;
-    color:#27ae60;
-    margin-bottom:10px;
-}
-
-/* BUTTON */
-.book-card button{
-    background:#27ae60;
-    color:white;
-    border:none;
-    padding:8px 12px;
-    border-radius:5px;
-    font-size:13px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.book-card button:hover{
-    background:#219150;
-}
-
-/* ==================================
-   RESPONSIVE
-================================== */
-@media(max-width:768px){
-    .sidebar{
-        width:180px;
-    }
-
-    .main-content{
-        margin-left:180px;
-        padding:15px;
-    }
-
-    #books-container{
-        grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
-        gap:12px;
-    }
-}
-
-@media(max-width:500px){
-    .sidebar{
-        position:relative;
-        width:100%;
-        height:auto;
-        padding-top:10px;
-    }
-
-    .main-content{
-        margin-left:0;
-        padding:10px;
-    }
-
-    #books-container{
-        grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
-        gap:10px;
-    }
-                                     }
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+        <div class="sidebar-brand">Sade <em>Books</em></div>
+        <button class="sidebar-close" id="sidebarClose">✕</button>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-label">Kurasa</div>
+    <nav class="sidebar-nav">
+        <a href="#books"                     class="sidebar-link"><span>📚</span> Tazama Vitabu</a>
+        <a href="about.html"                 class="sidebar-link"><span>ℹ️</span> Kuhusu</a>
+        <a href="sadebooks.html"             class="sidebar-link"><span>🏠</span> Sade Books</a>
+        <a href="shop.html"                  class="sidebar-link"><span>🛍️</span> Duka</a>
+        <a href="sadeCalculator.html"        class="sidebar-link"><span>🧮</span> SadeCalculator</a>
+        <a href="malipo.html"                class="sidebar-link"><span>💳</span> Malipo</a>
+        <a href="sade-GPT.html"              class="sidebar-link"><span>🤖</span> Sade-GPT</a>
+        <a href="comments.html"              class="sidebar-link"><span>💬</span> Maoni</a>
+        <a href="sade-order.html"            class="sidebar-link"><span>📦</span> Agiza</a>
+        <a href="lipa-namba-mix-by-yas.html" class="sidebar-link"><span>📱</span> Lipa Namba</a>
+        <a href="menu.html"                  class="sidebar-link"><span>☰</span> Menyu</a>
+        <a href="contact.html"               class="sidebar-link"><span>✉️</span> Wasiliana Nasi</a>
+    </nav>
+    <div class="sidebar-footer">Sade Digital · Tanzania 🇹🇿</div>
+</aside>
