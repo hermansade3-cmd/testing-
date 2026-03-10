@@ -1,14 +1,14 @@
 [
   {
-    "title": "Lishe_Kitabu_Herman_sade.pdf",
-    "description": "Mwongozo kamili wa lishe bora kwa afya njema.",
+    "title": "Lishe Kitabu — Herman Sade",
+    "description": "Mwongozo kamili wa lishe bora kwa afya ya mwili na akili njema.",
     "price": "BURE",
-    "file": "PDFs/lishe_herman_sade.pdf"
+    "file": "PDFs/Lishe_Kitabu_Herman_Sade.pdf"
   },
   {
-    "title": "Uzazi_wa_Mpango_wa_Vijiti_na_IUD_Kamili",
+    "title": "Uzazi wa Mpango — Vijiti na IUD Kamili",
     "description": "Maelezo ya aina za uzazi wa mpango, faida na madhara yake.",
     "price": "BURE",
-    "file": "PDFs/uzazi_wa_mpango.pdf"
+    "file": "PDFs/Uzazi_wa_Mpango_wa_Vijiti_na_IUD_Kamili.docx"
   }
 ]
