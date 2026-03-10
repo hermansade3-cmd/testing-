@@ -641,15 +641,15 @@ header h1 span {
 /* ===== HAMBURGER ===== */
 .hamburger {
     display: flex; flex-direction: column; justify-content: center;
-    gap: 5px; width: 42px; height: 42px;
-    background: rgba(180,20,20,0.12);
-    border: 1.5px solid rgba(180,20,20,0.45);
-    border-radius: 12px; cursor: pointer; padding: 10px;
+    gap: 5px; width: 40px; height: 40px;
+    background: rgba(201,168,76,0.12);
+    border: 1.5px solid rgba(201,168,76,0.5);
+    border-radius: 10px; cursor: pointer; padding: 10px;
     transition: all 0.2s; flex-shrink: 0;
 }
-.hamburger:hover { background: rgba(180,20,20,0.25); border-color: #cc1111; }
+.hamburger:hover { background: rgba(201,168,76,0.22); border-color: #C9A84C; }
 .hamburger span {
-    display: block; height: 2px; background: #cc1111;
+    display: block; height: 2px; background: #C9A84C;
     border-radius: 2px; transition: all 0.3s cubic-bezier(.16,1,.3,1);
     transform-origin: center;
 }
@@ -660,7 +660,7 @@ header h1 span {
 /* ===== OVERLAY ===== */
 .sidebar-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(8,0,0,0.7); backdrop-filter: blur(6px);
+    background: rgba(0,0,0,0.65); backdrop-filter: blur(5px);
     z-index: 998; opacity: 0; transition: opacity 0.35s ease;
 }
 .sidebar-overlay.active { display: block; opacity: 1; }
@@ -668,10 +668,10 @@ header h1 span {
 /* ===== SIDEBAR ===== */
 .sidebar {
     position: fixed; top: 0; left: 0;
-    width: 282px; height: 100vh;
-    background: linear-gradient(160deg, #1c0202 0%, #110101 55%, #0b0000 100%);
-    border-right: 1px solid rgba(180,20,20,0.3);
-    box-shadow: 8px 0 48px rgba(0,0,0,0.85);
+    width: 270px; height: 100vh;
+    background: linear-gradient(170deg, #1A1208 0%, #2D2010 60%, #1A1208 100%);
+    border-right: 1px solid rgba(201,168,76,0.25);
+    box-shadow: 8px 0 40px rgba(0,0,0,0.7);
     z-index: 999; display: flex; flex-direction: column;
     transform: translateX(-100%);
     transition: transform 0.38s cubic-bezier(.16,1,.3,1);
@@ -682,56 +682,57 @@ header h1 span {
 .sidebar-top {
     display: flex; align-items: center;
     justify-content: space-between;
-    padding: 1.6rem 1.4rem 1.2rem;
+    padding: 1.4rem 1.3rem 1rem;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
 }
 .sidebar-brand {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem; font-weight: 700; color: #fff;
+    font-size: 1.35rem; font-weight: 700; color: #fff;
 }
-.sidebar-brand em { color: #ff3333; font-style: normal; }
+.sidebar-brand em { color: #C9A84C; font-style: normal; }
 
 .sidebar-close {
-    width: 34px; height: 34px;
+    width: 32px; height: 32px;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(180,20,20,0.12);
-    border: 1px solid rgba(180,20,20,0.35);
-    border-radius: 10px; color: #ff5555;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px; color: #C9A84C;
     font-size: 13px; cursor: pointer; transition: all 0.2s;
 }
-.sidebar-close:hover { background: rgba(180,20,20,0.28); color: #ff1111; }
+.sidebar-close:hover { background: rgba(201,168,76,0.25); color: #E8C96A; }
 
 .sidebar-divider {
-    height: 1px; margin: 0 1.4rem 1rem;
-    background: linear-gradient(90deg, transparent, rgba(180,20,20,0.6), transparent);
+    height: 1px; margin: 0 1.3rem 0.7rem;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
 }
 .sidebar-label {
-    font-size: 0.62rem; font-weight: 700;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: #ff5555; padding: 0 1.4rem 0.6rem;
+    font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(201,168,76,0.6); padding: 0 1.3rem 0.5rem;
 }
 .sidebar-nav {
     display: flex; flex-direction: column;
-    padding: 0 0.8rem; gap: 2px; flex: 1;
+    padding: 0 0.7rem; gap: 1px; flex: 1;
 }
 .sidebar-link {
-    display: flex; align-items: center; gap: 0.9rem;
-    padding: 0.75rem 1rem; border-radius: 12px;
-    color: #ff4444 !important;
-    text-decoration: none; font-size: 0.92rem; font-weight: 600;
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.6rem 0.9rem; border-radius: 10px;
+    color: rgba(255,255,255,0.75) !important;
+    text-decoration: none; font-size: 0.88rem; font-weight: 500;
     border: 1px solid transparent; transition: all 0.2s ease;
 }
-.sidebar-link span { font-size: 1.1rem; width: 24px; text-align: center; flex-shrink: 0; }
+.sidebar-link span { font-size: 1rem; width: 22px; text-align: center; flex-shrink: 0; }
 .sidebar-link:hover {
-    background: rgba(180,20,20,0.18);
-    border-color: rgba(180,20,20,0.35);
-    color: #ff1111 !important;
-    transform: translateX(5px);
+    background: rgba(201,168,76,0.12);
+    border-color: rgba(201,168,76,0.3);
+    color: #C9A84C !important;
+    transform: translateX(4px);
 }
 .sidebar-footer {
-    padding: 1.2rem 1.4rem; text-align: center;
-    color: rgba(255,50,50,0.5); font-size: 0.72rem;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    border-top: 1px solid rgba(180,20,20,0.18); margin-top: 0.8rem;
+    padding: 1rem 1.3rem; text-align: center;
+    color: rgba(201,168,76,0.4); font-size: 0.7rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    border-top: 1px solid rgba(201,168,76,0.12); margin-top: 0.5rem;
 }
     </style>
     <link rel="stylesheet" href="style.css">
@@ -2011,6 +2012,88 @@ header h1 span {
     </section>
 
 
+
+<!-- ===== VITABU BURE — PDF HALISI ===== -->
+<section id="vitabu-bure" style="background:linear-gradient(160deg,#1A1208 0%,#2D2010 50%,#1A1208 100%);padding:5rem 2rem;position:relative;">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);"></div>
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div style="display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#4caf7d;background:rgba(39,174,96,0.12);border:1px solid rgba(39,174,96,0.35);padding:0.3rem 1rem;border-radius:100px;margin-bottom:1rem;">🎁 Bila Malipo Yoyote</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;color:#fff;line-height:1.15;">Vitabu <em style="color:#C9A84C;font-style:italic;">Bure</em> Kabisa</h2>
+      <p style="color:rgba(255,255,255,0.45);font-size:0.9rem;margin-top:0.8rem;line-height:1.7;">Soma na pakua vitabu hivi bila kulipa chochote — zawadi kutoka kwa Herman Sade.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+
+      <!-- KITABU: LISHE -->
+      <div style="background:#fff;border-radius:18px;overflow:hidden;display:flex;box-shadow:0 6px 28px rgba(0,0,0,0.35);">
+        <div style="width:100px;flex-shrink:0;background:linear-gradient(135deg,#1a5c1a,#27ae60,#a8e063);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:14px 8px;position:relative;">
+          <div style="position:absolute;top:6px;right:6px;background:#27ae60;color:#fff;font-size:0.4rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:2px 6px;border-radius:100px;">BURE</div>
+          <div style="font-size:2rem;">🥗</div>
+          <div style="width:22px;height:1.5px;background:rgba(255,255,255,0.35);border-radius:2px;"></div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.46rem;font-weight:700;color:rgba(255,255,255,0.9);text-align:center;line-height:1.3;">Lishe Kitabu</div>
+          <div style="font-size:0.4rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;">Herman Sade</div>
+        </div>
+        <div style="flex:1;padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+          <div>
+            <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:3px;">🌿 Afya &amp; Lishe</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#1A1208;line-height:1.3;margin-bottom:4px;">Lishe Kitabu — Herman Sade</div>
+            <div style="font-size:0.78rem;color:#7A6540;line-height:1.6;">Mwongozo kamili wa lishe bora kwa afya ya mwili na akili njema. Jifunza jinsi ya kula vizuri na mpango wa lishe kwa familia yako.</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="PDFs/Lishe_Kitabu_Herman_Sade.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:#1A1208;color:#fff;padding:8px 16px;border-radius:100px;font-size:0.78rem;font-weight:700;text-decoration:none;">👁 Soma Sasa</a>
+            <a href="PDFs/Lishe_Kitabu_Herman_Sade.pdf" download style="display:inline-flex;align-items:center;gap:5px;background:transparent;color:#27ae60;padding:8px 16px;border-radius:100px;font-size:0.78rem;font-weight:700;text-decoration:none;border:2px solid #27ae60;">⬇️ Pakua Bure</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- KITABU: UZAZI -->
+      <div style="background:#fff;border-radius:18px;overflow:hidden;display:flex;box-shadow:0 6px 28px rgba(0,0,0,0.35);">
+        <div style="width:100px;flex-shrink:0;background:linear-gradient(135deg,#002B7F,#1A5DCC,#4da6ff);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:14px 8px;position:relative;">
+          <div style="position:absolute;top:6px;right:6px;background:#27ae60;color:#fff;font-size:0.4rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:2px 6px;border-radius:100px;">BURE</div>
+          <div style="font-size:2rem;">👶</div>
+          <div style="width:22px;height:1.5px;background:rgba(255,255,255,0.35);border-radius:2px;"></div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.46rem;font-weight:700;color:rgba(255,255,255,0.9);text-align:center;line-height:1.3;">Uzazi wa Mpango</div>
+          <div style="font-size:0.4rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;">Herman Sade</div>
+        </div>
+        <div style="flex:1;padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+          <div>
+            <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:3px;">🏥 Afya ya Uzazi</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#1A1208;line-height:1.3;margin-bottom:4px;">Uzazi wa Mpango — Vijiti na IUD Kamili</div>
+            <div style="font-size:0.78rem;color:#7A6540;line-height:1.6;">Maelezo ya kina ya aina za uzazi wa mpango, faida na madhara yake. Mwongozo muhimu kwa familia za Tanzania.</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="PDFs/Uzazi_wa_Mpango_wa_Vijiti_na_IUD_Kamili.docx" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:#1A1208;color:#fff;padding:8px 16px;border-radius:100px;font-size:0.78rem;font-weight:700;text-decoration:none;">👁 Soma Sasa</a>
+            <a href="PDFs/Uzazi_wa_Mpango_wa_Vijiti_na_IUD_Kamili.docx" download style="display:inline-flex;align-items:center;gap:5px;background:transparent;color:#27ae60;padding:8px 16px;border-radius:100px;font-size:0.78rem;font-weight:700;text-decoration:none;border:2px solid #27ae60;">⬇️ Pakua Bure</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- KITABU: VITABU PDF -->
+      <div style="background:#fff;border-radius:18px;overflow:hidden;display:flex;box-shadow:0 6px 28px rgba(0,0,0,0.35);">
+        <div style="width:100px;flex-shrink:0;background:linear-gradient(135deg,#3d1a6b,#7733cc,#aa66ff);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:14px 8px;position:relative;">
+          <div style="position:absolute;top:6px;right:6px;background:#27ae60;color:#fff;font-size:0.4rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:2px 6px;border-radius:100px;">BURE</div>
+          <div style="font-size:2rem;">📘</div>
+          <div style="width:22px;height:1.5px;background:rgba(255,255,255,0.35);border-radius:2px;"></div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.46rem;font-weight:700;color:rgba(255,255,255,0.9);text-align:center;line-height:1.3;">Vitabu</div>
+          <div style="font-size:0.4rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;">Herman Sade</div>
+        </div>
+        <div style="flex:1;padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+          <div>
+            <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:3px;">📚 Maarifa ya Jumla</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#1A1208;line-height:1.3;margin-bottom:4px;">Vitabu — Herman Sade</div>
+            <div style="font-size:0.78rem;color:#7A6540;line-height:1.6;">Kitabu cha maarifa muhimu kilichoandikwa na Herman Sade. Jifunza mambo yanayokusaidia katika maisha ya kila siku.</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="PDFs/vitabu.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:#1A1208;color:#fff;padding:8px 16px;border-radius:100px;font-size:0.78rem;font-weight:700;text-decoration:none;">👁 Soma Sasa</a>
+            <a href="PDFs/vitabu.pdf" download style="display:inline-flex;align-items:center;gap:5px;background:transparent;color:#27ae60;padding:8px 16px;border-radius:100px;font-size:0.78rem;font-weight:700;text-decoration:none;border:2px solid #27ae60;">⬇️ Pakua Bure</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);"></div>
+</section>
 
 <!-- Features Section -->
     <section id="features">
