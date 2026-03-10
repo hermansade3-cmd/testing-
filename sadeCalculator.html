@@ -1,304 +1,160 @@
 <!DOCTYPE html>
-<html lang="sw">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SadeCalculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SadeCalculator</title>
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #1a0a00 0%, #0e0e0e 50%, #0a0a1a 100%);
-      font-family: 'Helvetica Neue', Helvetica, sans-serif;
-    }
+<style>
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0d6efd;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
 
-    @keyframes shimmer {
-      0%   { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
+.calculator{
+    background:white;
+    width:320px;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
 
-    .calc-wrap {
-      width: 320px;
-      background: linear-gradient(160deg, #221505, #1a1008, #111);
-      border-radius: 48px;
-      padding: 28px 20px 24px;
-      box-shadow:
-        0 60px 120px rgba(0,0,0,0.95),
-        0 0 0 1px rgba(200,150,42,0.15),
-        inset 0 1px 0 rgba(200,150,42,0.08);
-      animation: fadeUp 0.6s cubic-bezier(.16,1,.3,1) forwards;
-    }
+.title{
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    color:#0d6efd;
+    margin-bottom:15px;
+}
 
-    /* Brand */
-    .brand-header { text-align: center; margin-bottom: 16px; }
+.display{
+    width:100%;
+    height:60px;
+    border:none;
+    background:#e9f1ff;
+    border-radius:10px;
+    text-align:right;
+    font-size:24px;
+    padding-right:10px;
+    margin-bottom:15px;
+}
 
-    .brand-name {
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 6px;
-      background: linear-gradient(90deg, #c8962a, #f5d07a, #c8962a, #f5d07a);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 3s linear infinite;
-    }
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
 
-    .brand-sub {
-      color: rgba(200,150,42,0.3);
-      font-size: 9px;
-      letter-spacing: 5px;
-      margin-top: 2px;
-    }
+button{
+    height:55px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
 
-    .gold-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(200,150,42,0.4), transparent);
-      margin-bottom: 20px;
-    }
+.number{
+    background:#f2f6ff;
+}
 
-    /* Screen */
-    .screen {
-      background: rgba(0,0,0,0.4);
-      border-radius: 20px;
-      padding: 16px 18px 20px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(200,150,42,0.1);
-      min-height: 110px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      text-align: right;
-      gap: 4px;
-    }
+.operator{
+    background:#0d6efd;
+    color:white;
+}
 
-    .screen-op {
-      color: rgba(200,150,42,0.4);
-      font-size: 14px;
-      height: 20px;
-    }
+.equal{
+    background:#0d6efd;
+    color:white;
+    grid-column:span 2;
+}
 
-    .screen-display {
-      color: #f5d07a;
-      font-weight: 200;
-      line-height: 1;
-      letter-spacing: -2px;
-      transition: font-size 0.15s ease;
-      text-shadow: 0 0 30px rgba(200,150,42,0.4);
-      font-size: 68px;
-    }
+.clear{
+    background:#ff4d4d;
+    color:white;
+}
 
-    /* Button grid */
-    .btn-grid { display: flex; flex-direction: column; gap: 10px; }
+button:hover{
+    opacity:0.9;
+}
 
-    .btn-row {
-      display: grid;
-      gap: 10px;
-    }
+.footer{
+    text-align:center;
+    font-size:12px;
+    margin-top:10px;
+    color:#555;
+}
 
-    .btn-row-4 { grid-template-columns: repeat(4, 1fr); }
-    .btn-row-3 { grid-template-columns: 2fr 1fr 1fr; }
-
-    button {
-      height: 68px;
-      border-radius: 22px;
-      cursor: pointer;
-      font-size: 22px;
-      font-weight: 300;
-      font-family: 'Helvetica Neue', Helvetica, sans-serif;
-      transition: transform 0.08s ease, filter 0.08s ease;
-      outline: none;
-      user-select: none;
-      letter-spacing: -0.5px;
-    }
-
-    button:active { transform: scale(0.90); filter: brightness(0.75); }
-
-    .btn-num {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.04);
-      color: #fff;
-    }
-
-    .btn-spec {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.04);
-      color: #bbb;
-    }
-
-    .btn-op {
-      background: rgba(200,150,42,0.12);
-      border: 1px solid rgba(200,150,42,0.3);
-      color: #f5d07a;
-    }
-
-    .btn-op.active-op {
-      background: rgba(200,150,42,0.25);
-    }
-
-    .btn-eq {
-      background: linear-gradient(145deg, #c8962a, #a07018);
-      border: 1px solid rgba(200,150,42,0.3);
-      color: #fff;
-      box-shadow: 0 6px 20px rgba(200,150,42,0.4);
-    }
-
-    /* Footer */
-    .footer {
-      text-align: center;
-      margin-top: 18px;
-      color: rgba(200,150,42,0.2);
-      font-size: 9px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-<div class="calc-wrap">
-  <!-- Brand -->
-  <div class="brand-header">
-    <div class="brand-name">SADE</div>
-    <div class="brand-sub">CALCULATOR</div>
-  </div>
-  <div class="gold-divider"></div>
+<div class="calculator">
 
-  <!-- Screen -->
-  <div class="screen">
-    <div class="screen-op" id="op-display"></div>
-    <div class="screen-display" id="main-display">0</div>
-  </div>
+<div class="title">SadeCalculator</div>
 
-  <!-- Buttons -->
-  <div class="btn-grid">
-    <div class="btn-row btn-row-4">
-      <button class="btn-spec" data-val="C">C</button>
-      <button class="btn-spec" data-val="±">±</button>
-      <button class="btn-spec" data-val="%">%</button>
-      <button class="btn-op"  data-val="÷">÷</button>
-    </div>
-    <div class="btn-row btn-row-4">
-      <button class="btn-num" data-val="7">7</button>
-      <button class="btn-num" data-val="8">8</button>
-      <button class="btn-num" data-val="9">9</button>
-      <button class="btn-op"  data-val="×">×</button>
-    </div>
-    <div class="btn-row btn-row-4">
-      <button class="btn-num" data-val="4">4</button>
-      <button class="btn-num" data-val="5">5</button>
-      <button class="btn-num" data-val="6">6</button>
-      <button class="btn-op"  data-val="−">−</button>
-    </div>
-    <div class="btn-row btn-row-4">
-      <button class="btn-num" data-val="1">1</button>
-      <button class="btn-num" data-val="2">2</button>
-      <button class="btn-num" data-val="3">3</button>
-      <button class="btn-op"  data-val="+">+</button>
-    </div>
-    <div class="btn-row btn-row-3">
-      <button class="btn-num" data-val="0">0</button>
-      <button class="btn-num" data-val=".">.</button>
-      <button class="btn-eq"  data-val="=">=</button>
-    </div>
-  </div>
+<input type="text" id="display" class="display" disabled>
 
-  <div class="footer">Sade Digital · Tanzania</div>
+<div class="buttons">
+
+<button class="clear" onclick="clearDisplay()">C</button>
+<button class="operator" onclick="append('/')">÷</button>
+<button class="operator" onclick="append('*')">×</button>
+<button class="operator" onclick="append('-')">−</button>
+
+<button class="number" onclick="append('7')">7</button>
+<button class="number" onclick="append('8')">8</button>
+<button class="number" onclick="append('9')">9</button>
+<button class="operator" onclick="append('+')">+</button>
+
+<button class="number" onclick="append('4')">4</button>
+<button class="number" onclick="append('5')">5</button>
+<button class="number" onclick="append('6')">6</button>
+<button class="number" onclick="append('.')">.</button>
+
+<button class="number" onclick="append('1')">1</button>
+<button class="number" onclick="append('2')">2</button>
+<button class="number" onclick="append('3')">3</button>
+<button class="number" onclick="append('0')">0</button>
+
+<button class="equal" onclick="calculate()">=</button>
+
+</div>
+
+<div class="footer">
+Created by Herman Sade
+</div>
+
 </div>
 
 <script>
-  let display = "0";
-  let prev = null;
-  let op = null;
-  let fresh = true;
 
-  const mainEl = document.getElementById("main-display");
-  const opEl   = document.getElementById("op-display");
+function append(value){
+document.getElementById("display").value += value;
+}
 
-  function compute(a, b, o) {
-    if (o === "+") return +(a + b).toFixed(10);
-    if (o === "−") return +(a - b).toFixed(10);
-    if (o === "×") return +(a * b).toFixed(10);
-    if (o === "÷") return b !== 0 ? +(a / b).toFixed(10) : "Error";
-    return b;
-  }
+function clearDisplay(){
+document.getElementById("display").value = "";
+}
 
-  function fmt(v) {
-    const s = String(v);
-    return s.length > 10 ? parseFloat(s).toExponential(4) : s;
-  }
+function calculate(){
+let display = document.getElementById("display");
+try{
+display.value = eval(display.value);
+}
+catch{
+display.value = "Error";
+}
+}
 
-  function updateScreen() {
-    const f = fmt(display);
-    mainEl.textContent = f;
-    mainEl.style.fontSize =
-      f.length > 9 ? "36px" :
-      f.length > 6 ? "50px" : "68px";
-    opEl.textContent = op ? `${prev} ${op}` : "";
-    // Highlight active op button
-    document.querySelectorAll(".btn-op").forEach(b => {
-      b.classList.toggle("active-op", op && b.dataset.val === op && fresh);
-    });
-  }
-
-  function handleBtn(btn) {
-    const isNum = !"C±%÷×−+=".includes(btn) || btn === ".";
-    if (isNum) {
-      if (btn === "." && display.includes(".") && !fresh) return;
-      display = fresh
-        ? (btn === "." ? "0." : btn)
-        : (display === "0" && btn !== "." ? btn : display + btn);
-      fresh = false;
-    } else if (btn === "C") {
-      display = "0"; prev = null; op = null; fresh = true;
-    } else if (btn === "±") {
-      display = String(-parseFloat(display));
-    } else if (btn === "%") {
-      display = String(parseFloat(display) / 100);
-    } else if (btn === "=") {
-      if (prev === null || !op) return;
-      const res = compute(prev, parseFloat(display), op);
-      display = String(res); prev = null; op = null; fresh = true;
-    } else {
-      const cur = parseFloat(display);
-      if (prev !== null && !fresh) {
-        const res = compute(prev, cur, op);
-        display = String(res); prev = res;
-      } else {
-        prev = cur;
-      }
-      op = btn; fresh = true;
-    }
-    updateScreen();
-  }
-
-  document.querySelectorAll("button").forEach(btn => {
-    btn.addEventListener("click", () => handleBtn(btn.dataset.val));
-  });
-
-  // Keyboard support
-  document.addEventListener("keydown", (e) => {
-    const map = {
-      "0":"0","1":"1","2":"2","3":"3","4":"4",
-      "5":"5","6":"6","7":"7","8":"8","9":"9",
-      ".":".", "+":"+", "-":"−", "*":"×", "/":"÷",
-      "Enter":"=", "=":"=", "Backspace":"C", "Escape":"C"
-    };
-    if (map[e.key]) { e.preventDefault(); handleBtn(map[e.key]); }
-  });
-
-  updateScreen();
 </script>
+
 </body>
 </html>
