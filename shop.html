@@ -1,354 +1,317 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Duka — Sade Books</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sade Books — Duka la Vitabu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--dark:#1a0f08;--dark2:#2d1810;--gold:#c9a84c;--gold2:#e8c97a;--gdim:rgba(201,168,76,0.13);--gbor:rgba(201,168,76,0.25);--white:#faf7f2;--tl:rgba(250,247,242,0.75);--td:rgba(250,247,242,0.4);}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--dark);color:var(--white);font-family:'Cormorant Garamond',serif;overflow-x:hidden;}
-/* NAV */
-nav{position:sticky;top:0;z-index:200;background:rgba(26,15,8,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--gbor);padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
-.brand{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--white);text-decoration:none;}
-.brand em{color:var(--gold);font-style:normal;}
-.nav-links{display:flex;gap:1.5rem;list-style:none;}
-.nav-links a{text-decoration:none;color:var(--tl);font-size:.88rem;transition:color .2s;}
-.nav-links a:hover,.nav-links a.active{color:var(--gold);}
-#cartBtn{background:var(--gdim);border:1px solid var(--gbor);border-radius:100px;padding:.4rem 1rem;cursor:pointer;color:var(--white);font-family:'Cormorant Garamond',serif;font-size:.88rem;display:flex;align-items:center;gap:.5rem;}
-#cartBtn:hover{background:rgba(201,168,76,.22);}
-#cartCount{background:var(--gold);color:var(--dark);border-radius:50%;width:20px;height:20px;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
-@media(max-width:600px){.nav-links{display:none;}}
-/* HERO */
-.hero{position:relative;padding:60px 1.5rem 40px;text-align:center;background:linear-gradient(160deg,#2d1810,#1a0f08);overflow:hidden;}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 15% 40%,rgba(201,168,76,.1),transparent 70%);pointer-events:none;}
-.htag{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);background:var(--gdim);border:1px solid var(--gbor);padding:.28rem 1.1rem;border-radius:100px;margin-bottom:1.2rem;}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,6vw,3.5rem);font-weight:900;line-height:1.15;margin-bottom:.8rem;}
-.hero h1 em{color:var(--gold);font-style:italic;}
-.hero p{color:var(--tl);font-size:.98rem;max-width:460px;margin:0 auto;}
-/* GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;padding:2.5rem 1.5rem;max-width:1100px;margin:0 auto;}
-@media(max-width:580px){.grid{grid-template-columns:1fr 1fr;gap:.9rem;padding:1.2rem .9rem;}}
-@media(max-width:360px){.grid{grid-template-columns:1fr;}}
-/* CARD */
-.card{background:var(--dark2);border:1px solid var(--gbor);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s;}
-.card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(201,168,76,.13);}
-.cover{position:relative;height:175px;display:flex;align-items:center;justify-content:center;}
-.cover-in{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;padding:1rem;}
-.cicon{font-size:2.6rem;}
-.ctitle{font-family:'Playfair Display',serif;font-size:.8rem;font-weight:700;color:rgba(255,255,255,.9);text-align:center;line-height:1.3;}
-.cbrand{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);}
-.badge{position:absolute;top:10px;right:10px;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .65rem;border-radius:100px;}
-.bg{background:var(--gold);color:var(--dark);}
-.gg{background:#4caf82;color:#fff;}
-.cbody{padding:1rem 1.1rem .4rem;flex:1;display:flex;flex-direction:column;gap:.45rem;}
-.ccat{font-size:.63rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);}
-.ctname{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--white);line-height:1.3;}
-.cdesc{font-size:.83rem;color:var(--tl);line-height:1.6;flex:1;}
-.cprice-row{display:flex;align-items:center;padding-top:.65rem;border-top:1px solid var(--gbor);margin-top:.4rem;}
-.cprice{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--gold);}
-.cprice small{font-size:.67rem;color:var(--td);font-family:'Cormorant Garamond',serif;font-weight:400;}
-.cbtns{display:flex;gap:.55rem;padding:.75rem 1.1rem 1.1rem;}
-.bkikapu{flex:1;background:transparent;border:1px solid var(--gbor);border-radius:9px;padding:.55rem .4rem;color:var(--tl);font-family:'Cormorant Garamond',serif;font-size:.83rem;cursor:pointer;transition:all .2s;}
-.bkikapu:hover{background:var(--gdim);color:var(--gold);border-color:var(--gold);}
-.bnunua{flex:1;background:var(--gold);border:none;border-radius:9px;padding:.55rem .4rem;color:var(--dark);font-weight:700;font-family:'Cormorant Garamond',serif;font-size:.83rem;cursor:pointer;transition:background .2s;}
-.bnunua:hover{background:var(--gold2);}
-/* OVERLAY */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;display:none;}
-.overlay.on{display:block;}
-/* CART DRAWER */
-.drawer{position:fixed;right:0;top:0;bottom:0;width:min(400px,100vw);background:var(--dark2);border-left:1px solid var(--gbor);z-index:301;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);}
-.drawer.on{transform:translateX(0);}
-.dhead{padding:1.3rem 1.5rem;border-bottom:1px solid var(--gbor);display:flex;align-items:center;justify-content:space-between;}
-.dhead h3{font-family:'Playfair Display',serif;font-size:1.2rem;}
-.xbtn{background:none;border:none;color:var(--tl);font-size:1.4rem;cursor:pointer;}
-.xbtn:hover{color:var(--gold);}
-.dbody{flex:1;overflow-y:auto;padding:1rem 1.5rem;}
-.dempty{text-align:center;padding:3rem 1rem;color:var(--td);}
-.dempty span{font-size:3rem;display:block;margin-bottom:1rem;}
-.ditem{display:flex;gap:1rem;align-items:center;padding:.9rem 0;border-bottom:1px solid var(--gbor);}
-.dicon{width:46px;height:52px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
-.dinfo{flex:1;}
-.dinfo h4{font-family:'Playfair Display',serif;font-size:.9rem;margin-bottom:.15rem;}
-.dinfo p{font-size:.82rem;color:var(--gold);}
-.drem{background:none;border:none;color:var(--td);cursor:pointer;font-size:1rem;}
-.drem:hover{color:#e05555;}
-.dfoot{padding:1.3rem 1.5rem;border-top:1px solid var(--gbor);}
-.dtotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;}
-.dtotal span{color:var(--tl);font-size:.92rem;}
-.dtotal strong{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);}
-.blipa{width:100%;background:var(--gold);border:none;border-radius:12px;padding:.85rem;color:var(--dark);font-weight:700;font-family:'Playfair Display',serif;font-size:1rem;cursor:pointer;}
-.blipa:hover{background:var(--gold2);}
-/* MODAL */
-.mwrap{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:400;display:none;align-items:center;justify-content:center;padding:1rem;}
-.mwrap.on{display:flex;}
-.modal{background:var(--dark2);border:1px solid var(--gbor);border-radius:22px;padding:2rem;width:min(440px,100%);}
-.modal h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:.3rem;}
-.msub{color:var(--tl);font-size:.88rem;margin-bottom:1.5rem;}
-.msub b{color:var(--gold);font-family:'Playfair Display',serif;}
-.hatua{display:none;}
-.hatua.on{display:block;}
-.pmethods{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.5rem;}
-.popt{display:flex;align-items:center;gap:1rem;padding:.9rem 1.1rem;border:1px solid var(--gbor);border-radius:13px;cursor:pointer;background:transparent;color:var(--white);font-family:'Cormorant Garamond',serif;font-size:.95rem;text-align:left;width:100%;transition:all .2s;}
-.popt:hover,.popt.sel{background:var(--gdim);border-color:var(--gold);}
-.pico{font-size:1.4rem;width:32px;text-align:center;}
-.pinf{flex:1;}
-.pinf b{display:block;font-size:.92rem;}
-.pinf span{font-size:.75rem;color:var(--td);}
-.pchk{width:18px;height:18px;border-radius:50%;border:2px solid var(--gbor);display:flex;align-items:center;justify-content:center;font-size:.65rem;transition:all .2s;}
-.popt.sel .pchk{background:var(--gold);border-color:var(--gold);color:var(--dark);}
-.pbox{background:rgba(201,168,76,.07);border:1px solid var(--gbor);border-radius:13px;padding:1.1rem;margin-bottom:1.1rem;}
-.pbox p{font-size:.85rem;color:var(--tl);margin-bottom:.3rem;}
-.pnum{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);}
-.pname{font-size:.78rem;color:var(--td);}
-.pamnt{font-size:.88rem;color:var(--tl);margin-top:.7rem;}
-.pamnt b{color:var(--gold2);}
-.minput{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--gbor);border-radius:11px;padding:.75rem 1rem;color:var(--white);font-family:'Cormorant Garamond',serif;font-size:.95rem;margin-bottom:.8rem;outline:none;transition:border-color .2s;}
-.minput:focus{border-color:var(--gold);}
-.minput::placeholder{color:var(--td);}
-.mact{display:flex;gap:.7rem;}
-.brudi{flex:1;background:transparent;border:1px solid var(--gbor);border-radius:11px;padding:.75rem;color:var(--tl);font-family:'Cormorant Garamond',serif;font-size:.92rem;cursor:pointer;transition:all .2s;}
-.brudi:hover{border-color:var(--gold);color:var(--gold);}
-.bok{flex:2;background:var(--gold);border:none;border-radius:11px;padding:.75rem;color:var(--dark);font-weight:700;font-family:'Playfair Display',serif;font-size:.95rem;cursor:pointer;}
-.bok:hover{background:var(--gold2);}
-.sbox{text-align:center;padding:.5rem 0;}
-.sico{font-size:3.5rem;margin-bottom:.8rem;}
-.sbox h4{font-family:'Playfair Display',serif;font-size:1.3rem;color:#4caf82;margin-bottom:.5rem;}
-.sbox p{color:var(--tl);font-size:.88rem;}
-.bmaliza{margin-top:1.4rem;background:var(--gold);border:none;border-radius:11px;padding:.75rem 2rem;color:var(--dark);font-weight:700;font-family:'Playfair Display',serif;font-size:.95rem;cursor:pointer;}
-footer{text-align:center;padding:2rem 1.5rem;border-top:1px solid var(--gbor);color:var(--td);font-size:.82rem;margin-top:2rem;}
-footer em{color:var(--gold);font-style:normal;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#1565C0;--blue-mid:#1976D2;--blue-light:#42A5F5;
+  --blue-pale:#E3F2FD;--navy:#0A1628;--gold:#C9A84C;
+  --gold-light:#E8C96A;--white:#FFFFFF;--off:#F0F7FF;
+  --text:#0D1B3E;--text-mid:#3A5A8A;--text-light:#7A9CC8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);overflow-x:hidden}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(21,101,192,0.12);padding:0.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 20px rgba(21,101,192,0.08)}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;color:var(--navy)}
+.nav-brand em{color:var(--blue);font-style:normal}
+.nav-right{display:flex;align-items:center;gap:0.6rem}
+.nav-count{font-size:0.7rem;color:var(--text-mid);background:var(--blue-pale);padding:0.25rem 0.7rem;border-radius:100px;font-weight:600}
+.nav-badge{background:linear-gradient(135deg,var(--blue),var(--blue-mid));color:#fff;font-size:0.75rem;font-weight:700;padding:0.45rem 1.1rem;border-radius:100px;letter-spacing:0.03em;text-decoration:none;transition:all 0.2s;box-shadow:0 4px 14px rgba(21,101,192,0.3)}
+.nav-badge:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(21,101,192,0.4)}
+.hero-strip{background:linear-gradient(135deg,#050E1F 0%,#0D2550 55%,#163A70 100%);padding:3.5rem 2rem 2.5rem;text-align:center;position:relative;overflow:hidden}
+.hero-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% -10%,rgba(21,101,192,0.35) 0%,transparent 70%)}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(201,168,76,0.08) 1px,transparent 1px);background-size:30px 30px;pointer-events:none}
+.hero-inner{position:relative;z-index:2}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);border-radius:100px;padding:0.35rem 1rem;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.hero-strip h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:0.7rem}
+.hero-strip h1 em{color:var(--gold);font-style:italic}
+.hero-strip p{color:rgba(255,255,255,0.5);font-size:0.88rem;max-width:400px;margin:0 auto 1.5rem;line-height:1.7}
+.hero-price{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(201,168,76,0.18);border:1.5px solid rgba(201,168,76,0.5);border-radius:100px;padding:0.5rem 1.4rem;font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);font-weight:700}
+.hero-price span{font-family:'DM Sans',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.45);font-weight:400}
+.stats-row{background:#0D1B3E;display:flex;justify-content:center;gap:clamp(1.5rem,4vw,3.5rem);padding:1rem 2rem;flex-wrap:wrap;border-bottom:1px solid rgba(201,168,76,0.15)}
+.stat{text-align:center}
+.stat-n{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold)}
+.stat-l{font-size:0.62rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em}
+.filter-wrap{background:#fff;border-bottom:1px solid rgba(21,101,192,0.1);padding:0.8rem 1rem;position:sticky;top:57px;z-index:90}
+.filter-bar{display:flex;gap:0.5rem;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+.filter-bar::-webkit-scrollbar{display:none}
+.filter-btn{flex-shrink:0;background:transparent;border:1.5px solid rgba(21,101,192,0.18);border-radius:100px;padding:0.38rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:0.74rem;font-weight:600;color:var(--text-mid);cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.filter-btn:hover,.filter-btn.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 3px 12px rgba(21,101,192,0.25)}
+main{max-width:1320px;margin:0 auto;padding:2rem 1.2rem 4rem}
+.section-label{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.section-label h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--navy)}
+.section-label h2 em{color:var(--blue);font-style:italic}
+.line{flex:1;height:1px;background:linear-gradient(90deg,rgba(21,101,192,0.2),transparent)}
+.count-badge{background:var(--blue-pale);color:var(--blue);font-size:0.7rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:100px;white-space:nowrap}
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.9rem}
+.book-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid rgba(21,101,192,0.1);transition:all 0.3s cubic-bezier(0.23,1,0.32,1);cursor:pointer;position:relative}
+.book-card:hover{transform:translateY(-7px);box-shadow:0 18px 45px rgba(21,101,192,0.18),0 0 0 1.5px rgba(21,101,192,0.3)}
+.book-cover{position:relative;height:165px;overflow:hidden}
+.book-cover-bg{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;position:relative}
+.cover-shine{position:absolute;top:0;left:-60%;width:35%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.2),transparent);transform:skewX(-20deg);transition:left 0.5s ease;pointer-events:none}
+.book-card:hover .cover-shine{left:130%}
+.cover-icon{font-size:2.2rem;position:relative;z-index:2;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3))}
+.cover-title{font-family:'Playfair Display',serif;font-size:0.5rem;font-weight:700;color:rgba(255,255,255,0.92);text-align:center;padding:0 8px;line-height:1.3;position:relative;z-index:2;text-shadow:0 1px 4px rgba(0,0,0,0.5)}
+.book-badge{position:absolute;top:6px;right:6px;font-size:0.52rem;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;padding:2px 6px;border-radius:100px;z-index:3}
+.badge-hot{background:#FF5722;color:#fff}
+.badge-new{background:var(--gold);color:#0D1B3E}
+.badge-pop{background:rgba(255,255,255,0.95);color:var(--blue)}
+.book-body{padding:9px 10px 11px}
+.book-cat{font-size:0.56rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:2px}
+.book-title{font-family:'Playfair Display',serif;font-size:0.78rem;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:7px}
+.book-footer{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.book-price{font-family:'Playfair Display',serif;font-size:0.85rem;font-weight:700;color:var(--navy)}
+.book-price small{font-family:'DM Sans',sans-serif;font-size:0.55rem;color:var(--text-light);font-weight:400;display:block}
+.btn-buy{background:linear-gradient(135deg,var(--blue),var(--blue-mid));color:#fff;border:none;padding:5px 10px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;text-decoration:none;display:inline-block;box-shadow:0 3px 10px rgba(21,101,192,0.3)}
+.btn-buy:hover{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);box-shadow:0 4px 14px rgba(201,168,76,0.4);transform:scale(1.06)}
+.no-results{text-align:center;padding:4rem 2rem;color:var(--text-mid);grid-column:1/-1}
+.no-results .nr-icon{font-size:3rem;margin-bottom:1rem}
+.no-results p{font-size:0.9rem}
+footer{background:var(--navy);padding:2.5rem 2rem 1.5rem;text-align:center;border-top:2px solid rgba(201,168,76,0.2)}
+.f-brand{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:0.4rem}
+.f-brand em{color:var(--gold);font-style:normal}
+footer p{color:rgba(255,255,255,0.3);font-size:0.76rem;margin-top:0.8rem}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.book-card{animation:fadeUp 0.45s ease both}
+@media(max-width:480px){.books-grid{grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:0.7rem}.book-cover{height:148px}main{padding:1.5rem 0.9rem 3rem}.filter-wrap{top:52px}}
 </style>
 </head>
 <body>
-
 <nav>
-  <a href="index.html" class="brand">Sade <em>Books</em></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Nyumbani</a></li>
-    <li><a href="books.html">Vitabu</a></li>
-    <li><a href="shop.html" class="active">Duka</a></li>
-    <li><a href="download.html">Pakua</a></li>
-    <li><a href="about.html">Kuhusu</a></li>
-    <li><a href="contact.html">Wasiliana</a></li>
-  </ul>
-  <button id="cartBtn">🛒 Kikapu <div id="cartCount">0</div></button>
+  <div class="nav-brand">Sade <em>Books</em></div>
+  <div class="nav-right">
+    <span class="nav-count" id="navCount">120 vitabu</span>
+    <a href="malipo.html" class="nav-badge">🛒 Nunua</a>
+  </div>
 </nav>
 
-<div class="hero">
-  <div class="htag">🛍️ Duka Rasmi — Sade Books</div>
-  <h1>Vitabu Bora kwa <em>Bei Nafuu</em></h1>
-  <p>Vitabu vya kidijitali bora. Lipa kwa Lipa Namba na upakue mara moja.</p>
-</div>
-
-<div class="grid">
-
-  <div class="card">
-    <div class="cover">
-      <div class="cover-in" style="background:linear-gradient(135deg,#1a4a2e,#0d2b1a)">
-        <div class="cicon">🤱</div>
-        <div class="ctitle">Uzazi wa Mpango</div>
-        <div class="cbrand">Sade Books</div>
-      </div>
-      <div class="badge bg">Mpya</div>
-    </div>
-    <div class="cbody">
-      <div class="ccat">🏥 Afya</div>
-      <div class="ctname">Uzazi wa Mpango</div>
-      <div class="cdesc">Mwongozo kamili wa uzazi wa mpango kwa afya ya mama na familia nzima.</div>
-      <div class="cprice-row"><div class="cprice">TZS 2,000 <small>/kitabu</small></div></div>
-    </div>
-    <div class="cbtns">
-      <button class="bkikapu" onclick="wekKikapuni('Uzazi wa Mpango',2000,'🤱','linear-gradient(135deg,#1a4a2e,#0d2b1a)',this)">🛒 Kikapu</button>
-      <button class="bnunua" onclick="nunuaSasa('Uzazi wa Mpango',2000)">⚡ Nunua</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover">
-      <div class="cover-in" style="background:linear-gradient(135deg,#2a3a1a,#162010)">
-        <div class="cicon">🥗</div>
-        <div class="ctitle">Lishe Bora kwa Familia</div>
-        <div class="cbrand">Sade Books</div>
-      </div>
-    </div>
-    <div class="cbody">
-      <div class="ccat">🏥 Afya</div>
-      <div class="ctname">Lishe Bora kwa Familia</div>
-      <div class="cdesc">Jinsi ya kupika chakula chenye lishe kizuri kwa bei nafuu. Mapishi na mwongozo.</div>
-      <div class="cprice-row"><div class="cprice">TZS 2,000 <small>/kitabu</small></div></div>
-    </div>
-    <div class="cbtns">
-      <button class="bkikapu" onclick="wekKikapuni('Lishe Bora kwa Familia',2000,'🥗','linear-gradient(135deg,#2a3a1a,#162010)',this)">🛒 Kikapu</button>
-      <button class="bnunua" onclick="nunuaSasa('Lishe Bora kwa Familia',2000)">⚡ Nunua</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover">
-      <div class="cover-in" style="background:linear-gradient(135deg,#2a1a0a,#1a0f05)">
-        <div class="cicon">💼</div>
-        <div class="ctitle">Biashara Ndogo Tanzania</div>
-        <div class="cbrand">Sade Books</div>
-      </div>
-      <div class="badge gg">Bestseller</div>
-    </div>
-    <div class="cbody">
-      <div class="ccat">💼 Biashara</div>
-      <div class="ctname">Biashara Ndogo Tanzania</div>
-      <div class="cdesc">Jinsi ya kuanza na kukua biashara ndogo Tanzania. Mwongozo wa ujasiriamali.</div>
-      <div class="cprice-row"><div class="cprice">TZS 2,000 <small>/kitabu</small></div></div>
-    </div>
-    <div class="cbtns">
-      <button class="bkikapu" onclick="wekKikapuni('Biashara Ndogo Tanzania',2000,'💼','linear-gradient(135deg,#2a1a0a,#1a0f05)',this)">🛒 Kikapu</button>
-      <button class="bnunua" onclick="nunuaSasa('Biashara Ndogo Tanzania',2000)">⚡ Nunua</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover">
-      <div class="cover-in" style="background:linear-gradient(135deg,#1a2a3a,#0d1520)">
-        <div class="cicon">👶</div>
-        <div class="ctitle">Malezi ya Mtoto 0-5</div>
-        <div class="cbrand">Sade Books</div>
-      </div>
-    </div>
-    <div class="cbody">
-      <div class="ccat">👨‍👩‍👧 Malezi</div>
-      <div class="ctname">Malezi ya Mtoto 0-5</div>
-      <div class="cdesc">Kila kitu unachohitaji kujua kuhusu malezi ya mtoto mchanga hadi miaka 5.</div>
-      <div class="cprice-row"><div class="cprice">TZS 2,000 <small>/kitabu</small></div></div>
-    </div>
-    <div class="cbtns">
-      <button class="bkikapu" onclick="wekKikapuni('Malezi ya Mtoto 0-5',2000,'👶','linear-gradient(135deg,#1a2a3a,#0d1520)',this)">🛒 Kikapu</button>
-      <button class="bnunua" onclick="nunuaSasa('Malezi ya Mtoto 0-5',2000)">⚡ Nunua</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover">
-      <div class="cover-in" style="background:linear-gradient(135deg,#2a1a3a,#150d20)">
-        <div class="cicon">🧠</div>
-        <div class="ctitle">Afya ya Akili</div>
-        <div class="cbrand">Sade Books</div>
-      </div>
-    </div>
-    <div class="cbody">
-      <div class="ccat">🏥 Afya</div>
-      <div class="ctname">Afya ya Akili</div>
-      <div class="cdesc">Jinsi ya kudhibiti msongo wa mawazo, wasiwasi na huzuni kwa Watanzania.</div>
-      <div class="cprice-row"><div class="cprice">TZS 2,000 <small>/kitabu</small></div></div>
-    </div>
-    <div class="cbtns">
-      <button class="bkikapu" onclick="wekKikapuni('Afya ya Akili',2000,'🧠','linear-gradient(135deg,#2a1a3a,#150d20)',this)">🛒 Kikapu</button>
-      <button class="bnunua" onclick="nunuaSasa('Afya ya Akili',2000)">⚡ Nunua</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover">
-      <div class="cover-in" style="background:linear-gradient(135deg,#2a2a0a,#151505)">
-        <div class="cicon">💰</div>
-        <div class="ctitle">Elimu ya Fedha Binafsi</div>
-        <div class="cbrand">Sade Books</div>
-      </div>
-      <div class="badge bg">Mpya</div>
-    </div>
-    <div class="cbody">
-      <div class="ccat">💼 Biashara</div>
-      <div class="ctname">Elimu ya Fedha Binafsi</div>
-      <div class="cdesc">Jinsi ya kuhifadhi, kuwekeza na kukua mali zako kwa lugha ya Kiswahili.</div>
-      <div class="cprice-row"><div class="cprice">TZS 2,000 <small>/kitabu</small></div></div>
-    </div>
-    <div class="cbtns">
-      <button class="bkikapu" onclick="wekKikapuni('Elimu ya Fedha Binafsi',2000,'💰','linear-gradient(135deg,#2a2a0a,#151505)',this)">🛒 Kikapu</button>
-      <button class="bnunua" onclick="nunuaSasa('Elimu ya Fedha Binafsi',2000)">⚡ Nunua</button>
-    </div>
-  </div>
-
-</div>
-
-<!-- CART -->
-<div class="overlay" id="ov" onclick="funga()"></div>
-<div class="drawer" id="dr">
-  <div class="dhead">
-    <h3>🛒 Kikapu Chako</h3>
-    <button class="xbtn" onclick="funga()">✕</button>
-  </div>
-  <div class="dbody" id="db">
-    <div class="dempty"><span>🛒</span><p>Kikapu kiko tupu.</p></div>
-  </div>
-  <div class="dfoot" id="df" style="display:none">
-    <div class="dtotal"><span>Jumla:</span><strong id="dt">TZS 0</strong></div>
-    <button class="blipa" onclick="lipaKikapu()">💳 Lipa Sasa</button>
+<div class="hero-strip">
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">📚 Duka la Vitabu vya Kidigitali · Tanzania</div>
+    <h1>Vitabu <em>120+</em> Bora</h1>
+    <p>Maarifa yote unayohitaji — biashara, afya, dini, kilimo, viongozi na zaidi. Bei moja rahisi.</p>
+    <div class="hero-price"><span>Bei moja</span> TSH 2,000 <span>tu kwa kitabu</span></div>
   </div>
 </div>
 
-<!-- MODAL -->
-<div class="mwrap" id="mw">
-  <div class="modal">
+<div class="stats-row">
+  <div class="stat"><div class="stat-n">120+</div><div class="stat-l">Vitabu</div></div>
+  <div class="stat"><div class="stat-n">15+</div><div class="stat-l">Mada</div></div>
+  <div class="stat"><div class="stat-n">TSH 2K</div><div class="stat-l">Bei Moja</div></div>
+  <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Upatikanaji</div></div>
+</div>
 
-    <div class="hatua on" id="h1">
-      <h3>Chagua Njia ya Malipo</h3>
-      <p class="msub">Unalipa: <b id="mj"></b></p>
-      <div class="pmethods">
-        <button class="popt" onclick="chaguaNjia(this,'M-Pesa')">
-          <span class="pico">📱</span><div class="pinf"><b>M-Pesa</b><span>Vodacom Tanzania</span></div><div class="pchk">✓</div>
-        </button>
-        <button class="popt" onclick="chaguaNjia(this,'Tigo Pesa')">
-          <span class="pico">📲</span><div class="pinf"><b>Tigo Pesa</b><span>Tigo Tanzania</span></div><div class="pchk">✓</div>
-        </button>
-        <button class="popt" onclick="chaguaNjia(this,'Airtel Money')">
-          <span class="pico">💳</span><div class="pinf"><b>Airtel Money</b><span>Airtel Tanzania</span></div><div class="pchk">✓</div>
-        </button>
-      </div>
-      <div class="mact">
-        <button class="brudi" onclick="fungaModal()">Rudi</button>
-        <button class="bok" onclick="nendaH2()">Endelea →</button>
-      </div>
-    </div>
-
-    <div class="hatua" id="h2">
-      <h3 id="h2t">Malipo ya M-Pesa</h3>
-      <p class="msub">Tuma pesa kwa Lipa Namba hii:</p>
-      <div class="pbox">
-        <p>Lipa Namba (Merchant):</p>
-        <div class="pnum">16284801</div>
-        <div class="pname">Herman Onesmo Sade — Merchant</div>
-        <div class="pamnt">Kiasi: <b id="mb">TZS 2,000</b></div>
-      </div>
-      <input class="minput" type="tel" id="ph" placeholder="Namba yako ya simu (0712345678)"/>
-      <input class="minput" type="text" id="rf" placeholder="Transaction ID (mfano: SI89ABC123)"/>
-      <div class="mact">
-        <button class="brudi" onclick="nendaH1()">← Rudi</button>
-        <button class="bok" onclick="thibitishaM()">✓ Thibitisha</button>
-      </div>
-    </div>
-
-    <div class="hatua" id="h3">
-      <div class="sbox">
-        <div class="sico">✅</div>
-        <h4>Malipo Yamepokelewa!</h4>
-        <p>Asante sana! Tutakutumia kiungo cha kupakua kitabu chako hivi karibuni kupitia WhatsApp.</p>
-        <p style="margin-top:.8rem;font-size:.82rem;color:var(--gold)">📱 WhatsApp: 0712 655 957</p>
-        <button class="bmaliza" onclick="fungaModal()">Sawa, Asante! 🎉</button>
-      </div>
-    </div>
-
+<div class="filter-wrap">
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" onclick="filterBooks('all',this)">📚 Vyote</button>
+    <button class="filter-btn" onclick="filterBooks('biashara',this)">💼 Biashara</button>
+    <button class="filter-btn" onclick="filterBooks('nguo',this)">👗 Nguo & Mitindo</button>
+    <button class="filter-btn" onclick="filterBooks('mifugo',this)">🐄 Mifugo</button>
+    <button class="filter-btn" onclick="filterBooks('nyuki',this)">🐝 Nyuki & Asali</button>
+    <button class="filter-btn" onclick="filterBooks('viongozi',this)">👑 Viongozi Dunia</button>
+    <button class="filter-btn" onclick="filterBooks('dini',this)">📖 Dini & Imani</button>
+    <button class="filter-btn" onclick="filterBooks('ulimwengu',this)">🌍 Ulimwengu</button>
+    <button class="filter-btn" onclick="filterBooks('afya',this)">🌿 Afya</button>
+    <button class="filter-btn" onclick="filterBooks('maendeleo',this)">🧠 Maendeleo</button>
+    <button class="filter-btn" onclick="filterBooks('familia',this)">👨‍👩‍👧 Familia</button>
+    <button class="filter-btn" onclick="filterBooks('kilimo',this)">🌾 Kilimo</button>
+    <button class="filter-btn" onclick="filterBooks('teknolojia',this)">💻 Teknolojia</button>
+    <button class="filter-btn" onclick="filterBooks('elimu',this)">🎓 Elimu</button>
+    <button class="filter-btn" onclick="filterBooks('hadithi',this)">📖 Hadithi</button>
+    <button class="filter-btn" onclick="filterBooks('sanaa',this)">🎨 Sanaa</button>
   </div>
 </div>
 
-<footer><p>© 2026 <em>Sade Books</em> — Vitabu Bora vya Kiswahili | Tanzania 🇹🇿</p></footer>
+<main>
+  <div class="section-label">
+    <h2>Vitabu <em>Vyetu</em></h2>
+    <div class="line"></div>
+    <div class="count-badge" id="countBadge">120 vitabu</div>
+  </div>
+  <div class="books-grid" id="booksGrid"></div>
+</main>
+
+<footer>
+  <div class="f-brand">Sade <em>Books</em></div>
+  <p>Duka lako la kwanza la vitabu vya kidigitali kwa Kiswahili 🇹🇿</p>
+  <p>&copy; 2026 Sade Books · Herman Sade · Tanzania</p>
+</footer>
 
 <script>
-var kikapu = [];
-var njia = null;
+const B=[
+// BIASHARA
+{t:"Jifunze Biashara",c:"biashara",i:"💼",b:"pop",g:"linear-gradient(135deg,#1565C0,#0D47A1)"},
+{t:"Pesa na Akili",c:"biashara",i:"💰",b:"hot",g:"linear-gradient(135deg,#0D47A1,#1976D2)"},
+{t:"Ujasiriamali Tanzania",c:"biashara",i:"🚀",b:"hot",g:"linear-gradient(135deg,#1A237E,#283593)"},
+{t:"Akaunti Rahisi",c:"biashara",i:"📊",b:"",g:"linear-gradient(135deg,#1565C0,#42A5F5)"},
+{t:"Biashara ya Kimataifa",c:"biashara",i:"🌍",b:"hot",g:"linear-gradient(135deg,#0D47A1,#1565C0)"},
+{t:"Akiba na Uwekezaji",c:"biashara",i:"🏦",b:"hot",g:"linear-gradient(135deg,#283593,#3949AB)"},
+{t:"Sanaa ya Mazungumzo",c:"biashara",i:"🤝",b:"pop",g:"linear-gradient(135deg,#1976D2,#1565C0)"},
+{t:"Ujenzi wa Biashara",c:"biashara",i:"🏗️",b:"",g:"linear-gradient(135deg,#1565C0,#1976D2)"},
+{t:"Masoko ya Mtandaoni",c:"biashara",i:"📲",b:"new",g:"linear-gradient(135deg,#006064,#0097A7)"},
+{t:"Mkakati wa Biashara",c:"biashara",i:"♟️",b:"",g:"linear-gradient(135deg,#1A237E,#3949AB)"},
+{t:"Mauzo na Wateja",c:"biashara",i:"🎯",b:"new",g:"linear-gradient(135deg,#0D47A1,#1976D2)"},
+{t:"Usimamizi wa Wafanyakazi",c:"biashara",i:"👥",b:"",g:"linear-gradient(135deg,#283593,#1565C0)"},
+{t:"Brand Yako Tanzania",c:"biashara",i:"⭐",b:"hot",g:"linear-gradient(135deg,#1565C0,#0288D1)"},
+{t:"Biashara ya Nyumba",c:"biashara",i:"🏠",b:"new",g:"linear-gradient(135deg,#01579B,#0277BD)"},
+{t:"Fedha za Kigeni",c:"biashara",i:"💱",b:"",g:"linear-gradient(135deg,#1A237E,#283593)"},
+// NGUO & MITINDO
+{t:"Biashara ya Nguo",c:"nguo",i:"👗",b:"hot",g:"linear-gradient(135deg,#880E4F,#AD1457)"},
+{t:"Mitindo ya Afrika",c:"nguo",i:"🪭",b:"new",g:"linear-gradient(135deg,#4A148C,#7B1FA2)"},
+{t:"Ubunifu wa Mavazi",c:"nguo",i:"✂️",b:"pop",g:"linear-gradient(135deg,#C62828,#AD1457)"},
+{t:"Duka la Mtandaoni",c:"nguo",i:"🛍️",b:"hot",g:"linear-gradient(135deg,#880E4F,#C62828)"},
+{t:"Vitenge na Kanga",c:"nguo",i:"🎨",b:"new",g:"linear-gradient(135deg,#BF360C,#E64A19)"},
+{t:"Ushonaji wa Kisasa",c:"nguo",i:"🧵",b:"",g:"linear-gradient(135deg,#4A148C,#880E4F)"},
+{t:"Rangi na Muundo",c:"nguo",i:"🌈",b:"pop",g:"linear-gradient(135deg,#1A237E,#4A148C)"},
+{t:"Biashara ya Viatu",c:"nguo",i:"👠",b:"new",g:"linear-gradient(135deg,#880E4F,#D81B60)"},
+{t:"Soko la Nguo za Mitumba",c:"nguo",i:"🧥",b:"hot",g:"linear-gradient(135deg,#37474F,#546E7A)"},
+{t:"Mapambo ya Kike",c:"nguo",i:"💍",b:"",g:"linear-gradient(135deg,#C9A84C,#E65100)"},
+// MIFUGO
+{t:"Ufugaji wa Ng'ombe",c:"mifugo",i:"🐄",b:"pop",g:"linear-gradient(135deg,#33691E,#558B2F)"},
+{t:"Ufugaji wa Mbuzi",c:"mifugo",i:"🐐",b:"hot",g:"linear-gradient(135deg,#1B5E20,#33691E)"},
+{t:"Ufugaji wa Kuku",c:"mifugo",i:"🐔",b:"hot",g:"linear-gradient(135deg,#E65100,#F57F17)"},
+{t:"Ufugaji wa Nguruwe",c:"mifugo",i:"🐷",b:"",g:"linear-gradient(135deg,#AD1457,#C62828)"},
+{t:"Ufugaji wa Kondoo",c:"mifugo",i:"🐑",b:"new",g:"linear-gradient(135deg,#455A64,#607D8B)"},
+{t:"Maziwa na Biashara",c:"mifugo",i:"🥛",b:"pop",g:"linear-gradient(135deg,#0277BD,#01579B)"},
+{t:"Dawa za Mifugo",c:"mifugo",i:"💉",b:"",g:"linear-gradient(135deg,#1B5E20,#2E7D32)"},
+{t:"Samaki Tanzania",c:"mifugo",i:"🐟",b:"hot",g:"linear-gradient(135deg,#006064,#00838F)"},
+{t:"Mazao ya Mifugo",c:"mifugo",i:"🧀",b:"new",g:"linear-gradient(135deg,#F57F17,#E65100)"},
+{t:"Malisho Bora",c:"mifugo",i:"🌿",b:"",g:"linear-gradient(135deg,#33691E,#1B5E20)"},
+// NYUKI
+{t:"Ufugaji wa Nyuki",c:"nyuki",i:"🐝",b:"hot",g:"linear-gradient(135deg,#E65100,#F57F17)"},
+{t:"Asali ya Biashara",c:"nyuki",i:"🍯",b:"pop",g:"linear-gradient(135deg,#F57F17,#FF8F00)"},
+{t:"Mizinga ya Kisasa",c:"nyuki",i:"🏠",b:"new",g:"linear-gradient(135deg,#E65100,#BF360C)"},
+{t:"Sumu ya Nyuki Dawa",c:"nyuki",i:"💊",b:"hot",g:"linear-gradient(135deg,#FF8F00,#F57F17)"},
+{t:"Masega na Nta",c:"nyuki",i:"✨",b:"new",g:"linear-gradient(135deg,#C9A84C,#F57F17)"},
+{t:"Nyuki na Mazingira",c:"nyuki",i:"🌸",b:"",g:"linear-gradient(135deg,#1B5E20,#33691E)"},
+{t:"Uzalishaji wa Asali",c:"nyuki",i:"📦",b:"pop",g:"linear-gradient(135deg,#E65100,#FF6F00)"},
+// VIONGOZI DUNIA
+{t:"Nelson Mandela",c:"viongozi",i:"✊",b:"pop",g:"linear-gradient(135deg,#B71C1C,#C62828)"},
+{t:"Barack Obama",c:"viongozi",i:"🇺🇸",b:"hot",g:"linear-gradient(135deg,#1565C0,#0D47A1)"},
+{t:"Julius Nyerere",c:"viongozi",i:"🇹🇿",b:"hot",g:"linear-gradient(135deg,#1B5E20,#2E7D32)"},
+{t:"Elon Musk",c:"viongozi",i:"🚀",b:"hot",g:"linear-gradient(135deg,#37474F,#263238)"},
+{t:"Jeff Bezos",c:"viongozi",i:"📦",b:"pop",g:"linear-gradient(135deg,#E65100,#BF360C)"},
+{t:"Steve Jobs",c:"viongozi",i:"🍎",b:"pop",g:"linear-gradient(135deg,#37474F,#546E7A)"},
+{t:"Bill Gates",c:"viongozi",i:"💻",b:"",g:"linear-gradient(135deg,#01579B,#0277BD)"},
+{t:"Warren Buffett",c:"viongozi",i:"💰",b:"hot",g:"linear-gradient(135deg,#1A237E,#283593)"},
+{t:"Oprah Winfrey",c:"viongozi",i:"🌟",b:"pop",g:"linear-gradient(135deg,#880E4F,#AD1457)"},
+{t:"Alibaba — Jack Ma",c:"viongozi",i:"🏮",b:"hot",g:"linear-gradient(135deg,#E65100,#F57F17)"},
+{t:"Martin Luther King",c:"viongozi",i:"🕊️",b:"pop",g:"linear-gradient(135deg,#4A148C,#6A1B9A)"},
+{t:"Kwame Nkrumah",c:"viongozi",i:"🌍",b:"",g:"linear-gradient(135deg,#E65100,#BF360C)"},
+{t:"Mahatma Gandhi",c:"viongozi",i:"🕊️",b:"pop",g:"linear-gradient(135deg,#1B5E20,#33691E)"},
+{t:"Albert Einstein",c:"viongozi",i:"🧠",b:"",g:"linear-gradient(135deg,#37474F,#263238)"},
+{t:"Dangote — Mkwasi Afrika",c:"viongozi",i:"💎",b:"hot",g:"linear-gradient(135deg,#C9A84C,#E65100)"},
+// DINI
+{t:"Biblia Takatifu",c:"dini",i:"✝️",b:"pop",g:"linear-gradient(135deg,#4A148C,#6A1B9A)"},
+{t:"Quran Tukufu",c:"dini",i:"☪️",b:"pop",g:"linear-gradient(135deg,#1B5E20,#2E7D32)"},
+{t:"Sala na Mafanikio",c:"dini",i:"🙏",b:"",g:"linear-gradient(135deg,#1A237E,#283593)"},
+{t:"Subira na Shukrani",c:"dini",i:"🕌",b:"",g:"linear-gradient(135deg,#4A148C,#6A1B9A)"},
+{t:"Amani ya Roho",c:"dini",i:"🕊️",b:"new",g:"linear-gradient(135deg,#1B5E20,#2E7D32)"},
+{t:"Injili na Uponyaji",c:"dini",i:"⛪",b:"hot",g:"linear-gradient(135deg,#4A148C,#880E4F)"},
+{t:"Imani na Nguvu",c:"dini",i:"⚡",b:"",g:"linear-gradient(135deg,#0D47A1,#1565C0)"},
+{t:"Siku ya Mwisho",c:"dini",i:"📜",b:"hot",g:"linear-gradient(135deg,#37474F,#263238)"},
+{t:"Maisha Baada ya Kifo",c:"dini",i:"🌟",b:"pop",g:"linear-gradient(135deg,#4A148C,#6A1B9A)"},
+{t:"Mapepo na Ushindi",c:"dini",i:"🛡️",b:"new",g:"linear-gradient(135deg,#B71C1C,#C62828)"},
+{t:"Dua za Kila Siku",c:"dini",i:"📿",b:"pop",g:"linear-gradient(135deg,#1B5E20,#33691E)"},
+{t:"Baraka za Mungu",c:"dini",i:"🌈",b:"hot",g:"linear-gradient(135deg,#1565C0,#4A148C)"},
+// ULIMWENGU
+{t:"Miujiza ya Ulimwengu",c:"ulimwengu",i:"🌍",b:"hot",g:"linear-gradient(135deg,#006064,#01579B)"},
+{t:"Historia ya Dunia",c:"ulimwengu",i:"🏛️",b:"pop",g:"linear-gradient(135deg,#BF360C,#D84315)"},
+{t:"Sayari na Anga",c:"ulimwengu",i:"🪐",b:"new",g:"linear-gradient(135deg,#0D1B3E,#1A237E)"},
+{t:"Mabadiliko ya Tabianchi",c:"ulimwengu",i:"🌡️",b:"hot",g:"linear-gradient(135deg,#006064,#1B5E20)"},
+{t:"Teknolojia ya Kesho",c:"ulimwengu",i:"🔭",b:"new",g:"linear-gradient(135deg,#1A237E,#006064)"},
+{t:"Afrika ya Kale",c:"ulimwengu",i:"🏺",b:"pop",g:"linear-gradient(135deg,#BF360C,#E65100)"},
+{t:"Vita vya Dunia",c:"ulimwengu",i:"⚔️",b:"",g:"linear-gradient(135deg,#37474F,#263238)"},
+{t:"Miji Mikubwa Duniani",c:"ulimwengu",i:"🏙️",b:"",g:"linear-gradient(135deg,#01579B,#006064)"},
+{t:"Ajabu za Asili",c:"ulimwengu",i:"🌋",b:"pop",g:"linear-gradient(135deg,#E65100,#BF360C)"},
+{t:"Bahari za Dunia",c:"ulimwengu",i:"🌊",b:"hot",g:"linear-gradient(135deg,#006064,#0277BD)"},
+{t:"Wanyama Ajabu",c:"ulimwengu",i:"🦁",b:"new",g:"linear-gradient(135deg,#E65100,#F57F17)"},
+{t:"Mlima Kilimanjaro",c:"ulimwengu",i:"🏔️",b:"pop",g:"linear-gradient(135deg,#37474F,#1B5E20)"},
+// AFYA
+{t:"Afya Bora",c:"afya",i:"🌿",b:"",g:"linear-gradient(135deg,#1B5E20,#2E7D32)"},
+{t:"Lishe Bora",c:"afya",i:"🥗",b:"new",g:"linear-gradient(135deg,#2E7D32,#388E3C)"},
+{t:"Dawa za Asili",c:"afya",i:"🌱",b:"",g:"linear-gradient(135deg,#1B5E20,#33691E)"},
+{t:"Uzazi wa Mpango",c:"afya",i:"👶",b:"pop",g:"linear-gradient(135deg,#0277BD,#01579B)"},
+{t:"Mazoezi ya Nyumbani",c:"afya",i:"🏋️",b:"",g:"linear-gradient(135deg,#1B5E20,#2E7D32)"},
+{t:"Uzuri wa Asili",c:"afya",i:"🌺",b:"hot",g:"linear-gradient(135deg,#880E4F,#AD1457)"},
+// MAENDELEO
+{t:"Akili Timamu",c:"maendeleo",i:"🧠",b:"new",g:"linear-gradient(135deg,#4A148C,#6A1B9A)"},
+{t:"Nguvu ya Mawazo",c:"maendeleo",i:"⚡",b:"pop",g:"linear-gradient(135deg,#1A237E,#283593)"},
+{t:"Tabia za Mafanikio",c:"maendeleo",i:"🌟",b:"hot",g:"linear-gradient(135deg,#E65100,#EF6C00)"},
+{t:"Malengo na Mafanikio",c:"maendeleo",i:"🎯",b:"pop",g:"linear-gradient(135deg,#BF360C,#D84315)"},
+{t:"Uongozi wa Kweli",c:"maendeleo",i:"👑",b:"new",g:"linear-gradient(135deg,#1565C0,#0D47A1)"},
+{t:"Mwanamke wa Kisasa",c:"maendeleo",i:"🌸",b:"pop",g:"linear-gradient(135deg,#880E4F,#AD1457)"},
+// FAMILIA
+{t:"Familia Bora",c:"familia",i:"👨‍👩‍👧",b:"pop",g:"linear-gradient(135deg,#1565C0,#0288D1)"},
+{t:"Ndoa Yenye Furaha",c:"familia",i:"💕",b:"",g:"linear-gradient(135deg,#AD1457,#C62828)"},
+{t:"Mtoto Mwenye Akili",c:"familia",i:"🧒",b:"",g:"linear-gradient(135deg,#1565C0,#1976D2)"},
+{t:"Mtoto Shuleni",c:"familia",i:"🎓",b:"pop",g:"linear-gradient(135deg,#283593,#1A237E)"},
+// KILIMO
+{t:"Kilimo cha Bustani",c:"kilimo",i:"🌾",b:"hot",g:"linear-gradient(135deg,#1B5E20,#2E7D32)"},
+{t:"Kilimo Biashara",c:"kilimo",i:"🌱",b:"hot",g:"linear-gradient(135deg,#2E7D32,#1B5E20)"},
+{t:"Mbegu Bora Tanzania",c:"kilimo",i:"🌽",b:"new",g:"linear-gradient(135deg,#F57F17,#E65100)"},
+{t:"Umwagiliaji wa Kisasa",c:"kilimo",i:"💧",b:"",g:"linear-gradient(135deg,#006064,#0277BD)"},
+// TEKNOLOJIA
+{t:"Akili Bandia kwa Wote",c:"teknolojia",i:"🤖",b:"hot",g:"linear-gradient(135deg,#006064,#01579B)"},
+{t:"Mtandao na Pesa",c:"teknolojia",i:"🌐",b:"hot",g:"linear-gradient(135deg,#1565C0,#0288D1)"},
+{t:"Simu na Biashara",c:"teknolojia",i:"📱",b:"",g:"linear-gradient(135deg,#0D47A1,#283593)"},
+{t:"Crypto Tanzania",c:"teknolojia",i:"₿",b:"new",g:"linear-gradient(135deg,#E65100,#F57F17)"},
+// ELIMU
+{t:"Elimu ya Mafanikio",c:"elimu",i:"📚",b:"pop",g:"linear-gradient(135deg,#1565C0,#1976D2)"},
+{t:"Historia ya Afrika",c:"elimu",i:"📜",b:"pop",g:"linear-gradient(135deg,#BF360C,#D84315)"},
+{t:"Haki Zako Tanzania",c:"elimu",i:"⚖️",b:"new",g:"linear-gradient(135deg,#0D47A1,#1A237E)"},
+{t:"Jiografia ya Tanzania",c:"elimu",i:"🗺️",b:"",g:"linear-gradient(135deg,#1B5E20,#33691E)"},
+// HADITHI
+{t:"Hadithi za Usiku",c:"hadithi",i:"🌙",b:"",g:"linear-gradient(135deg,#311B92,#4527A0)"},
+{t:"Hadithi za Bahari",c:"hadithi",i:"🌊",b:"hot",g:"linear-gradient(135deg,#01579B,#006064)"},
+{t:"Mashairi ya Moyo",c:"hadithi",i:"✍️",b:"",g:"linear-gradient(135deg,#880E4F,#AD1457)"},
+// SANAA
+{t:"Utamaduni Tanzania",c:"sanaa",i:"🎨",b:"",g:"linear-gradient(135deg,#E65100,#BF360C)"},
+{t:"Muziki wa Kiafrika",c:"sanaa",i:"🎵",b:"pop",g:"linear-gradient(135deg,#1A237E,#311B92)"},
+{t:"Sanaa ya Maigizo",c:"sanaa",i:"🎭",b:"pop",g:"linear-gradient(135deg,#4A148C,#880E4F)"},
+];
 
-// Fungua/funga cart
-document.getElementById('cartBtn').onclick = function() {
-  document.getElementById('ov').classList.add('on');
-  document.getElementById('dr').classList.add('on');
-};
-function funga() {
-  document.getElementById('ov').classList.re
+const BADGE={hot:'<div class="book-badge badge-hot">🔥 Hot</div>',new:'<div class="book-badge badge-new">✨ Mpya</div>',pop:'<div class="book-badge badge-pop">⭐ Maarufu</div>','':""}
+
+function render(list){
+  const g=document.getElementById('booksGrid');
+  const total=list.length;
+  document.getElementById('countBadge').textContent=total+' vitabu';
+  document.getElementById('navCount').textContent=total+' vitabu';
+  if(!total){g.innerHTML='<div class="no-results"><div class="nr-icon">🔍</div><p>Hakuna vitabu katika mada hii bado.</p></div>';return;}
+  g.innerHTML=list.map((b,i)=>`
+<div class="book-card" style="animation-delay:${Math.min(i,30)*0.03}s">
+  <div class="book-cover">
+    <div class="book-cover-bg" style="background:${b.g}">
+      <div class="cover-shine"></div>
+      <div class="cover-icon">${b.i}</div>
+      <div class="cover-title">${b.t}</div>
+    </div>
+    ${BADGE[b.b]||''}
+  </div>
+  <div class="book-body">
+    <div class="book-cat">${b.c}</div>
+    <div class="book-title">${b.t}</div>
+    <div class="book-footer">
+      <div class="book-price"><small>TSH</small>2,000</div>
+      <a href="malipo.html?kitabu=${encodeURIComponent(b.t)}" class="btn-buy">Nunua →</a>
+    </div>
+  </div>
+</div>`).join('');
+}
+
+function filterBooks(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render(cat==='all'?B:B.filter(b=>b.c===cat));
+}
+
+render(B);
+</script>
+</body>
+</html>
