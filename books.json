@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Biashara ya Mafanikio",
+    "description": "Mbinu za kuanzisha biashara ndogo hadi kubwa.",
+    "price": "BURE",
+    "file": "PDFs/biashara.pdf"
+  },
+  {
+    "title": "Maarifa ya Fedha",
+    "description": "Jifunze kusimamia fedha zako vizuri.",
+    "price": "BURE",
+    "file": "PDFs/fedha.pdf"
+  }
+]
