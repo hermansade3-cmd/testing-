@@ -641,15 +641,15 @@ header h1 span {
 /* ===== HAMBURGER ===== */
 .hamburger {
     display: flex; flex-direction: column; justify-content: center;
-    gap: 5px; width: 40px; height: 40px;
-    background: rgba(201,168,76,0.12);
-    border: 1.5px solid rgba(201,168,76,0.5);
-    border-radius: 10px; cursor: pointer; padding: 10px;
+    gap: 5px; width: 42px; height: 42px;
+    background: rgba(180,20,20,0.12);
+    border: 1.5px solid rgba(180,20,20,0.45);
+    border-radius: 12px; cursor: pointer; padding: 10px;
     transition: all 0.2s; flex-shrink: 0;
 }
-.hamburger:hover { background: rgba(201,168,76,0.22); border-color: #C9A84C; }
+.hamburger:hover { background: rgba(180,20,20,0.25); border-color: #cc1111; }
 .hamburger span {
-    display: block; height: 2px; background: #C9A84C;
+    display: block; height: 2px; background: #cc1111;
     border-radius: 2px; transition: all 0.3s cubic-bezier(.16,1,.3,1);
     transform-origin: center;
 }
@@ -660,7 +660,7 @@ header h1 span {
 /* ===== OVERLAY ===== */
 .sidebar-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.65); backdrop-filter: blur(5px);
+    background: rgba(8,0,0,0.7); backdrop-filter: blur(6px);
     z-index: 998; opacity: 0; transition: opacity 0.35s ease;
 }
 .sidebar-overlay.active { display: block; opacity: 1; }
@@ -668,10 +668,10 @@ header h1 span {
 /* ===== SIDEBAR ===== */
 .sidebar {
     position: fixed; top: 0; left: 0;
-    width: 270px; height: 100vh;
-    background: linear-gradient(170deg, #1A1208 0%, #2D2010 60%, #1A1208 100%);
-    border-right: 1px solid rgba(201,168,76,0.25);
-    box-shadow: 8px 0 40px rgba(0,0,0,0.7);
+    width: 282px; height: 100vh;
+    background: linear-gradient(160deg, #1c0202 0%, #110101 55%, #0b0000 100%);
+    border-right: 1px solid rgba(180,20,20,0.3);
+    box-shadow: 8px 0 48px rgba(0,0,0,0.85);
     z-index: 999; display: flex; flex-direction: column;
     transform: translateX(-100%);
     transition: transform 0.38s cubic-bezier(.16,1,.3,1);
@@ -682,37 +682,1427 @@ header h1 span {
 .sidebar-top {
     display: flex; align-items: center;
     justify-content: space-between;
-    padding: 1.4rem 1.3rem 1rem;
-    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 1.6rem 1.4rem 1.2rem;
 }
 .sidebar-brand {
     font-family: 'Playfair Display', serif;
-    font-size: 1.35rem; font-weight: 700; color: #fff;
+    font-size: 1.4rem; font-weight: 700; color: #fff;
 }
-.sidebar-brand em { color: #C9A84C; font-style: normal; }
+.sidebar-brand em { color: #ff3333; font-style: normal; }
 
 .sidebar-close {
-    width: 32px; height: 32px;
+    width: 34px; height: 34px;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 8px; color: #C9A84C;
+    background: rgba(180,20,20,0.12);
+    border: 1px solid rgba(180,20,20,0.35);
+    border-radius: 10px; color: #ff5555;
     font-size: 13px; cursor: pointer; transition: all 0.2s;
 }
-.sidebar-close:hover { background: rgba(201,168,76,0.25); color: #E8C96A; }
+.sidebar-close:hover { background: rgba(180,20,20,0.28); color: #ff1111; }
 
 .sidebar-divider {
-    height: 1px; margin: 0 1.3rem 0.7rem;
-    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+    height: 1px; margin: 0 1.4rem 1rem;
+    background: linear-gradient(90deg, transparent, rgba(180,20,20,0.6), transparent);
 }
 .sidebar-label {
-    font-size: 0.6rem; font-weight: 700;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(201,168,76,0.6); padding: 0 1.3rem 0.5rem;
+    font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #ff5555; padding: 0 1.4rem 0.6rem;
 }
 .sidebar-nav {
     display: flex; flex-direction: column;
-    padding: 0 0.7rem; gap: 1px; flex: 1;
+    padding: 0 0.8rem; gap: 2px; flex: 1;
 }
 .sidebar-link {
-    display: flex; align-items: center; 
+    display: flex; align-items: center; gap: 0.9rem;
+    padding: 0.75rem 1rem; border-radius: 12px;
+    color: #ff4444 !important;
+    text-decoration: none; font-size: 0.92rem; font-weight: 600;
+    border: 1px solid transparent; transition: all 0.2s ease;
+}
+.sidebar-link span { font-size: 1.1rem; width: 24px; text-align: center; flex-shrink: 0; }
+.sidebar-link:hover {
+    background: rgba(180,20,20,0.18);
+    border-color: rgba(180,20,20,0.35);
+    color: #ff1111 !important;
+    transform: translateX(5px);
+}
+.sidebar-footer {
+    padding: 1.2rem 1.4rem; text-align: center;
+    color: rgba(255,50,50,0.5); font-size: 0.72rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    border-top: 1px solid rgba(180,20,20,0.18); margin-top: 0.8rem;
+}
+    </style>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+        <div class="sidebar-brand">Sade <em>Books</em></div>
+        <button class="sidebar-close" id="sidebarClose">✕</button>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-label">Kurasa</div>
+    <nav class="sidebar-nav">
+        <a href="#books"                     class="sidebar-link"><span>📚</span> Tazama Vitabu</a>
+        <a href="about.html"                 class="sidebar-link"><span>ℹ️</span> Kuhusu</a>
+        <a href="sadebooks.html"             class="sidebar-link"><span>🏠</span> Sade Books</a>
+        <a href="shop.html"                  class="sidebar-link"><span>🛍️</span> Duka</a>
+        <a href="sadeCalculator.html"        class="sidebar-link"><span>🧮</span> SadeCalculator</a>
+        <a href="malipo.html"                class="sidebar-link"><span>💳</span> Malipo</a>
+        <a href="sade-GPT.html"              class="sidebar-link"><span>🤖</span> Sade-GPT</a>
+        <a href="comments.html"              class="sidebar-link"><span>💬</span> Maoni</a>
+        <a href="sade-order.html"            class="sidebar-link"><span>📦</span> Agiza</a>
+        <a href="lipa-namba-mix-by-yas.html" class="sidebar-link"><span>📱</span> Lipa Namba</a>
+        <a href="menu.html"                  class="sidebar-link"><span>☰</span> Menyu</a>
+        <a href="contact.html"               class="sidebar-link"><span>✉️</span> Wasiliana Nasi</a>
+    </nav>
+    <div class="sidebar-footer">Sade Digital · Tanzania 🇹🇿</div>
+</aside>
+    
+<!-- Nav -->
+    <nav>
+        <div style="display:flex;align-items:center;gap:1rem;">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Fungua Menyu">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-brand">Sade <em>Books</em></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#books">Vitabu</a></li>
+            <li><a href="#features">Huduma</a></li>
+            <li><a href="contact.html">Mawasiliano</a></li>
+        </ul>
+        <a href="#books" class="btn-primary" style="padding:0.6rem 1.5rem;font-size:0.85rem;">Angalia Vitabu</a>
+    </nav>
+
+<!-- Hero Header -->
+    <header>
+        <div class="header-inner">
+            <div class="logo-badge">
+                <div class="logo-dot"></div>
+                <span>Duka la Vitabu vya Kidigitali</span>
+                <div class="logo-dot"></div>
+            </div>
+            <h1>
+                Sade
+                <span>Books</span>
+            </h1>
+            <p class="header-sub">Nunua vitabu vya kidigitali (PDF) kwa urahisi na bei nafuu</p>
+            <div class="header-cta">
+                <a href="#books" class="btn-primary">Tazama Vitabu</a>
+                <a href="shop.html" class="btn-outline">Duka →</a>
+            </div>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>Shuka</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+<!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-num">50+</div>
+            <div class="stat-label">Vitabu</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">1,200+</div>
+            <div class="stat-label">Wateja</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Usalama</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">Upatikanaji</div>
+        </div>
+    </div>
+
+<!-- Books Section -->
+    <section id="books">
+        <div class="section-header">
+            <div class="section-tag">📚 Mkusanyiko Wetu</div>
+            <h2 class="section-title">Vitabu <em>Vyetu</em> Bora</h2>
+            <p class="section-desc">Chagua kutoka kwa vitabu vya hali ya juu vinavyokusaidia kukua kibinafsi na kibiashara</p>
+        </div>
+
+<div class="books-grid">
+            <!-- Kitabu 1 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-placeholder cover-1">
+                        <span>💼</span>
+                                </div>
+                    <div class="book-badge">Maarufu</div>
+                </div>
+                <div class="book-body">
+                    <div class="book-category">Biashara &amp; Fedha</div>
+                    <h3>Jifunze Biashara</h3>
+                    <p class="book-desc">Mwongozo kamili wa kuanza na kukuza biashara yako kwa mafanikio ya kweli.</p>
+                    <div class="book-footer">
+                        <div class="book-price">
+                            <span class="price-label">Bei</span>
+                            <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                        </div>
+                        <a href="malipo.html" class="btn-buy">Nunua →</a>
+                    </div>
+                </div>
+            </div>
+
+
+<!-- Kitabu 2 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-placeholder cover-2">
+                        <span>🌿</span>
+                    </div>
+                </div>
+                <div class="book-body">
+                    <div class="book-category">Afya &amp; Ustawi</div>
+                    <h3>Afya Bora</h3>
+                    <p class="book-desc">Jifunze jinsi ya kuishi maisha ya afya na furaha kupitia mwongozo huu wa kipekee.</p>
+                    <div class="book-footer">
+                        <div class="book-price">
+                            <span class="price-label">Bei</span>
+                            <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                        </div>
+                        <a href="malipo.html" class="btn-buy">Nunua →</a>
+                    </div>
+                </div>
+            </div>
+
+
+<!-- Kitabu 3 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-placeholder cover-3">
+                        <span>🧠</span>
+                    </div>
+                    <div class="book-badge">Mpya</div>
+                </div>
+                <div class="book-body">
+                    <div class="book-category">Maendeleo Binafsi</div>
+                    <h3>Akili Timamu</h3>
+                    <p class="book-desc">Gundua nguvu za akili yako na ujifunze mbinu za kukufanya ufanikiwe zaidi.</p>
+                    <div class="book-footer">
+                        <div class="book-price">
+                            <span class="price-label">Bei</span>
+                            <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                        </div>
+                        <a href="malipo.html" class="btn-buy">Nunua →</a>
+                    </div>
+                </div>
+            </div>
+    
+
+        <!-- Kitabu 5 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-5">
+                    <span>🧘‍♂️</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Maendeleo Binafsi</div>
+                <h3>Amani ya Akili</h3>
+                <p class="book-desc">Jinsi ya kupata utulivu wa ndani na kuondoa msongo wa mawazo maishani mwako.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 6 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-6">
+                    <span>💰</span>
+                </div>
+                <div class="book-badge">Hot</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Biashara &amp; Fedha</div>
+                <h3>Pesa na Akili</h3>
+                <p class="book-desc">Mwongozo kamili wa kusimamia fedha zako na kujenga utajiri wa kweli Tanzania.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 7 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-1">
+                    <span>📖</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Hadithi</div>
+                <h3>Hadithi za Usiku</h3>
+                <p class="book-desc">Mkusanyiko wa hadithi nzuri za Kiswahili zenye mafunzo ya maisha na hekima.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 8 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-2">
+                    <span>👨‍👩‍👧</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Familia</div>
+                <h3>Familia Bora</h3>
+                <p class="book-desc">Jinsi ya kujenga familia yenye upendo, heshima na mafanikio ya pamoja.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 9 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-3">
+                    <span>🌙</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Dini &amp; Imani</div>
+                <h3>Sala na Mafanikio</h3>
+                <p class="book-desc">Nguvu ya sala na jinsi imani yako inavyoweza kubadilisha hali yako ya maisha.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 10 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-4">
+                    <span>👑</span>
+                </div>
+                <div class="book-badge">Mpya</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Maendeleo Binafsi</div>
+                <h3>Uongozi wa Kweli</h3>
+                <p class="book-desc">Sifa za kiongozi bora na jinsi ya kuongoza timu yako kuelekea mafanikio makubwa.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 11 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-5">
+                    <span>✍️</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Ushairi</div>
+                <h3>Mashairi ya Moyo</h3>
+                <p class="book-desc">Mkusanyiko wa mashairi mazuri ya Kiswahili yanayogusa hisia za moyo wa binadamu.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 12 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-6">
+                    <span>🚀</span>
+                </div>
+                <div class="book-badge">Hot</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Biashara &amp; Fedha</div>
+                <h3>Ujasiriamali Tanzania</h3>
+                <p class="book-desc">Hatua za vitendo za kuanzisha na kukuza biashara yako Tanzania mpaka itakapofanikiwa.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 13 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-1">
+                    <span>💻</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Teknolojia</div>
+                <h3>Mtandao na Pesa</h3>
+                <p class="book-desc">Jinsi ya kutumia mtandao kupata kipato cha ziada na kujenga biashara ya kidijitali.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 14 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-2">
+                    <span>🎓</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Elimu</div>
+                <h3>Elimu ya Mafanikio</h3>
+                <p class="book-desc">Mbinu bora za kusoma, kujifunza haraka na kufaulu mitihani na maisha yako yote.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 15 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-3">
+                    <span>🌳</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Mazingira</div>
+                <h3>Mazingira Yetu Tanzania</h3>
+                <p class="book-desc">Umuhimu wa kutunza mazingira na jinsi kila mmoja wetu anavyoweza kulinda nchi yetu.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 16 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-4">
+                    <span>⚽</span>
+                </div>
+                <div class="book-badge">Mpya</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Michezo</div>
+                <h3>Michezo na Afya</h3>
+                <p class="book-desc">Faida za michezo kwa afya ya mwili na akili na jinsi ya kujizoeza kila siku.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 17 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-5">
+                    <span>🎨</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Sanaa &amp; Utamaduni</div>
+                <h3>Utamaduni wa Tanzania</h3>
+                <p class="book-desc">Safari ya kugundua utamaduni tajiri wa Tanzania — desturi, sanaa na historia yetu.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 18 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-6">
+                    <span>📜</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Historia</div>
+                <h3>Historia ya Afrika Mashariki</h3>
+                <p class="book-desc">Simulizi nzuri za historia ya Afrika Mashariki — wafalme, vita na ustaarabu wa zamani.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 19 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-1">
+                    <span>💕</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Familia</div>
+                <h3>Ndoa Yenye Furaha</h3>
+                <p class="book-desc">Siri za ndoa iliyofanikiwa — mawasiliano, upendo na kushirikiana na mwenzi wako.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 20 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-2">
+                    <span>🥗</span>
+                </div>
+                <div class="book-badge">Mpya</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Afya &amp; Lishe</div>
+                <h3>Lishe Bora Maisha Bora</h3>
+                <p class="book-desc">Chakula kinachofaa mwilini, vyakula vya kuepuka na mapishi ya kiafya kwa familia.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 21 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-3">
+                    <span>📱</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Teknolojia</div>
+                <h3>Simu na Biashara</h3>
+                <p class="book-desc">Tumia simu yako ya mkononi kuendesha biashara, masoko ya mitandao na kufanya mauzo.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 22 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-4">
+                    <span>🌟</span>
+                </div>
+                <div class="book-badge">Hot</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Maendeleo Binafsi</div>
+                <h3>Tabia za Mafanikio</h3>
+                <p class="book-desc">Tabia 10 za watu waliofanikiwa duniani na jinsi unavyoweza kuzifuata maishani mwako.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 23 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-5">
+                    <span>🌿</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Afya &amp; Lishe</div>
+                <h3>Dawa za Asili</h3>
+                <p class="book-desc">Maarifa ya dawa za asili za Tanzania, jinsi ya kuzitumia na faida zake kwa mwili wako.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Kitabu 25 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-1">
+                    <span>🧠</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Maendeleo Binafsi</div>
+                <h3>Nguvu ya Mawazo</h3>
+                <p class="book-desc">Jinsi ya kutumia nguvu ya mawazo yako kubadilisha maisha na kupata unachotaka.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 26 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-2">
+                    <span>🏡</span>
+                </div>
+                <div class="book-badge">Mpya</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Familia</div>
+                <h3>Nyumba ya Furaha</h3>
+                <p class="book-desc">Jinsi ya kuunda mazingira ya furaha nyumbani na kuishi maisha ya amani na upendo.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 27 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-3">
+                    <span>📊</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Biashara &amp; Fedha</div>
+                <h3>Akaunti Rahisi</h3>
+                <p class="book-desc">Jifunze kusimamia akaunti za biashara yako bila kuhitaji elimu ya juu ya uhasibu.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 28 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-4">
+                    <span>🌺</span>
+                </div>
+                <div class="book-badge">Hot</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Afya &amp; Lishe</div>
+                <h3>Uzuri wa Asili</h3>
+                <p class="book-desc">Siri za uzuri wa asili kwa ngozi, nywele na afya ya mwili kwa kutumia vitu vya asili.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 29 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-5">
+                    <span>🕌</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Dini &amp; Imani</div>
+                <h3>Subira na Shukrani</h3>
+                <p class="book-desc">Thamani ya subira na shukrani katika maisha — jinsi zinavyoleta baraka na mafanikio.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 30 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-6">
+                    <span>🎯</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Maendeleo Binafsi</div>
+                <h3>Malengo na Mafanikio</h3>
+                <p class="book-desc">Jinsi ya kuweka malengo ya kweli na kuyafuatilia hadi kuyafikia bila kukata tamaa.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 31 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-1">
+                    <span>🐝</span>
+                </div>
+                <div class="book-badge">Mpya</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Kilimo &amp; Ufugaji</div>
+                <h3>Ufugaji wa Nyuki</h3>
+                <p class="book-desc">Mwongozo kamili wa kufuga nyuki Tanzania na kutengeneza asali ya biashara ya faida kubwa.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 32 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-2">
+                    <span>🧒</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Malezi</div>
+                <h3>Mtoto Mwenye Akili</h3>
+                <p class="book-desc">Mbinu za kisasa za kumlea mtoto mwenye akili, maadili mema na uwezo wa kujiamini.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 33 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-3">
+                    <span>🌍</span>
+                </div>
+                <div class="book-badge">Hot</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Biashara &amp; Fedha</div>
+                <h3>Biashara ya Kimataifa</h3>
+                <p class="book-desc">Jinsi ya kupeleka biashara yako nje ya Tanzania na kushindana kwenye soko la dunia.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 34 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-4">
+                    <span>🎤</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Maendeleo Binafsi</div>
+                <h3>Sanaa ya Kuongea</h3>
+                <p class="book-desc">Jinsi ya kuongea mbele ya watu kwa ujasiri, kuvutia na kushawishi hadhira yoyote.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 35 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-5">
+                    <span>🐄</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Kilimo &amp; Ufugaji</div>
+                <h3>Ufugaji wa Kisasa</h3>
+                <p class="book-desc">Mwongozo wa kufuga ng'ombe, mbuzi na kuku kwa njia ya kisasa yenye faida kubwa.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 36 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-6">
+                    <span>⚖️</span>
+                </div>
+                <div class="book-badge">Mpya</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Sheria &amp; Haki</div>
+                <h3>Haki Zako Tanzania</h3>
+                <p class="book-desc">Jua haki zako za kisheria Tanzania na jinsi ya kujitetea dhidi ya udhalimu wowote.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 37 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-1">
+                    <span>🍳</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Mapishi</div>
+                <h3>Mapishi Bora ya Afrika</h3>
+                <p class="book-desc">Mkusanyiko wa mapishi mazuri ya Afrika Mashariki yanayopendeza familia na wageni.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 38 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-2">
+                    <span>🏦</span>
+                </div>
+                <div class="book-badge">Hot</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Biashara &amp; Fedha</div>
+                <h3>Akiba na Uwekezaji</h3>
+                <p class="book-desc">Jinsi ya kuanza kuweka akiba na kuwekeza pesa zako ili zikuletee mapato ya kudumu.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 39 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-3">
+                    <span>🎭</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Sanaa &amp; Utamaduni</div>
+                <h3>Sanaa ya Maigizo</h3>
+                <p class="book-desc">Historia na mbinu za sanaa ya maigizo Tanzania — kutoka ngoma hadi filamu za kisasa.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 40 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-4">
+                    <span>🧘‍♀️</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Afya &amp; Lishe</div>
+                <h3>Yoga na Pumziko</h3>
+                <p class="book-desc">Jinsi ya kutumia yoga na mbinu za kupumzika kupunguza msongo na kuimarisha afya yako.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 41 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-5">
+                    <span>🖊️</span>
+                </div>
+                <div class="book-badge">Mpya</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Elimu</div>
+                <h3>Uandishi wa Ubunifu</h3>
+                <p class="book-desc">Jifunze kuandika hadithi, makala na vitabu vyenye ubora wa juu vinavyovutia wasomaji.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 42 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-6">
+                    <span>🚗</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Biashara &amp; Fedha</div>
+                <h3>Biashara ya Usafiri</h3>
+                <p class="book-desc">Jinsi ya kuanzisha na kukuza biashara ya usafiri Tanzania — bodaboda, teksi na zaidi.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 43 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-1">
+                    <span>🌾</span>
+                </div>
+                <div class="book-badge">Hot</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Kilimo &amp; Ufugaji</div>
+                <h3>Kilimo cha Bustani</h3>
+                <p class="book-desc">Jinsi ya kulima bustani ndogo nyumbani na kupata mboga safi kwa familia yako kila siku.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 44 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-2">
+                    <span>🎵</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Sanaa &amp; Utamaduni</div>
+                <h3>Muziki wa Kiafrika</h3>
+                <p class="book-desc">Historia na mageuzi ya muziki wa Kiafrika — kutoka muziki wa asili hadi bongo flava ya leo.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 45 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-3">
+                    <span>🏋️</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Afya &amp; Lishe</div>
+                <h3>Mazoezi ya Nyumbani</h3>
+                <p class="book-desc">Mpango kamili wa mazoezi ya nyumbani bila vifaa — pata mwili imara na wenye afya bora.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 46 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-4">
+                    <span>🔑</span>
+                </div>
+                <div class="book-badge">Mpya</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Maendeleo Binafsi</div>
+                <h3>Ufunguo wa Mafanikio</h3>
+                <p class="book-desc">Siri 7 za watu waliofanikiwa duniani ambazo zinaweza kubadilisha maisha yako leo hii.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 47 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-5">
+                    <span>🐟</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Kilimo &amp; Ufugaji</div>
+                <h3>Ufugaji wa Samaki</h3>
+                <p class="book-desc">Jinsi ya kuanzisha biashara ya ufugaji wa samaki Tanzania kwa mtaji mdogo na faida kubwa.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 48 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-6">
+                    <span>💡</span>
+                </div>
+                <div class="book-badge">Hot</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Teknolojia</div>
+                <h3>Akili Bandia kwa Wote</h3>
+                <p class="book-desc">Elewa AI na jinsi ya kuitumia kuboresha biashara yako, kazi yako na maisha ya kila siku.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 49 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-1">
+                    <span>🌸</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Maendeleo Binafsi</div>
+                <h3>Mwanamke wa Kisasa</h3>
+                <p class="book-desc">Mwongozo wa mwanamke wa Tanzania wa kisasa — kujitegemea, kujiamini na kufanikiwa.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 50 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-2">
+                    <span>🗺️</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Historia</div>
+                <h3>Jiografia ya Tanzania</h3>
+                <p class="book-desc">Mwongozo kamili wa jiografia ya Tanzania — mikoa, milima, mito na maajabu ya asili.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 51 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-3">
+                    <span>🛕</span>
+                </div>
+                <div class="book-badge">Mpya</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Dini &amp; Imani</div>
+                <h3>Amani ya Roho</h3>
+                <p class="book-desc">Njia za kiroho za kupata amani ya ndani, uponyaji wa moyo na furaha ya kweli maishani.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 52 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-4">
+                    <span>🏗️</span>
+                </div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Biashara &amp; Fedha</div>
+                <h3>Ujenzi wa Biashara</h3>
+                <p class="book-desc">Hatua za msingi za kujenga biashara imara kuanzia sifuri hadi biashara inayojitegemea.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 53 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-5">
+                    <span>🌊</span>
+                </div>
+                <div class="book-badge">Hot</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Hadithi</div>
+                <h3>Hadithi za Bahari</h3>
+                <p class="book-desc">Hadithi za kusisimua za wavuvi, mabaharia na maajabu ya bahari ya Hindi ya Tanzania.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kitabu 54 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-6">
+                    <span>🎓</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Elimu</div>
+                <h3>Mtoto Shuleni</h3>
+                <p class="book-desc">Jinsi ya kumsaidia mtoto wako kufaulu shuleni — mazingira, mbinu na msaada wa mzazi.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+    
+        <!-- Kitabu 24 -->
+        <div class="book-card">
+            <div class="book-cover">
+                <div class="book-cover-placeholder cover-6">
+                    <span>🤝</span>
+                </div>
+                <div class="book-badge">Maarufu</div>
+            </div>
+            <div class="book-body">
+                <div class="book-category">Biashara &amp; Fedha</div>
+                <h3>Sanaa ya Mazungumzo</h3>
+                <p class="book-desc">Jinsi ya kuzungumza kwa ufanisi, kushawishi watu na kujenga mahusiano ya biashara.</p>
+                <div class="book-footer">
+                    <div class="book-price">
+                        <span class="price-label">Bei</span>
+                        <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                    </div>
+                    <a href="malipo.html" class="btn-buy">Nunua →</a>
+                </div>
+            </div>
+        </div>
+
+
+<!-- Kitabu 4 -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-placeholder cover-4">
+                        <span>💻</span>
+                    </div>
+                </div>
+                <div class="book-body">
+                    <div class="book-category">Teknolojia</div>
+                    <h3>Teknolojia ya Leo</h3>
+                    <p class="book-desc">Elewa teknolojia ya kisasa na jinsi ya kuitumia kukufikisha mbali zaidi maishani.</p>
+                    <div class="book-footer">
+                        <div class="book-price">
+                            <span class="price-label">Bei</span>
+                            <span class="price-value"><span class="price-currency">TSH </span>2,000</span>
+                        </div>
+                        <a href="malipo.html" class="btn-buy">Nunua →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<!-- Features Section -->
+    <section id="features">
+        <div class="features-inner">
+            <div class="section-header">
+                <div class="section-tag" style="color:var(--gold)">✨ Kwa Nini Sisi</div>
+                <h2 class="section-title" style="color:var(--white)">Huduma Zetu <em>Bora</em></h2>
+                <p class="section-desc" style="color:rgba(255,255,255,0.45)">Tunakupa uzoefu bora wa ununuzi wa vitabu vya kidigitali</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Upakuaji wa Haraka</h4>
+                    <p>Pata kitabu chako papo hapo baada ya malipo kukamilika kwa sekunde chache.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Malipo Salama</h4>
+                    <p>Mfumo wetu wa malipo una usalama wa hali ya juu kulinda fedha na taarifa zako.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h4>Soma Popote</h4>
+                    <p>Vitabu vya PDF vinaweza kusomwa kwenye simu, kompyuta au tablet yoyote.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h4>Msaada wa Haraka</h4>
+                    <p>Timu yetu iko tayari kukusaidia masaa 24 kwa siku, siku 7 kwa wiki.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>Sade <em>Books</em></h3>
+                <p>Duka lako la kwanza la vitabu vya kidigitali kwa Kiswahili.</p>
+            </div>
+            <div class="footer-links">
+                <h5>Viungo</h5>
+                <ul>
+                    <li><a href="#books">Vitabu</a></li>
+                    <li><a href="#features">Huduma</a></li>
+                    <li><a href="malipo.html">Malipo</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5>Msaada</h5>
+                <ul>
+                    <li><a href="contact.html">Mawasiliano</a></li>
+                    <li><a href="#">Maswali Yanayoulizwa</a></li>
+                    <li><a href="#">Sera ya Faragha</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sade Books. Haki zote zimehifadhiwa.</p>
+            <p>Imetengenezwa kwa ❤️ Tanzania</p>
+        </div>
+    </footer>
+
+
+<script>
+(function() {
+    var btn      = document.getElementById('hamburgerBtn');
+    var sidebar  = document.getElementById('sidebar');
+    var overlay  = document.getElementById('sidebarOverlay');
+    var closeBtn = document.getElementById('sidebarClose');
+    function openMenu() {
+        sidebar.classList.add('open');
+        overlay.classList.add('active');
+        btn.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        btn.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    btn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.sidebar-link').forEach(function(l) {
+        l.addEventListener('click', closeMenu);
+    });
+})();
+</script>
+</body>
+</html>
+
+                        
