@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Masharti &amp; Sera ya Faragha – Sade Books</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue-deep:   #0d1b3e;
+      --blue-mid:    #1a3a6e;
+      --blue-bright: #1e5bc6;
+      --blue-light:  #3b82f6;
+      --gold:        #f5a623;
+      --white:       #ffffff;
+      --off-white:   #f0f4ff;
+      --text-body:   #1e2d50;
+      --text-muted:  #5a6e99;
+      --border:      #d0daf5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--off-white);
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--white);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      box-shadow: 0 2px 12px rgba(13,27,62,.08);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 22px; font-weight: 800; color: var(--blue-deep); text-decoration: none; }
+    .logo span { color: var(--blue-light); }
+    .nav-btn {
+      background: var(--blue-bright); color: var(--white);
+      border: none; border-radius: 50px;
+      padding: 10px 22px; font-size: 14px; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-mid) 55%, #1e4fa3 100%);
+      padding: 60px 24px 52px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(59,130,246,.22) 0%, transparent 60%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 50px; padding: 8px 20px;
+      font-size: 11px; font-weight: 600; letter-spacing: .09em;
+      color: rgba(255,255,255,.85); text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 6vw, 44px); font-weight: 800;
+      color: var(--white); line-height: 1.2; margin-bottom: 10px;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p { color: rgba(255,255,255,.7); font-size: 14px; max-width: 480px; margin: 0 auto 24px; }
+    .hero-pills {
+      display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+    }
+    .pill {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50px; padding: 5px 14px;
+      font-size: 12px; color: rgba(255,255,255,.8); font-weight: 500;
+    }
+
+    /* ── TAB SWITCHER ── */
+    .tab-wrap {
+      max-width: 760px; margin: -24px auto 0;
+      padding: 0 16px; position: relative; z-index: 10;
+    }
+    .tab-box {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(13,27,62,.12);
+      padding: 10px;
+      display: flex; gap: 8px;
+    }
+    .tab-btn {
+      flex: 1; padding: 14px 10px;
+      border: none; border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px; font-weight: 700;
+      cursor: pointer; transition: all .25s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: transparent; color: var(--text-muted);
+    }
+    .tab-btn.active {
+      background: linear-gradient(90deg, var(--blue-bright), var(--blue-light));
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(30,91,198,.35);
+    }
+    .tab-btn:not(.active):hover { background: var(--off-white); color: var(--blue-bright); }
+
+    /* ── TOC ── */
+    .toc-wrap {
+      max-width: 760px; margin: 20px auto 0;
+      padding: 0 16px;
+    }
+    .toc {
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(13,27,62,.07);
+      padding: 20px 24px;
+    }
+    .toc-title {
+      font-size: 12px; font-weight: 700; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--blue-light);
+      margin-bottom: 12px;
+    }
+    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; }
+    @media(max-width:480px){ .toc-grid { grid-template-columns: 1fr; } }
+    .toc-link {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--text-body);
+      font-size: 13px; padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s;
+    }
+    .toc-link:hover { color: var(--blue-bright); }
+    .toc-dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--blue-bright); color: var(--white);
+      font-size: 10px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    /* ── CONTENT PANELS ── */
+    .panel { display: none; }
+    .panel.active { display: flex; flex-direction: column; gap: 22px; }
+
+    .content {
+      max-width: 760px; margin: 30px auto 80px;
+      padding: 0 16px;
+    }
+
+    .date-bar { text-align: center; font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+    .date-bar span {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 50px; padding: 4px 16px;
+    }
+
+    /* cards */
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(13,27,62,.07);
+      overflow: hidden;
+    }
+    .card-head {
+      background: linear-gradient(90deg, var(--blue-bright), var(--blue-light));
+      padding: 16px 26px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .card-icon {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; flex-shrink: 0;
+    }
+    .card-num {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,.22); color: var(--white);
+      font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .card-head h2 { font-size: 15px; font-weight: 700; color: var(--white); }
+    .card-body { padding: 20px 24px; }
+    .card-body p { font-size: 13.5px; color: var(--text-body); margin-bottom: 10px; }
+    .card-body p:last-child { margin-bottom: 0; }
+
+    /* lists */
+    .flist { list-style: none; margin: 8px 0; }
+    .flist li {
+      font-size: 13.5px; color: var(--text-body);
+      padding: 7px 0 7px 22px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .flist li:last-child { border-bottom: none; }
+    .flist li::before {
+      content: '▸'; position: absolute; left: 0; top: 10px;
+      color: var(--blue-light); font-size: 11px;
+    }
+
+    /* info boxes */
+    .info-box {
+      background: #eef4ff; border-left: 4px solid var(--blue-bright);
+      border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 10px 0;
+      font-size: 13px; color: var(--text-body);
+    }
+    .info-box strong { color: var(--blue-deep); }
+    .warn-box {
+      background: #fff8ed; border-left: 4px solid var(--gold);
+      border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 10px 0;
+      font-size: 13px; color: var(--text-body);
+    }
+    .green-box {
+      background: #edfff4; border-left: 4px solid #22c55e;
+      border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 10px 0;
+      font-size: 13px; color: var(--text-body);
+    }
+
+    /* data grid */
+    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+    @media(max-width:500px){ .data-grid { grid-template-columns: 1fr; } }
+    .data-item {
+      background: var(--off-white); border: 1px solid var(--border);
+      border-radius: 10px; padding: 11px 13px;
+    }
+    .data-item .di-label { font-size: 11px; font-weight: 700; color: var(--blue-light); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 3px; }
+    .data-item .di-val { font-size: 13px; color: var(--text-body); }
+
+    /* rights grid */
+    .rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+    @media(max-width:500px){ .rights-grid { grid-template-columns: 1fr; } }
+    .right-item {
+      background: linear-gradient(135deg, #f0f4ff, #e8effe);
+      border: 1px solid var(--border); border-radius: 12px; padding: 13px 14px;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .right-emoji { font-size: 20px; flex-shrink: 0; }
+    .rt-title { font-size: 13px; font-weight: 700; color: var(--blue-deep); margin-bottom: 2px; }
+    .rt-desc { font-size: 12px; color: var(--text-muted); }
+
+    /* payment badges */
+    .payment-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
+    .pay-badge {
+      background: var(--off-white); border: 1px solid var(--border);
+      border-radius: 8px; padding: 7px 14px;
+      font-size: 13px; font-weight: 600; color: var(--text-body);
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* divider between sections */
+    .section-divider {
+      display: flex; align-items: center; gap: 14px;
+      margin: 10px 0 6px;
+    }
+    .section-divider span {
+      font-size: 12px; font-weight: 700; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--blue-light);
+      white-space: nowrap;
+    }
+    .section-divider::before, .section-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* contact card */
+    .contact-card {
+      background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+      border-radius: 16px; padding: 30px 24px; text-align: center;
+    }
+    .contact-card h2 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .contact-card p { font-size: 14px; color: rgba(255,255,255,.7); margin-bottom: 22px; }
+    .btn-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .c-btn {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22);
+      border-radius: 50px; padding: 10px 22px;
+      font-size: 13px; font-weight: 600; color: var(--white);
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+      transition: background .2s;
+    }
+    .c-btn:hover { background: rgba(255,255,255,.22); }
+    .c-btn.primary { background: var(--blue-bright); border-color: var(--blue-bright); }
+
+    /* footer */
+    footer {
+      background: var(--blue-deep); color: rgba(255,255,255,.45);
+      text-align: center; padding: 24px 16px; font-size: 12px;
+    }
+    footer a { color: var(--blue-light); text-decoration: none; }
+    footer strong { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">Sade <span>Books</span></a>
+  <a class="nav-btn" href="index.html">🛒 Nunua</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">📋 Hati Rasmi · Sade Books</div>
+  <h1>Masharti &amp; <em>Faragha</em></h1>
+  <p>Taarifa zote muhimu kuhusu matumizi ya duka letu na ulinzi wa taarifa zako za kibinafsi.</p>
+  <div class="hero-pills">
+    <span class="pill">🇹🇿 Tanzania</span>
+    <span class="pill">🔐 Taarifa Salama</span>
+    <span class="pill">📅 Ilisasishwa 2026</span>
+    <span class="pill">🌍 Kiswahili</span>
+  </div>
+</div>
+
+<!-- TAB SWITCHER -->
+<div class="tab-wrap">
+  <div class="tab-box">
+    <button class="tab-btn active" onclick="switchTab('masharti', this)">📋 Masharti ya Matumizi</button>
+    <button class="tab-btn" onclick="switchTab('faragha', this)">🔒 Sera ya Faragha</button>
+  </div>
+</div>
+
+<!-- TOC - Masharti -->
+<div class="toc-wrap" id="toc-masharti">
+  <div class="toc">
+    <div class="toc-title">📑 Muhtasari wa Masharti</div>
+    <div class="toc-grid">
+      <a class="toc-link" href="#t1"><span class="toc-dot">1</span> Makubaliano ya Jumla</a>
+      <a class="toc-link" href="#t2"><span class="toc-dot">2</span> Usajili na Akaunti</a>
+      <a class="toc-link" href="#t3"><span class="toc-dot">3</span> Ununuzi na Malipo</a>
+      <a class="toc-link" href="#t4"><span class="toc-dot">4</span> Haki za Miliki</a>
+      <a class="toc-link" href="#t5"><span class="toc-dot">5</span> Matumizi Yanayoruhusiwa</a>
+      <a class="toc-link" href="#t6"><span class="toc-dot">6</span> Marekebisho</a>
+    </div>
+  </div>
+</div>
+
+<!-- TOC - Faragha -->
+<div class="toc-wrap" id="toc-faragha" style="display:none">
+  <div class="toc">
+    <div class="toc-title">🔒 Muhtasari wa Sera ya Faragha</div>
+    <div class="toc-grid">
+      <a class="toc-link" href="#p1"><span class="toc-dot">1</span> Taarifa Tunazokusanya</a>
+      <a class="toc-link" href="#p2"><span class="toc-dot">2</span> Jinsi Tunavyotumia</a>
+      <a class="toc-link" href="#p3"><span class="toc-dot">3</span> Usalama wa Data</a>
+      <a class="toc-link" href="#p4"><span class="toc-dot">4</span> Malipo na M-Pesa</a>
+      <a class="toc-link" href="#p5"><span class="toc-dot">5</span> Haki Zako</a>
+      <a class="toc-link" href="#p6"><span class="toc-dot">6</span> Kushirikiana na Wengine</a>
+      <a class="toc-link" href="#p7"><span class="toc-dot">7</span> Cookies</a>
+      <a class="toc-link" href="#p8"><span class="toc-dot">8</span> Wasiliana Nasi</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ CONTENT ════════════════ -->
+<div class="content">
+
+  <!-- ── PANEL: MASHARTI ── -->
+  <div class="panel active" id="panel-masharti">
+    <div class="date-bar"><span>📅 Ilisasishwa: Januari 2026</span></div>
+
+    <!-- Intro -->
+    <div class="card">
+      <div class="card-body">
+        <p>Karibu Sade Books — duka la vitabu vya kidigitali nchini Tanzania. Kwa kutumia tovuti hii au kununua vitabu vyetu, unakubaliana na masharti yote yaliyoandikwa hapa chini.</p>
+        <div class="info-box"><strong>Kumbuka:</strong> Ikiwa hukubaliani na masharti haya, tafadhali usifanye ununuzi wowote kwenye tovuti hii.</div>
+      </div>
+    </div>
+
+    <!-- T1 -->
+    <div class="card" id="t1">
+      <div class="card-head"><div class="card-num">1</div><h2>Makubaliano ya Jumla</h2></div>
+      <div class="card-body">
+        <p>Masharti haya yanashughulikia mahusiano kati yako (mtumiaji) na Sade Books (muuzaji) katika shughuli zote za ununuzi wa vitabu vya PDF na maudhui ya kidigitali.</p>
+        <p>Kwa kufanya ununuzi au kutumia huduma zetu, unakiri kwamba una umri wa miaka 18 au zaidi, au una idhini ya mzazi/mlezi.</p>
+      </div>
+    </div>
+
+    <!-- T2 -->
+    <div class="card" id="t2">
+      <div class="card-head"><div class="card-num">2</div><h2>Usajili na Akaunti</h2></div>
+      <div class="card-body">
+        <p>Ili kununua vitabu, unaweza kuhitaji kutoa taarifa zako za mawasiliano. Unawajibika kwa:</p>
+        <ul class="flist">
+          <li>Kutoa taarifa sahihi za jina lako na nambari ya simu</li>
+          <li>Kulinda usiri wa taarifa zako za malipo</li>
+          <li>Kutoa taarifa za kweli na sahihi wakati wa ununuzi</li>
+          <li>Kutumia akaunti yako mwenyewe tu — kutoshiriki na wengine</li>
+        </ul>
+        <div class="info-box">Sade Books inaweza kusimamisha ufikiaji wako ikiwa taarifa za ulaghai zitagunduliwa.</div>
+      </div>
+    </div>
+
+    <!-- T3 -->
+    <div class="card" id="t3">
+      <div class="card-head"><div class="card-num">3</div><h2>Ununuzi na Malipo</h2></div>
+      <div class="card-body">
+        <p>Bei zote zinaonyeshwa kwa Shilingi za Tanzania (TSH). Tunapokea malipo kupitia:</p>
+        <div class="payment-row">
+          <div class="pay-badge">📱 M-Pesa</div>
+          <div class="pay-badge">📱 Tigo Pesa</div>
+          <div class="pay-badge">📱 Airtel Money</div>
+        </div>
+        <p>Baada ya malipo kukamilika na kuthibitishwa, utapokea kiungo cha kupakua kitabu ndani ya <strong>dakika 30</strong> kupitia ujumbe wa WhatsApp au SMS.</p>
+        <div class="warn-box">⚠️ <strong>Sera ya Kurejesha Pesa:</strong> Kwa sababu vitabu ni bidhaa za kidigitali zinazopakiwa mara moja, pesa haitoswi baada ya kupakua. Iwapo kuna tatizo la kiufundi, wasiliana nasi ndani ya masaa 24.</div>
+      </div>
+    </div>
+
+    <!-- T4 -->
+    <div class="card" id="t4">
+      <div class="card-head"><div class="card-num">4</div><h2>Haki za Miliki ya Vitabu</h2></div>
+      <div class="card-body">
+        <p>Vitabu vyote vinauzwa chini ya leseni ya matumizi ya kibinafsi. Ununuzi wako <strong>haukupa haki</strong> ya:</p>
+        <ul class="flist">
+          <li>Kusambaza au kushiriki nakala ya kitabu na mtu mwingine</li>
+          <li>Kuuza au kukodisha kitabu kwa watu wengine</li>
+          <li>Kubadilisha, kuhariri, au kufanya nakala za maudhui</li>
+          <li>Kupakia kitabu kwenye tovuti nyingine au mitandao ya kijamii</li>
+          <li>Kutumia maudhui kwa madhumuni ya kibiashara bila ruhusa yetu</li>
+        </ul>
+        <div class="info-box"><strong>Haki za Sade Books:</strong> Maudhui yote, alama za biashara, na vitabu ni mali ya Sade Books na yanalindwa kisheria chini ya sheria za Tanzania.</div>
+      </div>
+    </div>
+
+    <!-- T5 -->
+    <div class="card" id="t5">
+      <div class="card-head"><div class="card-num">5</div><h2>Matumizi Yanayoruhusiwa</h2></div>
+      <div class="card-body">
+        <p><strong>Unaruhusiwa:</strong></p>
+        <ul class="flist">
+          <li>Kusoma kitabu kwa matumizi yako ya kibinafsi</li>
+          <li>Kuprinti nakala moja kwa matumizi yako binafsi</li>
+          <li>Kupakua vitabu kwenye vifaa viwili (simu na kompyuta) unazomiliki</li>
+          <li>Kusoma vitabu bila kikomo cha muda</li>
+        </ul>
+        <p><strong>Yanayokatazwa kabisa:</strong></p>
+        <ul class="flist">
+          <li>Usambazaji wa bure au kwa malipo kwa wengine</li>
+          <li>Kuunda bidhaa mpya kwa msingi wa maudhui yetu</li>
+          <li>Mafunzo ya AI kwa kutumia maudhui yetu bila ruhusa</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- T6 -->
+    <div class="card" id="t6">
+      <div class="card-head"><div class="card-num">6</div><h2>Marekebisho ya Masharti</h2></div>
+      <div class="card-body">
+        <p>Sade Books inajiwekea haki ya kubadilisha masharti haya wakati wowote. Mabadiliko yatatolewa taarifa kupitia:</p>
+        <ul class="flist">
+          <li>Ujumbe wa WhatsApp kwa wateja wetu waliopo</li>
+          <li>Tangazo kwenye ukurasa huu wa tovuti</li>
+          <li>Tarehe ya "Ilisasishwa" itabadilika juu ya ukurasa huu</li>
+        </ul>
+        <div class="info-box">Kuendelea kutumia tovuti yetu baada ya mabadiliko kunamaanisha unakubaliana na masharti mapya.</div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-card">
+      <h2>📞 Wasiliana Nasi</h2>
+      <p>Una swali kuhusu masharti haya? Tuko hapa kukusaidia.</p>
+      <div class="btn-row">
+        <a class="c-btn primary" href="https://wa.me/255712655957">💬 WhatsApp</a>
+        <a class="c-btn" href="mailto:hermansade3@gmail.com">✉️ Barua Pepe</a>
+        <a class="c-btn" href="contact.html">📋 Fomu</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL: FARAGHA ── -->
+  <div class="panel" id="panel-faragha">
+    <div class="date-bar"><span>📅 Ilisasishwa: Januari 2026</span></div>
+
+    <!-- Intro -->
+    <div class="card">
+      <div class="card-body">
+        <p>Sade Books inajali faragha ya wateja wake. Sera hii inaeleza taarifa gani tunazokusanya, jinsi tunavyozitumia, na jinsi tunavyozilinda.</p>
+        <div class="info-box"><strong>Dhamira yetu:</strong> Hatushirikishi wala kuuza taarifa zako kwa kampuni yoyote ya tatu kwa madhumuni ya kibiashara. Faragha yako ni heshima yetu.</div>
+      </div>
+    </div>
+
+    <!-- P1 -->
+    <div class="card" id="p1">
+      <div class="card-head"><div class="card-icon">📋</div><h2>Taarifa Tunazokusanya</h2></div>
+      <div class="card-body">
+        <p><strong>Taarifa Unazotupatia Wewe Mwenyewe:</strong></p>
+        <div class="data-grid">
+          <div class="data-item"><div class="di-label">👤 Jina</div><div class="di-val">Jina lako kamili unapowasiliana nasi</div></div>
+          <div class="data-item"><div class="di-label">📱 Simu</div><div class="di-val">Nambari ya simu kwa kutuma vitabu</div></div>
+          <div class="data-item"><div class="di-label">💬 WhatsApp</div><div class="di-val">Nambari ya WhatsApp (kama ni tofauti)</div></div>
+          <div class="data-item"><div class="di-label">📧 Barua Pepe</div><div class="di-val">Kama utawasiliana kupitia email</div></div>
+        </div>
+        <p><strong>Taarifa Zinazokusanywa Kiotomatiki:</strong></p>
+        <ul class="flist">
+          <li>Anwani ya IP ya kifaa chako unapotumia tovuti</li>
+          <li>Aina ya kivinjari (browser) na mfumo wa uendeshaji</li>
+          <li>Kurasa ulizozitembelea na muda uliokaa</li>
+          <li>Historia ya vitabu ulivyovitazama au kununua</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="card" id="p2">
+      <div class="card-head"><div class="card-icon">⚙️</div><h2>Jinsi Tunavyotumia Taarifa</h2></div>
+      <div class="card-body">
+        <p>Taarifa zako zinatumika kwa madhumuni yafuatayo <strong>tu</strong>:</p>
+        <ul class="flist">
+          <li>Kutuma kiungo cha kupakua kitabu baada ya malipo kukamilika</li>
+          <li>Kuthibitisha malipo yako na kutatua matatizo ya ununuzi</li>
+          <li>Kutoa msaada wa wateja inapohitajika</li>
+          <li>Kukutumia habari za vitabu vipya — ikiwa umeridhia kupokea</li>
+          <li>Kuboresha huduma na maudhui ya tovuti yetu</li>
+          <li>Kuzuia ulaghai na matumizi mabaya ya mfumo wetu</li>
+        </ul>
+        <div class="warn-box">⚠️ Hatutumii taarifa zako kwa matangazo ya kampuni zingine, wala kuziuza kwa mtu yeyote.</div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="card" id="p3">
+      <div class="card-head"><div class="card-icon">🛡️</div><h2>Usalama wa Data</h2></div>
+      <div class="card-body">
+        <p>Tunalinda taarifa zako kwa njia zifuatazo:</p>
+        <ul class="flist">
+          <li>Taarifa zote huhifadhiwa kwa njia ya siri (encrypted)</li>
+          <li>Ufikiaji wa taarifa umepunguzwa kwa wafanyakazi wachache tu wenye ruhusa</li>
+          <li>Hakuna mtu wa nje anayeweza kuona taarifa zako bila ruhusa</li>
+          <li>Tunafanya ukaguzi wa usalama mara kwa mara</li>
+        </ul>
+        <div class="green-box">✅ <strong>Hifadhi Salama:</strong> Taarifa zako zinahifadhiwa kwenye seva zilizolindwa. Hatuhifadhi nambari kamili za malipo ya simu.</div>
+        <div class="info-box"><strong>Muda wa Kuhifadhi:</strong> Taarifa zako zinahifadhiwa kwa muda wa miaka 3 baada ya ununuzi wako wa mwisho, au hadi utaomba kufutwa.</div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="card" id="p4">
+      <div class="card-head"><div class="card-icon">💳</div><h2>Malipo na Mifumo ya Pesa</h2></div>
+      <div class="card-body">
+        <p>Tunapokea malipo kupitia mifumo ya Tanzania:</p>
+        <div class="payment-row">
+          <div class="pay-badge">📱 M-Pesa</div>
+          <div class="pay-badge">📱 Tigo Pesa</div>
+          <div class="pay-badge">📱 Airtel Money</div>
+        </div>
+        <ul class="flist">
+          <li>Tunapokea uthibitisho wa malipo tu — si nambari kamili za akaunti yako</li>
+          <li>Rekodi ya muamala (transaction ID) inahifadhiwa kwa ajili ya uthibitisho</li>
+          <li>Mifumo ya malipo ina sera zao binafsi za faragha</li>
+          <li>Hatuunganishi taarifa za malipo na mifumo mingine ya kibiashara</li>
+        </ul>
+        <div class="info-box"><strong>Kumbuka:</strong> Sade Books haioni PIN au nenosiri lako la M-Pesa wakati wowote.</div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="card" id="p5">
+      <div class="card-head"><div class="card-icon">⚖️</div><h2>Haki Zako</h2></div>
+      <div class="card-body">
+        <p>Una haki zifuatazo kuhusu taarifa zako:</p>
+        <div class="rights-grid">
+          <div class="right-item"><div class="right-emoji">👁️</div><div><div class="rt-title">Haki ya Kuona</div><div class="rt-desc">Omba nakala ya taarifa zako zote tulizonazo</div></div></div>
+          <div class="right-item"><div class="right-emoji">✏️</div><div><div class="rt-title">Haki ya Kurekebisha</div><div class="rt-desc">Sahihisha taarifa zako zisizo sahihi</div></div></div>
+          <div class="right-item"><div class="right-emoji">🗑️</div><div><div class="rt-title">Haki ya Kufuta</div><div class="rt-desc">Omba taarifa zako zifutwe kutoka mfumo wetu</div></div></div>
+          <div class="right-item"><div class="right-emoji">🚫</div><div><div class="rt-title">Haki ya Kupinga</div><div class="rt-desc">Zuia matumizi fulani ya taarifa zako</div></div></div>
+          <div class="right-item"><div class="right-emoji">📤</div><div><div class="rt-title">Haki ya Kuchukua</div><div class="rt-desc">Omba taarifa zako katika muundo unaoweza kusomwa</div></div></div>
+          <div class="right-item"><div class="right-emoji">🔕</div><div><div class="rt-title">Jiondoe Habari</div><div class="rt-desc">Acha kupokea ujumbe wa masoko wakati wowote</div></div></div>
+        </div>
+        <div class="info-box">Kutumia haki yoyote hapo juu, wasiliana nasi kupitia WhatsApp au barua pepe. Tutajibu ndani ya siku 7 za kazi.</div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="card" id="p6">
+      <div class="card-head"><div class="card-icon">🤝</div><h2>Kushirikiana na Wahusika Wengine</h2></div>
+      <div class="card-body">
+        <p>Tunashirikiana na wahusika wachache tu, na kwa madhumuni maalum:</p>
+        <ul class="flist">
+          <li><strong>Mifumo ya Malipo (M-Pesa, Tigo, Airtel):</strong> Kuthibitisha malipo yako tu</li>
+          <li><strong>Watoa Huduma wa Hosting:</strong> Kuhifadhi tovuti yetu kwa usalama</li>
+          <li><strong>WhatsApp Business:</strong> Kutuma vitabu na mawasiliano ya msaada</li>
+        </ul>
+        <div class="warn-box">⚠️ <strong>Hatushirikishi:</strong> Kampuni za matangazo, watoa huduma wa uuzaji data, au mtu yeyote asiye na uhusiano na huduma zetu.</div>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="card" id="p7">
+      <div class="card-head"><div class="card-icon">🍪</div><h2>Cookies na Ufuatiliaji</h2></div>
+      <div class="card-body">
+        <p>Tovuti yetu inatumia cookies (faili ndogo za data) kwa madhumuni yafuatayo:</p>
+        <ul class="flist">
+          <li><strong>Cookies Muhimu:</strong> Kukumbuka bidhaa ulizoziweka kwenye mkoba wa ununuzi</li>
+          <li><strong>Cookies za Utendaji:</strong> Kuelewa ni kurasa zipi zinatembelewa zaidi</li>
+          <li><strong>Cookies za Upendeleo:</strong> Kukumbuka lugha na mipangilio yako</li>
+        </ul>
+        <div class="info-box"><strong>Udhibiti wa Cookies:</strong> Unaweza kuzima cookies kupitia mipangilio ya kivinjari chako. Hata hivyo, baadhi ya vipengele vya tovuti vinaweza kutofanya kazi vizuri.</div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-card" id="p8">
+      <h2>📞 Wasiliana Nasi</h2>
+      <p>Una swali au ombi kuhusu faragha yako? Tutajibu haraka iwezekanavyo.</p>
+      <div class="btn-row">
+        <a class="c-btn primary" href="https://wa.me/255712655957">💬 WhatsApp</a>
+        <a class="c-btn" href="mailto:hermansade3@gmail.com">✉️ Barua Pepe</a>
+        <a class="c-btn" href="contact.html">📋 Fomu</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <strong>Sade Books</strong> · Duka la Vitabu vya Kidigitali · Tanzania</p>
+  <p style="margin-top:6px">
+    <a href="index.html">Nyumbani</a> ·
+    <a href="books.html">Vitabu</a> ·
+    <a href="contact.html">Wasiliana</a>
+  </p>
+</footer>
+
+<script>
+  function switchTab(name, btn) {
+    // panels
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+
+    // tabs
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // tocs
+    document.getElementById('toc-masharti').style.display = name === 'masharti' ? '' : 'none';
+    document.getElementById('toc-faragha').style.display  = name === 'faragha'  ? '' : 'none';
+
+    // scroll to top of content
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
