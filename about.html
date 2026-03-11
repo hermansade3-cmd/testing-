@@ -1,522 +1,818 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kuhusu Sade Books</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <title>Kuhusu Sade Books – Mmiliki & Copyright</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --dark:       #1a0f08;
-      --dark2:      #2d1810;
-      --dark3:      #3d2418;
-      --gold:       #c9a84c;
-      --gold-light: #e8c97a;
-      --gold-dim:   rgba(201,168,76,0.15);
-      --gold-border:rgba(201,168,76,0.25);
-      --white:      #faf7f2;
-      --text-light: rgba(250,247,242,0.75);
-      --text-dim:   rgba(250,247,242,0.45);
+      --blue-deep:   #0d1b3e;
+      --blue-mid:    #1a3a6e;
+      --blue-bright: #1e5bc6;
+      --blue-light:  #3b82f6;
+      --gold:        #f5a623;
+      --white:       #ffffff;
+      --off-white:   #f0f4ff;
+      --text-body:   #1e2d50;
+      --text-muted:  #5a6e99;
+      --border:      #d0daf5;
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
-
-    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--dark);
-      color: var(--white);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: var(--off-white);
+      color: var(--text-body);
+      line-height: 1.7;
     }
 
-    /* ===== NAV ===== */
+    /* ── NAV ── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(26,15,8,0.95);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--gold-border);
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      box-shadow: 0 2px 12px rgba(13,27,62,.08);
+      position: sticky; top: 0; z-index: 100;
     }
-    .nav-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--white);
-      text-decoration: none;
+    .logo { font-size: 22px; font-weight: 800; color: var(--blue-deep); text-decoration: none; }
+    .logo span { color: var(--blue-light); }
+    .nav-btn {
+      background: var(--blue-bright); color: var(--white);
+      border: none; border-radius: 50px;
+      padding: 10px 22px; font-size: 14px; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
     }
-    .nav-brand em { color: var(--gold); font-style: normal; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-light);
-      font-size: 0.88rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--gold); }
 
-    /* ===== HERO ===== */
-    .page-hero {
-      position: relative;
-      padding: 100px 2rem 80px;
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-mid) 50%, #1e4fa3 100%);
+      padding: 60px 24px 52px;
       text-align: center;
-      overflow: hidden;
-      background: linear-gradient(160deg, #2d1810 0%, #1a0f08 60%);
+      position: relative; overflow: hidden;
     }
-    .page-hero::before {
+    .hero::before {
       content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 50% at 20% 30%, rgba(201,168,76,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(201,168,76,0.08) 0%, transparent 70%);
-      pointer-events: none;
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 20%, rgba(59,130,246,.25) 0%, transparent 60%);
     }
-    .hero-tag {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: var(--gold-dim);
-      border: 1px solid var(--gold-border);
-      padding: 0.3rem 1.2rem;
-      border-radius: 100px;
-      margin-bottom: 1.5rem;
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -60px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(255,255,255,.03);
     }
-    .page-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1.2rem;
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 50px; padding: 8px 20px;
+      font-size: 11px; font-weight: 600; letter-spacing: .09em;
+      color: rgba(255,255,255,.85); text-transform: uppercase;
+      margin-bottom: 18px; position: relative;
     }
-    .page-hero h1 em { color: var(--gold); font-style: italic; }
-    .page-hero p {
-      max-width: 560px;
-      margin: 0 auto;
-      color: var(--text-light);
-      font-size: 1.1rem;
+    .hero h1 {
+      font-size: clamp(26px, 6vw, 44px); font-weight: 800;
+      color: var(--white); line-height: 1.2; margin-bottom: 10px;
+      position: relative;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p {
+      color: rgba(255,255,255,.7); font-size: 14px;
+      max-width: 480px; margin: 0 auto 28px; position: relative;
+    }
+    .hero-pills {
+      display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+      position: relative;
+    }
+    .pill {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50px; padding: 5px 14px;
+      font-size: 12px; color: rgba(255,255,255,.8); font-weight: 500;
     }
 
-    /* ===== SECTION BASE ===== */
-    section {
-      padding: 80px 2rem;
-      max-width: 900px;
-      margin: 0 auto;
+    /* ── TAB SWITCHER ── */
+    .tab-wrap {
+      max-width: 760px; margin: -24px auto 0;
+      padding: 0 16px; position: relative; z-index: 10;
     }
-    .section-label {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: var(--gold-dim);
-      border: 1px solid var(--gold-border);
-      padding: 0.25rem 1rem;
-      border-radius: 100px;
-      margin-bottom: 1rem;
+    .tab-box {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(13,27,62,.12);
+      padding: 10px;
+      display: flex; gap: 6px;
     }
-    section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
+    .tab-btn {
+      flex: 1; padding: 13px 8px;
+      border: none; border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all .25s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: transparent; color: var(--text-muted);
+    }
+    .tab-btn.active {
+      background: linear-gradient(90deg, var(--blue-bright), var(--blue-light));
       color: var(--white);
+      box-shadow: 0 4px 14px rgba(30,91,198,.35);
     }
-    section h2 em { color: var(--gold); font-style: italic; }
-    section p {
-      color: var(--text-light);
-      font-size: 1.05rem;
-      line-height: 1.85;
-      margin-bottom: 1rem;
+    .tab-btn:not(.active):hover { background: var(--off-white); color: var(--blue-bright); }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 760px; margin: 30px auto 80px;
+      padding: 0 16px;
+    }
+    .panel { display: none; flex-direction: column; gap: 22px; }
+    .panel.active { display: flex; }
+
+    .date-bar { text-align: center; font-size: 12px; color: var(--text-muted); }
+    .date-bar span {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 50px; padding: 4px 16px;
     }
 
-    /* ===== DIVIDER ===== */
-    .gold-divider {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
-      margin: 0 auto;
-    }
-
-    /* ===== 1. KUHUSU SADE BOOKS ===== */
-    #kuhusu {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    @media(max-width:680px){ #kuhusu { grid-template-columns:1fr; } }
-    .kuhusu-badge {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--dark3), var(--dark2));
-      border: 2px solid var(--gold-border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
-      box-shadow: 0 0 60px rgba(201,168,76,0.1);
-    }
-    .kuhusu-badge .icon { font-size: 3.5rem; margin-bottom: 0.5rem; }
-    .kuhusu-badge span {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: var(--gold);
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-
-    /* ===== 2. JINSI YA KUNUNUA ===== */
-    #kununua { background: var(--dark2); border-radius: 24px; padding: 60px 40px; max-width: 900px; }
-    .steps { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
-    .step {
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--gold-border);
+    /* cards */
+    .card {
+      background: var(--white);
       border-radius: 16px;
-      padding: 1.5rem;
-      transition: background 0.2s;
+      box-shadow: 0 4px 20px rgba(13,27,62,.07);
+      overflow: hidden;
     }
-    .step:hover { background: var(--gold-dim); }
-    .step-num {
-      min-width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--gold-dim);
-      border: 1px solid var(--gold-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--gold);
+    .card-head {
+      background: linear-gradient(90deg, var(--blue-bright), var(--blue-light));
+      padding: 16px 24px;
+      display: flex; align-items: center; gap: 12px;
     }
-    .step-content h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--white);
-      margin-bottom: 0.3rem;
+    .card-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
     }
-    .step-content p { margin: 0; font-size: 0.95rem; }
+    .card-head h2 { font-size: 16px; font-weight: 700; color: var(--white); }
+    .card-body { padding: 22px 24px; }
+    .card-body p { font-size: 13.5px; color: var(--text-body); margin-bottom: 10px; }
+    .card-body p:last-child { margin-bottom: 0; }
 
-    /* ===== 3. AINA ZA VITABU ===== */
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.2rem;
-      margin-top: 2rem;
+    /* lists */
+    .flist { list-style: none; margin: 8px 0; }
+    .flist li {
+      font-size: 13.5px; color: var(--text-body);
+      padding: 7px 0 7px 22px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
     }
-    .cat-card {
-      background: var(--dark2);
-      border: 1px solid var(--gold-border);
+    .flist li:last-child { border-bottom: none; }
+    .flist li::before {
+      content: '▸'; position: absolute; left: 0; top: 10px;
+      color: var(--blue-light); font-size: 11px;
+    }
+
+    /* info boxes */
+    .info-box {
+      background: #eef4ff; border-left: 4px solid var(--blue-bright);
+      border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 10px 0;
+      font-size: 13px; color: var(--text-body);
+    }
+    .info-box strong { color: var(--blue-deep); }
+    .warn-box {
+      background: #fff8ed; border-left: 4px solid var(--gold);
+      border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 10px 0;
+      font-size: 13px; color: var(--text-body);
+    }
+    .green-box {
+      background: #edfff4; border-left: 4px solid #22c55e;
+      border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 10px 0;
+      font-size: 13px; color: var(--text-body);
+    }
+
+    /* ── ABOUT: OWNER CARD ── */
+    .owner-card {
+      background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
       border-radius: 16px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .cat-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(201,168,76,0.12);
-    }
-    .cat-icon { font-size: 2rem; margin-bottom: 0.7rem; }
-    .cat-card h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
-    }
-    .cat-card p { font-size: 0.85rem; color: var(--text-dim); margin: 0; }
-
-    /* ===== 4. MASHARTI ===== */
-    #masharti { background: var(--dark2); border-radius: 24px; padding: 60px 40px; max-width: 900px; }
-    .masharti-list { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
-    .masharti-list li {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      padding: 1rem 1.2rem;
-      border-left: 3px solid var(--gold);
-      background: rgba(255,255,255,0.02);
-      border-radius: 0 12px 12px 0;
-    }
-    .masharti-list li span.ico { font-size: 1.2rem; }
-    .masharti-list li p { margin: 0; font-size: 0.95rem; color: var(--text-light); }
-
-    /* ===== 5. PRIVACY ===== */
-    .privacy-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.2rem;
-      margin-top: 2rem;
-    }
-    .privacy-card {
-      background: var(--dark2);
-      border: 1px solid var(--gold-border);
-      border-radius: 16px;
-      padding: 1.5rem;
-    }
-    .privacy-card h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: var(--gold-light);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .privacy-card p { font-size: 0.9rem; color: var(--text-light); margin: 0; }
-
-    /* ===== 6. MAWASILIANO ===== */
-    #mawasiliano { text-align: center; }
-    .contact-box {
-      background: linear-gradient(135deg, var(--dark2), var(--dark3));
-      border: 1px solid var(--gold-border);
-      border-radius: 24px;
-      padding: 3rem 2rem;
-      margin-top: 2rem;
-      box-shadow: 0 0 60px rgba(201,168,76,0.08);
-    }
-    .contact-items {
-      display: flex;
+      padding: 28px 24px;
+      display: flex; align-items: center; gap: 20px;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 2rem;
     }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: var(--gold-dim);
-      border: 1px solid var(--gold-border);
-      border-radius: 100px;
-      padding: 0.6rem 1.5rem;
-      font-size: 0.92rem;
-      color: var(--white);
-      text-decoration: none;
-      transition: background 0.2s;
+    .owner-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-light), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; flex-shrink: 0;
+      border: 3px solid rgba(255,255,255,.3);
     }
-    .contact-item:hover { background: rgba(201,168,76,0.25); }
-    .contact-item span { font-size: 1.1rem; }
+    .owner-info { flex: 1; min-width: 180px; }
+    .owner-info h2 { font-size: 20px; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+    .owner-info .owner-role {
+      font-size: 13px; color: var(--gold); font-weight: 600; margin-bottom: 10px;
+    }
+    .owner-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .owner-tag {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50px; padding: 3px 12px;
+      font-size: 11px; color: rgba(255,255,255,.8); font-weight: 500;
+    }
 
-    /* ===== FOOTER ===== */
+    /* ── ABOUT: STATS ROW ── */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    }
+    @media(max-width:500px){ .stats-row { grid-template-columns: repeat(2,1fr); } }
+    .stat-item {
+      background: var(--white); border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(13,27,62,.07);
+      padding: 18px 14px; text-align: center;
+    }
+    .stat-item .s-val { font-size: 26px; font-weight: 800; color: var(--blue-bright); line-height: 1; }
+    .stat-item .s-lbl { font-size: 11px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
+
+    /* ── ABOUT: MISSION ── */
+    .mission-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;
+    }
+    @media(max-width:500px){ .mission-grid { grid-template-columns: 1fr; } }
+    .mission-item {
+      background: var(--off-white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px;
+    }
+    .mission-item .m-icon { font-size: 24px; margin-bottom: 8px; }
+    .mission-item .m-title { font-size: 13px; font-weight: 700; color: var(--blue-deep); margin-bottom: 4px; }
+    .mission-item .m-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── ABOUT: CATEGORIES ── */
+    .cat-grid {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;
+    }
+    .cat-badge {
+      background: linear-gradient(90deg, #eef4ff, #e0eaff);
+      border: 1px solid var(--border);
+      border-radius: 50px; padding: 6px 14px;
+      font-size: 12px; font-weight: 600; color: var(--blue-bright);
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ── ABOUT: TIMELINE ── */
+    .timeline { margin: 10px 0; }
+    .t-item {
+      display: flex; gap: 14px; padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .t-item:last-child { border-bottom: none; }
+    .t-dot {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-bright), var(--blue-light));
+      color: var(--white); font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .t-content .t-year { font-size: 11px; font-weight: 700; color: var(--blue-light); text-transform: uppercase; letter-spacing: .07em; }
+    .t-content .t-text { font-size: 13.5px; color: var(--text-body); }
+
+    /* ── COPYRIGHT: BIG NOTICE ── */
+    .copyright-banner {
+      background: linear-gradient(135deg, var(--blue-deep), #0a1530);
+      border-radius: 16px; padding: 28px 24px; text-align: center;
+      border: 1px solid rgba(59,130,246,.2);
+      position: relative; overflow: hidden;
+    }
+    .copyright-banner::before {
+      content: '©';
+      position: absolute; right: -20px; top: -30px;
+      font-size: 160px; font-weight: 900; color: rgba(255,255,255,.03);
+      line-height: 1;
+    }
+    .copyright-banner .c-year {
+      font-size: 48px; font-weight: 900; color: var(--gold);
+      line-height: 1; margin-bottom: 4px;
+    }
+    .copyright-banner .c-name {
+      font-size: 22px; font-weight: 800; color: var(--white);
+      margin-bottom: 6px;
+    }
+    .copyright-banner .c-sub {
+      font-size: 13px; color: rgba(255,255,255,.6);
+      margin-bottom: 18px;
+    }
+    .copyright-banner .c-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(245,166,35,.15);
+      border: 1px solid rgba(245,166,35,.3);
+      border-radius: 50px; padding: 7px 18px;
+      font-size: 12px; font-weight: 700; color: var(--gold);
+    }
+
+    /* ── COPYRIGHT: RIGHTS GRID ── */
+    .rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    @media(max-width:500px){ .rights-grid { grid-template-columns: 1fr; } }
+    .right-card {
+      border-radius: 12px; padding: 16px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .right-card.allowed { background: #edfff4; border: 1px solid #bbf7d0; }
+    .right-card.denied  { background: #fff1f1; border: 1px solid #fecaca; }
+    .right-card .rc-icon { font-size: 22px; flex-shrink: 0; }
+    .right-card .rc-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+    .right-card.allowed .rc-title { color: #15803d; }
+    .right-card.denied  .rc-title { color: #b91c1c; }
+    .right-card .rc-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── COPYRIGHT: PENALTY ── */
+    .penalty-box {
+      background: linear-gradient(135deg, #fff1f1, #ffe4e4);
+      border: 1px solid #fecaca; border-radius: 14px; padding: 20px 22px;
+    }
+    .penalty-box h3 { font-size: 14px; font-weight: 700; color: #b91c1c; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .penalty-box ul { list-style: none; }
+    .penalty-box ul li {
+      font-size: 13px; color: #7f1d1d;
+      padding: 6px 0 6px 20px; position: relative;
+      border-bottom: 1px solid rgba(185,28,28,.1);
+    }
+    .penalty-box ul li:last-child { border-bottom: none; }
+    .penalty-box ul li::before { content: '⚠'; position: absolute; left: 0; font-size: 11px; top: 8px; }
+
+    /* ── CONTACT ── */
+    .contact-card {
+      background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+      border-radius: 16px; padding: 30px 24px; text-align: center;
+    }
+    .contact-card h2 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .contact-card p { font-size: 14px; color: rgba(255,255,255,.7); margin-bottom: 22px; }
+    .btn-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .c-btn {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22);
+      border-radius: 50px; padding: 10px 22px;
+      font-size: 13px; font-weight: 600; color: var(--white);
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+      transition: background .2s;
+    }
+    .c-btn:hover { background: rgba(255,255,255,.22); }
+    .c-btn.primary { background: var(--blue-bright); border-color: var(--blue-bright); }
+
+    /* ── OWNER INFO DETAILS ── */
+    .owner-details-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;
+    }
+    @media(max-width:500px){ .owner-details-grid { grid-template-columns: 1fr; } }
+    .od-item {
+      background: var(--off-white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .od-icon { font-size: 22px; flex-shrink: 0; }
+    .od-label { font-size: 11px; font-weight: 700; color: var(--blue-light); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 2px; }
+    .od-val { font-size: 13px; color: var(--text-body); font-weight: 600; }
+    .od-val a { color: var(--blue-bright); text-decoration: none; }
+
+    /* footer */
     footer {
-      text-align: center;
-      padding: 2.5rem 2rem;
-      border-top: 1px solid var(--gold-border);
-      color: var(--text-dim);
-      font-size: 0.85rem;
+      background: var(--blue-deep); color: rgba(255,255,255,.45);
+      text-align: center; padding: 24px 16px; font-size: 12px;
     }
-    footer em { color: var(--gold); font-style: normal; }
-
-    /* ===== ANIMATIONS ===== */
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(30px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    .page-hero > * { animation: fadeUp 0.8s ease both; }
-    .page-hero .hero-tag   { animation-delay: 0.1s; }
-    .page-hero h1          { animation-delay: 0.25s; }
-    .page-hero p           { animation-delay: 0.4s; }
+    footer a { color: var(--blue-light); text-decoration: none; }
+    footer strong { color: var(--white); }
   </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-brand">Sade <em>Books</em></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Nyumbani</a></li>
-    <li><a href="books.html">Vitabu</a></li>
-    <li><a href="download.html">Pakua</a></li>
-    <li><a href="about.html" style="color:var(--gold)">Kuhusu</a></li>
-    <li><a href="contact.html">Wasiliana</a></li>
-  </ul>
+  <a class="logo" href="index.html">Sade <span>Books</span></a>
+  <a class="nav-btn" href="index.html">🛒 Nunua</a>
 </nav>
 
 <!-- HERO -->
-<div class="page-hero">
-  <div class="hero-tag">📖 Sade Books — Tanzania</div>
-  <h1>Kila Kitu Unachohitaji <em>Kujua</em></h1>
-  <p>Maelezo ya huduma zetu, jinsi ya kununua vitabu, masharti, na njia za kuwasiliana nasi.</p>
+<div class="hero">
+  <div class="hero-badge">📚 Sade Books · Tanzania</div>
+  <h1>Kuhusu <em>Sade Books</em></h1>
+  <p>Taarifa za mmiliki, dhamira yetu, haki za miliki, na habari zote muhimu za duka letu.</p>
+  <div class="hero-pills">
+    <span class="pill">👤 Mmiliki</span>
+    <span class="pill">©️ Copyright</span>
+    <span class="pill">📖 Kuhusu Sisi</span>
+    <span class="pill">🇹🇿 Tanzania</span>
+  </div>
 </div>
 
-<!-- ===== 1. KUHUSU SADE BOOKS ===== -->
-<div class="gold-divider"></div>
-<section style="max-width:900px; padding-top:80px; padding-bottom:40px;">
-  <div id="kuhusu">
-    <div>
-      <span class="section-label">01 — Kuhusu Sisi</span>
-      <h2>Kuhusu <em>Sade Books</em></h2>
-      <p>Sade Books ni duka la vitabu vya kidijitali linalotoa vitabu bora vya Kiswahili kwa wasomaji wote Tanzania na duniani kote.</p>
-      <p>Lengo letu ni kuhakikisha maarifa yanafika kwa kila mtu — kwa bei nafuu, kwa lugha yako, wakati wowote unapotaka.</p>
-      <p>Tunaanzisha maktaba ya kidijitali inayokua — kutoka afya, biashara, malezi, hadi hadithi za kusisimua.</p>
-    </div>
-    <div class="kuhusu-badge">
-      <div class="icon">📚</div>
-      <span>Sade Books</span>
-    </div>
+<!-- TAB SWITCHER -->
+<div class="tab-wrap">
+  <div class="tab-box">
+    <button class="tab-btn active" onclick="switchTab('about', this)">📖 Kuhusu Sisi</button>
+    <button class="tab-btn" onclick="switchTab('mmiliki', this)">👤 Mmiliki</button>
+    <button class="tab-btn" onclick="switchTab('copyright', this)">© Copyright</button>
   </div>
-</section>
+</div>
 
-<!-- ===== 2. JINSI YA KUNUNUA ===== -->
-<div class="gold-divider"></div>
-<section id="kununua" style="margin-top:60px; margin-bottom:60px;">
-  <span class="section-label">02 — Mwongozo</span>
-  <h2>Jinsi ya <em>Kununua</em> Vitabu</h2>
-  <p>Mchakato wetu ni rahisi na salama. Fuata hatua hizi:</p>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-content">
-        <h4>Chagua Kitabu</h4>
-        <p>Tembelea ukurasa wa vitabu na chagua kitabu unachotaka. Soma maelezo na jedwali la maudhui kabla ya kununua.</p>
+<!-- ════════════════ CONTENT ════════════════ -->
+<div class="content">
+
+  <!-- ══ PANEL: ABOUT ══ -->
+  <div class="panel active" id="panel-about">
+    <div class="date-bar"><span>📅 Tangu 2024 · Tanzania</span></div>
+
+    <!-- What is Sade Books -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">📚</div><h2>Sade Books ni Nini?</h2></div>
+      <div class="card-body">
+        <p>Sade Books ni duka la kwanza la vitabu vya kidigitali (e-books) nchini Tanzania linalotoa maudhui yake yote kwa lugha ya Kiswahili. Tunaaminika kwa ubora, bei nafuu, na upatikanaji wa masaa 24/7.</p>
+        <p>Tunaamini kwamba maarifa ni haki ya kila Mtanzania — ndio maana tunauza vitabu vyetu kwa bei moja rahisi ya <strong>TSH 2,000</strong> tu.</p>
+        <div class="info-box"><strong>Dhamira Yetu:</strong> Kuwafikia Watanzania wote maarifa bora kupitia teknolojia ya kisasa na lugha yao ya mama — Kiswahili.</div>
       </div>
     </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-content">
-        <h4>Lipa kwa M-Pesa / Tigo / Airtel</h4>
-        <p>Tumia simu yako kulipa kwa urahisi kupitia M-Pesa, Tigopesa, au Airtel Money. Malipo salama na ya haraka.</p>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-item"><div class="s-val">120+</div><div class="s-lbl">Vitabu</div></div>
+      <div class="stat-item"><div class="s-val">15+</div><div class="s-lbl">Mada</div></div>
+      <div class="stat-item"><div class="s-val">2K</div><div class="s-lbl">Bei TSH</div></div>
+      <div class="stat-item"><div class="s-val">24/7</div><div class="s-lbl">Upatikanaji</div></div>
+    </div>
+
+    <!-- Mission & Values -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">🎯</div><h2>Dhamira na Maadili Yetu</h2></div>
+      <div class="card-body">
+        <div class="mission-grid">
+          <div class="mission-item">
+            <div class="m-icon">💡</div>
+            <div class="m-title">Maarifa kwa Wote</div>
+            <div class="m-desc">Kuhakikisha kila Mtanzania anapata fursa ya kujifunza bila vizuizi vya bei au lugha.</div>
+          </div>
+          <div class="mission-item">
+            <div class="m-icon">🌍</div>
+            <div class="m-title">Kiswahili Kwanza</div>
+            <div class="m-desc">Vitabu vyetu vyote vimeandikwa kwa Kiswahili safi ili kueleweka vizuri zaidi.</div>
+          </div>
+          <div class="mission-item">
+            <div class="m-icon">⚡</div>
+            <div class="m-title">Urahisi wa Kupata</div>
+            <div class="m-desc">Nunua leo, pata kitabu chako ndani ya dakika 30 kupitia WhatsApp au SMS.</div>
+          </div>
+          <div class="mission-item">
+            <div class="m-icon">🔒</div>
+            <div class="m-title">Ubora Unaohakikishwa</div>
+            <div class="m-desc">Kila kitabu kinapitia ukaguzi wa ubora kabla ya kuuzwa kwenye duka letu.</div>
+          </div>
+          <div class="mission-item">
+            <div class="m-icon">💰</div>
+            <div class="m-title">Bei Nafuu</div>
+            <div class="m-desc">Bei moja ya TSH 2,000 kwa vitabu vyote — hakuna ada za ziada au usajili.</div>
+          </div>
+          <div class="mission-item">
+            <div class="m-icon">📱</div>
+            <div class="m-title">Teknolojia ya Kisasa</div>
+            <div class="m-desc">Tunatumia M-Pesa, WhatsApp, na mifumo ya dijitali inayofahamika na Watanzania.</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-content">
-        <h4>Pokea Kitabu Chako</h4>
-        <p>Baada ya malipo kukamilika, utapata kiungo cha kupakua kitabu chako mara moja kwenye simu yako.</p>
+
+    <!-- Categories -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">🗂️</div><h2>Mada za Vitabu Vyetu</h2></div>
+      <div class="card-body">
+        <p>Tunashughulikia mada 15+ zinazogusa maisha ya kila siku ya Mtanzania:</p>
+        <div class="cat-grid">
+          <div class="cat-badge">💼 Biashara</div>
+          <div class="cat-badge">💰 Fedha &amp; Akaunti</div>
+          <div class="cat-badge">🏥 Afya</div>
+          <div class="cat-badge">👗 Nguo &amp; Mitindo</div>
+          <div class="cat-badge">🐄 Mifugo</div>
+          <div class="cat-badge">🌱 Kilimo</div>
+          <div class="cat-badge">👶 Uzazi</div>
+          <div class="cat-badge">📖 Dini</div>
+          <div class="cat-badge">👑 Viongozi</div>
+          <div class="cat-badge">💻 Teknolojia</div>
+          <div class="cat-badge">🎓 Elimu</div>
+          <div class="cat-badge">🏠 Nyumba &amp; Familia</div>
+          <div class="cat-badge">🚀 Ujasiriamali</div>
+          <div class="cat-badge">🧠 Maendeleo Binafsi</div>
+          <div class="cat-badge">⚖️ Sheria</div>
+        </div>
       </div>
     </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-content">
-        <h4>Soma Popote</h4>
-        <p>Vitabu vya PDF vinafanya kazi kwenye simu, kompyuta, na kompyuta kibao — bila ya intaneti baada ya kupakua.</p>
+
+    <!-- Timeline -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">📅</div><h2>Historia Yetu</h2></div>
+      <div class="card-body">
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-dot">🌱</div>
+            <div class="t-content">
+              <div class="t-year">2024 — Mwanzo</div>
+              <div class="t-text">Sade Books ilianzishwa na Herman Sade na maono ya kuleta vitabu vya Kiswahili kwa Watanzania wote kwa bei nafuu.</div>
+            </div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot">📈</div>
+            <div class="t-content">
+              <div class="t-year">2024 — Ukuaji</div>
+              <div class="t-text">Duka lilifika vitabu 50+ katika mada zaidi ya 10, wateja wakiongezeka kila siku kupitia WhatsApp na mitandao ya kijamii.</div>
+            </div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot">🚀</div>
+            <div class="t-content">
+              <div class="t-year">2025 — Tovuti</div>
+              <div class="t-text">Uzinduzi wa tovuti rasmi ya Sade Books ukiwa na mfumo wa ununuzi wa haraka na orodha kamili ya vitabu 120+.</div>
+            </div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot">⭐</div>
+            <div class="t-content">
+              <div class="t-year">2026 — Leo</div>
+              <div class="t-text">Tunaendelea kukua — vitabu vipya kila wiki, wateja wanaofurahi, na dhamira inayoendelea ya kueneza maarifa Tanzania nzima.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-card">
+      <h2>🤝 Jiunge Nasi</h2>
+      <p>Wasiliana nasi kwa maswali, mapendekezo, au ushirikiano wa kibiashara.</p>
+      <div class="btn-row">
+        <a class="c-btn primary" href="https://wa.me/255712655957">💬 WhatsApp</a>
+        <a class="c-btn" href="mailto:hermansade3@gmail.com">✉️ Barua Pepe</a>
+        <a class="c-btn" href="index.html">📚 Angalia Vitabu</a>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ===== 3. AINA ZA VITABU ===== -->
-<div class="gold-divider"></div>
-<section style="max-width:900px; padding-top:80px; padding-bottom:40px;">
-  <span class="section-label">03 — Maktaba Yetu</span>
-  <h2>Aina za <em>Vitabu</em> Tunavyotoa</h2>
-  <p>Tuna vitabu vingi vinavyoshughulikia maeneo mbalimbali ya maisha:</p>
-  <div class="categories">
-    <div class="cat-card">
-      <div class="cat-icon">🏥</div>
-      <h4>Afya & Uzazi</h4>
-      <p>Uzazi wa mpango, afya ya mama na mtoto, lishe bora</p>
+  <!-- ══ PANEL: MMILIKI ══ -->
+  <div class="panel" id="panel-mmiliki">
+    <div class="date-bar"><span>👤 Maelezo ya Mmiliki Rasmi</span></div>
+
+    <!-- Owner Profile -->
+    <div class="owner-card">
+      <div class="owner-avatar">👤</div>
+      <div class="owner-info">
+        <h2>Herman Sade</h2>
+        <div class="owner-role">Mwanzilishi &amp; Mkurugenzi Mkuu · Sade Books</div>
+        <div class="owner-tags">
+          <span class="owner-tag">🇹🇿 Tanzania</span>
+          <span class="owner-tag">📚 Mchapishaji</span>
+          <span class="owner-tag">💡 Mjasiriamali</span>
+          <span class="owner-tag">💻 Teknolojia</span>
+        </div>
+      </div>
     </div>
-    <div class="cat-card">
-      <div class="cat-icon">💼</div>
-      <h4>Biashara</h4>
-      <p>Ujasiriamali, masoko, fedha na uwekezaji</p>
+
+    <!-- Owner Details -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">📋</div><h2>Taarifa Rasmi za Mmiliki</h2></div>
+      <div class="card-body">
+        <div class="owner-details-grid">
+          <div class="od-item">
+            <div class="od-icon">👤</div>
+            <div><div class="od-label">Jina Kamili</div><div class="od-val">Herman Sade</div></div>
+          </div>
+          <div class="od-item">
+            <div class="od-icon">🏢</div>
+            <div><div class="od-label">Jina la Biashara</div><div class="od-val">Sade Books</div></div>
+          </div>
+          <div class="od-item">
+            <div class="od-icon">🇹🇿</div>
+            <div><div class="od-label">Nchi ya Usajili</div><div class="od-val">Tanzania</div></div>
+          </div>
+          <div class="od-item">
+            <div class="od-icon">📱</div>
+            <div><div class="od-label">Simu / WhatsApp</div><div class="od-val"><a href="https://wa.me/255712655957">+255 712 655 957</a></div></div>
+          </div>
+          <div class="od-item">
+            <div class="od-icon">📧</div>
+            <div><div class="od-label">Barua Pepe</div><div class="od-val"><a href="mailto:hermansade3@gmail.com">hermansade3@gmail.com</a></div></div>
+          </div>
+          <div class="od-item">
+            <div class="od-icon">🌐</div>
+            <div><div class="od-label">Tovuti</div><div class="od-val"><a href="index.html">sadebooks.co.tz</a></div></div>
+          </div>
+          <div class="od-item">
+            <div class="od-icon">📦</div>
+            <div><div class="od-label">Aina ya Biashara</div><div class="od-val">Duka la E-Books (Dijitali)</div></div>
+          </div>
+          <div class="od-item">
+            <div class="od-icon">📅</div>
+            <div><div class="od-label">Mwaka wa Kuanzisha</div><div class="od-val">2024</div></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="cat-card">
-      <div class="cat-icon">👨‍👩‍👧</div>
-      <h4>Malezi</h4>
-      <p>Malezi ya watoto, familia, mahusiano bora</p>
+
+    <!-- Bio -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">✍️</div><h2>Kuhusu Herman Sade</h2></div>
+      <div class="card-body">
+        <p>Herman Sade ni mjasiriamali wa Tanzania mwenye shauku ya teknolojia, elimu, na uendelezaji wa biashara za kidijitali. Alianzisha Sade Books kutokana na imani kwamba Watanzania wanastahili kupata vitabu vya ubora kwa bei wanayoweza kumudu, kwa lugha wanayoifahamu.</p>
+        <p>Akiwa na uzoefu katika nyanja za biashara ya kidijitali, Herman anaendelea kujenga mifumo ya kisasa inayoweza kuwasaidia Watanzania wengi iwezekanavyo kupata maarifa muhimu ya maisha na biashara.</p>
+        <div class="green-box">✅ <strong>Ujumbe wa Mmiliki:</strong> "Naamini kila Mtanzania ana uwezo wa kufanikiwa. Vitabu vya Sade Books ni chombo cha kukusaidia kufikia ndoto zako — kibiashara, kiafya, na kimaisha."</div>
+      </div>
     </div>
-    <div class="cat-card">
-      <div class="cat-icon">📖</div>
-      <h4>Elimu</h4>
-      <p>Vitabu vya shule, mwongozo wa masomo, stadi za maisha</p>
+
+    <!-- Responsibilities -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">⚖️</div><h2>Majukumu ya Mmiliki</h2></div>
+      <div class="card-body">
+        <p>Kama mmiliki wa Sade Books, Herman Sade anawajibika kwa:</p>
+        <ul class="flist">
+          <li>Maudhui yote ya vitabu yanayouzwa kwenye duka</li>
+          <li>Ubora na usahihi wa taarifa zilizo ndani ya vitabu</li>
+          <li>Usalama wa malipo na taarifa za wateja</li>
+          <li>Utoaji wa huduma bora za wateja</li>
+          <li>Haki za miliki ya maudhui yote ya Sade Books</li>
+          <li>Maamuzi yote ya kibiashara yanayohusu duka</li>
+        </ul>
+        <div class="info-box"><strong>Mawasiliano ya Moja kwa Moja:</strong> Unaweza kuwasiliana na mmiliki moja kwa moja kupitia WhatsApp +255 712 655 957 au barua pepe hermansade3@gmail.com.</div>
+      </div>
     </div>
-    <div class="cat-card">
-      <div class="cat-icon">✨</div>
-      <h4>Maendeleo Binafsi</h4>
-      <p>Mafanikio, motisha, uongozi na ukuaji wa kibinafsi</p>
-    </div>
-    <div class="cat-card">
-      <div class="cat-icon">🌍</div>
-      <h4>Hadithi & Riwaya</h4>
-      <p>Hadithi za kusisimua, riwaya za Kiswahili</p>
+
+    <!-- Contact -->
+    <div class="contact-card">
+      <h2>📞 Wasiliana na Mmiliki</h2>
+      <p>Kwa maswali ya biashara, ushirikiano, au malalamiko — tuko tayari kusaidia.</p>
+      <div class="btn-row">
+        <a class="c-btn primary" href="https://wa.me/255712655957">💬 WhatsApp</a>
+        <a class="c-btn" href="mailto:hermansade3@gmail.com">✉️ hermansade3@gmail.com</a>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- ===== 4. MASHARTI ===== -->
-<div class="gold-divider"></div>
-<section id="masharti" style="margin-top:60px; margin-bottom:60px;">
-  <span class="section-label">04 — Masharti</span>
-  <h2>Masharti ya <em>Matumizi</em></h2>
-  <p>Kwa kutumia huduma za Sade Books, unakubaliana na masharti yafuatayo:</p>
-  <ul class="masharti-list">
-    <li><span class="ico">📌</span><p><strong>Matumizi Binafsi:</strong> Vitabu unavyonunua ni kwa matumizi yako binafsi tu. Hairuhusiwi kusambaza, kuuza, au kushiriki nakala za vitabu bila idhini ya Sade Books.</p></li>
-    <li><span class="ico">💳</span><p><strong>Malipo:</strong> Malipo yote ni ya mwisho. Hakuna urejeshaji wa pesa isipokuwa kama kitabu halikupakiwa kwa makosa yetu.</p></li>
-    <li><span class="ico">🔒</span><p><strong>Akaunti:</strong> Wewe ni mwenye jukumu la kulinda taarifa zako za kuingia. Usishiriki nywila yako na mtu mwingine.</p></li>
-    <li><span class="ico">⚖️</span><p><strong>Haki Miliki:</strong> Vitabu vyote vina haki miliki. Kunakili au kusambaza maudhui bila ruhusa ni kinyume cha sheria.</p></li>
-    <li><span class="ico">🔄</span><p><strong>Mabadiliko:</strong> Sade Books ina haki ya kubadilisha masharti haya wakati wowote. Tutakujulisha kupitia tovuti au barua pepe.</p></li>
-  </ul>
-</section>
+  <!-- ══ PANEL: COPYRIGHT ══ -->
+  <div class="panel" id="panel-copyright">
+    <div class="date-bar"><span>© Haki Zote Zimehifadhiwa · 2024–2026</span></div>
 
-<!-- ===== 5. PRIVACY ===== -->
-<div class="gold-divider"></div>
-<section style="max-width:900px; padding-top:80px; padding-bottom:40px;">
-  <span class="section-label">05 — Faragha</span>
-  <h2>Sera ya <em>Faragha</em></h2>
-  <p>Tunajali faragha yako. Hapa jinsi tunavyolinda taarifa zako:</p>
-  <div class="privacy-grid">
-    <div class="privacy-card">
-      <h4>🔐 Ukusanyaji wa Taarifa</h4>
-      <p>Tunakusanya jina lako, namba ya simu, na historia ya manunuzi kwa madhumuni ya huduma tu.</p>
+    <!-- Big Copyright Banner -->
+    <div class="copyright-banner">
+      <div class="c-year">© 2026</div>
+      <div class="c-name">Sade Books</div>
+      <div class="c-sub">Herman Sade · Tanzania · Haki Zote Zimehifadhiwa</div>
+      <div class="c-badge">🔒 All Rights Reserved · Haki Zote Zimehifadhiwa</div>
     </div>
-    <div class="privacy-card">
-      <h4>🚫 Kutoshiriki Taarifa</h4>
-      <p>Hatuuzi wala kushiriki taarifa zako na watu wa tatu bila idhini yako ya wazi.</p>
+
+    <!-- What is Protected -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">🛡️</div><h2>Maudhui Yaliyolindwa</h2></div>
+      <div class="card-body">
+        <p>Chini ya sheria za haki miliki za Tanzania na kimataifa, maudhui yafuatayo yanalindwa kikamilifu:</p>
+        <ul class="flist">
+          <li>📚 Vitabu vyote vya PDF vilivyoandikwa au kuchapishwa na Sade Books</li>
+          <li>📝 Maandishi, maudhui, na taarifa zote zilizopo kwenye vitabu</li>
+          <li>🎨 Muundo wa jalada (cover design) na picha za vitabu</li>
+          <li>🌐 Maudhui yote ya tovuti — maneno, picha, na mpangilio</li>
+          <li>™️ Jina "Sade Books" na nembo rasmi ya biashara</li>
+          <li>💡 Mawazo asili, muundo wa vitabu, na mbinu za ufundishaji</li>
+        </ul>
+        <div class="warn-box">⚠️ Hata kama kitabu kimeshapakuliwa, haki za miliki zinabaki kwa Sade Books na mmiliki Herman Sade.</div>
+      </div>
     </div>
-    <div class="privacy-card">
-      <h4>🛡️ Usalama wa Data</h4>
-      <p>Tunatumia teknolojia za kisasa kulinda taarifa zako dhidi ya ufikiaji usioidhinishwa.</p>
+
+    <!-- Allowed vs Denied -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">📋</div><h2>Unachoruhusiwa na Usioruhusiwa</h2></div>
+      <div class="card-body">
+        <div class="rights-grid">
+          <div class="right-card allowed">
+            <div class="rc-icon">✅</div>
+            <div>
+              <div class="rc-title">Kusoma Kibinafsi</div>
+              <div class="rc-desc">Soma kitabu chako unachokinunua kwa matumizi yako binafsi bila kikomo.</div>
+            </div>
+          </div>
+          <div class="right-card denied">
+            <div class="rc-icon">🚫</div>
+            <div>
+              <div class="rc-title">Kusambaza</div>
+              <div class="rc-desc">Hairuhusiwi kushiriki, kutuma, au kusambaza vitabu kwa watu wengine.</div>
+            </div>
+          </div>
+          <div class="right-card allowed">
+            <div class="rc-icon">✅</div>
+            <div>
+              <div class="rc-title">Kuprinti Kwa Binafsi</div>
+              <div class="rc-desc">Unaweza kuprinti nakala moja kwa matumizi yako mwenyewe tu.</div>
+            </div>
+          </div>
+          <div class="right-card denied">
+            <div class="rc-icon">🚫</div>
+            <div>
+              <div class="rc-title">Kuuza Tena</div>
+              <div class="rc-desc">Hairuhusiwi kuuza au kukodisha vitabu kwa watu wengine kwa bei yoyote.</div>
+            </div>
+          </div>
+          <div class="right-card allowed">
+            <div class="rc-icon">✅</div>
+            <div>
+              <div class="rc-title">Vifaa Viwili</div>
+              <div class="rc-desc">Pakua na kusoma kwenye vifaa viwili unazomiliki (simu + kompyuta).</div>
+            </div>
+          </div>
+          <div class="right-card denied">
+            <div class="rc-icon">🚫</div>
+            <div>
+              <div class="rc-title">Kupakia Mtandaoni</div>
+              <div class="rc-desc">Hairuhusiwi kupakia vitabu kwenye tovuti, Telegram, WhatsApp groups, au mitandao yoyote.</div>
+            </div>
+          </div>
+          <div class="right-card allowed">
+            <div class="rc-icon">✅</div>
+            <div>
+              <div class="rc-title">Kutoa Maoni</div>
+              <div class="rc-desc">Ruhusa ya kushiriki maoni yako kuhusu kitabu kwa umma — lakini bila kunukuu mengi.</div>
+            </div>
+          </div>
+          <div class="right-card denied">
+            <div class="rc-icon">🚫</div>
+            <div>
+              <div class="rc-title">Kunakili Maudhui</div>
+              <div class="rc-desc">Hairuhusiwi kunakili, kuhariri, au kutumia maudhui ya vitabu kuunda bidhaa mpya.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="privacy-card">
-      <h4>📱 Cookies</h4>
-      <p>Tovuti yetu inatumia cookies kuboresha uzoefu wako. Unaweza kuzizima kwenye mipangilio ya kivinjari chako.</p>
+
+    <!-- Penalty -->
+    <div class="penalty-box">
+      <h3>⛔ Madhara ya Ukiukaji wa Haki Miliki</h3>
+      <ul>
+        <li>Kusimamishwa kwa ufikiaji wako wa duka na vitabu vyote ulivyonunua</li>
+        <li>Hatua za kisheria chini ya Sheria ya Haki Miliki ya Tanzania</li>
+        <li>Madai ya fidia ya uharibifu wa kiuchumi uliofanywa</li>
+        <li>Taarifa kwa mamlaka husika za Tanzania</li>
+        <li>Kufuatiliwa kwa kisheria kwa kila nakala iliyosambazwa</li>
+      </ul>
     </div>
-    <div class="privacy-card">
-      <h4>✉️ Mawasiliano</h4>
-      <p>Tunaweza kukutumia ujumbe kuhusu manunuzi yako na matoleo mapya ya vitabu. Unaweza kujiondoa wakati wowote.</p>
+
+    <!-- Legal Basis -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">⚖️</div><h2>Msingi wa Kisheria</h2></div>
+      <div class="card-body">
+        <p>Haki za miliki za Sade Books zinalindwa chini ya:</p>
+        <ul class="flist">
+          <li><strong>Sheria ya Haki Miliki ya Tanzania</strong> — Copyright and Neighbouring Rights Act</li>
+          <li><strong>Mkataba wa Berne</strong> — Makubaliano ya kimataifa ya haki miliki</li>
+          <li><strong>Sheria za WIPO</strong> — World Intellectual Property Organization</li>
+          <li><strong>Masharti ya Matumizi ya Sade Books</strong> — yanayopatikana kwenye tovuti yetu</li>
+        </ul>
+        <div class="info-box"><strong>Ripoti Ukiukaji:</strong> Ukigundua mtu anayesambaza vitabu vyetu bila ruhusa, tafadhali tufahamishe mara moja kupitia WhatsApp au barua pepe.</div>
+      </div>
     </div>
-    <div class="privacy-card">
-      <h4>👤 Haki Zako</h4>
-      <p>Una haki ya kuomba taarifa zako, kuzibadilisha, au kuzifuta kutoka kwenye mfumo wetu wakati wowote.</p>
+
+    <!-- License Summary -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon">📄</div><h2>Muhtasari wa Leseni ya Matumizi</h2></div>
+      <div class="card-body">
+        <p>Kila kitabu unachonunua kinakupa <strong>leseni ndogo ya kibinafsi</strong> (Personal Use License) inayomaanisha:</p>
+        <ul class="flist">
+          <li>Unamiliki haki ya kusoma — si kitabu chenyewe</li>
+          <li>Leseni ni ya mtu mmoja (wewe peke yako)</li>
+          <li>Leseni haina muda wa kuisha — unaweza kusoma daima</li>
+          <li>Leseni haiwezi kuhamishiwa kwa mtu mwingine</li>
+          <li>Ukikiuka masharti, leseni inafutwa mara moja</li>
+        </ul>
+        <div class="green-box">✅ Ununuzi wako unasaidia waandishi wa Tanzania kuendelea kuunda maudhui bora ya Kiswahili. Asante kwa kuheshimu haki miliki!</div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-card">
+      <h2>📞 Maswali ya Copyright</h2>
+      <p>Una swali kuhusu haki miliki au unataka ruhusa maalum? Wasiliana nasi.</p>
+      <div class="btn-row">
+        <a class="c-btn primary" href="https://wa.me/255712655957">💬 WhatsApp</a>
+        <a class="c-btn" href="mailto:hermansade3@gmail.com">✉️ Barua Pepe</a>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- ===== 6. MAWASILIANO ===== -->
-<div class="gold-divider"></div>
-<section id="mawasiliano" style="padding-top:80px; padding-bottom:80px;">
-  <span class="section-label">06 — Wasiliana</span>
-  <h2>Mawasiliano <em>Nasi</em></h2>
-  <p>Je, una swali au unahitaji msaada? Tuko hapa kukusaidia.</p>
-  <div class="contact-box">
-    <p style="font-size:1.1rem; color:var(--text-light); margin-bottom:0.5rem;">Wasiliana nasi kupitia njia zifuatazo:</p>
-    <div class="contact-items">
-      <a href="https://wa.me/255712655957" class="contact-item" target="_blank"><span>💬</span> WhatsApp: 0712 655 957</a>
-      <a href="/cdn-cgi/l/email-protection#a1c9c4d3ccc0cfd2c0c5c492e1c6ccc0c8cd8fc2cecc" class="contact-item"><span>✉️</span> <span class="__cf_email__" data-cfemail="2d45485f404c435e4c49481e6d4a404c4441034e4240">[email&#160;protected]</span></a>
-      <a href="contact.html" class="contact-item"><span>📝</span> Fomu ya Mawasiliano</a>
-    </div>
-    <p style="margin-top:2rem; font-size:0.88rem; color:var(--text-dim);">Saa za kazi: Jumatatu – Ijumaa, 8:00 asubuhi – 6:00 jioni (EAT)</p>
-  </div>
-</section>
+</div><!-- /content -->
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <strong>Sade Books</strong> · Herman Sade · Tanzania · Haki Zote Zimehifadhiwa</p>
+  <p style="margin-top:6px">
+    <a href="index.html">Nyumbani</a> ·
+    <a href="books.html">Vitabu</a> ·
+    <a href="masharti-na-faragha.html">Masharti</a> ·
+    <a href="contact.html">Wasiliana</a>
+  </p>
+</footer>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
