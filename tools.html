@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧰 Sade Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0d0f14;
+  --surface: #161a24;
+  --surface2: #1e2433;
+  --border: rgba(255,255,255,0.07);
+  --blue: #3b82f6;
+  --blue-glow: rgba(59,130,246,0.25);
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --text: #f1f5f9;
+  --muted: #64748b;
+  --font: 'Sora', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── BG GRID ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── HEADER ─── */
+header {
+  position: relative;
+  z-index: 10;
+  padding: 2rem 2rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(59,130,246,0.08) 0%, transparent 100%);
+}
+
+.header-logo {
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+}
+
+.header-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #fff 30%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+  letter-spacing: 0.05em;
+}
+
+/* ─── NAV TABS ─── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: rgba(13,15,20,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 100px;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.nav-btn:hover {
+  border-color: var(--blue);
+  color: var(--text);
+  background: rgba(59,130,246,0.1);
+}
+
+.nav-btn.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  box-shadow: 0 0 20px var(--blue-glow);
+}
+
+/* ─── MAIN CONTENT ─── */
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.tool { display: none; animation: fadeSlide 0.35s ease; }
+.tool.active { display: block; }
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── SECTION HEADER ─── */
+.tool-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.tool-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.6rem;
+  filter: drop-shadow(0 0 12px rgba(59,130,246,0.5));
+}
+
+.tool-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.tool-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ─── CARD ─── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* ─── INPUTS ─── */
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.45rem;
+}
+
+.field input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+/* ─── BUTTONS ─── */
+.btn {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-top: 0.5rem;
+}
+
+.btn-blue {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 4px 16px var(--blue-glow);
+}
+
+.btn-blue:hover {
+  background: #60a5fa;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--blue-glow);
+}
+
+/* ─── RESULT BOX ─── */
+.result-box {
+  margin-top: 1.2rem;
+  padding: 1.2rem;
+  border-radius: 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  text-align: center;
+  display: none;
+}
+
+.result-box.show { display: block; animation: fadeSlide 0.3s ease; }
+
+.result-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+
+.result-value {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--mono);
+  color: var(--blue);
+}
+
+.result-tag {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.8rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.tag-green { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+.tag-amber { background: rgba(245,158,11,0.15); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+.tag-red   { background: rgba(239,68,68,0.15);  color: var(--red);   border: 1px solid rgba(239,68,68,0.3); }
+.tag-blue  { background: rgba(59,130,246,0.15); color: var(--blue);  border: 1px solid rgba(59,130,246,0.3); }
+
+/* ─── CALCULATOR ─── */
+.calc-display {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.2rem;
+  text-align: right;
+}
+
+.calc-expr {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  min-height: 1.2em;
+  margin-bottom: 0.3rem;
+}
+
+.calc-num {
+  font-family: var(--mono);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-all;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+
+.calc-btn {
+  padding: 1rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface2);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.calc-btn:hover { background: var(--surface); border-color: rgba(255,255,255,0.15); }
+.calc-btn:active { transform: scale(0.94); }
+
+.calc-btn.op {
+  background: rgba(59,130,246,0.12);
+  border-color: rgba(59,130,246,0.3);
+  color: var(--blue);
+}
+
+.calc-btn.op:hover { background: rgba(59,130,246,0.22); }
+
+.calc-btn.eq {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  box-shadow: 0 4px 14px var(--blue-glow);
+}
+
+.calc-btn.eq:hover { background: #60a5fa; }
+
+.calc-btn.clear {
+  background: rgba(239,68,68,0.12);
+  border-color: rgba(239,68,68,0.3);
+  color: var(--red);
+}
+
+.calc-btn.clear:hover { background: rgba(239,68,68,0.22); }
+
+.calc-btn.wide { grid-column: span 2; }
+
+/* ─── CALENDAR ─── */
+.cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.cal-nav-btn {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+
+.cal-nav-btn:hover { border-color: var(--blue); background: rgba(59,130,246,0.1); }
+
+.cal-month-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.3rem;
+}
+
+.cal-day-name {
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  padding: 0.5rem 0;
+  text-transform: uppercase;
+}
+
+.cal-day {
+  text-align: center;
+  padding: 0.6rem 0.2rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: var(--mono);
+  color: var(--muted);
+  cursor: default;
+  transition: all 0.15s;
+}
+
+.cal-day.has-day {
+  color: var(--text);
+  background: var(--surface2);
+}
+
+.cal-day.has-day:hover {
+  background: rgba(59,130,246,0.15);
+  color: var(--blue);
+}
+
+.cal-day.today {
+  background: var(--blue) !important;
+  color: #fff !important;
+  font-weight: 700;
+  box-shadow: 0 0 12px var(--blue-glow);
+}
+
+.cal-day.sunday { color: var(--red); }
+.cal-day.has-day.sunday { color: #f87171; }
+
+/* ─── BMI SCALE ─── */
+.bmi-scale {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.bmi-range {
+  padding: 0.6rem;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+}
+
+.bmi-range .r-label { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.bmi-range .r-val { font-size: 0.8rem; font-weight: 700; margin-top: 0.2rem; font-family: var(--mono); }
+
+.bmi-range.thin  { background: rgba(59,130,246,0.08); }
+.bmi-range.normal { background: rgba(34,197,94,0.08); }
+.bmi-range.over  { background: rgba(245,158,11,0.08); }
+.bmi-range.obese { background: rgba(239,68,68,0.08); }
+.bmi-range.active-range { transform: scale(1.05); border-color: rgba(255,255,255,0.2); }
+
+/* ─── LOAN TABLE ─── */
+.loan-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.loan-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.loan-card .lc-label {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+
+.loan-card .lc-val {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: var(--mono);
+  color: var(--text);
+}
+
+.loan-card.highlight .lc-val { color: var(--green); }
+
+/* ─── FOOTER ─── */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+footer span { color: var(--blue); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 480px) {
+  .nav-btn { font-size: 0.78rem; padding: 0.5rem 1rem; }
+  .calc-btn { padding: 0.85rem 0.3rem; font-size: 1rem; }
+  .bmi-scale { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-logo">🧰</div>
+  <div class="header-title">Sade Tools</div>
+  <div class="header-sub">Zana za kila siku · All-in-one toolkit</div>
+</header>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="showTool('calc', this)">🧮 Calculator</button>
+  <button class="nav-btn" onclick="showTool('bmi', this)">⚕️ BMI</button>
+  <button class="nav-btn" onclick="showTool('loan', this)">💰 Mkopo</button>
+  <button class="nav-btn" onclick="showTool('calendar', this)">📅 Kalenda</button>
+</nav>
+
+<main>
+
+<!-- ═══ CALCULATOR ═══ -->
+<div id="calc" class="tool active">
+  <div class="tool-header">
+    <span class="tool-icon">🧮</span>
+    <div class="tool-title">Calculator</div>
+    <div class="tool-desc">Hesabu za kawaida na za sayansi</div>
+  </div>
+  <div class="card">
+    <div class="calc-display">
+      <div class="calc-expr" id="calcExpr">&nbsp;</div>
+      <div class="calc-num" id="calcNum">0</div>
+    </div>
+    <div class="calc-grid">
+      <!-- Row 1 -->
+      <button class="calc-btn clear wide" onclick="clearCalc()">⌫ C</button>
+      <button class="calc-btn op" onclick="appendCalc('%')">%</button>
+      <button class="calc-btn op" onclick="appendCalc('/')">÷</button>
+      <!-- Row 2 -->
+      <button class="calc-btn" onclick="appendCalc('7')">7</button>
+      <button class="calc-btn" onclick="appendCalc('8')">8</button>
+      <button class="calc-btn" onclick="appendCalc('9')">9</button>
+      <button class="calc-btn op" onclick="appendCalc('*')">×</button>
+      <!-- Row 3 -->
+      <button class="calc-btn" onclick="appendCalc('4')">4</button>
+      <button class="calc-btn" onclick="appendCalc('5')">5</button>
+      <button class="calc-btn" onclick="appendCalc('6')">6</button>
+      <button class="calc-btn op" onclick="appendCalc('-')">−</button>
+      <!-- Row 4 -->
+      <button class="calc-btn" onclick="appendCalc('1')">1</button>
+      <button class="calc-btn" onclick="appendCalc('2')">2</button>
+      <button class="calc-btn" onclick="appendCalc('3')">3</button>
+      <button class="calc-btn op" onclick="appendCalc('+')">+</button>
+      <!-- Row 5 -->
+      <button class="calc-btn wide" onclick="appendCalc('0')">0</button>
+      <button class="calc-btn" onclick="appendCalc('.')">.</button>
+      <button class="calc-btn eq" onclick="doCalc()">=</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BMI ═══ -->
+<div id="bmi" class="tool">
+  <div class="tool-header">
+    <span class="tool-icon">⚕️</span>
+    <div class="tool-title">BMI Calculator</div>
+    <div class="tool-desc">Pima uzito wa mwili wako kiafya</div>
+  </div>
+  <div class="card">
+    <div class="field">
+      <label>⚖️ Uzito (kg)</label>
+      <input type="number" id="weight" placeholder="Mfano: 70">
+    </div>
+    <div class="field">
+      <label>📏 Urefu (mita)</label>
+      <input type="number" id="height" placeholder="Mfano: 1.75" step="0.01">
+    </div>
+    <button class="btn btn-blue" onclick="calcBMI()">⚕️ Hesabu BMI Yangu</button>
+
+    <div class="result-box" id="bmiResult">
+      <div class="result-label">BMI Yako</div>
+      <div class="result-value" id="bmiNum">—</div>
+      <div id="bmiTag"></div>
+    </div>
+
+    <div class="bmi-scale" id="bmiScale" style="margin-top:1.2rem;">
+      <div class="bmi-range thin" id="r-thin">
+        <div class="r-label">😟 Konda</div>
+        <div class="r-val" style="color:#3b82f6;">&lt; 18.5</div>
+      </div>
+      <div class="bmi-range normal" id="r-normal">
+        <div class="r-label">😊 Kawaida</div>
+        <div class="r-val" style="color:#22c55e;">18.5–24.9</div>
+      </div>
+      <div class="bmi-range over" id="r-over">
+        <div class="r-label">😐 Nzito</div>
+        <div class="r-val" style="color:#f59e0b;">25–29.9</div>
+      </div>
+      <div class="bmi-range obese" id="r-obese">
+        <div class="r-label">⚠️ Unene</div>
+        <div class="r-val" style="color:#ef4444;">≥ 30</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LOAN ═══ -->
+<div id="loan" class="tool">
+  <div class="tool-header">
+    <span class="tool-icon">💰</span>
+    <div class="tool-title">Hesabu ya Mkopo</div>
+    <div class="tool-desc">Jua malipo yako ya kila mwezi</div>
+  </div>
+  <div class="card">
+    <div class="field">
+      <label>💵 Kiasi cha Mkopo (TSH / USD)</label>
+      <input type="number" id="amount" placeholder="Mfano: 1,000,000">
+    </div>
+    <div class="field">
+      <label>📈 Riba kwa Mwaka (%)</label>
+      <input type="number" id="interest" placeholder="Mfano: 12" step="0.1">
+    </div>
+    <div class="field">
+      <label>📅 Muda (Miaka)</label>
+      <input type="number" id="years" placeholder="Mfano: 3">
+    </div>
+    <button class="btn btn-blue" onclick="loanCalc()">💰 Hesabu Mkopo</button>
+
+    <div class="result-box" id="loanResult" style="display:none;">
+      <div class="loan-summary">
+        <div class="loan-card highlight">
+          <div class="lc-label">💳 Malipo/Mwezi</div>
+          <div class="lc-val" id="loanMonthly">—</div>
+        </div>
+        <div class="loan-card">
+          <div class="lc-label">📊 Jumla ya Malipo</div>
+          <div class="lc-val" id="loanTotal">—</div>
+        </div>
+        <div class="loan-card" style="grid-column: span 2;">
+          <div class="lc-label">💸 Jumla ya Riba</div>
+          <div class="lc-val" id="loanInterestTotal" style="color:var(--amber);">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CALENDAR ═══ -->
+<div id="calendar" class="tool">
+  <div class="tool-header">
+    <span class="tool-icon">📅</span>
+    <div class="tool-title">Kalenda</div>
+    <div class="tool-desc">Angalia tarehe na mwaka</div>
+  </div>
+  <div class="card">
+    <div class="cal-nav">
+      <button class="cal-nav-btn" onclick="changeMonth(-1)">←</button>
+      <div class="cal-month-label" id="calLabel">—</div>
+      <button class="cal-nav-btn" onclick="changeMonth(1)">→</button>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  Imetengenezwa na ❤️ <span>Sade Digital</span> · Tanzania 🇹🇿
+</footer>
+
+<script>
+/* ── TAB SWITCHING ── */
+function showTool(id, btn) {
+  document.querySelectorAll('.tool').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+/* ── CALCULATOR ── */
+let calcExpr = '';
+let justCalc = false;
+
+function appendCalc(v) {
+  const ops = ['+','-','*','/','.','%'];
+  if (justCalc && !ops.includes(v)) { calcExpr = ''; }
+  justCalc = false;
+  calcExpr += v;
+  const display = calcExpr
+    .replace(/\*/g,'×').replace(/\//g,'÷').replace(/-/g,'−');
+  document.getElementById('calcExpr').textContent = display;
+  document.getElementById('calcNum').textContent = calcExpr.slice(-1) || '0';
+}
+
+function doCalc() {
+  try {
+    const res = Function('"use strict"; return (' + calcExpr + ')')();
+    document.getElementById('calcExpr').textContent =
+      calcExpr.replace(/\*/g,'×').replace(/\//g,'÷').replace(/-/g,'−') + ' =';
+    const pretty = Number.isInteger(res) ? res : parseFloat(res.toFixed(10));
+    document.getElementById('calcNum').textContent = pretty;
+    calcExpr = String(pretty);
+    justCalc = true;
+  } catch(e) {
+    document.getElementById('calcNum').textContent = '⚠️ Kosa';
+    calcExpr = '';
+  }
+}
+
+function clearCalc() {
+  calcExpr = '';
+  justCalc = false;
+  document.getElementById('calcExpr').textContent = '\u00a0';
+  document.getElementById('calcNum').textContent = '0';
+}
+
+/* ── BMI ── */
+function calcBMI() {
+  const w = parseFloat(document.getElementById('weight').value);
+  const h = parseFloat(document.getElementById('height').value);
+  if (!w || !h || h <= 0) { alert('⚠️ Weka uzito na urefu sahihi!'); return; }
+
+  const bmi = w / (h * h);
+  let label, tagClass, emoji;
+  let activeId;
+
+  document.querySelectorAll('.bmi-range').forEach(r => r.classList.remove('active-range'));
+
+  if (bmi < 18.5) {
+    label = 'Konda Sana'; tagClass = 'tag-blue'; emoji = '😟'; activeId = 'r-thin';
+  } else if (bmi < 25) {
+    label = 'Uzito wa Kawaida'; tagClass = 'tag-green'; emoji = '😊'; activeId = 'r-normal';
+  } else if (bmi < 30) {
+    label = 'Nzito Kidogo'; tagClass = 'tag-amber'; emoji = '😐'; activeId = 'r-over';
+  } else {
+    label = 'Unene wa Hatari'; tagClass = 'tag-red'; emoji = '⚠️'; activeId = 'r-obese';
+  }
+
+  document.getElementById('r-' + activeId.split('-')[1]).classList.add('active-range');
+  document.getElementById('bmiNum').textContent = bmi.toFixed(1);
+  document.getElementById('bmiTag').innerHTML =
+    `<span class="result-tag ${tagClass}">${emoji} ${label}</span>`;
+  const rb = document.getElementById('bmiResult');
+  rb.classList.add('show');
+  rb.style.display = 'block';
+
+  if (activeId) document.getElementById(activeId).classList.add('active-range');
+}
+
+/* ── LOAN ── */
+function loanCalc() {
+  const a = parseFloat(document.getElementById('amount').value);
+  const r = parseFloat(document.getElementById('interest').value) / 100 / 12;
+  const n = parseFloat(document.getElementById('years').value) * 12;
+
+  if (!a || !n) { alert('⚠️ Jaza taarifa zote!'); return; }
+
+  let monthly;
+  if (r === 0) {
+    monthly = a / n;
+  } else {
+    const x = Math.pow(1 + r, n);
+    monthly = (a * x * r) / (x - 1);
+  }
+
+  const total = monthly * n;
+  const totalInterest = total - a;
+
+  const fmt = v => v.toLocaleString('en', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+  document.getElementById('loanMonthly').textContent = fmt(monthly);
+  document.getElementById('loanTotal').textContent = fmt(total);
+  document.getElementById('loanInterestTotal').textContent = fmt(totalInterest);
+  document.getElementById('loanResult').style.display = 'block';
+}
+
+/* ── CALENDAR ── */
+const MONTHS_SW = ['Januari','Februari','Machi','Aprili','Mei','Juni',
+                   'Julai','Agosti','Septemba','Oktoba','Novemba','Desemba'];
+const DAYS_SW   = ['Ju','Wt','Jm','Al','Ij','St','Sa'];
+
+let calYear, calMonth;
+
+function initCal() {
+  const now = new Date();
+  calYear = now.getFullYear();
+  calMonth = now.getMonth();
+  renderCal();
+}
+
+function changeMonth(d) {
+  calMonth += d;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  if (calMonth < 0)  { calMonth = 11; calYear--; }
+  renderCal();
+}
+
+function renderCal() {
+  const today = new Date();
+  const isCurrentMonth = today.getFullYear() === calYear && today.getMonth() === calMonth;
+
+  document.getElementById('calLabel').textContent = `${MONTHS_SW[calMonth]} ${calYear}`;
+
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  let html = DAYS_SW.map(d =>
+    `<div class="cal-day-name">${d}</div>`).join('');
+
+  // Empty cells before first day
+  for (let i = 0; i < firstDay; i++) {
+    html += `<div class="cal-day"></div>`;
+  }
+
+  for (let i = 1; i <= daysInMonth; i++) {
+    const dayOfWeek = (firstDay + i - 1) % 7;
+    const isSun = dayOfWeek === 0;
+    const isTodayDay = isCurrentMonth && i === today.getDate();
+    const cls = ['cal-day','has-day', isSun ? 'sunday':'', isTodayDay ? 'today':''].filter(Boolean).join(' ');
+    html += `<div class="${cls}">${i}</div>`;
+  }
+
+  document.getElementById('calGrid').innerHTML = html;
+}
+
+// Init on load
+initCal();
+</script>
+</body>
+</html>
