@@ -3,834 +3,831 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Agiza Kitabu – Sade Books</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+  <title>Oda Kitabu – Sade Books</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --blue:    #002B7F;
-      --blue2:   #003DA5;
-      --blue3:   #1A5DCC;
-      --yellow:  #FFD000;
-      --yellow2: #FFC200;
-      --green:   #00875A;
-      --green2:  #E6F7F1;
-      --green3:  #00A651;
-      --bg:      #F2F5FB;
-      --white:   #FFFFFF;
-      --ink:     #0C1A3A;
-      --muted:   #6B7A99;
-      --border:  #DDE3EF;
+    :root {
+      --ocean-deep:   #012a4a;
+      --ocean-mid:    #013a63;
+      --ocean-blue:   #0077b6;
+      --ocean-bright: #0096c7;
+      --ocean-teal:   #00b4d8;
+      --ocean-light:  #48cae4;
+      --ocean-pale:   #ade8f4;
+      --ocean-foam:   #caf0f8;
+      --white:        #ffffff;
+      --black:        #020d18;
+      --glass:        rgba(255,255,255,0.10);
+      --glass-hover:  rgba(255,255,255,0.17);
+      --glass-border: rgba(255,255,255,0.20);
+      --text-dim:     rgba(255,255,255,0.52);
+      --gold:         #d4a017;
+      --gold-light:   #f0c040;
     }
-    html{background:var(--bg)}
-    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;max-width:430px;margin:0 auto}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── TOP NAV ── */
-    .top-nav{
-      background:linear-gradient(160deg,var(--blue) 0%,var(--blue3) 100%);
-      padding:52px 20px 22px;
-      position:relative;overflow:hidden;
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--black);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    .top-nav::after{
-      content:'';position:absolute;
-      width:260px;height:260px;border-radius:50%;
-      background:rgba(255,208,0,.07);
-      top:-100px;right:-80px;pointer-events:none;
-    }
-    .nav-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
-    .nav-back{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.13);border:none;color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
-    .nav-logo{font-size:1rem;font-weight:800;color:#fff;letter-spacing:.01em}
-    .nav-logo span{color:var(--yellow)}
-    .nav-spacer{width:36px}
-    .nav-subtitle{position:relative;z-index:1;text-align:center;color:rgba(255,255,255,.6);font-size:.78rem;margin-top:4px}
 
-    /* ── STEPS INDICATOR ── */
-    .steps-bar{
-      display:flex;align-items:center;justify-content:center;
-      gap:0;padding:18px 20px 14px;background:var(--white);
-      border-bottom:1px solid var(--border);
+    /* ═══ OCEAN BACKGROUND ═══ */
+    .ocean-bg {
+      position: fixed; inset: 0; z-index: 0;
+      background: linear-gradient(170deg,
+        #012a4a 0%, #013a63 18%, #0077b6 42%,
+        #0096c7 62%, #00b4d8 80%, #48cae4 100%);
     }
-    .step-dot{
-      display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;
+    .ocean-bg::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 85% 55% at 10% 90%, rgba(1,20,50,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 88% 12%, rgba(0,150,199,0.20) 0%, transparent 50%);
     }
-    .step-circle{
-      width:32px;height:32px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      font-size:.8rem;font-weight:800;
-      border:2px solid var(--border);color:var(--muted);background:var(--bg);
-      transition:all .3s;
-    }
-    .step-circle.active{background:var(--blue2);border-color:var(--blue2);color:#fff}
-    .step-circle.done{background:var(--green);border-color:var(--green);color:#fff}
-    .step-lbl{font-size:.62rem;font-weight:700;color:var(--muted);text-align:center;letter-spacing:.04em;text-transform:uppercase}
-    .step-lbl.active{color:var(--blue2)}
-    .step-lbl.done{color:var(--green)}
-    .step-line{flex:1;height:2px;background:var(--border);margin:0 4px;margin-bottom:16px;transition:background .3s;max-width:40px}
-    .step-line.done{background:var(--green)}
 
-    /* ── PAGES ── */
-    .page{display:none;padding:20px 16px 40px;animation:fadeUp .3s ease}
-    .page.active{display:block}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-
-    /* ── CARDS ── */
-    .card{background:var(--white);border-radius:18px;box-shadow:0 2px 16px rgba(0,43,127,.07);margin-bottom:14px;overflow:hidden}
-    .card-head{padding:16px 18px 12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
-    .card-head-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-    .card-head-title{font-size:.92rem;font-weight:800;color:var(--ink)}
-    .card-head-sub{font-size:.72rem;color:var(--muted);margin-top:1px}
-    .card-body{padding:16px 18px}
-
-    /* ── FORM FIELDS ── */
-    .field{margin-bottom:14px}
-    .field:last-child{margin-bottom:0}
-    .field-label{font-size:.78rem;font-weight:700;color:var(--ink);margin-bottom:7px;display:flex;align-items:center;gap:5px}
-    .required{color:#E04040;font-size:.7rem}
-    .field-wrap{display:flex;align-items:center;gap:10px;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:12px 15px;transition:all .2s}
-    .field-wrap:focus-within{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(0,61,165,.1);background:#fff}
-    .field-wrap input,.field-wrap textarea{border:none;outline:none;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:500;color:var(--ink);width:100%}
-    .field-wrap textarea{resize:none;min-height:80px;line-height:1.6}
-    .field-wrap input::placeholder,.field-wrap textarea::placeholder{color:#B8C3D9;font-weight:400}
-    .field-prefix{font-size:.82rem;font-weight:700;color:var(--muted);white-space:nowrap;flex-shrink:0}
-    .field-hint{font-size:.7rem;color:var(--muted);margin-top:5px;font-family:'Lora',serif;font-style:italic;padding-left:2px}
-
-    /* ── BOOK SEARCH ── */
-    .book-search-wrap{position:relative}
-    .book-suggestions{
-      position:absolute;top:calc(100% + 4px);left:0;right:0;
-      background:var(--white);border:1.5px solid var(--border);
-      border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);
-      z-index:100;max-height:200px;overflow-y:auto;display:none;
+    /* ═══ BUBBLES ═══ */
+    .bubbles {
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1; overflow: hidden;
     }
-    .book-suggestions.open{display:block}
-    .suggestion-item{padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);transition:background .15s}
-    .suggestion-item:last-child{border-bottom:none}
-    .suggestion-item:hover{background:var(--bg)}
-    .sug-emoji{font-size:1.2rem;flex-shrink:0}
-    .sug-name{font-size:.85rem;font-weight:700;color:var(--ink)}
-    .sug-cat{font-size:.7rem;color:var(--muted)}
+    .bubble {
+      position: absolute; bottom: -80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      animation: rise linear infinite;
+    }
+    .bubble:nth-child(1)  { width:14px; height:14px; left:5%;  animation-duration:10s; animation-delay:0s;   }
+    .bubble:nth-child(2)  { width:8px;  height:8px;  left:14%; animation-duration:13s; animation-delay:1.5s; }
+    .bubble:nth-child(3)  { width:20px; height:20px; left:22%; animation-duration:9s;  animation-delay:0.8s; }
+    .bubble:nth-child(4)  { width:10px; height:10px; left:33%; animation-duration:14s; animation-delay:3s;   }
+    .bubble:nth-child(5)  { width:18px; height:18px; left:44%; animation-duration:11s; animation-delay:0.3s; }
+    .bubble:nth-child(6)  { width:7px;  height:7px;  left:55%; animation-duration:12s; animation-delay:2s;   }
+    .bubble:nth-child(7)  { width:22px; height:22px; left:63%; animation-duration:10s; animation-delay:1s;   }
+    .bubble:nth-child(8)  { width:11px; height:11px; left:72%; animation-duration:15s; animation-delay:4s;   }
+    .bubble:nth-child(9)  { width:16px; height:16px; left:82%; animation-duration:8s;  animation-delay:0.5s; }
+    .bubble:nth-child(10) { width:9px;  height:9px;  left:91%; animation-duration:13s; animation-delay:2.5s; }
+    .bubble:nth-child(11) { width:25px; height:25px; left:38%; animation-duration:16s; animation-delay:5s;   }
+    .bubble:nth-child(12) { width:6px;  height:6px;  left:76%; animation-duration:9s;  animation-delay:1.2s; }
+    @keyframes rise {
+      0%   { transform: translateY(0) scale(1);    opacity: 0; }
+      8%   { opacity: 1; }
+      92%  { opacity: 0.5; }
+      100% { transform: translateY(-105vh) scale(1.4); opacity: 0; }
+    }
 
-    /* ── SELECTED BOOK CARD ── */
-    .selected-book{
-      display:none;background:linear-gradient(135deg,#EEF4FF,#F5F8FF);
-      border:1.5px solid #B8D0FF;border-radius:14px;
-      padding:14px 16px;margin-top:10px;
+    /* ═══ NAV ═══ */
+    nav {
+      position: sticky; top: 0; z-index: 300;
+      background: rgba(1,20,50,0.62);
+      backdrop-filter: blur(22px) saturate(1.6);
+      -webkit-backdrop-filter: blur(22px) saturate(1.6);
+      border-bottom: 1px solid rgba(255,255,255,0.13);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
     }
-    .selected-book.show{display:flex;align-items:center;gap:12px}
-    .sel-emoji{font-size:2rem;flex-shrink:0}
-    .sel-info{flex:1}
-    .sel-title{font-size:.9rem;font-weight:800;color:var(--ink)}
-    .sel-cat{font-size:.72rem;color:var(--blue2);margin-top:2px;font-weight:600}
-    .sel-price{font-size:.82rem;font-weight:800;color:var(--ink);margin-top:4px}
-    .sel-remove{background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:4px}
+    .nav-inner {
+      max-width: 1320px; margin: 0 auto;
+      padding: 9px 18px;
+      display: flex; flex-wrap: wrap;
+      align-items: center; gap: 3px 2px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 700; font-style: italic;
+      letter-spacing: 2px; color: var(--ocean-foam);
+      text-decoration: none; margin-right: 14px; flex-shrink: 0;
+      text-shadow: 0 0 18px rgba(72,202,228,0.6);
+    }
+    .nav-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 5px 10px; border-radius: 8px;
+      font-size: 0.69rem; font-weight: 500;
+      color: rgba(255,255,255,0.65); text-decoration: none;
+      white-space: nowrap; border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-link:hover {
+      background: var(--glass-hover); color: #fff;
+      border-color: var(--glass-border);
+    }
+    .nav-link.active {
+      background: linear-gradient(135deg, var(--ocean-blue), var(--ocean-bright));
+      color: #fff; border-color: var(--ocean-teal);
+      box-shadow: 0 2px 12px rgba(0,119,182,0.5);
+    }
 
-    /* ── NOTICE BOX ── */
-    .notice{
-      display:flex;align-items:flex-start;gap:10px;
-      background:#FFF9E6;border:1.5px solid #FFD000;
-      border-radius:14px;padding:14px 16px;margin-bottom:14px;
+    /* ═══ HERO ═══ */
+    .hero {
+      position: relative; z-index: 2;
+      text-align: center; padding: 72px 24px 46px;
     }
-    .notice-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
-    .notice-text{font-size:.78rem;color:#5A4A00;line-height:1.6}
-    .notice-text strong{color:var(--ink)}
+    .hero-glow {
+      position: absolute; top: 30px; left: 50%;
+      transform: translateX(-50%);
+      width: 450px; height: 380px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,150,199,0.20) 0%, transparent 70%);
+      filter: blur(35px); pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 22px; border-radius: 50px; margin-bottom: 22px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.22);
+      font-size: 0.67rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--ocean-foam);
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      font-weight: 700; line-height: 1.08;
+      color: #fff; text-shadow: 0 8px 36px rgba(0,20,70,0.5);
+      margin-bottom: 14px;
+    }
+    .hero h1 .accent {
+      color: transparent;
+      background: linear-gradient(120deg, var(--ocean-foam), var(--ocean-light));
+      -webkit-background-clip: text; background-clip: text;
+    }
+    .hero p {
+      font-size: 1rem; color: rgba(255,255,255,0.68);
+      max-width: 480px; margin: 0 auto; line-height: 1.8; font-weight: 300;
+    }
 
-    .notice.green{background:var(--green2);border-color:#80D0B0}
-    .notice.green .notice-text{color:#004030}
+    /* wave */
+    .wave { position: relative; z-index: 2; line-height: 0; }
+    .wave svg { display: block; width: 100%; }
 
-    /* ── ERR ── */
-    .err-box{display:none;background:#FFF0F0;border:1.5px solid #FFBABA;border-radius:10px;padding:10px 14px;font-size:.8rem;color:#C00;font-weight:600;margin-bottom:12px}
+    /* ═══ MAIN CONTENT ═══ */
+    .main {
+      position: relative; z-index: 2;
+      background: rgba(1,10,28,0.48);
+      backdrop-filter: blur(10px);
+      padding-bottom: 80px;
+    }
 
-    /* ── BUTTONS ── */
-    .btn-yellow{
-      width:100%;background:linear-gradient(135deg,var(--yellow2),var(--yellow));
-      color:var(--blue);border:none;border-radius:14px;padding:16px;
-      font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;
-      cursor:pointer;box-shadow:0 6px 20px rgba(255,194,0,.4);
-      transition:transform .15s,box-shadow .2s;letter-spacing:.01em;
+    /* ═══ SECTION TITLE ═══ */
+    .section-title {
+      text-align: center; padding: 52px 24px 0;
     }
-    .btn-yellow:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,194,0,.5)}
-    .btn-yellow:disabled{background:#D0D8E8;color:#8896B0;box-shadow:none;transform:none;cursor:not-allowed}
-    .btn-blue{
-      width:100%;background:linear-gradient(135deg,var(--blue),var(--blue3));
-      color:#fff;border:none;border-radius:14px;padding:16px;
-      font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;
-      cursor:pointer;box-shadow:0 6px 20px rgba(0,43,127,.3);
-      transition:transform .15s;margin-bottom:8px;
+    .section-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 600; color: var(--ocean-foam); margin-bottom: 8px;
     }
-    .btn-blue:hover{transform:translateY(-2px)}
-    .btn-ghost{width:100%;background:none;border:none;padding:12px;font-size:.88rem;font-weight:600;color:var(--muted);cursor:pointer}
+    .section-title p { font-size: 0.88rem; color: var(--text-dim); }
+    .title-line {
+      width: 60px; height: 2px; margin: 14px auto 0;
+      background: linear-gradient(90deg, transparent, var(--ocean-teal), transparent);
+    }
 
-    /* ── RESERVATION CONFIRMED CARD ── */
-    .reservation-card{
-      background:linear-gradient(160deg,var(--blue) 0%,var(--blue3) 100%);
-      border-radius:20px;padding:22px;margin-bottom:14px;
-      position:relative;overflow:hidden;
+    /* ═══ FORM CARD ═══ */
+    .form-wrap {
+      max-width: 720px; margin: 44px auto 0; padding: 0 20px;
     }
-    .reservation-card::before{
-      content:'';position:absolute;
-      width:180px;height:180px;border-radius:50%;
-      background:rgba(255,208,0,.1);top:-60px;right:-50px;
+    .form-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px; padding: 44px 40px;
+      backdrop-filter: blur(18px);
+      position: relative; overflow: hidden;
     }
-    .res-badge{
-      display:inline-flex;align-items:center;gap:6px;
-      background:rgba(255,208,0,.15);border:1px solid rgba(255,208,0,.3);
-      border-radius:50px;padding:5px 14px;
-      font-size:.68rem;font-weight:700;color:var(--yellow);
-      letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;
+    .form-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      border-radius: 26px 26px 0 0;
+      background: linear-gradient(90deg, var(--ocean-blue), var(--ocean-teal), var(--ocean-light));
     }
-    .res-book-row{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-    .res-emoji{
-      width:52px;height:52px;border-radius:14px;
-      background:rgba(255,255,255,.12);
-      display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;
-    }
-    .res-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;color:#fff}
-    .res-cat{font-size:.72rem;color:rgba(255,255,255,.6);margin-top:2px}
-    .res-id{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:4px;font-family:'Lora',serif;font-style:italic}
-    .res-divider{height:1px;background:rgba(255,255,255,.1);margin:0 0 14px}
-    .res-info-row{display:flex;justify-content:space-between;margin-bottom:8px}
-    .res-info-label{font-size:.72rem;color:rgba(255,255,255,.55);font-weight:600}
-    .res-info-val{font-size:.78rem;font-weight:700;color:#fff}
-    .res-info-val.yellow{color:var(--yellow)}
 
-    /* ── PAYMENT SECTION ── */
-    .lipa-box{
-      background:linear-gradient(135deg,var(--blue),var(--blue3));
-      border-radius:16px;padding:18px;margin-bottom:14px;
+    /* ═══ STEPS INDICATOR ═══ */
+    .steps {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; margin-bottom: 36px;
     }
-    .lipa-tag{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:5px}
-    .lipa-num-row{display:flex;align-items:center;justify-content:space-between}
-    .lipa-number{font-size:2.2rem;font-weight:800;color:#fff;letter-spacing:.1em;line-height:1}
-    .lipa-name{font-size:.72rem;color:rgba(255,255,255,.5);font-family:'Lora',serif;font-style:italic;margin-top:3px}
-    .copy-btn{
-      background:var(--yellow);color:var(--blue);
-      border:none;border-radius:10px;padding:9px 15px;
-      font-size:.78rem;font-weight:800;cursor:pointer;
-      display:flex;align-items:center;gap:5px;flex-shrink:0;
-      transition:all .15s;
+    .step {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      position: relative;
     }
-    .copy-btn:active{transform:scale(.95)}
-    .networks-row{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}
-    .net-chip{display:flex;align-items:center;gap:5px;border-radius:50px;padding:5px 10px;font-size:.67rem;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,.15)}
-    .net-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-
-    .step-mini{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
-    .step-mini:last-child{border-bottom:none}
-    .step-mini-num{width:24px;height:24px;border-radius:50%;background:var(--blue2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0;margin-top:1px}
-    .step-mini-text{font-size:.8rem;color:var(--ink);line-height:1.5}
-    .step-mini-text strong{color:var(--blue)}
-
-    .num-badge{display:inline-block;background:#EEF4FF;border:1.5px solid #B8D0FF;border-radius:7px;padding:2px 10px;font-weight:800;font-size:.88rem;color:var(--blue);margin-top:3px;letter-spacing:.05em}
-
-    /* ── SUCCESS FULLPAGE ── */
-    .fullpage{display:none;position:fixed;inset:0;background:var(--bg);z-index:999;overflow-y:auto;max-width:430px;left:50%;transform:translateX(-50%)}
-
-    .success-top{
-      background:linear-gradient(160deg,var(--blue) 0%,var(--blue3) 100%);
-      padding:60px 24px 80px;text-align:center;position:relative;overflow:hidden;
+    .step-num {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 700;
+      background: rgba(255,255,255,0.10);
+      border: 2px solid rgba(255,255,255,0.20);
+      color: rgba(255,255,255,0.45);
+      transition: all 0.3s;
     }
-    .success-top::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 130%,rgba(255,208,0,.18) 0%,transparent 55%)}
-    .s-anim{
-      width:80px;height:80px;border-radius:50%;background:var(--yellow);
-      display:flex;align-items:center;justify-content:center;
-      margin:0 auto 16px;font-size:2.2rem;
-      box-shadow:0 8px 24px rgba(255,208,0,.5);position:relative;z-index:1;
+    .step.active .step-num {
+      background: linear-gradient(135deg, var(--ocean-blue), var(--ocean-teal));
+      border-color: var(--ocean-light);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(0,180,216,0.5);
     }
-    .s-title{font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:6px;position:relative;z-index:1}
-    .s-sub{font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.6;position:relative;z-index:1}
+    .step.done .step-num {
+      background: rgba(0,180,216,0.25);
+      border-color: var(--ocean-teal);
+      color: var(--ocean-light);
+    }
+    .step-label {
+      font-size: 0.6rem; letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.35);
+      text-align: center; max-width: 60px; line-height: 1.3;
+    }
+    .step.active .step-label { color: var(--ocean-pale); }
+    .step-line {
+      width: 48px; height: 2px; margin-bottom: 20px; flex-shrink: 0;
+      background: rgba(255,255,255,0.12);
+      transition: background 0.3s;
+    }
+    .step-line.done { background: var(--ocean-teal); }
 
-    .delivery-choice{
-      margin:-36px 16px 0;background:var(--white);border-radius:20px;
-      box-shadow:0 8px 32px rgba(0,43,127,.12);padding:22px;margin-bottom:14px;
+    /* ═══ QUESTION PANELS ═══ */
+    .q-panel {
+      display: none;
+      animation: fadeIn 0.35s ease;
     }
-    .dc-title{font-size:.88rem;font-weight:800;color:var(--ink);margin-bottom:14px}
-    .dc-option{
-      display:flex;align-items:center;gap:12px;
-      background:var(--bg);border:1.5px solid var(--border);
-      border-radius:14px;padding:14px 16px;cursor:pointer;
-      transition:all .2s;margin-bottom:10px;
+    .q-panel.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .dc-option:last-child{margin-bottom:0}
-    .dc-option:hover,.dc-option.chosen{background:#EEF4FF;border-color:var(--blue3)}
-    .dc-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-    .dc-icon.wa{background:#25D366;box-shadow:0 3px 10px rgba(37,211,102,.3)}
-    .dc-icon.dl{background:var(--blue2);box-shadow:0 3px 10px rgba(0,61,165,.25)}
-    .dc-text strong{font-size:.88rem;font-weight:800;color:var(--ink);display:block}
-    .dc-text span{font-size:.74rem;color:var(--muted)}
 
-    .receipt-card{background:var(--white);margin:0 16px 14px;border-radius:18px;box-shadow:0 4px 20px rgba(0,43,127,.09);overflow:hidden}
-    .receipt-hdr{background:linear-gradient(90deg,var(--blue),var(--blue3));padding:13px 18px;display:flex;align-items:center;gap:9px}
-    .receipt-hdr-icon{width:28px;height:28px;background:rgba(255,255,255,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.9rem}
-    .receipt-hdr-title{font-size:.85rem;font-weight:700;color:#fff}
-    .r-row{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-bottom:1px solid var(--border)}
-    .r-row:last-child{border-bottom:none}
-    .r-label{font-size:.73rem;font-weight:600;color:var(--muted)}
-    .r-val{font-size:.83rem;font-weight:700;color:var(--ink);text-align:right;max-width:55%}
-    .r-val.ref{color:var(--blue2);letter-spacing:.03em}
-    .r-val.big{font-size:1.05rem;font-weight:800}
-
-    .wa-btn{
-      display:flex;align-items:center;justify-content:center;gap:10px;
-      width:calc(100% - 32px);margin:0 16px 10px;
-      background:linear-gradient(135deg,#128C7E,#25D366);
-      color:#fff;border:none;border-radius:14px;padding:15px;
-      font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;font-weight:800;
-      cursor:pointer;box-shadow:0 6px 18px rgba(37,211,102,.3);
-      text-decoration:none;
+    .q-num {
+      font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--ocean-teal); margin-bottom: 8px;
     }
-    .dl-btn{
-      display:flex;align-items:center;justify-content:center;gap:10px;
-      width:calc(100% - 32px);margin:0 16px 10px;
-      background:linear-gradient(135deg,var(--blue),var(--blue3));
-      color:#fff;border:none;border-radius:14px;padding:15px;
-      font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;font-weight:800;
-      cursor:pointer;box-shadow:0 6px 18px rgba(0,43,127,.25);
+    .q-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; color: #fff;
+      margin-bottom: 6px; line-height: 1.3;
     }
-    .home-btn-s{width:calc(100% - 32px);display:block;margin:0 16px 24px;background:none;border:1.5px solid var(--border);border-radius:14px;padding:13px;font-size:.88rem;font-weight:700;color:var(--muted);cursor:pointer;text-align:center}
+    .q-desc {
+      font-size: 0.82rem; color: var(--text-dim);
+      margin-bottom: 22px; line-height: 1.6;
+    }
 
-    /* ── TOAST ── */
-    .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--ink);color:#fff;padding:11px 24px;border-radius:50px;font-size:.82rem;font-weight:700;opacity:0;transition:all .3s;pointer-events:none;z-index:9999;white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,.2)}
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    /* inputs */
+    .field {
+      margin-bottom: 16px;
+    }
+    .field label {
+      display: block; font-size: 0.78rem; font-weight: 500;
+      color: rgba(255,255,255,0.70); margin-bottom: 7px;
+      letter-spacing: 0.3px;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%; padding: 13px 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 12px;
+      color: #fff; font-size: 0.92rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.22s, background 0.22s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: rgba(255,255,255,0.30); }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--ocean-teal);
+      background: rgba(255,255,255,0.13);
+    }
+    .field select option { background: #013a63; color: #fff; }
+    .field textarea { resize: vertical; min-height: 100px; }
+
+    /* radio cards */
+    .radio-group {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      margin-bottom: 6px;
+    }
+    .radio-card {
+      position: relative; cursor: pointer;
+    }
+    .radio-card input[type="radio"] {
+      position: absolute; opacity: 0; width: 0; height: 0;
+    }
+    .radio-label {
+      display: flex; align-items: center; gap: 10px;
+      padding: 13px 16px; border-radius: 12px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75); font-size: 0.85rem; font-weight: 500;
+      transition: all 0.22s; cursor: pointer;
+    }
+    .radio-label .r-icon { font-size: 1.2rem; }
+    .radio-card input[type="radio"]:checked + .radio-label {
+      background: rgba(0,180,216,0.18);
+      border-color: var(--ocean-teal);
+      color: #fff;
+      box-shadow: 0 0 14px rgba(0,180,216,0.25);
+    }
+    .radio-label:hover { background: rgba(255,255,255,0.13); }
+
+    /* checkbox */
+    .check-group { display: flex; flex-direction: column; gap: 8px; }
+    .check-card { position: relative; cursor: pointer; }
+    .check-card input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .check-label {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 16px; border-radius: 12px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75); font-size: 0.85rem;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .check-card input:checked + .check-label {
+      background: rgba(0,180,216,0.18);
+      border-color: var(--ocean-teal); color: #fff;
+    }
+
+    /* navigation buttons */
+    .btn-row {
+      display: flex; gap: 12px; margin-top: 28px; justify-content: flex-end;
+    }
+    .btn-back {
+      padding: 12px 26px; border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.75); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .btn-back:hover { background: rgba(255,255,255,0.14); }
+    .btn-next {
+      padding: 12px 30px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--ocean-blue), var(--ocean-bright));
+      border: none; color: #fff; font-size: 0.87rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+      box-shadow: 0 5px 20px rgba(0,119,182,0.45);
+    }
+    .btn-next:hover { filter: brightness(1.12); transform: translateY(-1px); }
+
+    /* ═══ SEND OPTIONS ═══ */
+    .send-options {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+      margin-top: 28px;
+    }
+    .send-btn {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 10px; padding: 20px 14px; border-radius: 16px;
+      text-decoration: none; font-size: 0.8rem; font-weight: 600;
+      border: 1px solid transparent;
+      transition: all 0.25s; cursor: pointer; font-family: inherit;
+      background: none;
+    }
+    .send-btn .s-icon { font-size: 1.8rem; }
+    .send-btn .s-label { color: rgba(255,255,255,0.80); line-height: 1.4; text-align: center; }
+    .send-btn .s-num   { font-size: 0.72rem; color: var(--text-dim); }
+
+    .send-wa {
+      background: rgba(37,211,102,0.13);
+      border-color: rgba(37,211,102,0.30);
+    }
+    .send-wa:hover { background: rgba(37,211,102,0.25); transform: translateY(-4px); }
+
+    .send-sms {
+      background: rgba(0,180,216,0.13);
+      border-color: rgba(0,180,216,0.30);
+    }
+    .send-sms:hover { background: rgba(0,180,216,0.25); transform: translateY(-4px); }
+
+    .send-email {
+      background: rgba(212,160,23,0.13);
+      border-color: rgba(212,160,23,0.30);
+    }
+    .send-email:hover { background: rgba(212,160,23,0.25); transform: translateY(-4px); }
+
+    /* progress bar */
+    .progress-wrap {
+      height: 3px; background: rgba(255,255,255,0.10);
+      border-radius: 3px; margin-bottom: 32px; overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--ocean-blue), var(--ocean-teal));
+      transition: width 0.4s ease;
+    }
+
+    /* ═══ FOOTER ═══ */
+    footer {
+      position: relative; z-index: 2;
+      text-align: center; padding: 30px 24px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.76rem; color: var(--text-dim);
+    }
+    footer a { color: var(--ocean-pale); text-decoration: none; }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-style: italic; font-weight: 700;
+      color: var(--ocean-foam); display: block; margin-bottom: 8px; letter-spacing: 2px;
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 600px) {
+      .form-card { padding: 30px 20px; }
+      .radio-group { grid-template-columns: 1fr; }
+      .send-options { grid-template-columns: 1fr; }
+      .step-line { width: 28px; }
+    }
+    @media (max-width: 480px) {
+      .nav-link { font-size: 0.61rem; padding: 4px 7px; }
+    }
   </style>
 </head>
 <body>
 
-<!-- TOP NAV -->
-<div class="top-nav">
-  <div class="nav-row">
-    <button class="nav-back" onclick="goBack()">←</button>
-    <div class="nav-logo">Sade <span>Books</span></div>
-    <div class="nav-spacer"></div>
-  </div>
-  <div class="nav-subtitle">Agiza Kitabu Chochote</div>
+<!-- ═══ BG + BUBBLES ═══ -->
+<div class="ocean-bg"></div>
+<div class="bubbles">
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
 </div>
 
-<!-- STEPS BAR -->
-<div class="steps-bar">
-  <div class="step-dot">
-    <div class="step-circle active" id="sc1">1</div>
-    <div class="step-lbl active" id="sl1">Chagua</div>
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">🌊 Sade</a>
+    <a class="nav-link" href="index.html">🏠 Nyumbani</a>
+    <a class="nav-link" href="about.html">ℹ️ Kuhusu</a>
+    <a class="nav-link" href="shop.html">🛒 Duka</a>
+    <a class="nav-link" href="malipo.html">💳 Malipo</a>
+    <a class="nav-link" href="tools.html">🔧 Zana</a>
+    <a class="nav-link" href="sade-Gpt.html">🤖 SadeGpt</a>
+    <a class="nav-link" href="jifunze_ujasiriamali_na_website.html">📚 Jifunze</a>
+    <a class="nav-link active" href="sade-order.html">📦 Oda</a>
+    <a class="nav-link" href="lipa-namba-mix-by-yas.html">🎵 Lipa Mix</a>
+    <a class="nav-link" href="afya-yako.html">❤️ Afya</a>
+    <a class="nav-link" href="privacy_and_terms.html">🔒 Privacy</a>
+    <a class="nav-link" href="contact.html">📞 Wasiliana</a>
   </div>
-  <div class="step-line" id="line1"></div>
-  <div class="step-dot">
-    <div class="step-circle" id="sc2">2</div>
-    <div class="step-lbl" id="sl2">Hifadhi</div>
-  </div>
-  <div class="step-line" id="line2"></div>
-  <div class="step-dot">
-    <div class="step-circle" id="sc3">3</div>
-    <div class="step-lbl" id="sl3">Lipa</div>
-  </div>
-  <div class="step-line" id="line3"></div>
-  <div class="step-dot">
-    <div class="step-circle" id="sc4">✓</div>
-    <div class="step-lbl" id="sl4">Pokea</div>
-  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">📦 Tuma Oda Yako · Sade Books</div>
+  <h1>Agiza <span class="accent">Kitabu</span></h1>
+  <p>Jibu maswali 5 mafupi, kisha utume oda yako kwa njia unayopenda — WhatsApp, SMS au Barua Pepe.</p>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 65" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,32 C360,65 1080,0 1440,32 L1440,65 L0,65 Z" fill="rgba(1,10,28,0.48)"/>
+  </svg>
 </div>
 
-<!-- ══════════════════════════════ -->
-<!-- PAGE 1: CHAGUA KITABU         -->
-<!-- ══════════════════════════════ -->
-<div class="page active" id="page1">
-
-  <div class="notice">
-    <div class="notice-icon">💡</div>
-    <div class="notice-text"><strong>Jinsi inavyofanya kazi:</strong> Andika jina la kitabu unalotaka → Hifadhi nafasi yako → Lipa TSH 2,000 → Pokea kitabu kwa WhatsApp au Download moja kwa moja!</div>
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+  <div class="section-title">
+    <h2>Fomu ya Oda</h2>
+    <p>Hatua 5 rahisi — dakika 2 tu</p>
+    <div class="title-line"></div>
   </div>
 
-  <div class="card">
-    <div class="card-head">
-      <div class="card-head-icon">📚</div>
-      <div>
-        <div class="card-head-title">Tafuta Kitabu</div>
-        <div class="card-head-sub">Andika jina au aina ya kitabu unachotaka</div>
+  <div class="form-wrap">
+    <div class="form-card">
+
+      <!-- Progress bar -->
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar" style="width:20%"></div>
       </div>
-    </div>
-    <div class="card-body">
-      <div class="field">
-        <label class="field-label">Jina la Kitabu <span class="required">*</span></label>
-        <div class="book-search-wrap">
-          <div class="field-wrap">
-            <span class="field-prefix">📖</span>
-            <input type="text" id="book-input" placeholder="mfano: Nguvu ya Akili, Biashara Ndogo..." autocomplete="off" oninput="searchBooks(this.value)"/>
+
+      <!-- Steps -->
+      <div class="steps" id="stepsRow">
+        <div class="step active" data-step="1">
+          <div class="step-num">1</div>
+          <div class="step-label">Jina lako</div>
+        </div>
+        <div class="step-line" id="line1"></div>
+        <div class="step" data-step="2">
+          <div class="step-num">2</div>
+          <div class="step-label">Aina ya kitabu</div>
+        </div>
+        <div class="step-line" id="line2"></div>
+        <div class="step" data-step="3">
+          <div class="step-num">3</div>
+          <div class="step-label">Kichwa/Mada</div>
+        </div>
+        <div class="step-line" id="line3"></div>
+        <div class="step" data-step="4">
+          <div class="step-num">4</div>
+          <div class="step-label">Lugha & Bei</div>
+        </div>
+        <div class="step-line" id="line4"></div>
+        <div class="step" data-step="5">
+          <div class="step-num">5</div>
+          <div class="step-label">Tuma</div>
+        </div>
+      </div>
+
+      <!-- ── SWALI 1 ── -->
+      <div class="q-panel active" id="panel1">
+        <div class="q-num">Swali 1 kati ya 5</div>
+        <div class="q-title">Habari! Jina lako ni nani? 👋</div>
+        <div class="q-desc">Tutahitaji jina lako ili tuweze kukusaidia vizuri zaidi.</div>
+        <div class="field">
+          <label>Jina Lako Kamili</label>
+          <input type="text" id="q1_jina" placeholder="Mfano: Amina Hassan"/>
+        </div>
+        <div class="field">
+          <label>Nambari ya Simu (si lazima)</label>
+          <input type="tel" id="q1_simu" placeholder="Mfano: 0712 345 678"/>
+        </div>
+        <div class="btn-row">
+          <button class="btn-next" onclick="goTo(2)">Endelea →</button>
+        </div>
+      </div>
+
+      <!-- ── SWALI 2 ── -->
+      <div class="q-panel" id="panel2">
+        <div class="q-num">Swali 2 kati ya 5</div>
+        <div class="q-title">Unataka kitabu cha aina gani? 📚</div>
+        <div class="q-desc">Chagua kategoria inayokufaa zaidi.</div>
+        <div class="radio-group" id="q2_aina">
+          <label class="radio-card">
+            <input type="radio" name="aina" value="Elimu & Masomo"/>
+            <div class="radio-label"><span class="r-icon">🎓</span> Elimu &amp; Masomo</div>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="aina" value="Biashara & Ujasiriamali"/>
+            <div class="radio-label"><span class="r-icon">💼</span> Biashara &amp; Ujasiriamali</div>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="aina" value="Afya & Maisha"/>
+            <div class="radio-label"><span class="r-icon">❤️</span> Afya &amp; Maisha</div>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="aina" value="Hadithi & Riwaya"/>
+            <div class="radio-label"><span class="r-icon">📖</span> Hadithi &amp; Riwaya</div>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="aina" value="Teknolojia & AI"/>
+            <div class="radio-label"><span class="r-icon">🤖</span> Teknolojia &amp; AI</div>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="aina" value="Dini & Maadili"/>
+            <div class="radio-label"><span class="r-icon">🕌</span> Dini &amp; Maadili</div>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="aina" value="Watoto & Vijana"/>
+            <div class="radio-label"><span class="r-icon">🌟</span> Watoto &amp; Vijana</div>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="aina" value="Nyingine"/>
+            <div class="radio-label"><span class="r-icon">📂</span> Nyingine</div>
+          </label>
+        </div>
+        <div class="btn-row">
+          <button class="btn-back" onclick="goTo(1)">← Rudi</button>
+          <button class="btn-next" onclick="goTo(3)">Endelea →</button>
+        </div>
+      </div>
+
+      <!-- ── SWALI 3 ── -->
+      <div class="q-panel" id="panel3">
+        <div class="q-num">Swali 3 kati ya 5</div>
+        <div class="q-title">Kichwa au mada ya kitabu? ✍️</div>
+        <div class="q-desc">Andika jina la kitabu unachokitaka. Kama hujui jina, eleza mada tu.</div>
+        <div class="field">
+          <label>Jina / Kichwa cha Kitabu</label>
+          <input type="text" id="q3_kichwa" placeholder="Mfano: Jinsi ya Kuanzisha Biashara Tanzania"/>
+        </div>
+        <div class="field">
+          <label>Maelezo ya Ziada (si lazima)</label>
+          <textarea id="q3_maelezo" placeholder="Eleza zaidi unachotaka — maudhui, mwandishi, au mambo yoyote muhimu..."></textarea>
+        </div>
+        <div class="btn-row">
+          <button class="btn-back" onclick="goTo(2)">← Rudi</button>
+          <button class="btn-next" onclick="goTo(4)">Endelea →</button>
+        </div>
+      </div>
+
+      <!-- ── SWALI 4 ── -->
+      <div class="q-panel" id="panel4">
+        <div class="q-num">Swali 4 kati ya 5</div>
+        <div class="q-title">Lugha na muundo unaopenda? 🌍</div>
+        <div class="q-desc">Chagua lugha na aina ya kitabu.</div>
+        <div class="field">
+          <label>Lugha Unayopendelea</label>
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="lugha" value="Kiswahili"/>
+              <div class="radio-label"><span class="r-icon">🇹🇿</span> Kiswahili</div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="lugha" value="Kiingereza"/>
+              <div class="radio-label"><span class="r-icon">🇬🇧</span> Kiingereza</div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="lugha" value="Zote mbili"/>
+              <div class="radio-label"><span class="r-icon">🌐</span> Zote mbili</div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="lugha" value="Sijali"/>
+              <div class="radio-label"><span class="r-icon">🤷</span> Sijali</div>
+            </label>
           </div>
-          <div class="book-suggestions" id="suggestions"></div>
         </div>
-        <div class="selected-book" id="selected-book-card">
-          <div class="sel-emoji" id="sel-emoji"></div>
-          <div class="sel-info">
-            <div class="sel-title" id="sel-title"></div>
-            <div class="sel-cat" id="sel-cat"></div>
-            <div class="sel-price">TSH 2,000 · Lipa baada ya kuhifadhi</div>
+        <div class="field" style="margin-top:14px">
+          <label>Aina ya Muundo</label>
+          <div class="check-group" id="q4_muundo">
+            <label class="check-card">
+              <input type="checkbox" value="PDF (Dijitali)"/>
+              <div class="check-label"><span>📄</span> PDF – Dijitali (download)</div>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" value="Printed (Chapwa)"/>
+              <div class="check-label"><span>📗</span> Chapwa – Karatasi halisi</div>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" value="Audio Book"/>
+              <div class="check-label"><span>🎧</span> Audio Book – Sikiliza</div>
+            </label>
           </div>
-          <button class="sel-remove" onclick="clearBook()" title="Ondoa">✕</button>
         </div>
-        <div class="field-hint">Pia unaweza andika kitabu chochote, hata kama hakipo kwenye orodha</div>
-      </div>
-
-      <div class="field">
-        <label class="field-label">Nambari ya Simu <span class="required">*</span></label>
-        <div class="field-wrap">
-          <span class="field-prefix">🇹🇿 +255</span>
-          <input type="tel" id="p1-phone" placeholder="7XX XXX XXX" maxlength="9" oninput="this.value=this.value.replace(/\D/g,'')"/>
-        </div>
-        <div class="field-hint">Nambari hii itatumika kupokea kitabu kwa WhatsApp</div>
-      </div>
-
-      <div class="field">
-        <label class="field-label">Maelezo Zaidi <span style="color:var(--muted);font-weight:400;font-size:.72rem">(si lazima)</span></label>
-        <div class="field-wrap">
-          <textarea id="p1-notes" placeholder="mfano: Nataka toleo la Kiswahili, au ningetaka vitabu vya biashara..."></textarea>
+        <div class="btn-row">
+          <button class="btn-back" onclick="goTo(3)">← Rudi</button>
+          <button class="btn-next" onclick="goTo(5)">Endelea →</button>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="err-box" id="err1"></div>
+      <!-- ── SWALI 5 — TUMA ── -->
+      <div class="q-panel" id="panel5">
+        <div class="q-num">Swali 5 kati ya 5</div>
+        <div class="q-title">Tuma Oda Yako! 🚀</div>
+        <div class="q-desc">Chagua njia unayopenda kutuma oda yako. Ujumbe utakuwa tayari umejazwa kwa maelezo yako yote.</div>
 
-  <button class="btn-yellow" onclick="step1Next()">
-    Hifadhi Nafasi Yangu →
-  </button>
-</div>
+        <!-- summary -->
+        <div id="summary" style="
+          background: rgba(255,255,255,0.06);
+          border: 1px solid rgba(255,255,255,0.14);
+          border-radius: 14px; padding: 16px 18px; margin-bottom: 24px;
+          font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.8;
+        "></div>
 
-<!-- ══════════════════════════════ -->
-<!-- PAGE 2: IMEHIFADHIWA          -->
-<!-- ══════════════════════════════ -->
-<div class="page" id="page2">
+        <!-- notes -->
+        <div class="field">
+          <label>Maelezo ya Ziada / Swali lolote (si lazima)</label>
+          <textarea id="q5_note" placeholder="Una swali lolote la ziada? Andika hapa..."></textarea>
+        </div>
 
-  <div class="notice green">
-    <div class="notice-icon">✅</div>
-    <div class="notice-text">
-      <strong>Kitabu kimehifadhiwa kama kumbukumbu!</strong><br/>
-      Ombi lako limesajiliwa. Lipa sasa ili kupokea kitabu chako hivi karibuni.
-    </div>
-  </div>
+        <!-- send buttons -->
+        <div class="send-options">
+          <button class="send-btn send-wa" onclick="sendWhatsApp()">
+            <span class="s-icon">💬</span>
+            <span class="s-label">WhatsApp</span>
+            <span class="s-num">+255 712 655 957</span>
+          </button>
+          <button class="send-btn send-sms" onclick="sendSMS()">
+            <span class="s-icon">📱</span>
+            <span class="s-label">SMS ya Kawaida</span>
+            <span class="s-num">0712 655 957</span>
+          </button>
+          <button class="send-btn send-email" onclick="sendEmail()">
+            <span class="s-icon">✉️</span>
+            <span class="s-label">Barua Pepe</span>
+            <span class="s-num">hermansade3@gmail.com</span>
+          </button>
+        </div>
 
-  <!-- Reservation card -->
-  <div class="reservation-card">
-    <div class="res-badge">🔖 Imehifadhiwa</div>
-    <div class="res-book-row">
-      <div class="res-emoji" id="r2-emoji">📚</div>
-      <div>
-        <div class="res-title" id="r2-title"></div>
-        <div class="res-cat" id="r2-cat"></div>
-        <div class="res-id" id="r2-id"></div>
-      </div>
-    </div>
-    <div class="res-divider"></div>
-    <div class="res-info-row">
-      <span class="res-info-label">Simu</span>
-      <span class="res-info-val" id="r2-phone"></span>
-    </div>
-    <div class="res-info-row">
-      <span class="res-info-label">Hali</span>
-      <span class="res-info-val yellow">⏳ Inasubiri Malipo</span>
-    </div>
-    <div class="res-info-row">
-      <span class="res-info-label">Bei</span>
-      <span class="res-info-val yellow">TSH 2,000</span>
-    </div>
-  </div>
-
-  <div class="notice">
-    <div class="notice-icon">⚠️</div>
-    <div class="notice-text"><strong>Kumbuka:</strong> Nafasi yako imehifadhiwa kwa masaa 24. Lipa ndani ya muda huu ili kupata kitabu chako.</div>
-  </div>
-
-  <button class="btn-yellow" onclick="goToPayment()">
-    💳 &nbsp;Lipa Sasa – TSH 2,000
-  </button>
-  <button class="btn-ghost" onclick="goBack()">← Rudi nyuma</button>
-</div>
-
-<!-- ══════════════════════════════ -->
-<!-- PAGE 3: MALIPO                -->
-<!-- ══════════════════════════════ -->
-<div class="page" id="page3">
-
-  <!-- Lipa Namba -->
-  <div class="lipa-box">
-    <div class="lipa-tag">Lipa Namba ya Sade Books · Mix by YAS</div>
-    <div class="lipa-num-row">
-      <div>
-        <div class="lipa-number">16284801</div>
-        <div class="lipa-name">HERMAN ONESMO SADE · Merchant</div>
-      </div>
-      <button class="copy-btn" onclick="copyNum()">📋 Nakili</button>
-    </div>
-    <div class="networks-row">
-      <div class="net-chip"><div class="net-dot" style="background:#00A651"></div>M-Pesa</div>
-      <div class="net-chip"><div class="net-dot" style="background:#0066CC"></div>Tigo</div>
-      <div class="net-chip"><div class="net-dot" style="background:#E40000"></div>Airtel</div>
-      <div class="net-chip"><div class="net-dot" style="background:#FF6B00"></div>Halo</div>
-      <div class="net-chip"><div class="net-dot" style="background:#009900"></div>T-Pesa</div>
-    </div>
-  </div>
-
-  <!-- Mini steps -->
-  <div class="card" style="margin-bottom:14px">
-    <div class="card-head">
-      <div class="card-head-icon">📋</div>
-      <div class="card-head-title">Hatua za Kulipa</div>
-    </div>
-    <div style="padding:10px 18px 16px">
-      <div class="step-mini"><div class="step-mini-num">1</div><div class="step-mini-text">Fungua App yako au piga <strong>*150#</strong></div></div>
-      <div class="step-mini"><div class="step-mini-num">2</div><div class="step-mini-text">Chagua <strong>"Lipa Namba"</strong> kisha ingiza:<br/><div class="num-badge">16284801</div></div></div>
-      <div class="step-mini"><div class="step-mini-num">3</div><div class="step-mini-text">Ingiza kiasi <strong>TSH 2,000</strong> → thibitisha na PIN</div></div>
-      <div class="step-mini"><div class="step-mini-num">4</div><div class="step-mini-text">Ingiza <strong>Transaction ID</strong> kutoka SMS hapa chini</div></div>
-    </div>
-  </div>
-
-  <!-- Form -->
-  <div class="card">
-    <div class="card-head">
-      <div class="card-head-icon">✍️</div>
-      <div class="card-head-title">Thibitisha Malipo</div>
-    </div>
-    <div class="card-body">
-      <div class="field">
-        <label class="field-label">Nambari ya Simu Uliyolipa Nayo <span class="required">*</span></label>
-        <div class="field-wrap">
-          <span class="field-prefix">🇹🇿 +255</span>
-          <input type="tel" id="p3-phone" placeholder="7XX XXX XXX" maxlength="9" oninput="this.value=this.value.replace(/\D/g,'')"/>
+        <div class="btn-row" style="justify-content:flex-start; margin-top:20px;">
+          <button class="btn-back" onclick="goTo(4)">← Rudi</button>
         </div>
       </div>
-      <div class="field">
-        <label class="field-label">Transaction ID (Ref. No. kutoka SMS) <span class="required">*</span></label>
-        <div class="field-wrap">
-          <span class="field-prefix">🔑</span>
-          <input type="text" id="p3-ref" placeholder="mfano: BCA123456789" oninput="this.value=this.value.toUpperCase()"/>
-        </div>
-        <div class="field-hint">💡 Inatumwa kwa SMS mara baada ya malipo kukamilika</div>
-      </div>
-    </div>
-  </div>
 
-  <div class="err-box" id="err3"></div>
+    </div><!-- /form-card -->
+  </div><!-- /form-wrap -->
+</div><!-- /main -->
 
-  <button class="btn-yellow" id="pay-btn" onclick="confirmPayment()">
-    ✅ &nbsp;Nimetuma Malipo — Thibitisha
-  </button>
-  <button class="btn-ghost" onclick="showPage(2)">← Rudi nyuma</button>
-</div>
-
-<!-- ══════════════════════════════════════════════ -->
-<!-- SUCCESS FULLPAGE                               -->
-<!-- ══════════════════════════════════════════════ -->
-<div class="fullpage" id="success-pg">
-
-  <div class="success-top">
-    <div class="s-anim">✓</div>
-    <div class="s-title">Malipo Yamefanikiwa!</div>
-    <div class="s-sub">Asante sana! Kitabu chako <span id="s-bookname"></span><br/>kiko tayari kupokea.</div>
-  </div>
-
-  <!-- Delivery choice -->
-  <div class="delivery-choice">
-    <div class="dc-title">📲 Pata Kitabu Chako Vipi?</div>
-
-    <div class="dc-option" id="dc-wa" onclick="chooseDc('wa')">
-      <div class="dc-icon wa">💬</div>
-      <div class="dc-text">
-        <strong>Tuma kwa WhatsApp</strong>
-        <span>Herman atakutumia kitabu moja kwa moja kwenye WhatsApp yako</span>
-      </div>
-    </div>
-
-    <div class="dc-option" id="dc-dl" onclick="chooseDc('dl')">
-      <div class="dc-icon dl">⬇️</div>
-      <div class="dc-text">
-        <strong>Download Moja Kwa Moja</strong>
-        <span>Pakua kitabu mara moja kwenye simu yako sasa hivi</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Receipt -->
-  <div class="receipt-card">
-    <div class="receipt-hdr">
-      <div class="receipt-hdr-icon">🧾</div>
-      <div class="receipt-hdr-title">Risiti ya Ununuzi</div>
-    </div>
-    <div class="r-row"><span class="r-label">Kitabu</span><span class="r-val" id="s-r-book"></span></div>
-    <div class="r-row"><span class="r-label">Mlipaji (Simu)</span><span class="r-val" id="s-r-phone"></span></div>
-    <div class="r-row"><span class="r-label">Transaction ID</span><span class="r-val ref" id="s-r-ref"></span></div>
-    <div class="r-row"><span class="r-label">Kiasi</span><span class="r-val big">TSH 2,000</span></div>
-    <div class="r-row"><span class="r-label">Mpokeaji</span><span class="r-val">HERMAN ONESMO SADE</span></div>
-    <div class="r-row"><span class="r-label">Tarehe</span><span class="r-val" id="s-r-date"></span></div>
-  </div>
-
-  <!-- Action buttons shown after choosing -->
-  <div id="action-wa" style="display:none">
-    <a id="wa-link" href="#" class="wa-btn">
-      💬 &nbsp;Fungua WhatsApp — Tuma Uthibitisho
-    </a>
-    <div style="font-size:.72rem;color:var(--muted);text-align:center;margin:0 16px 14px;font-family:'Lora',serif;font-style:italic">
-      Utaelekeza kwa WhatsApp wa Herman Sade. Tuma picha ya SMS ya malipo yako ili apeleke kitabu.
-    </div>
-  </div>
-
-  <div id="action-dl" style="display:none">
-    <button class="dl-btn" onclick="fakeDownload()">
-      ⬇️ &nbsp;Pakua Kitabu Chako Sasa
-    </button>
-    <div style="font-size:.72rem;color:var(--muted);text-align:center;margin:0 16px 14px;font-family:'Lora',serif;font-style:italic">
-      Download itaanza hivi karibuni. Kitabu kitatumwa pia kwa WhatsApp kwa uhakika.
-    </div>
-  </div>
-
-  <button class="home-btn-s" onclick="resetAll()">← Agiza Kitabu Kingine</button>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <span class="footer-logo">🌊 Sade Books</span>
+  &copy; 2025 Sade Tanzania · Haki zote zimehifadhiwa &nbsp;·&nbsp;
+  <a href="privacy_and_terms.html">Privacy &amp; Masharti</a>
+</footer>
 
 <script>
-// ── BOOKS DATA (simplified) ──
-var bookList = [
-  {id:1,title:'Nguvu ya Akili',cat:'Maendeleo Binafsi',emoji:'🧠'},
-  {id:2,title:'Biashara Ndogo Faida Kubwa',cat:'Biashara & Fedha',emoji:'💼'},
-  {id:3,title:'Imani Inayobadilisha Maisha',cat:'Dini & Imani',emoji:'🕌'},
-  {id:4,title:'Afya ni Utajiri',cat:'Afya & Lishe',emoji:'❤️'},
-  {id:5,title:'Teknolojia na Mustakabali',cat:'Teknolojia',emoji:'💻'},
-  {id:6,title:'Historia ya Tanzania',cat:'Historia',emoji:'📜'},
-  {id:7,title:'Elimu ya Kibinafsi',cat:'Elimu',emoji:'🎓'},
-  {id:8,title:'Hadithi za Usiku',cat:'Hadithi',emoji:'📖'},
-  {id:9,title:'Familia Bora',cat:'Familia',emoji:'👨‍👩‍👧'},
-  {id:10,title:'Mashairi ya Moyo',cat:'Ushairi',emoji:'✍️'},
-  {id:11,title:'Pesa na Akili',cat:'Biashara & Fedha',emoji:'💰'},
-  {id:12,title:'Amani ya Rohoni',cat:'Dini & Imani',emoji:'🌙'},
-  {id:13,title:'Lishe Bora Maisha Bora',cat:'Afya & Lishe',emoji:'🥗'},
-  {id:14,title:'Ujasiriamali Tanzania',cat:'Biashara & Fedha',emoji:'🚀'},
-  {id:15,title:'Mazingira Yetu',cat:'Mazingira',emoji:'🌳'},
-  {id:16,title:'Michezo na Afya',cat:'Michezo',emoji:'⚽'},
-  {id:17,title:'Sanaa ya Maisha',cat:'Sanaa & Utamaduni',emoji:'🎨'},
-  {id:18,title:'Uongozi Bora',cat:'Maendeleo Binafsi',emoji:'👑'},
-  {id:19,title:'Upendo wa Kweli',cat:'Familia',emoji:'💕'},
-  {id:20,title:'Mafanikio ya Haraka',cat:'Maendeleo Binafsi',emoji:'⚡'}
-];
+  let current = 1;
 
-var state = {
-  page: 1,
-  selectedBook: null,
-  customBook: '',
-  phone: '',
-  reservationId: '',
-  dcChoice: ''
-};
+  function goTo(n) {
+    // validate step 1
+    if (n > 1 && current === 1) {
+      const jina = document.getElementById('q1_jina').value.trim();
+      if (!jina) { alert('Tafadhali weka jina lako kwanza.'); return; }
+    }
+    // validate step 2
+    if (n > 2 && current === 2) {
+      const sel = document.querySelector('input[name="aina"]:checked');
+      if (!sel) { alert('Tafadhali chagua aina ya kitabu.'); return; }
+    }
+    // validate step 3
+    if (n > 3 && current === 3) {
+      const k = document.getElementById('q3_kichwa').value.trim();
+      if (!k) { alert('Tafadhali andika kichwa au mada ya kitabu.'); return; }
+    }
+    // validate step 4
+    if (n > 4 && current === 4) {
+      const lg = document.querySelector('input[name="lugha"]:checked');
+      if (!lg) { alert('Tafadhali chagua lugha.'); return; }
+    }
 
-// ── BOOK SEARCH ──
-function searchBooks(val) {
-  var sugg = document.getElementById('suggestions');
-  if (!val || val.length < 2) { sugg.classList.remove('open'); return; }
+    // hide current, show next
+    document.getElementById('panel' + current).classList.remove('active');
+    document.getElementById('panel' + n).classList.add('active');
 
-  var matches = bookList.filter(function(b) {
-    return b.title.toLowerCase().indexOf(val.toLowerCase()) !== -1 ||
-           b.cat.toLowerCase().indexOf(val.toLowerCase()) !== -1;
-  });
+    // update steps UI
+    for (let i = 1; i <= 5; i++) {
+      const s = document.querySelector('[data-step="' + i + '"]');
+      s.classList.remove('active', 'done');
+      if (i < n) s.classList.add('done');
+      if (i === n) s.classList.add('active');
+    }
+    // update lines
+    for (let i = 1; i <= 4; i++) {
+      const l = document.getElementById('line' + i);
+      if (l) l.classList.toggle('done', i < n);
+    }
 
-  if (matches.length === 0) {
-    sugg.innerHTML = '<div class="suggestion-item"><div class="sug-emoji">✍️</div><div><div class="sug-name">' + val + '</div><div class="sug-cat">Kitabu kipya (nje ya orodha)</div></div></div>';
-    sugg.querySelector('.suggestion-item').onclick = function() { selectCustomBook(val); };
-    sugg.classList.add('open');
-    return;
+    // progress bar
+    document.getElementById('progressBar').style.width = (n * 20) + '%';
+
+    current = n;
+
+    // build summary on step 5
+    if (n === 5) buildSummary();
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  sugg.innerHTML = '';
-  matches.slice(0, 5).forEach(function(b) {
-    var item = document.createElement('div');
-    item.className = 'suggestion-item';
-    item.innerHTML = '<div class="sug-emoji">' + b.emoji + '</div><div><div class="sug-name">' + b.title + '</div><div class="sug-cat">' + b.cat + '</div></div>';
-    item.onclick = (function(book) { return function() { selectBook(book); }; })(b);
-    sugg.appendChild(item);
-  });
-  sugg.classList.add('open');
-}
+  function buildSummary() {
+    const jina   = document.getElementById('q1_jina').value.trim();
+    const simu   = document.getElementById('q1_simu').value.trim();
+    const aina   = document.querySelector('input[name="aina"]:checked')?.value || '—';
+    const kichwa = document.getElementById('q3_kichwa').value.trim();
+    const maelezo= document.getElementById('q3_maelezo').value.trim();
+    const lugha  = document.querySelector('input[name="lugha"]:checked')?.value || '—';
+    const muundo = [...document.querySelectorAll('#q4_muundo input:checked')].map(c => c.value).join(', ') || '—';
 
-function selectBook(book) {
-  state.selectedBook = book;
-  document.getElementById('book-input').value = book.title;
-  document.getElementById('suggestions').classList.remove('open');
-  var card = document.getElementById('selected-book-card');
-  document.getElementById('sel-emoji').textContent = book.emoji;
-  document.getElementById('sel-title').textContent = book.title;
-  document.getElementById('sel-cat').textContent = book.cat;
-  card.classList.add('show');
-}
-
-function selectCustomBook(name) {
-  state.selectedBook = {id:'custom', title: name, cat: 'Agizo Maalum', emoji: '📚'};
-  document.getElementById('book-input').value = name;
-  document.getElementById('suggestions').classList.remove('open');
-  var card = document.getElementById('selected-book-card');
-  document.getElementById('sel-emoji').textContent = '📚';
-  document.getElementById('sel-title').textContent = name;
-  document.getElementById('sel-cat').textContent = 'Agizo Maalum';
-  card.classList.add('show');
-}
-
-function clearBook() {
-  state.selectedBook = null;
-  document.getElementById('book-input').value = '';
-  document.getElementById('selected-book-card').classList.remove('show');
-}
-
-// Close suggestions on outside click
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('.book-search-wrap')) {
-    document.getElementById('suggestions').classList.remove('open');
+    document.getElementById('summary').innerHTML = `
+      <strong style="color:var(--ocean-pale);display:block;margin-bottom:8px">📋 Muhtasari wa Oda Yako:</strong>
+      👤 <strong>Jina:</strong> ${jina}${simu ? ' · 📞 ' + simu : ''}<br>
+      📚 <strong>Aina:</strong> ${aina}<br>
+      📖 <strong>Kitabu:</strong> ${kichwa}<br>
+      ${maelezo ? '💬 <strong>Maelezo:</strong> ' + maelezo + '<br>' : ''}
+      🌍 <strong>Lugha:</strong> ${lugha}<br>
+      📄 <strong>Muundo:</strong> ${muundo}
+    `;
   }
-});
 
-// ── STEP 1 → 2 ──
-function step1Next() {
-  var bookVal = document.getElementById('book-input').value.trim();
-  var phone   = document.getElementById('p1-phone').value.trim();
-  var err     = document.getElementById('err1');
+  function getMessage() {
+    const jina    = document.getElementById('q1_jina').value.trim();
+    const simu    = document.getElementById('q1_simu').value.trim();
+    const aina    = document.querySelector('input[name="aina"]:checked')?.value || '—';
+    const kichwa  = document.getElementById('q3_kichwa').value.trim();
+    const maelezo = document.getElementById('q3_maelezo').value.trim();
+    const lugha   = document.querySelector('input[name="lugha"]:checked')?.value || '—';
+    const muundo  = [...document.querySelectorAll('#q4_muundo input:checked')].map(c => c.value).join(', ') || '—';
+    const note    = document.getElementById('q5_note').value.trim();
 
-  if (!bookVal) { err.textContent = '⚠️ Tafadhali andika jina la kitabu unalotaka.'; err.style.display='block'; return; }
-  if (phone.length < 9) { err.textContent = '⚠️ Ingiza nambari yako ya simu (tarakimu 9).'; err.style.display='block'; return; }
-  err.style.display = 'none';
-
-  if (!state.selectedBook) { selectCustomBook(bookVal); }
-
-  state.phone = phone;
-  state.reservationId = 'SB-RES-' + Date.now().toString().slice(-8);
-
-  // Fill page 2
-  document.getElementById('r2-emoji').textContent = state.selectedBook.emoji;
-  document.getElementById('r2-title').textContent = state.selectedBook.title;
-  document.getElementById('r2-cat').textContent   = state.selectedBook.cat;
-  document.getElementById('r2-id').textContent    = 'Nambari ya Kumbukumbu: ' + state.reservationId;
-  document.getElementById('r2-phone').textContent = '+255 ' + phone;
-
-  // Pre-fill payment phone
-  document.getElementById('p3-phone').value = phone;
-
-  showPage(2);
-}
-
-// ── STEP 2 → 3 ──
-function goToPayment() { showPage(3); }
-
-// ── STEP 3: CONFIRM PAYMENT ──
-function confirmPayment() {
-  var phone = document.getElementById('p3-phone').value.trim();
-  var ref   = document.getElementById('p3-ref').value.trim();
-  var err   = document.getElementById('err3');
-
-  if (phone.length < 9) { err.textContent = '⚠️ Ingiza nambari ya simu sahihi.'; err.style.display='block'; return; }
-  if (ref.length < 5)   { err.textContent = '⚠️ Ingiza Transaction ID uliyopokea kwa SMS.'; err.style.display='block'; return; }
-
-  err.style.display = 'none';
-  var btn = document.getElementById('pay-btn');
-  btn.textContent = '⏳ Inathibitisha...';
-  btn.disabled = true;
-
-  setTimeout(function() {
-    showSuccess(phone, ref);
-  }, 2000);
-}
-
-function showSuccess(phone, ref) {
-  var months = ['Jan','Feb','Machi','Apr','Mei','Jun','Jul','Ago','Sep','Okt','Nov','Des'];
-  var d = new Date();
-  var dateStr = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear() +
-                '  ' + d.getHours() + ':' + String(d.getMinutes()).padStart(2,'0');
-
-  var bookTitle = state.selectedBook ? state.selectedBook.title : '';
-
-  document.getElementById('s-bookname').textContent = '"' + bookTitle + '"';
-  document.getElementById('s-r-book').textContent   = bookTitle;
-  document.getElementById('s-r-phone').textContent  = '+255 ' + phone;
-  document.getElementById('s-r-ref').textContent    = ref.toUpperCase();
-  document.getElementById('s-r-date').textContent   = dateStr;
-
-  // WhatsApp link
-  var waMsg = 'Habari Herman! Nimelipa TSH 2,000 kwa kitabu: *' + bookTitle + '*\n' +
-              'Transaction ID: *' + ref.toUpperCase() + '*\n' +
-              'Nambari yangu: +255 ' + phone + '\n' +
-              'Reservation ID: ' + state.reservationId + '\n' +
-              'Tafadhali nipeleke kitabu. Asante!';
-  document.getElementById('wa-link').href = 'https://wa.me/255' + state.phone.replace(/^0/,'') +
-    '?text=' + encodeURIComponent(waMsg);
-  // (In real use, replace with Herman's actual WhatsApp number)
-  document.getElementById('wa-link').href = 'https://wa.me/255XXXXXXXXXXX?text=' + encodeURIComponent(waMsg);
-
-  var sp = document.getElementById('success-pg');
-  sp.style.display = 'block';
-  sp.scrollTop = 0;
-  document.body.style.overflow = 'hidden';
-}
-
-function chooseDc(type) {
-  state.dcChoice = type;
-  document.getElementById('dc-wa').classList.toggle('chosen', type==='wa');
-  document.getElementById('dc-dl').classList.toggle('chosen', type==='dl');
-  document.getElementById('action-wa').style.display = type==='wa' ? 'block' : 'none';
-  document.getElementById('action-dl').style.display = type==='dl' ? 'block' : 'none';
-}
-
-function fakeDownload() {
-  showToast('⬇️  Kitabu kinapakuliwa... Itumwa pia WhatsApp!');
-}
-
-function resetAll() {
-  document.getElementById('success-pg').style.display = 'none';
-  document.body.style.overflow = '';
-  clearBook();
-  document.getElementById('p1-phone').value = '';
-  document.getElementById('p1-notes').value = '';
-  document.getElementById('p3-ref').value = '';
-  var btn = document.getElementById('pay-btn');
-  btn.textContent = '✅ \u00A0Nimetuma Malipo — Thibitisha';
-  btn.disabled = false;
-  document.getElementById('action-wa').style.display = 'none';
-  document.getElementById('action-dl').style.display = 'none';
-  showPage(1);
-}
-
-// ── PAGE NAVIGATION ──
-function showPage(n) {
-  state.page = n;
-  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-  document.getElementById('page' + n).classList.add('active');
-  updateSteps(n);
-  window.scrollTo(0,0);
-}
-
-function goBack() {
-  if (state.page > 1) showPage(state.page - 1);
-}
-
-function updateSteps(n) {
-  for (var i = 1; i <= 4; i++) {
-    var c = document.getElementById('sc' + i);
-    var l = document.getElementById('sl' + i);
-    c.classList.remove('active','done');
-    l.classList.remove('active','done');
-    if (i < n)      { c.classList.add('done'); c.textContent='✓'; l.classList.add('done'); }
-    else if (i===n) { c.classList.add('active'); c.textContent=i; l.classList.add('active'); }
-    else            { c.textContent=i; }
+    let msg = `🌊 *ODA MPYA – Sade Books*\n\n`;
+    msg += `👤 *Jina:* ${jina}\n`;
+    if (simu) msg += `📞 *Simu:* ${simu}\n`;
+    msg += `📚 *Aina ya Kitabu:* ${aina}\n`;
+    msg += `📖 *Kichwa/Mada:* ${kichwa}\n`;
+    if (maelezo) msg += `💬 *Maelezo:* ${maelezo}\n`;
+    msg += `🌍 *Lugha:* ${lugha}\n`;
+    msg += `📄 *Muundo:* ${muundo}\n`;
+    if (note) msg += `📝 *Maelezo ya Ziada:* ${note}\n`;
+    msg += `\n_Tuma kupitia Sade Books Website_`;
+    return msg;
   }
-  for (var j = 1; j <= 3; j++) {
-    var line = document.getElementById('line' + j);
-    if (line) line.classList.toggle('done', j < n);
+
+  function sendWhatsApp() {
+    const msg = getMessage();
+    const url = 'https://wa.me/255712655957?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
   }
-}
 
-// ── HELPERS ──
-function copyNum() {
-  navigator.clipboard.writeText('16284801').catch(function(){});
-  showToast('✅  Nambari 16284801 imenakiliwa!');
-}
+  function sendSMS() {
+    const msg = getMessage();
+    window.location.href = 'sms:+255712655957?body=' + encodeURIComponent(msg);
+  }
 
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function(){ t.classList.remove('show'); }, 2800);
-}
+  function sendEmail() {
+    const msg = getMessage();
+    const subject = 'Oda ya Kitabu – Sade Books';
+    window.location.href = 'mailto:hermansade3@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(msg);
+  }
 </script>
+
 </body>
 </html>
