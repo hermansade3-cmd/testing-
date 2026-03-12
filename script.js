@@ -22,7 +22,7 @@ function buildCard(book, index) {
     const filePath = book.file.startsWith('PDFs/') ? book.file : `PDFs/${book.file}`;
 
     return `
-    <div style="display:flex;border-radius:18px;overflow:hidden;background:#0b3d91;color:white;box-shadow:0 6px 25px rgba(0,0,0,0.35);animation-delay:${delay}s">
+    <div style="display:flex;width:100%;border-radius:18px;overflow:hidden;background:#0b3d91;color:white;box-shadow:0 6px 25px rgba(0,0,0,0.35);animation-delay:${delay}s">
 
         <!-- Cover -->
         <div style="width:110px;background:#1e5bff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;color:white">
@@ -69,6 +69,12 @@ function buildCard(book, index) {
     const container = document.getElementById("books-container");
 
     if(!container) return;
+
+    // HAPA NDIPO 3 COLUMN ZIMEWEKWA
+    container.style.display = "grid";
+    container.style.gridTemplateColumns = "repeat(3, 1fr)";
+    container.style.gap = "20px";
+    container.style.padding = "10px";
 
     fetch("books.json")
     .then(res => res.json())
