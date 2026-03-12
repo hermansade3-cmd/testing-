@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sade Books — Duka la Vitabu</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#f0f4ff;
+  --white:#ffffff;
+  --dark:#0a0f1e;
+  --dark2:#111827;
+  --blue:#1d4ed8;
+  --blue2:#2563eb;
+  --blue3:#3b82f6;
+  --blue-pale:#eff6ff;
+  --blue-mid:#dbeafe;
+  --gold:#f59e0b;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --font:'Sora',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* ── TOP NAV ── */
+.topnav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(10,15,30,0.96);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding:0 2rem;
+  height:62px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;
+}
+.topnav-brand{
+  font-family:var(--font);font-weight:800;font-size:1.2rem;
+  color:#fff;letter-spacing:-0.02em;white-space:nowrap;
+}
+.topnav-brand em{color:var(--gold);font-style:normal;}
+.topnav-tabs{
+  display:flex;gap:0.3rem;
+  background:rgba(255,255,255,0.06);
+  border-radius:12px;padding:4px;
+}
+.topnav-tab{
+  padding:0.45rem 1.2rem;border-radius:9px;
+  font-size:0.82rem;font-weight:600;
+  cursor:pointer;border:none;
+  background:transparent;color:rgba(255,255,255,0.55);
+  transition:all 0.2s;font-family:var(--font);
+}
+.topnav-tab.active{background:#fff;color:var(--dark);}
+.topnav-tab:hover:not(.active){color:#fff;background:rgba(255,255,255,0.1);}
+.topnav-cart{
+  display:flex;align-items:center;gap:0.4rem;
+  background:var(--gold);color:var(--dark);
+  border:none;border-radius:10px;
+  padding:0.5rem 1rem;font-size:0.82rem;font-weight:700;
+  cursor:pointer;font-family:var(--font);transition:all 0.2s;
+  white-space:nowrap;
+}
+.topnav-cart:hover{background:#fbbf24;transform:translateY(-1px);}
+.cart-count{
+  background:var(--dark);color:#fff;
+  border-radius:100px;padding:1px 6px;font-size:0.7rem;font-weight:700;
+  min-width:18px;text-align:center;
+}
+
+/* ── HERO BANNER ── */
+.hero{
+  background:linear-gradient(135deg,#0a0f1e 0%,#0d1a3e 40%,#1a2a6e 70%,#1d4ed8 100%);
+  padding:4rem 2rem 3.5rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(59,130,246,0.12) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+.hero::after{
+  content:'';position:absolute;
+  bottom:-60px;left:50%;transform:translateX(-50%);
+  width:600px;height:200px;
+  background:radial-gradient(ellipse,rgba(59,130,246,0.2) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;padding:0.3rem 1rem;
+  font-size:0.7rem;font-weight:700;letter-spacing:0.12em;
+  text-transform:uppercase;color:rgba(255,255,255,0.75);
+  margin-bottom:1.2rem;
+}
+.hero-title{
+  font-size:clamp(1.8rem,5vw,3.2rem);font-weight:800;
+  color:#fff;letter-spacing:-0.03em;line-height:1.1;
+  margin-bottom:0.8rem;
+}
+.hero-title em{color:var(--gold);font-style:normal;}
+.hero-sub{
+  font-size:0.9rem;color:rgba(255,255,255,0.55);
+  line-height:1.7;max-width:500px;margin:0 auto;
+}
+.hero-stats{
+  display:flex;justify-content:center;gap:2.5rem;
+  margin-top:2rem;flex-wrap:wrap;
+}
+.hero-stat{text-align:center;}
+.hero-stat-num{
+  font-family:var(--mono);font-size:1.6rem;font-weight:600;
+  color:#fff;
+}
+.hero-stat-label{font-size:0.68rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;}
+
+/* ── SECTION TABS ── */
+.section-nav{
+  background:var(--dark2);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex;justify-content:center;gap:0;
+  position:sticky;top:62px;z-index:100;
+  overflow-x:auto;scrollbar-width:none;
+}
+.section-nav::-webkit-scrollbar{display:none;}
+.snav-btn{
+  display:flex;align-items:center;gap:0.5rem;
+  padding:1rem 2rem;
+  background:transparent;border:none;
+  color:rgba(255,255,255,0.45);
+  font-family:var(--font);font-size:0.85rem;font-weight:600;
+  cursor:pointer;transition:all 0.2s;
+  border-bottom:3px solid transparent;white-space:nowrap;
+}
+.snav-btn:hover{color:rgba(255,255,255,0.8);}
+.snav-btn.active{color:#fff;border-bottom-color:var(--blue3);}
+.snav-divider{width:1px;background:rgba(255,255,255,0.06);margin:0.7rem 0;}
+
+/* ── SECTION PANEL ── */
+.section-panel{display:none;}
+.section-panel.active{display:block;}
+
+/* ── FILTER BAR ── */
+.filter-bar{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:0.9rem 2rem;
+  display:flex;align-items:center;gap:0.6rem;
+  flex-wrap:wrap;
+}
+.filter-label{
+  font-size:0.7rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--muted);margin-right:0.3rem;
+}
+.filter-btn{
+  padding:0.4rem 0.9rem;border-radius:8px;
+  border:1.5px solid var(--border);background:var(--bg);
+  color:var(--muted);font-family:var(--font);font-size:0.78rem;
+  font-weight:600;cursor:pointer;transition:all 0.18s;
+}
+.filter-btn:hover,.filter-btn.active{
+  border-color:var(--blue3);color:var(--blue2);
+  background:var(--blue-pale);
+}
+.filter-count{
+  margin-left:auto;font-size:0.75rem;color:var(--muted);
+  white-space:nowrap;
+}
+
+/* ── BOOKS GRID ── */
+.books-section{
+  padding:2rem;
+  max-width:1400px;margin:0 auto;
+}
+.books-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:1.2rem;
+}
+
+/* ── BOOK CARD ── */
+.book-card{
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  transition:all 0.28s cubic-bezier(0.23,1,0.32,1);
+  position:relative;
+}
+.book-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(29,78,216,0.12);
+  border-color:#bfdbfe;
+}
+.book-cover{
+  height:140px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:6px;position:relative;overflow:hidden;
+}
+.book-cover::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,0.3) 100%);
+}
+.book-emoji{font-size:2.4rem;position:relative;z-index:2;}
+.book-cover-title{
+  font-size:0.52rem;color:rgba(255,255,255,0.85);font-weight:600;
+  text-align:center;padding:0 8px;position:relative;z-index:2;
+  line-height:1.3;
+}
+.book-badge{
+  position:absolute;top:8px;right:8px;z-index:3;
+  padding:2px 8px;border-radius:100px;
+  font-size:0.58rem;font-weight:700;
+}
+.badge-new{background:#22c55e;color:#fff;}
+.badge-hot{background:#ef4444;color:#fff;}
+.badge-top{background:var(--gold);color:#0a0f1e;}
+
+.book-body{padding:0.9rem;}
+.book-cat{
+  font-size:0.58rem;font-weight:700;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--blue2);margin-bottom:0.3rem;
+}
+.book-title{
+  font-size:0.82rem;font-weight:700;color:var(--text);
+  line-height:1.3;margin-bottom:0.7rem;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.book-footer{
+  display:flex;align-items:center;justify-content:space-between;gap:0.5rem;
+}
+.book-price{
+  display:flex;flex-direction:column;
+}
+.price-label{font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+.price-val{
+  font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--text);
+  line-height:1.1;
+}
+
+/* ── ACTIONS ── */
+.book-actions{display:flex;align-items:center;gap:0.4rem;}
+
+.btn-buy{
+  background:var(--blue2);color:#fff;
+  border:none;border-radius:9px;
+  padding:0.45rem 0.85rem;
+  font-family:var(--font);font-size:0.75rem;font-weight:700;
+  cursor:pointer;transition:all 0.2s;text-decoration:none;
+  display:inline-block;white-space:nowrap;
+}
+.btn-buy:hover{background:var(--blue);transform:translateY(-1px);}
+
+.btn-like,.btn-dislike{
+  width:30px;height:30px;border-radius:8px;
+  border:1.5px solid var(--border);background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:0.8rem;transition:all 0.2s;
+}
+.btn-like:hover{border-color:#22c55e;background:#f0fdf4;}
+.btn-dislike:hover{border-color:#ef4444;background:#fff1f2;}
+.btn-like.liked{border-color:#22c55e;background:#f0fdf4;color:#16a34a;}
+.btn-dislike.disliked{border-color:#ef4444;background:#fff1f2;color:#dc2626;}
+
+.like-count{font-size:0.6rem;color:var(--muted);font-family:var(--mono);}
+
+/* ── SECTION HEADER STRIP ── */
+.section-strip{
+  padding:2.5rem 2rem 0.5rem;
+  max-width:1400px;margin:0 auto;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.strip-left{}
+.strip-badge{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  padding:0.28rem 0.9rem;border-radius:100px;
+  font-size:0.65rem;font-weight:700;letter-spacing:0.12em;
+  text-transform:uppercase;margin-bottom:0.5rem;
+}
+.strip-title{
+  font-size:clamp(1.3rem,3vw,2rem);font-weight:800;
+  color:var(--text);letter-spacing:-0.02em;line-height:1.1;
+}
+.strip-title em{font-style:normal;}
+.strip-desc{
+  font-size:0.82rem;color:var(--muted);margin-top:0.4rem;
+  max-width:500px;line-height:1.6;
+}
+.strip-count{
+  font-family:var(--mono);font-size:0.75rem;color:var(--muted);
+  background:var(--blue-pale);border:1px solid var(--blue-mid);
+  padding:0.3rem 0.8rem;border-radius:8px;white-space:nowrap;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--dark);
+  padding:2.5rem 2rem;
+  text-align:center;
+  margin-top:4rem;
+}
+footer p{font-size:0.78rem;color:rgba(255,255,255,0.3);}
+footer span{color:var(--gold);}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:2rem;right:2rem;z-index:9999;
+  background:var(--dark2);color:#fff;
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;padding:0.9rem 1.4rem;
+  font-size:0.82rem;font-weight:600;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+  transform:translateY(80px);opacity:0;
+  transition:all 0.35s cubic-bezier(0.23,1,0.32,1);
+  pointer-events:none;max-width:280px;
+}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* ── SCROLL TO TOP ── */
+#scrollTopBtn{
+  position:fixed;bottom:2rem;left:2rem;z-index:9999;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--blue2);color:#fff;border:none;
+  font-size:1.2rem;cursor:pointer;
+  box-shadow:0 4px 20px rgba(37,99,235,0.4);
+  display:none;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+#scrollTopBtn:hover{background:var(--blue);transform:translateY(-2px);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .books-grid{grid-template-columns:repeat(2,1fr);gap:0.8rem;}
+  .books-section{padding:1.2rem;}
+  .hero{padding:2.5rem 1.2rem 2rem;}
+  .topnav{padding:0 1rem;}
+  .topnav-brand{font-size:1rem;}
+  .hero-stats{gap:1.5rem;}
+  .filter-bar{padding:0.7rem 1rem;}
+  .section-strip{padding:1.5rem 1rem 0.5rem;}
+}
+@media(max-width:420px){
+  .books-grid{grid-template-columns:repeat(2,1fr);gap:0.6rem;}
+  .book-cover{height:110px;}
+  .book-emoji{font-size:1.8rem;}
+  .topnav-tabs{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOP NAV ── -->
+<nav class="topnav">
+  <div class="topnav-brand">Sade <em>Books</em></div>
+  <div class="topnav-tabs">
+    <button class="topnav-tab active" onclick="switchSection('ujasiriamali',this)">💼 Ujasiriamali</button>
+    <button class="topnav-tab" onclick="switchSection('digital',this)">🌐 Teknolojia</button>
+  </div>
+  <button class="topnav-cart" onclick="goCart()">🛒 Kasha <span class="cart-count" id="cartCount">0</span></button>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">📚 Duka la Vitabu vya Kidigitali</div>
+    <h1 class="hero-title">Jifunze. Fanya. <em>Fanikiwa.</em></h1>
+    <p class="hero-sub">Vitabu 100+ vya Kiswahili — Ujasiriamali na Teknolojia ya Kisasa. Pakua mara moja, soma popote.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">100+</div><div class="hero-stat-label">Vitabu</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">TSH 2K</div><div class="hero-stat-label">Bei ya Kitabu</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">PDF</div><div class="hero-stat-label">Muundo</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">24/7</div><div class="hero-stat-label">Upatikanaji</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION NAV ── -->
+<div class="section-nav">
+  <button class="snav-btn active" id="snav-ujasiriamali" onclick="switchSection('ujasiriamali',null,this)">💼 Vitabu vya Ujasiriamali <span style="background:rgba(255,255,255,0.1);border-radius:100px;padding:1px 8px;font-size:0.7rem;margin-left:4px;">50</span></button>
+  <div class="snav-divider"></div>
+  <button class="snav-btn" id="snav-digital" onclick="switchSection('digital',null,this)">🌐 Mafunzo ya Kidigitali <span style="background:rgba(255,255,255,0.1);border-radius:100px;padding:1px 8px;font-size:0.7rem;margin-left:4px;">50</span></button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SEHEMU 1: UJASIRIAMALI
+══════════════════════════════════════════ -->
+<div class="section-panel active" id="panel-ujasiriamali">
+
+  <!-- Strip -->
+  <div class="section-strip">
+    <div class="strip-left">
+      <div class="strip-badge" style="background:#fffbeb;color:#d97706;border:1px solid #fde68a;">💼 Ujasiriamali</div>
+      <div class="strip-title">Vitabu vya <em style="color:#d97706;">Kutengeneza Biashara</em></div>
+      <div class="strip-desc">Kutengeneza sabuni, jiko, shampoo, vifaa na biashara nyingi za nyumbani na sokoni.</div>
+    </div>
+    <div class="strip-count">📚 Vitabu 50</div>
+  </div>
+
+  <!-- Filter -->
+  <div class="filter-bar">
+    <span class="filter-label">🔍 Chujio:</span>
+    <button class="filter-btn active" onclick="filterBooks('u','all',this)">Zote</button>
+    <button class="filter-btn" onclick="filterBooks('u','sabuni',this)">🧴 Sabuni</button>
+    <button class="filter-btn" onclick="filterBooks('u','chakula',this)">🍳 Chakula</button>
+    <button class="filter-btn" onclick="filterBooks('u','kilimo',this)">🌱 Kilimo</button>
+    <button class="filter-btn" onclick="filterBooks('u','ujenzi',this)">🏗️ Ujenzi</button>
+    <button class="filter-btn" onclick="filterBooks('u','biashara',this)">💰 Biashara</button>
+    <button class="filter-btn" onclick="filterBooks('u','usafi',this)">🧹 Usafi</button>
+    <span class="filter-count" id="u-count">Vitabu 50</span>
+  </div>
+
+  <div class="books-section">
+    <div class="books-grid" id="grid-ujasiriamali"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SEHEMU 2: TEKNOLOJIA / DIGITAL
+══════════════════════════════════════════ -->
+<div class="section-panel" id="panel-digital">
+
+  <!-- Strip -->
+  <div class="section-strip">
+    <div class="strip-left">
+      <div class="strip-badge" style="background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;">🌐 Teknolojia</div>
+      <div class="strip-title">Mafunzo ya <em style="color:#1d4ed8;">Kidigitali</em></div>
+      <div class="strip-desc">Jifunza kutengeneza website, programu, na kutumia teknolojia ya kisasa kupata pesa.</div>
+    </div>
+    <div class="strip-count">💻 Vitabu 50</div>
+  </div>
+
+  <!-- Filter -->
+  <div class="filter-bar">
+    <span class="filter-label">🔍 Chujio:</span>
+    <button class="filter-btn active" onclick="filterBooks('d','all',this)">Zote</button>
+    <button class="filter-btn" onclick="filterBooks('d','html',this)">🏗️ HTML/CSS</button>
+    <button class="filter-btn" onclick="filterBooks('d','js',this)">⚡ JavaScript</button>
+    <button class="filter-btn" onclick="filterBooks('d','design',this)">🎨 Design</button>
+    <button class="filter-btn" onclick="filterBooks('d','ai',this)">🤖 AI</button>
+    <button class="filter-btn" onclick="filterBooks('d','pesa',this)">💵 Pesa Mtandao</button>
+    <button class="filter-btn" onclick="filterBooks('d','tools',this)">🔧 Zana</button>
+    <span class="filter-count" id="d-count">Vitabu 50</span>
+  </div>
+
+  <div class="books-section">
+    <div class="books-grid" id="grid-digital"></div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 <span>Sade Books</span> · Imetengenezwa na ❤️ Herman Sade · Tanzania 🇹🇿</p>
+  <p style="margin-top:0.4rem;">Vitabu vyote ni PDF · Malipo: M-Pesa, Tigopesa, Airtel Money</p>
+</footer>
+
+<!-- Scroll top -->
+<button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ════════════════════════════════
+   DATA: VITABU VYA UJASIRIAMALI (50)
+════════════════════════════════ */
+const ujasiriamaliBooks = [
+  // SABUNI
+  {id:'u1',emoji:'🧼',title:'Kutengeneza Sabuni ya Unga',cat:'sabuni',tag:'hot',
+   bg:'linear-gradient(135deg,#1e3a8a,#2563eb)',covers:'Sabuni ya Unga'},
+  {id:'u2',emoji:'🧴',title:'Sabuni ya Maji — Liquid Soap',cat:'sabuni',tag:'top',
+   bg:'linear-gradient(135deg,#1d4ed8,#60a5fa)',covers:'Liquid Soap'},
+  {id:'u3',emoji:'🪥',title:'Sabuni ya Kuogea — Bar Soap',cat:'sabuni',tag:'new',
+   bg:'linear-gradient(135deg,#1e40af,#3b82f6)',covers:'Bar Soap'},
+  {id:'u4',emoji:'💆',title:'Shampoo ya Asili Nyumbani',cat:'sabuni',tag:'hot',
+   bg:'linear-gradient(135deg,#1e3a8a,#7dd3fc)',covers:'Shampoo'},
+  {id:'u5',emoji:'🧽',title:'Sabuni ya Kuosha Vyombo',cat:'sabuni',
+   bg:'linear-gradient(135deg,#0369a1,#38bdf8)',covers:'Dish Soap'},
+  {id:'u6',emoji:'🫧',title:'Dettol ya Nyumbani — Disinfectant',cat:'sabuni',
+   bg:'linear-gradient(135deg,#075985,#0ea5e9)',covers:'Disinfectant'},
+  {id:'u7',emoji:'🌸',title:'Sabuni ya Watoto — Baby Soap',cat:'sabuni',tag:'new',
+   bg:'linear-gradient(135deg,#1e3a8a,#93c5fd)',covers:'Baby Soap'},
+  {id:'u8',emoji:'✨',title:'Laundry Detergent — Unga wa Nguo',cat:'sabuni',
+   bg:'linear-gradient(135deg,#1d4ed8,#a5f3fc)',covers:'Detergent'},
+
+  // CHAKULA
+  {id:'u9',emoji:'🍳',title:'Kutengeneza Jiko la Mkaa Bora',cat:'chakula',tag:'top',
+   bg:'linear-gradient(135deg,#111827,#374151)',covers:'Jiko la Mkaa'},
+  {id:'u10',emoji:'🥜',title:'Biashara ya Karanga — Siagi ya Karanga',cat:'chakula',tag:'hot',
+   bg:'linear-gradient(135deg,#78350f,#d97706)',covers:'Siagi Karanga'},
+  {id:'u11',emoji:'🍞',title:'Mkate na Mandazi — Biashara ya Nyumbani',cat:'chakula',
+   bg:'linear-gradient(135deg,#92400e,#f59e0b)',covers:'Mkate & Mandazi'},
+  {id:'u12',emoji:'🥤',title:'Juice ya Matunda — Kutengeneza na Kuuza',cat:'chakula',tag:'new',
+   bg:'linear-gradient(135deg,#14532d,#22c55e)',covers:'Juice ya Matunda'},
+  {id:'u13',emoji:'🍯',title:'Asali ya Nyuki — Ufugaji na Biashara',cat:'chakula',
+   bg:'linear-gradient(135deg,#713f12,#f97316)',covers:'Asali ya Nyuki'},
+  {id:'u14',emoji:'🌶️',title:'Viungo vya Kupikia — Biashara ya Spice',cat:'chakula',
+   bg:'linear-gradient(135deg,#7f1d1d,#ef4444)',covers:'Viungo'},
+  {id:'u15',emoji:'🧁',title:'Keki na Mikate — Bakery ya Nyumbani',cat:'chakula',tag:'hot',
+   bg:'linear-gradient(135deg,#701a75,#d946ef)',covers:'Keki & Bakery'},
+  {id:'u16',emoji:'🥛',title:'Maziwa ya Soya — Utengenezaji na Faida',cat:'chakula',
+   bg:'linear-gradient(135deg,#0c4a6e,#0ea5e9)',covers:'Maziwa Soya'},
+  {id:'u17',emoji:'🍫',title:'Chokoleti ya Nyumbani — Biashara Tamu',cat:'chakula',tag:'new',
+   bg:'linear-gradient(135deg,#451a03,#c2410c)',covers:'Chokoleti'},
+  {id:'u18',emoji:'🥗',title:'Chakula cha Watoto — Kutengeneza na Kuuza',cat:'chakula',
+   bg:'linear-gradient(135deg,#065f46,#10b981)',covers:'Chakula Watoto'},
+
+  // KILIMO
+  {id:'u19',emoji:'🌱',title:'Kilimo cha Nyanya — Faida Kubwa',cat:'kilimo',tag:'top',
+   bg:'linear-gradient(135deg,#14532d,#16a34a)',covers:'Kilimo Nyanya'},
+  {id:'u20',emoji:'🥬',title:'Mboga za Majani — Kilimo cha Mijini',cat:'kilimo',
+   bg:'linear-gradient(135deg,#052e16,#22c55e)',covers:'Mboga Majani'},
+  {id:'u21',emoji:'🍌',title:'Kilimo cha Ndizi — Mwongozo Kamili',cat:'kilimo',
+   bg:'linear-gradient(135deg,#713f12,#eab308)',covers:'Kilimo Ndizi'},
+  {id:'u22',emoji:'🌾',title:'Kilimo cha Mahindi kwa Faida',cat:'kilimo',tag:'hot',
+   bg:'linear-gradient(135deg,#78350f,#f59e0b)',covers:'Kilimo Mahindi'},
+  {id:'u23',emoji:'🐔',title:'Ufugaji wa Kuku — Biashara Nzuri',cat:'kilimo',
+   bg:'linear-gradient(135deg,#7c2d12,#fb923c)',covers:'Ufugaji Kuku'},
+  {id:'u24',emoji:'🐟',title:'Ufugaji wa Samaki — Aquaculture',cat:'kilimo',tag:'new',
+   bg:'linear-gradient(135deg,#0c4a6e,#0284c7)',covers:'Ufugaji Samaki'},
+  {id:'u25',emoji:'🌻',title:'Kilimo cha Maua — Biashara ya Mapambo',cat:'kilimo',
+   bg:'linear-gradient(135deg,#713f12,#f59e0b)',covers:'Kilimo Maua'},
+
+  // UJENZI / UFUNDI
+  {id:'u26',emoji:'🧱',title:'Utengenezaji wa Matofali — Biashara',cat:'ujenzi',tag:'hot',
+   bg:'linear-gradient(135deg,#1c1917,#57534e)',covers:'Matofali'},
+  {id:'u27',emoji:'🪟',title:'Ufundi wa Chuma — Welding Biashara',cat:'ujenzi',
+   bg:'linear-gradient(135deg,#0f172a,#334155)',covers:'Welding'},
+  {id:'u28',emoji:'🪑',title:'Utengenezaji wa Samani — Seremala',cat:'ujenzi',tag:'top',
+   bg:'linear-gradient(135deg,#451a03,#92400e)',covers:'Samani Seremala'},
+  {id:'u29',emoji:'🎨',title:'Upigaji Rangi — Painting Biashara',cat:'ujenzi',
+   bg:'linear-gradient(135deg,#1e1b4b,#4338ca)',covers:'Painting'},
+  {id:'u30',emoji:'💡',title:'Ufundi wa Umeme — Electrical Biashara',cat:'ujenzi',tag:'new',
+   bg:'linear-gradient(135deg,#1e3a8a,#f59e0b)',covers:'Umeme'},
+
+  // BIASHARA YA PESA
+  {id:'u31',emoji:'💰',title:'Jinsi ya Kuanzisha Biashara Ndogo',cat:'biashara',tag:'top',
+   bg:'linear-gradient(135deg,#064e3b,#059669)',covers:'Biashara Ndogo'},
+  {id:'u32',emoji:'📊',title:'Hesabu za Biashara — Usimamizi wa Fedha',cat:'biashara',
+   bg:'linear-gradient(135deg,#134e4a,#0d9488)',covers:'Hesabu Biashara'},
+  {id:'u33',emoji:'🤝',title:'Masoko na Kutangaza Biashara Yako',cat:'biashara',tag:'hot',
+   bg:'linear-gradient(135deg,#1e3a8a,#3b82f6)',covers:'Masoko'},
+  {id:'u34',emoji:'📱',title:'Biashara ya Kuuza Simu na Vifaa',cat:'biashara',
+   bg:'linear-gradient(135deg,#0f172a,#1e40af)',covers:'Kuuza Simu'},
+  {id:'u35',emoji:'🚗',title:'Biashara ya Usafiri — Bodaboda Hadi Taxi',cat:'biashara',tag:'new',
+   bg:'linear-gradient(135deg,#111827,#374151)',covers:'Biashara Usafiri'},
+  {id:'u36',emoji:'👗',title:'Biashara ya Nguo — Mitumba na Mpya',cat:'biashara',
+   bg:'linear-gradient(135deg,#701a75,#a21caf)',covers:'Biashara Nguo'},
+  {id:'u37',emoji:'💈',title:'Saluni ya Nywele — Kuanzisha na Kukuza',cat:'biashara',tag:'hot',
+   bg:'linear-gradient(135deg,#7c2d12,#dc2626)',covers:'Saluni'},
+  {id:'u38',emoji:'📦',title:'Biashara ya Kusambaza Bidhaa (Supply)',cat:'biashara',
+   bg:'linear-gradient(135deg,#1e3a8a,#6366f1)',covers:'Kusambaza'},
+
+  // USAFI / NYUMBA
+  {id:'u39',emoji:'🏠',title:'Biashara ya Usafi wa Nyumba',cat:'usafi',tag:'new',
+   bg:'linear-gradient(135deg,#0c4a6e,#0369a1)',covers:'Usafi Nyumba'},
+  {id:'u40',emoji:'🧹',title:'Kutengeneza Mfagio na Vifaa vya Usafi',cat:'usafi',
+   bg:'linear-gradient(135deg,#052e16,#15803d)',covers:'Vifaa Usafi'},
+  {id:'u41',emoji:'🌿',title:'Dawa za Wadudu — Asili na Kemikali',cat:'usafi',
+   bg:'linear-gradient(135deg,#14532d,#4ade80)',covers:'Dawa Wadudu'},
+  {id:'u42',emoji:'🪣',title:'Uzalishaji wa Ndoo na Bidhaa za Plastiki',cat:'usafi',tag:'hot',
+   bg:'linear-gradient(135deg,#0369a1,#38bdf8)',covers:'Bidhaa Plastiki'},
+  {id:'u43',emoji:'🕯️',title:'Utengenezaji wa Mishumaa na Difuse',cat:'usafi',tag:'new',
+   bg:'linear-gradient(135deg,#713f12,#fbbf24)',covers:'Mishumaa'},
+  {id:'u44',emoji:'🧺',title:'Utengenezaji wa Vikapu na Mikoba',cat:'usafi',
+   bg:'linear-gradient(135deg,#78350f,#d97706)',covers:'Vikapu'},
+  {id:'u45',emoji:'🌊',title:'Maji Safi — Kuchuja na Kuuza',cat:'usafi',
+   bg:'linear-gradient(135deg,#0c4a6e,#22d3ee)',covers:'Maji Safi'},
+  {id:'u46',emoji:'🎁',title:'Biashara ya Zawadi na Gift Wrapping',cat:'biashara',
+   bg:'linear-gradient(135deg,#7c3aed,#a78bfa)',covers:'Zawadi'},
+  {id:'u47',emoji:'📰',title:'Utengenezaji wa Magazeti ya Mtaa',cat:'biashara',
+   bg:'linear-gradient(135deg,#1e3a8a,#6366f1)',covers:'Magazeti'},
+  {id:'u48',emoji:'🎪',title:'Biashara ya Matukio — Events Management',cat:'biashara',tag:'new',
+   bg:'linear-gradient(135deg,#701a75,#c026d3)',covers:'Events'},
+  {id:'u49',emoji:'🖨️',title:'Biashara ya Uchapishaji — Printing Shop',cat:'biashara',tag:'hot',
+   bg:'linear-gradient(135deg,#1e3a8a,#2d6be4)',covers:'Printing'},
+  {id:'u50',emoji:'🍕',title:'Kuanzisha Restaurant Ndogo — Mwongozo',cat:'chakula',tag:'top',
+   bg:'linear-gradient(135deg,#7f1d1d,#b91c1c)',covers:'Restaurant'},
+];
+
+/* ════════════════════════════════
+   DATA: VITABU VYA KIDIGITALI (50)
+════════════════════════════════ */
+const digitalBooks = [
+  // HTML/CSS
+  {id:'d1',emoji:'🏗️',title:'HTML kwa Wanaoanza — Msingi Kamili',cat:'html',tag:'top',
+   bg:'linear-gradient(135deg,#0f172a,#1e3a8a)',covers:'HTML Msingi'},
+  {id:'d2',emoji:'🎨',title:'CSS ya Kisasa — Styling Yenye Mvuto',cat:'html',tag:'hot',
+   bg:'linear-gradient(135deg,#1e3a8a,#3b82f6)',covers:'CSS Kisasa'},
+  {id:'d3',emoji:'📱',title:'Responsive Design — Tovuti ya Simu',cat:'html',tag:'new',
+   bg:'linear-gradient(135deg,#1d4ed8,#60a5fa)',covers:'Responsive'},
+  {id:'d4',emoji:'🃏',title:'CSS Flexbox na Grid — Mwongozo Kamili',cat:'html',
+   bg:'linear-gradient(135deg,#1e40af,#818cf8)',covers:'Flexbox Grid'},
+  {id:'d5',emoji:'✨',title:'CSS Animations — Kuongeza Uhai Tovutini',cat:'html',
+   bg:'linear-gradient(135deg,#312e81,#6366f1)',covers:'CSS Animations'},
+  {id:'d6',emoji:'🖼️',title:'HTML Forms na Input — Kujifunza Kwa Vitendo',cat:'html',
+   bg:'linear-gradient(135deg,#1e3a8a,#93c5fd)',covers:'HTML Forms'},
+
+  // JAVASCRIPT
+  {id:'d7',emoji:'⚡',title:'JavaScript kwa Wanaoanza',cat:'js',tag:'top',
+   bg:'linear-gradient(135deg,#713f12,#f59e0b)',covers:'JavaScript'},
+  {id:'d8',emoji:'🔄',title:'JavaScript DOM — Kubadilisha Ukurasa',cat:'js',tag:'hot',
+   bg:'linear-gradient(135deg,#78350f,#fbbf24)',covers:'DOM JS'},
+  {id:'d9',emoji:'📡',title:'Fetch API — Kupata Data Mtandaoni',cat:'js',
+   bg:'linear-gradient(135deg,#92400e,#f97316)',covers:'Fetch API'},
+  {id:'d10',emoji:'🧩',title:'JavaScript ES6+ — Vipengele Vipya',cat:'js',tag:'new',
+   bg:'linear-gradient(135deg,#713f12,#fde68a)',covers:'ES6+'},
+  {id:'d11',emoji:'📦',title:'NPM na Node.js — Mwanzo wa Backend',cat:'js',
+   bg:'linear-gradient(135deg,#14532d,#22c55e)',covers:'NPM Node'},
+  {id:'d12',emoji:'⚛️',title:'React.js — Kutengeneza App za Kisasa',cat:'js',tag:'hot',
+   bg:'linear-gradient(135deg,#0c4a6e,#0ea5e9)',covers:'React.js'},
+  {id:'d13',emoji:'🗃️',title:'LocalStorage na JSON — Kuhifadhi Data',cat:'js',
+   bg:'linear-gradient(135deg,#1e3a8a,#38bdf8)',covers:'LocalStorage'},
+  {id:'d14',emoji:'🎮',title:'Kutengeneza Game kwa JavaScript',cat:'js',tag:'new',
+   bg:'linear-gradient(135deg,#4c1d95,#7c3aed)',covers:'JS Games'},
+
+  // DESIGN
+  {id:'d15',emoji:'🎨',title:'UI/UX Design — Kutengeneza Muundo Mzuri',cat:'design',tag:'top',
+   bg:'linear-gradient(135deg,#2e1065,#7c3aed)',covers:'UI/UX Design'},
+  {id:'d16',emoji:'🖌️',title:'Figma kwa Wanaoanza — Mwongozo',cat:'design',
+   bg:'linear-gradient(135deg,#4c1d95,#a855f7)',covers:'Figma'},
+  {id:'d17',emoji:'🎭',title:'Rangi katika Usanifu — Color Theory',cat:'design',
+   bg:'linear-gradient(135deg,#3b0764,#e879f9)',covers:'Color Theory'},
+  {id:'d18',emoji:'✍️',title:'Typography — Kuchagua Fonti Bora',cat:'design',tag:'new',
+   bg:'linear-gradient(135deg,#1e1b4b,#6366f1)',covers:'Typography'},
+  {id:'d19',emoji:'📐',title:'Design Grids — Mpangilio wa Ukurasa',cat:'design',
+   bg:'linear-gradient(135deg,#312e81,#818cf8)',covers:'Design Grids'},
+  {id:'d20',emoji:'🌙',title:'Dark Mode Design — Mwongozo wa Giza',cat:'design',tag:'hot',
+   bg:'linear-gradient(135deg,#0f172a,#1e3a8a)',covers:'Dark Mode'},
+
+  // AI
+  {id:'d21',emoji:'🤖',title:'ChatGPT kwa Biashara — Mwongozo wa AI',cat:'ai',tag:'top',
+   bg:'linear-gradient(135deg,#064e3b,#059669)',covers:'ChatGPT'},
+  {id:'d22',emoji:'🧠',title:'Kutengeneza Chatbot kwa Tovuti',cat:'ai',tag:'hot',
+   bg:'linear-gradient(135deg,#065f46,#10b981)',covers:'Chatbot'},
+  {id:'d23',emoji:'📸',title:'AI ya Picha — Midjourney na DALL-E',cat:'ai',
+   bg:'linear-gradient(135deg,#4c1d95,#7c3aed)',covers:'AI Picha'},
+  {id:'d24',emoji:'🔍',title:'SEO kwa AI — Kupata Wateja Zaidi',cat:'ai',tag:'new',
+   bg:'linear-gradient(135deg,#1e3a8a,#0ea5e9)',covers:'SEO + AI'},
+  {id:'d25',emoji:'📝',title:'Kuandika kwa AI — Content Creation',cat:'ai',
+   bg:'linear-gradient(135deg,#1e3a8a,#6366f1)',covers:'AI Content'},
+  {id:'d26',emoji:'📊',title:'Data Analysis kwa AI — Kujifunza Data',cat:'ai',tag:'hot',
+   bg:'linear-gradient(135deg,#134e4a,#0d9488)',covers:'AI Data'},
+
+  // PESA MTANDAO
+  {id:'d27',emoji:'💵',title:'Freelancing Online — Pata Pesa Mtandaoni',cat:'pesa',tag:'top',
+   bg:'linear-gradient(135deg,#14532d,#16a34a)',covers:'Freelancing'},
+  {id:'d28',emoji:'🛒',title:'Kuuza Mtandaoni — E-commerce Tanzania',cat:'pesa',tag:'hot',
+   bg:'linear-gradient(135deg,#1e3a8a,#3b82f6)',covers:'E-Commerce'},
+  {id:'d29',emoji:'📲',title:'Social Media Marketing — Kutangaza Biashara',cat:'pesa',
+   bg:'linear-gradient(135deg,#701a75,#c026d3)',covers:'Social Media'},
+  {id:'d30',emoji:'🎥',title:'YouTube Tanzania — Kutengeneza Pesa',cat:'pesa',tag:'new',
+   bg:'linear-gradient(135deg,#7f1d1d,#dc2626)',covers:'YouTube'},
+  {id:'d31',emoji:'📧',title:'Email Marketing — Wateja Kupitia Barua',cat:'pesa',
+   bg:'linear-gradient(135deg,#1e3a8a,#0369a1)',covers:'Email Marketing'},
+  {id:'d32',emoji:'🏪',title:'Duka la Mtandaoni — Kuanzisha Shop',cat:'pesa',tag:'hot',
+   bg:'linear-gradient(135deg,#064e3b,#22c55e)',covers:'Online Shop'},
+  {id:'d33',emoji:'💎',title:'Dropshipping Tanzania — Biashara Bila Stock',cat:'pesa',tag:'new',
+   bg:'linear-gradient(135deg,#312e81,#6366f1)',covers:'Dropshipping'},
+
+  // ZANA/TOOLS
+  {id:'d34',emoji:'🚀',title:'GitHub Pages — Chapisha Tovuti Bure',cat:'tools',tag:'top',
+   bg:'linear-gradient(135deg,#0f172a,#1e293b)',covers:'GitHub Pages'},
+  {id:'d35',emoji:'🔧',title:'VS Code — Mazingira Bora ya Kuandika Code',cat:'tools',
+   bg:'linear-gradient(135deg,#1e3a8a,#2563eb)',covers:'VS Code'},
+  {id:'d36',emoji:'🗄️',title:'Firebase — Database ya Bure kwa Tovuti',cat:'tools',tag:'hot',
+   bg:'linear-gradient(135deg,#78350f,#f59e0b)',covers:'Firebase'},
+  {id:'d37',emoji:'🌐',title:'Domain na Hosting — Mwongozo Kamili',cat:'tools',
+   bg:'linear-gradient(135deg,#0c4a6e,#0ea5e9)',covers:'Domain & Host'},
+  {id:'d38',emoji:'🔒',title:'Usalama wa Tovuti — HTTPS na Security',cat:'tools',tag:'new',
+   bg:'linear-gradient(135deg,#1e3a8a,#6366f1)',covers:'Web Security'},
+  {id:'d39',emoji:'⚡',title:'WordPress kwa Watanzania — Mwanzo',cat:'tools',
+   bg:'linear-gradient(135deg,#0369a1,#0ea5e9)',covers:'WordPress'},
+  {id:'d40',emoji:'📊',title:'Google Analytics — Kufuatilia Wageni',cat:'tools',
+   bg:'linear-gradient(135deg,#064e3b,#16a34a)',covers:'Analytics'},
+  {id:'d41',emoji:'🎬',title:'Video Editing — Kuhariri Video kwa Simu',cat:'tools',tag:'hot',
+   bg:'linear-gradient(135deg,#7f1d1d,#ef4444)',covers:'Video Editing'},
+  {id:'d42',emoji:'🤳',title:'Canva — Muundo wa Picha na Matangazo',cat:'tools',tag:'new',
+   bg:'linear-gradient(135deg,#4c1d95,#a855f7)',covers:'Canva Design'},
+  {id:'d43',emoji:'📋',title:'Notion — Kupanga Maisha na Biashara',cat:'tools',
+   bg:'linear-gradient(135deg,#0f172a,#334155)',covers:'Notion'},
+  {id:'d44',emoji:'💬',title:'WhatsApp Business — Biashara kwa WhatsApp',cat:'pesa',tag:'hot',
+   bg:'linear-gradient(135deg,#14532d,#22c55e)',covers:'WhatsApp Biz'},
+  {id:'d45',emoji:'📱',title:'Kutengeneza App ya Android — Mwanzo',cat:'tools',tag:'top',
+   bg:'linear-gradient(135deg,#064e3b,#059669)',covers:'Android App'},
+  {id:'d46',emoji:'🔗',title:'API Integration — Kuunganisha Mifumo',cat:'js',
+   bg:'linear-gradient(135deg,#1e3a8a,#0284c7)',covers:'API Integration'},
+  {id:'d47',emoji:'🗺️',title:'Google Maps API — Kutumia Ramani',cat:'js',
+   bg:'linear-gradient(135deg,#7f1d1d,#dc2626)',covers:'Google Maps'},
+  {id:'d48',emoji:'💳',title:'Malipo ya Mtandaoni — M-Pesa API',cat:'tools',tag:'new',
+   bg:'linear-gradient(135deg,#14532d,#16a34a)',covers:'M-Pesa API'},
+  {id:'d49',emoji:'📜',title:'JSON na REST API — Kuelewa Data',cat:'js',
+   bg:'linear-gradient(135deg,#78350f,#f59e0b)',covers:'REST API'},
+  {id:'d50',emoji:'🏆',title:'Portfolio ya Mtaalamu — Jinsi ya Kuunda',cat:'design',tag:'top',
+   bg:'linear-gradient(135deg,#0f172a,#1e3a8a)',covers:'Portfolio'},
+];
+
+/* ════════════════════════════════
+   LIKES STATE
+════════════════════════════════ */
+const likes = JSON.parse(localStorage.getItem('sb_likes') || '{}');
+
+function saveLikes(){ localStorage.setItem('sb_likes', JSON.stringify(likes)); }
+
+/* ════════════════════════════════
+   RENDER CARDS
+════════════════════════════════ */
+function badgeHTML(tag){
+  if(!tag) return '';
+  const map = {hot:'badge-hot',new:'badge-new',top:'badge-top'};
+  const txt = {hot:'🔥 Hot',new:'✨ Mpya',top:'⭐ Top'};
+  return `<div class="book-badge ${map[tag]}">${txt[tag]}</div>`;
+}
+
+function renderBooks(arr, containerId){
+  const container = document.getElementById(containerId);
+  container.innerHTML = arr.map(b => {
+    const likeData = likes[b.id] || {l:0,d:0,liked:false,disliked:false};
+    return `
+    <div class="book-card" data-cat="${b.cat}" data-section="${containerId}">
+      <div class="book-cover" style="background:${b.bg};">
+        ${badgeHTML(b.tag)}
+        <span class="book-emoji">${b.emoji}</span>
+        <span class="book-cover-title">${b.covers}</span>
+      </div>
+      <div class="book-body">
+        <div class="book-cat">${b.cat.toUpperCase()}</div>
+        <div class="book-title">${b.title}</div>
+        <div class="book-footer">
+          <div class="book-price">
+            <span class="price-label">TSH</span>
+            <span class="price-val">2,000</span>
+          </div>
+          <div class="book-actions">
+            <button class="btn-like ${likeData.liked?'liked':''}" onclick="toggleLike('${b.id}','like')" title="Napenda">👍</button>
+            <span class="like-count" id="lc-${b.id}">${likeData.l}</span>
+            <button class="btn-dislike ${likeData.disliked?'disliked':''}" onclick="toggleLike('${b.id}','dislike')" title="Sipendi">👎</button>
+            <a href="malipo.html" class="btn-buy" onclick="addToCart('${b.title}')">Nunua</a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ════════════════════════════════
+   LIKE / DISLIKE
+════════════════════════════════ */
+function toggleLike(id, type){
+  if(!likes[id]) likes[id] = {l:0,d:0,liked:false,disliked:false};
+  const s = likes[id];
+  if(type === 'like'){
+    if(s.liked){ s.liked=false; s.l=Math.max(0,s.l-1); }
+    else{ s.liked=true; s.l++; if(s.disliked){s.disliked=false;s.d=Math.max(0,s.d-1);} }
+  } else {
+    if(s.disliked){ s.disliked=false; s.d=Math.max(0,s.d-1); }
+    else{ s.disliked=true; s.d++; if(s.liked){s.liked=false;s.l=Math.max(0,s.l-1);} }
+  }
+  saveLikes();
+  // Update UI
+  document.querySelectorAll(`[onclick*="'${id}'"]`).forEach(el => {
+    if(el.classList.contains('btn-like')){ el.classList.toggle('liked',s.liked); }
+    if(el.classList.contains('btn-dislike')){ el.classList.toggle('disliked',s.disliked); }
+  });
+  const lc = document.getElementById('lc-'+id);
+  if(lc) lc.textContent = s.l;
+}
+
+/* ════════════════════════════════
+   CART
+════════════════════════════════ */
+let cartCount = 0;
+function addToCart(title){
+  cartCount++;
+  document.getElementById('cartCount').textContent = cartCount;
+  showToast('🛒 Imeongezwa: '+title.substring(0,30)+'...');
+}
+function goCart(){ showToast('💳 Unakwenda malipo...'); setTimeout(()=>window.location='malipo.html',800); }
+
+/* ════════════════════════════════
+   SWITCH SECTION
+════════════════════════════════ */
+function switchSection(sec, topBtn, snavBtn){
+  document.querySelectorAll('.section-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.snav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.topnav-tab').forEach(b=>b.classList.remove('active'));
+
+  document.getElementById('panel-'+sec).classList.add('active');
+  document.getElementById('snav-'+sec).classList.add('active');
+  if(topBtn) topBtn.classList.add('active');
+  else {
+    document.querySelectorAll('.topnav-tab').forEach(b=>{
+      if(b.textContent.toLowerCase().includes(sec==='ujasiriamali'?'ujasiriamali':'teknolojia'))
+        b.classList.add('active');
+    });
+  }
+  window.scrollTo({top:62,behavior:'smooth'});
+}
+
+/* ════════════════════════════════
+   FILTER
+════════════════════════════════ */
+function filterBooks(section, cat, btn){
+  const gridId = section==='u' ? 'grid-ujasiriamali' : 'grid-digital';
+  const countId = section==='u' ? 'u-count' : 'd-count';
+  const grid = document.getElementById(gridId);
+  const cards = grid.querySelectorAll('.book-card');
+  let visible = 0;
+  cards.forEach(c=>{
+    const show = cat==='all' || c.dataset.cat===cat;
+    c.style.display = show ? '' : 'none';
+    if(show) visible++;
+  });
+  document.getElementById(countId).textContent = `Vitabu ${visible}`;
+  // Update active filter btn
+  const parentBar = btn.closest('.filter-bar');
+  parentBar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ════════════════════════════════
+   TOAST
+════════════════════════════════ */
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+/* ════════════════════════════════
+   SCROLL TOP
+════════════════════════════════ */
+const scrollBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll',()=>{
+  scrollBtn.style.display = window.scrollY>400?'flex':'none';
+});
+
+/* ════════════════════════════════
+   INIT
+════════════════════════════════ */
+renderBooks(ujasiriamaliBooks,'grid-ujasiriamali');
+renderBooks(digitalBooks,'grid-digital');
+</script>
+</body>
+</html>
