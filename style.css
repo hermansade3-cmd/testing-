@@ -3,210 +3,253 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SadeBooks – Sidebar Demo</title>
+<title>SadeBooks – Sidebar</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', sans-serif; background: #1a3a5c; }
 
-/* overlay */
-.overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex; align-items: flex-start;
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #ffffff;
+  min-height: 100vh;
 }
 
-/* ── SIDEBAR ── */
+/* ── SIDEBAR – imesimama wazi, hakuna overlay ── */
 .sidebar {
-  width: 280px;
+  width: 100%;
+  max-width: 320px;
   min-height: 100vh;
-  max-height: 100vh;
-  background: #f0ede8;
+  background: #f5f2ed;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
-  position: relative;
   scrollbar-width: thin;
   scrollbar-color: rgba(0,0,0,0.15) transparent;
 }
 .sidebar::-webkit-scrollbar { width: 4px; }
 .sidebar::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.18); border-radius: 4px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 4px;
 }
 
-/* header */
+/* ── HEADER ── */
 .sidebar-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 20px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 16px;
   background: #0d1b2a;
   flex-shrink: 0;
 }
-.brand { font-size: 1.25rem; font-weight: 700; color: #fff; }
-.brand em { font-style: normal; color: #d4a017; }
+.brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+.brand em {
+  font-style: normal;
+  color: #d4a017;
+}
 .close-btn {
-  width: 36px; height: 36px; border-radius: 8px;
+  width: 36px; height: 36px;
+  border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.25);
   background: rgba(255,255,255,0.1);
-  color: #fff; font-size: 1rem; cursor: pointer;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
   display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
 }
+.close-btn:hover { background: rgba(255,255,255,0.22); }
 
-/* label */
+/* ── KURASA LABEL ── */
 .kurasa-label {
-  font-size: 0.63rem; font-weight: 700;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: #b8860b; padding: 16px 24px 10px; display: block;
+  display: block;
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: #b8860b;
+  padding: 18px 22px 10px;
 }
 
-/* nav list */
-.nav-list { list-style: none; padding: 0 10px; flex: 1; }
-.nav-list li { margin: 2px 0; }
+/* ── NAV LIST ── */
+.nav-list {
+  list-style: none;
+  padding: 0 10px 10px;
+  margin: 0;
+}
+.nav-list li {
+  margin: 2px 0;
+}
 
-/* ── LINK: NYEUSI + KATIKATI ── */
+/* ── LINKS: NYEUSI + KATIKATI ── */
 .nav-list li a {
   display: flex;
   align-items: center;
-  justify-content: flex-start;   /* icons left, text centered in remaining space */
-  gap: 13px;
-  padding: 13px 16px;
+  padding: 12px 16px;
   border-radius: 10px;
   text-decoration: none;
-  color: #1a1a1a;                /* NYEUSI */
+  color: #111111;
   font-size: 0.93rem;
   font-weight: 500;
   transition: background 0.18s, transform 0.15s;
-}
-.nav-list li a .link-text {
-  flex: 1;
-  text-align: center;            /* KATIKATI */
-  color: #1a1a1a;
-  font-size: 0.93rem;
+  gap: 12px;
 }
 .nav-list li a:hover {
   background: rgba(0,0,0,0.07);
   transform: translateX(3px);
 }
 .nav-list li a.active {
-  background: rgba(184,134,11,0.13);
+  background: rgba(184,134,11,0.12);
+  color: #7a5900;
+  font-weight: 600;
 }
-.nav-list li a.active .link-text { color: #7a5900; font-weight: 600; }
-.nav-icon { font-size: 1.25rem; flex-shrink: 0; }
+
+/* Icon */
+.nav-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+
+/* Text — katikati */
+.nav-text {
+  flex: 1;
+  text-align: center;
+  color: #111111;
+}
+.nav-list li a.active .nav-text {
+  color: #7a5900;
+}
 
 /* ── SCROLL INDICATOR ── */
-.scroll-indicator {
+.scroll-hint {
   position: sticky;
   bottom: 0;
-  width: 100%;
-  padding: 10px 0 16px;
-  text-align: center;
-  background: linear-gradient(transparent, rgba(240,237,232,0.97) 45%);
-  pointer-events: none;
   flex-shrink: 0;
+  width: 100%;
+  padding: 12px 0 16px;
+  text-align: center;
+  background: linear-gradient(transparent, rgba(245,242,237,0.97) 40%);
+  pointer-events: none;
+  transition: opacity 0.3s;
 }
-.scroll-indicator span {
-  font-size: 0.7rem;
-  color: rgba(0,0,0,0.38);
+.scroll-hint .hint-inner {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.67rem;
   letter-spacing: 1.5px;
-  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.35);
   animation: bounce 1.8s ease-in-out infinite;
 }
-.scroll-indicator span svg { width: 16px; opacity: 0.5; }
+.scroll-hint svg {
+  width: 18px;
+  height: 18px;
+  opacity: 0.45;
+}
 @keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(5px); }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
 }
 </style>
 </head>
 <body>
-<div class="overlay">
-  <nav class="sidebar" id="sidebar">
 
-    <!-- Header -->
-    <div class="sidebar-header">
-      <div class="brand">Sade <em>Books</em></div>
-      <button class="close-btn">✕</button>
+<nav class="sidebar" id="sidebar">
+
+  <!-- Header -->
+  <div class="sidebar-header">
+    <div class="brand">Sade <em>Books</em></div>
+    <button class="close-btn">✕</button>
+  </div>
+
+  <!-- Label -->
+  <span class="kurasa-label">Kurasa</span>
+
+  <!-- Links -->
+  <ul class="nav-list">
+    <li><a href="about.html">
+      <span class="nav-icon">ℹ️</span>
+      <span class="nav-text">Kuhusu Sade Books</span>
+    </a></li>
+    <li><a href="index.html" class="active">
+      <span class="nav-icon">📖</span>
+      <span class="nav-text">Sade Books</span>
+    </a></li>
+    <li><a href="books.html">
+      <span class="nav-icon">📚</span>
+      <span class="nav-text">Tazama Vitabu</span>
+    </a></li>
+    <li><a href="shop.html">
+      <span class="nav-icon">🛍️</span>
+      <span class="nav-text">Duka</span>
+    </a></li>
+    <li><a href="malipo.html">
+      <span class="nav-icon">💳</span>
+      <span class="nav-text">Malipo</span>
+    </a></li>
+    <li><a href="tools.html">
+      <span class="nav-icon">🔥</span>
+      <span class="nav-text">Tools</span>
+    </a></li>
+    <li><a href="sade-Gpt.html">
+      <span class="nav-icon">🤖</span>
+      <span class="nav-text">Sade-GPT</span>
+    </a></li>
+    <li><a href="jifunze_ujasiriamali_na_website.html">
+      <span class="nav-icon">🔗</span>
+      <span class="nav-text">Create Website Ujasiriamali</span>
+    </a></li>
+    <li><a href="sade-order.html">
+      <span class="nav-icon">📦</span>
+      <span class="nav-text">Agiza</span>
+    </a></li>
+    <li><a href="lipa-namba-mix-by-yas.html">
+      <span class="nav-icon">📋</span>
+      <span class="nav-text">Lipa Namba</span>
+    </a></li>
+    <li><a href="afya-yako.html">
+      <span class="nav-icon">🏥</span>
+      <span class="nav-text">Afya Yako</span>
+    </a></li>
+    <li><a href="privacy_and_terms.html">
+      <span class="nav-icon">✏️</span>
+      <span class="nav-text">Terms and Privacy</span>
+    </a></li>
+    <li><a href="contact.html">
+      <span class="nav-icon">✉️</span>
+      <span class="nav-text">Wasiliana Nasi</span>
+    </a></li>
+  </ul>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-hint" id="scrollHint">
+    <div class="hint-inner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+      Sogeza chini
     </div>
+  </div>
 
-    <!-- Label -->
-    <span class="kurasa-label">Kurasa</span>
-
-    <!-- Links -->
-    <ul class="nav-list">
-      <li><a href="about.html">
-        <span class="nav-icon">ℹ️</span>
-        <span class="link-text">Kuhusu Sade Books</span>
-      </a></li>
-      <li><a href="index.html" class="active">
-        <span class="nav-icon">📖</span>
-        <span class="link-text">Sade Books</span>
-      </a></li>
-      <li><a href="books.html">
-        <span class="nav-icon">📚</span>
-        <span class="link-text">Tazama Vitabu</span>
-      </a></li>
-      <li><a href="shop.html">
-        <span class="nav-icon">🛍️</span>
-        <span class="link-text">Duka</span>
-      </a></li>
-      <li><a href="malipo.html">
-        <span class="nav-icon">💳</span>
-        <span class="link-text">Malipo</span>
-      </a></li>
-      <li><a href="tools.html">
-        <span class="nav-icon">🔥</span>
-        <span class="link-text">Tools</span>
-      </a></li>
-      <li><a href="sade-Gpt.html">
-        <span class="nav-icon">🤖</span>
-        <span class="link-text">Sade-GPT</span>
-      </a></li>
-      <li><a href="jifunze_ujasiriamali_na_website.html">
-        <span class="nav-icon">🔗</span>
-        <span class="link-text">Create Website Ujasiriamali</span>
-      </a></li>
-      <li><a href="sade-order.html">
-        <span class="nav-icon">📦</span>
-        <span class="link-text">Agiza</span>
-      </a></li>
-      <li><a href="lipa-namba-mix-by-yas.html">
-        <span class="nav-icon">📋</span>
-        <span class="link-text">Lipa Namba</span>
-      </a></li>
-      <li><a href="afya-yako.html">
-        <span class="nav-icon">🏥</span>
-        <span class="link-text">Afya Yako</span>
-      </a></li>
-      <li><a href="privacy_and_terms.html">
-        <span class="nav-icon">✏️</span>
-        <span class="link-text">Terms and Privacy</span>
-      </a></li>
-      <li><a href="contact.html">
-        <span class="nav-icon">✉️</span>
-        <span class="link-text">Wasiliana Nasi</span>
-      </a></li>
-    </ul>
-
-    <!-- Scroll indicator -->
-    <div class="scroll-indicator" id="scrollHint">
-      <span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M6 9l6 6 6-6"/>
-        </svg>
-        Sogeza chini
-      </span>
-    </div>
-
-  </nav>
-</div>
+</nav>
 
 <script>
   const sidebar = document.getElementById('sidebar');
-  const hint    = document.getElementById('scrollHint');
+  const hint = document.getElementById('scrollHint');
   sidebar.addEventListener('scroll', () => {
-    const atBottom = sidebar.scrollHeight - sidebar.scrollTop <= sidebar.clientHeight + 12;
+    const atBottom = sidebar.scrollHeight - sidebar.scrollTop <= sidebar.clientHeight + 10;
     hint.style.opacity = atBottom ? '0' : '1';
   });
 </script>
+
 </body>
 </html>
-  
+
