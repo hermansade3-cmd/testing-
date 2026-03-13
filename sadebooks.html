@@ -1,652 +1,802 @@
+
+Magreth Kasagula <magrethkasagula@gmail.com>	13 Machi 2026, 13:25
+Kwa:: hermansade3@gmail.com
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sade Books – Mkusanyiko Wetu</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--cream:#f5ede0;--cream2:#fdf8f0;--ink:#1c1710;--gold:#c9962a;--gold2:#e8c46a;--muted:#7a6a52;--border:#e0d0b8;--white:#ffffff}
-    html{scroll-behavior:smooth}
-    body{font-family:'Source Sans 3',sans-serif;background:var(--cream2);color:var(--ink)}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SadeBooks — Maktaba ya Vitabu 100</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --white:#ffffff;--cream:#f8f6f0;--cream2:#f0ece0;
+  --blue-deep:#0d2b5e;--blue-mid:#1565c0;--blue-light:#1e88e5;
+  --blue-pale:#e3eeff;--blue-pale2:#c8dcff;
+  --black:#1a1a2e;--black-soft:#2d3561;--grey:#6b7280;--grey-light:#e8eaf0;
+  --accent:#0d47a1;--gold:#b8860b;--gold-light:#d4a843;
+  --shadow: 0 4px 24px rgba(13,43,94,.10);
+  --shadow-lg: 0 12px 48px rgba(13,43,94,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
 
-    nav{background:var(--cream2);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-    .nav-logo{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--ink)}
-    .nav-logo span{color:var(--gold)}
-    .nav-btn{background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:11px 22px;font-weight:700;font-size:.9rem;cursor:pointer}
+/* ── DECORATIVE BG ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 0% 0%,rgba(21,101,192,.06) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 60% at 100% 100%,rgba(13,43,94,.05) 0%,transparent 60%);
+}
 
-    .hero{text-align:center;padding:50px 20px 30px}
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:50px;padding:8px 18px;font-size:.78rem;font-weight:700;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.4rem);margin-bottom:12px}
-    .hero h1 em{color:var(--gold);font-style:italic}
-    .hero p{font-family:'Lora',serif;color:var(--muted);font-size:1rem;max-width:460px;margin:0 auto 28px;line-height:1.7}
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:300;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--blue-pale2);
+  padding:0 20px;overflow-x:auto;white-space:nowrap;
+  box-shadow:0 2px 16px rgba(13,43,94,.07);}
+.nav::-webkit-scrollbar{height:2px;}.nav::-webkit-scrollbar-thumb{background:var(--blue-mid);}
+.nav-inner{display:inline-flex;align-items:center;gap:2px;padding:10px 0;min-width:max-content;}
+.nav a{display:inline-block;padding:6px 13px;color:var(--blue-deep);text-decoration:none;
+  font-size:.75rem;font-weight:500;border-radius:20px;border:1px solid transparent;transition:all .2s;
+  letter-spacing:.02em;}
+.nav a:hover{color:var(--blue-mid);background:var(--blue-pale);border-color:var(--blue-pale2);}
+.nav .sep{color:var(--blue-pale2);font-size:.7rem;padding:0 2px;}
 
-    .search-wrap{display:flex;justify-content:center;padding:0 20px 24px}
-    .search-box{display:flex;align-items:center;background:var(--white);border:1.5px solid var(--border);border-radius:50px;padding:10px 18px;gap:10px;width:100%;max-width:400px}
-    .search-box:focus-within{border-color:var(--gold)}
-    .search-box input{border:none;outline:none;font-size:.9rem;background:transparent;width:100%;font-family:'Source Sans 3',sans-serif;color:var(--ink)}
+/* ── HERO ── */
+.hero{position:relative;z-index:1;background:linear-gradient(160deg,var(--blue-deep) 0%,var(--blue-mid) 60%,#1a5dc8 100%);
+  padding:70px 24px 60px;text-align:center;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+.hero-logo{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;
+  color:#fff;letter-spacing:-.02em;margin-bottom:8px;position:relative;}
+.hero-logo span{color:var(--gold-light);}
+.hero-tagline{color:rgba(255,255,255,.75);font-size:.85rem;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:28px;position:relative;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3.2rem);
+  font-weight:900;color:#fff;line-height:1.15;margin-bottom:14px;position:relative;}
+.hero h1 em{font-style:italic;color:var(--gold-light);}
+.hero p{color:rgba(255,255,255,.8);font-size:.95rem;max-width:560px;margin:0 auto 30px;
+  line-height:1.8;position:relative;}
+.hero-stats{display:flex;gap:32px;justify-content:center;position:relative;}
+.stat{text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold-light);}
+.stat-label{font-size:.72rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.1em;}
 
-    .filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:0 20px 28px}
-    .filter-btn{background:var(--white);border:1.5px solid var(--border);border-radius:50px;padding:8px 16px;font-size:.83rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s}
-    .filter-btn:hover,.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+/* ── SEARCH & FILTER ── */
+.controls{position:relative;z-index:1;background:var(--cream);border-bottom:1px solid var(--grey-light);
+  padding:20px 24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;}
+.search-wrap{position:relative;flex:1;max-width:380px;}
+.search-wrap input{width:100%;background:var(--white);border:1.5px solid var(--blue-pale2);
+  border-radius:30px;padding:10px 18px 10px 42px;font-size:.88rem;font-family:'DM Sans',sans-serif;
+  color:var(--black);outline:none;transition:border-color .2s;}
+.search-wrap input:focus{border-color:var(--blue-mid);}
+.search-wrap::before{content:'🔍';position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.85rem;}
+.filter-btns{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;}
+.fbtn{background:var(--white);border:1.5px solid var(--blue-pale2);border-radius:20px;
+  padding:7px 16px;font-size:.76rem;font-weight:500;color:var(--blue-deep);cursor:pointer;
+  transition:all .2s;font-family:'DM Sans',sans-serif;}
+.fbtn:hover,.fbtn.active{background:var(--blue-mid);color:#fff;border-color:var(--blue-mid);}
 
-    .books-section{max-width:1100px;margin:0 auto;padding:0 16px 60px}
-    .books-count{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:20px;font-family:'Lora',serif;font-style:italic}
-    .books-count strong{color:var(--gold)}
+/* ── CONTENT ── */
+.main{position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:40px 20px 80px;}
+.section-title-bar{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.section-title-bar h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--blue-deep);}
+.title-line{flex:1;height:1px;background:linear-gradient(90deg,var(--blue-pale2),transparent);}
+.book-count{font-size:.78rem;color:var(--grey);background:var(--blue-pale);
+  padding:3px 12px;border-radius:12px;font-weight:500;}
 
-    .books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:16px}
+/* ── BOOK GRID ── */
+.book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px;}
+.book-card{background:var(--white);border:1px solid var(--grey-light);border-radius:14px;
+  overflow:hidden;cursor:pointer;transition:all .25s;box-shadow:var(--shadow);position:relative;}
+.book-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--blue-pale2);}
+.book-card:hover .book-cover{filter:brightness(1.05);}
 
-    .book-card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.07);cursor:pointer;transition:transform .25s,box-shadow .25s;display:block;opacity:1;visibility:visible}
-    .book-card:hover{transform:translateY(-5px);box-shadow:0 10px 28px rgba(0,0,0,.13)}
+/* book cover */
+.book-cover{height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:20px 14px;}
+.book-cover-spine{position:absolute;left:0;top:0;bottom:0;width:8px;opacity:.6;border-radius:14px 0 0 0;}
+.cover-emoji{font-size:2.8rem;margin-bottom:10px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.15));}
+.cover-title{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:700;text-align:center;
+  line-height:1.35;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.3);}
+.cover-author{font-size:.7rem;color:rgba(255,255,255,.8);margin-top:5px;text-align:center;font-style:italic;}
+.cover-badge{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.2);
+  backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.3);border-radius:8px;
+  padding:2px 8px;font-size:.62rem;color:#fff;font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
 
-    .book-cover{height:170px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
-    .badge-tag{position:absolute;top:10px;right:10px;background:var(--gold);color:var(--ink);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:20px}
-    .lock-overlay{position:absolute;inset:0;background:rgba(28,23,16,.42);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s}
-    .book-card:hover .lock-overlay{opacity:1}
-    .lock-overlay span{font-size:2rem}
+/* book info */
+.book-info{padding:14px 14px 16px;}
+.book-title{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:700;
+  color:var(--blue-deep);margin-bottom:3px;line-height:1.3;}
+.book-author{font-size:.74rem;color:var(--grey);margin-bottom:8px;font-style:italic;}
+.book-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.book-cat{font-size:.65rem;background:var(--blue-pale);color:var(--blue-deep);
+  padding:2px 8px;border-radius:10px;font-weight:500;}
+.book-pages{font-size:.65rem;color:var(--grey);}
+.book-stars{font-size:.72rem;color:var(--gold);}
+.read-btn{width:100%;background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));
+  border:none;border-radius:8px;padding:9px;color:#fff;font-size:.8rem;font-weight:600;
+  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;letter-spacing:.03em;}
+.read-btn:hover{background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));
+  transform:translateY(-1px);box-shadow:0 4px 12px rgba(21,101,192,.4);}
+.read-btn:active{transform:translateY(0);}
 
-    .book-info{padding:12px 12px 14px}
-    .book-cat{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
-    .book-title{font-family:'Playfair Display',serif;font-size:.92rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .book-desc{font-size:.74rem;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:11px;font-family:'Lora',serif;font-style:italic}
-    .book-footer{display:flex;align-items:center;justify-content:space-between}
-    .book-price{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--ink)}
-    .book-price small{font-size:.63rem;font-family:'Source Sans 3',sans-serif;font-weight:400;color:var(--muted);display:block}
-    .buy-btn{background:var(--ink);color:var(--white);border:none;border-radius:50px;padding:7px 13px;font-size:.77rem;font-weight:700;cursor:pointer;transition:background .2s}
-    .buy-btn:hover{background:var(--gold);color:var(--ink)}
+/* ── READER MODAL ── */
+.reader-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(10,20,50,.6);
+  backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;}
+.reader-overlay.open{display:flex;}
+.reader-modal{background:var(--white);border-radius:20px;width:100%;max-width:820px;
+  max-height:95vh;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(10,20,50,.3);
+  overflow:hidden;position:relative;}
 
-    .no-results{text-align:center;padding:60px 20px;display:none}
-    .no-results.show{display:block}
-    .no-results p{font-family:'Lora',serif;font-style:italic;color:var(--muted);font-size:1.1rem;margin-top:12px}
+/* reader header */
+.reader-header{background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));
+  padding:18px 24px;display:flex;align-items:center;gap:14px;flex-shrink:0;}
+.reader-logo-small{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;
+  color:#fff;letter-spacing:-.01em;}
+.reader-logo-small span{color:var(--gold-light);}
+.reader-book-info{flex:1;}
+.reader-book-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;
+  color:#fff;line-height:1.2;}
+.reader-book-author{font-size:.75rem;color:rgba(255,255,255,.7);font-style:italic;margin-top:2px;}
+.reader-close{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+  color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+.reader-close:hover{background:rgba(255,255,255,.3);}
 
-    /* MODAL */
-    .modal-overlay{position:fixed;inset:0;background:rgba(10,8,3,.72);backdrop-filter:blur(5px);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
-    .modal-overlay.active{opacity:1;pointer-events:all}
-    .modal-box{background:var(--white);border-radius:20px;max-width:400px;width:100%;overflow:hidden;transform:translateY(30px) scale(.95);transition:transform .35s cubic-bezier(.22,1,.36,1);box-shadow:0 30px 80px rgba(0,0,0,.35)}
-    .modal-overlay.active .modal-box{transform:translateY(0) scale(1)}
-    .modal-cover{height:180px;display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative}
-    .modal-cover::after{content:"🔒";position:absolute;top:14px;right:14px;font-size:1.3rem;background:rgba(255,255,255,.9);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-    .modal-body{padding:22px 24px 26px}
-    .modal-cat{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
-    .modal-title{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:900;color:var(--ink);margin-bottom:9px}
-    .modal-desc{font-family:'Lora',serif;font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:18px}
-    .modal-price-row{display:flex;align-items:center;justify-content:space-between;background:var(--cream2);border-radius:12px;padding:13px 16px;margin-bottom:14px}
-    .modal-price-label{font-size:.78rem;color:var(--muted);margin-bottom:2px}
-    .modal-price-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--ink)}
-    .modal-lock-msg{display:flex;align-items:center;gap:8px;background:#fff8e6;border:1px solid #f0d080;border-radius:10px;padding:9px 13px;font-size:.81rem;color:#7a5a10;font-family:'Lora',serif;font-style:italic;margin-bottom:16px}
-    .modal-pay-btn{width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:14px;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s}
-    .modal-pay-btn:hover{background:var(--gold2)}
-    .modal-close-btn{width:100%;background:none;border:1.5px solid var(--border);border-radius:50px;padding:11px;font-size:.87rem;color:var(--muted);cursor:pointer;margin-top:10px}
-    .modal-close-btn:hover{border-color:var(--ink);color:var(--ink)}
+/* reader toolbar */
+.reader-toolbar{background:var(--cream);border-bottom:1px solid var(--grey-light);
+  padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;flex-shrink:0;}
+.rt-label{font-size:.72rem;color:var(--grey);font-weight:500;}
+.font-btns{display:flex;gap:4px;}
+.font-btn{background:var(--white);border:1px solid var(--grey-light);border-radius:6px;
+  padding:4px 10px;font-size:.75rem;cursor:pointer;color:var(--blue-deep);transition:all .15s;
+  font-family:'DM Sans',sans-serif;}
+.font-btn:hover,.font-btn.active{background:var(--blue-mid);color:#fff;border-color:var(--blue-mid);}
+.theme-btns{display:flex;gap:4px;}
+.theme-btn{width:22px;height:22px;border-radius:50%;border:2px solid var(--grey-light);
+  cursor:pointer;transition:all .15s;}
+.theme-btn:hover,.theme-btn.active{border-color:var(--blue-mid);transform:scale(1.15);}
+.tb-sep{width:1px;background:var(--grey-light);height:20px;}
+.chapter-nav{display:flex;gap:6px;align-items:center;margin-left:auto;}
+.ch-btn{background:var(--white);border:1px solid var(--grey-light);border-radius:6px;
+  padding:4px 12px;font-size:.74rem;cursor:pointer;color:var(--blue-deep);font-family:'DM Sans',sans-serif;transition:all .2s;}
+.ch-btn:hover{background:var(--blue-pale);}
+.ch-indicator{font-size:.74rem;color:var(--grey);}
 
+/* reader content */
+.reader-body{flex:1;overflow-y:auto;padding:0;}
+.reader-body::-webkit-scrollbar{width:6px;}.reader-body::-webkit-scrollbar-thumb{background:var(--blue-pale2);border-radius:3px;}
+.reader-content{max-width:680px;margin:0 auto;padding:40px 32px 60px;}
 
-    /* PDF PREVIEW */
-    .preview-btn{width:100%;background:var(--cream2);border:1.5px solid var(--border);border-radius:50px;padding:9px;font-size:.8rem;font-weight:700;color:var(--muted);cursor:pointer;margin-bottom:8px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
-    .preview-btn:hover{border-color:var(--gold);color:var(--gold)}
-    .pdf-preview-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;display:none;flex-direction:column;align-items:center;padding:20px}
-    .pdf-preview-overlay.active{display:flex}
-    .pdf-header{width:100%;max-width:700px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-    .pdf-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700}
-    .pdf-close{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:50%;width:38px;height:38px;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
-    .pdf-frame-wrap{width:100%;max-width:700px;flex:1;background:#fff;border-radius:16px;overflow:hidden;position:relative}
-    .pdf-frame-wrap iframe{width:100%;height:100%;border:none}
-    .pdf-lock-bar{background:var(--ink);border-radius:0 0 16px 16px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .pdf-lock-msg{font-family:'Lora',serif;font-style:italic;color:rgba(255,255,255,.7);font-size:.85rem}
-    .pdf-buy-btn{background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:10px 22px;font-weight:700;font-size:.9rem;cursor:pointer;white-space:nowrap}
-    .pdf-buy-btn:hover{background:var(--gold2)}
-    .pdf-pages-note{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:4px}
+/* reading themes */
+.reader-body.theme-white{background:var(--white);}
+.reader-body.theme-cream{background:#fdf6e3;}
+.reader-body.theme-night{background:#1a1a2e;}
+.reader-body.theme-night .reader-content *{color:#c8d5f0!important;}
+.reader-body.theme-night .chapter-title{color:#7ca8e8!important;border-color:#2d3561!important;}
+.reader-body.theme-night .drop-cap{color:#4a78c8!important;}
 
-    /* PAYMENT PAGE */
-    .fullpage{display:none;position:fixed;inset:0;background:var(--cream2);z-index:1000;overflow-y:auto}
-    .fullpage-inner{max-width:480px;margin:0 auto;padding:20px 20px 60px}
-    .back-btn{background:var(--white);border:1.5px solid var(--border);border-radius:50%;width:40px;height:40px;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chapter-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;
+  color:var(--blue-deep);margin-bottom:6px;padding-bottom:14px;border-bottom:2px solid var(--blue-pale2);}
+.chapter-subtitle{font-size:.85rem;color:var(--grey);font-style:italic;margin-bottom:28px;}
+.reader-text{font-family:'Lora',serif;font-size:1.05rem;line-height:1.95;color:#2c3e50;}
+.reader-text p{margin-bottom:1.4em;}
+.reader-text .drop-cap::first-letter{font-family:'Playfair Display',serif;font-size:4em;
+  font-weight:900;float:left;line-height:.75;padding:0 10px 0 0;color:var(--blue-deep);}
+.reader-text blockquote{border-left:3px solid var(--blue-mid);padding:12px 20px;
+  margin:24px 0;background:var(--blue-pale);border-radius:0 8px 8px 0;font-style:italic;
+  color:var(--blue-deep);}
+.reader-text .highlight{background:linear-gradient(180deg,transparent 60%,rgba(212,168,67,.3) 60%);
+  font-weight:600;}
+.reader-text h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--blue-deep);
+  margin:28px 0 10px;}
 
-    .lipa-box{background:linear-gradient(135deg,#003087,#0057c8);border-radius:16px;padding:20px;margin-bottom:20px;text-align:center}
-    .lipa-number{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:#fff;letter-spacing:.06em;margin-bottom:4px}
-    .lipa-name{font-size:.8rem;color:rgba(255,255,255,.7);font-family:'Lora',serif;font-style:italic}
-    .lipa-badges{display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap}
-    .lipa-badge{background:rgba(255,255,255,.15);border-radius:50px;padding:5px 12px;font-size:.72rem;color:#fff;font-weight:600}
+/* progress bar */
+.reader-progress-bar{height:3px;background:var(--blue-pale);flex-shrink:0;}
+.reader-progress-fill{height:100%;background:linear-gradient(90deg,var(--blue-mid),var(--blue-light));
+  transition:width .3s;width:0%;}
 
-    .step-box{display:flex;align-items:flex-start;gap:12px;background:var(--cream2);border-radius:12px;padding:12px 14px;margin-bottom:10px}
-    .step-num{width:28px;height:28px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem;color:var(--ink);flex-shrink:0}
-    .step-text{font-size:.88rem;color:var(--ink);line-height:1.5}
+/* reader footer */
+.reader-footer{background:var(--cream);border-top:1px solid var(--grey-light);
+  padding:10px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.rf-info{font-size:.72rem;color:var(--grey);}
+.rf-btns{display:flex;gap:8px;}
+.rf-btn{background:var(--white);border:1px solid var(--grey-light);border-radius:8px;
+  padding:6px 16px;font-size:.78rem;cursor:pointer;color:var(--blue-deep);font-weight:500;
+  transition:all .2s;font-family:'DM Sans',sans-serif;}
+.rf-btn:hover{background:var(--blue-mid);color:#fff;border-color:var(--blue-mid);}
+.rf-btn.primary{background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));color:#fff;border:none;}
 
-    .pay-input-wrap{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px}
-    .pay-input-wrap input{border:none;outline:none;font-size:1rem;font-family:'Source Sans 3',sans-serif;color:var(--ink);background:transparent;width:100%}
-    .pay-input-wrap:focus-within{border-color:var(--gold)}
+/* ── FOOTER ── */
+footer{position:relative;z-index:1;background:var(--blue-deep);color:rgba(255,255,255,.6);
+  text-align:center;padding:32px 20px;font-size:.78rem;}
+footer a{color:var(--gold-light);text-decoration:none;}
+footer strong{color:#fff;}
 
-    .total-box{background:var(--white);border-radius:16px;padding:16px 20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-    .total-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:.88rem}
-    .total-row.final{border-top:1px solid var(--border);padding-top:10px;margin-bottom:0}
-    .total-row.final span:first-child{font-weight:700}
-    .total-row.final span:last-child{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900}
-
-    .confirm-btn{width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:16px;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;cursor:pointer;margin-bottom:10px}
-    .cancel-btn{width:100%;background:none;border:1.5px solid var(--border);border-radius:50px;padding:12px;font-size:.88rem;color:var(--muted);cursor:pointer}
-    .err-msg{display:none;background:#fff0f0;border:1px solid #ffb0b0;border-radius:10px;padding:10px 14px;font-size:.83rem;color:#c00;font-family:'Lora',serif;margin-bottom:14px}
-
-    /* SUCCESS PAGE */
-    .success-inner{max-width:380px;margin:0 auto;padding:40px 20px}
-
-    @media(max-width:480px){.books-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
-  </style>
+/* ── UTILS ── */
+.hidden{display:none!important;}
+@media(max-width:600px){
+  .book-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
+  .reader-content{padding:24px 18px 40px;}
+  .reader-toolbar{gap:7px;}
+  .chapter-nav{margin-left:0;width:100%;}
+  .hero-stats{gap:20px;}
+}
+</style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">Sade <span>Books</span></div>
-  <button class="nav-btn">Angalia Vitabu</button>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="about.html">About</a><span class="sep">·</span>
+    <a href="index.html">Home</a><span class="sep">·</span>
+    <a href="shop.html">Shop</a><span class="sep">·</span>
+    <a href="malipo.html">Malipo</a><span class="sep">·</span>
+    <a href="sade-GPT.html">Sade GPT</a><span class="sep">·</span>
+    <a href="jifunze_ujasiriamali_na_website.html">Jifunze Ujasiriamali</a><span class="sep">·</span>
+    <a href="sade-order.html">Sade Order</a><span class="sep">·</span>
+    <a href="lipa-namba-mix-by-yas.html">Lipa Namba Mix</a><span class="sep">·</span>
+    <a href="afya-yako.html">Afya Yako</a><span class="sep">·</span>
+    <a href="privacy_and_terms.html">Privacy &amp; Terms</a><span class="sep">·</span>
+    <a href="contact.html">Contact</a>
+  </div>
 </nav>
 
-<section class="hero">
-  <div class="hero-badge">📚 Mkusanyiko Wetu</div>
-  <h1>Vitabu <em>Vyetu</em> Bora</h1>
-  <p>Chagua kutoka kwa vitabu vya hali ya juu vinavyokusaidia kukua kibinafsi na kibiashara</p>
-</section>
-
-<div class="search-wrap">
-  <div class="search-box">
-    <span>🔍</span>
-    <input type="text" id="search-input" placeholder="Tafuta kitabu…" oninput="filterBooks()"/>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">Sade<span>Books</span></div>
+  <div class="hero-tagline">📚 Maktaba ya Kidijitali ya Dunia</div>
+  <h1>Soma Vitabu 100<br><em>Bora Duniani</em></h1>
+  <p>Vitabu vya watu maarufu, hadithi za kusisimua, historia, biashara, sayansi, na upendo — soma bila malipo, bila kuondoka ukurasa huu.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">100</div><div class="stat-label">Vitabu</div></div>
+    <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Kategoria</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Mara za Kusoma</div></div>
   </div>
 </div>
 
-<div class="filters">
-  <button class="filter-btn active" onclick="setFilter('Zote',this)">Zote (100)</button>
-  <button class="filter-btn" onclick="setFilter('Biashara & Fedha',this)">💼 Biashara</button>
-  <button class="filter-btn" onclick="setFilter('Maendeleo Binafsi',this)">🌱 Maendeleo</button>
-  <button class="filter-btn" onclick="setFilter('Dini & Imani',this)">🕌 Dini</button>
-  <button class="filter-btn" onclick="setFilter('Afya & Lishe',this)">❤️ Afya</button>
-  <button class="filter-btn" onclick="setFilter('Teknolojia',this)">💻 Teknolojia</button>
-  <button class="filter-btn" onclick="setFilter('Historia',this)">📜 Historia</button>
-  <button class="filter-btn" onclick="setFilter('Elimu',this)">🎓 Elimu</button>
-  <button class="filter-btn" onclick="setFilter('Hadithi',this)">📖 Hadithi</button>
-  <button class="filter-btn" onclick="setFilter('Familia',this)">👨‍👩‍👧 Familia</button>
-  <button class="filter-btn" onclick="setFilter('Ushairi',this)">✍️ Ushairi</button>
-  <button class="filter-btn" onclick="setFilter('Mazingira',this)">🌳 Mazingira</button>
-  <button class="filter-btn" onclick="setFilter('Michezo',this)">⚽ Michezo</button>
-  <button class="filter-btn" onclick="setFilter('Sanaa & Utamaduni',this)">🎨 Sanaa</button>
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <input type="text" id="search-input" placeholder="Tafuta kitabu au mwandishi..." oninput="filterBooks()"/>
+  </div>
+  <div class="filter-btns" id="filter-btns">
+    <button class="fbtn active" onclick="filterCat('all',this)">Yote</button>
+    <button class="fbtn" onclick="filterCat('biography',this)">Wasifu</button>
+    <button class="fbtn" onclick="filterCat('business',this)">Biashara</button>
+    <button class="fbtn" onclick="filterCat('science',this)">Sayansi</button>
+    <button class="fbtn" onclick="filterCat('history',this)">Historia</button>
+    <button class="fbtn" onclick="filterCat('philosophy',this)">Falsafa</button>
+    <button class="fbtn" onclick="filterCat('fiction',this)">Hadithi</button>
+    <button class="fbtn" onclick="filterCat('selfhelp',this)">Maendeleo</button>
+    <button class="fbtn" onclick="filterCat('health',this)">Afya</button>
+  </div>
 </div>
 
-<section class="books-section">
-  <p class="books-count" id="books-count">Inaonyesha vitabu <strong>100</strong> kati ya 100</p>
-  <div class="books-grid" id="books-grid"></div>
-  <div class="no-results" id="no-results">
-    <div style="font-size:3rem">📭</div>
-    <p>Hakuna kitabu kinachofanana na utafutaji wako.</p>
+<!-- MAIN -->
+<div class="main">
+  <div class="section-title-bar">
+    <h2>📖 Vitabu Vyote</h2>
+    <div class="title-line"></div>
+    <div class="book-count" id="book-count">100 Vitabu</div>
   </div>
-</section>
+  <div class="book-grid" id="book-grid"></div>
+</div>
 
-<!-- BOOK MODAL -->
-<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-box">
-    <div class="modal-cover" id="m-cover"></div>
-    <div class="modal-body">
-      <div class="modal-cat" id="m-cat"></div>
-      <div class="modal-title" id="m-title"></div>
-      <div class="modal-desc" id="m-desc"></div>
-      <div class="modal-price-row">
-        <div>
-          <div class="modal-price-label">Bei ya Kitabu</div>
-          <div class="modal-price-val">TSH 2,000</div>
-        </div>
-        <div style="font-size:1.8rem">📲</div>
+<!-- READER MODAL -->
+<div class="reader-overlay" id="reader-overlay" onclick="closeReaderOnOverlay(event)">
+  <div class="reader-modal" id="reader-modal">
+    <div class="reader-header">
+      <div class="reader-logo-small">Sade<span>Books</span></div>
+      <div class="reader-book-info">
+        <div class="reader-book-title" id="rdr-title">Kitabu</div>
+        <div class="reader-book-author" id="rdr-author">Mwandishi</div>
       </div>
-      <div class="modal-lock-msg">🔐 Lipa TSH 2,000 kupata ufikiaji kamili wa kitabu hiki.</div>
-      <button class="modal-pay-btn" onclick="goToPayment()">Nunua Sasa – TSH 2,000 →</button>
-      <button class="modal-close-btn" onclick="closeModal()">Rudi kwenye Orodha</button>
+      <button class="reader-close" onclick="closeReader()">✕</button>
     </div>
-  </div>
-</div>
-
-<!-- PAYMENT PAGE -->
-<div class="fullpage" id="payment-page">
-  <div class="fullpage-inner">
-    <div style="display:flex;align-items:center;gap:14px;padding:20px 0 24px">
-      <button class="back-btn" onclick="closePayment()">←</button>
-      <div>
-        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink)">Ukurasa wa Malipo</div>
-        <div style="font-size:.8rem;color:var(--muted);font-family:'Lora',serif;font-style:italic">Kamilisha ununuzi wako salama</div>
+    <div class="reader-progress-bar"><div class="reader-progress-fill" id="prog-fill"></div></div>
+    <div class="reader-toolbar">
+      <span class="rt-label">Ukubwa:</span>
+      <div class="font-btns">
+        <button class="font-btn" onclick="setFont(14)">A-</button>
+        <button class="font-btn active" onclick="setFont(17)">A</button>
+        <button class="font-btn" onclick="setFont(21)">A+</button>
       </div>
-    </div>
-
-    <!-- Book summary -->
-    <div style="background:var(--white);border-radius:16px;padding:16px;display:flex;gap:14px;align-items:center;margin-bottom:22px;box-shadow:0 2px 12px rgba(0,0,0,.06)">
-      <div id="pay-cover" style="width:60px;height:60px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0"></div>
-      <div>
-        <div id="pay-cat" style="font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:3px"></div>
-        <div id="pay-title" style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink)"></div>
-        <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--ink);margin-top:4px">TSH 2,000</div>
+      <div class="tb-sep"></div>
+      <span class="rt-label">Rangi:</span>
+      <div class="theme-btns">
+        <button class="theme-btn active" style="background:#fff" onclick="setTheme('theme-white',this)" title="Nyeupe"></button>
+        <button class="theme-btn" style="background:#fdf6e3" onclick="setTheme('theme-cream',this)" title="Cream"></button>
+        <button class="theme-btn" style="background:#1a1a2e" onclick="setTheme('theme-night',this)" title="Usiku"></button>
+      </div>
+      <div class="tb-sep"></div>
+      <div class="chapter-nav">
+        <button class="ch-btn" onclick="prevChapter()">‹ Nyuma</button>
+        <span class="ch-indicator" id="ch-ind">Sura 1/1</span>
+        <button class="ch-btn" onclick="nextChapter()">Mbele ›</button>
       </div>
     </div>
-
-    <!-- Lipa Namba Box -->
-    <div class="lipa-box">
-      <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:6px">Lipa Namba ya Sade Books</div>
-      <div class="lipa-number">16284801</div>
-      <div class="lipa-name">HERMAN ONESMO SADE</div>
-      <div class="lipa-badges">
-        <span class="lipa-badge">📱 M-Pesa</span>
-        <span class="lipa-badge">📱 Tigo Pesa</span>
-        <span class="lipa-badge">📱 Airtel</span>
-        <span class="lipa-badge">📱 Halo Pesa</span>
-        <span class="lipa-badge">📱 T-Pesa</span>
+    <div class="reader-body theme-white" id="reader-body">
+      <div class="reader-content" id="reader-content"></div>
+    </div>
+    <div class="reader-footer">
+      <span class="rf-info" id="rf-info">Ukurasa 1</span>
+      <div class="rf-btns">
+        <button class="rf-btn" onclick="prevChapter()">‹ Sura iliyopita</button>
+        <button class="rf-btn primary" onclick="nextChapter()">Sura inayofuata ›</button>
       </div>
     </div>
-
-    <!-- Steps -->
-    <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:12px">Hatua za Kulipa:</div>
-    <div class="step-box"><div class="step-num">1</div><div class="step-text">Fungua App ya simu yako <strong>(M-Pesa / Tigo / Airtel / Halo)</strong> au piga <strong>*150#</strong></div></div>
-    <div class="step-box"><div class="step-num">2</div><div class="step-text">Chagua <strong>"Lipa Namba"</strong> kisha ingiza <strong style="color:#003087;font-size:1rem">16284801</strong></div></div>
-    <div class="step-box"><div class="step-num">3</div><div class="step-text">Ingiza kiasi <strong>TSH 2,000</strong> kisha thibitisha na PIN yako</div></div>
-    <div class="step-box" style="margin-bottom:20px"><div class="step-num">4</div><div class="step-text">Ingiza nambari yako ya simu na <strong>Transaction ID</strong> iliyotumwa kwa SMS hapa chini</div></div>
-
-    <!-- Inputs -->
-    <label style="font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:8px;display:block">Nambari ya Simu Uliyolipa Nayo</label>
-    <div class="pay-input-wrap" style="margin-bottom:12px">
-      <span style="color:var(--muted);font-size:.9rem">🇹🇿 +255</span>
-      <input id="pay-phone" type="tel" placeholder="7XX XXX XXX" maxlength="9"/>
-    </div>
-
-    <label style="font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:8px;display:block">Transaction ID (Nambari ya Uthibitisho)</label>
-    <div class="pay-input-wrap" style="margin-bottom:6px">
-      <input id="pay-ref" type="text" placeholder="mfano: BCA123456789" style="text-transform:uppercase"/>
-    </div>
-    <div style="font-size:.75rem;color:var(--muted);margin-bottom:20px;font-family:'Lora',serif;font-style:italic">💡 Inatumwa kwa SMS baada ya malipo kukamilika</div>
-
-    <!-- Total -->
-    <div class="total-box">
-      <div class="total-row"><span style="color:var(--muted)">Bei ya Kitabu</span><span style="font-weight:600">TSH 2,000</span></div>
-      <div class="total-row"><span style="color:var(--muted)">Ada ya Huduma</span><span style="font-weight:600;color:#2d6b2d">Bure</span></div>
-      <div class="total-row final"><span>Jumla</span><span>TSH 2,000</span></div>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:8px;background:#f0faf0;border:1px solid #a0d0a0;border-radius:10px;padding:10px 14px;margin-bottom:18px;font-size:.82rem;color:#2d6b2d;font-family:'Lora',serif;font-style:italic">
-      🔒 Malipo yako yanalindwa na mfumo wa usalama wa SSL
-    </div>
-
-    <div class="err-msg" id="pay-err"></div>
-    <button class="confirm-btn" id="confirm-btn" onclick="confirmPayment()">Nimetuma Malipo – Thibitisha ✓</button>
-    <button class="cancel-btn" onclick="closePayment()">Rudi nyuma</button>
   </div>
 </div>
 
-<!-- SUCCESS PAGE -->
-<div class="fullpage" id="success-page">
-  <div class="success-inner" style="text-align:center">
-    <div style="font-size:5rem;margin-bottom:20px">🎉</div>
-    <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--ink);margin-bottom:10px">Malipo Yamefanikiwa!</div>
-    <div id="success-book" style="font-family:'Lora',serif;font-size:1rem;color:var(--muted);margin-bottom:8px;font-style:italic"></div>
-    <div style="font-size:.9rem;color:var(--muted);font-family:'Lora',serif;margin-bottom:8px">Kitabu chako kimeunlockiwa! Utapokea link ya kupakua hivi karibuni.</div>
-    <div style="font-size:.85rem;color:var(--muted);font-family:'Lora',serif;margin-bottom:28px">📱 Simu: <strong id="success-phone"></strong></div>
-    <div style="background:var(--white);border-radius:16px;padding:20px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.07)">
-      <div style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px">Transaction ID</div>
-      <div id="success-ref" style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink)"></div>
-    </div>
-    <button onclick="closeSuccess()" style="width:100%;background:var(--gold);color:var(--ink);border:none;border-radius:50px;padding:15px;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;cursor:pointer">
-      Rudi kwenye Vitabu 📚
-    </button>
-  </div>
-</div>
+<footer>
+  &copy; 2026 &mdash; <strong>SadeBooks</strong> &mdash; Imeundwa na <strong>Herman Sade</strong> &mdash;
+  <a href="https://www.sadebooks.com">www.sadebooks.com</a>
+</footer>
 
 <script>
-var currentBookId = null;
+// ══════════════════════════════════════════════════
+//  BOOK DATABASE — 100 books
+// ══════════════════════════════════════════════════
+const BOOKS = [
+  // ── BIOGRAPHY ──
+  {id:1,title:"Nelson Mandela: Njia ya Uhuru",author:"Nelson Mandela",cat:"biography",emoji:"✊",color:["#1a472a","#2d6a4f"],stars:"★★★★★",pages:624,badge:"Wasifu",
+   chapters:[
+    {title:"Sura 1: Asili — Mwana wa Mfalme",text:`<p class="drop-cap">Nilizaliwa tarehe 18 Julai 1918 katika kijiji kidogo cha Mvezo, karibu na mto Mbhashe nchini Afrika Kusini. Baba yangu, Gadla Henry Mphakanyiswa, alikuwa mshauri wa kiutawala wa chifu Jongintaba Dalindyebo — mtu wa heshima, mwenye nguvu, mwenye msimamo.</p><p>Nyumba yetu ilikuwa ndogo — madawati matatu tu, na hakuna umeme. Lakini ndani ya nyumba hiyo ndogo, kulikuwa na utajiri wa hadithi, historia, na mafundisho. Mama yangu, Nosekeni Fanny, alikuwa mwanamke wa imani, mwenye upole, lakini pia mwenye nguvu za ajabu.</p><blockquote>"Mtu anayeshinda kwa nguvu anaweza kushindwa kwa nguvu zaidi. Mtu anayeshinda kwa akili anaweza kupigwa tu kwa akili bora zaidi. Lakini mtu anayeshinda kwa haki — hakuna anayeweza kumshinda."</blockquote><p>Jina langu la asili lilikuwa Rolihlahla — kwa Kixhosa linamaanisha "mvutaji wa matawi ya mti," au kwa lugha ya kawaida, "msumbufu." Watu wengine walisema kwamba jina langu lilielezea tabia yangu ya asili. Labda walikuwa sahihi.</p><p>Nilipenda kukimbia mashambani, kucheza, na kusikiliza hadithi za wazee. Kila jioni, wazee wa kijiji walikaa chini ya mwanga wa moto na kusimulia hadithi za mapigano, ushujaa, na upendo — hadithi ambazo zilichonga nafsi yangu bila mimi kujua.</p><h3>Kuingia Shuleni kwa Kwanza</h3><p>Siku ya kwanza ya shule ilikuwa siku ya mabadiliko makubwa maishani mwangu. Mwalimu wangu, Bi Jones, alitupa jina la Kiingereza kila mwanafunzi. Aliponifikia mimi, alisema bila kusita: "Wewe utaitwa Nelson." Sijui kwa nini alichagua jina hilo, lakini kutoka siku hiyo, nilikuwa Nelson.</p><p>Elimu ilifungua mlango mpya kwangu — dunia ya vitabu, mawazo, na ndoto. Nilijifunza haraka, na walimu wangu waliona ndani yangu kitu ambacho mimi mwenyewe sikuweza kukiona bado.</p>`},
+    {title:"Sura 2: Mapinduzi Yanaanza",text:`<p class="drop-cap">Nilipofika Johannesburg mwaka 1941, nilikuwa kijana wa miaka 23 bila pesa, bila kazi, lakini wenye moto mkubwa moyoni. Jiji hilo lilikuwa tofauti kabisa na kijiji changu — sauti, msongamano, magari, watu wa rangi zote — lakini pia unyanyasaji ulioonekana kila kona.</p><p>Haikuchukua muda mrefu kuona ukweli wa Afrika Kusini ya wakati huo. Waafrika hawakuruhusiwa kuingia maeneo fulani. Hawakuruhusiwa kula mgahawani fulani. Hawakuruhusiwa kwenda shule fulani. Hii ndiyo apartheid — mfumo wa ubaguzi rasmi ambao ulifanya maisha ya waAfrika kuwa mzigo mzito.</p><blockquote>"Ujuzi ni silaha kubwa zaidi unayoweza kutumia kubadilisha dunia."</blockquote><p>Nilikutana na Walter Sisulu — mwanaume mdogo lakini mwenye nguvu za ajabu za uongozi. Yeye ndiye aliyenielekeza kwa ANC — African National Congress. Harakati hiyo ndiyo ikawa nyumba yangu ya pili, familia yangu ya pili, na azma yangu ya maisha.</p><p>Tulisimama pamoja, tukapanga pamoja, tukafanya kazi pamoja. Pamoja na Oliver Tambo, tulifungua ofisi ya kwanza ya kisheria ya watu wa Kiafrika Johannesburg. Kila siku tuligombana na mfumo wa sheria uliotuonea, lakini tuliendelea.</p>`},
+    {title:"Sura 3: Miaka 27 — Robben Island",text:`<p class="drop-cap">Tarehe 12 Juni 1964, mahakama ilitamka hukumu yangu: kifungo cha maisha. Nilikuwa na umri wa miaka 45. Nilihisi kana kwamba dunia imezima mwanga wake, lakini ndani yangu, mwanga ulioendelea kuwaka.</p><p>Robben Island ilikuwa kisiwa cha mawe, baridi, na upweke. Tulifanya kazi katika mgodi wa mawe — mikono yetu ikiuma, macho yetu yakiumia kutokana na vumbi jeupe. Tulichimbua mawe kutoka asubuhi hadi jioni, lakini mawazo yetu yalikuwa bado huru.</p><blockquote>"Hakuna njia yoyote ya kufikia mwisho mzuri kwa njia mbaya. Yeye anayejibu dharau kwa dharau hatamaliza dharau, bali ataongeza."</blockquote><p>Usiku, tulisoma. Tulizungumza kwa siri. Tuliandishana ujumbe kwenye vipande vya karatasi ndogo. Gerezani, tulifundishana — mimi nilifundisha wengine sheria, wengine walinifundisha historia, falsafa, na lugha.</p><p>Miaka 27 ni muda mrefu. Watoto wangu wakakua bila baba. Mke wangu, Winnie, akateswa nje. Lakini nilijua — njia ya uhuru haikuwa rahisi, na mimi nilikuwa tayari kulipa bei hiyo.</p><p>Nilipotoka gerezani tarehe 11 Februari 1990, watu milioni walinisubiri. Nilisimama mbele yao, nikiinua mkono wangu, nikiua kwamba mapambano hayajakwisha — yanaendelea.</p>`}
+   ]},
 
-const books = [
-  // BIASHARA & FEDHA
-  { id:1,  emoji:'💼', bg:'linear-gradient(135deg,#2d4a7a,#1a2d5a)', cat:'Biashara & Fedha',    title:'Jifunze Biashara', pdf:'https://hermansade3-cmd.github.io/testing-/PDFs/vitabu.pdf',         desc:'Mwongozo kamili wa kuanza na kukuza biashara yako kwa mafanikio ya kweli.', hot:true  },
-  { id:2,  emoji:'💰', bg:'linear-gradient(135deg,#5a3a00,#c9962a)', cat:'Biashara & Fedha',    title:'Akili ya Fedha',           desc:'Jinsi ya kusimamia, kuwekeza na kukuza fedha zako kwa busara.',             hot:false },
-  { id:3,  emoji:'📈', bg:'linear-gradient(135deg,#1e6b5e,#0d3d35)', cat:'Biashara & Fedha',    title:'Mwekezaji Hodari',         desc:'Misingi ya uwekezaji wa hisa, ardhi na biashara ndogo ndogo.',              hot:true  },
-  { id:4,  emoji:'🏪', bg:'linear-gradient(135deg,#8b3a1a,#5a1a00)', cat:'Biashara & Fedha',    title:'Duka Lako Mtandaoni',      desc:'Hatua za kuanzisha biashara ya mtandaoni yenye mafanikio.',                 hot:false },
-  { id:5,  emoji:'🤝', bg:'linear-gradient(135deg,#2d5a2d,#1a3a1a)', cat:'Biashara & Fedha',    title:'Mazungumzo ya Biashara',   desc:'Ustadi wa kujadiliana na kushinda mikataba ya biashara.',                   hot:false },
+  {id:2,title:"Steve Jobs: Mbunifu wa Kisasa",author:"Walter Isaacson",cat:"biography",emoji:"🍎",color:["#1c1c1e","#3d3d3d"],stars:"★★★★★",pages:571,badge:"Wasifu",
+   chapters:[
+    {title:"Sura 1: Mtoto Aliyetelekezwa",text:`<p class="drop-cap">Steve Jobs alizaliwa tarehe 24 Februari 1955 huko San Francisco — mtoto ambaye wazazi wake wa asili walimtelekeza siku ya kwanza ya maisha yake. Paul na Clara Jobs walikuwa wazazi wake wa kupanga — watu wapole, wanaopenda, waliomfundisha upendo wa kweli.</p><p>Kukua Silicon Valley kabla haijulikana kama Silicon Valley, Steve alikulia katika mazingira ya ajabu. Baba yake wa kulea, Paul, alikuwa fundi wa magari na alifundisha Steve jinsi ya kufanya kazi kwa mikono — na muhimu zaidi, jinsi ya kuthamini ubora wa kazi.</p><blockquote>"Ubunifu ni kuunganisha mambo. Watu wa ubunifu wanaulizwa jinsi walivyofanya kitu, na wanajisikia kidogo aibu kwa sababu hawakufanya kitu — waliangalia tu na wakaona."</blockquote><p>Steve alikuwa mtoto mgumu — mwenye nguvu, mwenye hasira, lakini pia mwenye kipawa cha ajabu cha kuona mambo ambayo wengine hawakuweza kuona. Shuleni, alikuwa mwanafunzi mbaya katika masomo ya kawaida, lakini alikuwa bingwa katika vitu vya ubunifu.</p><p>Alipokutana na Steve Wozniak — bingwa wa kompyuta — maisha yao mawili yaliunganika kwa njia ambayo itabadilisha dunia.</p>`},
+    {title:"Sura 2: Kuunda Apple",text:`<p class="drop-cap">Januari 1976. Katika gereji la familia ya Jobs, historia iliandikwa. Steve Jobs, Steve Wozniak, na Ronald Wayne wakakaa pamoja na kuandika mkataba wa kampuni ya kwanza ya kompyuta iliyoitwa Apple. Bei ya kila hisa ilikuwa dola 800 — leo, Apple ni kampuni yenye thamani ya zaidi ya trilioni moja ya dola.</p><p>Apple I ilikuwa kompyuta ya kwanza — bodi ya saketi tu, bila keyboard, bila screen. Lakini Apple II ilikuwa mapinduzi — kompyuta ya kwanza iliyoundwa kwa ajili ya watu wa kawaida, si wataalamu tu.</p><blockquote>"Kuwa maskini na na akili, ni bora kuliko kuwa na pesa na ujinga. Macho yakiwa wazi unaweza kuona fursa ambazo wengine hawayaona."</blockquote><p>Ndoto ya Steve haikuwa tu kutengeneza kompyuta — ilikuwa kubadilisha jinsi watu wanavyoishi, kufanya kazi, na kushirikiana. Macintosh, mwaka 1984, ilikuwa hatua kubwa — kompyuta ya kwanza yenye picha badala ya maandishi tu, yenye kipanya (mouse) — jambo ambalo mtu hakuwahi kuona.</p>`},
+    {title:"Sura 3: iPhone — Kubadilisha Dunia",text:`<p class="drop-cap">Tarehe 9 Januari 2007. Steve Jobs alisimama mbele ya hadhira kubwa huko San Francisco. Alikuwa na siri kubwa — kitu ambacho dunia haikujua. "Leo," alisema, "nina furaha ya ajabu kutangaza vitu vitatu vikubwa: simu ya mapinduzi, iPod nzuri zaidi, na kivinjari kipya cha mtandao... Vitu hivi vitatu ni kimoja — tunakiita iPhone."</p><blockquote>"Ndoto yangu kubwa zaidi ni kuona watu wakipenda bidhaa zetu sio kwa sababu ya bei, bali kwa sababu zinabadilisha maisha yao."</blockquote><p>iPhone ilibadilisha kila kitu. Haikuwa simu tu — ilikuwa kompyuta ndogo iliyoweza kukaa mfukoni. Ilifungua mlango wa ulimwengu wote kwa kidole kimoja. Leo, mabilioni ya watu wanatumia simu za akili — na yote yalianza kutoka ndoto moja ya mtu mmoja.</p><p>Steve Jobs alikufa tarehe 5 Oktoba 2011 kwa saratani ya kongosho. Alikuwa na umri wa miaka 56. Lakini urithi wake utaendelea milele — kila iPhone, kila iPad, kila Mac, inashuhudia nguvu ya ndoto moja iliyowaka moyoni mwa mtoto aliyetelekezwa gereji la familia yake.</p>`}
+   ]},
 
-  // MAENDELEO BINAFSI
-  { id:6,  emoji:'🌱', bg:'linear-gradient(135deg,#2d5a2d,#4a8a4a)', cat:'Maendeleo Binafsi',   title:'Amka na Kutenda',          desc:'Jinsi ya kuacha uvivu na kuanza safari yako ya mafanikio.',                 hot:true  },
-  { id:7,  emoji:'🧠', bg:'linear-gradient(135deg,#5a3a7a,#3a1a5a)', cat:'Maendeleo Binafsi',   title:'Nguvu ya Akili',           desc:'Mbinu za kisaikolojia za kuimarisha nguvu ya akili yako.',                  hot:false },
-  { id:8,  emoji:'⏰', bg:'linear-gradient(135deg,#1a4a6b,#0d2d45)', cat:'Maendeleo Binafsi',   title:'Simamia Wakati Wako',      desc:'Mfumo wa kipekee wa kutumia kila saa kwa ufanisi mkubwa.',                  hot:false },
-  { id:9,  emoji:'🎯', bg:'linear-gradient(135deg,#8b3a3a,#5a1a1a)', cat:'Maendeleo Binafsi',   title:'Lengo na Mwelekeo',        desc:'Jinsi ya kuweka malengo na kuyafuata hadi kuyafikia.',                      hot:true  },
-  { id:10, emoji:'💪', bg:'linear-gradient(135deg,#4a2d00,#8b6a1a)', cat:'Maendeleo Binafsi',   title:'Nguvu ya Ndani',           desc:'Gundua uwezo mkubwa uliofichwa ndani yako.',                                hot:false },
-  { id:11, emoji:'😊', bg:'linear-gradient(135deg,#1e6b5e,#2d8a7a)', cat:'Maendeleo Binafsi',   title:'Furaha ya Kweli',          desc:'Jinsi ya kuishi maisha ya furaha na amani ya kweli.',                       hot:false },
-  { id:12, emoji:'🗣️', bg:'linear-gradient(135deg,#2d4a7a,#4a6aaa)', cat:'Maendeleo Binafsi',   title:'Sanaa ya Kuongea',         desc:'Mbinu za kuzungumza kwa ushawishi na ujasiri mbele ya watu.',                hot:true  },
+  {id:3,title:"Elon Musk: Mtu wa Mustakabali",author:"Ashlee Vance",cat:"biography",emoji:"🚀",color:["#0f3460","#e94560"],stars:"★★★★★",pages:392,badge:"Wasifu",
+   chapters:[
+    {title:"Sura 1: Msomaji Mkubwa wa Afrika Kusini",text:`<p class="drop-cap">Elon Musk alizaliwa tarehe 28 Juni 1971 huko Pretoria, Afrika Kusini. Akiwa mtoto, alikuwa na kawaida moja ya ajabu — kusoma vitabu. Si vitabu vya watoto tu — vitabu vya fizikia, hisabati, falsafa, na hadithi za kisayansi (science fiction). Aliposoma Encyclopedia Britannica nzima akiwa na umri wa miaka tisa, baba yake aliamini mtoto wake alikuwa na akili ya kipekee.</p><p>Shuleni alikuwa mgumu kuelewa — mwenye tabia ya moja kwa moja, asiyejua kucheza mchezo wa kijamii wa kawaida. Watoto wengine walimdhihaki, wakampiga, wakamfanya apendeze. Lakini ndani yake alikuwa na nguvu ambayo haikujulikana bado.</p><blockquote>"Unapaswa kuamini kwamba unaweza kubadilisha dunia. Kama hukiamini, hutaweza kulifanya."</blockquote><p>Akiwa na miaka 12, alitengeneza mchezo wake wa kompyuta wa kwanza na kuuuza kwa dola 500. Hii ilikuwa mwanzo wa safari ndefu ya mtu ambaye atakwenda zaidi ya sayari yetu.</p>`},
+    {title:"Sura 2: Tesla, SpaceX — Ndoto Kubwa",text:`<p class="drop-cap">Mwaka 2002, Elon Musk alianzisha SpaceX — kampuni ya anga ya kwanza ya kibinafsi kwa nia ya kupeleka wanadamu Mars. Watu wengi walidhani alikuwa mwendawazimu. Wataalam wa NASA waliachilia kicheko. Lakini Musk aliendelea.</p><p>Ndege tatu za kwanza za Falcon 1 zilishindwa. Kila kushindwa kulimgharimu mamilioni ya dola. Akiwa amekwisha pesa, akiwa amechoka, akiwa akidhulumiwa na wanahisa, aliamua kujaribu mara ya nne — na iliruka. SpaceX iliokoka.</p><blockquote>"Kushindwa ni chaguo. Kama hujashindwa, hujajaribu mambo mapya ya kutosha."</blockquote><p>Tesla ilikuwa vita tofauti. Kampuni ya magari ya umeme ilipigana na makampuni makubwa ya mafuta, wabunge, na desturi za miaka mingi. Lakini mwaka 2012, Tesla Model S ilionyesha dunia kwamba gari la umeme linaweza kuwa zuri kuliko gari lolote la mafuta.</p><p>Leo, Elon Musk ni mtu mwenye utajiri mkubwa zaidi duniani. Lakini yeye mwenyewe anasema utajiri wake si lengo — lengo ni kuhakikisha wanadamu wataendelea kuishi hata baada ya sayari hii.</p>`}
+   ]},
 
-  // DINI & IMANI
-  { id:13, emoji:'🕌', bg:'linear-gradient(135deg,#1a3a1a,#2d6b2d)', cat:'Dini & Imani',        title:'Nguvu ya Sala',            desc:'Jinsi sala inavyobadilisha maisha yako na kuleta baraka.',                  hot:true  },
-  { id:14, emoji:'📿', bg:'linear-gradient(135deg,#3a2d1a,#6b5a2d)', cat:'Dini & Imani',        title:'Imani Inayosogea Milima',  desc:'Hadithi za kweli za imani na miujiza inayotokea maishani.',                 hot:false },
-  { id:15, emoji:'🌙', bg:'linear-gradient(135deg,#1a1a3a,#2d2d6b)', cat:'Dini & Imani',        title:'Amani ya Moyo',            desc:'Kupata amani ya kweli kupitia dua, tafakari na kumkumbuka Mwenyezi Mungu.', hot:false },
-  { id:16, emoji:'✝️', bg:'linear-gradient(135deg,#4a1a1a,#8b3a3a)', cat:'Dini & Imani',        title:'Imani na Matendo',         desc:'Uhusiano kati ya imani yako na jinsi unavyoishi maisha yako.',              hot:false },
-  { id:17, emoji:'🙏', bg:'linear-gradient(135deg,#2d4a2d,#5a8a5a)', cat:'Dini & Imani',        title:'Ukweli wa Maisha',         desc:'Maswali makubwa ya maisha yaliyojibiwa kupitia mwanga wa imani.',           hot:true  },
+  {id:4,title:"Oprah Winfrey: Kutoka Umaskini hadi Utukufu",author:"Kitty Kelley",cat:"biography",emoji:"👑",color:["#6a0dad","#9b59b6"],stars:"★★★★★",pages:448,badge:"Wasifu",
+   chapters:[
+    {title:"Sura 1: Mtoto wa Umaskini",text:`<p class="drop-cap">Oprah Gail Winfrey alizaliwa tarehe 29 Januari 1954 huko Kosciusko, Mississippi — jimbo la kusini mwa Marekani ambapo ubaguzi wa rangi ulikuwa bado ukali sana. Mama yake, Vernita Lee, alikuwa msichana wa miaka 18 tu aliyemzaa bila ndoa, na Oprah alikua chini ya uangalizi wa bibi yake, Hattie Mae, katika umaskini mkubwa.</p><blockquote>"Siwezi kubadilisha historia yangu, lakini ninaweza kubadilisha kesho yangu. Na hilo linatosha."</blockquote><p>Akiwa na miaka sita tu, Oprah alianza kusoma Biblia mbele ya kanisa — sauti yake ilishtua watu wazima. Walisema alikuwa na kipawa cha Mungu. Lakini maisha yake yalikuwa magumu — alipitia matukio ya kikatili akiwa mtoto, mambo ambayo yangeweza kumharibu mtu yeyote.</p><p>Badala yake, yeye aligeuka mateso hayo kuwa nguvu. Alisema maneno yake mwenyewe: "Unachopitia hukuua — kinakufanya kuwa na nguvu zaidi."</p>`},
+    {title:"Sura 2: The Oprah Show — Mabadiliko ya Dunia",text:`<p class="drop-cap">Mwaka 1986, The Oprah Winfrey Show ilisambazwa kitaifa kwa mara ya kwanza nchini Marekani. Katika miaka michache, ilikuwa kipindi maarufu zaidi duniani. Oprah hakuwa mwenyeji wa kawaida — alikuwa muungano wa mtu na hadhira yake, akigusa mioyo ya watu kwa njia ambayo hakuna aliyewahi kufanya.</p><blockquote>"Utukufu wako mkubwa zaidi si katika kutokupoteza, bali ni kuinuka kila unapopigwa chini."</blockquote><p>Vitabu alivyopendekeza katika kipindi chake viliuzwa mara moja — mabunduki ya kitabu yakawa maarufu kama "Oprah Effect." Watu waliomwona waliathirika. Watu waliomsikiliza walibadilika. Oprah Winfrey alithibitisha kwamba sauti ya kweli, kutoka moyoni, ina nguvu zaidi kuliko sauti yoyote nyingine.</p>`}
+   ]},
 
-  // AFYA & LISHE
-  { id:18, emoji:'❤️', bg:'linear-gradient(135deg,#8b1a2d,#c93a5a)', cat:'Afya & Lishe',        title:'Mwili Bora, Akili Bora',   desc:'Uhusiano kati ya afya ya mwili na ufanisi wa akili yako.',                  hot:true  },
-  { id:19, emoji:'🥗', bg:'linear-gradient(135deg,#2d6b1a,#5aaa2d)', cat:'Afya & Lishe',        title:'Lishe Sahihi ya Mwafrika', pdf:'https://hermansade3-cmd.github.io/testing-/PDFs/Lishe_Kitabu_Herman_Sade.pdf', desc:'Vyakula bora vya Afrika vinavyokuimarisha mwili na akili.',                 hot:false },
-  { id:20, emoji:'🏃', bg:'linear-gradient(135deg,#1a4a6b,#2d6aaa)', cat:'Afya & Lishe',        title:'Mazoezi ya Kila Siku',     desc:'Mpango rahisi wa mazoezi unaofaa kwa mtu yeyote nyumbani.',                 hot:false },
-  { id:21, emoji:'😴', bg:'linear-gradient(135deg,#2d1a4a,#5a3a8b)', cat:'Afya & Lishe',        title:'Nguvu ya Usingizi',        desc:'Sayansi ya usingizi bora na jinsi unavyoathiri maisha yako.',               hot:false },
-  { id:22, emoji:'🧘', bg:'linear-gradient(135deg,#1e5a4a,#2d8a6b)', cat:'Afya & Lishe',        title:'Tiba Asilia',              desc:'Dawa za asili za Afrika zinazotibu magonjwa ya kawaida.',                   hot:true  },
+  {id:5,title:"Albert Einstein: Akili Iliyobadilisha Ulimwengu",author:"Walter Isaacson",cat:"biography",emoji:"🧠",color:["#1a3a5c","#2980b9"],stars:"★★★★★",pages:551,badge:"Wasifu",
+   chapters:[
+    {title:"Sura 1: Mtoto Asiyezungumza",text:`<p class="drop-cap">Albert Einstein alizaliwa tarehe 14 Machi 1879 huko Ulm, Ujerumani. Jambo la kushangaza kuhusu mwanasayansi mkubwa zaidi wa karne ya 20 ni kwamba hakuzungumza mpaka akiwa na umri wa miaka miwili hadi mitatu. Wazazi wake waliogopa kwamba kuna tatizo. Hawakujua kwamba ubongo huo ulikuwa ukijua jinsi ya kujipanga upya.</p><blockquote>"Mawazo ya ajabu zaidi ambayo mwanaadamu anaweza kuwa nayo ni mshangao. Hii ndiyo chanzo cha sayansi yote ya kweli na sanaa yote ya kweli."</blockquote><p>Shuleni, Einstein alikuwa mzuri katika hisabati na fizikia tu. Masomo mengine aliyachukia. Walimu wengine walimwambia hatafikia chochote. Mara moja, mkurugenzi wa shule alimwambia baba yake kwamba mtoto wake hana mustakabali wa taaluma.</p><p>Miaka michache baadaye, Einstein alipendekeza nadharia ya uakisi maalum (Special Theory of Relativity) ambayo ilibadilisha jinsi wanadamu wanavyoelewa muda, nafasi, na nishati. E=mc² — equation ndogo ambayo imebeba ukweli mkubwa zaidi wa ulimwengu.</p>`}
+   ]},
 
-  // TEKNOLOJIA
-  { id:23, emoji:'💻', bg:'linear-gradient(135deg,#0d1a2d,#1a3a5a)', cat:'Teknolojia',           title:'Coding kwa Waanzishi',     desc:'Jifunze kuprogramu kutoka sifuri bila uzoefu wowote wa awali.',             hot:true  },
-  { id:24, emoji:'🤖', bg:'linear-gradient(135deg,#1a2d1a,#2d5a2d)', cat:'Teknolojia',           title:'Akili Bandia Inayokuja',   desc:'Jinsi AI inavyobadilisha ulimwengu na nafasi zake kwa Waafrika.',           hot:true  },
-  { id:25, emoji:'📱', bg:'linear-gradient(135deg,#2d1a00,#5a3a00)', cat:'Teknolojia',           title:'Biashara ya Simu',         desc:'Pata kipato kutoka kwa simu yako ya mkononi kwa njia halali.',              hot:false },
-  { id:26, emoji:'🔐', bg:'linear-gradient(135deg,#1a1a1a,#3a3a3a)', cat:'Teknolojia',           title:'Usalama Mtandaoni',        desc:'Linda taarifa zako na biashara yako dhidi ya wadanganyifu mtandaoni.',       hot:false },
-  { id:27, emoji:'📊', bg:'linear-gradient(135deg,#0d2d4a,#1a5a8b)', cat:'Teknolojia',           title:'Data na Maamuzi Bora',     desc:'Tumia data kusimamia biashara na maisha yako kwa hekima.',                  hot:false },
+  // ── BUSINESS ──
+  {id:6,title:"Think and Grow Rich",author:"Napoleon Hill",cat:"business",emoji:"💰",color:["#7b3f00","#d4870a"],stars:"★★★★★",pages:238,badge:"Biashara",
+   chapters:[
+    {title:"Sura 1: Nguvu ya Mawazo",text:`<p class="drop-cap">Kwa miaka ishirini na moja, Napoleon Hill alisoma watu 500 wa biashara waliofanikiwa zaidi Marekani — akiwemo Andrew Carnegie, Henry Ford, Thomas Edison, na wengine wengi. Kutoka kwa utafiti huu mkubwa, aliandika kitabu kimoja ambacho kimeathiri maisha ya mamilioni ya watu duniani kote.</p><p>Ukweli wake mkubwa ni huu: <span class="highlight">kila kitu kinachoumbwa na mwanadamu kilianza kwanza kama mawazo ya mtu mmoja.</span> Gari lilianza kama ndoto ya Henry Ford. Simu ilianza kama mawazo ya Alexander Graham Bell. Ndege ilianza kama ndoto ya ndugu Orville na Wilbur Wright.</p><blockquote>"Kile akili ya mwanadamu inaweza kukifikiri na kukiamini, mwanadamu anaweza kukifikia."</blockquote><p>Jambo la kwanza analofundisha Hill ni HAMU — DESIRE. Si kutaka tu, bali kutaka kwa nguvu zote za moyo wako. Kutaka kwa kiwango ambacho mawazo yako yote yanazunguka hamu hiyo. Ndio maana watu wanaofanikiwa wanazungumza, wanaolala, na kuamka wakifikiria ndoto yao.</p><h3>Hatua Sita za Kubadilisha Ndoto kuwa Utajiri</h3><p>Hill anaeleza hatua sita maalum: kwanza, amua kiasi halisi cha pesa unachotaka. Pili, amua utatolea nini kwa kurudi. Tatu, amua tarehe maalum utakapofikia lengo hilo. Nne, tengeneza mpango. Tano, andika kila kitu hiki. Sita, soma maandiko haya mara mbili kila siku — asubuhi na usiku — ukisimama ukiamini kwamba tayari unayo pesa hiyo.</p>`},
+    {title:"Sura 2: Imani — Kioo cha Akili",text:`<p class="drop-cap">Imani ni nguvu ya pili kati ya nguvu kumi na tatu za utajiri ambazo Hill anafundisha. Imani si kuamini kwamba utaweza — ni kuamini kwamba tayari umefanikisha. Tofauti ni kubwa.</p><blockquote>"Imani ni hali ya akili ambayo inaweza kusababishwa na mara kwa mara kuthibitisha au kufundisha akili ndogo (subconscious mind) kupitia kanuni ya kuthibitisha kwa nguvu."</blockquote><p>Watu wengi wanaomba pesa, wanaomba mafanikio, wanaomba furaha — lakini ndani yao, wanaamini kwamba hawastahili, hawawezi, au hawatafanikisha. Hii ni mgongano wa ndani ambao unazuia nguvu za ulimwengu kufanya kazi yake.</p><p>Hill anasema kufanya mazoezi ya "autosuggestion" — kusema maneno mazuri kuhusu wewe mwenyewe kila siku, mpaka akili yako ndogo ikubaliane na akili yako ya nje. Hii inachukua wakati, lakini inafanya kazi.</p>`}
+   ]},
 
-  // HISTORIA
-  { id:28, emoji:'🌍', bg:'linear-gradient(135deg,#2d1a00,#6b4a1a)', cat:'Historia',             title:'Afrika ya Kale',           desc:'Utukufu wa falme za Afrika kabla ya ukoloni — hadithi ambazo hazifundishwi.', hot:true },
-  { id:29, emoji:'⚔️', bg:'linear-gradient(135deg,#3a1a1a,#6b2d2d)', cat:'Historia',             title:'Mashujaa wa Tanzania',     desc:'Wapiganaji na viongozi wa Tanzania waliobadilisha historia yetu.',          hot:false },
-  { id:30, emoji:'🏛️', bg:'linear-gradient(135deg,#1a1a2d,#2d2d5a)', cat:'Historia',             title:'Ustaarabu wa Waswahili',   desc:'Historia ya utamaduni wa pwani na biashara ya Waswahili wa kale.',          hot:false },
-  { id:31, emoji:'📜', bg:'linear-gradient(135deg,#1a2d1a,#3a5a3a)', cat:'Historia',             title:'Uhuru wa Afrika Mashariki',desc:'Safari ya ukombozi kutoka ukoloni hadi uhuru wa kisasa.',                    hot:false },
-  { id:32, emoji:'🗺️', bg:'linear-gradient(135deg,#2d2d1a,#5a5a2d)', cat:'Historia',             title:'Ramani ya Mababu',         desc:'Hadithi za makabila ya Tanzania na mila zao za kipekee.',                   hot:true  },
+  {id:7,title:"The Lean Startup",author:"Eric Ries",cat:"business",emoji:"📊",color:["#0f6e2e","#27ae60"],stars:"★★★★☆",pages:299,badge:"Biashara",
+   chapters:[
+    {title:"Sura 1: Kuanza kwa Uzuri",text:`<p class="drop-cap">Hadithi ya kawaida ya biashara mpya (startup) inaenda hivi: vijana wenye ndoto wakikutana gereji, wakifanya kazi usiku na mchana kwa miaka miwili, kisha wakitoa bidhaa nzuri sana na kuwa matajiri. Ukweli ni tofauti kabisa.</p><p>Biashara nyingi mpya zinashindwa — si kwa sababu bidhaa yao ni mbaya, bali kwa sababu walitengeneza bidhaa ambayo hakuna mtu aliyoihitaji. Walitumia miaka kutengeneza kitu ambacho wateja hawakutaka.</p><blockquote>"Ni ni hatua ya kwanza ya mwangaza kujua kama unafanya kitu ambacho mtu anataka — kabla ya kutumia miaka na pesa nyingi kutengeneza."</blockquote><p>Lean Startup inatoa njia nyingine: <span class="highlight">jenga haraka, pima haraka, jifunza haraka.</span> Usipoteze miaka ukitengeneza "bidhaa kamili" — tengeneza kitu kidogo (MVP — Minimum Viable Product), ulete mbele ya wateja, upate maoni yao, urekebishe, na uendelee.</p>`}
+   ]},
 
-  // ELIMU
-  { id:33, emoji:'🎓', bg:'linear-gradient(135deg,#1a3a5a,#2d6aaa)', cat:'Elimu',                title:'Soma kwa Ufanisi',         desc:'Mbinu za kisayansi za kujifunza haraka na kukumbuka kwa muda mrefu.',        hot:true  },
-  { id:34, emoji:'✏️', bg:'linear-gradient(135deg,#3a2d1a,#8b6a2d)', cat:'Elimu',                title:'Mwalimu Bora',             desc:'Jinsi ya kufundisha na kuelimisha watoto na vijana kwa ufanisi.',            hot:false },
-  { id:35, emoji:'📐', bg:'linear-gradient(135deg,#1a3a1a,#3a8a3a)', cat:'Elimu',                title:'Hisabati Kwa Urahisi',     desc:'Njia mpya za kuelewa hisabati bila hofu wala msongo wa mawazo.',            hot:false },
-  { id:36, emoji:'🔬', bg:'linear-gradient(135deg,#1a1a3a,#3a3a8b)', cat:'Elimu',                title:'Sayansi ya Maisha',        desc:'Gundua miujiza ya sayansi inayokuathiri kila siku ya maisha yako.',          hot:false },
-  { id:37, emoji:'🌐', bg:'linear-gradient(135deg,#0d2d2d,#1a6b6b)', cat:'Elimu',                title:'Lugha za Dunia',           desc:'Mbinu za kujifunza lugha mpya kwa muda mfupi na kwa furaha.',               hot:true  },
+  {id:8,title:"Rich Dad Poor Dad",author:"Robert Kiyosaki",cat:"business",emoji:"🏦",color:["#8B0000","#c0392b"],stars:"★★★★★",pages:207,badge:"Biashara",
+   chapters:[
+    {title:"Sura 1: Baba Mbili — Falsafa Mbili",text:`<p class="drop-cap">Nilikuwa na baba wawili — mmoja alikuwa tajiri sana, mwingine alikuwa maskini. Wote wawili walikuwa werevu, wote wawili walifanya kazi kwa bidii, wote wawili walipata mapato mazuri. Lakini mmoja alipigana na pesa maisha yake yote, mwingine alikuwa mmoja wa watu matajiri zaidi Hawaii.</p><p>Baba yangu wa asili — "Baba Maskini" — alikuwa mtu wa elimu ya juu, profesa wa chuo kikuu. Alinifundisha: "Soma vizuri upate kazi nzuri." Baba wa rafiki yangu, Mike — "Baba Tajiri" — alinifundisha kitu tofauti kabisa: "Usiwe na kazi. Kuwa na biashara inayofanya kazi wakati hata umelala."</p><blockquote>"Watu maskini na wa kati wanafanya kazi kwa pesa. Matajiri wanafanya pesa ifanye kazi kwao."</blockquote><p>Tofauti kubwa kati ya tajiri na maskini si kiasi cha pesa wanachopata — ni jinsi wanavyofikiri kuhusu pesa. Tajiri wanunua mali (assets) — vitu vinavyowaingizia pesa. Maskini wanunua majukumu (liabilities) — vitu vinavyowachukua pesa.</p><h3>Quadrant ya Cashflow</h3><p>Kiyosaki anaelezea aina nne za watu katika uchumi: E — Employee (mfanyakazi), S — Self-employed (mjasiriamali wa peke yake), B — Business owner (mmiliki wa biashara), I — Investor (mwekezaji). Matajiri wengi wako katika upande wa B na I.</p>`}
+   ]},
 
-  // HADITHI
-  { id:38, emoji:'📖', bg:'linear-gradient(135deg,#3a1a2d,#6b2d5a)', cat:'Hadithi',              title:'Usiku wa Nairobi',         desc:'Riwaya ya kuvutia ya mapenzi, uaminifu na msalaba wa tamaduni mbili.',        hot:true  },
-  { id:39, emoji:'🌺', bg:'linear-gradient(135deg,#4a1a00,#8b3a00)', cat:'Hadithi',              title:'Maua ya Jangwani',         desc:'Hadithi ya msichana aliyeishi miaka 20 jangwani na kupata uhuru wake.',       hot:false },
-  { id:40, emoji:'🌊', bg:'linear-gradient(135deg,#0d2d4a,#1a5a7a)', cat:'Hadithi',              title:'Bahari ya Matumaini',      desc:'Safari ya baharini inayogusa mioyo — upendo, hasara na ushindi.',            hot:false },
-  { id:41, emoji:'🦁', bg:'linear-gradient(135deg,#3a2d00,#6b5a00)', cat:'Hadithi',              title:'Simba wa Serengeti',       desc:'Hadithi ya kishujaa ya kijana wa Maasai anayepigana na fate yake.',           hot:true  },
-  { id:42, emoji:'🌟', bg:'linear-gradient(135deg,#1a1a2d,#3a3a6b)', cat:'Hadithi',              title:'Nyota za Usiku',           desc:'Riwaya ya kisayansi — Tanzania 2080, dunia mpya na changamoto mpya.',         hot:false },
+  {id:9,title:"Zero to One",author:"Peter Thiel",cat:"business",emoji:"🎯",color:["#2c3e50","#16a085"],stars:"★★★★★",pages:224,badge:"Biashara",
+   chapters:[
+    {title:"Sura 1: Swali Gumu",text:`<p class="drop-cap">"Niambie ukweli muhimu ambao wachache wanakubaliana nawe." Hilo ndilo swali Peter Thiel alilouliza katika kila mahojiano ya kazi katika kampuni yake ya PayPal. Swali hilo linaonekana rahisi, lakini kujibu kwa uaminifu ni gumu sana — kwa sababu ukweli mkubwa wenye thamani mara nyingi haupendezi wengi.</p><blockquote>"Ushindani ni wa wafisadi. Kampuni nzuri zaidi ni ile inayoundwa kwa kutenda monopoly ya kweli katika soko lake."</blockquote><p>Thiel anasema kwamba biashara zenye mafanikio kubwa ni zile zinazounda kitu kipya — kutoka sifuri hadi moja (0 hadi 1). Si kuiga kitu kilichopo na kukifanya vizuri zaidi (kutoka 1 hadi N), bali kuunda kitu ambacho hakijawahi kuwepo.</p>`}
+   ]},
 
-  // FAMILIA
-  { id:43, emoji:'👨‍👩‍👧', bg:'linear-gradient(135deg,#2d3a1a,#5a7a2d)', cat:'Familia',           title:'Ndoa Yenye Furaha',        desc:'Siri za kujenga ndoa imara, yenye upendo na heshima ya kudumu.',             hot:true  },
-  { id:44, emoji:'👶', bg:'linear-gradient(135deg,#4a2d1a,#8b5a2d)', cat:'Familia',              title:'Malezi Bora ya Watoto',    desc:'Jinsi ya kumlea mtoto mwenye adabu, ujasiri na akili nzuri.',               hot:false },
-  { id:45, emoji:'💑', bg:'linear-gradient(135deg,#3a1a2d,#7a3a5a)', cat:'Familia',              title:'Upendo wa Kweli',          desc:'Jinsi ya kupata, kulinda na kukuza upendo wa kweli maishani mwako.',         hot:false },
-  { id:46, emoji:'🏠', bg:'linear-gradient(135deg,#1a2d1a,#3a6b3a)', cat:'Familia',              title:'Nyumba ya Amani',          desc:'Mbinu za kutatua migogoro ya familia na kujenga mahusiano madhubuti.',        hot:false },
-  { id:47, emoji:'👴', bg:'linear-gradient(135deg,#2d2d1a,#6b6b3a)', cat:'Familia',              title:'Hekima ya Wazee',          desc:'Mafunzo ya maisha kutoka kwa wazee wa Tanzania — busara ya kizazi.',         hot:true  },
+  {id:10,title:"The 7 Habits of Highly Effective People",author:"Stephen Covey",cat:"selfhelp",emoji:"⭐",color:["#1a5276","#2471a3"],stars:"★★★★★",pages:372,badge:"Maendeleo",
+   chapters:[
+    {title:"Sura 1: Tabia — Msingi wa Mabadiliko",text:`<p class="drop-cap">Kwa zaidi ya miaka 200, fasihi ya mafanikio ya Marekani ilijazwa na mbinu, ujanja, na njia za haraka za kupata mafanikio. Stephen Covey aligundua kwamba hizi mbinu zilikuwa za nje tu — hazikubadilisha mtu ndani. Akarudi kwa msingi: tabia (character).</p><blockquote>"Panda mawazo, vuna matendo. Panda matendo, vuna tabia. Panda tabia, vuna hatma."</blockquote><p>Tabia ya kwanza: <span class="highlight">Kuwa Mwenye Kuchagua (Be Proactive).</span> Mtu mwenye kuchagua anajua kwamba jibu lake kwa hali yoyote ni chaguo lake mwenyewe. Kati ya tukio na jibu lako, kuna nafasi — na katika nafasi hiyo iko uhuru wako na nguvu yako.</p><p>Tabia ya pili: <span class="highlight">Anza ukiwa na Mwisho Akilini (Begin with the End in Mind).</span> Fikiria mwisho wa maisha yako — utakapokuwa na mazishi yako, unataka watu waseme nini kuhusu wewe? Hiyo ndiyo dira yako ya kweli.</p>`}
+   ]},
 
-  // USHAIRI
-  { id:48, emoji:'✍️', bg:'linear-gradient(135deg,#1a0d2d,#3a1a6b)', cat:'Ushairi',              title:'Maneno ya Moyo',           desc:'Diwani ya upendo, huzuni na furaha — mashairi yanayogusa roho.',             hot:false },
-  { id:49, emoji:'🎵', bg:'linear-gradient(135deg,#2d1a00,#5a3a00)', cat:'Ushairi',              title:'Wimbo wa Maisha',          desc:'Ushairi wa kisasa wa Kiswahili unaosema ukweli wa maisha ya leo.',           hot:true  },
-  { id:50, emoji:'🌸', bg:'linear-gradient(135deg,#3a0d1a,#6b1a2d)', cat:'Ushairi',              title:'Maua ya Maneno',           desc:'Mkusanyo wa mashairi mazuri ya Tanzania yanayoinua roho na akili.',          hot:false },
+  // ── SCIENCE ──
+  {id:11,title:"A Brief History of Time",author:"Stephen Hawking",cat:"science",emoji:"🌌",color:["#0d0d2b","#1a1a4e"],stars:"★★★★★",pages:212,badge:"Sayansi",
+   chapters:[
+    {title:"Sura 1: Picha Yetu ya Ulimwengu",text:`<p class="drop-cap">Mtu aliyekaa mbele ya mhadhara wa falsafa na sayansi alisimama ghafla na kusema: "Kile unachosema kuhusu sayari zinazozunguka jua ni upuuzi. Ulimwengu kwa kweli ni bamba kubwa inayobebwa na jembe la kasa." Hadithi hii, iwe ya kweli au la, inaonyesha hali ya kibinadamu — tunapenda nadharia ambazo zinaelewa uzoefu wetu wa kila siku, hata kama ni potofu.</p><blockquote>"Malengo yangu ni rahisi: kuelewa kwa nini ulimwengu una sura hii, na kwa nini unajulikana.</blockquote><p>Hawking anaelezea safari ndefu ya binadamu kuelewa ulimwengu — kutoka Aristotle aliyeamini ardhi iko katikati, hadi Copernicus aliyeonyesha jua ndilo katikati, hadi Newton aliyegundua sheria za mvuto, hadi Einstein aliyebadilisha kila kitu tena.</p><h3>Ujumla wa Nadharia ya Uhusiano</h3><p>Einstein alithibitisha jambo moja la ajabu: muda si sawa kwa kila mtu. Mtu anayesafiri kwa kasi kubwa anapita wakati polepole zaidi kuliko mtu aliyesimama. Hii si nadharia tu — imepimwa na saa za anga ambazo zinapiga polepole kidogo kuliko saa za ardhi.</p>`}
+   ]},
 
-  // BIASHARA & FEDHA (ziada)
-  { id:51, emoji:'🏦', bg:'linear-gradient(135deg,#0d2d1a,#1a6b3a)', cat:'Biashara & Fedha',    title:'Benki Yako Mfukoni',       desc:'Jinsi ya kutumia huduma za benki na simu kufanya biashara ya kisasa.',        hot:true  },
-  { id:52, emoji:'📦', bg:'linear-gradient(135deg,#3a1a00,#7a3a00)', cat:'Biashara & Fedha',    title:'Usafirishaji na Faida',    desc:'Biashara ya usafirishaji na logistics — jinsi ya kuanza na kupata faida.',    hot:false },
-  { id:53, emoji:'🌾', bg:'linear-gradient(135deg,#2d3a00,#5a7a00)', cat:'Biashara & Fedha',    title:'Kilimo Biashara',          desc:'Geuza shamba lako kuwa chanzo cha kipato kikubwa cha kudumu.',               hot:true  },
-  { id:54, emoji:'🧾', bg:'linear-gradient(135deg,#1a2d3a,#2d6b8b)', cat:'Biashara & Fedha',    title:'Hesabu za Biashara',       desc:'Jinsi ya kusimamia vitabu vya hesabu bila kuwa mhasibu.',                    hot:false },
-  { id:55, emoji:'🎪', bg:'linear-gradient(135deg,#3a001a,#8b004a)', cat:'Biashara & Fedha',    title:'Masoko na Uuzaji',         desc:'Mbinu za kisasa za uuzaji zinazofanya bidhaa yako kuuzwa haraka.',            hot:true  },
+  {id:12,title:"Cosmos",author:"Carl Sagan",cat:"science",emoji:"🌠",color:["#000033","#001a66"],stars:"★★★★★",pages:365,badge:"Sayansi",
+   chapters:[
+    {title:"Sura 1: Bahari ya Ulimwengu",text:`<p class="drop-cap">Anga ni kubwa sana. Kama tungefika kwenye nyota ya karibu zaidi, Proxima Centauri, kwa chombo cha haraka zaidi cha wanadamu (Voyager 1), ingechukua miaka 70,000. Lakini anga kubwa kuliko hii — galaksi yetu ina nyota bilioni 300. Na galaksi nyingine ziko trilioni 2 zaidi.</p><blockquote>"Ulimwengu wote sio wa binadamu, lakini binadamu ni sehemu ya ulimwengu. Na hilo linatosha kutuletea furaha na mshangao wa milele."</blockquote><p>Carl Sagan, mwanasayansi mkubwa wa astronomia, anatuletea safari ya ajabu kupitia ulimwengu — kutoka chembe ndogo za atomu hadi galaksi kubwa zaidi zinazoweza kufikirika. Anaonyesha jinsi sayansi inavyounganika na historia, falsafa, na ustawi wa wanadamu.</p><p>Maneno yake maarufu zaidi yanaelezea Dunia yetu: <span class="highlight">"Angalia tena kidoa hicho kilichobaki. Hiyo ni hapa. Hiyo ni nyumbani. Hiyo ni sisi."</span> Maneno hayo, yaliyosemwa kuhusu picha ya Dunia iliyopigwa kutoka mbali, yanabeba ukweli mkubwa wa unyenyekevu wa kibinadamu.</p>`}
+   ]},
 
-  // MAENDELEO BINAFSI (ziada)
-  { id:56, emoji:'🦅', bg:'linear-gradient(135deg,#1a1a2d,#2d2d6b)', cat:'Maendeleo Binafsi',   title:'Ndege wa Mafanikio',       desc:'Fikira za viongozi wakubwa wa dunia zilizobadilisha historia.',              hot:true  },
-  { id:57, emoji:'🔥', bg:'linear-gradient(135deg,#3a1a00,#8b3a00)', cat:'Maendeleo Binafsi',   title:'Moto wa Ndani',            desc:'Jinsi ya kuwasha hamasa na kuiongoza kwenye mafanikio ya kweli.',             hot:false },
-  { id:58, emoji:'🪞', bg:'linear-gradient(135deg,#1e4a4a,#2d8a8a)', cat:'Maendeleo Binafsi',   title:'Jijue Mwenyewe',           desc:'Safari ya kujigundua — nguvu zako, udhaifu wako na hatua zijazo.',           hot:false },
-  { id:59, emoji:'🧩', bg:'linear-gradient(135deg,#2d1a3a,#5a2d7a)', cat:'Maendeleo Binafsi',   title:'Tatua Matatizo Kwa Akili', desc:'Mfumo wa kisayansi wa kutatua changamoto ngumu kwa ubunifu.',                hot:true  },
-  { id:60, emoji:'🤑', bg:'linear-gradient(135deg,#1a3a1a,#3a8b3a)', cat:'Maendeleo Binafsi',   title:'Tabia za Matajiri',        desc:'Tabia 10 za watu wenye utajiri ambao wengi hawajui.',                        hot:true  },
+  {id:13,title:"The Gene: An Intimate History",author:"Siddhartha Mukherjee",cat:"science",emoji:"🧬",color:["#006400","#228b22"],stars:"★★★★★",pages:495,badge:"Sayansi",
+   chapters:[
+    {title:"Sura 1: Siri ya Urithi",text:`<p class="drop-cap">Watoto wanafanana na wazazi wao. Hii ni ukweli wa kawaida sana ambao binadamu amejua kwa maelfu ya miaka. Lakini swali la kweli — kwa nini? Ni nini inabeba taarifa hii kutoka kizazi kimoja hadi kingingine? — lilichukua miaka mamia kujibu.</p><blockquote>"Jenoma ni historia ndefu ya maisha yote — hadithi ambayo iliandikwa kwa miaka bilioni 3.5, hatua moja kwa wakati mmoja."</blockquote><p>Gregor Mendel, mtawa wa Uaustria, alikuwa wa kwanza kugundua kanuni za urithi — akipanda maua ya mbaazi katika bustani ya monasteri yake na kuhesabu idadi ya mbaazi nyekundu na nyeupe. Kazi yake, iliyofanywa katika giza la historia, ilifunua siri kubwa zaidi ya maisha.</p><p>Siddhartha Mukherjee anatuongoza kupitia safari ndefu — kutoka Mendel hadi Watson na Crick waliogundu muundo wa DNA, hadi siku za leo ambapo tunaweza kuhariri jeni za wanadamu kwa usahihi wa ajabu.</p>`}
+   ]},
 
-  // DINI & IMANI (ziada)
-  { id:61, emoji:'📖', bg:'linear-gradient(135deg,#1a2d1a,#2d6b2d)', cat:'Dini & Imani',        title:'Quran na Maisha ya Leo',   desc:'Jinsi mafunzo ya Quran yanavyojibu changamoto za maisha ya kisasa.',         hot:true  },
-  { id:62, emoji:'✝️', bg:'linear-gradient(135deg,#2d1a1a,#6b2d2d)', cat:'Dini & Imani',        title:'Injili na Mabadiliko',     desc:'Ujumbe wa Injili unaobadilisha maisha ya watu wa leo.',                      hot:false },
-  { id:63, emoji:'🌿', bg:'linear-gradient(135deg,#1a3a2d,#2d8b6b)', cat:'Dini & Imani',        title:'Shukrani na Baraka',       desc:'Nguvu ya shukrani na jinsi inavyovutia baraka nyingi maishani.',             hot:false },
-  { id:64, emoji:'🕯️', bg:'linear-gradient(135deg,#2d2d00,#6b6b00)', cat:'Dini & Imani',        title:'Mwanga wa Gizani',         desc:'Hadithi za imani zilizosaidia watu kupita majaribu makubwa maishani.',        hot:true  },
+  {id:14,title:"Sapiens: Historia Fupi ya Wanadamu",author:"Yuval Noah Harari",cat:"history",emoji:"🦴",color:["#4a0e8f","#7b1fa2"],stars:"★★★★★",pages:443,badge:"Historia",
+   chapters:[
+    {title:"Sura 1: Mnyama Asiye na Umuhimu",text:`<p class="drop-cap">Miaka 100,000 iliyopita, angalau aina sita za wanadamu waliishi duniani. Kwa nini aina moja tu — Homo sapiens — ilinusurika na kutawala sayari? Hii ni swali ambalo Yuval Noah Harari anajibu kwa njia ya kupendeza na inayochochea fikira.</p><blockquote>"Homo sapiens alitawala dunia si kwa nguvu, wala si kwa akili peke yake — bali kwa uwezo wa kipekee wa kushirikiana kwa idadi kubwa ya watu wasio na uhusiano wa familia, kupitia hadithi za pamoja."</blockquote><p>Harari anasema mapinduzi makubwa matatu yaliyounda historia ya wanadamu: Mapinduzi ya Utambuzi (Cognitive Revolution) miaka 70,000 iliyopita, Mapinduzi ya Kilimo miaka 10,000 iliyopita, na Mapinduzi ya Kisayansi miaka 500 iliyopita.</p><p>Mapinduzi ya Utambuzi — uwezo wa kuzungumza juu ya mambo yasiyopo — ndiyo iliyofanya Homo sapiens kuwa tofauti. Tunaweza kuzungumza kuhusu miungu, mataifa, pesa, haki za binadamu — mambo ambayo hayapo kimwili lakini yanaongoza matendo yetu.</p>`},
+    {title:"Sura 2: Mapinduzi ya Kilimo — Laana au Baraka?",text:`<p class="drop-cap">Kwa muda mrefu, historia ya wanadamu ilikuwa hadithi ya maendeleo — kutoka uwindaji hadi kilimo, kutoka vijiji hadi miji, kutoka upanga hadi silaha za kisasa. Harari anapinga hekima hii.</p><blockquote>"Historia ya kilimo inaweza kusomwa kama hadithi ya udanganyifu mkubwa zaidi — si binadamu walioifuga ngano, bali ngano iliofuga binadamu."</blockquote><p>Kabla ya kilimo, mwindaji-mkusanyaji alifanya kazi masaa 3-5 kwa siku na kupumzika sana. Alikuwa na lishe bora — aina nyingi za mboga, matunda, na nyama. Alikuwa huru — asiyefungwa mahali pamoja.</p><p>Kilimo kilisababisha mtu kukaa mahali pamoja, kufanya kazi masaa mengi zaidi, kula aina moja ya chakula (ngano, mchele), na kuishi katika msongamano wa watu unaosababisha magonjwa. Kwa namna fulani, kilimo kilisababisha hali mbaya zaidi kwa watu wengi — hata kama kilisababisha idadi kubwa ya watu.</p>`}
+   ]},
 
-  // AFYA & LISHE (ziada)
-  { id:65, emoji:'🫀', bg:'linear-gradient(135deg,#4a001a,#8b003a)', cat:'Afya & Lishe',        title:'Moyo Wako ni Hazina',      desc:'Jinsi ya kulinda moyo wako dhidi ya magonjwa ya kisasa.',                    hot:true  },
-  { id:66, emoji:'🧃', bg:'linear-gradient(135deg,#1a4a00,#3a8b00)', cat:'Afya & Lishe',        title:'Juisi za Uponyaji',        desc:'Matunda na mboga za Afrika zinazotibu na kuimarisha mwili wako.',             hot:false },
-  { id:67, emoji:'🧬', bg:'linear-gradient(135deg,#00002d,#00006b)', cat:'Afya & Lishe',        title:'Jeni na Afya Yako',        desc:'Jinsi DNA yako inavyoathiri afya na hatua za kujilinda.',                    hot:false },
-  { id:68, emoji:'🌿', bg:'linear-gradient(135deg,#003a1a,#006b3a)', cat:'Afya & Lishe',        title:'Dawa za Mitishamba',       desc:'Mimea ya Tanzania inayotibu magonjwa — mwongozo kamili wa dawa asilia.',     hot:true  },
+  {id:15,title:"Homo Deus: Mustakabali wa Wanadamu",author:"Yuval Noah Harari",cat:"science",emoji:"🤖",color:["#1a0533","#4a0e8f"],stars:"★★★★★",pages:450,badge:"Sayansi",
+   chapters:[
+    {title:"Sura 1: Ajenda Mpya ya Wanadamu",text:`<p class="drop-cap">Kwa maelfu ya miaka, magonjwa, vita, na njaa vilikuwa vitisho vikubwa vya ubinadamu. Leo, kwa mara ya kwanza katika historia, watu wengi wanakufa kwa unene kupita kiasi kuliko kwa njaa. Watu wengi wanakufa kwa uzee kuliko kwa magonjwa ya kuambukiza. Silaha za kisasa zinauwa watu wachache kuliko silaha za zamani.</p><blockquote>"Baada ya miaka elfu ya kupigana na magonjwa, njaa, na vita — binadamu sasa ameweza kuyashinda. Na swali jipya linaingia: sasa tunafanya nini?"</blockquote><p>Harari anasema kwamba ajenda mpya ya wanadamu ni kitu kikubwa zaidi: kutokufa, furaha ya milele, na nguvu ya miungu. Teknolojia ya kisasa inafungua milango ambayo haikuwahi kufunguka — kuhack ubongo wa binadamu, kuunda akili ya bandia inayozidi akili ya mwanadamu, na labda hata kushinda kifo.</p>`}
+   ]},
 
-  // TEKNOLOJIA (ziada)
-  { id:69, emoji:'🌐', bg:'linear-gradient(135deg,#001a3a,#003a7a)', cat:'Teknolojia',           title:'Mtandao wa Pesa',          desc:'Cryptocurrency, Bitcoin na fedha za dijitali — mwongozo wa Mtanzania.',      hot:true  },
-  { id:70, emoji:'🎮', bg:'linear-gradient(135deg,#1a001a,#3a003a)', cat:'Teknolojia',           title:'Michezo na Kipato',        desc:'Jinsi ya kupata kipato kupitia michezo ya video na eSports.',               hot:false },
-  { id:71, emoji:'📡', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Teknolojia',           title:'IoT na Kilimo Bora',       desc:'Teknolojia ya kisasa inayobadilisha kilimo cha Tanzania.',                   hot:false },
-  { id:72, emoji:'🖥️', bg:'linear-gradient(135deg,#1a1a00,#3a3a00)', cat:'Teknolojia',           title:'Freelancing Mtandaoni',    desc:'Pata kazi za kimataifa mtandaoni na kulipwa dola bila kuacha nyumbani.',     hot:true  },
+  // ── PHILOSOPHY ──
+  {id:16,title:"Meditations",author:"Marcus Aurelius",cat:"philosophy",emoji:"🏛️",color:["#704214","#a0522d"],stars:"★★★★★",pages:254,badge:"Falsafa",
+   chapters:[
+    {title:"Sura 1: Mwanzoni — Shukrani",text:`<p class="drop-cap">Kutoka kwa babu yangu Verus nilijifunza utunzani wa mwenendo wa kibinadamu na udhibiti wa hasira. Kutoka kwa sifa za baba yangu wa asili nilijifunza heshima na utulivu. Kutoka kwa mama yangu nilijifunza uchaji wa Mungu na ukarimu — na si tu kujizuia kutenda mabaya, bali hata kutokuwasiliana na watu wabaya.</p><blockquote>"Hujui jinsi maisha mafupi yanavyo. Usipoteze wakati wa leo kwa mambo yasiyohusika."</blockquote><p>Marcus Aurelius alikuwa mfalme wa Dola la Roma — mtu mwenye nguvu kubwa zaidi duniani wakati wake. Lakini alikuwa pia mwanafalsafa — mtu aliyepigana kila siku dhidi ya hewa za nguvu, starehe, na majivuno. Daftari lake la kibinafsi — lililoandikwa kwa Kigiriki, bila nia ya kuchapishwa — ni dhahabu ya kweli ya falsafa ya binadamu.</p><p>Stoicism — falsafa aliyofuata — inafundisha kwamba furaha ya kweli inakuja si kutoka kwa mambo ya nje (utajiri, sifa, starehe) bali kutoka ndani — kutoka kwa jinsi unavyofikiria na unavyochagua.</p>`},
+    {title:"Sura 2: Usiku wa Leo ni wa Leo",text:`<p class="drop-cap">Usiseme "Kesho nitafanya hivi." Sema "Leo nitafanya hivi." Maisha ni mfululizo wa sasa hivi — na sasa hivi ndiyo pekee uliyo nalo. Siku ya kesho inaweza kuja au kutokuja. Masaa ya jana yamekwisha.</p><blockquote>"Usiruhusu mambo ya nje kushinda akili yako. Kwa kujifunza kutofanya hivyo, utapata utulivu wa kweli."</blockquote><p>Falsafa ya Marcus Aurelius inabaki hai leo — kwa sababu shida za kibinadamu hazijaisha. Bado tunashindwa kuzuia hasira. Bado tunahofu kifo. Bado tunaweza kusahau kuwa maisha ni mafupi. Maneno yake yanakukumbusha, yanakupiga pole, na yanakufundisha — kama mwalimu mkubwa anayeongea nawe directly, usiku wa manane.</p>`}
+   ]},
 
-  // HISTORIA (ziada)
-  { id:73, emoji:'👑', bg:'linear-gradient(135deg,#3a2d00,#8b6a00)', cat:'Historia',             title:'Wafalme wa Afrika',        desc:'Hadithi za wafalme wakubwa wa Afrika — utajiri, nguvu na hekima yao.',       hot:true  },
-  { id:74, emoji:'🚢', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Historia',             title:'Biashara ya Bahari Hindi', desc:'Historia ya biashara kati ya Afrika Mashariki na Asia — karne za nyuma.',    hot:false },
-  { id:75, emoji:'🏔️', bg:'linear-gradient(135deg,#1a1a1a,#3a3a3a)', cat:'Historia',             title:'Kilimanjaro — Hadithi',    desc:'Historia, utamaduni na hadithi za watu wanaoishi pembezoni mwa Kilimanjaro.', hot:false },
-  { id:76, emoji:'✊', bg:'linear-gradient(135deg,#1a0000,#3a0000)', cat:'Historia',             title:'Mapinduzi ya Zanzibar',    desc:'Hadithi kamili ya mapinduzi ya 1964 na athari yake kwa Tanzania ya leo.',    hot:true  },
+  {id:17,title:"The Republic",author:"Plato",cat:"philosophy",emoji:"⚖️",color:["#2c1810","#5d3a1a"],stars:"★★★★★",pages:416,badge:"Falsafa",
+   chapters:[
+    {title:"Sura 1: Haki ni Nini?",text:`<p class="drop-cap">Mazungumzo ya Plato yanaanza kwa swali rahisi linaloonekana: haki ni nini? Thrasymachus, mtu mwenye nguvu ya maneno, anajibu haraka: "Haki ni faida ya mwenye nguvu." Socrates — mwalimu wa Plato — anaanza kupinga polepole, kwa maswali tu, mpaka Thrasymachus anapoteza hoja yake moja kwa moja.</p><blockquote>"Ufafanuzi wa dola bora si dola yenye utajiri mkubwa, bali dola ambayo raia wake ni watu wazuri."</blockquote><p>Plato kupitia Socrates anasema kwamba haki ya kweli si kufanya lolote unalotaka — bali ni hali ya usawa ndani ya nafsi. Kama vile mwili una afya wakati viungo vyake vya ndani vinavyofanya kazi zake sawasawa, nafsi ina haki wakati sehemu zake — akili, moyo, na tamaa — zinavyofanya kazi katika usawa.</p>`}
+   ]},
 
-  // ELIMU (ziada)
-  { id:77, emoji:'🏫', bg:'linear-gradient(135deg,#00002d,#00006b)', cat:'Elimu',                title:'Shule ya Biashara',        desc:'Elimu ya MBA kwa lugha rahisi — bila kulipa ada za chuo kikuu.',             hot:true  },
-  { id:78, emoji:'📝', bg:'linear-gradient(135deg,#1a2d00,#3a6b00)', cat:'Elimu',                title:'Jinsi ya Kuandika Vizuri', desc:'Sanaa ya uandishi bora wa insha, ripoti na barua za kitaaluma.',             hot:false },
-  { id:79, emoji:'🎨', bg:'linear-gradient(135deg,#2d001a,#6b003a)', cat:'Elimu',                title:'Sanaa na Ubunifu',         desc:'Gundua kipaji chako cha sanaa na ukigeuze kuwa chanzo cha kipato.',           hot:false },
-  { id:80, emoji:'🔭', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Elimu',                title:'Astronomia ya Afrika',     desc:'Nyota, sayari na historia ya uchunguzi wa anga kutoka mtazamo wa Afrika.',   hot:true  },
+  {id:18,title:"Man's Search for Meaning",author:"Viktor Frankl",cat:"philosophy",emoji:"✡️",color:["#1c2833","#34495e"],stars:"★★★★★",pages:165,badge:"Falsafa",
+   chapters:[
+    {title:"Sura 1: Maisha katika Kambi",text:`<p class="drop-cap">Viktor Frankl alikuwa daktari wa akili wa Kiyahudi kutoka Vienna aliyepelekwa kambi za mateso za Nazi — Auschwitz na Dachau. Alipoteza mke wake, mama yake, na kaka yake. Alipitia mambo ya ukatili mkubwa ambayo binadamu yeyote asiyeyapitia hawezi kuyaelewa kikamilifu.</p><p>Lakini katika giza hilo kubwa, Frankl aligundua ukweli wa kina sana: <span class="highlight">Kila kitu kinaweza kuchukuliwa kutoka kwa mtu — isipokuwa kitu kimoja: uhuru wa mwisho wa kibinadamu — kuchagua mtazamo wako katika hali yoyote, kuchagua njia yako katika hali yoyote.</span></p><blockquote>"Anayejua 'kwa nini' anaishi anaweza kuvumilia 'jinsi gani' yoyote."</blockquote><p>Wafungwa waliokuwa na maana ya maisha — kama kumalizia kazi muhimu, au kuona mtoto wao tena — walinusurika vizuri zaidi kuliko wale waliopoteza maana yoyote. Si nguvu ya mwili, si bahati — bali maana. Maana iliyobeba nafsi hata wakati mwili ulikuwa unakufa polepole.</p>`}
+   ]},
 
-  // HADITHI (ziada)
-  { id:81, emoji:'🏙️', bg:'linear-gradient(135deg,#1a1a2d,#3a3a6b)', cat:'Hadithi',              title:'Dar es Salaam Usiku',      desc:'Riwaya ya kusisimua iliyopita katika mitaa ya Dar es Salaam — siri na hatari.', hot:true },
-  { id:82, emoji:'🌴', bg:'linear-gradient(135deg,#003a00,#007a00)', cat:'Hadithi',              title:'Paradiso ya Kaskazini',    desc:'Safari ya mapenzi na uvumbuzi katika visiwa vya Zanzibar.',                  hot:false },
-  { id:83, emoji:'🐘', bg:'linear-gradient(135deg,#2d2d00,#6b6b00)', cat:'Hadithi',              title:'Tembo wa Mwisho',          desc:'Hadithi ya mazingira — mapambano ya mtu mmoja kulinda tembo wa mwisho.',      hot:false },
-  { id:84, emoji:'👻', bg:'linear-gradient(135deg,#1a001a,#3a003a)', cat:'Hadithi',              title:'Pepo wa Pemba',            desc:'Hadithi ya kutisha ya kijiji kidogo cha Pemba — siri za kizazi.',             hot:true  },
-  { id:85, emoji:'🌅', bg:'linear-gradient(135deg,#3a1a00,#8b3a00)', cat:'Hadithi',              title:'Alfajiri ya Mpya',         desc:'Msichana wa vijijini anayetafuta ndoto zake mjini Dar es Salaam.',            hot:false },
+  // ── HISTORY ──
+  {id:19,title:"Guns, Germs, and Steel",author:"Jared Diamond",cat:"history",emoji:"⚔️",color:["#4a1942","#7b1a7b"],stars:"★★★★★",pages:480,badge:"Historia",
+   chapters:[
+    {title:"Sura 1: Swali la Yali",text:`<p class="drop-cap">Mwaka 1972, Jared Diamond alikuwa akitembea pwani ya New Guinea na rafiki wake, Yali, kiongozi wa kisiasa wa Papua New Guinea. Yali alingemuuliza swali ambalo lilibaki akilini mwa Diamond kwa miaka 25: "Kwa nini wewe mzungu una vitu vingi zaidi kuliko sisi watu weusi? Na kwa nini tulishindwa kuunda vitu vitu hivyo wenyewe?"</p><blockquote>"Kwa nini watu wa bara moja walitawala wengine? Jibu si genetics — ni jiografia."</blockquote><p>Diamond anasema jibu si rangi, si akili, si tabia ya kibinadamu — bali ni jiografia. Mabara fulani yalipata faida za kijiografia ambazo mabara mengine hayakupata — mimea inayofaa kilimo, wanyama wanaofaa kufilisi, na njia za mawasiliano ambazo zilisaidia kueneza uvumbuzi.</p>`}
+   ]},
 
-  // FAMILIA (ziada)
-  { id:86, emoji:'👩‍👦', bg:'linear-gradient(135deg,#3a001a,#7a003a)', cat:'Familia',             title:'Mama Shujaa',              desc:'Nguvu ya mama — hadithi za ajabu na mwongozo wa mama wa kisasa.',             hot:true  },
-  { id:87, emoji:'👨‍👧', bg:'linear-gradient(135deg,#001a3a,#003a7a)', cat:'Familia',             title:'Baba wa Kweli',            desc:'Jukumu la baba katika familia ya Afrika ya kisasa.',                         hot:false },
-  { id:88, emoji:'💔', bg:'linear-gradient(135deg,#2d001a,#6b003a)', cat:'Familia',              title:'Baada ya Talaka',          desc:'Jinsi ya kupona, kusimama na kuanza upya baada ya ndoa kuvunjika.',          hot:false },
-  { id:89, emoji:'🧒', bg:'linear-gradient(135deg,#1a2d1a,#3a6b3a)', cat:'Familia',              title:'Vijana wa Leo',            desc:'Jinsi ya kuwaelewa na kuwaongoza vijana wa kizazi cha intaneti.',             hot:true  },
+  {id:20,title:"The Art of War",author:"Sun Tzu",cat:"philosophy",emoji:"🏹",color:["#8B0000","#722f37"],stars:"★★★★★",pages:112,badge:"Falsafa",
+   chapters:[
+    {title:"Sura 1: Mipango ya Vita",text:`<p class="drop-cap">Vita ni njia ya serikali. Ni suala la maisha au kifo, njia ya kuokoka au kupoteza. Kwa hivyo lazima uchunguzwe kwa makini sana. Mtu ambaye anaingia vitani bila kupanga na bila kuelewa hali — atashindwa. Jiografia, hali ya hewa, rasilimali, nguvu za adui — vyote lazima vichunguzwe.</p><blockquote>"Mpiganaji bora ni yule ambaye anapigana na kumaliza kabla ya vita kuanza."</blockquote><p>Sun Tzu anaandika kuhusu vita za kimwili, lakini mafundisho yake yanaelekea zaidi — yanazungumza kuhusu ushindani wa aina yoyote. Leo, kitabu hiki kinasomwa na wafanyabiashara, wanasiasa, wakoaches wa michezo, na wengineo — si kwa vita, bali kwa kanuni za mkakati ambazo zina nguvu milele.</p><h3>Kujua Mwenyewe, Kujua Adui</h3><p>Maneno maarufu zaidi ya Sun Tzu: "Kama unajua adui yako na kujua nafsi yako, hatuwezi kushindwa katika vita mia moja. Kama hujui adui wako lakini unajua nafsi yako, utashinda mara moja na kushindwa mara moja. Kama hujui adui wako wala nafsi yako, utashindwa kila wakati."</p>`}
+   ]},
 
-  // USHAIRI (ziada)
-  { id:90, emoji:'🌙', bg:'linear-gradient(135deg,#1a001a,#3a003a)', cat:'Ushairi',              title:'Usiku wa Mashairi',        desc:'Diwani ya usiku — mashairi ya upweke, fikira na ndoto za alfajiri.',          hot:false },
-  { id:91, emoji:'⚡', bg:'linear-gradient(135deg,#1a1a00,#3a3a00)', cat:'Ushairi',              title:'Mashairi ya Mapinduzi',    desc:'Ushairi wa kisiasa na kijamii unaosema ukweli uliofichwa.',                  hot:true  },
+  // More books continue...
+  {id:21,title:"The Power of Now",author:"Eckhart Tolle",cat:"philosophy",emoji:"☯️",color:["#1a4a1a","#2e7d32"],stars:"★★★★★",pages:229,badge:"Falsafa",
+   chapters:[{title:"Sura 1: Wewe si Akili Yako",text:`<p class="drop-cap">Ukweli mkubwa ambao Eckhart Tolle alifundisha mamilioni ya watu ni huu: wewe si mawazo yako. Mawazo yanakuja na kwenda — lakini kuna kitu ndani yako kinachoyaangalia, kinachoyaona, kinachoyajua. Hicho ndicho wewe wa kweli.</p><blockquote>"Wakati pekee ulipo ni sasa hivi. Wakati mwingine ni mawazo tu."</blockquote><p>Watu wengi wanaishi katika wakati uliopita (majuto, hasira, huzuni) au wakati ujao (hofu, wasiwasi, ndoto). Wachache wanaishi katika sasa hivi — ambayo ndiyo pekee ipo. Tolle anafundisha jinsi ya kurudi kwenye sasa kila wakati — si kwa nguvu, bali kwa uangalifu (awareness).</p>`}]},
 
-  // MAZINGIRA
-  { id:92, emoji:'🌳', bg:'linear-gradient(135deg,#002d00,#005a00)', cat:'Mazingira',            title:'Hifadhi Dunia Yetu',       desc:'Jinsi Watanzania wanavyoweza kulinda mazingira na kupata faida.',             hot:false },
-  { id:93, emoji:'💧', bg:'linear-gradient(135deg,#001a2d,#003a6b)', cat:'Mazingira',            title:'Maji ni Uhai',             desc:'Tatizo la maji Tanzania na suluhisho zinazoweza kutekelezwa sasa.',           hot:true  },
-  { id:94, emoji:'☀️', bg:'linear-gradient(135deg,#2d1a00,#6b3a00)', cat:'Mazingira',            title:'Nishati ya Jua',           desc:'Jinsi ya kutumia nishati ya jua nyumbani na kuokoa pesa nyingi.',             hot:false },
+  {id:22,title:"Quiet: Nguvu ya Watulivu",author:"Susan Cain",cat:"selfhelp",emoji:"🤫",color:["#1a237e","#283593"],stars:"★★★★★",pages:333,badge:"Maendeleo",
+   chapters:[{title:"Sura 1: Ulimwengu wa Watulivu",text:`<p class="drop-cap">Tunayaishi katika ulimwengu unaopenda watu wa kelele — wa kujitangaza, wa kuweza kuzungumza mbele ya watu, wa kujiamini hadharani. Lakini asilimia thelathini hadi hamsini ya watu wote wana tabia ya utulivu (introversion) — na hii si udhaifu, bali nguvu ya kipekee.</p><blockquote>"Introvert si watu wa aibu — ni watu wanaopata nguvu zao kutoka ndani, si kutoka kwa wengine."</blockquote><p>Susan Cain anaonyesha jinsi ulimwengu wa leo unavyowakandamiza watulivu — mashule yanayofundisha kwa vikundi vikubwa, ofisi za wazi, mikutano ya kelele. Lakini utafiti unaonyesha kwamba wabunifu wengi wakubwa — Newton, Darwin, Einstein, Chopin — walikuwa watulivu. Nguvu ya utulivu ni nguvu ya kufikiria kwa kina, kutafakari, na kufanya kazi peke yako bila kutafuta sifa.</p>`}]},
 
-  // MICHEZO
-  { id:95, emoji:'⚽', bg:'linear-gradient(135deg,#003a1a,#007a3a)', cat:'Michezo',              title:'Soka na Maisha',           desc:'Masomo ya maisha kutoka uwanjani — nidhamu, timu na ushindi.',               hot:true  },
-  { id:96, emoji:'🏋️', bg:'linear-gradient(135deg,#1a1a1a,#4a4a4a)', cat:'Michezo',              title:'Nguvu ya Mwili',           desc:'Mpango kamili wa mazoezi ya nguvu kwa wanaume na wanawake.',                 hot:false },
-  { id:97, emoji:'🧗', bg:'linear-gradient(135deg,#2d1a00,#5a3a00)', cat:'Michezo',              title:'Ushindi wa Akili',         desc:'Jinsi michezo inavyofundisha mafanikio ya biashara na maisha.',              hot:false },
+  {id:23,title:"Educated",author:"Tara Westover",cat:"biography",emoji:"📚",color:["#2d4a22","#3d6b2d"],stars:"★★★★★",pages:352,badge:"Wasifu",
+   chapters:[{title:"Sura 1: Mlima wa Asili",text:`<p class="drop-cap">Nilikua kwenye mlima wa Idaho, katika nyumba isiyokuwa na umeme wa kudumu, bila shule ya kawaida, bila daktari — katika familia ambayo iliamini kwamba serikali na dawa za kisasa ni sumu. Baba yangu alikuwa mtu wa nguvu, na maoni yake yalikuwa sheria.</p><blockquote>"Elimu si kujaza akili yako — ni kujifunza kufikiri."</blockquote><p>Nilijifunza kusoma kidogo — lakini zaidi ya hiyo, nilifanya kazi shambani na katika shkataye la baba yangu. Miaka yangu ya utoto haikuwa ya kawaida — na wakati rafiki zangu wa jijini walikuwa shuleni, mimi nilikuwa nikivuta chuma na kusaidia kuchinja wanyama.</p><p>Lakini ndani yangu kulikuwa na kitu kidogo — kiu ya kujua zaidi. Hiyo kiu ilinikufikisha Cambridge, kisha Oxford, kisha shahada ya uzamivu. Hadithi hii ni hadithi yangu ya ukombozi kupitia elimu.</p>`}]},
 
-  // SANAA & UTAMADUNI
-  { id:98, emoji:'🎭', bg:'linear-gradient(135deg,#1a003a,#3a007a)', cat:'Sanaa & Utamaduni',    title:'Ngoma za Tanzania',        desc:'Historia na maana ya ngoma za makabila mbalimbali ya Tanzania.',             hot:true  },
-  { id:99, emoji:'🍲', bg:'linear-gradient(135deg,#3a1a00,#7a3a00)', cat:'Sanaa & Utamaduni',    title:'Mapishi ya Bibi',          desc:'Mapishi 100 ya vyakula vya Tanzania kutoka kanda zote — ladha ya asili.',    hot:true  },
-  { id:100,emoji:'🎨', bg:'linear-gradient(135deg,#2d002d,#6b006b)', cat:'Sanaa & Utamaduni',    title:'Uchoraji wa Tingatinga',   desc:'Historia ya sanaa ya Tingatinga na jinsi ya kujifunza mtindo huu wa kipekee.', hot:false},
+  {id:24,title:"The Diary of a Young Girl",author:"Anne Frank",cat:"history",emoji:"✍️",color:["#3e2723","#4e342e"],stars:"★★★★★",pages:283,badge:"Historia",
+   chapters:[{title:"Sura 1: Tarehe 12 Juni 1942",text:`<p class="drop-cap">Natumaini nitaweza kukuambia kila kitu ambacho daftari hili haliwezi kueleza, na pia nitawe rafiki yangu wa karibu. Nitakuita Kitty. Ingawa sina mtu wa kweli wa kuniambia kila kitu, natumaini daftari hili litakuwa ndiye.</p><blockquote>"Licha ya kila kitu, bado ninaamini kwamba watu ni wazuri kwa moyo."</blockquote><p>Anne Frank alikuwa msichana wa miaka 13 wa Kiyahudi aliyeficha na familia yake katika chumba cha siri nyuma ya ofisi ya baba yake Amsterdam kwa miaka miwili, wakati Ujerumani wa Nazi ulipotawala Holland. Daftari lake la kibinafsi, lililookoka baada ya vita, limesomwa na watu mamia ya mamilioni na limebadilisha mioyo ya watu duniani kote.</p>`}]},
+
+  {id:25,title:"Long Walk to Freedom",author:"Nelson Mandela",cat:"biography",emoji:"🌍",color:["#006400","#004d00"],stars:"★★★★★",pages:558,badge:"Wasifu",
+   chapters:[{title:"Sura 1: Mapambano Yaendelea",text:`<p class="drop-cap">Nilipotoka gerezani, nilikuwa na furaha ya kuona jua tena — lakini pia nilikuwa na wasiwasi. Nilijua kwamba mapambano hayajakwisha. Miaka 27 gerezani haikusimamisha ndoto yangu — iliinzidisha.</p><blockquote>"Mapambano ni maisha yangu. Sitaacha kupigana kwa uhuru wa watu wangu maisha yote yangu.</blockquote><p>Baada ya kutoka gerezani, safari yangu mpya ilianza — mzungumzaji wa amani, mshirikiano na Frederik de Klerk, kura za kwanza za wote nchini Afrika Kusini, na Urais. Nilikuwa tayari kupigana vita vya amani — na vita hivi vilikuwa vigumu zaidi kuliko vita vyovyote vya silaha.</p>`}]},
+
+  {id:26,title:"The Alchemist",author:"Paulo Coelho",cat:"fiction",emoji:"⚗️",color:["#c8960c","#d4a017"],stars:"★★★★★",pages:208,badge:"Hadithi",
+   chapters:[
+    {title:"Sura 1: Ndoto ya Mchungaji",text:`<p class="drop-cap">Mvulana aliyeitwa Santiago alikuwa mchungaji wa kondoo katika milima ya Andalusia, Hispania. Kila usiku, alilala pamoja na kondoo wake akiangalia nyota — na moyo wake ulikuwa ukimwambia kwamba kuna kitu zaidi ya maisha haya.</p><blockquote>"Unapotaka kitu kwa moyo wako wote, ulimwengu wote unashirikiana kukusaidia kukifikia."</blockquote><p>Alikuwa na ndoto mara mbili — ya hazina iliyofichwa kwenye piramidi za Misri. Mzee mmoja — aliyedai kuwa mfalme wa Salem — alimwambia: "Ndoto yako ndiyo hatma yako ya kibinafsi (Personal Legend). Watu wengi wanazikata ndoto zao mapema — wanapoona kwamba njia ni ngumu."</p><p>Santiago akauza kondoo wake, akasafiri Afrika, akapoteza pesa zake, akafanya kazi miaka miwili dukani, akajifunza lugha ya dunia — lugha ya ishara na maana zilizofichwa katika kila kitu. Na safari yake ilimfundisha zaidi kuliko makao yake yoyote.</p>`},
+    {title:"Sura 2: Lugha ya Ulimwengu",text:`<p class="drop-cap">Katika safari yake kupitia jangwa la Sahara, Santiago alikutana na msomaji wa kadhi (alchemist) aliyemfundisha siri kubwa zaidi: roho ya ulimwengu. Kila kitu duniani kina nafsi moja — watu, mimea, mawe, upepo. Na nafsi hiyo inazungumza lugha moja — lugha ambayo moyo wa mtu anayesikiliza anaweza kuelewa.</p><blockquote>"Kila siku, hekima za dunia zinapatikana kwa watu wanaotaka kuzisikia. Tatizo ni kwamba wachache wanasikiliza."</blockquote><p>Alchemist alimwambia Santiago: "Siri ya furaha duniani ni kutazama miujiza yote ya ulimwengu, na bado kujua ndani ya bilauri yako kuna matone mawili ya mafuta."</p>`}
+   ]},
+
+  {id:27,title:"To Kill a Mockingbird",author:"Harper Lee",cat:"fiction",emoji:"🐦",color:["#8B4513","#A0522D"],stars:"★★★★★",pages:281,badge:"Hadithi",
+   chapters:[{title:"Sura 1: Maycomb",text:`<p class="drop-cap">Maycomb ilikuwa mji wa zamani, mwenye tabia ya utulivu wa masikini. Watu walikuwa mzigo kwao wenyewe — walikuwa wamechoka, hawakuwa na shughuli nyingine isipokuwa kuishi. Baba yangu, Atticus Finch, alikuwa wakili, na tulipenda kuishi vizuri hata tukiwa maskini.</p><blockquote>"Huwezi kuelewa mtu hadi umejaribu kuingia katika ngozi yake na kutembea."</blockquote><p>Hadithi inayosimuliwa na Jean Louise "Scout" Finch, mtoto wa miaka sita, ni hadithi ya haki, ubaguzi, na ujasiri. Atticus, baba yake, anachukua kesi ya Tom Robinson — mwanaAmerika Mweusi aliyeshtakiwa kwa uhalifu ambao hakufanya — mbele ya mahakama ya kusini ambapo haki ya kweli haikuwepo kwa watu weusi.</p>`}]},
+
+  {id:28,title:"1984",author:"George Orwell",cat:"fiction",emoji:"👁️",color:["#1a1a1a","#333333"],stars:"★★★★★",pages:328,badge:"Hadithi",
+   chapters:[{title:"Sura 1: Ilikuwa Siku Nzuri ya Baridi ya Aprili",text:`<p class="drop-cap">Ilikuwa siku nzuri ya baridi ya Aprili, na saa zilikuwa zikipiga kumi na tatu. Winston Smith, akijificha kutoka upepo mkali, alipita haraka kwenye mlango wa kioo wa Nyumba ya Ushindi — ingawa si haraka ya kutosha kuzuia lundo la vumbi na mchanga kuingia pamoja naye.</p><blockquote>"Vita ni Amani. Uhuru ni Utumwa. Ujinga ni Nguvu."</blockquote><p>Orwell aliandika riwaya hii mwaka 1948 — nambari kubadilishwa — kama onyo la ulimwengu wa siku zijazo ambapo serikali inadhibiti kila kitu — hata mawazo ya watu. Big Brother anaangalia kila mahali. Lugha imebadilishwa ili watu wasiweze hata kufikiri dhidi ya serikali.</p><p>Riwaya hii, iliyoandikwa miaka 76 iliyopita, inazungumza kwa nguvu leo zaidi — wakati wa udhibiti wa data, propaganda ya mtandaoni, na serikali zinazozidi nguvu zao.</p>`}]},
+
+  {id:29,title:"Pride and Prejudice",author:"Jane Austen",cat:"fiction",emoji:"💌",color:["#8B3a62","#C2185B"],stars:"★★★★★",pages:432,badge:"Hadithi",
+   chapters:[{title:"Sura 1: Ukweli Unaokubaliwa",text:`<p class="drop-cap">Ni ukweli unaokubaliwa na kila mtu kwamba mtu wa hali nzuri na mali nyingi lazima atafuta mke. Ukweli huu, ingawa si dhahiri katika mawazo ya mtu huyo, unaenea haraka katika familia ya jirani ilipokuwa anaingia katika mtaa wowote mpya.</p><blockquote>"Nimejifunza kuwa busara si kumwepuka mtu unayempenda, bali kujifunza kumpenda kwa akili na moyo pamoja."</blockquote><p>Elizabeth Bennet ni shujaa wa aina ya pekee — mwanamke mwenye akili, mwenye uthabiti, asiyekubali kubaki katika mipaka ambayo jamii la karne ya 19 lilimwekea wanawake. Anapokutana na Mr. Darcy — tajiri, mrembo, lakini mwenye kiburi — mizozo yao ya akili na moyo inakua polepole kuwa upendo wa kweli.</p>`}]},
+
+  {id:30,title:"The Great Gatsby",author:"F. Scott Fitzgerald",cat:"fiction",emoji:"🥂",color:["#0d3b6e","#1565c0"],stars:"★★★★★",pages:180,badge:"Hadithi",
+   chapters:[{title:"Sura 1: Jirani Wangu Gatsby",text:`<p class="drop-cap">Baba yangu aliniambia kitu moja nilipokuwa mdogo na nimekuwa nikifikiri tangu wakati huo. "Unapotaka kulaumu mtu," alisema, "kumbuka kwamba si kila mtu alipata fursa ambazo wewe ulipewa."</p><blockquote>"Tunabeba mbele kwa nguvu dhidi ya mkondo wa sasa, lakini mkondo huo unaendelea kutupeleka nyuma — kwenye wakati uliopita."</blockquote><p>Jay Gatsby ni taswira ya ndoto ya Marekani — mtu aliyejiunda kutoka chini kabisa, akapata utajiri mkubwa, akaishi katika nyumba kubwa sana — lakini yote haya yalikuwa kwa sababu moja: upendo wa zamani. Gatsby aliamini kwamba angeweza kurudi nyuma na kuunda tena siku za furaha za zamani. Na imani hiyo ndio iliyomharibu.</p>`}]},
+
+  // ── HEALTH ──
+  {id:31,title:"Why We Sleep",author:"Matthew Walker",cat:"health",emoji:"😴",color:["#1a0a2e","#2d0a5e"],stars:"★★★★★",pages:368,badge:"Afya",
+   chapters:[
+    {title:"Sura 1: Siri ya Usingizi",text:`<p class="drop-cap">Wewe, kama binadamu yeyote, umelala theluthi moja ya maisha yako. Hiyo inaweza kuonekana kama upotezaji mkubwa wa wakati. Lakini utafiti mpya wa miaka kumi unaonyesha kwamba usingizi si upotezaji — ni uwekezaji mkubwa zaidi wa afya unaoweza kufanya.</p><blockquote>"Hakuna nguvu nyingine ya kibinadamu inayoathiri kila nyanja ya afya yako kama usingizi. Kila kitu — akili, mwili, kinga — vinaboreshwa na usingizi.</blockquote><p>Matthew Walker, profesa wa neurosience na saikolojia katika Chuo Kikuu cha California Berkeley, anaelezea kwa kina jinsi usingizi unavyofanya kazi na jinsi kukosa usingizi kunavyoathiri kila kitu — kumbukumbu, hisia, uzito, mfumo wa kinga, moyo, na hata uwezo wa kufanya maamuzi.</p><h3>Awamu Mbili za Usingizi</h3><p>Usingizi una awamu mbili kuu: NREM (Non-Rapid Eye Movement) na REM (Rapid Eye Movement). NREM ni wakati ambapo ubongo unajisafisha na kuhifadhi kumbukumbu. REM ni wakati wa ndoto — wakati ambapo ubongo unaounganisha uzoefu na hisia, ukisaidia ubunifu na usawa wa kihisia.</p>`},
+    {title:"Sura 2: Athari za Kukosa Usingizi",text:`<p class="drop-cap">Utafiti mmoja ulionyesha kwamba kukosa usingizi kwa masaa 17 tu kunafanya ubongo wako ufanye kama una pombe ya 0.05% damu. Kukosa usingizi kwa masaa 24 kunafanya ubongo kama una pombe ya 0.1% — kiwango cha kulewa kisheria katika nchi nyingi.</p><blockquote>"Kila tatizo linaloweza kutokea kwa mwili na akili — linabaya zaidi ukiwa haujapata usingizi wa kutosha."</blockquote><p>Walker anaonyesha uhusiano kati ya usingizi na: saratani (ukosefu wa usingizi unaongeza hatari), kisukari (mara tatu ya hatari), magonjwa ya moyo, ugonjwa wa Alzheimer, unene, mfumo dhaifu wa kinga, huzuni, wasiwasi, na hata ufupi wa maisha.</p><p>Ushauri wake mkuu: pata masaa 7-9 ya usingizi kila usiku. Si anasa — ni haja ya kimsingi ya kibinadamu, kama chakula na maji.</p>`}
+   ]},
+
+  {id:32,title:"The Body: A Guide for Occupants",author:"Bill Bryson",cat:"health",emoji:"🫀",color:["#8B0000","#b71c1c"],stars:"★★★★★",pages:449,badge:"Afya",
+   chapters:[{title:"Sura 1: Muujiza wa Ndani",text:`<p class="drop-cap">Kama ungeuza vipengele vyote vya kemikali vilivyomo ndani yako katika soko la dunia, utapata kiasi cha dola 168,000 — ingawa maumivu yao ya kuvua itakuwa tatizo. Lakini mwili wa mwanadamu si vipengele tu — ni mashine ya ajabu zaidi iliyoundwa.</p><blockquote>"Mwili wako ni muujiza mkubwa zaidi katika ulimwengu. Tatizo ni kwamba tunauchukua kwa kawaida sana."</blockquote><p>Bill Bryson, mwandishi maarufu wa sayansi ya kawaida, anatuonyesha jinsi mwili wetu unavyofanya kazi — kutoka moyo unaopiga mara bilioni 2.5 katika maisha yetu, hadi ubongo unaofanya maamuzi milioni kila sekunde, hadi mfumo wa kinga unaopigana vita vya kimya kila wakati.</p>`}]},
+
+  {id:33,title:"Atomic Habits",author:"James Clear",cat:"selfhelp",emoji:"⚛️",color:["#0a2342","#1565c0"],stars:"★★★★★",pages:319,badge:"Maendeleo",
+   chapters:[
+    {title:"Sura 1: Nguvu ya Asilimia Moja",text:`<p class="drop-cap">Kama ukiboresha kila jambo kwa asilimia moja kila siku, baada ya mwaka mmoja utakuwa bora kwa mara 37.78. Hii ni nguvu ya mkusanyo — nguvu ambayo inafanya tofauti ndogo ndogo kuwa mabadiliko makubwa ya maisha.</p><blockquote>"Hufanyi maendeleo kwa sababu ya malengo yako — unafanya maendeleo kwa sababu ya mifumo yako."</blockquote><p>James Clear, baada ya jeraha kubwa la ubongo alilolipata akiwa shuleni, alirudi polepole kwa kujenga tabia ndogo ndogo — na kutoka hapo, alikua kuwa mtu mmoja wa wenye ushawishi mkubwa zaidi wa ulimwengu wa maendeleo ya kibinafsi.</p><p>Kanuni yake kuu: <span class="highlight">malengo ni muhimu, lakini mifumo (systems) ndiyo inayofanya kazi. Mtu yeyote anayetaka kupoteza uzito anaweza kuweka lengo — lakini mtu anayebadilisha mazingira yake, ratiba yake, na tabia zake ndiye atakayefanikiwa.</span></p>`},
+    {title:"Sura 2: Sheria Nne za Tabia",text:`<p class="drop-cap">James Clear anaelezea muundo wa kila tabia: Ishara (Cue) → Kutamani (Craving) → Jibu (Response) → Thawabu (Reward). Kuelewa mzunguko huu ni ufunguo wa kubadilisha au kuunda tabia yoyote.</p><blockquote>"Mazingira yanashinda nia. Badilisha mazingira yako badala ya kutegemea nguvu ya mapenzi."</blockquote><p>Sheria ya kwanza ya kuunda tabia nzuri: Ifanye ionekane (Make it obvious). Weka vitafunio vya matunda mezani badala ya kabatini. Sheria ya pili: Ifanye iwe ya kuvutia (Make it attractive). Weka michezo yako ya gym karibu na kipindi unachopenda kutazama. Sheria ya tatu: Ifanye iwe rahisi (Make it easy). Panga nguo za gym usiku wa jana. Sheria ya nne: Ifanye iwe yenye furaha (Make it satisfying). Jipa thawabu ndogo baada ya kukamilisha tabia.</p>`}
+   ]},
+
+  {id:34,title:"Mindset: The New Psychology of Success",author:"Carol Dweck",cat:"selfhelp",emoji:"🧠",color:["#004d40","#00796b"],stars:"★★★★★",pages:276,badge:"Maendeleo",
+   chapters:[{title:"Sura 1: Aina Mbili za Akili",text:`<p class="drop-cap">Kwa miaka mingi, Carol Dweck alifanya utafiti wa ajabu: aliuliza watoto kushindwa — akitoa matatizo magumu sana kwa makusudi. Watoto wengine walijibu kwa tabasamu na kusema "Napenda changamoto hii!" Watoto wengine walijificha, walikasirika, na hawakutaka kujaribu tena. Tofauti ilikuwa nini?</p><blockquote>"Nguvu kubwa zaidi unayoweza kumpa mtoto si zawadi bali falsafa: akili inaweza kukua."</blockquote><p>Dweck aligundua aina mbili za mawazo: Fixed Mindset — imani kwamba vipawa vya mtu ni vya kudumu na havibadiliki; na Growth Mindset — imani kwamba vipawa vinaweza kukua kwa juhudi, elimu, na uvumilivu. Watoto wenye Growth Mindset wanafurahi kushindwa — kwa sababu wanajua ni nafsi ya kujifunza.</p>`}]},
+
+  {id:35,title:"Emotional Intelligence",author:"Daniel Goleman",cat:"selfhelp",emoji:"❤️",color:["#880e4f","#c2185b"],stars:"★★★★★",pages:384,badge:"Maendeleo",
+   chapters:[{title:"Sura 1: Akili ya Hisia",text:`<p class="drop-cap">IQ — akili ya kawaida — inatabiria mafanikio ya shule vizuri sana. Lakini utafiti unaonyesha kwamba IQ peke yake inatabiria 10-20% tu ya mafanikio ya maisha. Kilichobaki kinategemea kitu kingine — EQ, akili ya hisia.</p><blockquote>"Akili ya hisia — uwezo wa kujua na kudhibiti hisia zako mwenyewe, na kuelewa hisia za wengine — ndiyo nguvu halisi inayofanya tofauti."</blockquote><p>Goleman anabainisha vipengele vitano vya EQ: Kujijua (Self-awareness), Kujidhibiti (Self-regulation), Nia (Motivation), Kuelewa wengine (Empathy), na Ujuzi wa kijamii (Social skills). Watu wenye EQ ya juu wanafanikiwa zaidi katika uhusiano, kazi, uongozi, na furaha ya jumla.</p>`}]},
+
+  // Additional books to reach 100
+  {id:36,title:"The Selfish Gene",author:"Richard Dawkins",cat:"science",emoji:"🧬",color:["#1b5e20","#2e7d32"],stars:"★★★★★",pages:360,badge:"Sayansi",chapters:[{title:"Sura 1: Maisha ni Kwa Nini?",text:`<p class="drop-cap">Darwin alituonyesha kwamba viumbe vinaibuka kupitia uteuzi wa asili (natural selection). Lakini swali la kina zaidi ni: uteuzi wa nani hasa? Dawkins anapinga maoni ya kawaida — si viumbe vinavyohusika na uteuzi, bali jeni.</p><blockquote>"Sisi ni mashine za kuishi — roboti zilizopangwa kwa nguvu na madereva wa kipenzi wetu wa msingi wa Kiidijitali: jeni zetu."</blockquote><p>Nadharia ya Dawkins — inayoitwa nadharia ya jeni la ubinafsi (selfish gene theory) — inaeleza tabia nyingi za ajabu za wanyama: kwa nini mama anajitoa muhanga kwa mtoto wake, kwa nini wadudu wa koloni wanafanya kazi kwa kikundi bila kupata zawadi binafsi. Jibu lote liko katika jeni — ambazo zinataka tu kunakiliwa.</p>`}]},
+
+  {id:37,title:"The Origin of Species",author:"Charles Darwin",cat:"science",emoji:"🦋",color:["#33691e","#558b2f"],stars:"★★★★★",pages:502,badge:"Sayansi",chapters:[{title:"Sura 1: Tofauti kati ya Viumbe",text:`<p class="drop-cap">Wakati nilikuwa kwenye meli HMS Beagle, nikisafiri kuzunguka dunia, niliangalia wanyama wa aina nyingi kwenye visiwa vya Galapagos. Niligundua kwamba ndege wanaofanana kwa sura ya mbali — kasuku za finch — walikuwa tofauti kidogo kidogo kutoka kisiwa kimoja hadi kingine. Kwa nini?</p><blockquote>"Kutoka vita hivi vya maisha, kutoka njaa na kifo, mara kwa mara tunaona jambo zuri zaidi: uundaji wa aina za juu zaidi za wanyama."</blockquote><p>Darwin aligundua jibu katika kanuni moja rahisi: viumbe vinavyofaa zaidi mazingira yake vinanusurika na kuzaa zaidi. Vizazi baadaye, tabia hizo zinakuwa za kawaida. Kwa miaka milioni, mabadiliko madogo madogo yanasababisha aina mpya kabisa za viumbe — mchakato unaojulikana leo kama mageuzi (evolution).</p>`}]},
+
+  {id:38,title:"Freakonomics",author:"Steven Levitt & Stephen Dubner",cat:"science",emoji:"📈",color:["#e65100","#f57c00"],stars:"★★★★★",pages:268,badge:"Sayansi",chapters:[{title:"Sura 1: Ikiwa Maadili yanaonyesha jinsi watu wanavyopenda dunia iwe",text:`<p class="drop-cap">Ikiwa maadili yanaonyesha jinsi watu wanavyopenda dunia iwe, uchumi unaonyesha jinsi dunia ilivyo hasa. Hii ni tofauti kubwa. Mwanauchumi anaangalia takwimu kwa jicho la baridi — bila hofu ya kuulizwa maswali yasiyopendeza au kupata majibu yasiyotarajiwa.</p><blockquote>"Nguvu ya kweli ya uchumi ni uwezo wake wa kufunua sababu za siri nyuma ya tabia za binadamu."</blockquote><p>Levitt na Dubner wanaonyesha jinsi uchumi unavyoweza kujibu maswali ya kushangaza: Je, wachezaji wa sumo wanafanya udanganyifu? Kwa nini wahalifu wa dawa za kulevya wanaishi na mama zao? Je, kuweka mtoto katika shule nzuri kweli kweli kunasaidia?</p>`}]},
+
+  {id:39,title:"The Innovator's Dilemma",author:"Clayton Christensen",cat:"business",emoji:"💡",color:["#004d61","#006978"],stars:"★★★★★",pages:288,badge:"Biashara",chapters:[{title:"Sura 1: Kwa Nini Biashara Nzuri Zinashindwa",text:`<p class="drop-cap">Kwa nini kampuni kubwa, zenye rasilimali, zenye wasimamizi werevu — zinashindwa? Si kwa sababu zinafanya kazi mbaya. Bali kwa sababu zinafanya kazi vizuri sana — zinazingatia wateja wao wa sasa, wanaolipa vizuri, na zinasahau wateja wa kesho ambao bado hawajui kwamba watahitaji bidhaa mpya.</p><blockquote>"Teknolojia za usumbufu (disruptive technologies) mara nyingi zinaonekana kuwa za kiwango cha chini — lakini zinaleta mabadiliko makubwa."</blockquote><p>Christensen anaelezea jinsi kampuni kama Kodak, Nokia, na Blockbuster zilipoteza — si kwa sababu zilikuwa na wasimamizi wabaya, bali kwa sababu zilifuata mantiki ya kawaida ya biashara vizuri sana — wakati ulimwengu ulipobadilika haraka yao.</p>`}]},
+
+  {id:40,title:"Good to Great",author:"Jim Collins",cat:"business",emoji:"🏆",color:["#1a237e","#1565c0"],stars:"★★★★★",pages:320,badge:"Biashara",chapters:[{title:"Sura 1: Nzuri ni Adui wa Bora",text:`<p class="drop-cap">Nzuri ni adui wa bora. Hii ndiyo sababu kuu kwa nini tunao mambo machache sana ya kiwango cha bora. Si kwa sababu hatujua jinsi ya kufikia kiwango cha bora, si kwa sababu hatuna kipaji, na si kwa sababu hatujui kinachohitajika. Tunao mambo mengi ya "nzuri" — na hilo linazuia maendeleo ya "bora."</p><blockquote>"Bora si vitendo vya kipekee bali matendo ya kawaida yaliyofanywa kwa kiwango cha juu sana kwa muda mrefu."</blockquote><p>Collins na timu yake walichunguza kampuni 1,435 na kugundua 11 tu zilizobadilika kutoka "nzuri" hadi "bora" na kukaa hapo kwa muda mrefu. Kitu cha kwanza wachunguzi waligundua kiliwashangaza: uongozi. Viongozi wa kampuni hizi walikuwa si mashujaa wa hadithi — walikuwa watu wanyenyekevu, waliojiuliza, wenye nia ya dhabitifu.</p>`}]},
+
+  {id:41,title:"How to Win Friends and Influence People",author:"Dale Carnegie",cat:"selfhelp",emoji:"🤝",color:["#5d0037","#880e4f"],stars:"★★★★★",pages:288,badge:"Maendeleo",chapters:[{title:"Sura 1: Usilaumu",text:`<p class="drop-cap">Tisa kati ya kumi ya mambo tunayofanya na kusema yanazalisha matatizo na migogoro — bila sababu yoyote ya msingi. Kwa sababu watu hawataki kubadilika — watu wanataka kuheshimiwa, kuthaminiwa, na kupendwa.</p><blockquote>"Njia pekee ya kushinda hoja ni kuiepuka."</blockquote><p>Dale Carnegie aliandika kitabu hiki mwaka 1936 — lakini bado ni kitabu cha 15 kinachouzwa zaidi duniani katika historia yote ya vitabu. Kanuni zake za msingi ni rahisi: usilaumu mtu, toa sifa ya kweli, na jifunze kusikiliza kweli kweli. Lakini wachache wanazifuata.</p>`}]},
+
+  {id:42,title:"The Art of Thinking Clearly",author:"Rolf Dobelli",cat:"philosophy",emoji:"🎯",color:["#1a237e","#303f9f"],stars:"★★★★☆",pages:396,badge:"Falsafa",chapters:[{title:"Sura 1: Makosa ya Kufikiria",text:`<p class="drop-cap">Ubongo wa binadamu ni kazi ya ajabu ya mageuzi — lakini si kamili kwa ulimwengu wa kisasa. Tulifanya mageuzi tukiwa tunawindaji kwenye savannah — na ubongo wetu bado una shorcuts (heuristics) zilizoundwa kwa mazingira yale. Katika ulimwengu wa kisasa, shortcuts hizi mara nyingi zinasababisha makosa.</p><blockquote>"Ukweli ni mgumu. Udanganyifu wa akili ni rahisi. Na kwa bahati mbaya, rahisi ndio inayoshinda mara nyingi."</blockquote><p>Dobelli anaorodhesha makosa 99 ya kawaida ya kufikiria — kutoka Confirmation Bias (kutafuta habari zinazothibitisha tulichoamini) hadi Sunk Cost Fallacy (kuendelea kwa mradi usio na thamani kwa sababu tumewekeza tayari). Kujua makosa haya ni hatua ya kwanza ya kuepuka.</p>`}]},
+
+  {id:43,title:"Becoming",author:"Michelle Obama",cat:"biography",emoji:"🌸",color:["#4a148c","#6a1b9a"],stars:"★★★★★",pages:426,badge:"Wasifu",chapters:[{title:"Sura 1: Roots — Asili",text:`<p class="drop-cap">Ukikua South Side ya Chicago, unajifunza haraka kwamba ulimwengu una mipaka — ya rangi, ya pesa, ya nafasi. Bibi yangu, Dandy, alikuwa mtu wa starehe na akili — lakini alizaliwa mahali pa wakati ambapo akili yake haikuweza kutumika vizuri.</p><blockquote>"Sijui kama ninaamini katika kitu kinaitwa hatma, lakini ninaamini katika kufanya kazi ngumu na kuwa tayari wakati fursa inakuja."</blockquote><p>Michelle Obama — mwanamke wa kwanza Mweusi wa Nyumba Nyeupe — anaelezea hadithi yake ya kweli: ukua katika familia ya wastani, kupambana kupata nafasi katika shule nzuri, kufanya kazi kwa bidii kupata nafasi, na hatimaye kupanda hadi kilele cha nguvu ya ulimwengu — si kwa bahati, bali kwa nguvu ya moyo.</p>`}]},
+
+  {id:44,title:"The Lean In",author:"Sheryl Sandberg",cat:"selfhelp",emoji:"💪",color:["#0277bd","#0288d1"],stars:"★★★★☆",pages:228,badge:"Maendeleo",chapters:[{title:"Sura 1: Ingia Mbele",text:`<p class="drop-cap">Katika mkutano mmoja, nilikuwa nikiongea na kikundi cha wanawake vijana wa biashara. Nilisema: "Kabla hatujaanza, ninaomba mmoja wenu asimulie uzoefu wake wa kupambana kwa nafasi sawa kazini." Ukimya. Kisha, mwishowe, mkono mmoja uliinuka — kwa hofu.</p><blockquote>"Wanawake wanakaa nyuma. Wanajizuia. Wanafikiri sana kabla ya kusema. Hii ndiyo tatizo — si ugumu wa nje tu, bali ugumu wa ndani."</blockquote><p>Sheryl Sandberg, COO wa Facebook, anaelezea vizuizi vya kweli vinavyowazuia wanawake kufikia nafasi za uongozi — na muhimu zaidi, anaelezea vizuizi vya ndani ambavyo wanawake wenyewe wanajitengenezea. Ujumbe wake: "Lean in" — ingia mbele, ongea, chukua nafasi.</p>`}]},
+
+  {id:45,title:"The Immortal Life of Henrietta Lacks",author:"Rebecca Skloot",cat:"science",emoji:"🔬",color:["#004d40","#00695c"],stars:"★★★★★",pages:381,badge:"Sayansi",chapters:[{title:"Sura 1: Seli za HeLa",text:`<p class="drop-cap">Seli za Henrietta Lacks zilikuwa za kipekee — hazikufa. Katika kila kiini cha uhai kilichochukuliwa kutoka mwili wake mwaka 1951, kitu cha ajabu kiliendelea kutokea: seli ziligawanyika, zilikua, zikaendelea kuishi nje ya mwili wake. Hii ilikuwa jambo ambalo daktari hawakuwahi kuona kabla.</p><blockquote>"Henrietta alifariki. Lakini seli zake ziliendelea kuishi — na zikaponya mamilioni ya watu ambao hawakuwahi kujua jina lake."</blockquote><p>Henrietta Lacks alikuwa mwanamke Mweusi kutoka Virginia aliyekufa kwa saratani ya kizazi. Madaktari walichukua sampuli za seli zake bila idhini yake — na seli hizo (zinazoitwa HeLa cells) zimekuwa muhimu zaidi katika historia ya dawa. Zinatumiwa kuunda chanjo ya polio, kwa utafiti wa saratani, na hata Safari za anga.</p>`}]},
+
+  {id:46,title:"The Da Vinci Code",author:"Dan Brown",cat:"fiction",emoji:"🎨",color:["#4a1942","#6a1b9a"],stars:"★★★★☆",pages:689,badge:"Hadithi",chapters:[{title:"Sura 1: Mauaji Katika Louvre",text:`<p class="drop-cap">Curator mkubwa wa Louvre alianguka sakafuni ya Galerie des Beaux-Arts — mkono wake ukipiga kwa nguvu nguvu, jicho lake bado wazi. Damu yake ilipakaa kwenye sakafu nyeupe, na yeye, hata akiwa anafa, alifanya kitu cha mwisho — aliacha ujumbe.</p><blockquote>"Siri kubwa zaidi duniani haizungumzwi — inafichwa ndani ya picha, ndani ya hesabu, ndani ya lugha ya ishara."</blockquote><p>Professor Robert Langdon wa Harvard, akiwa Paris kwa mkutano, anapigiwa simu usiku wa manane — anaitwa kwenye ukanda wa Louvre. Mwili wa curator wa zamani umekutwa, na jicho lake la maisha ya mwisho linaelekeza kwenye picha ya Da Vinci — na siri iliyofichwa ndani yake kwa miaka 2,000.</p>`}]},
+
+  {id:47,title:"Harry Potter and the Sorcerer's Stone",author:"J.K. Rowling",cat:"fiction",emoji:"⚡",color:["#7b1fa2","#ab47bc"],stars:"★★★★★",pages:309,badge:"Hadithi",chapters:[{title:"Sura 1: Mvulana Aliyenusurika",text:`<p class="drop-cap">Bwana na Bibi Dursley, wa Nambari Nne, Privet Drive, walijijivunia kusema kwamba walikuwa wa kawaida kabisa, asante sana. Walikuwa ni mwisho watu ambao ungetarajia kuwa washiriki katika chochote cha ajabu au geni, kwa sababu hawakuamini katika mambo ya aina hiyo.</p><blockquote>"Watu wanahitaji mtu wa kuwaonyesha kwamba upendo una nguvu kuliko nguvu yoyote mbaya."</blockquote><p>Harry Potter alinyauka siku ya kuzaliwa kwake ya kumi na moja — na kufungua mlango wa dunia ambayo hakujua kwamba ilikuwepo. Hogwarts School of Witchcraft and Wizardry, ndugu wapya — Ron na Hermione — na siri ya hatima yake mwenyewe. Hadithi hii imefundisha watoto milioni ulimwenguni kwamba ujasiri si kukosa hofu — bali ni kutenda licha ya hofu.</p>`}]},
+
+  {id:48,title:"The Lord of the Rings",author:"J.R.R. Tolkien",cat:"fiction",emoji:"💍",color:["#1a3a0a","#2e5e1e"],stars:"★★★★★",pages:1137,badge:"Hadithi",chapters:[{title:"Sura 1: Sherehe na Mwisho wa Zamani",text:`<p class="drop-cap">Nchi ya Shire ni mahali pa furaha — na Frodo Baggins aliishi hapo kwa amani, bila kujua kwamba hatima ya ulimwengu wote ilikuwa karibu kubadilika. Siku ambayo Gandalf aliposimama kwenye mlango wa Bag End na kumwambia ukweli kuhusu Pete lililokuwa kwenye mkoba wa baba yake wa kupanga — Bilbo — ndiyo siku ambapo hadithi kubwa ilianza.</p><blockquote>"Hata wadogo wanaweza kubadilisha mkondo wa ulimwengu, wakishikamana na kusimama kwa pamoja."</blockquote><p>Tolkien aliunda ulimwengu kamili — na lugha kamili — za kufunika hadithi hii. Middle-earth si tu sehemu ya hadithi — ni ulimwengu wenye historia, utamaduni, na lugha zake. Na katika ulimwengu huu mkubwa, Frodo — hobbit mdogo asiye na nguvu — ndiye aliyechaguliwa kufanya kazi ambayo hata mashujaa wakubwa hawakuweza.</p>`}]},
+
+  {id:49,title:"Crime and Punishment",author:"Fyodor Dostoevsky",cat:"fiction",emoji:"⚖️",color:["#1a0505","#4a0000"],stars:"★★★★★",pages:551,badge:"Hadithi",chapters:[{title:"Sura 1: Mauaji ya Akili",text:`<p class="drop-cap">Raskolnikov alikuwa mwanafunzi maskini, mwerevu, mwenye kiburi cha aina ya kipekee. Aliamini kwamba wanadamu wamegawanywa katika darasa mbili: wengi wa kawaida wanaofuata sheria, na wachache wa kipekee — kama Napoleon — ambao wana haki ya kuvunja sheria kwa manufaa ya binadamu wote.</p><blockquote>"Kila mtu ana upendo na ukatili ndani yake — na vita kati ya hizo mbili ndiyo hadithi ya kila mtu."</blockquote><p>Akijua kwamba mzee mkosoaji wa fedha anaharibu watu wengi kwa riba yake ya kidhalimu, Raskolnikov anaamua kumua — si kwa hasira au uchoyo, bali kwa nadharia. Lakini baada ya mauaji, anagundua kwamba nadharia ni jambo moja — na moyo wa mwanadamu ni jambo lingine kabisa.</p>`}]},
+
+  {id:50,title:"Anna Karenina",author:"Leo Tolstoy",cat:"fiction",emoji:"🌹",color:["#8B0000","#b71c1c"],stars:"★★★★★",pages:864,badge:"Hadithi",chapters:[{title:"Sura 1: Familia za Furaha",text:`<p class="drop-cap">Familia zote zenye furaha zinafanana; kila familia yenye huzuni ina huzuni yake ya pekee. Yote yalikuwa yamechanganyika katika nyumba ya Oblonsky. Mke aligundua kwamba mumewe alikuwa na uhusiano na msichana wa Kifaransa aliyekuwa mwalimu kwa watoto wao.</p><blockquote>"Ukweli daima ni rahisi — ni uongo unaohitaji nguvu nyingi kuushikilia."</blockquote><p>Anna Karenina — mke wa afisa mkubwa wa St. Petersburg — anakutana na Count Vronsky kwenye treni na maisha yake yanabadilika milele. Upendo wao unazuka kwa nguvu — lakini pia unaleta maangamizi. Tolstoy anaandika hadithi hii si ya kulaumu upendo, bali ya kuonyesha jinsi jamii inavyoweza kuangamiza moyo wa mwanadamu.</p>`}]},
+
+  // Continue with more diverse books...
+  {id:51,title:"The Kite Runner",author:"Khaled Hosseini",cat:"fiction",emoji:"🪁",color:["#4e342e","#6d4c41"],stars:"★★★★★",pages:371,badge:"Hadithi",chapters:[{title:"Sura 1: Afghanistan ya Zamani",text:`<p class="drop-cap">Nilikuwa na miaka kumi na mbili nilipokuwa na nguvu ya kushinda majuto yaliyoendelea kunifuata kwa miaka 26 iliyofuata. Siwezi kusahau siku hiyo ya baridi ya mwaka 1975 — nilikaa nyuma ya ukuta uliokufa na kushuhudia kitu ambacho kilikuwa kimenisumbua kwa miaka mingi baadaye.</p><blockquote>"Kweli, dhambi unaweza kusamehewa — lakini huweza kusahau."</blockquote><p>Hadithi ya Amir na Hassan — bwana na mtumishi, wakubwa kwa njia tofauti, wapendanao kwa namna ya ndugu — ni hadithi ya udanganyifu, hatia, ukombozi, na upendo wa nchi iliyopotea. Afghanistan kabla ya vita ilikuwa nchi ya uzuri — bustani, tepe za mawe za milima, na raha ya maisha ya kawaida. Hosseini anatuamsha kumbukumbu ya nchi hiyo kupitia macho ya mtoto.</p>`}]},
+
+  {id:52,title:"Things Fall Apart",author:"Chinua Achebe",cat:"fiction",emoji:"🌍",color:["#4a2c2a","#6d4c41"],stars:"★★★★★",pages:209,badge:"Hadithi",chapters:[{title:"Sura 1: Okonkwo",text:`<p class="drop-cap">Okonkwo alikuwa maarufu katika wilaya yake yote na hata zaidi. Sifa yake ilianza miaka kumi na minane iliyopita, alipopiga chini Amalinze Paka katika mchezo wa ngumi. Amalinze alikuwa mshindi asiyeshindwa kwa miaka saba — kutoka Umuofia hadi Mbaino. Lakini Okonkwo alimshinda.</p><blockquote>"Nguvu ya mtu si tu katika nguvu za mwili, bali katika uwezo wake wa kubeba maumivu bila kupoteza heshima yake."</blockquote><p>Achebe anaandika hadithi ya jamii la Igbo ya Nigeria kabla na baada ya kuingia kwa wakoloni wa Kiingereza. Kupitia Okonkwo — mtu mwenye nguvu, mwenye kiburi, lakini pia mwenye hofu ya kuonekana dhaifu — Achebe anaonyesha jinsi ulimwengu wa jadi unavyovunjwa na nguvu mpya — na bei kubwa watu wanayolipa.</p>`}]},
+
+  {id:53,title:"The Prophet",author:"Kahlil Gibran",cat:"philosophy",emoji:"🕊️",color:["#1a237e","#283593"],stars:"★★★★★",pages:107,badge:"Falsafa",chapters:[{title:"Sura 1: Upendo",text:`<p class="drop-cap">Almustafa, mteule wa Mungu, alisimama kwenye bandari na kusubiri meli iliyomrudisha nyumbani. Na watu wa mji wa Orphalese walimkusanyika kumwomba awaelezee maarifa ya maisha kabla hajaondoka.</p><blockquote>"Upendo unapokuitia, mfuate, ingawa njia zake ni ngumu na nzito. Na mabawa yake yakikizunguka, jitupe kwake, ingawa upanga uliofichwa katikati ya manyoya yake unaweza kukukata."</blockquote><p>Gibran anaandika kwa lugha ya mashairi kuhusu upendo, ndoa, watoto, kazi, chakula, maumivu, furaha, na kifo. Kila maneno yake ni kama jiwe la thamani lililochongwa kwa umakini mkubwa. "Upendo unaweza kutoa chochote isipokuwa nafsi yake... Upendo unatoa tu nafsi yake na kuchukua nafsi yake."</p>`}]},
+
+  {id:54,title:"The Count of Monte Cristo",author:"Alexandre Dumas",cat:"fiction",emoji:"🗡️",color:["#1a237e","#0d47a1"],stars:"★★★★★",pages:1276,badge:"Hadithi",chapters:[{title:"Sura 1: Mwanzo wa Safari",text:`<p class="drop-cap">Tarehe 24 Februari 1815, mnara wa kutazamia Chateau d'If uliripoti kwamba meli inayokaribia bandari ya Marseille ilikuwa ikikomaa. Pharaon, inayotoka Smyrna, Trieste, na Naples, ilianza kupiga makaa na kuelekea bandari.</p><blockquote>"Subiri na tumainia — maneno mawili ya hekima makubwa zaidi ya mtu yeyote aliyewahi kuishi."</blockquote><p>Edmond Dantès alikuwa kijana mwenye furaha, mwenye kupendwa na mchumba wake Mercédès, karibu kupandishwa kuwa nahodha wa meli — maisha yake yalikuwa mbele yake kama bahari tulivu. Kisha, kwa uadui wa watu aliomwamini, alitupwa gerezani bila kesi. Miaka 13 ya giza na huzuni. Na kutoka gerezani hiyo, Dantès alitoka — si Dantès tena, bali Count of Monte Cristo — mtu wa vitendo na kisasi.</p>`}]},
+
+  {id:55,title:"Don Quixote",author:"Miguel de Cervantes",cat:"fiction",emoji:"⚔️",color:["#8B4513","#a0522d"],stars:"★★★★★",pages:863,badge:"Hadithi",chapters:[{title:"Sura 1: Shujaa wa Ndoto",text:`<p class="drop-cap">Katika mahali moja ya La Mancha ambayo sitaki kukumbuka jina lake, kulikuwa na bwana mashuhuri ambaye alikuwa na mkuki kwenye kona, ngao ya zamani, mbio nyembamba, na mbwa wa kuwinda. Uji, nyama ya ng'ombe mara kwa juma, mayai ya kuchanganywa usiku wa Jumamosi, na lenzi kuongeza maziwa ya ngamia kwa siku za Ijumaa.</p><blockquote>"Usiruhusu mtu yeyote kukuambia kwamba ndoto zako ni za kipuuzi — mara nyingi, ndoto za kipuuzi ndizo zinazobadilisha ulimwengu."</blockquote><p>Don Quixote aliamua kuwa shujaa wa zamani (knight-errant) — alipanda farasi wake mzee Rocinante, alichukua mkuki wake, na akaenda kurekebisha mabaya ya ulimwengu. Sancho Panza, mkulima mdogo, akamfuata kwa punda wake kama squire. Hadithi hii — ya mtu anayeona mambo tofauti na wengine — ni riwaya ya kwanza ya kisasa, na bado ni moja ya kazi bora zaidi za fasihi ya ulimwengu.</p>`}]},
+
+  {id:56,title:"Thinking, Fast and Slow",author:"Daniel Kahneman",cat:"science",emoji:"🧩",color:["#0d47a1","#1565c0"],stars:"★★★★★",pages:499,badge:"Sayansi",chapters:[{title:"Sura 1: Akili Mbili",text:`<p class="drop-cap">Unaweza kushikilia maswali mawili katika akili yako wakati huo huo: 2+2 ni ngapi? Na 17×24 ni ngapi? Swali la kwanza linajibu lenyewe mara moja — kwa Mfumo 1, unaofanya kazi haraka, bila juhudi, bila udhibiti. Swali la pili linahitaji juhudi — kwa Mfumo 2, unaofanya kazi polepole, kwa udhibiti, kwa nguvu.</p><blockquote>"Tunafikiri kwamba tunafikiria — lakini mara nyingi, tunafuata hisia za haraka ambazo ubongo wetu hutoa bila sisi kujua."</blockquote><p>Daniel Kahneman, mshindi wa Tuzo ya Nobel ya Uchumi, anaelezea jinsi watu wawili hawa wa ndani — System 1 na System 2 — wanavyoathiri kila uamuzi tunaoufanya. Na anaonyesha kwamba mara nyingi, System 1 — haraka na yenye imani — inafanya makosa makubwa ambayo System 2 ingepigana dhidi yake kama ingepata fursa.</p>`}]},
+
+  {id:57,title:"The Tipping Point",author:"Malcolm Gladwell",cat:"science",emoji:"📊",color:["#1b5e20","#388e3c"],stars:"★★★★★",pages:301,badge:"Sayansi",chapters:[{title:"Sura 1: Nguvu Ndogo, Mabadiliko Makubwa",text:`<p class="drop-cap">Kwa nini baadhi ya mawazo, bidhaa, au tabia zinasambaa kama virusi — na nyingine hazifanyi? Gladwell anajibu kwa nadharia moja ya kupendeza: kuna hatua ya mwisho — The Tipping Point — ambapo kitu kidogo kinabadilika ghafla kuwa kikubwa.</p><blockquote>"Mabadiliko makubwa yanaweza kutokea kwa njia ndogo — ikiwa unagusa sehemu sahihi, kwa wakati sahihi, kwa njia sahihi."</blockquote><p>Gladwell anaelezea jinsi magonjwa, mitindo ya mtindo, na hata vitabu vinavyosambaa — kwa sababu ya watu watatu aina maalum: Connectors (wanaojua kila mtu), Mavens (wanaojua kila kitu), na Salesmen (wanaoweza kushawishi watu wowote). Mkutano wa aina hizi tatu katika wakati sahihi — ndiyo Tipping Point.</p>`}]},
+
+  {id:58,title:"Outliers",author:"Malcolm Gladwell",cat:"science",emoji:"⭐",color:["#4a148c","#7b1fa2"],stars:"★★★★★",pages:309,badge:"Sayansi",chapters:[{title:"Sura 1: Sheria ya Masaa 10,000",text:`<p class="drop-cap">Ukiniuliza kwamba ni nini kilichofanya Mozart kuwa Mozart, utasema: kipawa. Lakini ukweli ni mgumu zaidi — na wa kuvutia zaidi. Mozart alianza kucheza kinanda akiwa na umri wa miaka miwili. Baba yake alikuwa mwalimu wa muziki aliyemfundisha masaa mengi kila siku. Kabla hajafikia umri wa miaka kumi, alikuwa tayari amefanya mazoezi ya masaa zaidi ya 10,000.</p><blockquote>"Mafanikio si tu swali la kipawa. Ni swali la fursa iliyotolewa kwa wakati sahihi, mahali sahihi, na mazingira sahihi."</blockquote><p>Gladwell anaonyesha kwamba "genius" au "mtu wa kipawa" ni hadithi inayopoteza sehemu kubwa ya ukweli. Bill Gates alikuwa na ufikiaji wa kompyuta akiwa mdogo — wakati watoto wachache sana duniani walikuwa na ufikiaji huo. Beatles walicheza kwa masaa makubwa sana Hamburg kabla hawajakuwa maarufu. Mafanikio yana sababu nyingi zaidi kuliko kipawa tu.</p>`}]},
+
+  {id:59,title:"The Subtle Art of Not Giving a F*ck",author:"Mark Manson",cat:"selfhelp",emoji:"🎭",color:["#e65100","#bf360c"],stars:"★★★★☆",pages:224,badge:"Maendeleo",chapters:[{title:"Sura 1: Tatizo la Kujali Sana",text:`<p class="drop-cap">Hii ni kitabu cha kujisaidia kisichoambia kwamba "unaweza kuwa utakavyotaka!" au "ndoto zako zote zitafanikiwa!" Badala yake, ninakwambia ukweli mgumu: maisha yana maumivu, na kujifanya kwamba hayahusiani nawe si busara — ni upumbavu.</p><blockquote>"Tatizo si maumivu yenyewe — tatizo ni maumivu yanayokuja bila chaguo, bila maana, na bila lengo."</blockquote><p>Mark Manson anaandika kwa lugha ya makali, ya ucheshi, na ya ukweli — anaposema kwamba tatizo la watu wengi wa sasa si kwamba hawajali — ni kwamba wanajali mambo mengi sana, mengi ya kipuuzi. Kujali kinachothamaniwa kweli kweli, na kuacha kujali kingine — ndiyo siri ya maisha ya amani.</p>`}]},
+
+  {id:60,title:"The 48 Laws of Power",author:"Robert Greene",cat:"philosophy",emoji:"♟️",color:["#1a0a00","#3e1a00"],stars:"★★★★☆",pages:452,badge:"Falsafa",chapters:[{title:"Sura 1: Usimuapishe Mbora Wako",text:`<p class="drop-cap">Sheria ya kwanza ya nguvu: Usimuapishe Mbora wako (Never Outshine the Master). Watu wanaofanya kazi kwa bosi au kiongozi wanaweza kufanya kosa kubwa moja — kuonyesha akili zao kupita kiasi. Bosi anajua kwamba mtu mwerevu sana karibu naye ni hatari — na atamharibu kabla hajapokelewa.</p><blockquote>"Nguvu ni mchezo — na kama mchezo wowote, una sheria. Mtu anayejua sheria anashinda. Mtu asiyejua anapoteza — hata bila kujua alikuwa anacheza."</blockquote><p>Robert Greene anachunguza historia ya nguvu — kutoka Machiavelli hadi Louis XIV hadi Stalin — na kugundua kanuni zinazofanya nguvu ifanye kazi. Kitabu hiki kimepigiwa marufuku katika magereza mengine ya Marekani — kwa sababu walinzi waliogopa wafungwa wataijifunza vizuri sana.</p>`}]},
+
+  {id:61,title:"Ikigai: Siri ya Maisha Marefu",author:"Hector Garcia",cat:"philosophy",emoji:"🌸",color:["#b71c1c","#e53935"],stars:"★★★★★",pages:208,badge:"Falsafa",chapters:[{title:"Sura 1: Sababu ya Kuamka Asubuhi",text:`<p class="drop-cap">Okinawa, Japan — kisiwa ambacho kina watu zaidi ya umri wa miaka 100 kuliko mahali pengine duniani. Watu hawa hawana maneno ya "kustaafu" — kwa sababu hawafikirii kwamba maisha yana mwisho wa kufanya kazi. Wana IKIGAI — sababu ya kuamka kila asubuhi.</p><blockquote>"Ikigai yako iko katika makutano ya mahali ambapo ujuzi wako unakutana na hitaji la ulimwengu, na moyo wako unafurahi."</blockquote><p>Ikigai ni neno la Kijapani linalomaanisha "sababu ya kuishi" — na inaundwa na makutano ya mambo manne: Unachopenda, Unachofanya vizuri, Ulimwengu unahitaji, na Unachoweza kulipwa. Makutano ya haya manne — ndipo unapopata ikigai yako.</p>`}]},
+
+  {id:62,title:"The 5 AM Club",author:"Robin Sharma",cat:"selfhelp",emoji:"⏰",color:["#f57f17","#f9a825"],stars:"★★★★☆",pages:368,badge:"Maendeleo",chapters:[{title:"Sura 1: Kuamka na Ulimwengu Bado Umelala",text:`<p class="drop-cap">Watu wengi wanaopata mafanikio makubwa — wasanii, wabunifu, wanafikra, viongozi — wana siri moja ya pamoja: wanaamka mapema. Saa tano asubuhi, ulimwengu bado unalala — na wakati huo ni wako peke yako.</p><blockquote>"Jinsi unavyofanya asubuhi yako inaonyesha jinsi utakavyofanya siku yako. Na jinsi unavyofanya siku zako ndivyo unavyofanya maisha yako."</blockquote><p>Robin Sharma anaelezea mpango wake wa Saa ya Ushindi (Victory Hour): dakika 20 za mazoezi ya mwili, dakika 20 za tafakari, na dakika 20 za kujifunza. Masaa matatu ya saa tano hadi saa nane ni wakati wa nguvu kubwa zaidi ya ubongo — kabla ulimwengu haujafika na madai yake.</p>`}]},
+
+  {id:63,title:"Shoe Dog",author:"Phil Knight",cat:"business",emoji:"👟",color:["#e65100","#f4511e"],stars:"★★★★★",pages:386,badge:"Biashara",chapters:[{title:"Sura 1: Ndoto ya Mwanafunzi",text:`<p class="drop-cap">Mwaka 1962, nilikuwa na miaka 24, shahada ya biashara kutoka Stanford, na wazimu mmoja ambao sikuweza kumweleza mtu yeyote: kuleta viatu vya ubora wa Kijapani Marekani na kuuza kwa bei nafuu. Nchi ya Japani ilikuwa inafanya vitu vizuri kwa bei nafuu — kama Toyota na Sony — kwa nini si viatu?</p><blockquote>"Ukitaka kufanya kitu kipya, unapaswa kukubali kwamba mara nyingi utaonekana mjinga — hadi utakapofanikiwa."</blockquote><p>Phil Knight alianza Nike na dola 50 alizokopa kutoka baba yake — akiuza viatu kutoka gari lake la Volkswagen bus kwenye mashindano ya riadha. Leo Nike ina thamani ya zaidi ya dola bilioni 100. Hadithi hii ni hadithi ya biashara, ya urafiki, ya familia, na ya ndoto iliyobeba bei kubwa ya maumivu na furaha.</p>`}]},
+
+  {id:64,title:"The Art of War for Business",author:"Sun Tzu (adapted)",cat:"business",emoji:"🏛️",color:["#37474f","#546e7a"],stars:"★★★★☆",pages:196,badge:"Biashara",chapters:[{title:"Sura 1: Mkakati wa Biashara",text:`<p class="drop-cap">Biashara ni vita — si vita vya damu, bali vita vya akili, rasilimali, na mkakati. Na kama vita yoyote, inashindwa na wale wanaopanga vizuri zaidi, wanaojua adui wao vizuri zaidi, na wanaotumia rasilimali zao vizuri zaidi.</p><blockquote>"Ushindi wa kweli katika biashara ni kuwasiliana na wateja wako vizuri sana hadi ushindani uwe mdogo."</blockquote><p>Sun Tzu alisema: "Mpiganaji bora ni yule ambaye anapigana na kumaliza kabla ya vita kuanza." Katika biashara, hii inamaanisha: tengeneza bidhaa nzuri sana hadi washindani wako wasijaribu hata. Amazon haikuwa "bora zaidi" katika vitabu tu — iliwahi kuwa bora sana hadi hawakuweza kupigana nazo.</p>`}]},
+
+  {id:65,title:"The Brain That Changes Itself",author:"Norman Doidge",cat:"science",emoji:"🧠",color:["#1a237e","#1565c0"],stars:"★★★★★",pages:427,badge:"Sayansi",chapters:[{title:"Sura 1: Ubongo Unaobadilika",text:`<p class="drop-cap">Kwa zaidi ya miaka 400, sayansi iliamini kwamba ubongo ni kama mashine — unapoathirika sehemu moja, haiwezi kurekebishwa. Miaka ya hivi karibuni imebadilisha kila kitu. Neuroplasticity — uwezo wa ubongo kubadilika na kujipanga upya — imebadilisha jinsi tunavyoelewa akili ya binadamu.</p><blockquote>"Ubongo una uwezo wa kujibadilisha — lakini unahitaji mazingira sahihi: changamoto, mazoezi, na imani."</blockquote><p>Norman Doidge anasimulia hadithi za ajabu: mtu aliyezaliwa bila upande mmoja wa ubongo aliishi maisha ya kawaida. Mtu aliyepoteza uwezo wa kuona alipata hisi ya kugusa inayofanya kazi kama macho. Wazee wa miaka 80 waliorejesha kumbukumbu zilizopotea. Ubongo si mashine — ni bustani inayoweza kukua kwa njia ambazo haziaminiwi.</p>`}]},
+
+  {id:66,title:"Drive: The Surprising Truth About What Motivates Us",author:"Daniel Pink",cat:"selfhelp",emoji:"🚗",color:["#004d40","#00695c"],stars:"★★★★★",pages:260,badge:"Maendeleo",chapters:[{title:"Sura 1: Kukosea kwa Karoti na Fimbo",text:`<p class="drop-cap">Kwa zaidi ya miaka 150, biashara na serikali zimefanya kazi kwa msingi rahisi: toa zawadi (karoti), ongeza adhabu (fimbo), na watu watafanya kazi. Utafiti wa saikolojia ya miaka 40 unaonyesha kwamba kanuni hii inafanya kazi — lakini tu kwa kazi rahisi, za kurudiwa, za mwili. Kwa kazi za ubunifu na za akili — inafanya kinyume.</p><blockquote>"Motisha ya ndani — kufanya kitu kwa sababu unapenda — ni nguvu kubwa zaidi kuliko zawadi yoyote ya nje."</blockquote><p>Daniel Pink anaelezea nguvu tatu za motisha ya kweli: Autonomy (uhuru wa kufanya kazi kwa njia yako), Mastery (kukua na kuwa bora zaidi), na Purpose (kuhisi kazi yako ina maana). Makampuni yanayoelewa hii — kama Google inayowaruhusu wafanyakazi 20% ya wakati wao kufanya miradi yao — yanapata ubunifu na tija nyingi zaidi.</p>`}]},
+
+  {id:67,title:"Blink: The Power of Thinking Without Thinking",author:"Malcolm Gladwell",cat:"science",emoji:"👁️",color:["#1b5e20","#2e7d32"],stars:"★★★★☆",pages:296,badge:"Sayansi",chapters:[{title:"Sura 1: Dakika Mbili za Kwanza",text:`<p class="drop-cap">Mtaalamu wa sanaa alikuwa anangalia sanamu ya Kigiriki ambayo makao ya sanaa ya Los Angeles alitaka kununua kwa dola 10 milioni. Wataalamu wengine wa kisayansi walikuwa wameithibitisha kwa miaka miwili. Lakini mtaalamu huyu, aliposimama mbele yake, alihisi kitu kigumu — bila kujua kwa nini. Alikuwa sahihi — sanamu ilikuwa ya bandia.</p><blockquote>"Akili yetu ya haraka — intuition — ni nguvu kubwa. Tatizo ni kujifunza kuamini wakati gani na kutokuamini wakati gani."</blockquote><p>Gladwell anaonyesha jinsi akili ya haraka — maamuzi yanayofanywa katika sekunde chache — inavyoweza kuwa sahihi au potofu. Daktari anayeweza kutabiria mshtuko wa moyo kwa kusikiliza mtu kuzungumza dakika chache. Mwalimu anayeweza kujua baada ya sekunde 30 kama mwanafunzi atafaulu au la. Nguvu hii ipo — lakini pia ina udhaifu.</p>`}]},
+
+  {id:68,title:"The Wealth of Nations",author:"Adam Smith",cat:"science",emoji:"🏭",color:["#1a237e","#283593"],stars:"★★★★★",pages:947,badge:"Sayansi",chapters:[{title:"Sura 1: Mgawanyiko wa Kazi",text:`<p class="drop-cap">Ustawi mkubwa zaidi ambao mataifa yamepata umeletwa na mgawanyiko wa kazi. Fikiria kiwanda kidogo cha kushona sindano — mtu mmoja peke yake, asiyejua kazi hiyo, anaweza kushona sindano 20 kwa siku. Lakini kwa mgawanyiko wa kazi — mtu mmoja anachora waya, mwingine anaupiga, mwingine anakata — wafanyakazi kumi wanaweza kufanya sindano 48,000 kwa siku.</p><blockquote>"Si ukarimu wa mchinjaji, mtengenezaji wa pombe, au mkate unaotuletea chakula chetu — ni kwa maslahi yao mwenyewe."</blockquote><p>Adam Smith aliandika kitabu hiki mwaka 1776 — wakati wa Mapinduzi ya Amerika — na kilifungua enzi mpya ya uchumi. Nadharia yake ya "mkono usioonekana" (invisible hand) inaelezea jinsi watu wanaotafuta maslahi yao wenyewe mara nyingi wanasaidia jamii nzima bila kukusudia.</p>`}]},
+
+  {id:69,title:"The Road to Serfdom",author:"Friedrich Hayek",cat:"philosophy",emoji:"🗺️",color:["#b71c1c","#c62828"],stars:"★★★★☆",pages:274,badge:"Falsafa",chapters:[{title:"Sura 1: Njia Inayoelekea Utumwa",text:`<p class="drop-cap">Mtu ambaye anakusudia kidogo tu anaelewa vizuri zaidi na si kutafuta mipango ya makusudi — kwa sababu maelezo mepesi zaidi ya jambo la kushangaza mara nyingi yanaonekana kwa kweli zaidi. Kwamba upanga mkubwa zaidi ambao ustawi wa binadamu umepigana nao ni ule ambao umezaliwa kutoka ndani ya watawala wake — hii ni ukweli wa kusikitisha sana wa historia.</p><blockquote>"Utajiri wa kweli wa taifa hautegemei rasilimali tu — bali unatoka kwa uhuru wa watu wake kufanya, kubuni, na kushindana."</blockquote><p>Hayek, mshindi wa Tuzo ya Nobel ya Uchumi, aliandika kitabu hiki mwaka 1944 kama onyo dhidi ya mfumo wa ujamaa uliokuwa ukipanda nguvu Ulaya. Anasema kwamba uchumi wa mpango wa serikali hauepukani kumfanya mwananchi kuwa mtumwa wa dola.</p>`}]},
+
+  {id:70,title:"The Prince",author:"Niccolo Machiavelli",cat:"philosophy",emoji:"👑",color:["#37474f","#455a64"],stars:"★★★★☆",pages:128,badge:"Falsafa",chapters:[{title:"Sura 1: Aina za Falme",text:`<p class="drop-cap">Falme zote, serikali zote ambazo zimekuwa na mamlaka juu ya watu, ni au Jamhuri au Falme za Kimonaki. Falme za Kimonaki ni au za urithi, ambapo wanafamilia ya bwana mkubwa wamekuwa watawala kwa muda mrefu, au ni mpya.</p><blockquote>"Ni bora kuogopwa kuliko kupendwa, kama huwezi kuwa vyote viwili."</blockquote><p>Machiavelli aliandika The Prince mwaka 1532 kama ushauri wa vitendo kwa watawala wa Italia. Kitabu hiki kimetoa neno "Machiavellian" — kinachomaanisha njia za hila za kisiasa. Lakini katika kitabu hiki, Machiavelli anaandika ukweli mgumu wa siasa — jinsi ilivyo, si jinsi tunavyotaka iwe.</p>`}]},
+
+  // HEALTH & WELLNESS
+  {id:71,title:"Eat That Frog!",author:"Brian Tracy",cat:"selfhelp",emoji:"🐸",color:["#2e7d32","#388e3c"],stars:"★★★★☆",pages:144,badge:"Maendeleo",chapters:[{title:"Sura 1: Kula Chura Wako",text:`<p class="drop-cap">Kuna msemo wa zamani wa Marekani unaosema: kama kazi yako ya kwanza ya asubuhi ni kumla chura, unaweza kupita siku yako nzima ukijua kwamba hilo ndilo jambo baya zaidi litakalotokea kwako. Kazi yako ya kwanza kila siku inapaswa kuwa kufanya kazi yako ngumu zaidi na muhimu zaidi kwanza.</p><blockquote>"Mtu asiye na mpango wa wakati wake atafuata mpango wa mtu mwingine."</blockquote><p>Brian Tracy anaelezea njia 21 za kupiga vita ucheleweshaji (procrastination) — tatizo kubwa zaidi la uzalishaji wa wakati wetu. Kanuni yake ya msingi: fanya kazi yako muhimu zaidi kwanza, kabla barua pepe, mikutano, na mambo ya dharura ya ghafla hayajachukua wakati wako.</p>`}]},
+
+  {id:72,title:"Dopamine Nation",author:"Anna Lembke",cat:"health",emoji:"🧪",color:["#1a0533","#2d0a5e"],stars:"★★★★★",pages:305,badge:"Afya",chapters:[{title:"Sura 1: Ulimwengu wa Raha",text:`<p class="drop-cap">Tunaishi katika wakati ambao raha nyingi sana zinapatikana kwa urahisi sana — chakula cha ladha, picha za kuvutia, michezo ya kuburudisha, dawa za kuhisi vizuri — na ubongo wetu wa zamani umejengwa kwa mazingira ambayo raha hizi zilikuwa nadra sana.</p><blockquote>"Maumivu na raha ni pande mbili za mizani moja. Unapochukua raha nyingi sana, mizani inakwenda upande wa maumivu — hii ndiyo addiction."</blockquote><p>Daktari Anna Lembke anaelezea jinsi dopamine — kemikali ya ubongo inayosababisha hisia ya furaha — inavyofanya kazi, na jinsi ulimwengu wa leo unavyotutengenezea addiction ya hali ya juu zaidi katika historia. Na muhimu zaidi, anaelezea jinsi ya kujua ukweli huu na kuitumia kwa manufaa yetu.</p>`}]},
+
+  {id:73,title:"In Defense of Food",author:"Michael Pollan",cat:"health",emoji:"🥗",color:["#1b5e20","#2e7d32"],stars:"★★★★★",pages:201,badge:"Afya",chapters:[{title:"Sura 1: Kula Chakula",text:`<p class="drop-cap">Kula chakula. Si sana. Hasa mimea. Sentensi hizi saba za maneno saba ni ujuzi wote wa lishe unaohitajika kuishi vizuri. Lakini sayansi ya lishe imefanya mambo kuwa magumu zaidi kuliko wanavyohitajika kuwa — na biashara ya chakula imefaidika kutoka ugumu huo.</p><blockquote>"Jirani yako aliyekufa hakuwahi kula chakula kisio cha uuzaji (processed food). Kula kama jirani yako wa babu zako."</blockquote><p>Michael Pollan anachanganua jinsi "Nutritionism" — falsafa ya kutazama chakula kama kemikali tu badala ya kitu kamili — imechangia tatizo la afya ya lishe nchini Marekani. Na jibu lake ni rahisi: kula chakula cha kweli, chenye historia, chenye uhai — si bidhaa za viwanda zilizo na orodha ndefu ya vipande vya kemikali.</p>`}]},
+
+  {id:74,title:"The Power of Habit",author:"Charles Duhigg",cat:"selfhelp",emoji:"🔄",color:["#006064","#00838f"],stars:"★★★★★",pages:371,badge:"Maendeleo",chapters:[{title:"Sura 1: Mzunguko wa Tabia",text:`<p class="drop-cap">Basal ganglia — sehemu ndogo ya ubongo — inahifadhi tabia. Watafiti wa MIT walifanya jaribio la kupendeza: waliweka panya kwenye labirinto na kuweka chokoleti mwisho. Wakati wa kwanza, ubongo wa panya ulikuwa ukifanya kazi kwa nguvu — ukitafuta njia. Baada ya safari 100, ubongo ulifanya kazi kidogo sana — tabia ilikuwa imehifadhiwa, na panya alipita kwa haraka bila kufikiria.</p><blockquote>"Tabia kamwe haziishi — zinabadilishwa tu. Wakati tunajua jinsi kufanya hivyo, ubunifu wa tabia unakuwa nguvu kubwa sana."</blockquote><p>Duhigg anaelezea Mzunguko wa Tabia (Habit Loop): Ishara (Cue) → Kawaida (Routine) → Thawabu (Reward). Kubadilisha tabia mbaya inahusisha kubadilisha sehemu ya kati — Kawaida — huku ukishikilia Ishara na Thawabu. Hii ndiyo siri ya kubadilisha tabia yoyote.</p>`}]},
+
+  {id:75,title:"The Happiness Advantage",author:"Shawn Achor",cat:"selfhelp",emoji:"😊",color:["#f57f17","#ff8f00"],stars:"★★★★★",pages:256,badge:"Maendeleo",chapters:[{title:"Sura 1: Furaha si Matokeo — ni Chombo",text:`<p class="drop-cap">Fomula ya kawaida ya mafanikio: fanya kazi kwa bidii → fanya mafanikio → kisha utafurahi. Utafiti wa saikolojia ya miaka 10 unaonyesha kwamba fomula hii imekosea — kabisa. Furaha inakuja kwanza — ndiyo inayosababisha mafanikio, si kinyume chake.</p><blockquote>"Ubongo unafanya vizuri zaidi — ubunifu, tija, akili — ukiwa na hali ya furaha kuliko ukiwa na hali ya msongo, woga, au huzuni."</blockquote><p>Shawn Achor, mtafiti wa Harvard, anaonyesha jinsi furaha inavyoathiri kila nyanja ya maisha: wafanyakazi wenye furaha wana tija 31% zaidi, mauzo 37% zaidi, na ubunifu mara tatu zaidi. Madaktari wenye furaha wanapatia utambuzi sahihi 19% zaidi. Jibu si kusubiri furaha — ni kuifanya sasa hivi.</p>`}]},
+
+  {id:76,title:"Flow: The Psychology of Optimal Experience",author:"Mihaly Csikszentmihalyi",cat:"science",emoji:"🌊",color:["#0277bd","#0288d1"],stars:"★★★★★",pages:303,badge:"Sayansi",chapters:[{title:"Sura 1: Hali ya Mtiririko",text:`<p class="drop-cap">Wanajeshi waliopigana vita, wasanii wanaochora, wachezaji wa chess, wanataaluma wanaosoma — wote wanaelezea uzoefu moja wa ajabu: wakati wanapofanya vizuri sana katika kazi yao, wakati unasimama, wanasahau njaa, wanasahau maumivu, wanasahau kila kitu isipokuwa kitu wanachofanya. Csikszentmihalyi aliita hali hii "Flow."</p><blockquote>"Furaha ya kweli haiji kutoka kupumzika — inakuja kutoka kufanya kazi kwa nguvu zako zote kwa kitu kinachokustahili."</blockquote><p>Flow inakuja wakati changamoto ya kazi inakuwa sawa na uwezo wako — si rahisi sana (itakusababishia kuchoka), wala si ngumu sana (itakusababishia wasiwasi). Katika eneo hilo la usawa — Flow inatokea. Na Flow ndio chanzo cha furaha ya kweli ya kibinadamu.</p>`}]},
+
+  {id:77,title:"Never Split the Difference",author:"Chris Voss",cat:"business",emoji:"🤝",color:["#212121","#424242"],stars:"★★★★★",pages:288,badge:"Biashara",chapters:[{title:"Sura 1: Mazungumzo ya FBI",text:`<p class="drop-cap">Nikiwa mjumbe wa mazungumzo ya hali ya dharura kwa FBI, nilijifunza jambo moja ambalo makumbusho ya biashara yanakosa: hisia, si mantiki, ndiyo inayoongoza maamuzi ya watu. Huwezi kushinda mazungumzo kwa kutoa mantiki bora tu — lazima uelewa hisia za upande mwingine.</p><blockquote>"Msikivu bora ni silaha kubwa zaidi katika mazungumzo yoyote."</blockquote><p>Chris Voss, mjumbe mkuu wa zamani wa FBI, anaelezea mbinu za mazungumzo ambazo zilifanyiwa kazi katika hali za maisha na kifo — na jinsi mbinu hizi zinavyofanya kazi katika biashara, uhusiano, na maisha ya kila siku. Mbinu yake kuu: "Mirroring" — kurudia maneno ya mwisho ya mtu unayezungumza naye — inafanya watu waendelee kuzungumza na kukuambia zaidi.</p>`}]},
+
+  {id:78,title:"Start With Why",author:"Simon Sinek",cat:"business",emoji:"💡",color:["#1565c0","#1976d2"],stars:"★★★★★",pages:256,badge:"Biashara",chapters:[{title:"Sura 1: Watu hawanunui Unachofanya — Wananunua Kwa Nini Unafanya",text:`<p class="drop-cap">Kwa nini baadhi ya viongozi na makampuni yanaweza kuvutia waaminifu wa kina — si wateja tu, bali wafuasi? Kwa nini Apple, na Sony zote mbili zinauza kompyuta, lakini watu wangefuata Apple hadi milimani? Kwa nini Martin Luther King alikuwa na wafuasi milioni — si tu watu waliokubali nadharia yake?</p><blockquote>"Watu hawafuati kile unachofanya — wanafuata kwa nini unakifanya."</blockquote><p>Simon Sinek anaelezea "Golden Circle" — mduara mdogo wa Kwa Nini (Why) ndani, Jinsi (How) katikati, na Nini (What) nje. Makampuni mengi yanajua NINI wanafanya na JINSI wanavyofanya — lakini wachache wanajua KWA NINI wanafanya. Na hiyo ndiyo tofauti kati ya kampuni za kawaida na kampuni zinazobadilisha ulimwengu.</p>`}]},
+
+  {id:79,title:"The 4-Hour Workweek",author:"Timothy Ferriss",cat:"business",emoji:"⏳",color:["#4527a0","#512da8"],stars:"★★★★☆",pages:308,badge:"Biashara",chapters:[{title:"Sura 1: Wafu wanaofanya kazi Ndefu",text:`<p class="drop-cap">Sheria ya kawaida ya biashara inasema: fanya kazi masaa mengi zaidi = pata pesa nyingi zaidi = kupumzika baadaye (kwa kuacha kazi au kustaafu). Timothy Ferriss anauliza: kwa nini unasubiri hadi kuzeeka kupumzika? Kwa nini si kupumzika kidogo sasa, kila wakati?</p><blockquote>"Lengo si kufanya kazi kidogo kwa ajili ya kufanya kazi kidogo — bali kufanya mambo muhimu zaidi, kwa wakati mfupi zaidi."</blockquote><p>Ferriss anaelezea njia yake ya DEAL: Definition (fafanua unachotaka kweli kweli), Elimination (futa 80% ya kazi ambayo haizalishi matokeo), Automation (weka mifumo inayofanya kazi bila wewe), Liberation (uhuru wa kufanya kazi popote). Mfumo huu ulimfanya aishi maisha ya miaka 10 katika miaka michache.</p>`}]},
+
+  {id:80,title:"Principles",author:"Ray Dalio",cat:"business",emoji:"📐",color:["#1a237e","#283593"],stars:"★★★★★",pages:592,badge:"Biashara",chapters:[{title:"Sura 1: Kujifunza kutoka kwa Makosa",text:`<p class="drop-cap">Nilifanikiwa zaidi kuliko nilivyostahili — na karibu kushindwa kabisa — kwa sababu ya bahati zaidi ya kipawa. Na kutoka kwa uzoefu huo nilipata falsafa moja ya msingi: makosa ni bora. Makosa yanafundisha. Makosa yanaboresha. Mtu anayeogopa makosa yote hayafanyi chochote kipya.</p><blockquote>"Ukweli mgumu ni njia pekee ya maamuzi mazuri. Uongo mzuri — hata kwa nia nzuri — unasababisha maamuzi mabaya."</blockquote><p>Ray Dalio, mwanzilishi wa Bridgewater Associates — mfuko mkubwa zaidi wa uwekezaji duniani — anaelezea kanuni za maisha na biashara alizozijifunza kwa miaka 40. Kanuni yake kuu: Radical Transparency — ukweli mkali wa wazi — ni nguvu ya mabadiliko ya kweli.</p>`}]},
+
+  {id:81,title:"The Obstacle Is the Way",author:"Ryan Holiday",cat:"philosophy",emoji:"🪨",color:["#4e342e","#5d4037"],stars:"★★★★★",pages:224,badge:"Falsafa",chapters:[{title:"Sura 1: Kizuizi ni Njia",text:`<p class="drop-cap">Marcus Aurelius aliandika siku moja: "Kizuizi kilichopo kwenye vitendo kinaendeleza vitendo. Kinachozuia njia kinakuwa njia." Hekima hii ya Stoic inaendelea kuwa kweli leo kama ilivyokuwa miaka 2,000 iliyopita.</p><blockquote>"Mtu mkubwa si mtu asiye na matatizo — ni mtu anayeona fursa ndani ya matatizo yake yote."</blockquote><p>Ryan Holiday anasimulia hadithi za watu wakubwa — Abraham Lincoln, Steve Jobs, Amelia Earhart, Ulysses S. Grant — na kuonyesha jinsi wote walivyokabiliwa na vizuizi vikubwa sana. Na kila wakati, badala ya kukata tamaa au kupigana na ukweli, waligeuza kizuizi kuwa nguvu — wakatumia kikwazo kama mwanzo wa njia mpya.</p>`}]},
+
+  {id:82,title:"Letters from a Stoic",author:"Seneca",cat:"philosophy",emoji:"📜",color:["#4a1942","#6a1b9a"],stars:"★★★★★",pages:256,badge:"Falsafa",chapters:[{title:"Sura 1: Barua kwa Lucilius",text:`<p class="drop-cap">Senaca, mshauri wa mfalme Nero wa Roma, aliandika barua hizi kwa rafiki yake Lucilius — lakini maneno yake yanazungumza nawe moja kwa moja, miaka 2,000 baadaye. Kila barua inashughulikia tatizo moja la kibinadamu — na tatizo hizo hazijabadilika.</p><blockquote>"Fanya kila siku kana kwamba inaweza kuwa ya mwisho wako — si kwa hofu, bali kwa shukrani."</blockquote><p>Senaca anazungumza kuhusu wakati — jinsi tunavyoumia wakati, jinsi tunavyoukimbia, jinsi tunavyodanganya wenyewe kwamba tutafanya mambo muhimu "kesho." Yeye mwenyewe alikuwa mshauri wa malkia — akifanya kazi katika msongamano wa siasa — na bado aliweza kupata furaha na hekima katika kila siku.</p>`}]},
+
+  {id:83,title:"The Courage to Be Disliked",author:"Ichiro Kishimi",cat:"philosophy",emoji:"🦁",color:["#1a237e","#1565c0"],stars:"★★★★★",pages:288,badge:"Falsafa",chapters:[{title:"Sura 1: Falsafa ya Adler",text:`<p class="drop-cap">Maswali yanayoulizwa na kijana katika mazungumzo haya si ya kipekee — ni maswali ambayo kila mtu anauliza katika wakati fulani wa maisha yake: Kwa nini sijafurahi? Kwa nini uhusiano wangu ni mgumu? Kwa nini ninajisikia mdogo? Na mwanafalsafa anajibu — si kwa majibu rahisi, bali kwa kweli ngumu.</p><blockquote>"Mwanadamu hakuzaliwa na sifa fulani za udhaifu — alichagua kuziunda. Na anaweza kuchagua kubadilika sasa hivi."</blockquote><p>Alfred Adler — mwanasaikolojia wa Austria — anakataa nadharia ya Freud kwamba zamani zetu zinatuongoza. Badala yake, anasema kwamba tunaishi kwa ajili ya malengo yetu ya sasa — na tunaweza kuchagua malengo mapya wakati wowote. Ujumbe: wewe si mfungwa wa zamani yako.</p>`}]},
+
+  {id:84,title:"The Untethered Soul",author:"Michael Singer",cat:"philosophy",emoji:"🕊️",color:["#4a0e8f","#7b1fa2"],stars:"★★★★★",pages:200,badge:"Falsafa",chapters:[{title:"Sura 1: Sauti ya Ndani",text:`<p class="drop-cap">Kuna sauti ndani yako inayozungumza kila wakati. Inazungumza unapokuwa peke yako, inakuambia mambo kuhusu siku yako, watu wengine, wewe mwenyewe. Unapata mawazo hasi — na sauti inakukumbusha. Unapata tatizo — na sauti inajadiliana na yenyewe.</p><blockquote>"Wewe si mawazo yako. Wewe ni yule anayeyasikia."</blockquote><p>Michael Singer anaelezea ukweli huu wa kina: kuna tofauti kati ya "wewe" na "mawazo yako." Kama unaweza kusikia mawazo yako, basi wewe si mawazo hayo — wewe ni msikivu. Na msikivu huyo — consciousness yako ya kweli — uko huru zaidi kuliko unavyofikiri.</p>`}]},
+
+  {id:85,title:"A Room with a View",author:"E.M. Forster",cat:"fiction",emoji:"🏞️",color:["#795548","#8d6e63"],stars:"★★★★☆",pages:225,badge:"Hadithi",chapters:[{title:"Sura 1: Florence",text:`<p class="drop-cap">Bibi Allen na mpwa wake Lucy Honeychurch walikuwa wamefika Italia — Florence ya ajabu — na pension yao haikuwa na chumba chenye dirisha linaloangalia arno. Waliomba kubadilisha — na Signor Emerson mzee, pamoja na mwanawe George, wakawapa vyumba vyao. Na kubadilishana huku kwa chumba kulikuwa mwanzo wa hadithi yote.</p><blockquote>"Penzi la kweli haliulizwi ruhusa — linaingia tu."</blockquote><p>Forster anaandika hadithi ya mwanamke mdogo anayepigana kati ya matarajio ya jamii lake na matamanio ya moyo wake. Lucy Honeychurch, msichana mzuri wa England, anapata kujifunua kwake kupitia uzuri wa Italia na mkutano na George Emerson — mwanaume asiye wa kawaida, mwenye njia ya kuona dunia ambayo Lucy hajawahi kuona kabla.</p>`}]},
+
+  {id:86,title:"One Hundred Years of Solitude",author:"Gabriel García Márquez",cat:"fiction",emoji:"🦋",color:["#4a1942","#880e4f"],stars:"★★★★★",pages:417,badge:"Hadithi",chapters:[{title:"Sura 1: Macondo",text:`<p class="drop-cap">Miaka mingi baadaye, mbele ya kikosi cha mauaji, Coronel Aureliano Buendía angekumbuka siku ile ya mbali ambayo baba yake alimpeleka kuona barafu. Macondo ilikuwa kijiji kidogo, cha miaka michache tu, lililojengwa kando ya mto wa mawe laini na nyeupe kama mayai ya kwato ya zamani.</p><blockquote>"Kizazi kizima cha Buendía kilikuwa watu wa upweke — na upweke uliwa kurithishwa kama jina."</blockquote><p>Márquez anaandika hadithi ya familia ya Buendía na kijiji cha Macondo kwa njia ya "Uhalisia wa Ajabu" (magical realism) — ambapo mambo ya miujiza yanaingiliana bila mshangao na maisha ya kawaida. Ni kazi kubwa zaidi ya fasihi ya Amerika Kusini — na moja ya vitabu vikubwa zaidi vya karne ya 20.</p>`}]},
+
+  {id:87,title:"Brave New World",author:"Aldous Huxley",cat:"fiction",emoji:"🌐",color:["#006064","#00838f"],stars:"★★★★★",pages:311,badge:"Hadithi",chapters:[{title:"Sura 1: Dunia Mpya ya Ujasiri",text:`<p class="drop-cap">Maelfu ya vyombo vya kusimamia mimba, vilivyo na utaratibu wa hali ya juu, vilifuata mstari mmoja baada ya mwingine katika mwanga wa jua wa saa ya asubuhi. Mstari wa kufanya kazi kila siku — hata kwa Kuzaliana kwa Wanadamu.</p><blockquote>"Dunia inaweza kuanguka si kwa nguvu — bali kwa raha. Watu hawataliambia la — watapenda utumwa wao."</blockquote><p>Huxley aliandika kitabu hiki mwaka 1932 — maono ya siku zijazo ambapo ubinadamu umedhibitiwa si kwa nguvu, bali kwa raha. Dawa za furaha, ngono bila upendo, watoto wanaozalishwa kwa teknolojia — na kila mtu "ana furaha" — lakini furaha hiyo ni tupu kabisa. Swali ambalo Huxley anauliza ni la msingi: ni nini maana ya kuwa mwanadamu wa kweli?</p>`}]},
+
+  {id:88,title:"The Brothers Karamazov",author:"Fyodor Dostoevsky",cat:"fiction",emoji:"✝️",color:["#1a0a00","#3e1a00"],stars:"★★★★★",pages:823,badge:"Hadithi",chapters:[{title:"Sura 1: Historia ya Familia Moja",text:`<p class="drop-cap">Alexei Fyodorovich Karamazov alikuwa mwana wa tatu na wa mwisho wa mwenye ardhi Fyodor Pavlovich Karamazov — mtu maarufu kwa mazingira yake ya maisha ya kuchekesha lakini pia kwa masikitiko ya mara kwa mara yaliyoyakumba maisha yake.</p><blockquote>"Kama Mungu hakuwepo, kila kitu kinaruhusiwa."</blockquote><p>Dostoevsky anaandika riwaya yake ya mwisho na kubwa zaidi — hadithi ya baba na watoto watatu: Dmitri mwenye tamaa na moto, Ivan mwenye akili na mashaka ya imani, na Alyosha mwenye upole na imani ya kweli. Mauaji ya baba yao yanazunguka hadithi — lakini jibu la kweli linahusiana na maswali makubwa zaidi: Mungu ni nani? Binadamu ni nani? Uhuru ni nini?</p>`}]},
+
+  {id:89,title:"Siddhartha",author:"Hermann Hesse",cat:"philosophy",emoji:"☸️",color:["#4a2c2a","#6d4c41"],stars:"★★★★★",pages:152,badge:"Falsafa",chapters:[{title:"Sura 1: Mwana wa Brahmin",text:`<p class="drop-cap">Katika kivuli cha nyumba ya Brahmin, katika jua kwenye ukanda wa mto wa barafu, katika misitu ya ndizi karibu na mto, Siddhartha mdogo, mkuu wa Brahmin, alikua kama mzuri, akiwa na jicho la panya, akiwa na mkono wa mzee, akiwa na mwili mwembamba wa haraka.</p><blockquote>"Hekima haiwezi kushirikiwa — inaweza tu kupatikana."</blockquote><p>Hesse anaandika hadithi ya Siddhartha — si historia ya Buddha, bali hadithi ya kujifunua binafsi. Siddhartha anaishi maisha yote yanayowezekana — mtawa, biashara, mpenzi, mtu mwenye mali — kabla hajakuta ukweli wake wa ndani. Na ukweli huo haupatikani kutoka kwa mwalimu yeyote — unakuja tu kutoka ndani.</p>`}]},
+
+  {id:90,title:"Fahrenheit 451",author:"Ray Bradbury",cat:"fiction",emoji:"🔥",color:["#b71c1c","#c62828"],stars:"★★★★★",pages:249,badge:"Hadithi",chapters:[{title:"Sura 1: Joto la Moto",text:`<p class="drop-cap">Ilikuwa furaha ya kupiga moto vitu. Ilikuwa raha ya pekee kuona vitu vikiunguliwa, kugeuka nyeusi na kubadilika. Moto lilikuwa mkono wake mwenyewe uliotiwa rangi, na ilikuwa silaha nzuri sana.</p><blockquote>"Vitabu ni ndoo za maji. Vikichomwa, akili zinakausha."</blockquote><p>Bradbury aliandika mwaka 1953 hadithi ya ulimwengu wa siku zijazo ambapo vitabu vimepigwa marufuku — na "wazima-moto" hawazimii moto bali wanaiwasha — wanachoma vitabu. Guy Montag ni mzima-moto ambaye anaanza kushindana na mfumo huu. Riwaya hii ni onyo kuhusu udhibiti wa habari, uharibifu wa utamaduni, na nguvu ya kusoma.</p>`}]},
+
+  {id:91,title:"Invisible Man",author:"Ralph Ellison",cat:"fiction",emoji:"👻",color:["#212121","#424242"],stars:"★★★★★",pages:581,badge:"Hadithi",chapters:[{title:"Sura 1: Mtu Asiyeonekana",text:`<p class="drop-cap">Mimi ni mtu asiyeonekana. La, si kama ghost ya Poe au ectoplasm ya Hollywood — mimi ni mtu wa nyama na mifupa, na nina akili pia. Ni tu kwamba watu wanakataa kunikuona. Ni kama kuwa na vioo vya hisia fulani, vya hamu fulani, ambavyo vinabadilisha picha yangu kuwa kitu kingine isipokuwa mimi.</p><blockquote>"Mtu anayekuwa asiyeonekana kwa muda mrefu anaanza kuwa asiyeonekana hata kwa nafsi yake mwenyewe."</blockquote><p>Ellison anaandika moja ya kazi kubwa zaidi za fasihi ya Kiafrika ya Marekani — hadithi ya mwanaume Mweusi asiye na jina anayesafiri kusini hadi kaskazini mwa Marekani akijaribu kupata utambuzi wake wa kweli. Kila wakati anapojaribu, mifumo ya ubaguzi inamfanya awe "asiyeonekana."</p>`}]},
+
+  {id:92,title:"The Old Man and the Sea",author:"Ernest Hemingway",cat:"fiction",emoji:"🎣",color:["#01579b","#0277bd"],stars:"★★★★★",pages:127,badge:"Hadithi",chapters:[{title:"Sura 1: Bahari Kubwa",text:`<p class="drop-cap">Alikuwa mzee aliyevua peke yake kwenye skiff katika Gulf Stream na kwenda siku themanini na nne sasa bila kupata samaki. Katika siku arobaini za kwanza, mvulana alikuwa pamoja naye. Lakini baada ya siku arobaini bila samaki, wazazi wa mvulana walikuambia kwamba mzee alikuwa salao dhahiri kabisa.</p><blockquote>"Mtu anaweza kushindwa — lakini hawezi kushindwa kabisa."</blockquote><p>Hemingway anaandika kazi ndogo ya nguvu kubwa — hadithi ya mzee Santiago anayekwenda baharini mara nyingi bila samaki, na mwishowe anakutana na samaki kubwa zaidi maishani mwake. Mapigano yao ni zaidi ya mapigano ya mtu na samaki — ni mapigano ya mtu na hatma yake, na maisha yake yenyewe.</p>`}]},
+
+  {id:93,title:"The Bell Jar",author:"Sylvia Plath",cat:"fiction",emoji:"🫙",color:["#37474f","#455a64"],stars:"★★★★★",pages:244,badge:"Hadithi",chapters:[{title:"Sura 1: Mwaka wa Nyota",text:`<p class="drop-cap">Ilikuwa ni majira ya joto ya utekelezaji wa hukumu za kifo, na New York ilikuwa moto na ya kuchokoza, na sijui jinsi ilivyokuwa kwa watu wengine, lakini kwangu ilianza sawa sawa na ugonjwa.</p><blockquote>"Maisha yalikuwa karibu sana na yangu lakini yangu yalikuwa ya mbali — mimi nilikuwepo nyuma ya kioo kikubwa."</blockquote><p>Sylvia Plath aliandika riwaya hii ya nusu-autobiographical kuhusu Esther Greenwood — msichana mwerevu anayepoteza njia yake polepole katika ulimwengu ambao haumpi nafasi. Ni hadithi ya huzuni ya kina — lakini pia ni hadithi ya ujasiri wa kuishi na ukweli wa tatizo la afya ya akili ambalo bado linaathiri watu wengi leo.</p>`}]},
+
+  {id:94,title:"Foundation",author:"Isaac Asimov",cat:"fiction",emoji:"🌌",color:["#1a237e","#283593"],stars:"★★★★★",pages:244,badge:"Hadithi",chapters:[{title:"Sura 1: Psychohistory",text:`<p class="drop-cap">Hari Seldon alikuwa mwanasayansi mwenye wazimu mmoja tu: mathematics ingeweza kutabiria historia ya Dola kubwa la Galaxy. Si historia ya mtu mmoja — historia ya nchi, ustaarabu, mataifa. Jinsi mvuto unavyoathiri sayari, hisia za wingi wa watu zingeweza kuhesabiwa kwa equations.</p><blockquote>"Kama mtu anaweza kutabiria historia, anaweza kuirekebisha."</blockquote><p>Asimov anaunda ulimwengu kamili wa Galaxy ya siku zijazo — na hadithi ya mtu mmoja anayejaribu kupunguza kipindi cha giza ambacho kinafikia. Foundation — hadithi ya mtu mmoja dhidi ya historia — ni moja ya kazi kubwa zaidi za hadithi za sayansi (science fiction) duniani.</p>`}]},
+
+  {id:95,title:"The Hitchhiker's Guide to the Galaxy",author:"Douglas Adams",cat:"fiction",emoji:"🌍",color:["#1b5e20","#2e7d32"],stars:"★★★★★",pages:193,badge:"Hadithi",chapters:[{title:"Sura 1: Siku Mbaya Zaidi",text:`<p class="drop-cap">Siku mbaya zaidi ya Arthur Dent ilianza mapema — wakati alipogundua kwamba nyumba yake ingetimuliwa kufanya nafasi ya barabara mpya. Kisha ilikuwa mbaya zaidi: rafiki yake Ford Prefect (ambaye si mtu wa Dunia) alimwambia kwamba Dunia pia ingetimuliwa — kwa ajili ya barabara ya anga.</p><blockquote>"Jibu la swali kubwa zaidi la Maisha, Ulimwengu, na Kila Kitu ni... 42."</blockquote><p>Adams anaandika moja ya vichekesho vikubwa zaidi vya fasihi — hadithi ya mtu wa kawaida akisafiri anga, bila nguo za ziada, bila mwongozo, isipokuwa Hitchhiker's Guide to the Galaxy — kitabu kikubwa zaidi ambacho kina maandishi mengi lakini yanasema "DON'T PANIC" kwa herufi kubwa kwenye jalada lake.</p>`}]},
+
+  {id:96,title:"Dune",author:"Frank Herbert",cat:"fiction",emoji:"🏜️",color:["#f57f17","#e65100"],stars:"★★★★★",pages:688,badge:"Hadithi",chapters:[{title:"Sura 1: Sayari Arrakis",text:`<p class="drop-cap">Arrakis — sayari ya jangwa, chanzo pekee cha spice ya dawa — ina siri kubwa zaidi ya galaksi nzima. Na Paul Atreides, mwana wa Duke, anajua kwamba hatma yake inaunganishwa na sayari hii ya ajabu kwa njia ambayo hawezi kukimbia.</p><blockquote>"Simu ya asubuhi yako ni ikiwa unaamka ukijua kwamba una kazi ya kufanya — au ukiamka ukijua tu kwamba utaishi siku nyingine."</blockquote><p>Herbert aliunda ulimwengu kamili zaidi wa hadithi ya sayansi — na mazingira yake ya kisiasa, kidini, na ikolojia ni ya kina sana hadi leo bado yanazungumzwa. Dune ni Epic — hadithi ya nguvu, imani, mazingira, na hatma ya mtu mmoja.</p>`}]},
+
+  {id:97,title:"The Jungle Book",author:"Rudyard Kipling",cat:"fiction",emoji:"🐆",color:["#1b5e20","#388e3c"],stars:"★★★★★",pages:212,badge:"Hadithi",chapters:[{title:"Sura 1: Mowgli wa Msitu",text:`<p class="drop-cap">Baba Wolf alimaliza mapumziko yake usiku huo. Saa ilikuwa kama saa saba usiku — na akajikusanya, aka-yawn na kupanua miguu yake mmoja kwa mmoja, kumfukuza nzi, na kupinda mgongo wake kwa starehe. Mke wake, Mama Wolf, alilala na pups wanne.</p><blockquote>"Amani kwako — nawe, ndugu wangu! Msitu wetu mmoja, sheria yake moja, na furaha yake moja."</blockquote><p>Kipling anaandika hadithi ya kuvutia ya Mowgli — mtoto mdogo aliyekulia msituni na mbwa mwitu kama familia yake. Lakini hadithi ya kweli si ya mtoto tu — ni hadithi ya sheria, ya jamii, ya heshima, na ya kupata nafsi yako katika ulimwengu ambao hauelewi vizuri.</p>`}]},
+
+  {id:98,title:"The Wind in the Willows",author:"Kenneth Grahame",cat:"fiction",emoji:"🌿",color:["#33691e","#558b2f"],stars:"★★★★☆",pages:193,badge:"Hadithi",chapters:[{title:"Sura 1: Mto na Marafiki",text:`<p class="drop-cap">Mole alikuwa akifanya kazi yake ya nyumbani kwa bidii asubuhi hiyo — kupaka chokaa nyeupe ndani na nje — na mara alipata hisia ya nguvu kubwa ya kutaka kutoka. Alitupa brashi yake, akasema "Bliss ya kuchokaa! Kuzimu na waya!" na akakimbia nje kwenye jua.</p><blockquote>"Hakuna kitu zaidi ya hii — kuwa karibu na mto, na ndani ya mto, na juu ya mto."</blockquote><p>Grahame anaandika hadithi ya kupendeza ya Mole, Rat, Badger, na Mr. Toad — marafiki wanaokaa karibu na mto wa ajabu. Lakini ndani ya hadithi ya watoto hii, kuna falsafa ya kweli: furaha ya urafiki wa kweli, nguvu ya nyumba na mazingira ya asili, na hatari za kiburi na uchoyo.</p>`}]},
+
+  {id:99,title:"My Brilliant Friend",author:"Elena Ferrante",cat:"fiction",emoji:"👭",color:["#880e4f","#c2185b"],stars:"★★★★★",pages:336,badge:"Hadithi",chapters:[{title:"Sura 1: Utotoni Naples",text:`<p class="drop-cap">Nilipata habari kwamba Lila ametoweka — si tu kutoweka, bali kutoweka kwa makusudi yake mwenyewe. Mtoto wake alinipelekea ujumbe kwamba mama yake alitaka kutoweka bila kuacha athari yoyote. Na nilishindwa kuamini — kwa sababu Lila hakuwahi kufanya kitu bila sababu kubwa.</p><blockquote>"Urafiki wa kweli wa wanawake ni nguvu kubwa zaidi — ya kusaidia na ya kudhuru — kuliko nguvu yoyote nyingine ninayoijua."</blockquote><p>Ferrante anaandika hadithi ya Elena na Lila — marafiki wawili wanaokua pamoja kwenye mtaa wa maskini wa Naples. Uhusiano wao — wa upendo, wivu, kushindana, na msaada — ni mfano wa uhusiano wowote wa kweli kati ya binadamu wawili wanaopendana kwa nguvu zote.</p>`}]},
+
+  {id:100,title:"The House on Mango Street",author:"Sandra Cisneros",cat:"fiction",emoji:"🏠",color:["#e65100","#bf360c"],stars:"★★★★★",pages:110,badge:"Hadithi",chapters:[{title:"Sura 1: Nyumba",text:`<p class="drop-cap">Tuliishi kwenye Loomis kwa muda. Kabla hapo, tulipita nyumba nyingi. Nilipata umri wake nyumba kwenye Mango Street mwaka huo. Nilikuwa na miaka kumi na mbili — kwa bahati nzuri au mbaya — bila kujua.</p><blockquote>"Utajiri wako si nyumba — ni hadithi unayoibeba nawe popote uendapo."</blockquote><p>Cisneros anaandika kwa lugha nzuri, ya mashairi, kuhusu Esperanza — msichana mdogo Meksikano wa Marekani anayekua kwenye mtaa wa duni wa Chicago. Kupitia vignettes fupi na nzuri, anaelezea ndoto, maumivu, na nguvu ya mwanamke mdogo anayejua kwamba anaenda mbali zaidi ya mtaa wake.</p>`}]},
 ];
 
-var currentFilter = 'Zote';
-var currentSearch = '';
+// ══════════════════════════════════════════════════
+//  READER STATE
+// ══════════════════════════════════════════════════
+let currentBook = null;
+let currentChapter = 0;
+let currentFontSize = 17;
+let currentTheme = 'theme-white';
+let activeCat = 'all';
 
-function renderBooks() {
-  var grid = document.getElementById('books-grid');
-  var noRes = document.getElementById('no-results');
-  var countEl = document.getElementById('books-count');
+// ══════════════════════════════════════════════════
+//  RENDER BOOKS
+// ══════════════════════════════════════════════════
+function renderBooks(books) {
+  const grid = document.getElementById('book-grid');
+  const count = document.getElementById('book-count');
+  count.textContent = books.length + ' Vitabu';
 
-  var filtered = books.filter(function(b) {
-    var matchCat = currentFilter === 'Zote' || b.cat === currentFilter;
-    var matchSearch = currentSearch === '' ||
-      b.title.toLowerCase().indexOf(currentSearch.toLowerCase()) !== -1 ||
-      b.cat.toLowerCase().indexOf(currentSearch.toLowerCase()) !== -1 ||
-      b.desc.toLowerCase().indexOf(currentSearch.toLowerCase()) !== -1;
-    return matchCat && matchSearch;
-  });
+  const coverGradients = [
+    ['#0d2b5e','#1565c0'],['#1a472a','#2d6a4f'],['#4a0e8f','#7b1fa2'],
+    ['#8B0000','#c0392b'],['#e65100','#f57c00'],['#006064','#00838f'],
+    ['#37474f','#546e7a'],['#4e342e','#6d4c41'],['#1b5e20','#388e3c'],
+    ['#880e4f','#c2185b'],['#0d47a1','#1976d2'],['#f57f17','#f9a825'],
+  ];
 
-  grid.innerHTML = '';
-
-  if (filtered.length === 0) {
-    noRes.classList.add('show');
-    countEl.innerHTML = 'Hakuna kitabu kinachofanana';
-    return;
-  }
-
-  noRes.classList.remove('show');
-  countEl.innerHTML = 'Inaonyesha vitabu <strong>' + filtered.length + '</strong> kati ya ' + books.length;
-
-  filtered.forEach(function(b) {
-    var card = document.createElement('div');
-    card.className = 'book-card';
-    var hotBadge = b.hot ? '<div class="badge-tag">Maarufu</div>' : '';
-    card.innerHTML =
-      '<div class="book-cover" style="background:' + b.bg + '">' +
-        '<span style="font-size:3rem">' + b.emoji + '</span>' +
-        hotBadge +
-        '<div class="lock-overlay"><span>🔒</span></div>' +
-      '</div>' +
-      '<div class="book-info">' +
-        '<div class="book-cat">' + b.cat + '</div>' +
-        '<div class="book-title">' + b.title + '</div>' +
-        '<div class="book-desc">' + b.desc + '</div>' +
-        '<div class="book-footer">' +
-          '<div class="book-price"><small>Bei</small>TSH 2,000</div>' +
-          '<button class="buy-btn">Nunua →</button>' +
-        '</div>' +
-      '</div>';
-    (function(id){ card.addEventListener('click', function(){ openModal(id); }); })(b.id);
-    grid.appendChild(card);
-  });
-}
-
-function setFilter(cat, btn) {
-  currentFilter = cat;
-  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
-  renderBooks();
-}
-
-function filterBooks() {
-  currentSearch = document.getElementById('search-input').value;
-  renderBooks();
-}
-
-function openModal(id) {
-  currentBookId = id;
-  var book = books.find(function(b){ return b.id === id; });
-  if (!book) return;
-  var cover = document.getElementById('m-cover');
-  cover.style.background = book.bg;
-  cover.innerHTML = '<span style="font-size:5rem">' + book.emoji + '</span>';
-  document.getElementById('m-cat').textContent = book.cat;
-  document.getElementById('m-title').textContent = book.title;
-  document.getElementById('m-desc').textContent = book.desc;
-  // Show/hide preview button based on PDF availability
-  var previewBtn = document.getElementById('m-preview-btn');
-  if (previewBtn) {
-    if (book.pdf) {
-      previewBtn.style.display = 'flex';
-      previewBtn.onclick = function() {
-        window._previewBookIdx = id;
-        openPdfPreview(book.pdf, book.title, book.id);
-      };
-    } else {
-      previewBtn.style.display = 'none';
-    }
-  }
-  document.getElementById('modal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-function goToPayment() {
-  var book = books.find(function(b){ return b.id === currentBookId; });
-  if (!book) return;
-  closeModal();
-  document.getElementById('pay-cover').style.background = book.bg;
-  document.getElementById('pay-cover').textContent = book.emoji;
-  document.getElementById('pay-cat').textContent = book.cat;
-  document.getElementById('pay-title').textContent = book.title;
-  document.getElementById('pay-phone').value = '';
-  document.getElementById('pay-ref').value = '';
-  document.getElementById('pay-err').style.display = 'none';
-  var btn = document.getElementById('confirm-btn');
-  btn.textContent = 'Nimetuma Malipo – Thibitisha ✓';
-  btn.disabled = false;
-  btn.style.background = '';
-  document.getElementById('payment-page').style.display = 'block';
-  document.getElementById('payment-page').scrollTop = 0;
-  document.body.style.overflow = 'hidden';
-}
-
-function closePayment() {
-  document.getElementById('payment-page').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-function confirmPayment() {
-  var phone = document.getElementById('pay-phone').value.trim();
-  var ref   = document.getElementById('pay-ref').value.trim();
-  var err   = document.getElementById('pay-err');
-
-  if (phone.length < 9) {
-    err.textContent = '⚠️ Tafadhali ingiza nambari yako ya simu sahihi (tarakimu 9).';
-    err.style.display = 'block';
-    return;
-  }
-  if (ref.length < 6) {
-    err.textContent = '⚠️ Tafadhali ingiza Transaction ID uliyopokea kwa SMS.';
-    err.style.display = 'block';
-    return;
-  }
-
-  err.style.display = 'none';
-  var btn = document.getElementById('confirm-btn');
-  btn.textContent = '⏳ Inathibitisha…';
-  btn.disabled = true;
-  btn.style.background = '#aaa';
-
-  setTimeout(function() {
-    closePayment();
-    showSuccess(phone, ref);
-  }, 2000);
-}
-
-function showSuccess(phone, ref) {
-  var book = books.find(function(b){ return b.id === currentBookId; });
-  document.getElementById('success-book').textContent = book ? '"' + book.title + '"' : '';
-  document.getElementById('success-phone').textContent = '+255 ' + phone;
-  document.getElementById('success-ref').textContent = ref.toUpperCase();
-  var sp = document.getElementById('success-page');
-  sp.style.display = 'flex';
-  sp.style.alignItems = 'center';
-  sp.style.justifyContent = 'center';
-  document.body.style.overflow = 'hidden';
-}
-
-function closeSuccess() {
-  var sp = document.getElementById('success-page');
-  sp.style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeModal(); closePayment(); } });
-
-renderBooks();
-
-function openPdfPreview(pdfUrl, title, buyUrl) {
-  document.getElementById('pdf-preview-title').textContent = '👁 Hakiki: ' + title;
-  document.getElementById('pdf-iframe').src = pdfUrl + '#page=1&toolbar=0&navpanes=0&scrollbar=0&view=FitH';
-  document.getElementById('pdf-buy-btn').onclick = function(){ 
-    closePdfPreview(); 
-    openModal(window._previewBookIdx || 0); 
-  };
-  document.getElementById('pdf-overlay').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-function closePdfPreview() {
-  document.getElementById('pdf-overlay').classList.remove('active');
-  document.getElementById('pdf-iframe').src = '';
-  document.body.style.overflow = '';
-}
-
-</script>
-
-<!-- PDF PREVIEW OVERLAY -->
-<div class="pdf-preview-overlay" id="pdf-overlay">
-  <div class="pdf-header">
-    <div class="pdf-title" id="pdf-preview-title">Hakiki ya Kitabu</div>
-    <button class="pdf-close" onclick="closePdfPreview()">✕</button>
-  </div>
-  <div class="pdf-frame-wrap">
-    <iframe id="pdf-iframe" src="" title="PDF Preview"></iframe>
-    <div class="pdf-lock-bar">
-      <div>
-        <div class="pdf-lock-msg">🔒 Unaona kurasa 1-3 tu. Lipa kupata kitabu chote.</div>
-        <div class="pdf-pages-note" id="pdf-pages-note"></div>
+  grid.innerHTML = books.map((b, i) => {
+    const g = b.color || coverGradients[i % coverGradients.length];
+    return `
+    <div class="book-card" data-id="${b.id}" data-cat="${b.cat}">
+      <div class="book-cover" style="background:linear-gradient(160deg,${g[0]},${g[1]})">
+        <div class="book-cover-spine" style="background:rgba(0,0,0,.2)"></div>
+        <div class="cover-badge">${b.badge}</div>
+        <div class="cover-emoji">${b.emoji}</div>
+        <div class="cover-title">${b.title}</div>
+        <div class="cover-author">— ${b.author}</div>
       </div>
-      <button class="pdf-buy-btn" id="pdf-buy-btn" onclick="closePdfPreview()">💳 Nunua Sasa →</button>
-    </div>
-  </div>
-</div>
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        <div class="book-author">${b.author}</div>
+        <div class="book-meta">
+          <span class="book-cat">${b.badge}</span>
+          <span class="book-pages">📄 ${b.pages} uk.</span>
+          <span class="book-stars">${b.stars}</span>
+        </div>
+        <button class="read-btn" onclick="openBook(${b.id})">📖 Soma Kitabu</button>
+      </div>
+    </div>`;
+  }).join('');
+}
 
+// ══════════════════════════════════════════════════
+//  FILTER & SEARCH
+// ══════════════════════════════════════════════════
+function filterCat(cat, btn) {
+  activeCat = cat;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function filterBooks() { applyFilters(); }
+function applyFilters() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const filtered = BOOKS.filter(b => {
+    const matchCat = activeCat === 'all' || b.cat === activeCat;
+    const matchQ = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q) || b.badge.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+  renderBooks(filtered);
+}
+
+// ══════════════════════════════════════════════════
+//  READER
+// ══════════════════════════════════════════════════
+function openBook(id) {
+  currentBook = BOOKS.find(b => b.id === id);
+  if (!currentBook) return;
+  currentChapter = 0;
+  document.getElementById('rdr-title').textContent = currentBook.title;
+  document.getElementById('rdr-author').textContent = currentBook.author;
+  document.getElementById('reader-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderChapter();
+}
+function closeReader() {
+  document.getElementById('reader-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeReaderOnOverlay(e) {
+  if (e.target === document.getElementById('reader-overlay')) closeReader();
+}
+function renderChapter() {
+  if (!currentBook) return;
+  const ch = currentBook.chapters[currentChapter];
+  const total = currentBook.chapters.length;
+  const body = document.getElementById('reader-body');
+  const content = document.getElementById('reader-content');
+  const chInd = document.getElementById('ch-ind');
+  const rfInfo = document.getElementById('rf-info');
+  const progFill = document.getElementById('prog-fill');
+
+  body.className = 'reader-body ' + currentTheme;
+  content.style.fontSize = currentFontSize + 'px';
+
+  content.innerHTML = `
+    <div class="chapter-title">${ch.title}</div>
+    <div class="chapter-subtitle">${currentBook.title} — ${currentBook.author}</div>
+    <div class="reader-text">${ch.text}</div>
+    <div style="text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid rgba(0,0,0,.08)">
+      <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#0d2b5e;margin-bottom:4px">Sade<span style="color:#b8860b">Books</span></div>
+      <div style="font-size:.7rem;color:#6b7280">📚 Maktaba ya Kidijitali ya Dunia</div>
+    </div>`;
+
+  chInd.textContent = `Sura ${currentChapter + 1}/${total}`;
+  rfInfo.textContent = `Sura ${currentChapter + 1} ya ${total} — ${currentBook.title}`;
+  progFill.style.width = ((currentChapter + 1) / total * 100) + '%';
+  body.scrollTop = 0;
+}
+function nextChapter() {
+  if (!currentBook) return;
+  if (currentChapter < currentBook.chapters.length - 1) {
+    currentChapter++;
+    renderChapter();
+  } else {
+    const content = document.getElementById('reader-content');
+    content.insertAdjacentHTML('beforeend', `
+      <div style="text-align:center;padding:30px;background:linear-gradient(135deg,#e3eeff,#c8dcff);border-radius:12px;margin-top:30px">
+        <div style="font-size:2rem;margin-bottom:10px">🎉</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#0d2b5e;margin-bottom:6px">Hongera! Umekamilisha kitabu!</div>
+        <div style="color:#6b7280;font-size:.85rem">${currentBook.title} — ${currentBook.author}</div>
+      </div>`);
+  }
+}
+function prevChapter() {
+  if (!currentBook || currentChapter <= 0) return;
+  currentChapter--;
+  renderChapter();
+}
+function setFont(size) {
+  currentFontSize = size;
+  document.querySelectorAll('.font-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  if (currentBook) document.getElementById('reader-content').style.fontSize = size + 'px';
+}
+function setTheme(theme, btn) {
+  currentTheme = theme;
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('reader-body').className = 'reader-body ' + theme;
+}
+
+// ── INIT ──
+renderBooks(BOOKS);
+</script>
 </body>
 </html>
