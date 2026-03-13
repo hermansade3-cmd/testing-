@@ -313,7 +313,7 @@ function render(list){
     <div class="book-title">${b.t}</div>
     <div class="book-footer">
       <div class="book-price"><small>TSH</small>5,000</div>
-      <a href="malipo.html?kitabu=${encodeURIComponent(b.t)}" class="btn-buy">Nunua →</a>
+      <a href="malipo.html?book=${encodeURIComponent(b.t)}&emoji=${encodeURIComponent(b.i)}" class="btn-buy">Nunua →</a>
     </div>
   </div>
 </div>`).join('');
