@@ -65,21 +65,6 @@ body{
 }
 .topnav-tab.active{background:#fff;color:var(--dark);}
 .topnav-tab:hover:not(.active){color:#fff;background:rgba(255,255,255,0.1);}
-.topnav-cart{
-  display:flex;align-items:center;gap:0.4rem;
-  background:var(--gold);color:var(--dark);
-  border:none;border-radius:10px;
-  padding:0.5rem 1rem;font-size:0.82rem;font-weight:700;
-  cursor:pointer;font-family:var(--font);transition:all 0.2s;
-  white-space:nowrap;
-}
-.topnav-cart:hover{background:#fbbf24;transform:translateY(-1px);}
-.cart-count{
-  background:var(--dark);color:#fff;
-  border-radius:100px;padding:1px 6px;font-size:0.7rem;font-weight:700;
-  min-width:18px;text-align:center;
-}
-
 /* ── HERO BANNER ── */
 .hero{
   background:linear-gradient(135deg,#0a0f1e 0%,#0d1a3e 40%,#1a2a6e 70%,#1d4ed8 100%);
@@ -266,19 +251,6 @@ body{
 }
 .btn-buy:hover{background:var(--blue);transform:translateY(-1px);}
 
-.btn-like,.btn-dislike{
-  width:30px;height:30px;border-radius:8px;
-  border:1.5px solid var(--border);background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:0.8rem;transition:all 0.2s;
-}
-.btn-like:hover{border-color:#22c55e;background:#f0fdf4;}
-.btn-dislike:hover{border-color:#ef4444;background:#fff1f2;}
-.btn-like.liked{border-color:#22c55e;background:#f0fdf4;color:#16a34a;}
-.btn-dislike.disliked{border-color:#ef4444;background:#fff1f2;color:#dc2626;}
-
-.like-count{font-size:0.6rem;color:var(--muted);font-family:var(--mono);}
-
 /* ── SECTION HEADER STRIP ── */
 .section-strip{
   padding:2.5rem 2rem 0.5rem;
@@ -365,6 +337,22 @@ footer span{color:var(--gold);}
 </head>
 <body>
 
+<!-- ── TOPBAR LINKS ── -->
+<div style="background:#050e1f;padding:4px 8px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;line-height:1;">
+<style>.tbl{display:inline-block;color:#93c5fd;text-decoration:none;font-family:'Sora',sans-serif;font-size:0.66rem;font-weight:600;padding:3px 7px;border-radius:4px;transition:.15s;margin:0 1px;}.tbl:hover{background:#1e40af;color:#fff;}.tbd{color:#ffffff22;font-size:.6rem;}</style>
+<a class="tbl" href="about.html">ℹ️ About</a><span class="tbd"> · </span>
+<a class="tbl" href="index.html">🏠 Home</a><span class="tbd"> · </span>
+<a class="tbl" href="shop.html">🛒 Shop</a><span class="tbd"> · </span>
+<a class="tbl" href="malipo.html">💳 Malipo</a><span class="tbd"> · </span>
+<a class="tbl" href="sade-GPT.html">🤖 Sade-GPT</a><span class="tbd"> · </span>
+<a class="tbl" href="jifunze_ujasiriamali_na_website.html">📚 Jifunze</a><span class="tbd"> · </span>
+<a class="tbl" href="sade-order.html">📦 Order</a><span class="tbd"> · </span>
+<a class="tbl" href="lipa-namba-mix-by-yas.html">🎵 Lipa-Namba</a><span class="tbd"> · </span>
+<a class="tbl" href="afya-yako.html">❤️ Afya</a><span class="tbd"> · </span>
+<a class="tbl" href="privacy_and_terms.html">🔒 Privacy</a><span class="tbd"> · </span>
+<a class="tbl" href="contact.html">📞 Contact</a>
+</div>
+
 <!-- ── TOP NAV ── -->
 <nav class="topnav">
   <div class="topnav-brand">Sade <em>Books</em></div>
@@ -372,7 +360,6 @@ footer span{color:var(--gold);}
     <button class="topnav-tab active" onclick="switchSection('ujasiriamali',this)">💼 Ujasiriamali</button>
     <button class="topnav-tab" onclick="switchSection('digital',this)">🌐 Teknolojia</button>
   </div>
-  <button class="topnav-cart" onclick="goCart()">🛒 Kasha <span class="cart-count" id="cartCount">0</span></button>
 </nav>
 
 <!-- ── HERO ── -->
@@ -383,7 +370,7 @@ footer span{color:var(--gold);}
     <p class="hero-sub">Vitabu 100+ vya Kiswahili — Ujasiriamali na Teknolojia ya Kisasa. Pakua mara moja, soma popote.</p>
     <div class="hero-stats">
       <div class="hero-stat"><div class="hero-stat-num">100+</div><div class="hero-stat-label">Vitabu</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">TSH 2K</div><div class="hero-stat-label">Bei ya Kitabu</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">TSH 5K</div><div class="hero-stat-label">Bei ya Kitabu</div></div>
       <div class="hero-stat"><div class="hero-stat-num">PDF</div><div class="hero-stat-label">Muundo</div></div>
       <div class="hero-stat"><div class="hero-stat-num">24/7</div><div class="hero-stat-label">Upatikanaji</div></div>
     </div>
@@ -711,13 +698,6 @@ const digitalBooks = [
 ];
 
 /* ════════════════════════════════
-   LIKES STATE
-════════════════════════════════ */
-const likes = JSON.parse(localStorage.getItem('sb_likes') || '{}');
-
-function saveLikes(){ localStorage.setItem('sb_likes', JSON.stringify(likes)); }
-
-/* ════════════════════════════════
    RENDER CARDS
 ════════════════════════════════ */
 function badgeHTML(tag){
@@ -730,7 +710,6 @@ function badgeHTML(tag){
 function renderBooks(arr, containerId){
   const container = document.getElementById(containerId);
   container.innerHTML = arr.map(b => {
-    const likeData = likes[b.id] || {l:0,d:0,liked:false,disliked:false};
     return `
     <div class="book-card" data-cat="${b.cat}" data-section="${containerId}">
       <div class="book-cover" style="background:${b.bg};">
@@ -744,53 +723,16 @@ function renderBooks(arr, containerId){
         <div class="book-footer">
           <div class="book-price">
             <span class="price-label">TSH</span>
-            <span class="price-val">2,000</span>
+            <span class="price-val">5,000</span>
           </div>
           <div class="book-actions">
-            <button class="btn-like ${likeData.liked?'liked':''}" onclick="toggleLike('${b.id}','like')" title="Napenda">👍</button>
-            <span class="like-count" id="lc-${b.id}">${likeData.l}</span>
-            <button class="btn-dislike ${likeData.disliked?'disliked':''}" onclick="toggleLike('${b.id}','dislike')" title="Sipendi">👎</button>
-            <a href="malipo.html" class="btn-buy" onclick="addToCart('${b.title}')">Nunua</a>
+            <a href="malipo.html" class="btn-buy">Nunua</a>
           </div>
         </div>
       </div>
     </div>`;
   }).join('');
 }
-
-/* ════════════════════════════════
-   LIKE / DISLIKE
-════════════════════════════════ */
-function toggleLike(id, type){
-  if(!likes[id]) likes[id] = {l:0,d:0,liked:false,disliked:false};
-  const s = likes[id];
-  if(type === 'like'){
-    if(s.liked){ s.liked=false; s.l=Math.max(0,s.l-1); }
-    else{ s.liked=true; s.l++; if(s.disliked){s.disliked=false;s.d=Math.max(0,s.d-1);} }
-  } else {
-    if(s.disliked){ s.disliked=false; s.d=Math.max(0,s.d-1); }
-    else{ s.disliked=true; s.d++; if(s.liked){s.liked=false;s.l=Math.max(0,s.l-1);} }
-  }
-  saveLikes();
-  // Update UI
-  document.querySelectorAll(`[onclick*="'${id}'"]`).forEach(el => {
-    if(el.classList.contains('btn-like')){ el.classList.toggle('liked',s.liked); }
-    if(el.classList.contains('btn-dislike')){ el.classList.toggle('disliked',s.disliked); }
-  });
-  const lc = document.getElementById('lc-'+id);
-  if(lc) lc.textContent = s.l;
-}
-
-/* ════════════════════════════════
-   CART
-════════════════════════════════ */
-let cartCount = 0;
-function addToCart(title){
-  cartCount++;
-  document.getElementById('cartCount').textContent = cartCount;
-  showToast('🛒 Imeongezwa: '+title.substring(0,30)+'...');
-}
-function goCart(){ showToast('💳 Unakwenda malipo...'); setTimeout(()=>window.location='malipo.html',800); }
 
 /* ════════════════════════════════
    SWITCH SECTION
