@@ -3,606 +3,1441 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💼 Vitabu vya Ujasiriamali — Sade Books</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Duka la Vitabu vya Ujasiriamali</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --white:#ffffff;
-  --bg:#fafaf7;
-  --gold:#d4a017;
-  --gold2:#f5c842;
-  --gold-pale:#fef9e7;
-  --gold-mid:#fdeaa3;
-  --dark:#1a1208;
-  --dark2:#2d2010;
-  --muted:#7a6840;
-  --border:#e8d99a;
-  --green:#0d6e3f;
-  --green2:#16a34a;
-  --blue:#1d4ed8;
-  --blue2:#2563eb;
-  --red:#b91c1c;
-  --red2:#dc2626;
-  --purple:#7c3aed;
-  --serif:'Playfair Display',serif;
-  --sans:'Plus Jakarta Sans',sans-serif;
-  --r12:12px;--r16:16px;--r20:20px;
-}
-html{scroll-behavior:smooth;}
-body{font-family:var(--sans);background:var(--bg);color:var(--dark);overflow-x:hidden;}
+  :root {
+    --gold: #D4A017;
+    --dark-gold: #A07810;
+    --green: #1B6B3A;
+    --light-green: #2E9E5B;
+    --cream: #FDF6E3;
+    --dark: #1A1A1A;
+    --card-bg: #FFFFFF;
+    --shadow: 0 8px 32px rgba(0,0,0,0.13);
+    --radius: 18px;
+  }
 
-/* ══ TOPNAV ══ */
-.topnav{
-  position:sticky;top:0;z-index:800;
-  background:rgba(26,18,8,0.97);
-  backdrop-filter:blur(20px);
-  padding:0.6rem 1.2rem;
-  display:flex;align-items:center;flex-wrap:wrap;gap:0.3rem;
-  border-bottom:2px solid var(--gold);
-}
-.nav-brand{
-  font-family:var(--serif);font-size:1.1rem;font-weight:900;
-  color:var(--gold2);margin-right:0.5rem;white-space:nowrap;
-  text-shadow:0 0 20px rgba(245,200,66,0.4);
-}
-.nav-link{
-  padding:0.25rem 0.55rem;border-radius:6px;
-  font-size:0.68rem;font-weight:600;
-  color:rgba(255,255,255,0.55);text-decoration:none;
-  transition:all 0.15s;white-space:nowrap;
-}
-.nav-link:hover{color:var(--gold2);background:rgba(245,200,66,0.12);}
-.nav-link.curr{color:var(--gold2);background:rgba(245,200,66,0.15);}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ══ HERO ══ */
-.hero{
-  background:linear-gradient(160deg,#1a1208 0%,#2d2010 35%,#1a3318 100%);
-  padding:4rem 1.5rem 3.5rem;
-  text-align:center;position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background-image:radial-gradient(rgba(212,160,23,0.08) 1.5px,transparent 1.5px);
-  background-size:28px 28px;pointer-events:none;
-}
-.hero::after{
-  content:'';position:absolute;
-  bottom:-1px;left:0;right:0;height:60px;
-  background:linear-gradient(to bottom,transparent,var(--bg));
-  pointer-events:none;
-}
-.hero-inner{position:relative;z-index:2;max-width:720px;margin:0 auto;}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:0.4rem;
-  background:rgba(212,160,23,0.15);
-  border:1px solid rgba(212,160,23,0.4);
-  border-radius:100px;padding:0.3rem 1rem;
-  font-size:0.68rem;font-weight:700;letter-spacing:0.12em;
-  text-transform:uppercase;color:var(--gold2);margin-bottom:1rem;
-}
-.hero-title{
-  font-family:var(--serif);
-  font-size:clamp(2rem,5vw,3.2rem);font-weight:900;
-  color:var(--white);letter-spacing:-0.02em;line-height:1.1;margin-bottom:0.6rem;
-}
-.hero-title em{color:var(--gold2);font-style:italic;}
-.hero-sub{font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.7;max-width:520px;margin:0 auto 1.8rem;}
-.hero-stats{
-  display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
-  margin-bottom:1.8rem;
-}
-.stat-box{
-  background:rgba(255,255,255,0.05);border:1px solid rgba(212,160,23,0.3);
-  border-radius:12px;padding:0.7rem 1.2rem;text-align:center;
-}
-.stat-num{font-family:var(--serif);font-size:1.4rem;font-weight:900;color:var(--gold2);}
-.stat-lbl{font-size:0.58rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;}
-.hero-cta{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:var(--dark);padding:0.75rem 1.8rem;border-radius:100px;
-  font-weight:800;font-size:0.85rem;text-decoration:none;
-  box-shadow:0 8px 24px rgba(212,160,23,0.35);
-  transition:all 0.22s;
-}
-.hero-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(212,160,23,0.45);}
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+  }
 
-/* ══ FILTER BAR ══ */
-.filter-wrap{
-  background:var(--white);
-  border-bottom:1px solid var(--border);
-  padding:0.7rem 1.2rem;
-  display:flex;align-items:center;gap:0.45rem;flex-wrap:wrap;
-  position:sticky;top:48px;z-index:600;
-  box-shadow:0 3px 12px rgba(26,18,8,0.06);
-}
-.search-box{
-  display:flex;align-items:center;gap:0.4rem;
-  background:var(--bg);border:1.5px solid var(--border);
-  border-radius:9px;padding:0.38rem 0.8rem;
-  flex:1;min-width:160px;max-width:240px;
-}
-.search-box input{border:none;background:transparent;outline:none;
-  font-family:var(--sans);font-size:0.8rem;color:var(--dark);width:100%;}
-.search-box input::placeholder{color:var(--muted);}
-.fcat{
-  padding:0.3rem 0.72rem;border-radius:7px;
-  border:1.5px solid var(--border);background:var(--bg);
-  color:var(--muted);font-family:var(--sans);font-size:0.7rem;font-weight:700;
-  cursor:pointer;transition:all 0.15s;white-space:nowrap;
-}
-.fcat:hover,.fcat.on{border-color:var(--gold);color:var(--dark2);background:var(--gold-pale);}
-.bcnt{margin-left:auto;font-size:0.7rem;color:var(--muted);font-weight:700;white-space:nowrap;}
+  /* ===== TOPBAR LINKS ===== */
+  .topbar {
+    background: var(--dark);
+    padding: 10px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .topbar::-webkit-scrollbar { display: none; }
+  .topbar-inner {
+    display: inline-flex;
+    gap: 6px;
+    padding: 0 16px;
+    min-width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .topbar a {
+    color: #FFD700;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border: 1.5px solid #FFD70040;
+    border-radius: 20px;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .topbar a:hover {
+    background: var(--gold);
+    color: var(--dark);
+    border-color: var(--gold);
+  }
 
-/* ══ SECTION GROUPS ══ */
-.section-wrap{padding:2.5rem 1.5rem 5rem;max-width:1400px;margin:0 auto;}
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--green) 0%, #0D3D22 60%, #1A1A1A 100%);
+    color: white;
+    text-align: center;
+    padding: 64px 20px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(212,160,23,0.18) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -40px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(46,158,91,0.22) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-icon { font-size: 3.5rem; margin-bottom: 12px; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p {
+    font-size: 1.1rem;
+    opacity: 0.88;
+    max-width: 560px;
+    margin: 0 auto 20px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 8px 24px;
+    border-radius: 30px;
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
 
-.group{margin-bottom:3.5rem;}
-.group-header{
-  display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;
-  padding:1.2rem 1.5rem;border-radius:16px;
-  position:relative;overflow:hidden;
-}
-.group-header::before{
-  content:'';position:absolute;inset:0;opacity:0.07;
-  background-image:repeating-linear-gradient(45deg,
-    transparent,transparent 6px,rgba(255,255,255,0.3) 6px,rgba(255,255,255,0.3) 7px);
-}
-.gh-icon{font-size:2rem;position:relative;z-index:1;}
-.gh-info{flex:1;min-width:0;position:relative;z-index:1;}
-.gh-label{font-size:0.62rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;opacity:0.7;margin-bottom:0.2rem;}
-.gh-title{font-family:var(--serif);font-size:1.2rem;font-weight:900;line-height:1.2;}
-.gh-desc{font-size:0.72rem;opacity:0.7;margin-top:0.2rem;}
-.gh-count{
-  background:rgba(255,255,255,0.2);border-radius:100px;
-  padding:0.3rem 0.8rem;font-size:0.72rem;font-weight:800;
-  white-space:nowrap;position:relative;z-index:1;
-}
+  /* ===== SECTION TABS ===== */
+  .section-nav {
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .section-nav::-webkit-scrollbar { display: none; }
+  .section-nav-inner {
+    display: flex;
+    gap: 4px;
+    padding: 10px 16px;
+    min-width: max-content;
+  }
+  .tab-btn {
+    background: none;
+    border: 2px solid #e0e0e0;
+    border-radius: 22px;
+    padding: 7px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: #555;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover, .tab-btn.active {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+  }
 
-/* Group color themes */
-.grp-1{background:linear-gradient(135deg,#78350f,#d97706);color:#fff;}
-.grp-2{background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:#fff;}
-.grp-3{background:linear-gradient(135deg,#14532d,#22c55e);color:#fff;}
-.grp-4{background:linear-gradient(135deg,#701a75,#d946ef);color:#fff;}
-.grp-5{background:linear-gradient(135deg,#7c2d12,#f97316);color:#fff;}
+  /* ===== MAIN ===== */
+  main { max-width: 1200px; margin: 0 auto; padding: 40px 16px 60px; }
 
-/* ══ BOOKS GRID ══ */
-.books-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:1.2rem;
-}
+  /* ===== GROUP SECTION ===== */
+  .group-section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-/* ══ BOOK CARD ══ */
-.book-card{
-  background:var(--white);
-  border:1.5px solid var(--border);
-  border-radius:18px;overflow:hidden;
-  transition:transform 0.26s cubic-bezier(.23,1,.32,1),
-             box-shadow 0.26s,border-color 0.2s;
-  display:flex;flex-direction:column;
-}
-.book-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 16px 40px rgba(26,18,8,0.12);
-  border-color:var(--gold);
-}
-.book-cover{
-  height:150px;position:relative;overflow:hidden;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-}
-.book-cover::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,0.4) 100%);
-}
-.bc-emoji{font-size:2.8rem;position:relative;z-index:2;
-  filter:drop-shadow(0 3px 8px rgba(0,0,0,0.3));}
-.bc-num{
-  position:absolute;top:8px;right:8px;z-index:3;
-  background:rgba(0,0,0,0.4);color:rgba(255,255,255,0.8);
-  font-size:0.55rem;font-weight:800;padding:2px 7px;border-radius:100px;
-}
-.bc-price{
-  position:absolute;bottom:8px;left:8px;z-index:3;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:var(--dark);
-  font-size:0.6rem;font-weight:800;padding:3px 8px;border-radius:100px;
-}
-.book-body{padding:0.85rem 0.85rem 1rem;flex:1;display:flex;flex-direction:column;}
-.book-num{font-size:0.55rem;font-weight:800;letter-spacing:0.12em;color:var(--gold);
-  text-transform:uppercase;margin-bottom:0.2rem;}
-.book-title{
-  font-family:var(--serif);font-size:0.84rem;font-weight:700;color:var(--dark);
-  line-height:1.3;margin-bottom:0.4rem;flex:1;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-}
-.book-meta{font-size:0.62rem;color:var(--muted);margin-bottom:0.75rem;line-height:1.4;}
-.book-footer{display:flex;align-items:center;justify-content:space-between;gap:0.5rem;margin-top:auto;}
-.book-price-tag{
-  font-family:var(--serif);font-size:0.95rem;font-weight:900;
-  color:var(--dark2);white-space:nowrap;
-}
-.book-price-tag span{font-size:0.55rem;font-weight:600;color:var(--muted);}
-.buy-btn{
-  padding:0.42rem 0.9rem;
-  background:linear-gradient(135deg,var(--green),var(--green2));
-  color:#fff;border:none;border-radius:8px;
-  font-family:var(--sans);font-size:0.72rem;font-weight:800;
-  cursor:pointer;transition:all 0.18s;white-space:nowrap;
-  text-decoration:none;display:inline-block;
-}
-.buy-btn:hover{
-  background:linear-gradient(135deg,#065f46,var(--green));
-  transform:scale(1.04);
-  box-shadow:0 4px 12px rgba(22,163,74,0.35);
-}
+  .group-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 3px solid;
+  }
+  .group-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+  .group-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+  }
+  .group-subtitle {
+    font-size: 0.88rem;
+    opacity: 0.65;
+    margin-top: 2px;
+    font-weight: 600;
+  }
+  .group-range {
+    margin-left: auto;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
 
-/* ══ CART TOAST ══ */
-.toast{
-  position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;
-  background:var(--dark);color:#fff;
-  padding:0.8rem 1.2rem;border-radius:12px;
-  font-size:0.8rem;font-weight:600;
-  border-left:4px solid var(--gold2);
-  box-shadow:0 8px 24px rgba(0,0,0,0.25);
-  transform:translateY(100px);opacity:0;
-  transition:all 0.3s;pointer-events:none;
-}
-.toast.show{transform:translateY(0);opacity:1;}
+  /* Color themes per group */
+  .g1 { --gc: #E53935; --glight: #FFEBEE; }
+  .g2 { --gc: #1B6B3A; --glight: #E8F5E9; }
+  .g3 { --gc: #F57C00; --glight: #FFF3E0; }
+  .g4 { --gc: #6B3A8A; --glight: #F3E5F5; }
+  .g5 { --gc: #0277BD; --glight: #E1F5FE; }
+  .g6 { --gc: #00838F; --glight: #E0F7FA; }
+  .g7 { --gc: #558B2F; --glight: #F1F8E9; }
+  .g8 { --gc: #D81B60; --glight: #FCE4EC; }
+  .g9 { --gc: #4527A0; --glight: #EDE7F6; }
+  .g10 { --gc: #BF360C; --glight: #FBE9E7; }
 
-/* ══ FOOTER ══ */
-footer{
-  background:var(--dark);padding:2.5rem 1.5rem;text-align:center;
-  border-top:2px solid var(--gold);
-}
-footer p{font-size:0.73rem;color:rgba(255,255,255,0.3);}
-footer span{color:var(--gold2);}
+  .group-header { border-color: var(--gc); }
+  .group-icon { background: var(--glight); color: var(--gc); }
+  .group-range { background: var(--gc); color: white; }
 
-/* ══ HIDDEN ══ */
-.book-card.hidden{display:none;}
+  /* ===== BOOKS GRID ===== */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
 
-/* ══ RESPONSIVE ══ */
-@media(max-width:768px){
-  .books-grid{grid-template-columns:repeat(2,1fr);gap:0.85rem;}
-  .section-wrap{padding:1.5rem 1rem 4rem;}
-  .filter-wrap{top:44px;}
-}
-@media(max-width:480px){
-  .books-grid{grid-template-columns:repeat(2,1fr);gap:0.65rem;}
-  .book-cover{height:130px;}
-  .topnav .nav-link{font-size:0.62rem;padding:0.2rem 0.4rem;}
-}
+  .book-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.22s, box-shadow 0.22s;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid transparent;
+  }
+  .book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    border-color: var(--gc);
+  }
+
+  .book-cover {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--glight), white);
+    position: relative;
+  }
+  .book-num {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: var(--gc);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 8px;
+  }
+
+  .book-body {
+    padding: 14px 14px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .book-title {
+    font-size: 0.93rem;
+    font-weight: 800;
+    line-height: 1.35;
+    color: var(--dark);
+  }
+  .book-price {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--gc);
+  }
+  .book-price span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #888;
+    display: block;
+    margin-top: 1px;
+  }
+
+  .buy-btn {
+    display: block;
+    width: 100%;
+    background: var(--gc);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.18s, transform 0.18s;
+    letter-spacing: 0.03em;
+    margin-top: auto;
+  }
+  .buy-btn:hover { opacity: 0.85; transform: scale(0.98); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--dark);
+    color: #ccc;
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 0.88rem;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 14px; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 500px) {
+    .books-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .book-cover { height: 100px; font-size: 2.2rem; }
+    .group-title { font-size: 1.2rem; }
+    .hero h1 { font-size: 1.7rem; }
+  }
 </style>
 </head>
 <body>
 
-<!-- TOPNAV -->
-<nav class="topnav">
-  <div class="nav-brand">💼 Sade Books</div>
-  <a href="about.html" class="nav-link">ℹ️ Kuhusu</a>
-  <a href="index.html" class="nav-link">🏠 Nyumbani</a>
-  <a href="shop.html" class="nav-link">🛍️ Duka</a>
-  <a href="malipo.html" class="nav-link">💳 Malipo</a>
-  <a href="sade-GPT.html" class="nav-link">🤖 SadeGPT</a>
-  <a href="jifunze_ujasiriamali_na_website.html" class="nav-link curr">💡 Jifunze</a>
-  <a href="sade-order.html" class="nav-link">📦 Agiza</a>
-  <a href="lipa-namba-mix-by-yas.html" class="nav-link">📱 Lipa</a>
-  <a href="afya-yako.html" class="nav-link">🏥 Afya</a>
-  <a href="privacy_and_terms.html" class="nav-link">🔏 Privacy</a>
-  <a href="contact.html" class="nav-link">✉️ Wasiliana</a>
+<!-- TOPBAR LINKS -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a href="about.html">ℹ️ Kuhusu</a>
+    <a href="index.html">🏠 Nyumbani</a>
+    <a href="shop.html">🛒 Duka</a>
+    <a href="malipo.html">💳 Malipo</a>
+    <a href="sade-GPT.html">🤖 Sade-GPT</a>
+    <a href="jifunze_ujasiriamali_na_website.html">📚 Jifunze</a>
+    <a href="sade-order.html">📦 Oda</a>
+    <a href="lipa-namba-mix-by-yas.html">🎵 Lipa-Namba</a>
+    <a href="afya-yako.html">❤️ Afya Yako</a>
+    <a href="privacy_and_terms.html">🔒 Privacy</a>
+    <a href="contact.html">📞 Wasiliana</a>
+  </div>
 </nav>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">📚 Maktaba ya Ujasiriamali — Sade Books</div>
-    <h1 class="hero-title">Vitabu vya <em>Ujasiriamali</em><br>Mdogo na Mkubwa</h1>
-    <p class="hero-sub">Vitabu 100 vya mwongozo wa biashara zote — kuanzia mtaji mdogo hadi kampuni kubwa. Kila kitabu ni hatua moja ya karibu zaidi na mafanikio yako.</p>
-    <div class="hero-stats">
-      <div class="stat-box"><div class="stat-num">100</div><div class="stat-lbl">Vitabu</div></div>
-      <div class="stat-box"><div class="stat-num">5</div><div class="stat-lbl">Makundi</div></div>
-      <div class="stat-box"><div class="stat-num">Tsh 5,000</div><div class="stat-lbl">Kwa Kitabu</div></div>
-      <div class="stat-box"><div class="stat-num">PDF</div><div class="stat-lbl">Papo Hapo</div></div>
+<header class="hero">
+  <div class="hero-icon">📚</div>
+  <h1>Vitabu vya <span>Ujasiriamali</span><br>Tanzania</h1>
+  <p>Mwongozo kamili wa kuanza na kukuza biashara yako — kutoka mtaji mdogo hadi kampuni kubwa</p>
+  <div class="hero-badge">💰 Bei: Tsh 5,000/= kwa Kitabu</div>
+</header>
+
+<!-- SECTION NAV TABS -->
+<nav class="section-nav">
+  <div class="section-nav-inner">
+    <button class="tab-btn active" onclick="scrollTo('g1')">🍩 Biashara Ndogo Sana</button>
+    <button class="tab-btn" onclick="scrollTo('g2')">🏪 Biashara Ndogo Kawaida</button>
+    <button class="tab-btn" onclick="scrollTo('g3')">🌾 Kilimo & Ufugaji</button>
+    <button class="tab-btn" onclick="scrollTo('g4')">🚖 Huduma</button>
+    <button class="tab-btn" onclick="scrollTo('g5')">🏢 Biashara Kubwa</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ========== GROUP 1: Biashara Ndogo Sana ========== -->
+<section class="group-section g1" id="g1">
+  <div class="group-header">
+    <div class="group-icon">🍩</div>
+    <div>
+      <div class="group-title">Biashara Ndogo Sana</div>
+      <div class="group-subtitle">Mtaji Mdogo — Anza Leo Hii!</div>
     </div>
-    <a href="#vitabu" class="hero-cta">🚀 Angalia Vitabu Vyote</a>
+    <div class="group-range">#1–10</div>
   </div>
-</div>
+  <div class="books-grid">
 
-<!-- FILTER BAR -->
-<div class="filter-wrap">
-  <div class="search-box">
-    <span style="color:var(--muted)">🔍</span>
-    <input type="text" id="searchInp" placeholder="Tafuta kitabu..." oninput="applyFilter()">
-  </div>
-  <button class="fcat on" onclick="setCat('all',this)">Zote (100)</button>
-  <button class="fcat" onclick="setCat('grp1',this)">🔥 Ndogo Sana</button>
-  <button class="fcat" onclick="setCat('grp2',this)">🏪 Ndogo Kawaida</button>
-  <button class="fcat" onclick="setCat('grp3',this)">🌾 Kilimo & Ufugaji</button>
-  <button class="fcat" onclick="setCat('grp4',this)">🛵 Huduma</button>
-  <button class="fcat" onclick="setCat('grp5',this)">🏢 Kubwa Zaidi</button>
-  <span class="bcnt" id="bcount">Vitabu 100</span>
-</div>
-
-<!-- BOOKS SECTION -->
-<div class="section-wrap" id="vitabu">
-
-  <!-- GROUP 1 -->
-  <div class="group" id="g-grp1">
-    <div class="group-header grp-1">
-      <span class="gh-icon">🔥</span>
-      <div class="gh-info">
-        <div class="gh-label">Kundi 1 — Vitabu 1–20</div>
-        <div class="gh-title">Biashara Ndogo Sana</div>
-        <div class="gh-desc">Mtaji mdogo, mapato ya haraka — Anza leo hii bila kusubiri</div>
+    <div class="book-card">
+      <div class="book-cover">🍩<div class="book-num">#1</div></div>
+      <div class="book-body">
+        <div class="book-title">Mwongozo wa Kuuza Maandazi na Chapati</div>
+        <div class="book-price">Tsh 5,000/=<span>Chapati • Maandazi • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
       </div>
-      <span class="gh-count">📚 Vitabu 20</span>
     </div>
-    <div class="books-grid" id="grid-grp1"></div>
-  </div>
 
-  <!-- GROUP 2 -->
-  <div class="group" id="g-grp2">
-    <div class="group-header grp-2">
-      <span class="gh-icon">🏪</span>
-      <div class="gh-info">
-        <div class="gh-label">Kundi 2 — Vitabu 21–40</div>
-        <div class="gh-title">Biashara Ndogo za Kawaida</div>
-        <div class="gh-desc">Duka, saluni, huduma — biashara zenye wateja wa kudumu</div>
+    <div class="book-card">
+      <div class="book-cover">🥜<div class="book-num">#2</div></div>
+      <div class="book-body">
+        <div class="book-title">Biashara ya Vitafunwa: Karanga na Popcorn</div>
+        <div class="book-price">Tsh 5,000/=<span>Karanga • Popcorn • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
       </div>
-      <span class="gh-count">📚 Vitabu 20</span>
     </div>
-    <div class="books-grid" id="grid-grp2"></div>
-  </div>
 
-  <!-- GROUP 3 -->
-  <div class="group" id="g-grp3">
-    <div class="group-header grp-3">
-      <span class="gh-icon">🌾</span>
-      <div class="gh-info">
-        <div class="gh-label">Kundi 3 — Vitabu 41–60</div>
-        <div class="gh-title">Kilimo na Ufugaji</div>
-        <div class="gh-desc">Ardhi yetu ni utajiri wetu — Kilimo na ufugaji wa kisasa</div>
+    <div class="book-card">
+      <div class="book-cover">🍊<div class="book-num">#3</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Matunda: Faida na Mbinu</div>
+        <div class="book-price">Tsh 5,000/=<span>Matunda • Soko • Uhifadhi</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
       </div>
-      <span class="gh-count">📚 Vitabu 20</span>
     </div>
-    <div class="books-grid" id="grid-grp3"></div>
-  </div>
 
-  <!-- GROUP 4 -->
-  <div class="group" id="g-grp4">
-    <div class="group-header grp-4">
-      <span class="gh-icon">🛵</span>
-      <div class="gh-info">
-        <div class="gh-label">Kundi 4 — Vitabu 61–80</div>
-        <div class="gh-title">Biashara za Huduma</div>
-        <div class="gh-desc">Ujuzi wako ni mali yako — Biashara za huduma zinazolipa</div>
+    <div class="book-card">
+      <div class="book-cover">💧<div class="book-num">#4</div></div>
+      <div class="book-body">
+        <div class="book-title">Biashara ya Maji ya Kunywa</div>
+        <div class="book-price">Tsh 5,000/=<span>Maji • Leseni • Usambazaji</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
       </div>
-      <span class="gh-count">📚 Vitabu 20</span>
     </div>
-    <div class="books-grid" id="grid-grp4"></div>
-  </div>
 
-  <!-- GROUP 5 -->
-  <div class="group" id="g-grp5">
-    <div class="group-header grp-5">
-      <span class="gh-icon">🏢</span>
-      <div class="gh-info">
-        <div class="gh-label">Kundi 5 — Vitabu 81–100</div>
-        <div class="gh-title">Biashara Kubwa Zaidi</div>
-        <div class="gh-desc">Supermarket, viwanda, kampuni — Ngazi ya juu ya ujasiriamali</div>
+    <div class="book-card">
+      <div class="book-cover">🥤<div class="book-num">#5</div></div>
+      <div class="book-body">
+        <div class="book-title">Kuanzisha Biashara ya Juisi za Matunda</div>
+        <div class="book-price">Tsh 5,000/=<span>Juisi • Vifaa • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
       </div>
-      <span class="gh-count">📚 Vitabu 20</span>
     </div>
-    <div class="books-grid" id="grid-grp5"></div>
+
+    <div class="book-card">
+      <div class="book-cover">🍟<div class="book-num">#6</div></div>
+      <div class="book-body">
+        <div class="book-title">Chipsi Mayai: Biashara Inayolipa</div>
+        <div class="book-price">Tsh 5,000/=<span>Chipsi • Mayai • Mapishi</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">☕<div class="book-num">#7</div></div>
+      <div class="book-body">
+        <div class="book-title">Biashara ya Kahawa na Chai Mtaani</div>
+        <div class="book-price">Tsh 5,000/=<span>Kahawa • Chai • Mahali</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">👗<div class="book-num">#8</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Mitumba: Siri za Mafanikio</div>
+        <div class="book-price">Tsh 5,000/=<span>Mitumba • Ununuzi • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">👟<div class="book-num">#9</div></div>
+      <div class="book-body">
+        <div class="book-title">Biashara ya Viatu vya Mitumba</div>
+        <div class="book-price">Tsh 5,000/=<span>Viatu • Uteuzi • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🥦<div class="book-num">#10</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Mboga Mboga Faida Kubwa</div>
+        <div class="book-price">Tsh 5,000/=<span>Mboga • Soko • Uhifadhi</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
   </div>
+</section>
 
-</div>
+<!-- GROUP 1b: Biashara Ndogo Sana (11-20) -->
+<section class="group-section g1" id="g1b">
+  <div class="group-header">
+    <div class="group-icon">🐟</div>
+    <div>
+      <div class="group-title">Biashara Ndogo Sana — Sehemu ya 2</div>
+      <div class="group-subtitle">Mtaji Mdogo — Faida Nzuri!</div>
+    </div>
+    <div class="group-range">#11–20</div>
+  </div>
+  <div class="books-grid">
 
-<!-- TOAST -->
-<div class="toast" id="toast">✅ Kitabu kimeongezwa! Unaelekea malipo...</div>
+    <div class="book-card">
+      <div class="book-cover">🐟<div class="book-num">#11</div></div>
+      <div class="book-body">
+        <div class="book-title">Samaki wa Kukaanga: Biashara Inayolipa</div>
+        <div class="book-price">Tsh 5,000/=<span>Samaki • Mafuta • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
 
+    <div class="book-card">
+      <div class="book-cover">🍠<div class="book-num">#12</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Mihogo na Viazi Sokoni</div>
+        <div class="book-price">Tsh 5,000/=<span>Mihogo • Viazi • Ununuzi</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🥚<div class="book-num">#13</div></div>
+      <div class="book-body">
+        <div class="book-title">Biashara ya Mayai: Ununuzi na Uuzaji</div>
+        <div class="book-price">Tsh 5,000/=<span>Mayai • Bei • Usambazaji</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🍢<div class="book-num">#14</div></div>
+      <div class="book-body">
+        <div class="book-title">Mishikaki: Biashara ya Nyama Mtaani</div>
+        <div class="book-price">Tsh 5,000/=<span>Mishikaki • Mapishi • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🍦<div class="book-num">#15</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Ice Cream: Biashara ya Baridi</div>
+        <div class="book-price">Tsh 5,000/=<span>Ice Cream • Vifaa • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🌾<div class="book-num">#16</div></div>
+      <div class="book-body">
+        <div class="book-title">Maandazi ya Ufuta: Siri za Mapishi na Biashara</div>
+        <div class="book-price">Tsh 5,000/=<span>Ufuta • Mapishi • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🧼<div class="book-num">#17</div></div>
+      <div class="book-body">
+        <div class="book-title">Biashara ya Sabuni Ndogo Ndogo</div>
+        <div class="book-price">Tsh 5,000/=<span>Sabuni • Utengenezaji • Usambazaji</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🫙<div class="book-num">#18</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Mafuta ya Kupikia Rejareja</div>
+        <div class="book-price">Tsh 5,000/=<span>Mafuta • Rejareja • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">📱<div class="book-num">#19</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Vocha za Simu: Biashara Rahisi</div>
+        <div class="book-price">Tsh 5,000/=<span>Vocha • Mtaji • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🔦<div class="book-num">#20</div></div>
+      <div class="book-body">
+        <div class="book-title">Biashara ya Betri na Tochi Mtaani</div>
+        <div class="book-price">Tsh 5,000/=<span>Betri • Tochi • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== GROUP 2: Biashara Ndogo za Kawaida ========== -->
+<section class="group-section g2" id="g2">
+  <div class="group-header">
+    <div class="group-icon">🏪</div>
+    <div>
+      <div class="group-title">Biashara Ndogo za Kawaida</div>
+      <div class="group-subtitle">Hatua ya Pili — Duka na Huduma</div>
+    </div>
+    <div class="group-range">#21–30</div>
+  </div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-cover">✂️<div class="book-num">#21</div></div>
+      <div class="book-body">
+        <div class="book-title">Saluni ya Kiume: Kuanzisha na Kukuza</div>
+        <div class="book-price">Tsh 5,000/=<span>Saluni • Vifaa • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">💇<div class="book-num">#22</div></div>
+      <div class="book-body">
+        <div class="book-title">Saluni ya Kike: Mwongozo Kamili</div>
+        <div class="book-price">Tsh 5,000/=<span>Saluni • Vipodozi • Huduma</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🧖<div class="book-num">#23</div></div>
+      <div class="book-body">
+        <div class="book-title">Kinyozi na Spa: Biashara ya Kisasa</div>
+        <div class="book-price">Tsh 5,000/=<span>Kinyozi • Spa • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🏬<div class="book-num">#24</div></div>
+      <div class="book-body">
+        <div class="book-title">Duka la Vyakula: Jinsi ya Kufanikiwa</div>
+        <div class="book-price">Tsh 5,000/=<span>Duka • Bidhaa • Usimamizi</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">👔<div class="book-num">#25</div></div>
+      <div class="book-body">
+        <div class="book-title">Duka la Nguo: Ununuzi na Uuzaji wa Busara</div>
+        <div class="book-price">Tsh 5,000/=<span>Nguo • Mitindo • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">👠<div class="book-num">#26</div></div>
+      <div class="book-body">
+        <div class="book-title">Duka la Viatu: Mwongozo wa Biashara</div>
+        <div class="book-price">Tsh 5,000/=<span>Viatu • Stock • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">💄<div class="book-num">#27</div></div>
+      <div class="book-body">
+        <div class="book-title">Duka la Vipodozi: Biashara ya Urembo</div>
+        <div class="book-price">Tsh 5,000/=<span>Vipodozi • Wateja • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">📱<div class="book-num">#28</div></div>
+      <div class="book-body">
+        <div class="book-title">Duka la Simu na Accessories: Siri za Faida</div>
+        <div class="book-price">Tsh 5,000/=<span>Simu • Vifaa • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">📓<div class="book-num">#29</div></div>
+      <div class="book-body">
+        <div class="book-title">Duka la Stationery: Biashara ya Elimu</div>
+        <div class="book-price">Tsh 5,000/=<span>Stationery • Shule • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🖨️<div class="book-num">#30</div></div>
+      <div class="book-body">
+        <div class="book-title">Photocopy na Printing: Biashara ya Haraka</div>
+        <div class="book-price">Tsh 5,000/=<span>Printing • Vifaa • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GROUP 2b: 31-40 -->
+<section class="group-section g2" id="g2b">
+  <div class="group-header">
+    <div class="group-icon">🔧</div>
+    <div>
+      <div class="group-title">Biashara Ndogo za Kawaida — Sehemu ya 2</div>
+      <div class="group-subtitle">Huduma na Bidhaa za Kila Siku</div>
+    </div>
+    <div class="group-range">#31–40</div>
+  </div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-cover">📲<div class="book-num">#31</div></div>
+      <div class="book-body">
+        <div class="book-title">Kutengeneza Simu: Biashara ya Teknolojia</div>
+        <div class="book-price">Tsh 5,000/=<span>Ukarabati • Vifaa • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">👞<div class="book-num">#32</div></div>
+      <div class="book-body">
+        <div class="book-title">Kutengeneza Viatu: Fundi wa Kisasa</div>
+        <div class="book-price">Tsh 5,000/=<span>Viatu • Ukarabati • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">💊<div class="book-num">#33</div></div>
+      <div class="book-body">
+        <div class="book-title">Duka la Dawa Ndogo (OTC): Mwongozo</div>
+        <div class="book-price">Tsh 5,000/=<span>Dawa • Leseni • Usimamizi</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🔵<div class="book-num">#34</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Gesi ya Kupikia: Biashara Salama</div>
+        <div class="book-price">Tsh 5,000/=<span>Gesi • Usalama • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🐠<div class="book-num">#35</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Samaki Sokoni: Usimamizi Bora</div>
+        <div class="book-price">Tsh 5,000/=<span>Samaki • Soko • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🥩<div class="book-num">#36</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Nyama: Biashara ya Uhakika</div>
+        <div class="book-price">Tsh 5,000/=<span>Nyama • Uhifadhi • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🌾<div class="book-num">#37</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Mchele na Nafaka Sokoni</div>
+        <div class="book-price">Tsh 5,000/=<span>Mchele • Nafaka • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🥤<div class="book-num">#38</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Vinywaji Baridi: Biashara ya Burudani</div>
+        <div class="book-price">Tsh 5,000/=<span>Vinywaji • Friji • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🎂<div class="book-num">#39</div></div>
+      <div class="book-body">
+        <div class="book-title">Biashara ya Keki na Maandazi: Bakery Yako</div>
+        <div class="book-price">Tsh 5,000/=<span>Keki • Bakery • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🍽️<div class="book-num">#40</div></div>
+      <div class="book-body">
+        <div class="book-title">Biashara ya Chakula cha Mchana (Mgahawa)</div>
+        <div class="book-price">Tsh 5,000/=<span>Mgahawa • Mapishi • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== GROUP 3: Kilimo na Ufugaji ========== -->
+<section class="group-section g3" id="g3">
+  <div class="group-header">
+    <div class="group-icon">🌾</div>
+    <div>
+      <div class="group-title">Kilimo na Ufugaji</div>
+      <div class="group-subtitle">Ardhi ni Mali — Zitumie Vizuri!</div>
+    </div>
+    <div class="group-range">#41–50</div>
+  </div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-cover">🐔<div class="book-num">#41</div></div>
+      <div class="book-body">
+        <div class="book-title">Ufugaji wa Kuku wa Mayai: Mwongozo Kamili</div>
+        <div class="book-price">Tsh 5,000/=<span>Kuku • Mayai • Soko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🍗<div class="book-num">#42</div></div>
+      <div class="book-body">
+        <div class="book-title">Ufugaji wa Kuku wa Nyama: Faida Haraka</div>
+        <div class="book-price">Tsh 5,000/=<span>Kuku • Nyama • Mauzo</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🦆<div class="book-num">#43</div></div>
+      <div class="book-body">
+        <div class="book-title">Ufugaji wa Bata: Biashara ya Tija</div>
+        <div class="book-price">Tsh 5,000/=<span>Bata • Ufugaji • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🐇<div class="book-num">#44</div></div>
+      <div class="book-body">
+        <div class="book-title">Ufugaji wa Sungura: Biashara Nyumbani</div>
+        <div class="book-price">Tsh 5,000/=<span>Sungura • Nyama • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🐐<div class="book-num">#45</div></div>
+      <div class="book-body">
+        <div class="book-title">Ufugaji wa Mbuzi: Maziwa na Nyama</div>
+        <div class="book-price">Tsh 5,000/=<span>Mbuzi • Maziwa • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🐄<div class="book-num">#46</div></div>
+      <div class="book-body">
+        <div class="book-title">Ufugaji wa Ng'ombe: Biashara ya Maziwa</div>
+        <div class="book-price">Tsh 5,000/=<span>Ng'ombe • Maziwa • Usimamizi</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🐟<div class="book-num">#47</div></div>
+      <div class="book-body">
+        <div class="book-title">Ufugaji wa Samaki (Aquaculture): Faida Kubwa</div>
+        <div class="book-price">Tsh 5,000/=<span>Samaki • Bwawa • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🌾<div class="book-num">#48</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Mpunga: Mwongozo wa Kisasa</div>
+        <div class="book-price">Tsh 5,000/=<span>Mpunga • Pembejeo • Mavuno</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🌽<div class="book-num">#49</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Mahindi: Mavuno Makubwa</div>
+        <div class="book-price">Tsh 5,000/=<span>Mahindi • Mbolea • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🥬<div class="book-num">#50</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Mboga Mboga: Biashara ya Haraka</div>
+        <div class="book-price">Tsh 5,000/=<span>Mboga • Umwagiliaji • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GROUP 3b: 51-60 -->
+<section class="group-section g3" id="g3b">
+  <div class="group-header">
+    <div class="group-icon">🍅</div>
+    <div>
+      <div class="group-title">Kilimo na Ufugaji — Sehemu ya 2</div>
+      <div class="group-subtitle">Mazao Tofauti, Faida Zaidi!</div>
+    </div>
+    <div class="group-range">#51–60</div>
+  </div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-cover">🍎<div class="book-num">#51</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Matunda: Bustani ya Faida</div>
+        <div class="book-price">Tsh 5,000/=<span>Matunda • Maji • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🍉<div class="book-num">#52</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Tikiti Maji: Mavuno ya Haraka</div>
+        <div class="book-price">Tsh 5,000/=<span>Tikiti • Maji • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🌶️<div class="book-num">#53</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Pilipili: Bei Nzuri Sokoni</div>
+        <div class="book-price">Tsh 5,000/=<span>Pilipili • Msimu • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🧅<div class="book-num">#54</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Vitunguu: Biashara ya Kila Siku</div>
+        <div class="book-price">Tsh 5,000/=<span>Vitunguu • Uhifadhi • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🍅<div class="book-num">#55</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Nyanya: Masoko na Faida</div>
+        <div class="book-price">Tsh 5,000/=<span>Nyanya • Mbolea • Mavuno</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🌻<div class="book-num">#56</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Alizeti: Mafuta ya Asili</div>
+        <div class="book-price">Tsh 5,000/=<span>Alizeti • Mafuta • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🌿<div class="book-num">#57</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Ufuta: Mazao ya Thamani</div>
+        <div class="book-price">Tsh 5,000/=<span>Ufuta • Msimu • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🍠<div class="book-num">#58</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Mihogo: Chanzo cha Chakula na Pesa</div>
+        <div class="book-price">Tsh 5,000/=<span>Mihogo • Ardhi • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🥔<div class="book-num">#59</div></div>
+      <div class="book-body">
+        <div class="book-title">Kilimo cha Viazi: Biashara ya Uhakika</div>
+        <div class="book-price">Tsh 5,000/=<span>Viazi • Mbolea • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🌱<div class="book-num">#60</div></div>
+      <div class="book-body">
+        <div class="book-title">Uuzaji wa Pembejeo za Kilimo: Biashara Inayolipa</div>
+        <div class="book-price">Tsh 5,000/=<span>Pembejeo • Mbolea • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== GROUP 4: Biashara za Huduma ========== -->
+<section class="group-section g4" id="g4">
+  <div class="group-header">
+    <div class="group-icon">🚖</div>
+    <div>
+      <div class="group-title">Biashara za Huduma</div>
+      <div class="group-subtitle">Huduma ni Biashara — Toa Ubora!</div>
+    </div>
+    <div class="group-range">#61–70</div>
+  </div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-cover">🏍️<div class="book-num">#61</div></div>
+      <div class="book-body">
+        <div class="book-title">Bodaboda: Biashara ya Usafiri Mtaani</div>
+        <div class="book-price">Tsh 5,000/=<span>Bodaboda • Faida • Usalama</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🛺<div class="book-num">#62</div></div>
+      <div class="book-body">
+        <div class="book-title">Bajaji: Usafiri wa Faida Kubwa</div>
+        <div class="book-price">Tsh 5,000/=<span>Bajaji • Leseni • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🚕<div class="book-num">#63</div></div>
+      <div class="book-body">
+        <div class="book-title">Taxi: Biashara ya Usafiri wa Kisasa</div>
+        <div class="book-price">Tsh 5,000/=<span>Taxi • App • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🚗<div class="book-num">#64</div></div>
+      <div class="book-body">
+        <div class="book-title">Kukodisha Magari: Biashara ya Hadhi</div>
+        <div class="book-price">Tsh 5,000/=<span>Gari • Kukodisha • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🏍️<div class="book-num">#65</div></div>
+      <div class="book-body">
+        <div class="book-title">Kukodisha Pikipiki: Biashara Yenye Tija</div>
+        <div class="book-price">Tsh 5,000/=<span>Pikipiki • Kukodisha • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🪑<div class="book-num">#66</div></div>
+      <div class="book-body">
+        <div class="book-title">Kukodisha Viti na Meza: Biashara ya Sherehe</div>
+        <div class="book-price">Tsh 5,000/=<span>Viti • Meza • Sherehe</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">⛺<div class="book-num">#67</div></div>
+      <div class="book-body">
+        <div class="book-title">Kukodisha Mahema ya Sherehe</div>
+        <div class="book-price">Tsh 5,000/=<span>Mahema • Sherehe • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🍽️<div class="book-num">#68</div></div>
+      <div class="book-body">
+        <div class="book-title">Huduma ya Catering: Kupika kwa Faida</div>
+        <div class="book-price">Tsh 5,000/=<span>Catering • Mapishi • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">📷<div class="book-num">#69</div></div>
+      <div class="book-body">
+        <div class="book-title">Huduma ya Kupiga Picha: Fundi wa Picha</div>
+        <div class="book-price">Tsh 5,000/=<span>Picha • Vifaa • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🎬<div class="book-num">#70</div></div>
+      <div class="book-body">
+        <div class="book-title">Huduma ya Video: Biashara ya Kumbukumbu</div>
+        <div class="book-price">Tsh 5,000/=<span>Video • Camera • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GROUP 4b: 71-80 -->
+<section class="group-section g4" id="g4b">
+  <div class="group-header">
+    <div class="group-icon">🎨</div>
+    <div>
+      <div class="group-title">Biashara za Huduma — Sehemu ya 2</div>
+      <div class="group-subtitle">Taaluma Yako ni Biashara!</div>
+    </div>
+    <div class="group-range">#71–80</div>
+  </div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-cover">🎧<div class="book-num">#71</div></div>
+      <div class="book-body">
+        <div class="book-title">Huduma ya DJ: Biashara ya Burudani</div>
+        <div class="book-price">Tsh 5,000/=<span>DJ • Sound • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🎊<div class="book-num">#72</div></div>
+      <div class="book-body">
+        <div class="book-title">Huduma ya Mapambo ya Sherehe</div>
+        <div class="book-price">Tsh 5,000/=<span>Mapambo • Sherehe • Ubunifu</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🧹<div class="book-num">#73</div></div>
+      <div class="book-body">
+        <div class="book-title">Huduma ya Usafishaji Majumbani</div>
+        <div class="book-price">Tsh 5,000/=<span>Usafi • Wateja • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">👕<div class="book-num">#74</div></div>
+      <div class="book-body">
+        <div class="book-title">Kufua Nguo (Laundry): Biashara Inayolipa</div>
+        <div class="book-price">Tsh 5,000/=<span>Laundry • Mashine • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">📖<div class="book-num">#75</div></div>
+      <div class="book-body">
+        <div class="book-title">Kufundisha Tuition: Elimu ni Biashara</div>
+        <div class="book-price">Tsh 5,000/=<span>Tuition • Wanafunzi • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">💻<div class="book-num">#76</div></div>
+      <div class="book-body">
+        <div class="book-title">Kufundisha Kompyuta: Taaluma Inayolipa</div>
+        <div class="book-price">Tsh 5,000/=<span>Kompyuta • Wanafunzi • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🗣️<div class="book-num">#77</div></div>
+      <div class="book-body">
+        <div class="book-title">Kufundisha Lugha: Biashara ya Taaluma</div>
+        <div class="book-price">Tsh 5,000/=<span>Lugha • Wanafunzi • Mapato</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🎵<div class="book-num">#78</div></div>
+      <div class="book-body">
+        <div class="book-title">Kufundisha Muziki: Sanaa Inayolipa</div>
+        <div class="book-price">Tsh 5,000/=<span>Muziki • Wanafunzi • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🌐<div class="book-num">#79</div></div>
+      <div class="book-body">
+        <div class="book-title">Kituo cha Internet: Biashara ya Mtandao</div>
+        <div class="book-price">Tsh 5,000/=<span>Internet • Kompyuta • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🎨<div class="book-num">#80</div></div>
+      <div class="book-body">
+        <div class="book-title">Huduma za Graphic Design: Ubunifu wa Faida</div>
+        <div class="book-price">Tsh 5,000/=<span>Design • Wateja • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== GROUP 5: Biashara Kubwa Zaidi ========== -->
+<section class="group-section g5" id="g5">
+  <div class="group-header">
+    <div class="group-icon">🏢</div>
+    <div>
+      <div class="group-title">Biashara Kubwa Zaidi</div>
+      <div class="group-subtitle">Kampuni za Kweli — Maono Makubwa!</div>
+    </div>
+    <div class="group-range">#81–90</div>
+  </div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-cover">🛒<div class="book-num">#81</div></div>
+      <div class="book-body">
+        <div class="book-title">Supermarket: Biashara Kubwa ya Rejareja</div>
+        <div class="book-price">Tsh 5,000/=<span>Supermarket • Stock • Usimamizi</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🏨<div class="book-num">#82</div></div>
+      <div class="book-body">
+        <div class="book-title">Hotel au Lodge: Biashara ya Utalii</div>
+        <div class="book-price">Tsh 5,000/=<span>Hotel • Wageni • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🍴<div class="book-num">#83</div></div>
+      <div class="book-body">
+        <div class="book-title">Restaurant Kubwa: Jinsi ya Kufanikiwa</div>
+        <div class="book-price">Tsh 5,000/=<span>Restaurant • Menu • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🚚<div class="book-num">#84</div></div>
+      <div class="book-body">
+        <div class="book-title">Kampuni ya Usafirishaji: Logistics ya Faida</div>
+        <div class="book-price">Tsh 5,000/=<span>Usafiri • Bidhaa • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🏗️<div class="book-num">#85</div></div>
+      <div class="book-body">
+        <div class="book-title">Kampuni ya Ujenzi: Biashara ya Nyumba</div>
+        <div class="book-price">Tsh 5,000/=<span>Ujenzi • Nyumba • Mikataba</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🧽<div class="book-num">#86</div></div>
+      <div class="book-body">
+        <div class="book-title">Kampuni ya Usafi: Cleaning Company</div>
+        <div class="book-price">Tsh 5,000/=<span>Usafi • Wateja • Mikataba</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">💻<div class="book-num">#87</div></div>
+      <div class="book-body">
+        <div class="book-title">Kampuni ya IT: Teknolojia ni Biashara</div>
+        <div class="book-price">Tsh 5,000/=<span>IT • Software • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">📢<div class="book-num">#88</div></div>
+      <div class="book-body">
+        <div class="book-title">Kampuni ya Matangazo: Ubunifu Unaolipa</div>
+        <div class="book-price">Tsh 5,000/=<span>Matangazo • Media • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🧴<div class="book-num">#89</div></div>
+      <div class="book-body">
+        <div class="book-title">Kiwanda cha Sabuni: Uzalishaji wa Faida</div>
+        <div class="book-price">Tsh 5,000/=<span>Sabuni • Kiwanda • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">💧<div class="book-num">#90</div></div>
+      <div class="book-body">
+        <div class="book-title">Kiwanda cha Maji: Biashara ya Afya</div>
+        <div class="book-price">Tsh 5,000/=<span>Maji • Kiwanda • Usambazaji</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GROUP 5b: 91-100 -->
+<section class="group-section g5" id="g5b">
+  <div class="group-header">
+    <div class="group-icon">🚀</div>
+    <div>
+      <div class="group-title">Biashara Kubwa Zaidi — Sehemu ya 2</div>
+      <div class="group-subtitle">Maono Makubwa, Mafanikio Makubwa!</div>
+    </div>
+    <div class="group-range">#91–100</div>
+  </div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-cover">🥤<div class="book-num">#91</div></div>
+      <div class="book-body">
+        <div class="book-title">Kiwanda cha Juisi: Uzalishaji wa Vinywaji</div>
+        <div class="book-price">Tsh 5,000/=<span>Juisi • Kiwanda • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🍞<div class="book-num">#92</div></div>
+      <div class="book-body">
+        <div class="book-title">Kiwanda cha Mikate: Biashara ya Chakula</div>
+        <div class="book-price">Tsh 5,000/=<span>Mikate • Bakery • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🧵<div class="book-num">#93</div></div>
+      <div class="book-body">
+        <div class="book-title">Kiwanda cha Nguo: Biashara ya Mavazi</div>
+        <div class="book-price">Tsh 5,000/=<span>Nguo • Kiwanda • Usambazaji</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🏫<div class="book-num">#94</div></div>
+      <div class="book-body">
+        <div class="book-title">Shule Binafsi: Elimu ni Biashara Kubwa</div>
+        <div class="book-price">Tsh 5,000/=<span>Shule • Wanafunzi • Usimamizi</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🎓<div class="book-num">#95</div></div>
+      <div class="book-body">
+        <div class="book-title">Chuo cha Mafunzo: Taaluma ya Biashara</div>
+        <div class="book-price">Tsh 5,000/=<span>Chuo • Kozi • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🌱<div class="book-num">#96</div></div>
+      <div class="book-body">
+        <div class="book-title">Kampuni ya Kilimo Kikubwa: Agribusiness</div>
+        <div class="book-price">Tsh 5,000/=<span>Kilimo • Kampuni • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🐄<div class="book-num">#97</div></div>
+      <div class="book-body">
+        <div class="book-title">Kampuni ya Ufugaji Mkubwa: Mifugo ya Biashara</div>
+        <div class="book-price">Tsh 5,000/=<span>Ufugaji • Mifugo • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">📱<div class="book-num">#98</div></div>
+      <div class="book-body">
+        <div class="book-title">App au Website ya Biashara: Teknolojia Inayolipa</div>
+        <div class="book-price">Tsh 5,000/=<span>App • Website • Wateja</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">📦<div class="book-num">#99</div></div>
+      <div class="book-body">
+        <div class="book-title">Kampuni ya Logistics: Usafirishaji wa Bidhaa</div>
+        <div class="book-price">Tsh 5,000/=<span>Logistics • Bidhaa • Masoko</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">🛍️<div class="book-num">#100</div></div>
+      <div class="book-body">
+        <div class="book-title">Duka Kubwa la Mtandaoni (E-Commerce): Biashara ya Dijitali</div>
+        <div class="book-price">Tsh 5,000/=<span>E-Commerce • Mtandao • Faida</span></div>
+        <a class="buy-btn" href="malipo.html">🛒 Nunua Sasa</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 <span>Sade Books</span> · Imetengenezwa na ❤️ Herman Sade · Tanzania 🇹🇿</p>
-  <p style="margin-top:0.3rem;">💳 Malipo: M-Pesa/Tigo/Airtel → <span>0712 655 957</span> (HERMAN O SADE) · Tsh 5,000 kwa kitabu</p>
+  <div style="font-size:1.6rem; margin-bottom:8px;">📚</div>
+  <p style="font-weight:700; color:white; margin-bottom:6px;">Duka la Vitabu vya Ujasiriamali Tanzania</p>
+  <p>Vitabu 100 vya Biashara — Bei Tsh 5,000/= kila kimoja</p>
+  <div class="footer-links">
+    <a href="about.html">Kuhusu</a>
+    <a href="index.html">Nyumbani</a>
+    <a href="shop.html">Duka</a>
+    <a href="malipo.html">Malipo</a>
+    <a href="contact.html">Wasiliana</a>
+    <a href="privacy_and_terms.html">Privacy & Terms</a>
+    <a href="afya-yako.html">Afya Yako</a>
+  </div>
+  <p style="margin-top:16px; opacity:0.5; font-size:0.8rem;">© 2025 Ujasiriamali Tanzania. Haki Zote Zimehifadhiwa.</p>
 </footer>
 
 <script>
-const PRICE = 5000;
-const PAY_URL = 'malipo.html';
-
-const BOOKS = [
-// ── GROUP 1: Biashara Ndogo Sana (1–20) ──
-{id:1,g:'grp1',e:'🍩',t:'Biashara ya Maandazi na Chapati',desc:'Jinsi ya kuanzisha, kupika, na kuuza maandazi na chapati kwa faida',pages:45,mtaji:'Tsh 20,000–50,000',bg:'linear-gradient(135deg,#78350f,#d97706)'},
-{id:2,g:'grp1',e:'🥜',t:'Vitafunwa vya Biashara: Karanga na Popcorn',desc:'Uzalishaji, ufungashaji na uuzaji wa vitafunwa vya bei nafuu',pages:38,mtaji:'Tsh 15,000–30,000',bg:'linear-gradient(135deg,#92400e,#f59e0b)'},
-{id:3,g:'grp1',e:'🍉',t:'Biashara ya Matunda: Mapato ya Kila Siku',desc:'Kununua, kuhifadhi na kuuza matunda sokoni na mitaani',pages:42,mtaji:'Tsh 30,000–80,000',bg:'linear-gradient(135deg,#14532d,#22c55e)'},
-{id:4,g:'grp1',e:'💧',t:'Biashara ya Maji ya Kunywa',desc:'Uuzaji wa maji ya chupa na gudulia — mahitaji ya kila siku',pages:50,mtaji:'Tsh 50,000–150,000',bg:'linear-gradient(135deg,#0c4a6e,#38bdf8)'},
-{id:5,g:'grp1',e:'🥤',t:'Juisi za Matunda Safi: Biashara ya Afya',desc:'Kutengeneza na kuuza juisi za asili za matunda ya Tanzania',pages:48,mtaji:'Tsh 30,000–100,000',bg:'linear-gradient(135deg,#701a75,#c026d3)'},
-{id:6,g:'grp1',e:'🍟',t:'Chipsi Mayai: Biashara ya Mitaani Inayolipa',desc:'Jinsi ya kuanzisha stendi ya chipsi mayai yenye wateja wengi',pages:35,mtaji:'Tsh 20,000–60,000',bg:'linear-gradient(135deg,#7c2d12,#f97316)'},
-{id:7,g:'grp1',e:'☕',t:'Kahawa na Chai: Biashara ya Asubuhi',desc:'Kuanzisha stendi ya kahawa na chai yenye wateja wa kudumu',pages:40,mtaji:'Tsh 25,000–70,000',bg:'linear-gradient(135deg,#1c1917,#78350f)'},
-{id:8,g:'grp1',e:'👗',t:'Biashara ya Mitumba: Nguo za Pili',desc:'Kununua gunia la mitumba na kuuza kwa faida nzuri',pages:55,mtaji:'Tsh 50,000–200,000',bg:'linear-gradient(135deg,#1e3a8a,#7c3aed)'},
-{id:9,g:'grp1',e:'👟',t:'Viatu vya Mitumba: Faida Kubwa Mtaji Mdogo',desc:'Biashara ya viatu vya pili hand — ununuzi na uuzaji wa busara',pages:43,mtaji:'Tsh 40,000–150,000',bg:'linear-gradient(135deg,#312e81,#6366f1)'},
-{id:10,g:'grp1',e:'🥬',t:'Mboga Mboga: Biashara ya Kila Siku',desc:'Uuzaji wa mboga sokoni na mtaani — mahitaji ya familia kila siku',pages:47,mtaji:'Tsh 20,000–60,000',bg:'linear-gradient(135deg,#14532d,#16a34a)'},
-{id:11,g:'grp1',e:'🐟',t:'Samaki wa Kukaanga: Biashara ya Usiku',desc:'Jinsi ya kuanzisha meza ya samaki wa kukaanga yenye faida',pages:38,mtaji:'Tsh 30,000–80,000',bg:'linear-gradient(135deg,#0c4a6e,#0369a1)'},
-{id:12,g:'grp1',e:'🍠',t:'Mihogo na Viazi: Chakula cha Watanzania',desc:'Uuzaji wa mihogo, viazi na mazao ya ardhi kwa faida nzuri',pages:36,mtaji:'Tsh 20,000–50,000',bg:'linear-gradient(135deg,#78350f,#d97706)'},
-{id:13,g:'grp1',e:'🥚',t:'Biashara ya Mayai: Rahisi na Inayolipa',desc:'Uuzaji wa mayai kwa rejareja na jumla — faida ya haraka',pages:40,mtaji:'Tsh 30,000–100,000',bg:'linear-gradient(135deg,#854d0e,#eab308)'},
-{id:14,g:'grp1',e:'🍢',t:'Mishikaki: Biashara ya Usiku wa Burudani',desc:'Kuandaa na kuuza mishikaki mitaani — wateja wengi usiku',pages:35,mtaji:'Tsh 20,000–60,000',bg:'linear-gradient(135deg,#7c2d12,#ef4444)'},
-{id:15,g:'grp1',e:'🍦',t:'Ice Cream: Biashara ya Watoto na Wazee',desc:'Kuuza ice cream na barafu ya ladha — wateja wa rika zote',pages:42,mtaji:'Tsh 50,000–200,000',bg:'linear-gradient(135deg,#be185d,#f9a8d4)'},
-{id:16,g:'grp1',e:'🍩',t:'Maandazi ya Ufuta: Ladha ya Kipekee',desc:'Kutengeneza na kuuza maandazi ya ufuta yanayovutia wateja',pages:38,mtaji:'Tsh 15,000–40,000',bg:'linear-gradient(135deg,#92400e,#fbbf24)'},
-{id:17,g:'grp1',e:'🧼',t:'Sabuni Ndogo Ndogo: Uzalishaji Nyumbani',desc:'Kutengeneza sabuni za msingi nyumbani na kuuza kwa jirani',pages:55,mtaji:'Tsh 20,000–80,000',bg:'linear-gradient(135deg,#0e7490,#22d3ee)'},
-{id:18,g:'grp1',e:'🛢️',t:'Mafuta ya Kupikia Rejareja: Biashara ya Muhimu',desc:'Kununua mafuta kwa jumla na kuuza kwa rejareja kwa faida',pages:40,mtaji:'Tsh 50,000–150,000',bg:'linear-gradient(135deg,#713f12,#f59e0b)'},
-{id:19,g:'grp1',e:'📱',t:'Vocha za Simu: Biashara Rahisi na ya Haraka',desc:'Kuuza vocha za simu zote — Vodacom, Tigo, Airtel, Halotel',pages:32,mtaji:'Tsh 20,000–100,000',bg:'linear-gradient(135deg,#1e3a8a,#3b82f6)'},
-{id:20,g:'grp1',e:'🔦',t:'Betri na Tochi: Biashara ya Umeme wa Ndogo',desc:'Uuzaji wa betri, tochi na vifaa vya umeme vidogo vidogo',pages:35,mtaji:'Tsh 30,000–80,000',bg:'linear-gradient(135deg,#1c1917,#374151)'},
-
-// ── GROUP 2: Biashara Ndogo za Kawaida (21–40) ──
-{id:21,g:'grp2',e:'✂️',t:'Saluni ya Kiume: Biashara ya Kinyozi',desc:'Kuanzisha na kuendesha saluni ya kiume yenye wateja wa kudumu',pages:65,mtaji:'Tsh 500,000–2M',bg:'linear-gradient(135deg,#1e3a8a,#2563eb)'},
-{id:22,g:'grp2',e:'💇',t:'Saluni ya Kike: Beauty Business',desc:'Saluni ya wanawake — nywele, manicure, pedicure na zaidi',pages:70,mtaji:'Tsh 1M–5M',bg:'linear-gradient(135deg,#701a75,#a21caf)'},
-{id:23,g:'grp2',e:'💆',t:'Kinyozi + Spa: Biashara ya Starehe',desc:'Kuchanganya kinyozi na huduma za spa kwa mapato mazuri zaidi',pages:68,mtaji:'Tsh 2M–8M',bg:'linear-gradient(135deg,#312e81,#8b5cf6)'},
-{id:24,g:'grp2',e:'🏪',t:'Duka la Vyakula: Biashara ya Msingi',desc:'Kuanzisha na kuendesha duka la vyakula vya rejareja kwa ufanisi',pages:72,mtaji:'Tsh 500,000–3M',bg:'linear-gradient(135deg,#14532d,#16a34a)'},
-{id:25,g:'grp2',e:'👔',t:'Duka la Nguo: Fashion na Biashara',desc:'Uuzaji wa nguo za kisasa — wateja, usimamizi na mapato',pages:68,mtaji:'Tsh 1M–5M',bg:'linear-gradient(135deg,#1e3a8a,#6366f1)'},
-{id:26,g:'grp2',e:'👠',t:'Duka la Viatu: Hatua za Mafanikio',desc:'Biashara ya viatu vya aina zote — import, mitumba na mpya',pages:65,mtaji:'Tsh 1M–5M',bg:'linear-gradient(135deg,#7c2d12,#dc2626)'},
-{id:27,g:'grp2',e:'💄',t:'Duka la Vipodozi: Beauty Supply',desc:'Uuzaji wa vipodozi, dawa za nywele na bidhaa za urembo',pages:62,mtaji:'Tsh 500,000–2M',bg:'linear-gradient(135deg,#9d174d,#ec4899)'},
-{id:28,g:'grp2',e:'📱',t:'Duka la Simu na Accessories',desc:'Uuzaji wa simu, covers, chargers na vifaa vingine vya simu',pages:70,mtaji:'Tsh 2M–10M',bg:'linear-gradient(135deg,#0f172a,#1d4ed8)'},
-{id:29,g:'grp2',e:'📝',t:'Duka la Stationery: Elimu ni Biashara',desc:'Uuzaji wa vitabu, kalamu, karatasi na vifaa vya shule/ofisi',pages:58,mtaji:'Tsh 300,000–1.5M',bg:'linear-gradient(135deg,#1e3a8a,#0369a1)'},
-{id:30,g:'grp2',e:'🖨️',t:'Photocopy na Printing: Biashara ya Ofisi',desc:'Huduma ya photocopy, printing na lamination kwa wateja wa ofisi na shule',pages:60,mtaji:'Tsh 1M–4M',bg:'linear-gradient(135deg,#1c1917,#374151)'},
-{id:31,g:'grp2',e:'🔧',t:'Kutengeneza Simu: Fundi wa Kisasa',desc:'Mwongozo wa kuanzisha duka la utengenezaji simu za kisasa',pages:75,mtaji:'Tsh 500,000–2M',bg:'linear-gradient(135deg,#0f172a,#0369a1)'},
-{id:32,g:'grp2',e:'👞',t:'Fundi wa Viatu: Ustadi Unaolipa',desc:'Biashara ya kutengeneza na kurekebisha viatu — fundi wa kisasa',pages:55,mtaji:'Tsh 200,000–800,000',bg:'linear-gradient(135deg,#78350f,#b45309)'},
-{id:33,g:'grp2',e:'💊',t:'Duka la Dawa Ndogo (OTC): Afya ni Fedha',desc:'Kuanzisha duka la dawa za OTC — mwongozo wa kisheria na biashara',pages:80,mtaji:'Tsh 1M–5M',bg:'linear-gradient(135deg,#064e3b,#16a34a)'},
-{id:34,g:'grp2',e:'🔥',t:'Biashara ya Gesi ya Kupikia: Nishati ya Nyumba',desc:'Uuzaji wa gesi ya kupikia — wateja wa kila siku na faida imara',pages:62,mtaji:'Tsh 1M–4M',bg:'linear-gradient(135deg,#7c2d12,#f97316)'},
-{id:35,g:'grp2',e:'🐟',t:'Uuzaji wa Samaki Sokoni: Biashara ya Bahari',desc:'Biashara ya samaki sokoni — ununuzi, uhifadhi na uuzaji wa faida',pages:60,mtaji:'Tsh 300,000–1M',bg:'linear-gradient(135deg,#0c4a6e,#0284c7)'},
-{id:36,g:'grp2',e:'🥩',t:'Uuzaji wa Nyama: Biashara ya Nguvu',desc:'Kuanzisha duka la nyama — uchinjaji, uhifadhi na uuzaji wa nyama',pages:68,mtaji:'Tsh 500,000–3M',bg:'linear-gradient(135deg,#7f1d1d,#dc2626)'},
-{id:37,g:'grp2',e:'🌾',t:'Duka la Mchele na Nafaka',desc:'Biashara ya mchele, mahindi, unga na nafaka — wateja wa jumla na rejareja',pages:65,mtaji:'Tsh 500,000–2M',bg:'linear-gradient(135deg,#713f12,#d97706)'},
-{id:38,g:'grp2',e:'🧃',t:'Uuzaji wa Vinywaji Baridi: Kuburudisha na Kupata Faida',desc:'Biashara ya vinywaji baridi, maji ya chupa na juisi — wakati wa joto',pages:55,mtaji:'Tsh 300,000–1.5M',bg:'linear-gradient(135deg,#0c4a6e,#06b6d4)'},
-{id:39,g:'grp2',e:'🎂',t:'Keki na Maandazi ya Biashara: Uchumi wa Mikono',desc:'Uzalishaji wa keki na maandazi kwa biashara — wateja wa harusi na sherehe',pages:72,mtaji:'Tsh 200,000–1M',bg:'linear-gradient(135deg,#9d174d,#db2777)'},
-{id:40,g:'grp2',e:'🍽️',t:'Chakula cha Mchana: Mama Lishe wa Kisasa',desc:'Kuanzisha mgahawa mdogo wa chakula cha mchana — mapato ya kila siku',pages:70,mtaji:'Tsh 300,000–1.5M',bg:'linear-gradient(135deg,#7c2d12,#b45309)'},
-
-// ── GROUP 3: Kilimo na Ufugaji (41–60) ──
-{id:41,g:'grp3',e:'🐔',t:'Ufugaji wa Kuku wa Mayai: Biashara ya Kila Siku',desc:'Kuanzisha banda la kuku wa mayai — mwongozo kamili wa uzalishaji',pages:85,mtaji:'Tsh 1M–5M',bg:'linear-gradient(135deg,#14532d,#16a34a)'},
-{id:42,g:'grp3',e:'🍗',t:'Ufugaji wa Kuku wa Nyama: Broiler Business',desc:'Kuku wa nyama — ufugaji wa haraka, mauzo na faida kubwa',pages:80,mtaji:'Tsh 500,000–3M',bg:'linear-gradient(135deg,#7c2d12,#ef4444)'},
-{id:43,g:'grp3',e:'🦆',t:'Ufugaji wa Bata: Fursa Inayosahauliwa',desc:'Bata wa nyama na mayai — biashara rahisi yenye soko zuri Tanzania',pages:72,mtaji:'Tsh 300,000–1.5M',bg:'linear-gradient(135deg,#0c4a6e,#0284c7)'},
-{id:44,g:'grp3',e:'🐰',t:'Ufugaji wa Sungura: Nyama ya Ubora',desc:'Sungura wa nyama — mazao haraka, gharama ndogo, soko linakua',pages:68,mtaji:'Tsh 200,000–800,000',bg:'linear-gradient(135deg,#701a75,#9333ea)'},
-{id:45,g:'grp3',e:'🐐',t:'Ufugaji wa Mbuzi: Mali ya Ardhi',desc:'Ufugaji wa mbuzi wa nyama na maziwa — biashara ya muda mrefu',pages:82,mtaji:'Tsh 500,000–3M',bg:'linear-gradient(135deg,#713f12,#d97706)'},
-{id:46,g:'grp3',e:'🐄',t:'Ufugaji wa Ng'ombe: Maziwa na Nyama',desc:'Mifugo ya ng'ombe — maziwa, nyama na ngozi — biashara ya utajiri',pages:90,mtaji:'Tsh 5M–20M',bg:'linear-gradient(135deg,#1c1917,#57534e)'},
-{id:47,g:'grp3',e:'🐠',t:'Ufugaji wa Samaki: Aquaculture ya Kisasa',desc:'Samaki wa mabwawa — tilapia, kambale — mwongozo kamili wa aquaculture',pages:88,mtaji:'Tsh 1M–10M',bg:'linear-gradient(135deg,#0c4a6e,#0369a1)'},
-{id:48,g:'grp3',e:'🌾',t:'Kilimo cha Mpunga: Biashara ya Chakula',desc:'Kilimo cha mpunga wa mseto na wa asili — mbinu za kisasa Tanzania',pages:85,mtaji:'Tsh 1M–10M',bg:'linear-gradient(135deg,#14532d,#22c55e)'},
-{id:49,g:'grp3',e:'🌽',t:'Kilimo cha Mahindi: Chakula na Biashara',desc:'Mahindi ya mseto — kilimo bora, kuhifadhi na kuuza kwa faida',pages:80,mtaji:'Tsh 500,000–5M',bg:'linear-gradient(135deg,#713f12,#eab308)'},
-{id:50,g:'grp3',e:'🥬',t:'Kilimo cha Mboga Mboga: Bustani ya Biashara',desc:'Mboga za aina zote — kilimo cha umwagiliaji, uzalishaji mwaka mzima',pages:78,mtaji:'Tsh 300,000–2M',bg:'linear-gradient(135deg,#14532d,#16a34a)'},
-{id:51,g:'grp3',e:'🍊',t:'Kilimo cha Matunda: Shamba la Utajiri',desc:'Miembe, michungwa, mapapai — kilimo cha matunda yenye soko kubwa',pages:82,mtaji:'Tsh 1M–10M',bg:'linear-gradient(135deg,#7c2d12,#f97316)'},
-{id:52,g:'grp3',e:'🍈',t:'Kilimo cha Tikiti Maji: Faida Kubwa kwa Hekta',desc:'Tikiti maji — msimu mfupi, faida kubwa, soko zuri mijini',pages:70,mtaji:'Tsh 500,000–3M',bg:'linear-gradient(135deg,#14532d,#16a34a)'},
-{id:53,g:'grp3',e:'🌶️',t:'Kilimo cha Pilipili: Export na Soko la Ndani',desc:'Pilipili hoho na tango — kilimo cha export na soko la ndani',pages:75,mtaji:'Tsh 300,000–2M',bg:'linear-gradient(135deg,#7f1d1d,#dc2626)'},
-{id:54,g:'grp3',e:'🧅',t:'Kilimo cha Vitunguu: Mazao Yanayolipa',desc:'Vitunguu maji na saumu — kilimo cha biashara yenye soko kubwa',pages:72,mtaji:'Tsh 500,000–3M',bg:'linear-gradient(135deg,#78350f,#d97706)'},
-{id:55,g:'grp3',e:'🍅',t:'Kilimo cha Nyanya: Biashara ya Vitamini',desc:'Nyanya — mbinu za kisasa, magonjwa, masoko na faida',pages:78,mtaji:'Tsh 300,000–2M',bg:'linear-gradient(135deg,#7f1d1d,#ef4444)'},
-{id:56,g:'grp3',e:'🌻',t:'Kilimo cha Alizeti: Mafuta ya Asili',desc:'Alizeti — malighafi ya mafuta ya kupikia, soko kubwa Tanzania',pages:75,mtaji:'Tsh 500,000–5M',bg:'linear-gradient(135deg,#713f12,#fbbf24)'},
-{id:57,g:'grp3',e:'🌱',t:'Kilimo cha Ufuta: Mazao ya Kimataifa',desc:'Ufuta wa export — mbinu za kilimo, kuvuna na kuuza kwa bei nzuri',pages:72,mtaji:'Tsh 500,000–5M',bg:'linear-gradient(135deg,#92400e,#d97706)'},
-{id:58,g:'grp3',e:'🥔',t:'Kilimo cha Mihogo: Chakula na Viwanda',desc:'Mihogo ya biashara — chakula, unga, na malighafi za viwanda',pages:70,mtaji:'Tsh 300,000–2M',bg:'linear-gradient(135deg,#78350f,#b45309)'},
-{id:59,g:'grp3',e:'🥕',t:'Kilimo cha Viazi: Ardhi yenye Utajiri',desc:'Viazi vitamu na viazi mviringo — kilimo cha faida Tanzania',pages:68,mtaji:'Tsh 300,000–2M',bg:'linear-gradient(135deg,#7c2d12,#f97316)'},
-{id:60,g:'grp3',e:'🧪',t:'Uuzaji wa Pembejeo: Duka la Wakulima',desc:'Mbegu, mbolea, dawa za mimea — duka la pembejeo kwa wakulima',pages:82,mtaji:'Tsh 1M–5M',bg:'linear-gradient(135deg,#14532d,#059669)'},
-
-// ── GROUP 4: Huduma (61–80) ──
-{id:61,g:'grp4',e:'🏍️',t:'Bodaboda: Biashara ya Usafiri wa Haraka',desc:'Bodaboda — mwanzo, usimamizi, usalama na kuongeza mapato',pages:60,mtaji:'Tsh 1M–3M',bg:'linear-gradient(135deg,#701a75,#c026d3)'},
-{id:62,g:'grp4',e:'🛺',t:'Bajaji: Usafiri wa Mwendo wa Kati',desc:'Bajaji — uendeshaji wa biashara, matengenezo na faida ya kila siku',pages:62,mtaji:'Tsh 3M–8M',bg:'linear-gradient(135deg,#1e3a8a,#7c3aed)'},
-{id:63,g:'grp4',e:'🚕',t:'Taxi: Biashara ya Usafiri wa Heshima',desc:'Taxi na Uber/Bolt — jinsi ya kuanzisha, kuendesha na kupata wateja',pages:70,mtaji:'Tsh 10M–30M',bg:'linear-gradient(135deg,#0f172a,#1d4ed8)'},
-{id:64,g:'grp4',e:'🚌',t:'Kukodisha Magari: Biashara ya Utulivu',desc:'Kukodisha gari moja au zaidi — wateja, mikataba na usimamizi',pages:75,mtaji:'Tsh 20M–100M',bg:'linear-gradient(135deg,#1c1917,#374151)'},
-{id:65,g:'grp4',e:'🏍️',t:'Kukodisha Pikipiki: Biashara ya Haraka',desc:'Kutoa pikipiki kwa kukodisha — kwa siku, wiki na mwezi',pages:58,mtaji:'Tsh 2M–10M',bg:'linear-gradient(135deg,#7c2d12,#ef4444)'},
-{id:66,g:'grp4',e:'🪑',t:'Kukodisha Viti na Meza: Biashara ya Sherehe',desc:'Kukodisha vifaa vya sherehe — harusi, mikutano na matukio',pages:65,mtaji:'Tsh 2M–8M',bg:'linear-gradient(135deg,#1e3a8a,#6366f1)'},
-{id:67,g:'grp4',e:'⛺',t:'Kukodisha Mahema ya Sherehe',desc:'Kukodisha mahema makubwa kwa harusi, sherehe na mikutano',pages:68,mtaji:'Tsh 3M–15M',bg:'linear-gradient(135deg,#701a75,#9333ea)'},
-{id:68,g:'grp4',e:'🍱',t:'Huduma ya Catering: Chakula cha Sherehe',desc:'Catering kwa harusi, mikutano, shule na kampuni — mwongozo kamili',pages:80,mtaji:'Tsh 500,000–3M',bg:'linear-gradient(135deg,#7c2d12,#b45309)'},
-{id:69,g:'grp4',e:'📷',t:'Huduma ya Kupiga Picha: Kumbukumbu ya Maisha',desc:'Photography ya biashara — harusi, matukio, studio na online',pages:75,mtaji:'Tsh 1M–5M',bg:'linear-gradient(135deg,#0f172a,#1e3a8a)'},
-{id:70,g:'grp4',e:'🎬',t:'Huduma ya Video: Filamu na Matukio',desc:'Videography ya harusi, matukio na content ya biashara',pages:72,mtaji:'Tsh 2M–8M',bg:'linear-gradient(135deg,#1c1917,#7c3aed)'},
-{id:71,g:'grp4',e:'🎵',t:'Huduma ya DJ: Burudani ya Sherehe',desc:'Biashara ya DJ — vifaa, masoko na kuendesha sherehe za hadhi',pages:65,mtaji:'Tsh 2M–10M',bg:'linear-gradient(135deg,#1e1b4b,#7c3aed)'},
-{id:72,g:'grp4',e:'🌸',t:'Mapambo ya Sherehe: Urembo wa Matukio',desc:'Biashara ya mapambo ya harusi na sherehe — maua, vitambaa na zaidi',pages:70,mtaji:'Tsh 500,000–2M',bg:'linear-gradient(135deg,#9d174d,#ec4899)'},
-{id:73,g:'grp4',e:'🧹',t:'Huduma ya Usafishaji: Kampuni ya Usafi',desc:'Usafishaji wa nyumba, ofisi na majengo — biashara ya mkataba',pages:68,mtaji:'Tsh 300,000–2M',bg:'linear-gradient(135deg,#0c4a6e,#0284c7)'},
-{id:74,g:'grp4',e:'👚',t:'Kufua Nguo (Laundry): Biashara ya Usafi',desc:'Laundry ya nyumbani au ya kisasa — wateja, vifaa na usimamizi',pages:62,mtaji:'Tsh 500,000–3M',bg:'linear-gradient(135deg,#064e3b,#16a34a)'},
-{id:75,g:'grp4',e:'📚',t:'Kufundisha Tuition: Elimu ni Biashara',desc:'Tuition ya nyumbani au kituo — masomo, bei na kuendesha vizuri',pages:65,mtaji:'Tsh 100,000–500,000',bg:'linear-gradient(135deg,#1e3a8a,#3b82f6)'},
-{id:76,g:'grp4',e:'💻',t:'Kufundisha Kompyuta: Ustadi wa Kesho',desc:'Kuanzisha kituo cha kompyuta — masomo, vifaa na wateja',pages:72,mtaji:'Tsh 2M–8M',bg:'linear-gradient(135deg,#0f172a,#1d4ed8)'},
-{id:77,g:'grp4',e:'🗣️',t:'Kufundisha Lugha: Kiingereza na Zaidi',desc:'Biashara ya kufundisha lugha za kigeni — Kiingereza, Kifaransa, Kichina',pages:68,mtaji:'Tsh 200,000–1M',bg:'linear-gradient(135deg,#701a75,#c026d3)'},
-{id:78,g:'grp4',e:'🎸',t:'Kufundisha Muziki: Sanaa na Biashara',desc:'Skuli ya muziki nyumbani au kituo — gitaa, piano, ngoma na zaidi',pages:65,mtaji:'Tsh 500,000–2M',bg:'linear-gradient(135deg,#1e1b4b,#4338ca)'},
-{id:79,g:'grp4',e:'🌐',t:'Kituo cha Internet: Biashara ya Data',desc:'Cyber cafe / internet cafe — vifaa, wateja na usimamizi wa kisasa',pages:70,mtaji:'Tsh 2M–8M',bg:'linear-gradient(135deg,#0c4a6e,#0369a1)'},
-{id:80,g:'grp4',e:'🎨',t:'Graphic Design: Sanaa ya Kidijitali',desc:'Biashara ya design — logo, banner, social media na wateja wa biashara',pages:75,mtaji:'Tsh 200,000–1M',bg:'linear-gradient(135deg,#701a75,#9333ea)'},
-
-// ── GROUP 5: Biashara Kubwa (81–100) ──
-{id:81,g:'grp5',e:'🏬',t:'Supermarket: Biashara ya Rejareja Kubwa',desc:'Kuanzisha supermarket — mpangilio, vifaa, wafanyakazi na usimamizi',pages:110,mtaji:'Tsh 30M–200M',bg:'linear-gradient(135deg,#0f172a,#1d4ed8)'},
-{id:82,g:'grp5',e:'🏨',t:'Hotel au Lodge: Biashara ya Ukarimu',desc:'Hotel au lodge ya kisasa — usimamizi, huduma na kupata wateja',pages:120,mtaji:'Tsh 50M–500M',bg:'linear-gradient(135deg,#78350f,#d97706)'},
-{id:83,g:'grp5',e:'🍽️',t:'Restaurant Kubwa: Biashara ya Ladha',desc:'Restaurant ya kisasa — menyu, wafanyakazi, usimamizi na faida',pages:115,mtaji:'Tsh 10M–50M',bg:'linear-gradient(135deg,#7c2d12,#dc2626)'},
-{id:84,g:'grp5',e:'🚛',t:'Kampuni ya Usafirishaji: Logistics Tanzania',desc:'Kuanzisha kampuni ya usafirishaji — magari, wateja na usimamizi',pages:105,mtaji:'Tsh 20M–200M',bg:'linear-gradient(135deg,#1c1917,#374151)'},
-{id:85,g:'grp5',e:'🏗️',t:'Kampuni ya Ujenzi: Biashara ya Miundombinu',desc:'Construction company — leseni, vifaa, wateja na mipango ya miradi',pages:118,mtaji:'Tsh 10M–100M',bg:'linear-gradient(135deg,#713f12,#d97706)'},
-{id:86,g:'grp5',e:'🧹',t:'Kampuni ya Usafi: Biashara ya Mazingira',desc:'Cleaning company ya kisasa — mikataba ya kampuni, ofisi na hospitali',pages:95,mtaji:'Tsh 2M–20M',bg:'linear-gradient(135deg,#0c4a6e,#0284c7)'},
-{id:87,g:'grp5',e:'💻',t:'Kampuni ya IT: Teknolojia ni Biashara',desc:'IT company — software, hardware, networks na huduma za kidijitali',pages:112,mtaji:'Tsh 5M–50M',bg:'linear-gradient(135deg,#1e3a8a,#6366f1)'},
-{id:88,g:'grp5',e:'📢',t:'Kampuni ya Matangazo: Advertising Agency',desc:'Agency ya matangazo — wanahabari, digital, TV na outdoor',pages:108,mtaji:'Tsh 5M–30M',bg:'linear-gradient(135deg,#701a75,#c026d3)'},
-{id:89,g:'grp5',e:'🏭',t:'Kiwanda cha Sabuni: Uzalishaji Mkubwa',desc:'Kiwanda cha sabuni — malighafi, uzalishaji, usambazaji na soko',pages:115,mtaji:'Tsh 10M–100M',bg:'linear-gradient(135deg,#0e7490,#22d3ee)'},
-{id:90,g:'grp5',e:'💧',t:'Kiwanda cha Maji: Uhai ni Biashara',desc:'Bottling plant ya maji — vifaa, usajili wa TFDA, masoko na usambazaji',pages:118,mtaji:'Tsh 20M–200M',bg:'linear-gradient(135deg,#0c4a6e,#0369a1)'},
-{id:91,g:'grp5',e:'🥤',t:'Kiwanda cha Juisi: Afya na Uzalishaji',desc:'Juisi factory — malighafi, teknolojia, ufungashaji na soko la Tanzania',pages:112,mtaji:'Tsh 20M–150M',bg:'linear-gradient(135deg,#14532d,#16a34a)'},
-{id:92,g:'grp5',e:'🍞',t:'Kiwanda cha Mikate: Chakula cha Kila Siku',desc:'Bakery ya kisasa ya uzalishaji mkubwa — kwa migahawa, masoko na jumla',pages:108,mtaji:'Tsh 10M–80M',bg:'linear-gradient(135deg,#92400e,#d97706)'},
-{id:93,g:'grp5',e:'👔',t:'Kiwanda cha Nguo: Fashion Industry',desc:'Textile factory — ushonaji wa nguo, uniform za shule na kampuni',pages:115,mtaji:'Tsh 30M–300M',bg:'linear-gradient(135deg,#1e3a8a,#7c3aed)'},
-{id:94,g:'grp5',e:'🏫',t:'Shule Binafsi: Kuwekeza kwa Elimu',desc:'Kuanzisha shule binafsi — leseni, walimu, miundombinu na usimamizi',pages:120,mtaji:'Tsh 20M–200M',bg:'linear-gradient(135deg,#1e3a8a,#3b82f6)'},
-{id:95,g:'grp5',e:'🎓',t:'Chuo cha Mafunzo: Ustadi ni Nguvu',desc:'VETA au chuo cha mafunzo — kozi, usajili wa NACTE na usimamizi',pages:115,mtaji:'Tsh 10M–80M',bg:'linear-gradient(135deg,#312e81,#6366f1)'},
-{id:96,g:'grp5',e:'🌾',t:'Kampuni ya Kilimo Kikubwa: Agribusiness',desc:'Large scale farming — hekta nyingi, umwagiliaji, masoko ya export',pages:118,mtaji:'Tsh 20M–200M',bg:'linear-gradient(135deg,#14532d,#22c55e)'},
-{id:97,g:'grp5',e:'🐄',t:'Kampuni ya Ufugaji Mkubwa: Ranchi ya Kisasa',desc:'Ranchi ya kisasa — ng'ombe, mbuzi, nguruwe — usimamizi na masoko',pages:112,mtaji:'Tsh 30M–300M',bg:'linear-gradient(135deg,#78350f,#d97706)'},
-{id:98,g:'grp5',e:'📱',t:'App au Website ya Biashara: Teknolojia ya Kufanya Pesa',desc:'Kuunda na kuendesha app au website ya biashara inayolipa',pages:108,mtaji:'Tsh 2M–50M',bg:'linear-gradient(135deg,#0f172a,#4338ca)'},
-{id:99,g:'grp5',e:'🚚',t:'Kampuni ya Logistics: Biashara ya Usambazaji',desc:'Logistics company — delivery, warehouse na usambazaji wa Tanzania nzima',pages:115,mtaji:'Tsh 20M–150M',bg:'linear-gradient(135deg,#1c1917,#1d4ed8)'},
-{id:100,g:'grp5',e:'🛒',t:'Duka Kubwa la Mtandaoni (E-commerce)',desc:'E-commerce platform ya Tanzania — bidhaa, malipo ya kidijitali na delivery',pages:120,mtaji:'Tsh 5M–50M',bg:'linear-gradient(135deg,#0f172a,#7c3aed)'},
-];
-
-const GROUPS = {
-  grp1:{label:'Biashara Ndogo Sana (1-20)',color:'grp-1'},
-  grp2:{label:'Biashara Ndogo za Kawaida (21-40)',color:'grp-2'},
-  grp3:{label:'Kilimo na Ufugaji (41-60)',color:'grp-3'},
-  grp4:{label:'Biashara za Huduma (61-80)',color:'grp-4'},
-  grp5:{label:'Biashara Kubwa (81-100)',color:'grp-5'},
-};
-
-let currentCat = 'all';
-let currentSearch = '';
-
-function fmtPrice(n){return 'Tsh '+n.toLocaleString()+'=';}
-
-function renderAll(){
-  ['grp1','grp2','grp3','grp4','grp5'].forEach(g=>{
-    const grid = document.getElementById('grid-'+g);
-    const books = BOOKS.filter(b=>b.g===g);
-    grid.innerHTML = books.map((bk,i)=>`
-      <div class="book-card" id="bc-${bk.id}" style="animation:fadeIn 0.4s ${i*0.04}s both">
-        <div class="book-cover" style="background:${bk.bg}">
-          <span class="bc-emoji">${bk.e}</span>
-          <span class="bc-num">#${bk.id}</span>
-          <span class="bc-price">Tsh 5,000=</span>
-        </div>
-        <div class="book-body">
-          <div class="book-num">Kitabu #${bk.id} · ${bk.pages} Kurasa</div>
-          <div class="book-title">${bk.t}</div>
-          <div class="book-meta">📌 ${bk.desc}<br>💰 Mtaji: ${bk.mtaji}</div>
-          <div class="book-footer">
-            <div class="book-price-tag">${fmtPrice(PRICE)}<br><span>kwa kitabu</span></div>
-            <a class="buy-btn" href="${PAY_URL}?book=${encodeURIComponent(bk.t)}&bei=5000&id=${bk.id}" onclick="showToast('${bk.t.substring(0,25)}...')">
-              🛒 Nunua
-            </a>
-          </div>
-        </div>
-      </div>`).join('');
-  });
-  applyFilter();
-}
-
-function showToast(title){
-  const t=document.getElementById('toast');
-  t.textContent='🛒 "'+title+'" — Unaelekea malipo...';
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
-}
-
-function setCat(c,btn){
-  currentCat=c;
-  document.querySelectorAll('.fcat').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  applyFilter();
-}
-
-function applyFilter(){
-  const q=document.getElementById('searchInp').value.toLowerCase();
-  currentSearch=q;
-  let visible=0;
-  ['grp1','grp2','grp3','grp4','grp5'].forEach(g=>{
-    let gVis=0;
-    BOOKS.filter(b=>b.g===g).forEach(bk=>{
-      const el=document.getElementById('bc-'+bk.id);
-      if(!el)return;
-      const matchG=currentCat==='all'||currentCat===g;
-      const matchQ=!q||bk.t.toLowerCase().includes(q)||bk.desc.toLowerCase().includes(q);
-      if(matchG&&matchQ){el.classList.remove('hidden');gVis++;visible++;}
-      else el.classList.add('hidden');
-    });
-    const grpEl=document.getElementById('g-'+g);
-    if(grpEl) grpEl.style.display=gVis===0?'none':'';
-  });
-  document.getElementById('bcount').textContent='Vitabu '+visible;
-}
-
-// fade in animation
-const style=document.createElement('style');
-style.textContent='@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}';
-document.head.appendChild(style);
-
-renderAll();
+  function scrollTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+  }
 </script>
+
 </body>
 </html>
