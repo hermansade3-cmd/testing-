@@ -4,32 +4,75 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>SadeBooks – Sidebar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #000000;
-  min-height: 100vh;
+/* ── CSS Variables (kutoka style.css) ── */
+:root {
+  --bg-deep:        #0b0c0e;
+  --bg-surface:     #111318;
+  --bg-card:        #181c23;
+  --accent-gold:    #c9a84c;
+  --accent-warm:    #e8c97a;
+  --accent-muted:   #7a6535;
+  --text-primary:   #f0ece3;
+  --text-secondary: #9a9490;
+  --text-muted:     #4f4c47;
+  --border-soft:    rgba(201, 168, 76, 0.12);
+  --border-glow:    rgba(201, 168, 76, 0.35);
+  --shadow-deep:    0 24px 60px rgba(0, 0, 0, 0.65);
+  --shadow-card:    0 8px 32px rgba(0, 0, 0, 0.45);
+  --radius-sm:      6px;
+  --radius-md:      14px;
+  --radius-pill:    999px;
+  --font-display:   'Playfair Display', Georgia, serif;
+  --font-body:      'DM Sans', sans-serif;
+  --transition:     cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ── SIDEBAR – imesimama wazi, hakuna overlay ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 70% 50% at 20% 20%, rgba(201,168,76,0.04) 0%, transparent 60%);
+}
+
+/* ══════════════════════════════
+   SIDEBAR
+══════════════════════════════ */
 .sidebar {
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
   min-height: 100vh;
-  background: #f5f2ed;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-soft);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.15) transparent;
+  scrollbar-color: var(--accent-gold) var(--bg-deep);
+  position: relative;
 }
-.sidebar::-webkit-scrollbar { width: 4px; }
+
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
 .sidebar::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.15);
-  border-radius: 4px;
+  background: linear-gradient(180deg, var(--accent-gold), var(--accent-muted));
+  border-radius: var(--radius-pill);
 }
 
 /* ── HEADER ── */
@@ -37,93 +80,179 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px 16px;
-  background: #0d1b2a;
+  padding: 20px 20px 18px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-soft);
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
+
+/* shimmer line ya juu ya header */
+.sidebar-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  opacity: 0.7;
+}
+
+/* top-right glow */
+.sidebar-header::after {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 100px; height: 100px;
+  background: radial-gradient(circle, rgba(201,168,76,0.12), transparent 70%);
+  pointer-events: none;
+}
+
 .brand {
-  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
   font-weight: 700;
-  color: #000000;
-  letter-spacing: 0.5px;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 .brand em {
-  font-style: normal;
-  color: #d4a017;
+  font-style: italic;
+  color: var(--accent-gold);
 }
+
 .close-btn {
-  width: 36px; height: 36px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  font-size: 1rem;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-glow);
+  background: rgba(201, 168, 76, 0.06);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
   cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s var(--transition);
+  flex-shrink: 0;
 }
-.close-btn:hover { background: rgba(255,255,255,0.22); }
+.close-btn:hover {
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
 
 /* ── KURASA LABEL ── */
 .kurasa-label {
-  display: block;
-  font-size: 0.63rem;
-  font-weight: 700;
-  letter-spacing: 3.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.67rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #b8860b;
-  padding: 18px 22px 10px;
+  color: var(--accent-gold);
+  padding: 20px 20px 10px;
+  flex-shrink: 0;
+}
+.kurasa-label::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--accent-gold);
+  flex-shrink: 0;
 }
 
 /* ── NAV LIST ── */
 .nav-list {
   list-style: none;
-  padding: 0 10px 10px;
+  padding: 4px 10px 12px;
   margin: 0;
+  flex: 1;
 }
 .nav-list li {
   margin: 2px 0;
 }
 
-/* ── LINKS: NYEUSI + KATIKATI ── */
+/* ── LINKS ── */
 .nav-list li a {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
-  border-radius: 10px;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
   text-decoration: none;
-  color: #111111;
-  font-size: 0.93rem;
-  font-weight: 500;
-  transition: background 0.18s, transform 0.15s;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 400;
+  transition: background 0.2s var(--transition),
+              color 0.2s var(--transition),
+              transform 0.2s var(--transition),
+              border-color 0.2s var(--transition);
   gap: 12px;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
+
+/* hover shimmer effect */
+.nav-list li a::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--accent-gold);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.25s var(--transition);
+  border-radius: 0 2px 2px 0;
+}
+
 .nav-list li a:hover {
-  background: rgba(0,0,0,0.07);
-  transform: translateX(3px);
+  background: rgba(201, 168, 76, 0.06);
+  color: var(--text-primary);
+  transform: translateX(4px);
+  border-color: var(--border-soft);
 }
+.nav-list li a:hover::after {
+  transform: scaleY(1);
+}
+
+/* active */
 .nav-list li a.active {
-  background: rgba(184,134,11,0.12);
-  color: #7a5900;
-  font-weight: 600;
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--accent-gold);
+  font-weight: 500;
+  border-color: var(--border-soft);
+}
+.nav-list li a.active::after {
+  transform: scaleY(1);
 }
 
 /* Icon */
 .nav-icon {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   flex-shrink: 0;
-  width: 28px;
+  width: 26px;
   text-align: center;
+  opacity: 0.85;
+}
+.nav-list li a:hover .nav-icon,
+.nav-list li a.active .nav-icon {
+  opacity: 1;
 }
 
-/* Text — katikati */
+/* Text */
 .nav-text {
   flex: 1;
-  text-align: center;
-  color: #111111;
+  color: inherit;
+  line-height: 1.3;
 }
-.nav-list li a.active .nav-text {
-  color: #7a5900;
+
+/* ── DIVIDER ndani ya nav ── */
+.nav-divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: 8px 14px;
 }
 
 /* ── SCROLL INDICATOR ── */
@@ -132,32 +261,41 @@ body {
   bottom: 0;
   flex-shrink: 0;
   width: 100%;
-  padding: 12px 0 16px;
+  padding: 14px 0 18px;
   text-align: center;
-  background: linear-gradient(transparent, rgba(245,242,237,0.97) 40%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(17, 19, 24, 0.97) 45%
+  );
   pointer-events: none;
-  transition: opacity 0.3s;
+  transition: opacity 0.35s var(--transition);
 }
-.scroll-hint .hint-inner {
+
+.hint-inner {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  font-size: 0.67rem;
-  letter-spacing: 1.5px;
+  gap: 4px;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(0,0,0,0.35);
-  animation: bounce 1.8s ease-in-out infinite;
+  color: var(--text-muted);
+  animation: bounce 1.9s ease-in-out infinite;
 }
-.scroll-hint svg {
-  width: 18px;
-  height: 18px;
-  opacity: 0.45;
+
+.hint-inner svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent-gold);
+  opacity: 0.55;
 }
+
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
+  0%, 100% { transform: translateY(0);   }
   50%       { transform: translateY(5px); }
 }
+
 </style>
 </head>
 <body>
@@ -167,7 +305,7 @@ body {
   <!-- Header -->
   <div class="sidebar-header">
     <div class="brand">Sade <em>Books</em></div>
-    <button class="close-btn">✕</button>
+    <button class="close-btn" aria-label="Funga menyu">✕</button>
   </div>
 
   <!-- Label -->
@@ -175,64 +313,84 @@ body {
 
   <!-- Links -->
   <ul class="nav-list">
-    <li><a href="about.html">
-      <span class="nav-icon">ℹ️</span>
-      <span class="nav-text">Kuhusu Sade Books</span>
-    </a></li>
+
     <li><a href="index.html" class="active">
       <span class="nav-icon">📖</span>
       <span class="nav-text">Sade Books</span>
     </a></li>
+
+    <li><a href="about.html">
+      <span class="nav-icon">ℹ️</span>
+      <span class="nav-text">Kuhusu Sade Books</span>
+    </a></li>
+
     <li><a href="books.html">
       <span class="nav-icon">📚</span>
       <span class="nav-text">Tazama Vitabu</span>
     </a></li>
+
     <li><a href="shop.html">
       <span class="nav-icon">🛍️</span>
       <span class="nav-text">Duka</span>
     </a></li>
-    <li><a href="malipo.html">
-      <span class="nav-icon">💳</span>
-      <span class="nav-text">Malipo</span>
-    </a></li>
-    <li><a href="tools.html">
-      <span class="nav-icon">🔥</span>
-      <span class="nav-text">Tools</span>
-    </a></li>
-    <li><a href="sade-Gpt.html">
-      <span class="nav-icon">🤖</span>
-      <span class="nav-text">Sade-GPT</span>
-    </a></li>
-    <li><a href="jifunze_ujasiriamali_na_website.html">
-      <span class="nav-icon">🔗</span>
-      <span class="nav-text">Create Website Ujasiriamali</span>
-    </a></li>
+
     <li><a href="sade-order.html">
       <span class="nav-icon">📦</span>
       <span class="nav-text">Agiza</span>
     </a></li>
+
+    <div class="nav-divider"></div>
+
+    <li><a href="malipo.html">
+      <span class="nav-icon">💳</span>
+      <span class="nav-text">Malipo</span>
+    </a></li>
+
     <li><a href="lipa-namba-mix-by-yas.html">
       <span class="nav-icon">📋</span>
       <span class="nav-text">Lipa Namba</span>
     </a></li>
+
+    <div class="nav-divider"></div>
+
+    <li><a href="tools.html">
+      <span class="nav-icon">🔥</span>
+      <span class="nav-text">Tools</span>
+    </a></li>
+
+    <li><a href="sade-Gpt.html">
+      <span class="nav-icon">🤖</span>
+      <span class="nav-text">Sade-GPT</span>
+    </a></li>
+
+    <li><a href="jifunze_ujasiriamali_na_website.html">
+      <span class="nav-icon">🔗</span>
+      <span class="nav-text">Create Website Ujasiriamali</span>
+    </a></li>
+
+    <div class="nav-divider"></div>
+
     <li><a href="afya-yako.html">
       <span class="nav-icon">🏥</span>
       <span class="nav-text">Afya Yako</span>
     </a></li>
+
     <li><a href="privacy_and_terms.html">
       <span class="nav-icon">✏️</span>
       <span class="nav-text">Terms and Privacy</span>
     </a></li>
+
     <li><a href="contact.html">
       <span class="nav-icon">✉️</span>
       <span class="nav-text">Wasiliana Nasi</span>
     </a></li>
+
   </ul>
 
   <!-- Scroll Indicator -->
   <div class="scroll-hint" id="scrollHint">
     <div class="hint-inner">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
         <path d="M6 9l6 6 6-6"/>
       </svg>
       Sogeza chini
@@ -243,7 +401,8 @@ body {
 
 <script>
   const sidebar = document.getElementById('sidebar');
-  const hint = document.getElementById('scrollHint');
+  const hint    = document.getElementById('scrollHint');
+
   sidebar.addEventListener('scroll', () => {
     const atBottom = sidebar.scrollHeight - sidebar.scrollTop <= sidebar.clientHeight + 10;
     hint.style.opacity = atBottom ? '0' : '1';
@@ -252,4 +411,3 @@ body {
 
 </body>
 </html>
-
