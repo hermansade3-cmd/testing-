@@ -33,16 +33,17 @@ body {
 /* ===== HERO WRAPPER — quarter width layout ===== */
 .hero-wrapper {
     display: flex;
-    min-height: 92vh;
+    min-height: auto;
     background: #f8fafc;
 }
 
 /* Left panel — blue hero (quarter width) */
 header {
     position: relative;
-    width: 25%;
+    width: 30%;
     min-width: 260px;
-    min-height: 92vh;
+    max-width: 380px;
+    min-height: auto;
     background: linear-gradient(160deg, #0f172a 0%, #1e3a8a 55%, #1d4ed8 100%);
     display: flex;
     flex-direction: column;
@@ -50,7 +51,7 @@ header {
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    padding: 2.5rem 1.5rem;
+    padding: 3rem 2rem;
     flex-shrink: 0;
 }
 
@@ -191,7 +192,18 @@ header h1 span {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 3rem 2.5rem;
+    padding: 3rem 4rem;
+}
+
+/* Desktop: make stats grid wider */
+@media (min-width: 769px) {
+    .hero-stats-grid {
+        max-width: 500px;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .hero-right-desc {
+        max-width: 520px;
+    }
 }
 
 .hero-right-title {
@@ -269,7 +281,8 @@ header h1 span {
     .hero-wrapper { flex-direction: column; }
     header {
         width: 100%;
-        min-height: 70vh;
+        max-width: 100%;
+        min-height: auto;
         padding: 3rem 1.5rem;
     }
     .hero-right { padding: 2rem 1.5rem; }
