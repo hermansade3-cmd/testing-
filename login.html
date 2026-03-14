@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ingia | Sade Books</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0a0f1e;
+      --navy2: #111827;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dim: rgba(201,168,76,0.15);
+      --white: #f5f0e8;
+      --gray: #8a8fa8;
+      --error: #e05c5c;
+      --card: rgba(255,255,255,0.04);
+      --border: rgba(201,168,76,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 80% 80%, rgba(201,168,76,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Floating book pages decoration */
+    .bg-lines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bg-lines span {
+      position: absolute;
+      display: block;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.12), transparent);
+      animation: lineFloat 8s infinite ease-in-out;
+    }
+    .bg-lines span:nth-child(1) { left: 15%; height: 200px; top: 10%; animation-delay: 0s; }
+    .bg-lines span:nth-child(2) { left: 30%; height: 150px; top: 60%; animation-delay: 2s; }
+    .bg-lines span:nth-child(3) { left: 70%; height: 180px; top: 20%; animation-delay: 1s; }
+    .bg-lines span:nth-child(4) { left: 85%; height: 120px; top: 70%; animation-delay: 3s; }
+    .bg-lines span:nth-child(5) { left: 50%; height: 160px; top: 40%; animation-delay: 1.5s; }
+
+    @keyframes lineFloat {
+      0%, 100% { opacity: 0; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(-30px); }
+    }
+
+    /* Card */
+    .login-card {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      margin: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.05) inset;
+      animation: cardIn 0.7s cubic-bezier(0.16,1,0.3,1) both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Corner ornament */
+    .login-card::before, .login-card::after {
+      content: '';
+      position: absolute;
+      width: 40px; height: 40px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.4;
+    }
+    .login-card::before { top: 14px; left: 14px; border-width: 1px 0 0 1px; border-radius: 4px 0 0 0; }
+    .login-card::after  { bottom: 14px; right: 14px; border-width: 0 1px 1px 0; border-radius: 0 0 4px 0; }
+
+    /* Logo area */
+    .logo-area {
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s 0.2s both;
+    }
+    .logo-icon {
+      width: 52px; height: 52px;
+      margin: 0 auto 0.8rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+    }
+    .logo-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .logo-title span { color: var(--gold); }
+    .logo-sub {
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-top: 0.3rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.6s 0.3s both;
+    }
+    .tab {
+      flex: 1;
+      padding: 0.55rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gray);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s;
+      user-select: none;
+    }
+    .tab.active {
+      background: var(--gold-dim);
+      color: var(--gold-light);
+      box-shadow: 0 2px 8px rgba(201,168,76,0.1);
+    }
+
+    /* Form */
+    .form-section { animation: fadeUp 0.6s 0.35s both; }
+    .form-section.hidden { display: none; }
+
+    .field {
+      margin-bottom: 1.1rem;
+    }
+    .field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gray);
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .field input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field input::placeholder { color: rgba(255,255,255,0.2); }
+    .field input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      width: 100%;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+      box-shadow: 0 6px 20px rgba(201,168,76,0.25);
+      margin-top: 0.3rem;
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(201,168,76,0.35); }
+    .btn-primary:active { transform: scale(0.99); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 1.2rem 0;
+      color: var(--gray);
+      font-size: 0.78rem;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .btn-google {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-google:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.18); }
+    .btn-google svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* Error / success messages */
+    .msg {
+      padding: 0.65rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .msg.error { background: rgba(224,92,92,0.12); border: 1px solid rgba(224,92,92,0.3); color: #f08080; display: block; }
+    .msg.success { background: rgba(80,200,120,0.1); border: 1px solid rgba(80,200,120,0.25); color: #7ecf9a; display: block; }
+
+    /* Forgot password */
+    .forgot {
+      text-align: right;
+      margin-top: -0.6rem;
+      margin-bottom: 1rem;
+    }
+    .forgot a {
+      font-size: 0.78rem;
+      color: var(--gold);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .forgot a:hover { opacity: 1; }
+
+    /* Spinner */
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(10,15,30,0.3);
+      border-top-color: var(--navy);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer note */
+    .footer-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(138,143,168,0.6);
+      margin-top: 1.5rem;
+      animation: fadeUp 0.6s 0.5s both;
+    }
+    .footer-note a { color: var(--gold); text-decoration: none; opacity: 0.8; }
+    .footer-note a:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="bg-lines">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="login-card">
+    <div class="logo-area">
+      <div class="logo-icon">📚</div>
+      <div class="logo-title">Sade <span>Books</span></div>
+      <div class="logo-sub">MAKTABA YA KIDIJITALI</div>
+    </div>
+
+    <!-- Tabs: Ingia / Jisajili -->
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('login')">Ingia</div>
+      <div class="tab" onclick="switchTab('register')">Jisajili</div>
+    </div>
+
+    <!-- Message area -->
+    <div class="msg" id="msgBox"></div>
+
+    <!-- LOGIN FORM -->
+    <div class="form-section" id="loginSection">
+      <div class="field">
+        <label>Barua Pepe</label>
+        <input type="email" id="loginEmail" placeholder="mfano@gmail.com"/>
+      </div>
+      <div class="field">
+        <label>Nywila</label>
+        <input type="password" id="loginPass" placeholder="Nywila yako"/>
+      </div>
+      <div class="forgot"><a href="#" onclick="forgotPassword()">Umesahau nywila?</a></div>
+      <button class="btn-primary" id="loginBtn" onclick="loginEmail()">Ingia</button>
+      <div class="divider">au</div>
+      <button class="btn-google" onclick="loginGoogle()">
+        <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20H24v8h11.3C33.6 33.1 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 19.6-8 19.6-20 0-1.3-.1-2.7-.4-4z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.1 18.9 12 24 12c3.1 0 5.8 1.1 8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5l-6.2-5.2C29.4 35.5 26.8 36 24 36c-5.3 0-9.6-2.9-11.3-7L6 34c3.5 6.2 10.1 10 18 10z"/><path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.3-2.3 4.2-4.3 5.5l6.2 5.2C41.3 35.3 44 30 44 24c0-1.3-.1-2.7-.4-4z"/></svg>
+        Ingia na Google
+      </button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="form-section hidden" id="registerSection">
+      <div class="field">
+        <label>Jina Kamili</label>
+        <input type="text" id="regName" placeholder="Jina lako"/>
+      </div>
+      <div class="field">
+        <label>Barua Pepe</label>
+        <input type="email" id="regEmail" placeholder="mfano@gmail.com"/>
+      </div>
+      <div class="field">
+        <label>Nywila</label>
+        <input type="password" id="regPass" placeholder="Angalau herufi 6"/>
+      </div>
+      <button class="btn-primary" id="registerBtn" onclick="registerUser()">Jisajili</button>
+      <div class="divider">au</div>
+      <button class="btn-google" onclick="loginGoogle()">
+        <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20H24v8h11.3C33.6 33.1 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 19.6-8 19.6-20 0-1.3-.1-2.7-.4-4z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.1 18.9 12 24 12c3.1 0 5.8 1.1 8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5l-6.2-5.2C29.4 35.5 26.8 36 24 36c-5.3 0-9.6-2.9-11.3-7L6 34c3.5 6.2 10.1 10 18 10z"/><path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.3-2.3 4.2-4.3 5.5l6.2 5.2C41.3 35.3 44 30 44 24c0-1.3-.1-2.7-.4-4z"/></svg>
+        Jisajili na Google
+      </button>
+    </div>
+
+    <div class="footer-note">
+      Kwa kuingia unakubali <a href="#">Masharti yetu</a> ya matumizi.
+    </div>
+  </div>
+
+  <!-- Firebase SDK (compat version - works directly in HTML) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // ── Firebase Config ──────────────────────────────────────────
+    const firebaseConfig = {
+      apiKey: "AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",
+      authDomain: "sadebooks-16523.firebaseapp.com",
+      projectId: "sadebooks-16523",
+      storageBucket: "sadebooks-16523.firebasestorage.app",
+      messagingSenderId: "304204101160",
+      appId: "1:304204101160:web:a43c2a882238ec183b271d",
+      measurementId: "G-DK6W813MF2"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // ── Utility ──────────────────────────────────────────────────
+    function showMsg(text, type) {
+      const el = document.getElementById('msgBox');
+      el.textContent = text;
+      el.className = 'msg ' + type;
+    }
+    function clearMsg() {
+      const el = document.getElementById('msgBox');
+      el.className = 'msg';
+      el.textContent = '';
+    }
+    function setLoading(btnId, loading) {
+      const btn = document.getElementById(btnId);
+      if (loading) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span>Subiri...';
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = btnId === 'loginBtn' ? 'Ingia' : 'Jisajili';
+      }
+    }
+
+    // ── Tab Switch ───────────────────────────────────────────────
+    function switchTab(tab) {
+      clearMsg();
+      document.querySelectorAll('.tab').forEach((t,i) => {
+        t.classList.toggle('active', (i===0 && tab==='login') || (i===1 && tab==='register'));
+      });
+      document.getElementById('loginSection').classList.toggle('hidden', tab !== 'login');
+      document.getElementById('registerSection').classList.toggle('hidden', tab !== 'register');
+    }
+
+    // ── Email Login ──────────────────────────────────────────────
+    async function loginEmail() {
+      clearMsg();
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass  = document.getElementById('loginPass').value;
+      if (!email || !pass) return showMsg('Jaza barua pepe na nywila.', 'error');
+      setLoading('loginBtn', true);
+      try {
+        await auth.signInWithEmailAndPassword(email, pass);
+        showMsg('✓ Umeingia! Inaelekeza...', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+      } catch(e) {
+        setLoading('loginBtn', false);
+        showMsg(firebaseError(e.code), 'error');
+      }
+    }
+
+    // ── Register ─────────────────────────────────────────────────
+    async function registerUser() {
+      clearMsg();
+      const name  = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const pass  = document.getElementById('regPass').value;
+      if (!name || !email || !pass) return showMsg('Jaza sehemu zote.', 'error');
+      if (pass.length < 6) return showMsg('Nywila iwe na angalau herufi 6.', 'error');
+      setLoading('registerBtn', true);
+      try {
+        const cred = await auth.createUserWithEmailAndPassword(email, pass);
+        await cred.user.updateProfile({ displayName: name });
+        showMsg('✓ Akaunti imeundwa! Inaelekeza...', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+      } catch(e) {
+        setLoading('registerBtn', false);
+        showMsg(firebaseError(e.code), 'error');
+      }
+    }
+
+    // ── Google Login ─────────────────────────────────────────────
+    async function loginGoogle() {
+      clearMsg();
+      const provider = new firebase.auth.GoogleAuthProvider();
+      try {
+        await auth.signInWithPopup(provider);
+        showMsg('✓ Umeingia! Inaelekeza...', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+      } catch(e) {
+        showMsg(firebaseError(e.code), 'error');
+      }
+    }
+
+    // ── Forgot Password ──────────────────────────────────────────
+    async function forgotPassword() {
+      clearMsg();
+      const email = document.getElementById('loginEmail').value.trim();
+      if (!email) return showMsg('Weka barua pepe yako kwanza.', 'error');
+      try {
+        await auth.sendPasswordResetEmail(email);
+        showMsg('✓ Barua ya kurekebisha nywila imetumwa!', 'success');
+      } catch(e) {
+        showMsg(firebaseError(e.code), 'error');
+      }
+    }
+
+    // ── Auth State ───────────────────────────────────────────────
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        // Redirect if already logged in (uncomment if needed)
+        // window.location.href = 'index.html';
+      }
+    });
+
+    // ── Error Messages (Kiswahili) ───────────────────────────────
+    function firebaseError(code) {
+      const msgs = {
+        'auth/user-not-found':      'Hakuna akaunti na barua pepe hii.',
+        'auth/wrong-password':      'Nywila si sahihi.',
+        'auth/email-already-in-use':'Barua pepe hii tayari inatumika.',
+        'auth/invalid-email':       'Barua pepe si sahihi.',
+        'auth/weak-password':       'Nywila ni dhaifu sana.',
+        'auth/too-many-requests':   'Majaribio mengi. Jaribu tena baadaye.',
+        'auth/popup-closed-by-user':'Umefunga dirisha la Google.',
+        'auth/network-request-failed':'Hakuna muunganiko wa mtandao.',
+        'auth/invalid-credential':  'Barua pepe au nywila si sahihi.',
+      };
+      return msgs[code] || 'Hitilafu imetokea. Jaribu tena.';
+    }
+
+    // Enter key support
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const loginHidden = document.getElementById('loginSection').classList.contains('hidden');
+        if (!loginHidden) loginEmail();
+        else registerUser();
+      }
+    });
+  </script>
+</body>
+</html>
