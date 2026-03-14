@@ -32,7 +32,38 @@
       position: relative;
     }
 
-    /* Animated background */
+    /* Loading overlay - shown while checking auth */
+    #authLoader {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      gap: 1rem;
+    }
+    #authLoader .loader-icon {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+      50% { transform: scale(1.06); box-shadow: 0 12px 32px rgba(201,168,76,0.5); }
+    }
+    #authLoader p {
+      color: var(--gray);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+    }
+    #authLoader.hidden { display: none; }
+
     body::before {
       content: '';
       position: fixed;
@@ -43,7 +74,6 @@
       pointer-events: none;
     }
 
-    /* Floating book pages decoration */
     .bg-lines {
       position: fixed;
       inset: 0;
@@ -68,7 +98,6 @@
       50% { opacity: 1; transform: translateY(-30px); }
     }
 
-    /* Card */
     .login-card {
       position: relative;
       width: 100%;
@@ -88,7 +117,6 @@
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Corner ornament */
     .login-card::before, .login-card::after {
       content: '';
       position: absolute;
@@ -100,7 +128,6 @@
     .login-card::before { top: 14px; left: 14px; border-width: 1px 0 0 1px; border-radius: 4px 0 0 0; }
     .login-card::after  { bottom: 14px; right: 14px; border-width: 0 1px 1px 0; border-radius: 0 0 4px 0; }
 
-    /* Logo area */
     .logo-area {
       text-align: center;
       margin-bottom: 2rem;
@@ -129,7 +156,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* Tabs */
     .tabs {
       display: flex;
       background: rgba(255,255,255,0.04);
@@ -156,13 +182,10 @@
       box-shadow: 0 2px 8px rgba(201,168,76,0.1);
     }
 
-    /* Form */
     .form-section { animation: fadeUp 0.6s 0.35s both; }
     .form-section.hidden { display: none; }
 
-    .field {
-      margin-bottom: 1.1rem;
-    }
+    .field { margin-bottom: 1.1rem; }
     .field label {
       display: block;
       font-size: 0.78rem;
@@ -190,7 +213,6 @@
       box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
     }
 
-    /* Buttons */
     .btn-primary {
       width: 100%;
       padding: 0.8rem;
@@ -245,7 +267,6 @@
     .btn-google:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.18); }
     .btn-google svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-    /* Error / success messages */
     .msg {
       padding: 0.65rem 0.9rem;
       border-radius: 8px;
@@ -256,7 +277,6 @@
     .msg.error { background: rgba(224,92,92,0.12); border: 1px solid rgba(224,92,92,0.3); color: #f08080; display: block; }
     .msg.success { background: rgba(80,200,120,0.1); border: 1px solid rgba(80,200,120,0.25); color: #7ecf9a; display: block; }
 
-    /* Forgot password */
     .forgot {
       text-align: right;
       margin-top: -0.6rem;
@@ -271,7 +291,6 @@
     }
     .forgot a:hover { opacity: 1; }
 
-    /* Spinner */
     .spinner {
       display: inline-block;
       width: 16px; height: 16px;
@@ -289,7 +308,6 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Footer note */
     .footer-note {
       text-align: center;
       font-size: 0.75rem;
@@ -302,6 +320,13 @@
   </style>
 </head>
 <body>
+
+  <!-- Auth loading overlay -->
+  <div id="authLoader">
+    <div class="loader-icon">📚</div>
+    <p>Inapakia...</p>
+  </div>
+
   <div class="bg-lines">
     <span></span><span></span><span></span><span></span><span></span>
   </div>
@@ -313,13 +338,11 @@
       <div class="logo-sub">MAKTABA YA KIDIJITALI</div>
     </div>
 
-    <!-- Tabs: Ingia / Jisajili -->
     <div class="tabs">
       <div class="tab active" onclick="switchTab('login')">Ingia</div>
       <div class="tab" onclick="switchTab('register')">Jisajili</div>
     </div>
 
-    <!-- Message area -->
     <div class="msg" id="msgBox"></div>
 
     <!-- LOGIN FORM -->
@@ -332,7 +355,7 @@
         <label>Nywila</label>
         <input type="password" id="loginPass" placeholder="Nywila yako"/>
       </div>
-      <div class="forgot"><a href="#" onclick="forgotPassword()">Umesahau nywila?</a></div>
+      <div class="forgot"><a href="#" onclick="forgotPassword(); return false;">Umesahau nywila?</a></div>
       <button class="btn-primary" id="loginBtn" onclick="loginEmail()">Ingia</button>
       <div class="divider">au</div>
       <button class="btn-google" onclick="loginGoogle()">
@@ -368,12 +391,10 @@
     </div>
   </div>
 
-  <!-- Firebase SDK (compat version - works directly in HTML) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 
   <script>
-    // ── Firebase Config ──────────────────────────────────────────
     const firebaseConfig = {
       apiKey: "AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",
       authDomain: "sadebooks-16523.firebaseapp.com",
@@ -383,10 +404,25 @@
       appId: "1:304204101160:web:a43c2a882238ec183b271d",
       measurementId: "G-DK6W813MF2"
     };
+
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    // ── Utility ──────────────────────────────────────────────────
+    // ── MUHIMU: Weka persistence LOCAL + angalia auth state ──────────
+    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+      auth.onAuthStateChanged(user => {
+        const loader = document.getElementById('authLoader');
+        if (user) {
+          // Ameingia tayari → nenda moja kwa moja bila kuonyesha fomu
+          window.location.replace('index.html');
+        } else {
+          // Hajangia → ficha loader, onyesha fomu
+          loader.classList.add('hidden');
+        }
+      });
+    });
+
+    // ── Utility ──────────────────────────────────────────────────────
     function showMsg(text, type) {
       const el = document.getElementById('msgBox');
       el.textContent = text;
@@ -408,17 +444,17 @@
       }
     }
 
-    // ── Tab Switch ───────────────────────────────────────────────
+    // ── Tab Switch ───────────────────────────────────────────────────
     function switchTab(tab) {
       clearMsg();
-      document.querySelectorAll('.tab').forEach((t,i) => {
-        t.classList.toggle('active', (i===0 && tab==='login') || (i===1 && tab==='register'));
+      document.querySelectorAll('.tab').forEach((t, i) => {
+        t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register'));
       });
       document.getElementById('loginSection').classList.toggle('hidden', tab !== 'login');
       document.getElementById('registerSection').classList.toggle('hidden', tab !== 'register');
     }
 
-    // ── Email Login ──────────────────────────────────────────────
+    // ── Email Login ──────────────────────────────────────────────────
     async function loginEmail() {
       clearMsg();
       const email = document.getElementById('loginEmail').value.trim();
@@ -428,14 +464,14 @@
       try {
         await auth.signInWithEmailAndPassword(email, pass);
         showMsg('✓ Umeingia! Inaelekeza...', 'success');
-        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+        setTimeout(() => { window.location.replace('index.html'); }, 1000);
       } catch(e) {
         setLoading('loginBtn', false);
         showMsg(firebaseError(e.code), 'error');
       }
     }
 
-    // ── Register ─────────────────────────────────────────────────
+    // ── Register ─────────────────────────────────────────────────────
     async function registerUser() {
       clearMsg();
       const name  = document.getElementById('regName').value.trim();
@@ -448,27 +484,27 @@
         const cred = await auth.createUserWithEmailAndPassword(email, pass);
         await cred.user.updateProfile({ displayName: name });
         showMsg('✓ Akaunti imeundwa! Inaelekeza...', 'success');
-        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+        setTimeout(() => { window.location.replace('index.html'); }, 1000);
       } catch(e) {
         setLoading('registerBtn', false);
         showMsg(firebaseError(e.code), 'error');
       }
     }
 
-    // ── Google Login ─────────────────────────────────────────────
+    // ── Google Login ─────────────────────────────────────────────────
     async function loginGoogle() {
       clearMsg();
       const provider = new firebase.auth.GoogleAuthProvider();
       try {
         await auth.signInWithPopup(provider);
         showMsg('✓ Umeingia! Inaelekeza...', 'success');
-        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+        setTimeout(() => { window.location.replace('index.html'); }, 1000);
       } catch(e) {
         showMsg(firebaseError(e.code), 'error');
       }
     }
 
-    // ── Forgot Password ──────────────────────────────────────────
+    // ── Forgot Password ──────────────────────────────────────────────
     async function forgotPassword() {
       clearMsg();
       const email = document.getElementById('loginEmail').value.trim();
@@ -481,31 +517,23 @@
       }
     }
 
-    // ── Auth State ───────────────────────────────────────────────
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        // Redirect if already logged in (uncomment if needed)
-        // window.location.href = 'index.html';
-      }
-    });
-
-    // ── Error Messages (Kiswahili) ───────────────────────────────
+    // ── Error Messages (Kiswahili) ───────────────────────────────────
     function firebaseError(code) {
       const msgs = {
-        'auth/user-not-found':      'Hakuna akaunti na barua pepe hii.',
-        'auth/wrong-password':      'Nywila si sahihi.',
-        'auth/email-already-in-use':'Barua pepe hii tayari inatumika.',
-        'auth/invalid-email':       'Barua pepe si sahihi.',
-        'auth/weak-password':       'Nywila ni dhaifu sana.',
-        'auth/too-many-requests':   'Majaribio mengi. Jaribu tena baadaye.',
-        'auth/popup-closed-by-user':'Umefunga dirisha la Google.',
+        'auth/user-not-found':        'Hakuna akaunti na barua pepe hii.',
+        'auth/wrong-password':        'Nywila si sahihi.',
+        'auth/email-already-in-use':  'Barua pepe hii tayari inatumika.',
+        'auth/invalid-email':         'Barua pepe si sahihi.',
+        'auth/weak-password':         'Nywila ni dhaifu sana.',
+        'auth/too-many-requests':     'Majaribio mengi. Jaribu tena baadaye.',
+        'auth/popup-closed-by-user':  'Umefunga dirisha la Google.',
         'auth/network-request-failed':'Hakuna muunganiko wa mtandao.',
-        'auth/invalid-credential':  'Barua pepe au nywila si sahihi.',
+        'auth/invalid-credential':    'Barua pepe au nywila si sahihi.',
       };
       return msgs[code] || 'Hitilafu imetokea. Jaribu tena.';
     }
 
-    // Enter key support
+    // ── Enter key support ────────────────────────────────────────────
     document.addEventListener('keydown', e => {
       if (e.key === 'Enter') {
         const loginHidden = document.getElementById('loginSection').classList.contains('hidden');
