@@ -3209,6 +3209,31 @@ header h1 span {
   btn.addEventListener('mouseleave',function(){btn.style.transform='scale(1)';});
 })();
 </script>
+<!-- Firebase Auth Protection -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+  (function() {
+    var firebaseConfig = {
+      apiKey: "AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",
+      authDomain: "sadebooks-16523.firebaseapp.com",
+      projectId: "sadebooks-16523",
+      storageBucket: "sadebooks-16523.firebasestorage.app",
+      messagingSenderId: "304204101160",
+      appId: "1:304204101160:web:a43c2a882238ec183b271d"
+    };
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    // Weka persistence LOCAL - mtumiaji abaki ameingia
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(function() {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (!user) {
+          // Hajangia - peleka login
+          window.location.replace('login.html');
+        }
+      });
+    });
+  })();
+</script>
 </body>
 </html>
 
