@@ -903,7 +903,6 @@ header h1 span {
     <div class="sidebar-label">Kurasa</div>
     <nav class="sidebar-nav" style="overflow-y:scroll!important;-webkit-overflow-scrolling:touch;flex:1;min-height:0;">
         <a href="about.html"                 class="sidebar-link"><span>ℹ️</span> Kuhusu Sade Books</a>
-         <a href="sqdebooks.apk"                 class="sidebar-link"><span>ℹ️</span> Sade Books App</a>
         <a href="sadebooks.html"                 class="sidebar-link"><span>📖</span> Free Half Books</a>
         <a href="magazeti.html"                  class="sidebar-link"><span>🛍️</span> Magaazeti Bure</a>
         <a href="shop.html"                   class="sidebar-link"><span>🛍️</span> Duka</a>
@@ -935,6 +934,101 @@ header h1 span {
         </ul>
         <a href="#books" class="btn-primary" style="padding:0.6rem 1.5rem;font-size:0.85rem;">Angalia Vitabu</a>
     </nav>
+
+<!-- ===== TANGAZO LA KUSOGEA — Herman Sade Web Developer ===== -->
+<div id="ticker-ad" style="
+  background: linear-gradient(90deg, #0A2463 0%, #1B4FCC 50%, #0A2463 100%);
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  z-index: 100;
+  border-top: 2px solid #F59E0B;
+  border-bottom: 2px solid #F59E0B;
+  padding: 0;
+  box-shadow: 0 4px 20px rgba(10,36,99,0.35);
+">
+  <!-- Label ya kushoto imefixiwa -->
+  <div style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #F59E0B;
+    color: #0A2463;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    z-index: 2;
+    white-space: nowrap;
+  ">
+    <span style="font-size:1rem;">📢</span> TANGAZO
+  </div>
+
+  <!-- Maandishi yanayotembea -->
+  <div class="ticker-track" style="
+    display: inline-flex;
+    animation: ticker-scroll 28s linear infinite;
+    padding-left: 100%;
+    gap: 0;
+  ">
+    <!-- Nakala ya kwanza -->
+    <span class="ticker-msg">
+      🌐 <strong>UNAHITAJI WEBSITE?</strong> — Herman Sade anatengeneza websites za kisasa na za kitaalamu kwa bei nafuu kabisa!
+      &nbsp;&nbsp;📞 Piga simu: <strong>0712 655 957</strong>
+      &nbsp;&nbsp;💬 WhatsApp: <strong>+255 712 655 957</strong>
+      &nbsp;&nbsp;✉️ Barua pepe: <strong>hermansade3@gmail.com</strong>
+      &nbsp;&nbsp;⚡ Website ya Biashara • Duka la Online • Responsive Design • Muundo wa Kipekee
+      &nbsp;&nbsp;&nbsp;&nbsp;✅ Bei Nafuu · Ubora wa Juu · Tanzania 🇹🇿
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+    <!-- Nakala ya pili (loop bila mwisho) -->
+    <span class="ticker-msg">
+      🌐 <strong>UNAHITAJI WEBSITE?</strong> — Herman Sade anatengeneza websites za kisasa na za kitaalamu kwa bei nafuu kabisa!
+      &nbsp;&nbsp;📞 Piga simu: <strong>0712 655 957</strong>
+      &nbsp;&nbsp;💬 WhatsApp: <strong>+255 712 655 957</strong>
+      &nbsp;&nbsp;✉️ Barua pepe: <strong>hermansade3@gmail.com</strong>
+      &nbsp;&nbsp;⚡ Website ya Biashara • Duka la Online • Responsive Design • Muundo wa Kipekee
+      &nbsp;&nbsp;&nbsp;&nbsp;✅ Bei Nafuu · Ubora wa Juu · Tanzania 🇹🇿
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+  </div>
+
+  <!-- Gradient ya kushoto (kuficha chini ya label) -->
+  <div style="
+    position: absolute; left: 110px; top: 0; bottom: 0; width: 30px;
+    background: linear-gradient(90deg, #0A2463, transparent);
+    z-index: 1; pointer-events: none;
+  "></div>
+</div>
+
+<style>
+.ticker-msg {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #ffffff;
+  padding: 10px 0;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+.ticker-msg strong {
+  color: #F5C842;
+  font-weight: 700;
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+#ticker-ad:hover .ticker-track {
+  animation-play-state: paused;
+}
+</style>
+<!-- ===== MWISHO WA TANGAZO ===== -->
 
 <!-- Hero Section -->
 <div class="hero-wrapper">
