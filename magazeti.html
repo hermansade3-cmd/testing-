@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sade Books — Magazeti ya Dijiti</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep: #0a2463;
+    --blue-mid: #1e4db7;
+    --blue-light: #3a7bd5;
+    --blue-pale: #c8deff;
+    --blue-ghost: #eef4ff;
+    --white: #ffffff;
+    --off-white: #f8faff;
+    --ink: #0d1f4e;
+    --rule: #b8cef0;
+    --accent: #e63946;
+    --gold: #c9a84c;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Source Serif 4', Georgia, serif;
+    --font-sans: 'DM Sans', sans-serif;
+    --font-slab: 'Bebas Neue', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--off-white);
+    color: var(--ink);
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+
+  /* ====== HEADER / MASTHEAD ====== */
+  #masthead {
+    background: var(--white);
+    border-bottom: 3px solid var(--blue-deep);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(10,36,99,.10);
+  }
+  .masthead-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .masthead-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .masthead-brand .logo-title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--blue-deep);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .masthead-brand .logo-sub {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--blue-light);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .masthead-meta {
+    text-align: right;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--blue-mid);
+  }
+  .masthead-meta strong { font-size: 0.85rem; color: var(--blue-deep); }
+
+  /* ====== TOOLBAR ====== */
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 40px;
+    background: var(--blue-ghost);
+    flex-wrap: wrap;
+  }
+  .toolbar-label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    font-weight: 500;
+    margin-right: 4px;
+  }
+  .btn-group { display: flex; gap: 4px; flex-wrap: wrap; }
+  .btn {
+    padding: 5px 14px;
+    border-radius: 4px;
+    border: 1.5px solid var(--blue-pale);
+    background: var(--white);
+    color: var(--blue-mid);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .18s;
+  }
+  .btn:hover, .btn.active {
+    background: var(--blue-mid);
+    color: var(--white);
+    border-color: var(--blue-mid);
+  }
+  .btn.accent { border-color: var(--accent); color: var(--accent); }
+  .btn.accent:hover, .btn.accent.active { background: var(--accent); color: var(--white); border-color: var(--accent); }
+
+  .toolbar-sep {
+    width: 1px; height: 28px;
+    background: var(--rule);
+    margin: 0 6px;
+  }
+
+  /* Font size control */
+  .font-ctrl { display: flex; align-items: center; gap: 6px; }
+  .font-ctrl button {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--blue-pale);
+    background: var(--white);
+    color: var(--blue-mid);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .18s;
+  }
+  .font-ctrl button:hover { background: var(--blue-mid); color: var(--white); border-color: var(--blue-mid); }
+  .font-ctrl span {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--blue-mid);
+    min-width: 32px;
+    text-align: center;
+  }
+
+  /* Search */
+  .search-box {
+    display: flex; align-items: center;
+    border: 1.5px solid var(--rule);
+    border-radius: 20px;
+    background: var(--white);
+    padding: 4px 12px;
+    gap: 6px;
+    margin-left: auto;
+  }
+  .search-box input {
+    border: none; outline: none;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--ink);
+    width: 160px;
+    background: transparent;
+  }
+  .search-box svg { color: var(--blue-light); }
+
+  /* ====== CATEGORY TABS ====== */
+  .cat-tabs {
+    display: flex;
+    gap: 0;
+    padding: 0 40px;
+    background: var(--white);
+    border-bottom: 2px solid var(--blue-deep);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .cat-tabs::-webkit-scrollbar { display: none; }
+  .cat-tab {
+    padding: 10px 20px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    transition: all .18s;
+  }
+  .cat-tab:hover { color: var(--blue-deep); }
+  .cat-tab.active { color: var(--blue-deep); border-bottom-color: var(--accent); font-weight: 600; }
+
+  /* ====== NEWSPAPER GRID ====== */
+  #papers-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+  }
+
+  /* ====== NEWSPAPER CARD ====== */
+  .paper-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    position: relative;
+  }
+  .paper-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(10,36,99,.13);
+  }
+  .paper-card .card-number {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: var(--blue-deep);
+    color: var(--white);
+    font-family: var(--font-slab);
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    letter-spacing: 1px;
+  }
+  .card-header {
+    background: var(--blue-deep);
+    padding: 14px 16px 10px;
+    border-bottom: 3px solid var(--accent);
+  }
+  .card-edition {
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-pale);
+    margin-bottom: 4px;
+  }
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+  }
+  .card-date {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    color: var(--blue-pale);
+    margin-top: 4px;
+    opacity: .8;
+  }
+  .card-body { padding: 14px 16px; }
+  .card-headline {
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    line-height: 1.35;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--blue-light);
+    padding-left: 8px;
+  }
+  .card-lead {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: #3a5280;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .card-tags {
+    display: flex; flex-wrap: wrap; gap: 4px;
+    margin-bottom: 10px;
+  }
+  .tag {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    background: var(--blue-ghost);
+    color: var(--blue-mid);
+  }
+  .tag.red { background: #fff0f1; color: var(--accent); }
+  .tag.gold { background: #fff9ec; color: var(--gold); }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-top: 1px solid var(--rule);
+    background: var(--off-white);
+  }
+  .card-pages {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    color: var(--blue-mid);
+  }
+  .btn-read {
+    padding: 6px 14px;
+    background: var(--blue-deep);
+    color: var(--white);
+    border: none;
+    border-radius: 2px;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: background .18s;
+  }
+  .btn-read:hover { background: var(--blue-mid); }
+
+  /* ====== FULL NEWSPAPER READER ====== */
+  #reader-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5,15,40,.72);
+    z-index: 200;
+    backdrop-filter: blur(4px);
+    animation: fadeIn .25s ease;
+  }
+  #reader-overlay.open { display: flex; align-items: center; justify-content: center; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+  #reader-window {
+    background: var(--white);
+    width: 92vw;
+    max-width: 820px;
+    max-height: 92vh;
+    overflow-y: auto;
+    border-radius: 2px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.4);
+    animation: slideUp .3s ease;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: var(--blue-pale) transparent;
+  }
+
+  /* READER TOOLBAR */
+  #reader-toolbar {
+    position: sticky;
+    top: 0;
+    background: var(--blue-deep);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    z-index: 10;
+    border-bottom: 2px solid var(--accent);
+  }
+  .r-btn {
+    padding: 5px 12px;
+    border: 1.5px solid rgba(255,255,255,.3);
+    border-radius: 3px;
+    background: transparent;
+    color: rgba(255,255,255,.8);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .r-btn:hover, .r-btn.r-active { background: rgba(255,255,255,.15); color: var(--white); border-color: rgba(255,255,255,.6); }
+  .r-btn.r-close { margin-left: auto; color: #ff8a8a; border-color: #ff8a8a; }
+  .r-btn.r-close:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
+  #r-font-size {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: rgba(255,255,255,.7);
+    min-width: 50px;
+    text-align: center;
+  }
+
+  /* NEWSPAPER CONTENT */
+  #reader-content {
+    padding: 0;
+    transition: all .2s;
+  }
+
+  /* MODES */
+  #reader-content.mode-day { background: var(--white); color: var(--ink); }
+  #reader-content.mode-night { background: #0d1624; color: #c8d8f0; }
+  #reader-content.mode-night .np-masthead { background: #050d1a; border-color: #1e3a6e; }
+  #reader-content.mode-night .np-section-rule { border-color: #1e3a6e; }
+  #reader-content.mode-night .np-headline { color: #7ab3f5; }
+  #reader-content.mode-night .np-subhead { color: #5a8acf; }
+  #reader-content.mode-night .np-body { color: #a8c4e8; }
+  #reader-content.mode-night .np-sidebar { background: #0a1930; border-color: #1e3a6e; }
+  #reader-content.mode-night .np-pull { color: #5a8acf; border-color: #1e3a6e; }
+  #reader-content.mode-night .np-ad { background: #0a1930; border-color: #1e3a6e; }
+  #reader-content.mode-sepia { background: #fdf6e3; color: #4a3728; }
+  #reader-content.mode-sepia .np-masthead { background: #f5e6c8; border-color: #c4a882; }
+  #reader-content.mode-sepia .np-headline { color: #7a4f2e; }
+  #reader-content.mode-sepia .np-subhead { color: #a07040; }
+  #reader-content.mode-sepia .np-body { color: #5a4030; }
+  #reader-content.mode-sepia .np-pull { color: #a07040; border-color: #c4a882; }
+  #reader-content.mode-sepia .np-sidebar { background: #f0e0c0; border-color: #c4a882; }
+  #reader-content.mode-sepia .np-ad { background: #f0e0c0; border-color: #c4a882; }
+
+  /* Column layouts */
+  #reader-content.cols-1 .np-article-grid { columns: 1; }
+  #reader-content.cols-2 .np-article-grid { columns: 2; }
+  #reader-content.cols-3 .np-article-grid { columns: 3; }
+
+  /* THE NEWSPAPER PAGE */
+  .np-masthead {
+    background: var(--off-white);
+    border-bottom: 3px double var(--blue-deep);
+    padding: 20px 32px 14px;
+    text-align: center;
+  }
+  .np-paper-name {
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: var(--blue-deep);
+    letter-spacing: -2px;
+    line-height: 1;
+  }
+  .np-paper-tagline {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--blue-mid);
+    margin: 4px 0 8px;
+  }
+  .np-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 5px 0;
+  }
+  .np-meta-row span {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    color: var(--blue-mid);
+    font-weight: 500;
+  }
+
+  .np-banner {
+    background: var(--blue-deep);
+    color: var(--white);
+    text-align: center;
+    padding: 18px 32px;
+    border-bottom: 3px solid var(--accent);
+  }
+  .np-banner-headline {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .np-banner-deck {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.05rem;
+    opacity: .85;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .np-section-rule {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 32px;
+    border-top: 2px solid var(--blue-deep);
+    border-bottom: 1px solid var(--rule);
+    margin-top: 16px;
+  }
+  .np-section-label {
+    font-family: var(--font-slab);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--blue-deep);
+  }
+  .np-section-line { flex: 1; height: 1px; background: var(--rule); }
+
+  .np-article-grid {
+    padding: 16px 32px;
+    column-gap: 24px;
+  }
+  .np-article {
+    break-inside: avoid;
+    margin-bottom: 20px;
+  }
+  .np-headline {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .np-subhead {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--blue-mid);
+    margin-bottom: 8px;
+  }
+  .np-byline {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 6px;
+  }
+  .np-body {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: #243d6e;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .np-body + .np-body { margin-top: 8px; }
+  .np-article-rule { border: none; border-top: 1px solid var(--rule); margin: 14px 0; }
+
+  .np-pull {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--blue-mid);
+    border-top: 2px solid var(--blue-mid);
+    border-bottom: 2px solid var(--rule);
+    padding: 10px 0;
+    margin: 14px 0;
+    text-align: center;
+    line-height: 1.45;
+  }
+
+  .np-sidebar {
+    background: var(--blue-ghost);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--blue-mid);
+    padding: 12px 14px;
+    margin: 14px 0;
+    break-inside: avoid;
+  }
+  .np-sidebar-title {
+    font-family: var(--font-slab);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    color: var(--blue-deep);
+    margin-bottom: 6px;
+  }
+  .np-sidebar p {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: #3a5280;
+    line-height: 1.6;
+  }
+
+  .np-ad {
+    background: var(--blue-ghost);
+    border: 1px dashed var(--rule);
+    text-align: center;
+    padding: 16px;
+    margin: 16px 32px;
+    border-radius: 2px;
+  }
+  .np-ad-label {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    margin-bottom: 6px;
+  }
+  .np-ad-text {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+  }
+  .np-ad-sub {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--blue-mid);
+    margin-top: 4px;
+  }
+
+  .np-footer {
+    background: var(--blue-deep);
+    color: var(--white);
+    text-align: center;
+    padding: 12px 32px;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 1px;
+    opacity: .9;
+    margin-top: 20px;
+  }
+
+  /* ====== STATUS BAR ====== */
+  #status-bar {
+    background: var(--blue-deep);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 7px 40px;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+  }
+  #status-bar span { opacity: .75; }
+  #status-bar strong { opacity: 1; }
+  .ticker {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+  }
+  @keyframes ticker {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* ====== COUNT BADGE ====== */
+  #count-badge {
+    background: var(--accent);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-left: 6px;
+  }
+
+  /* ====== EMPTY STATE ====== */
+  #empty-state {
+    display: none;
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--blue-mid);
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .masthead-top, .toolbar, #papers-grid, #status-bar { padding-left: 16px; padding-right: 16px; }
+    .cat-tabs { padding: 0 10px; }
+    #papers-grid { grid-template-columns: 1fr; gap: 18px; }
+    .np-paper-name { font-size: 2rem; }
+    .np-banner-headline { font-size: 1.6rem; }
+    #reader-window { width: 100vw; max-height: 100vh; border-radius: 0; }
+    .np-article-grid { padding: 12px 16px; }
+    .np-section-rule { padding: 8px 16px; }
+    .np-masthead, .np-banner, .np-ad, .np-footer { padding-left: 16px; padding-right: 16px; }
+    .cols-3 .np-article-grid { columns: 1 !important; }
+    .r-btn.hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- STATUS BAR -->
+<div id="status-bar">
+  <strong>📰 SADE BOOKS NEWS 2026</strong>
+  <div class="ticker"><span class="ticker-inner">⚡ HABARI ZA HARAKA: Mabadiliko ya hali ya hewa yameathiri nchi 80 duniani kote &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Viongozi wa G20 wanakutana kujadili uchumi wa dunia &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Teknolojia ya AI inabadilisha sekta ya elimu Afrika &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Michezo ya Olimpiki: Wachezaji wanajiandaa kwa mashindano makubwa</span></div>
+  <span>📖 Bure Kabisa</span>
+</div>
+
+<!-- MASTHEAD -->
+<div id="masthead">
+  <div class="masthead-top">
+    <div class="masthead-brand">
+      <span class="logo-title">Sade Books</span>
+      <span class="logo-sub">Magazeti ya Dijiti</span>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div class="search-box">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="search-input" placeholder="Tafuta gazeti...">
+      </div>
+    </div>
+    <div class="masthead-meta">
+      <strong>Magazeti 100 | Dijiti</strong><br>
+      Toleo la Mwaka 2026
+    </div>
+  </div>
+
+  <!-- DISPLAY PREFERENCES TOOLBAR -->
+  <div class="toolbar">
+    <span class="toolbar-label">Mpangilio:</span>
+    <div class="btn-group">
+      <button class="btn active" onclick="setLayout('grid',this)">⊞ Gridi</button>
+      <button class="btn" onclick="setLayout('list',this)">☰ Orodha</button>
+    </div>
+    <div class="toolbar-sep"></div>
+    <span class="toolbar-label">Ukubwa:</span>
+    <div class="btn-group">
+      <button class="btn" onclick="setCardSize('sm',this)">Ndogo</button>
+      <button class="btn active" onclick="setCardSize('md',this)">Kati</button>
+      <button class="btn" onclick="setCardSize('lg',this)">Kubwa</button>
+    </div>
+    <div class="toolbar-sep"></div>
+    <span class="toolbar-label">Mpangilio wa Msomaji:</span>
+    <div class="btn-group">
+      <button class="btn active" id="mode-day" onclick="setReaderMode('mode-day',this)">☀️ Mchana</button>
+      <button class="btn" id="mode-night" onclick="setReaderMode('mode-night',this)">🌙 Usiku</button>
+      <button class="btn" id="mode-sepia" onclick="setReaderMode('mode-sepia',this)">📜 Sepia</button>
+    </div>
+    <div class="toolbar-sep"></div>
+    <span class="toolbar-label">Nguzo:</span>
+    <div class="btn-group">
+      <button class="btn" onclick="setColumns(1,this)">1</button>
+      <button class="btn active" onclick="setColumns(2,this)">2</button>
+      <button class="btn" onclick="setColumns(3,this)">3</button>
+    </div>
+    <div class="toolbar-sep"></div>
+    <span class="toolbar-label">Herufi:</span>
+    <div class="font-ctrl">
+      <button onclick="changeFontSize(-1)">−</button>
+      <span id="font-size-display">100%</span>
+      <button onclick="changeFontSize(1)">+</button>
+    </div>
+  </div>
+
+  <!-- CATEGORY TABS -->
+  <div class="cat-tabs" id="cat-tabs">
+    <div class="cat-tab active" onclick="filterCat('all',this)">Zote <span id="count-badge">50</span></div>
+    <div class="cat-tab" onclick="filterCat('vita',this)">⚔️ Vita & Amani</div>
+    <div class="cat-tab" onclick="filterCat('siasa',this)">🏛️ Siasa</div>
+    <div class="cat-tab" onclick="filterCat('uchumi',this)">💹 Uchumi</div>
+    <div class="cat-tab" onclick="filterCat('sayansi',this)">🔬 Sayansi & Tech</div>
+    <div class="cat-tab" onclick="filterCat('mazingira',this)">🌍 Mazingira</div>
+    <div class="cat-tab" onclick="filterCat('afya',this)">💊 Afya</div>
+    <div class="cat-tab" onclick="filterCat('michezo',this)">⚽ Michezo</div>
+    <div class="cat-tab" onclick="filterCat('utamaduni',this)">🎭 Utamaduni</div>
+    <div class="cat-tab" onclick="filterCat('elimu',this)">📚 Elimu</div>
+  </div>
+</div>
+
+<!-- PAPERS GRID -->
+<div id="papers-grid"></div>
+<div id="empty-state">Hakuna magazeti yaliyopatikana. Jaribu maneno mengine.</div>
+
+<!-- READER OVERLAY -->
+<div id="reader-overlay">
+  <div id="reader-window">
+    <div id="reader-toolbar">
+      <span style="font-family:'Bebas Neue',sans-serif;letter-spacing:2px;font-size:.85rem;color:rgba(255,255,255,.7);margin-right:4px;">MSOMAJI</span>
+      <button class="r-btn r-active" onclick="setRMode('mode-day',this)">☀️ Mchana</button>
+      <button class="r-btn" onclick="setRMode('mode-night',this)">🌙 Usiku</button>
+      <button class="r-btn" onclick="setRMode('mode-sepia',this)">📜 Sepia</button>
+      <div class="toolbar-sep" style="background:rgba(255,255,255,.2)"></div>
+      <button class="r-btn hide-sm" onclick="setRCols(1,this)">1 Nguzo</button>
+      <button class="r-btn r-active hide-sm" onclick="setRCols(2,this)">2 Nguzo</button>
+      <button class="r-btn hide-sm" onclick="setRCols(3,this)">3 Nguzo</button>
+      <div class="toolbar-sep" style="background:rgba(255,255,255,.2)"></div>
+      <button class="r-btn" onclick="rFontSize(-1)">A−</button>
+      <span id="r-font-size">100%</span>
+      <button class="r-btn" onclick="rFontSize(1)">A+</button>
+      <button class="r-btn r-close" onclick="closeReader()">✕ Funga</button>
+    </div>
+    <div id="reader-content" class="mode-day cols-2"></div>
+  </div>
+</div>
+
+<script>
+// ====== DATA: 50 NEWSPAPERS ======
+const PAPERS = [
+  {id:1,cat:'vita',edition:'Nambari 001',date:'Jan 15, 2025',title:'Gazeti la Amani Duniani',headline:'Vita vya Mashariki ya Kati: Matumaini ya Amani Yanazidi',deck:'Mazungumzo ya amani yanafanyika Geneva huku wafanyakazi wa kibinadamu wakijaribu kufikia maeneo yaliyoathirika',byline:'Na Mwandishi Mkuu wa Sade Books',tags:['vita','amani','diplomasia'],pages:'1 ukurasa',content:[
+    {type:'banner',headline:'VITA VYA MASHARIKI YA KATI: MAZUNGUMZO YA AMANI YANAFANYIKA GENEVA',deck:'Nchi 12 zinashiriki katika mazungumzo ya muda mrefu yanayolenga kumaliza mzozo mkubwa zaidi wa karne hii'},
+    {type:'section',label:'HABARI KUU'},
+    {type:'article',headline:'Mazungumzo ya Amani: Hatua Mpya',sub:'Viongozi wanne wa nchi wenye nguvu wanakusanyika Geneva kwa mazungumzo ya siri',byline:'IDHAA YA KIMATAIFA',body:['Mazungumzo ya amani yanayohusisha nchi 12 duniani yameanza leo Geneva, Uswisi, huku dunia ikitazama kwa matumaini. Wawakilishi wa pande zote za mzozo wamekubali kuja mezani, jambo ambalo halikuwahi kutokea kwa miaka mitatu iliyopita.','Msemaji wa Umoja wa Mataifa alisema kwamba mazungumzo haya ni "hatua muhimu zaidi" katika historia ya mzozo huu. Hata hivyo, wataalamu wanaonya kwamba bado kuna changamoto kubwa zinazohitaji kushughulikiwa kabla ya amani kamili kuweza kupatikana.','Watu milioni 4.5 wamekimbia nyumba zao kwa sababu ya vita hivi, na shirika la UNHCR limeomba msaada wa dharura wa dola bilioni 2.8 kusaidia wakimbizi hawa.']},
+    {type:'pull',text:'"Amani si ndoto tu — ni haki ya kila binadamu kwenye uso wa dunia hii." — Katibu Mkuu wa Umoja wa Mataifa'},
+    {type:'article',headline:'Vikosi vya Kibinadamu: Hatarini Lakini Vimesimama Imara',sub:'Madaktari na wauguzi wanaendelea kufanya kazi katikati ya hatari',byline:'RIPOTA WA MISINGI',body:["Licha ya mazingira magumu, vikosi vya kibinadamu vya shirika la Doctors Without Borders vimeweza kufikia hospitali tatu ambazo zimefungwa kwa miezi sita. Madaktari zaidi ya 200 wanafanya kazi bila kupumzika kusaidia maelfu ya majeraha.","Shirika la Msalaba Mwekundu limetangaza kwamba litaanzisha njia mpya za utoaji wa chakula na dawa kwa maeneo yaliyozingirwa, hatua inayotarajiwa kusaidia zaidi ya watu 300,000."]},
+    {type:'sidebar',title:'TAKWIMU ZA MZOZO',body:'Wafu: 127,000+ | Majeruhi: 450,000+ | Wakimbizi wa ndani: 2.1 milioni | Wakimbizi nje: 2.4 milioni | Msaada unaohitajika: $8.4 bilioni'},
+    {type:'section',label:'UCHAMBUZI'},
+    {type:'article',headline:'Nini Maana ya Mazungumzo Haya kwa Mustakabali?',sub:'Wataalamu wanashiriki maoni yao kuhusu uwezekano wa amani ya kudumu',byline:'UCHAMBUZI WA KINA',body:["Wataalamu wa mambo ya kimataifa wanasema kwamba mazungumzo haya yana umuhimu mkubwa lakini pia hatari kubwa. Kama mazungumzo yatashindwa, pande zote mbili zinaweza kuamua kuendelea na vita kwa nguvu zaidi.","Historia inaonyesha kwamba mizozo kama hii inachukua wastani wa miaka saba kutatuliwa kupitia mazungumzo. Swali kubwa ni: Je, dunia ina uvumilivu wa kusubiri muda huu?"]}
+  ]},
+  {id:2,cat:'sayansi',edition:'Nambari 002',date:'Jan 22, 2025',title:'Gazeti la Sayansi na Teknolojia',headline:'AI Mpya Inayoweza Kugundua Saratani Mapema Zaidi',deck:'Mfumo wa akili bandia unasaidia madaktari kutambua saratani miaka miwili kabla ya dalili kuonekana',byline:'Na Mhariri wa Sayansi',tags:['sayansi','afya','teknolojia'],pages:'1 ukurasa',content:[
+    {type:'banner',headline:'UVUMBUZI MKUBWA: AI INAGUNDUA SARATANI KABLA DALILI HAZIJAONEKANA',deck:'Utafiti mpya kutoka MIT na Johns Hopkins unabadilisha jinsi dawa inavyofanya kazi'},
+    {type:'section',label:'UVUMBUZI WA KISAYANSI'},
+    {type:'article',headline:'AlphaHealth: Mfumo Unaoponya Matumaini',sub:'Teknolojia mpya ina usahihi wa asilimia 94 katika kugundua saratani ya mapema',byline:'TIMU YA UTAFITI WA SADE',body:['Watafiti kutoka taasisi sita za kisayansi duniani wametangaza mfumo mpya wa akili bandia unaoitwa "AlphaHealth" ambao unaweza kugundua aina 15 za saratani kwa usahihi wa asilimia 94 — mapema zaidi kuliko mbinu yoyote ya sasa.','Katika majaribio yaliyofanywa kwa wagonjwa zaidi ya 50,000, mfumo uliweza kutambua saratani kwa wastani wa miaka miwili kabla ya dalili kuonekana kwa njia ya kawaida. Hii inamaanisha kwamba wagonjwa watapata matibabu mapema zaidi, na nafasi zao za kupona zinazidi.','Mtafiti mkuu Dkt. Sarah Chen alisema: "Hii ni mapinduzi ya kweli katika dawa. Saratani iliyogunduliwa mapema ina uwezekano wa kupona zaidi ya asilimia 90 ikilinganishwa na asilimia 20 tu ikigunduliwa baadaye."']},
+    {type:'pull',text:'"Tunapoelekea kwenye mustakabali wa dawa, AI itakuwa daktari anayetuletea matumaini ya kweli."'},
+    {type:'article',headline:'Jinsi Teknolojia Inavyofanya Kazi',sub:'Mfumo unasoma matokeo ya damu kwa usahihi usiopatanikana',byline:'MAELEZO YA KISAYANSI',body:["AlphaHealth inasoma viashiria 847 katika sampuli ndogo ya damu. Kila kiashiria ni kama 'kidole cha alama' ambacho husababishwa na saratani inayokua ndani ya mwili — hata kabla mtu hajapata maumivu au dalili nyingine.","Mfumo ulifunzwa kwa data ya wagonjwa milioni 2.3 kutoka nchi 40 duniani, na unaweza kufanya kazi kwa makundi yote ya watu bila kujali umri, jinsia, au rangi ya ngozi."]},
+    {type:'sidebar',title:'SARATANI ZINAZOWEZA KUGUNDULIWA',body:'• Saratani ya matiti\n• Saratani ya mapafu\n• Saratani ya koloni\n• Saratani ya kongosho\n• Saratani ya damu\n• + Aina 10 zaidi'},
+    {type:'section',label:'ATHARI KWA AFRIKA'},
+    {type:'article',headline:'Afrika Itafaidikaje na Uvumbuzi Huu?',sub:'Changamoto na fursa kwa bara linaloathiriwa sana na saratani',byline:'MTAALAMU WA AFYA YA AFRIKA',body:["Afrika inahangaika sana na saratani kwa sababu ya ukosefu wa vifaa vya kisasa vya uchunguzi. Teknolojia hii mpya, kama gharama yake itashuka, inaweza kubadilisha hali hii kabisa.","Shirika la WHO Afrika linafanya mazungumzo na wabunifu wa AlphaHealth kuhusu mpango wa kuifanya teknolojia hii ipatikane Afrika kwa bei nafuu ifikapo mwaka 2027."]}
+  ]},
+  {id:3,cat:'siasa',edition:'Nambari 003',date:'Feb 1, 2025',title:'Gazeti la Siasa za Dunia',headline:'Uchaguzi Mkuu wa Nchi 8 Mwaka Huu: Nani Atashinda?',deck:'Mwaka 2025 ni mwaka wa uchaguzi mkubwa — nchi nyingi zinaelekea mabadiliko ya uongozi',byline:'Na Mchambuzi wa Siasa',tags:['siasa','uchaguzi','demokrasia'],pages:'1 ukurasa',content:[
+    {type:'banner',headline:'MWAKA WA UCHAGUZI: DEMOKRASIA INAJARIBISHWA KOTE DUNIANI',deck:'Zaidi ya watu bilioni moja watapiga kura mwaka huu — uchaguzi mkubwa zaidi katika historia'},
+    {type:'section',label:'UCHAGUZI WA KIDUNIA'},
+    {type:'article',headline:'Nchi 8 Zenye Uchaguzi Muhimu Mwaka 2025',sub:'Kutoka Ulaya hadi Asia, demokrasia inakabiliwa na mitihani',byline:'DAWATI LA SIASA ZA KIMATAIFA',body:['Mwaka 2025 umepewa jina la "Mwaka Mkubwa wa Demokrasia" na wataalamu wa siasa, na uchaguzi utakaofanyika katika nchi 8 kubwa duniani utabainisha mwelekeo wa ulimwengu kwa miaka kumi ijayo.','Uchaguzi mkubwa zaidi utafanyika India, ambapo wapiga kura zaidi ya milioni 970 watachagua serikali yao mpya. India ni nchi kubwa zaidi ya demokrasia duniani, na matokeo yake yataathiri biashara, usalama, na uhusiano wa kimataifa.','Huko Ulaya, uchaguzi wa mataifa matano ya EU utabainisha kama nguvu za upande wa kulia zitaendelea kupanda, au kama nguvu za wastani zitarejea mamlakani.']},
+    {type:'pull',text:'"Demokrasia ni kama bustani — inahitaji kutunzwa kila wakati, vinginevyo magugu ya udikteta yanakua."'},
+    {type:'article',headline:'Changamoto za Demokrasia ya Kisasa',sub:'Uongo wa kisiasa na AI zinaleta hatari mpya',byline:'MCHAMBUZI WA SIASA',body:["Moja ya changamoto kubwa zaidi katika uchaguzi wa mwaka huu ni kinachoitwa 'deepfakes' — picha na video za uongo zinazoundwa kwa AI. Katika uchaguzi wa hivi karibuni, video za uongo za wagombea ziliangalia mamilioni ya mara kwenye mitandao ya kijamii.","Mashirika ya udhibiti wa uchaguzi duniani yanafanya kazi kwa nguvu zaidi kuliko wakati wowote kuangalia na kuzuia habari za uongo. Hata hivyo, kasi ya teknolojia inazidi uwezo wa udhibiti."]},
+    {type:'sidebar',title:'NCHI ZENYE UCHAGUZI 2025',body:'🇮🇳 India — Machi\n🇩🇪 Ujerumani — Aprili\n🇵🇱 Poland — Mei\n🇧🇷 Brazil (local) — Oktoba\n🇷🇴 Romania — Nov\n🇵🇭 Philippines — Mei\n🇹🇿 Tanzania — Oct\n🇰🇪 Kenya (local) — Aug'}
+  ]},
+  {id:4,cat:'uchumi',edition:'Nambari 004',date:'Feb 10, 2025',title:'Gazeti la Uchumi wa Dunia',headline:'Bitcoin Inafikia Rekodi Mpya: Nini Maana Yake kwa Afrika?',deck:'Sarafu ya kidijitali inapanda kwa kasi na kubadilisha mfumo wa fedha duniani kote',byline:'Na Mhariri wa Uchumi',tags:['uchumi','crypto','fedha'],pages:'1 ukurasa',content:[
+    {type:'banner',headline:'BITCOIN INASHINDA REKODI: MFUMO WA FEDHA DUNIANI UNABADILIKA',deck:'Wawekezaji wa Afrika wanaona fursa kubwa — lakini hatari pia zinakuja'},
+    {type:'section',label:'UCHUMI WA KIDIJITALI'},
+    {type:'article',headline:'Bitcoin na Afrika: Fursa au Hatari?',sub:'Nchi za Afrika zinaweza kupoteza au kupata mengi kutoka kwenye sarafu za kidijitali',byline:'MHARIRI WA UCHUMI WA AFRIKA',body:['Bitcoin imevuka rekodi ya dola 100,000 kwa mara ya kwanza katika historia yake, na wataalam wanasema hii ni alama ya mabadiliko makubwa katika mfumo wa fedha wa kimataifa. Lakini athari kwa Afrika ni ngumu zaidi kuelewa.','Kwa upande mmoja, sarafu za kidijitali zinatoa fursa kubwa kwa Waafrika wengi ambao hawana akaunti ya benki — inakadiriwa kwamba asilimia 57 ya watu wa Afrika Kusini mwa Jangwa la Sahara hawana akaunti rasmi ya benki. Teknolojia hii inaweza kuwashirikisha kwenye uchumi wa kimataifa.','Kwa upande mwingine, hatari za sarafu za kidijitali ni kubwa — mabadiliko ya bei yanaweza kuumiza watu wanaotumia akiba zao zote. Mnamo 2022, watu wengi walipoteza akiba zote zao wakati Bitcoin iliposhuka kwa asilimia 65 kwa miezi sita.']},
+    {type:'pull',text:'"Fedha za dijiti ni nguvu mpya ya uchumi — lakini nguvu hiyo inaweza kujenga au kuharibu."'},
+    {type:'article',headline:'Serikali Zinajibu Jinsi Gani?',sub:'Nchi nyingi zinaunda kanuni mpya za kusimamia crypto',byline:'RIPOTA WA FEDHA',body:["Nchi 47 zimekwisha kutangaza au zinaandaa sheria mpya za kusimamia sarafu za kidijitali. Nigeria, Kenya, na Afrika Kusini ziko mbele katika Afrika — zimetangaza mifumo ya udhibiti ambayo inalenga kulinda watumiaji huku ikiacha nafasi ya uvumbuzi.","Tanzania bado inajiandaa kuunda sera yake. Wataalamu wanasema Tanzania inaweza kujifunza kutoka kwa majirani wake na kuunda sera bora zaidi."]},
+    {type:'sidebar',title:'SARAFU KUU ZA KIDIJITALI',body:'₿ Bitcoin: $103,450\n⧫ Ethereum: $3,892\n◎ Solana: $198\n⬡ BNB: $412\nTanzania: Crypto bado haijaidhinishwa rasmi'}
+  ]},
+  {id:5,cat:'mazingira',edition:'Nambari 005',date:'Feb 18, 2025',title:'Gazeti la Mazingira na Hali ya Hewa',headline:'Jangwa la Sahara Linazidi Kukua: Hatari kwa Milioni',deck:'Utafiti mpya unaonyesha kwamba Sahara imekua kwa kilomita za mraba 300,000 katika miongo miwili',byline:'Na Mhariri wa Mazingira',tags:['mazingira','hali ya hewa','Afrika'],pages:'1 ukurasa',content:[
+    {type:'banner',headline:'SAHARA INAKUA: MABADILIKO YA HALI YA HEWA YANAATHIRI AFRIKA KUSINI',deck:'Watu milioni 200 wanaishi katika maeneo yanayogeuka jangwa — na idadi inaongezeka'},
+    {type:'section',label:'MAZINGIRA NA HALI YA HEWA'},
+    {type:'article',headline:'Sahara Inajipanua: Takwimu za Kutisha',sub:'Satelaiti zinaonyesha upotevu wa misitu na ardhi ya kilimo',byline:'WATAFITI WA MAZINGIRA',body:['Picha za satelaiti kutoka NASA na Shirika la Anga za Ulaya zinaonyesha kwamba jangwa la Sahara limekua kwa asilimia 10 katika miongo miwili iliyopita. Hii inamaanisha upotevu wa ardhi yenye rutuba inayolingana na ukubwa wa nchi kama Ujerumani.','Maeneo yanayoathirika zaidi ni Sahel — ukanda unaopita Niger, Mali, Chad, Sudan, na Ethiopia. Hapa, wakulima wanaona ardhi yao ikibadilika kuwa jangwa ndani ya miaka michache tu, na wanalazimika kuhama au kukaa wakijua kwamba mazao yao hayatastawi.','Wataalamu wanasema ongezeko la joto la takriban digrii 1.2 Celsius tangu mwaka 1900 ndilo chanzo kikuu cha tatizo hili, ingawa ukataji wa miti kwa kasi pia unafanya hali kuwa mbaya zaidi.']},
+    {type:'pull',text:'"Ardhi inalia — na kilio chake kinasikika kutoka Sahara hadi pwani ya Bahari Hindi."'},
+    {type:'article',headline:'Suluhisho: Ukuta Mkuu wa Kijani wa Afrika',sub:'Mradi mkubwa wa kupanda miti unalenga kukomesha upanuzi wa jangwa',byline:'MRADI WA UKUTA WA KIJANI',body:["Mradi wa Ukuta Mkuu wa Kijani — mpango wa kupanda miti katika ukanda mwenye upana wa kilomita 15 kutoka Senegal hadi Djibouti — unaendelea ingawa polepole zaidi kuliko ilivyopangwa.","Hadi sasa, takriban asilimia 18 ya ukuta umepandwa — takwimu ndogo ikilinganishwa na lengo la asilimia 100 ifikapo 2030. Hata hivyo, maeneo yaliyopandwa yanaonyesha mabadiliko chanya — mvua zaidi, ardhi baridi, na kurudi kwa wanyama."]},
+    {type:'sidebar',title:'MAMBO YANAYOATHIRI SAHEL',body:'🌡️ Joto: +1.2°C tangu 1900\n🌧️ Mvua: -20% katika miaka 30\n🌳 Miti: Milioni 2.3 hukatwa kila mwaka\n👨‍👩‍👧 Wakimbizi wa mazingira: 500,000/mwaka'}
+  ]},
+  {id:6,cat:'michezo',edition:'Nambari 006',date:'Mar 3, 2025',title:'Gazeti la Michezo Duniani',headline:'Kombe la Dunia la FIFA 2026: Tanzania Inaweza Kufika?',deck:'Timu ya taifa inafanya mazoezi kwa nguvu — na wachezaji wapya wanasemwa kuweza kubadilisha mchezo',byline:'Na Mhariri wa Michezo',tags:['michezo','mpira','Tanzania'],pages:'1 ukurasa',content:[
+    {type:'banner',headline:'FIFA 2026: SAFARI YA TANZANIA YA NDOTO INAZIDI KUAMINIKA',deck:'Wachunguzi wa kimataifa wanasema Tanzania ina "nguvu ya siri" inayoweza kushangaza dunia'},
+    {type:'section',label:'MICHEZO YA KIMATAIFA'},
+    {type:'article',headline:'Taifa Stars: Wachezaji Wapya Wanaletea Matumaini',sub:'Kizazi kipya cha wachezaji wa Tanzania kinaonyesha uwezo mkubwa',byline:'RIPOTA WA MICHEZO',body:['Timu ya taifa ya Tanzania, inayojulikana kama Taifa Stars, inaingia katika awamu mpya ya maandalizi kwa ajili ya kujaribu kufika Kombe la Dunia la FIFA 2026 litakalofanyika Marekani, Canada, na Mexico.','Kocha mpya aliyetoka Ulaya amekuja na falsafa mpya ya mchezo ambayo inasisitiza udhibiti wa mpira na mashambulio ya haraka. Wachezaji watano wapya wenye umri kati ya miaka 20 na 23 wamejiunga na timu, na wamefanya vizuri sana katika mechi za mazoezi.','Mchezaji aliyezingatiwa zaidi ni Amani Mwamba, mshambuliaji mwenye umri wa miaka 21 anayecheza kwa timu ya ligi kuu ya Afrika Kusini. Mwamba amefanya mabao 18 msimu huu na anasemwa kuwa mwanachezaji wa kwanza wa Tanzania anayeweza kwenda Ulaya.']},
+    {type:'pull',text:'"Taifa Stars haziendi tu kushiriki — zinaenda kushinda. Hii ndiyo nia yetu." — Kocha Julius Swai'},
+    {type:'article',headline:'Kombe la Dunia 2026: Nchi za Afrika Zinatarajiwa',sub:'Nafasi za Afrika ni kubwa zaidi kuliko wakati wowote',byline:'UCHAMBUZI WA MICHEZO',body:["Kombe la Dunia la 2026 litakuwa kubwa zaidi katika historia — timu 48 zinashiriki badala ya 32 kama ilivyokuwa awali. Hii inamaanisha Africa inapata nafasi 9 badala ya 5 za zamani.","Wataalamu wanasema Senegal, Morocco, na Egypt ndizo timu bora zaidi za Afrika kwa sasa. Lakini Tanzania, Guinea, na Zambia ziko katika kundi la timu zinazoweza kushangaza."]},
+    {type:'sidebar',title:'NAFASI ZA AFRICA FIFA 2026',body:'✅ Nafasi: 9 (ziada ya 4)\n🏆 Fainali ya mwisho: 2023 — Morocco\n⚽ Tanzania ranking: #117 (FIFA)\n📈 Maendeleo: +23 nafasi katika miaka 2'}
+  ]},
+  {id:7,cat:'afya',edition:'Nambari 007',date:'Mar 12, 2025',title:'Gazeti la Afya na Ustawi',headline:'Usingizi Mzuri ni Dawa: Utafiti Mpya Unagundua Mambo Mapya',deck:'Wanasayansi wanathibitisha kwamba usingizi wa saa 7-9 hufuta sumu hatari kutoka ubongoni',byline:'Na Daktari wa Ustawi',tags:['afya','sayansi','ubongo'],pages:'1 ukurasa',content:[
+    {type:'banner',headline:'USINGIZI: DAWA BORA ZAIDI ULIYONAYO BURE — UTAFITI UNASEMA',deck:'Kila usiku wa usingizi mzuri, ubongo wako unafanya kazi ya daktari — bila malipo'},
+    {type:'section',label:'AFYA YA UBONGO'},
+    {type:'article',headline:'Glymphatic System: Mfumo wa Kusafisha Ubongo',sub:'Ubongo unajisafisha usiku — lakini tu kama unalala vizuri',byline:'TIMU YA UTAFITI WA AFYA',body:["Utafiti mpya uliochapishwa katika jarida la Nature unaelezea jinsi ubongo unavyojisafisha wakati wa usingizi kwa kupitia mfumo unaojulikana kama 'glymphatic system'. Wakati wa usingizi mzuri, mfumo huu husafisha sumu kama amyloid-beta — ambayo inashiriki katika ugonjwa wa Alzheimer — kwa ufanisi wa asilimia 60 zaidi ya wakati wa macho.","Watafiti waliochunguza watu 10,000 kwa miaka 25 waligundua kwamba watu waliolala chini ya saa sita kwa usiku walikuwa na uwezekano wa mara tatu zaidi kupata ugonjwa wa Alzheimer au aina nyingine za kupoteza kumbukumbu.","Dkt. Matthew Walker, mwandishi wa kitabu maarufu 'Why We Sleep', alisema kwamba 'hakuna kitu kimoja unachoweza kukifanya ambacho kina manufaa zaidi kwa afya yako kuliko kulala vizuri kila usiku'."  ]},
+    {type:'pull',text:'"Usingizi si muda uliopotezwa — ni wakati wa ujenzi, uponyaji, na uzima wa akili na mwili."'},
+    {type:'article',headline:'Jinsi ya Kulala Vizuri: Vidokezo vya Kisayansi',sub:'Madaktari wanashiriki ushauri wa kimazoea unaofanya kazi',byline:'DAKTARI WA USINGIZI',body:["Kwanza, weka ratiba ya kulala — inuka na lala wakati mmoja kila siku, hata wikendi. Mwili wako una saa ya kibaolojia inayopenda mfumo wa kawaida.","Pili, fanya chumba chako kuwa baridi, giza, na kimya. Joto la digrii 18-20 Celsius ni bora zaidi kwa usingizi. Tatu, epuka simu na kompyuta dakika 60 kabla ya kulala — nuru ya bluu inazuia mwili kutoa melatonin, homoni ya usingizi."]},
+    {type:'sidebar',title:'DALILI ZA USINGIZI MBAYA',body:'😴 Kuchoka mchana mzima\n😠 Hasira haraka bila sababu\n🧠 Kusahau mambo\n😷 Kuugua mara kwa mara\n⚖️ Kupata uzito bila sababu\n💔 Moyo kudunda bila kawaida'}
+  ]},
+  {id:8,cat:'utamaduni',edition:'Nambari 008',date:'Mar 20, 2025',title:'Gazeti la Utamaduni na Sanaa',headline:'Muziki wa Bongo Flava Unafikia Mataifa Mapya 2025',deck:'Wasanii wa Tanzania wanashangaza ulimwengu — na uchumi wa burudani unakua kwa asilimia 34',byline:'Na Mhariri wa Utamaduni',tags:['utamaduni','muziki','Tanzania'],pages:'1 ukurasa',content:[
+    {type:'banner',headline:'BONGO FLAVA INASHINDA ULIMWENGU: SAUTI YA TANZANIA INASIKIKA KILA MAHALI',deck:'Kutoka Los Angeles hadi London, hadi Dubai — Bongo Flava inabeba moyo wa Afrika Mashariki'},
+    {type:'section',label:'SANAA NA UTAMADUNI'},
+    {type:'article',headline:'Wasanii Wapya wa Bongo Wanaibuka',sub:'Kizazi kipya kinabeba mkoba wa utamaduni na kisasa',byline:'RIPOTA WA UTAMADUNI',body:["Bongo Flava — mchanganyiko wa muziki wa kisasa wa kiswahili na midundo ya hip-hop, afrobeat, na reggae — inaendelea kupaa kwenye majukwaa ya kimataifa. Wasanii watano wapya wa Tanzania wameingia orodha za muziki wa Afrika kwenye Spotify na Apple Music kwa mara ya kwanza.","Diamond Platnumz, ambaye tayari ni nyota wa kimataifa, alifanya tamasha kubwa la 'Africa United' mjini Dubai ambalo lilishuhuliwa na zaidi ya watu 80,000 live na mamilioni mengine mtandaoni. Tamasha hilo lilionyesha jinsi Bongo Flava inavyounganisha mataifa ya Afrika.","Lakini si Diamond peke yake. Wasanii kama Harmonize, Zuchu, na waimbaji wapya wa kizazi kipya wanaonyesha kwamba Tanzania ina akiba kubwa ya vipaji ambavyo bado havijafikiwa."]},
+    {type:'pull',text:'"Muziki wa Tanzania si tu sauti — ni historia, utamaduni, na roho ya watu wetu ikipanda juu."'},
+    {type:'article',headline:'Uchumi wa Burudani Tanzania: Ukuaji wa Ajabu',sub:'Sekta inakua kwa asilimia 34 na kuunda ajira elfu',byline:'MCHAMBUZI WA UCHUMI WA UTAMADUNI',body:["Sekta ya burudani Tanzania inakua kwa kasi ya kushangaza. Ripoti mpya ya Benki Kuu ya Tanzania inaonyesha kwamba sekta hii ilichangia shilingi bilioni 450 katika uchumi mwaka 2024, ikilinganishwa na bilioni 195 mwaka 2020.","Ukuaji huu unaunda ajira mpya kwa vijana zaidi ya 12,000 kila mwaka — kutoka kwa wasanii na waimbaji hadi technicians wa sauti, wabunifu wa picha, na wafanya biashara wa muziki."]},
+    {type:'sidebar',title:'WASANII WANAONGOZA AFRIKA MASHARIKI',body:'🎵 Diamond Platnumz — #1 Africa\n🎤 Zuchu — Rising Star 2024\n🎸 Harmonize — 5M+ streams/mwezi\n🎶 Nandy — Best Female Vocalist\n🏆 Tanzania: Best Music Nation EA 2024'}
+  ]},
+  {id:9,cat:'elimu',edition:'Nambari 009',date:'Apr 1, 2025',title:'Gazeti la Elimu na Ujuzi',headline:'Elimu ya AI: Serikali 40 Zinalazimisha Masomo ya Akili Bandia Shuleni',deck:'Nchi zinakimbilia kuandaa vijana wao kwa uchumi wa kesho unaomilikiwa na AI',byline:'Na Mhariri wa Elimu',tags:['elimu','AI','vijana'],pages:'1 ukurasa',content:[
+    {type:'banner',headline:'MAPINDUZI YA ELIMU: AI INAINGIA DARASANI DUNIANI KOTE',deck:'Serikali 40 zinasema: vijana wa leo wanahitaji kujua AI — hili ni hitaji, si chaguo'},
+    {type:'section',label:'ELIMU YA KISASA'},
+    {type:'article',headline:'AI Darasani: Changamoto na Fursa',sub:'Walimu wanajiuliza: AI itabadilisha kazi zao au itawasaidia?',byline:'RIPOTA WA ELIMU',body:["Serikali za nchi 40, ikiwemo Finland, Singapore, UAE, na Brazil, zimetangaza mipango ya lazima ya kujifunza akili bandia (AI) katika shule za msingi na sekondari. Nchi hizi zinasema kwamba AI itabadilisha uchumi kwa njia ambayo haijawahi kutokea, na vijana wanahitaji kuwa tayari.","Katika Singapore, wanafunzi wa darasa la sita wanafunzwa misingi ya programu ya AI na jinsi ya kutumia zana za AI kwa njia ya kibunifu. Shule za Finland zimejumuisha AI katika masomo yote — hata sanaa na muziki — badala ya kuifanya somo tofauti.","Swali zito linabaki: Je, walimu wanaposaidia na AI, au AI inawabadilisha? Utafiti mpya unaonyesha kwamba walimu wanaotumia AI kama msaidizi wanaweza kufundisha mara mbili ya wanafunzi kwa wakati mmoja bila kupoteza ubora."]},
+    {type:'pull',text:'"Kutofundisha AI ni kama kutofundisha kusoma — mtoto hataweza kushiriki kikamilifu katika dunia ya kesho."'},
+    {type:'article',headline:'Tanzania na Elimu ya AI: Wapi Tunasimama?',sub:'Mwelekeo na hatua zinazohitajika kwa elimu bora zaidi',byline:'MTAALAMU WA ELIMU YA TANZANIA',body:["Tanzania inaanza safari ya AI katika elimu. Wizara ya Elimu imetangaza programu ya majaribio katika shule 50 za msingi na sekondari mjini Dar es Salaam na Dodoma, ambapo wanafunzi wataanza kujifunza misingi ya programu ya kompyuta na AI.","Changamoto kubwa ni ukosefu wa vifaa — zaidi ya asilimia 70 ya shule za Tanzania hazina kompyuta za kutosha. Lakini mashirika kama Sade Books yanasaidia kuufikisha ujuzi wa dijiti kwa njia ya bei nafuu kupitia vitabu vya kidijitali."]},
+    {type:'sidebar',title:'NCHI BORA ELIMU YA AI 2025',body:'🇸🇬 Singapore — #1 Ulimwenguni\n🇫🇮 Finland — #2\n🇦🇪 UAE — #3 Nchi Inayoendelea\n🇰🇪 Kenya — #1 Afrika\n🇹🇿 Tanzania — Inaanza (Program ya Majaribio)'}
+  ]},
+  {id:10,cat:'vita',edition:'Nambari 010',date:'Apr 10, 2025',title:'Gazeti la Usalama Duniani',headline:'Silaha za Roboti: Mapinduzi Mapya ya Vita Yanayotisha',deck:'Nchi zinajenga majeshi ya roboti — na maswali ya kimaadili yanaulizwa bila majibu',byline:'Na Mtaalamu wa Usalama',tags:['vita','teknolojia','usalama'],pages:'1 ukurasa',content:[
+    {type:'banner',headline:'SILAHA ZA ROBOTI: VITA VYA KESHO VINAANZA LEO',deck:'Nchi 30 zinatengeneza silaha zinazofanya maamuzi za kupiga bila idhini ya binadamu'},
+    {type:'section',label:'USALAMA WA KIMATAIFA'},
+    {type:'article',headline:'Lethal Autonomous Weapons: Wakati Ujao wa Kutisha',sub:'Akili Bandia inaamua nani anaishi na nani anakufa — bila ruhusa ya binadamu',byline:'MTAALAMU WA USALAMA WA KIMATAIFA',body:["Nchi 30 duniani, ikiwemo Marekani, China, Russia, Israel, na Korea Kusini, zinathibitishwa kuwa zina programu za kutengeneza 'Lethal Autonomous Weapons Systems' (LAWS) — silaha zinazoweza kuchagua na kushambulia malengo bila amri ya binadamu.","Shirika la Campaign to Stop Killer Robots linasema kwamba silaha hizi zinaleta hatari kubwa sana — zinaweza kufanya makosa ambayo yanaweza kuua raia wa kawaida, na hakuna mtu anayeweza kuwajibika kwa makosa hayo.","Umoja wa Mataifa umejaribu kuunda makubaliano ya kimataifa ya kupiga marufuku silaha hizi, lakini mazungumzo yanashindwa kwa sababu nchi za nguvu zinapinga vikali, zikisema kwamba silaha hizi zitasaidia kupunguza vifo vya askari."]},
+    {type:'pull',text:'"Tunaporuhusu mashine kuamua uhai wa binadamu, tunapoteza kitu muhimu zaidi — ubinadamu wetu."'},
+    {type:'article',headline:'Athari kwa Vita vya Afrika',sub:'Silaha hizi zinaweza kubadilisha mzozo wa kanda',byline:'MCHAMBUZI WA USALAMA WA AFRIKA',body:["Wataalamu wanaonya kwamba silaha hizi zitaenea haraka — na kama zilivyoenea silaha nyingine za vita, hatimaye zitafika Afrika. Tayari kuna ripoti za drones za kiotomatiki kutumika katika mzozo wa Ethiopia na Sudan.","Nchi za Afrika zinahitaji kuungana na kupigana dhidi ya kuenea kwa silaha hizi kabla hazijaingia katika mzozo wao."]},
+    {type:'sidebar',title:'NCHI ZENYE PROGRAMU ZA LAWS',body:'🇺🇸 Marekani — Bajeti $3.4B\n🇨🇳 China — Mpango wa Siri\n🇷🇺 Russia — Inathibitishwa\n🇮🇱 Israel — Inatumia Gaza\n🇰🇷 Korea Kusini — DMZ Robots\n🌍 Afrika — Inaathirika'}
+  ]}
+];
+
+// Generate remaining 40 papers
+const EXTRA_TITLES = [
+  {cat:'uchumi',title:'Gazeti la Biashara ya Afrika',headline:'Eneo Huru la Biashara la Afrika (AfCFTA) Linafanya Kazi Mwaka wa Pili',deck:'Faida za biashara ya ndani ya Afrika zinaonekana — na Tanzania inanufaika'},
+  {cat:'sayansi',title:'Gazeti la Nafasi za Anga',headline:'Mwezi: Nchi 6 Zinapanga Vituo vya Kudumu Ifikapo 2035',deck:'Mbio ya Mwezi ya Kisasa inaanza — na Afrika inajiunga'},
+  {cat:'mazingira',title:'Gazeti la Bahari Duniani',headline:'Matumbawe ya Bahari ya Hindi Yanakufa kwa Kasi ya Kutisha',deck:'Joto la bahari linafika kiwango kipya — matumbawe zaidi ya 40% yako hatarini'},
+  {cat:'siasa',title:'Gazeti la Afrika Mashariki',headline:'Jumuiya ya Afrika Mashariki: Changamoto za Muungano Zinazidi',deck:'Nchi wanachama zinajadili mustakabali wa EAC — umoja au mgawanyiko?'},
+  {cat:'afya',title:'Gazeti la Chanjo na Kinga',headline:'Chanjo Mpya ya Malaria Inafanya Kazi: Matumaini Makubwa kwa Afrika',deck:'WHO inaidhinisha chanjo ya tatu inayoweza kumaliza ugonjwa unaoua watoto milioni'},
+  {cat:'elimu',title:'Gazeti la Vyuo na Utafiti',headline:'Chuo Kikuu cha Afrika Kinaingia Orodha ya Vyuo Bora 100 Duniani',deck:'Chuo Kikuu cha Cape Town kinapanda — na vyuo vya Tanzania vinafanya nini?'},
+  {cat:'utamaduni',title:'Gazeti la Fasihi ya Kiswahili',headline:'Riwaya ya Kiswahili Inashinda Tuzo ya Nobel ya Fasihi',deck:'Mwandishi kutoka Zanzibar anashangaza ulimwengu na kazi yake ya kipekee'},
+  {cat:'michezo',title:'Gazeti la Riadha ya Afrika',headline:'Wanariadha wa Afrika Wanaongoza Mashindano ya Dunia ya Marathon',deck:'Kenya, Ethiopia, na sasa Tanzania — Afrika inashinda barabara za ulimwengu'},
+  {cat:'vita',title:'Gazeti la Mazungumzo ya Diplomasia',headline:'NATO na China: Mazungumzo ya Usalama Yanafanyika Siri',deck:'Mazungumzo ya siri yanalenga kuzuia mgongano wa nguvu mbili kubwa za ulimwengu'},
+  {cat:'uchumi',title:'Gazeti la Kilimo na Chakula',headline:'Bei ya Chakula Duniani Inashuka kwa Mara ya Kwanza kwa Miaka 5',deck:'Mavuno mazuri na teknolojia mpya ya kilimo vinasaidia kupunguza njaa duniani'},
+  {cat:'sayansi',title:'Gazeti la Nishati Safi',headline:'Nishati ya Jua Inashinda Petroli kwa Bei: Historia Inabadilika',deck:'Kwa mara ya kwanza, solar power ni chaguo nafuu zaidi katika nchi 130'},
+  {cat:'mazingira',title:'Gazeti la Mito na Maji',headline:'Ziwa Viktoria Linashuka: Wakati wa Dharura kwa Afrika Mashariki',deck:'Mabadiliko ya mvua na matumizi ya ziada yanafanya ziwa kubwa zaidi la Afrika kushuka'},
+  {cat:'siasa',title:'Gazeti la Umoja wa Mataifa',headline:'Baraza la Usalama la UN Linapata Wanachama Wapya wa Afrika',deck:'Marekebisho ya UN yanakabiliwa na upinzani mkali lakini pia msaada wa pande nyingi'},
+  {cat:'afya',title:'Gazeti la Lishe na Maisha',headline:'Kula Mboga Zaidi: Utafiti Unaonyesha Faida za Kipekee',deck:'Watu wanaokula mboga na matunda 8+ kwa siku wana maisha marefu zaidi kwa miaka 7'},
+  {cat:'elimu',title:'Gazeti la Elimu ya Kiufundi',headline:'VETA Tanzania: Wanafunzi Wapya 50,000 Wanajiandaa kwa Kazi',deck:'Mafunzo ya ufundi yanabadilika na kutoa wahitimu wanaohitajika zaidi na tasnia'},
+  {cat:'utamaduni',title:'Gazeti la Filamu za Afrika',headline:'Nollywood vs. Bongo Movies: Ushindani Unaojenga Burudani la Afrika',deck:'Sekta ya filamu za Tanzania inakua kwa asilimia 55 — na soko la kimataifa linabeba'},
+  {cat:'michezo',title:'Gazeti la Mchezo wa Maskauti',headline:'Mchezo wa Chess Unashamiri Afrika: Grandmasters Wapya Wanaibuka',deck:'Vijana wa Afrika wanashangaza ulimwengu wa chess — nchi 8 zina grandmasters sasa'},
+  {cat:'vita',title:'Gazeti la Migogoro ya Jirani',headline:'Mpaka wa Sudan na Ethiopia: Mazungumzo Yanaendelea Lakini Polepole',deck:'Msukosuko wa mipaka unasimamishwa lakini hujashughulikiwa kabisa'},
+  {cat:'uchumi',title:'Gazeti la Teknolojia ya Fedha',headline:'M-Pesa na Airtel Money: Ushindani Unaowezesha Uchumi wa Masikini',decade:'Mobile money inabadilisha jinsi watu wanyonge wanavyofanya biashara Afrika Mashariki',deck:'Mobile money inabadilisha jinsi watu wanyonge wanavyofanya biashara Afrika Mashariki'},
+  {cat:'sayansi',title:'Gazeti la Ugunduzi wa Kisaikolojia',headline:'Ubongo wa Binadamu una Uwezo wa Kujifunza Hadi Uzee wa Miaka 90',deck:'Neuroscience mpya inabomoa dhana kwamba ubongo huweza tu kujifunza ukiwa mdogo'},
+  {cat:'mazingira',title:'Gazeti la Misitu ya Tropiki',headline:'Amazon na Congo: Mapafu Mawili ya Dunia Yanakabiliwa na Hatari Sawa',deck:'Ukataji wa miti unaendelea — lakini msukumo wa kimataifa unaanza kufanya kazi'},
+  {cat:'siasa',title:'Gazeti la Haki za Binadamu',headline:'Ripoti ya Amnesty: Haki za Binadamu Zinazidi Kupungua Duniani',deck:'Nchi 67 zinaonyesha kupungua kwa uhuru wa kujieleza na kufanya maandamano'},
+  {cat:'afya',title:'Gazeti la Afya ya Akili',headline:'Msongo wa Mawazo: Ugonjwa wa Karne — Njia za Kushinda',deck:'Miongo miwili ya utafiti inatoa njia mpya za kushughulikia msongo wa mawazo'},
+  {cat:'elimu',title:'Gazeti la Wasomi wa Tanzania',headline:'Wasomi wa Tanzania Wanaoishi Nje ya Nchi: Hurudi Nchi au Hawana?',deck:'Brain drain ni tatizo kubwa — lakini pia fursa ya kutumia ujuzi wa diaspora'},
+  {cat:'utamaduni',title:'Gazeti la Chakula cha Kitamaduni',headline:'Pilau ya Zanzibar Inaingia Orodha ya UNESCO ya Urithi wa Lishe Duniani',deck:'Chakula cha Tanzania kinatambuliwa duniani — fursa mpya za utalii na biashara'},
+  {cat:'michezo',title:'Gazeti la Michezo ya Maji',headline:'Uogeaji Tanzania: Waogeaji Wapya Wanaibuka Baada ya Mafunzo Mapya',deck:'Programu mpya ya kitaifa inaandaa waogeaji kwa mashindano ya kimataifa'},
+  {cat:'vita',title:'Gazeti la Mashambulizi ya Mtandaoni',headline:'Cyber War: Nchi 12 Zinashambuliwa Mtandaoni kwa Wakati Mmoja',deck:'Mashambulizi makubwa zaidi ya mtandao katika historia yanasababisha uharibifu mkubwa'},
+  {cat:'uchumi',title:'Gazeti la Utalii wa Afrika',headline:'Afrika Mashariki Inapokea Watalii Zaidi ya Milioni 10 kwa Mara ya Kwanza',deck:'Tanzania, Kenya, Rwanda, na Uganda vinashinda mapato ya utalii'},
+  {cat:'sayansi',title:'Gazeti la Dawa za Asili',headline:'Mitishamba ya Afrika Inaweza Kuponya Magonjwa Ambayo Dawa Za Kisasa Zinashindwa',deck:'Watafiti wa Kenya na Tanzania wanagundu kemikali mpya katika mimea ya kiafrika'},
+  {cat:'mazingira',title:'Gazeti la Uchafuzi wa Hewa',headline:'Hewa Chafu Inaua Watu Milioni 7 Kila Mwaka — Zaidi ya Covid',deck:'Uchafuzi wa hewa ni tatizo kubwa zaidi ya kiafya ulimwenguni — lakini unaweza kushindwa'},
+  {cat:'siasa',title:'Gazeti la Uchaguzi wa Afrika',headline:'Uchaguzi Huru Afrika: Kwa Kiwango Gani Unaweza Kuaminika?',deck:'Uchunguzi wa mashirika ya uchaguzi unaonyesha mwelekeo tofauti kanda mbalimbali'},
+  {cat:'afya',title:'Gazeti la Saratani Afrika',headline:'Vituo Vipya vya Matibabu ya Saratani Vinafunguliwa Tanzania',deck:'Hospitali mpya ya saratani ya kisasa inafungua milango Dar es Salaam'},
+  {cat:'elimu',title:'Gazeti la Vijana na Kazi',headline:'Vijana wa Afrika: Nguvu Kubwa Inayohitaji Fursa',deck:'Afrika ina nguvu kazi kubwa zaidi duniani — lakini mfumo wa elimu unalingana?'},
+  {cat:'utamaduni',title:'Gazeti la Lugha za Afrika',headline:'Kiswahili Kinakuwa Lugha ya Tatu Kubwa ya Biashara Afrika',deck:'Watu milioni 200 wanazungumza Kiswahili — na idadi inaongezeka kila mwaka'},
+  {cat:'michezo',title:'Gazeti la Mbio za Marathoni',headline:'Eliud Kipchoge Anashinda Kwa Mara ya Sita — Rekodi Mpya ya Historia',deck:'Mwathlete mkubwa wa historia ya marathon anaendelea kuwashangaza wengine'},
+  {cat:'vita',title:'Gazeti la Vikosi vya Amani',headline:'UN Peacekeepers: Wanajeshi wa Afrika Wanaongoza Umoja wa Mataifa',deck:'Kwa mara ya kwanza, wanajeshi wa Afrika wanaongoza operesheni kubwa ya amani ya UN'},
+  {cat:'uchumi',title:'Gazeti la Madeni ya Afrika',headline:'Madeni ya Afrika: Wakati wa Kujadili Upya Masharti na Wakopeshaji',deck:'IMF na Benki ya Dunia wanakubali kwamba masharti ya sasa ni mazito sana kwa nchi za Afrika'},
+  {cat:'sayansi',title:'Gazeti la Jenetiki na Afya',headline:'Ramani Mpya ya Jenetiki ya Binadamu Inafungua Mlango wa Dawa Binafsi',deck:'Kila mtu ataweza kupata dawa iliyobuniwa kwa ajili ya jenetiki yake maalum ifikapo 2030'},
+  {cat:'mazingira',title:'Gazeti la Uvuvi Baharini',headline:'Bahari ya Hindi: Uvuvi Kupita Kiasi Unatishia Riziki ya Wavuvi Milioni',deck:'Meli kubwa za kigeni zinapora samaki — wavuvi wadogo wa Tanzania wanaumia'},
+  {cat:'siasa',title:'Gazeti la Ushirikiano wa Afrika',headline:'AU Summit: Viongozi wa Afrika Wanakubaliana Kuunda Jeshi la Pamoja',deck:'Hatua ya kihistoria — lakini maswali mengi bado hayajajibiwa kuhusu utekelezaji'},
+  {cat:'afya',title:'Gazeti la Vitamini na Lishe',headline:'Upungufu wa Vitamini D: Tatizo la Kimataifa Linalopuuzwa',deck:'Hata Afrika ina tatizo la upungufu wa vitamini D — hali ya ajabu inayoelezwa na sayansi'}
+];
+
+// Extra 50 more papers (51-100) for 2026
+const EXTRA_TITLES_2026 = [
+  {cat:'vita',title:'Gazeti la Usalama wa Bahari',headline:'Bahari ya Shamu: Masharti Mapya ya Usafiri wa Kimataifa',deck:'Nchi za Ghuba zinajadili usalama wa njia muhimu zaidi za biashara baharini'},
+  {cat:'sayansi',title:'Gazeti la Kompyuta ya Quantum',headline:'Kompyuta ya Quantum Inashinda Rekodi: Suluhisho la Dakika Moja Lilichukua Miaka Elfu',deck:'IBM na Google wanashindana katika mbio za teknolojia inayobadilisha ulimwengu'},
+  {cat:'mazingira',title:'Gazeti la Theluji za Milima',headline:'Kilimanjaro: Theluji Inayobaki ni Asilimia 15 ya Ilivyokuwa 1912',deck:'Wanasayansi wanaonya Tanzania kuhusu athari za upotezaji wa theluji kwa mto na kilimo'},
+  {cat:'siasa',title:'Gazeti la Uchaguzi wa Tanzania',headline:'Tanzania 2026: Chaguzi la Serikali za Mitaa Linakaribia',deck:'Vyama vya siasa vinajiandaa — na vijana wanaingia siasa kwa nguvu kubwa'},
+  {cat:'afya',title:'Gazeti la Dawa ya Kisukari',headline:'Dawa Mpya ya Kisukari Inatibu Bila Sindano: Mapinduzi ya Afya',deck:'Vidonge vipya vinaweza kubadilisha maisha ya wagonjwa milioni 537 duniani'},
+  {cat:'elimu',title:'Gazeti la Masomo ya Mtandaoni',headline:'MOOC Afrika: Wanafunzi Milioni Wanasoma Bure Kupitia Mtandao',deck:'Elimu ya bure ya mtandaoni inafika Tanzania — na zaidi ya watu 50,000 wamesajiliwa'},
+  {cat:'utamaduni',title:'Gazeti la Ngoma za Asili',headline:'Ngoma za Tanzania Zinaingia Orodha ya UNESCO ya Urithi wa Binadamu',deck:'Utambuzi huu unaifanya Tanzania kuwa mahali maalum pa utalii wa utamaduni'},
+  {cat:'michezo',title:'Gazeti la Mpira wa Vikapu',headline:'Tanzania Basketball: Timu Mpya Inaingia Ligi ya Afrika',deck:'Klabu mpya ya Dar es Salaam inashiriki BAL kwa mara ya kwanza — furaha kubwa'},
+  {cat:'uchumi',title:'Gazeti la Gesi Asilia Tanzania',headline:'Gesi ya Tanzania: Mapato Yanazidi Dola Bilioni 2 kwa Mwaka',deck:'Sekta ya gesi inakua kwa kasi — lakini manufaa yanafika kwa wananchi wa kawaida?'},
+  {cat:'sayansi',title:'Gazeti la Maji Safi Duniani',headline:'Teknolojia Mpya Inabadilisha Maji ya Bahari Kuwa ya Kunywa kwa Bei Nafuu',deck:'Desalination ya solar inaweza kutatua tatizo la maji safi kwa nchi za pwani'},
+  {cat:'vita',title:'Gazeti la Ugaidi wa Kisasa',headline:'AI Inasaidia Kupambana na Ugaidi: Mafanikio na Hatari Mpya',deck:'Akili bandia inagundua mipango ya ugaidi — lakini pia inaweza kutumika vibaya'},
+  {cat:'mazingira',title:'Gazeti la Plastiki Baharini',headline:'Bahari ya Hindi: Tani Milioni 12 za Plastiki Zinaingia Kila Mwaka',deck:'Tanzania, Kenya, na Msumbiji wanashirikiana kupambana na uchafuzi wa plastiki'},
+  {cat:'siasa',title:'Gazeti la BRICS na Afrika',headline:'BRICS Inapanuka: Nchi 6 Mpya za Afrika Zinajiunga',deck:'Muungano mpya wa uchumi unabadilisha nguvu za kimataifa — Tanzania iko wapi?'},
+  {cat:'afya',title:'Gazeti la Uzazi wa Mpango',headline:'Uzazi wa Mpango Afrika: Maendeleo Makubwa lakini Bado Mengi Yanabaki',deck:'Asilimia ya wanawake wanaotumia uzazi wa mpango inaongezeka — lakini si kwa kasi ya kutosha'},
+  {cat:'elimu',title:'Gazeti la Wasichana Shuleni',headline:'Msichana Shule: Kampeni ya Kimataifa Inaleta Matokeo Tanzania',deck:'Idadi ya wasichana wanaokaa shule hadi form six imeongezeka kwa asilimia 34'},
+  {cat:'utamaduni',title:'Gazeti la Sanaa ya Dijiti',headline:'Sanaa ya NFT: Wasanii wa Tanzania Wanauza Kazi Mtandaoni kwa Mamilioni',deck:'Mapinduzi ya kidijitali yanafungua soko jipya kwa wasanii wa Afrika'},
+  {cat:'michezo',title:'Gazeti la Tenisi Afrika',headline:'Tenisi Tanzania: Mchezo Unaokua Kwa Kasi Miongoni mwa Vijana',deck:'Viwanja vipya vya tenisi vinajengwa mijini — na vipaji vipya vinavyoibuka'},
+  {cat:'vita',title:'Gazeti la Mzozo wa Sudan',headline:'Sudan: Mazungumzo ya Amani Yanabeba Matumaini Mapya 2026',deck:'Pande zote zinakubaliana kuhuia ceasefire ya miezi mitatu — hatua muhimu'},
+  {cat:'uchumi',title:'Gazeti la Benki za Dijiti',headline:'Benki ya Dijiti Tanzania: Akaunti Milioni 5 Mpya kwa Mwaka Mmoja',deck:'Fintech inabadilisha Tanzania — watu wanaopata huduma za benki kwa mara ya kwanza'},
+  {cat:'sayansi',title:'Gazeti la Roboti za Kilimo',headline:'Roboti Zinakulima: Mapinduzi ya Kilimo Yanaingia Afrika',deck:'Teknolojia mpya ya kilimo inaweza kuongeza mavuno kwa asilimia 300 bila kuongeza ardhi'},
+  {cat:'mazingira',title:'Gazeti la Ukame na Mvua',headline:'La Nina 2026: Mvua Nyingi Zinatarajiwa Afrika Mashariki',deck:'Wataalamu wa hali ya hewa wanatahadharisha kuhuia mafuriko — nchi zinajiandaa'},
+  {cat:'siasa',title:'Gazeti la Mahusiano ya Tanzania na China',headline:'Uwekezaji wa China Tanzania Unazidi Dola Bilioni 8 kwa Mwaka',deck:'Miundombinu, madini, na kilimo — ushirikiano unakua lakini maswali yanazidi'},
+  {cat:'afya',title:'Gazeti la Meno na Afya',headline:'Afya ya Meno ni Afya ya Mwili: Uhusiano Unaoshangaza',deck:'Utafiti mpya unaonyesha meno yenye afya yanahusiana na moyo na ubongo wenye afya'},
+  {cat:'elimu',title:'Gazeti la Lugha za Kigeni',headline:'Kichina na Kiarabu: Lugha Mpya Zinazofundishwa Tanzania',deck:'Shule zinaanza kufundisha lugha za biashara za kesho — fursa au changamoto?'},
+  {cat:'utamaduni',title:'Gazeti la Mavazi ya Kitanzania',headline:'Kitenge na Ankara: Mavazi ya Afrika Yanashinda Mitindo ya Kimataifa',deck:'Wabunifu wa Tanzania wanafanya sauti yao isikike Paris na Milan'},
+  {cat:'michezo',title:'Gazeti la Volleyball Tanzania',headline:'Volleyball Tanzania: Timu ya Wanawake Inashinda Kombe la Afrika Mashariki',deck:'Mafanikio ya timu ya wanawake yanainspire kizazi kipya cha wachezaji'},
+  {cat:'vita',title:'Gazeti la Silaha za Nyuklia',headline:'Silaha za Nyuklia: Mazungumzo ya Kupunguza Yanashindwa Mara Nyingine',deck:'Nchi 9 zenye silaha za nyuklia hazikubaliani kuhusu hatua za kuzipunguza'},
+  {cat:'uchumi',title:'Gazeti la Sekta ya Ujenzi',headline:'Ujenzi Tanzania: Vitalu vya Makazi 100,000 Vinapangwa Miaka 5 Ijayo',deck:'Serikali na sekta binafsi zinashirikiana kukabili tatizo kubwa la nyumba mijini'},
+  {cat:'sayansi',title:'Gazeti la Dawa ya Akili',headline:'Dawa Mpya ya Unyogovu Inafanya Kazi kwa Saa 24 — Uvumbuzi wa Karne',deck:'Watafiti wa Stanford wanasema dawa hii inaweza kusaidia watu milioni wanaoteseka'},
+  {cat:'mazingira',title:'Gazeti la Nishati ya Upepo',headline:'Upepo wa Pwani ya Tanzania: Nguvu Kubwa Ambayo Haijatumika',deck:'Utafiti mpya unaonyesha Tanzania inaweza kuzalisha megawatt 5,000 kutoka upepo wa pwani'},
+  {cat:'siasa',title:'Gazeti la Uchaguzi wa Zanzibar',headline:'Zanzibar 2025: Uchaguzi Uliofanya Historia kwa Ushiriki Mkubwa',deck:'Asilimia 87 ya wapiga kura walishiriki — rekodi mpya ya demokrasia visiwani'},
+  {cat:'afya',title:'Gazeti la Upasuaji wa Roboti',headline:'Upasuaji wa Roboti Unaingia Hospitali za Afrika: Daktari wa Dijiti Amefika',deck:'Hospitali tatu za Afrika sasa zinafanya upasuaji kwa kutumia roboti za kisasa'},
+  {cat:'elimu',title:'Gazeti la Vitabu vya Kidijitali',headline:'Vitabu vya Kidijitali Tanzania: Soko Linakua kwa Asilimia 120',deck:'Sade Books na washindani wanaonyesha kwamba Watanzania wanataka kusoma kidijitali'},
+  {cat:'utamaduni',title:'Gazeti la Filamu za Kiswahili',headline:'Filamu ya Kiswahili Inashinda Tuzo ya BAFTA kwa Mara ya Kwanza',deck:'Mkurugenzi wa Tanzania anashangaza Hollywood na hadithi ya kipekee ya Afrika'},
+  {cat:'michezo',title:'Gazeti la Michezo ya Elektroniki',headline:'E-Sports Tanzania: Vijana Wanashinda Pesa kwa Kucheza Mchezo wa Kompyuta',deck:'Tasnia ya e-sports inakua haraka — fursa mpya za kipato kwa vijana'},
+  {cat:'vita',title:'Gazeti la Usalama wa Chakula',headline:'Vita vya Chakula: Nchi Zinazogombana kwa Sababu ya Maji na Ardhi',deck:'Rasilimali zinazopungua zinasababisha mizozo mipya duniani kote'},
+  {cat:'uchumi',title:'Gazeti la Ajira na Vijana',headline:'Ajira 2026: Kazi Gani Zitaongezeka na Zipi Zitapotea kwa Sababu ya AI?',deck:'Ripoti ya ILO inaonyesha mabadiliko makubwa ya soko la ajira yanakuja'},
+  {cat:'sayansi',title:'Gazeti la Akili Bandia na Sanaa',headline:'AI Inaweza Kuandika Riwaya na Kupaka Rangi — Lakini Je, ni Sanaa?',deck:'Mjadala mkubwa wa kimataifa kuhusu haki za ubunifu wa akili bandia unaendelea'},
+  {cat:'mazingira',title:'Gazeti la Misitu ya Tanzania',headline:'Hifadhi ya Selous: Wanyama Wanarudishwa Baada ya Kupungua',deck:'Programu ya uhifadhi inaleta matokeo mazuri — idadi ya tembo inaongezeka'},
+  {cat:'siasa',title:'Gazeti la Utawala Bora Tanzania',headline:'Tanzania Inapanda kwa Nafasi 15 kwenye Orodha ya Utawala Bora Afrika',deck:'Transparency International inatambua maboresho — lakini bado kuna changamoto kubwa'},
+  {cat:'afya',title:'Gazeti la Lishe ya Watoto',headline:'Utapiamlo Tanzania: Hatua Mpya za Serikali Zinasaidia Watoto Milioni',deck:'Programu mpya ya lishe shuleni inafikia watoto 3.2 milioni kwa chakula cha mchana bure'},
+  {cat:'elimu',title:'Gazeti la Sayansi Shuleni',headline:'STEM Tanzania: Wanafunzi Wapya wa Sayansi Wanaongezeka kwa Asilimia 45',deck:'Programu mpya za serikali na mashirika binafsi zinabadilisha hali ya elimu ya sayansi'},
+  {cat:'utamaduni',title:'Gazeti la Sherehe za Tanzania',headline:'Sauti za Busara Zanzibar: Tamasha Kubwa Zaidi la Muziki Afrika 2026',deck:'Wasanii 200 kutoka nchi 40 wanakusanyika Zanzibar kwa tamasha la siku tano'},
+  {cat:'michezo',title:'Gazeti la Mchezo wa Ngumi',headline:'Mwanamichezo wa Tanzania Anashinda Ubingwa wa Afrika wa Ngumi',deck:'Mpiganaji kutoka Dar es Salaam anabeba taji kwa mara ya kwanza kwa Tanzania'},
+  {cat:'vita',title:'Gazeti la Vikosi vya Tanzania',headline:'JWTZ: Jeshi la Tanzania Linafunzwa Kwa Teknolojia ya Kisasa',deck:'Ushirikiano na nchi za NATO unaleta mafunzo ya kisasa kwa jeshi la Tanzania'},
+  {cat:'uchumi',title:'Gazeti la Madini ya Tanzania',headline:'Tanzanite na Dhahabu: Tanzania Inazidi Kupata Thamani ya Rasilimali Zake',deck:'Sheria mpya za madini zinaongeza mapato ya serikali — lakini wachimbaji wadogo wanafikiriwa?'},
+  {cat:'sayansi',title:'Gazeti la Anga za Juu Afrika',headline:'Setilaiti ya Kwanza ya Tanzania Itazinduliwa Mwaka 2027',deck:'Mradi wa setilaiti unaoungwa mkono na Chuo Kikuu cha Dar es Salaam unaendelea vizuri'},
+  {cat:'mazingira',title:'Gazeti la Usimamizi wa Taka',headline:'Dar es Salaam Inaweza Kuwa Mji Safi: Mpango Mkubwa Unatekelezwa',deck:'Teknolojia mpya za usimamizi wa taka zinaonekana kuwa suluhisho la tatizo hili la muda mrefu'},
+  {cat:'siasa',title:'Gazeti la Muungano wa Tanzania',headline:'Muungano wa Tanzania na Zanzibar: Miaka 62 na Nguvu Inazidi',deck:'Sherehe za muungano zinaadhibitiwa — na viongozi wanasisitiza umoja wa kudumu'},
+  {cat:'afya',title:'Gazeti la Hospitali za Tanzania',headline:'Hospitali Mpya 50 Zinajengwa Tanzania Miaka 3 Ijayo',deck:'Bajeti kubwa zaidi ya afya katika historia ya Tanzania inatekelezwa — matokeo yanatarajiwa'}
+];
+
+// Build all 100 papers
+const allPapers = [...PAPERS];
+
+// Build extra 90 from both arrays
+const ALL_EXTRAS = [...EXTRA_TITLES, ...EXTRA_TITLES_2026];
+ALL_EXTRAS.forEach((p, i) => {
+  allPapers.push({
+    id: i + 11,
+    cat: p.cat,
+    edition: `Nambari ${String(i+11).padStart(3,'0')}`,
+    date: getDate(i+11),
+    title: p.title,
+    headline: p.headline,
+    deck: p.deck,
+    byline: 'Na Mhariri wa Sade Books',
+    tags: [p.cat, 'dunia'],
+    pages: '1 ukurasa',
+    content: [
+      {type:'banner',headline:p.headline.toUpperCase(),deck:p.deck},
+      {type:'section',label:'HABARI KUU'},
+      {type:'article',headline:p.headline,sub:p.deck,byline:'DAWATI LA KIMATAIFA',body:[
+        `${p.deck}. Ripoti za hivi karibuni zinaonyesha kwamba hali hii ina athari kubwa kwa nchi nyingi duniani, ikiwemo Tanzania na majirani wake wa karibu.`,
+        `Wataalamu wanaosoma mwenendo huu wanasema kwamba hatua za haraka zinahitajika ili kushughulikia changamoto hizi kabla hazijazidi. Viongozi wa kimataifa wanaalikwa kuja pamoja na kuunda mkakati wa pamoja.`,
+        `Tanzania, kama nchi inayoendelea kwa kasi, inaweza kunufaika au kuathiriwa vibaya na maendeleo haya kulingana na sera na uamuzi wa viongozi wake.`
+      ]},
+      {type:'pull',text:`"${p.deck}" — Ripoti ya Sade Books ${getDate(i+11)}`},
+      {type:'article',headline:'Athari kwa Tanzania na Afrika Mashariki',sub:'Nini maana ya habari hizi kwa nchi yetu',byline:'RIPOTA WA MKOA',body:[
+        `Kwa Tanzania, maendeleo haya yana umuhimu mkubwa. Nchi inakua kwa kasi na mabadiliko ya kimataifa yanaathiri moja kwa moja maisha ya wananchi wa kawaida.`,
+        `Serikali na sekta binafsi zinahimizwa kushirikiana ili kuhakikisha Tanzania inasimama imara katika kipindi hiki cha mabadiliko makubwa ya kimataifa.`
+      ]},
+      {type:'sidebar',title:'SADE BOOKS — TOLEO LA DIJITI',body:`📰 Toleo ${String(i+11).padStart(3,'0')}\n📅 ${getDate(i+11)}\n📚 Gazeti la Sade Books\n📖 Bure Kabisa\n🌐 sadebooks.online`}
+    ]
+  });
+});
+
+function getDate(n) {
+  const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ago','Sep','Okt','Nov','Des'];
+  const d = ((n-1)*7 + 1) % 28 + 1;
+  const m = Math.floor((n-1)/4) % 12;
+  const yr = n <= 50 ? 2025 : 2026;
+  return `${d} ${months[m]}, ${yr}`;
+}
+
+// ====== STATE ======
+let currentMode = 'mode-day';
+let currentCols = 2;
+let readerFontSize = 100;
+let layout = 'grid';
+let cardSize = 'md';
+let filterCatVal = 'all';
+let searchVal = '';
+const cardSizeMap = {sm:'240px',md:'280px',lg:'340px'};
+
+// ====== RENDER GRID ======
+function renderGrid() {
+  const grid = document.getElementById('papers-grid');
+  const empty = document.getElementById('empty-state');
+  let filtered = allPapers.filter(p => {
+    const catMatch = filterCatVal === 'all' || p.cat === filterCatVal;
+    const q = searchVal.toLowerCase();
+    const searchMatch = !q || p.title.toLowerCase().includes(q) || p.headline.toLowerCase().includes(q) || p.tags.some(t => t.includes(q));
+    return catMatch && searchMatch;
+  });
+
+  document.getElementById('count-badge').textContent = filtered.length;
+
+  if (!filtered.length) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  grid.style.display = 'grid';
+
+  if (layout === 'list') {
+    grid.style.gridTemplateColumns = '1fr';
+  } else {
+    grid.style.gridTemplateColumns = `repeat(auto-fill, minmax(${cardSizeMap[cardSize]}, 1fr))`;
+  }
+
+  grid.innerHTML = filtered.map(p => `
+    <div class="paper-card" onclick="openPaper(${p.id})">
+      <span class="card-number">${p.edition}</span>
+      <div class="card-header">
+        <div class="card-edition">${p.cat.toUpperCase()} • SADE BOOKS</div>
+        <div class="card-title">${p.title}</div>
+        <div class="card-date">📅 ${p.date}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-headline">${p.headline}</div>
+        <div class="card-lead">${p.deck}</div>
+        <div class="card-tags">${p.tags.map(t=>`<span class="tag${t==='vita'||t==='usalama'?' red':''}">${t}</span>`).join('')}</div>
+      </div>
+      <div class="card-footer">
+        <span class="card-pages">📄 ${p.pages}</span>
+        <button class="btn-read">Soma Sasa →</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ====== RENDER NEWSPAPER PAGE ======
+function renderNewspaper(paper) {
+  let html = '';
+  paper.content.forEach(block => {
+    if (block.type === 'banner') {
+      html += `<div class="np-banner"><div class="np-banner-headline">${block.headline}</div><div class="np-banner-deck">${block.deck}</div></div>`;
+    } else if (block.type === 'section') {
+      html += `<div class="np-section-rule"><span class="np-section-label">${block.label}</span><span class="np-section-line"></span></div>`;
+    } else if (block.type === 'article') {
+      html += `<div class="np-article"><div class="np-headline">${block.headline}</div>${block.sub?`<div class="np-subhead">${block.sub}</div>`:''}<div class="np-byline">${block.byline}</div>${block.body.map(b=>`<p class="np-body">${b}</p>`).join('')}</div>`;
+    } else if (block.type === 'pull') {
+      html += `<div class="np-pull">${block.text}</div>`;
+    } else if (block.type === 'sidebar') {
+      html += `<div class="np-sidebar"><div class="np-sidebar-title">${block.title}</div><p>${block.body.replace(/\n/g,'<br>')}</p></div>`;
+    }
+  });
+
+  return `
+    <div class="np-masthead">
+      <div class="np-paper-name">Sade Books News</div>
+      <div class="np-paper-tagline">"Habari za Kweli kwa Watu wa Kweli"</div>
+      <div class="np-meta-row">
+        <span>📅 ${paper.date}</span>
+        <span>${paper.edition} • ${paper.title}</span>
+        <span>📖 Bure • Dijiti</span>
+      </div>
+    </div>
+    <div class="np-article-grid">${html}</div>
+    <div class="np-ad">
+      <div class="np-ad-label">📚 Matangazo</div>
+      <div class="np-ad-text">Sade Books — Vitabu & Magazeti ya Kidijitali</div>
+      <div class="np-ad-sub">Vitabu zaidi ya 500 • Magazeti 100 • Bure Kabisa</div>
+    </div>
+    <div class="np-footer">© 2025 Sade Books Digital Media • Haki Zote Zimehifadhiwa • sadebooks.online</div>
+  `;
+}
+
+// ====== OPEN / CLOSE READER ======
+function openPaper(id) {
+  const paper = allPapers.find(p => p.id === id);
+  if (!paper) return;
+  const content = document.getElementById('reader-content');
+  content.innerHTML = renderNewspaper(paper);
+  content.className = `${currentMode} cols-${currentCols}`;
+  content.style.fontSize = readerFontSize + '%';
+  document.getElementById('r-font-size').textContent = readerFontSize + '%';
+  document.getElementById('reader-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeReader() {
+  document.getElementById('reader-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('reader-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeReader();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeReader(); });
+
+// ====== READER CONTROLS ======
+function setRMode(mode, btn) {
+  currentMode = mode;
+  const content = document.getElementById('reader-content');
+  content.classList.remove('mode-day','mode-night','mode-sepia');
+  content.classList.add(mode);
+  document.querySelectorAll('#reader-toolbar .r-btn:not(.r-close)').forEach(b => b.classList.remove('r-active'));
+  if (btn) btn.classList.add('r-active');
+}
+function setRCols(n, btn) {
+  currentCols = n;
+  const content = document.getElementById('reader-content');
+  content.classList.remove('cols-1','cols-2','cols-3');
+  content.classList.add('cols-'+n);
+  document.querySelectorAll('#reader-toolbar .hide-sm').forEach(b => b.classList.remove('r-active'));
+  if (btn) btn.classList.add('r-active');
+}
+function rFontSize(dir) {
+  readerFontSize = Math.min(160, Math.max(70, readerFontSize + dir * 10));
+  document.getElementById('reader-content').style.fontSize = readerFontSize + '%';
+  document.getElementById('r-font-size').textContent = readerFontSize + '%';
+}
+
+// ====== GRID CONTROLS ======
+function setLayout(l, btn) {
+  layout = l;
+  document.querySelectorAll('.toolbar .btn').forEach(b => { if (b.onclick && b.onclick.toString().includes('setLayout')) b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderGrid();
+}
+function setCardSize(s, btn) {
+  cardSize = s;
+  document.querySelectorAll('.toolbar .btn').forEach(b => { if (b.onclick && b.onclick.toString().includes('setCardSize')) b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderGrid();
+}
+function setReaderMode(mode, btn) {
+  currentMode = mode;
+  document.querySelectorAll('.toolbar .btn').forEach(b => { if (b.onclick && b.onclick.toString().includes('setReaderMode')) b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+function setColumns(n, btn) {
+  currentCols = n;
+  document.querySelectorAll('.toolbar .btn').forEach(b => { if (b.onclick && b.onclick.toString().includes('setColumns')) b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+let gridFontSize = 100;
+function changeFontSize(dir) {
+  gridFontSize = Math.min(140, Math.max(80, gridFontSize + dir*10));
+  document.getElementById('font-size-display').textContent = gridFontSize + '%';
+  document.getElementById('papers-grid').style.fontSize = gridFontSize + '%';
+}
+
+function filterCat(cat, el) {
+  filterCatVal = cat;
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderGrid();
+}
+
+document.getElementById('search-input').addEventListener('input', function() {
+  searchVal = this.value;
+  renderGrid();
+});
+
+// ====== INIT ======
+renderGrid();
+</script>
+
+<!-- ====== FOOTER ====== -->
+<footer style="
+  background: #0a2463;
+  color: #c8deff;
+  padding: 48px 40px 24px;
+  margin-top: 40px;
+  font-family: 'DM Sans', sans-serif;
+">
+  <div style="max-width:1200px;margin:0 auto;">
+    <!-- Top row -->
+    <div style="display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;padding-bottom:32px;border-bottom:1px solid #1e3a6e;">
+      <!-- Brand -->
+      <div style="flex:1;min-width:220px;">
+        <div style="font-family:'Playfair Display',Georgia,serif;font-size:2rem;font-weight:900;color:#ffffff;letter-spacing:-1px;line-height:1;margin-bottom:8px;">Sade Books</div>
+        <div style="font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:#5a8acf;margin-bottom:14px;">Magazeti ya Dijiti</div>
+        <p style="font-size:0.82rem;line-height:1.7;color:#7aabdf;max-width:280px;">"Habari za Kweli kwa Watu wa Kweli" — Tunakuletea habari bora za dunia kwa lugha ya Kiswahili.</p>
+        <div style="margin-top:16px;display:flex;gap:10px;">
+          <a href="#" style="display:inline-block;padding:7px 16px;background:#1e4db7;color:#fff;border-radius:3px;font-size:0.72rem;font-weight:600;letter-spacing:1px;text-decoration:none;">WhatsApp</a>
+          <a href="#" style="display:inline-block;padding:7px 16px;background:transparent;color:#c8deff;border:1.5px solid #1e4db7;border-radius:3px;font-size:0.72rem;font-weight:600;letter-spacing:1px;text-decoration:none;">TikTok</a>
+        </div>
+      </div>
+      <!-- Links -->
+      <div style="flex:1;min-width:160px;">
+        <div style="font-size:0.68rem;letter-spacing:2.5px;text-transform:uppercase;color:#5a8acf;font-weight:600;margin-bottom:14px;">Kurasa</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">🏠 Nyumbani</a></li>
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">📚 Vitabu</a></li>
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">📰 Magazeti</a></li>
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">🤖 SadeGPT</a></li>
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">ℹ️ Kuhusu Sisi</a></li>
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">📞 Wasiliana</a></li>
+        </ul>
+      </div>
+      <!-- Categories -->
+      <div style="flex:1;min-width:160px;">
+        <div style="font-size:0.68rem;letter-spacing:2.5px;text-transform:uppercase;color:#5a8acf;font-weight:600;margin-bottom:14px;">Makundi</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">⚔️ Vita &amp; Amani</a></li>
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">🏛️ Siasa</a></li>
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">💹 Uchumi</a></li>
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">🔬 Sayansi &amp; Tech</a></li>
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">🌍 Mazingira</a></li>
+          <li><a href="#" style="color:#c8deff;text-decoration:none;font-size:0.82rem;">⚽ Michezo</a></li>
+        </ul>
+      </div>
+      <!-- Info -->
+      <div style="flex:1;min-width:200px;">
+        <div style="font-size:0.68rem;letter-spacing:2.5px;text-transform:uppercase;color:#5a8acf;font-weight:600;margin-bottom:14px;">Maelezo ya Biashara</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;">
+          <li style="font-size:0.8rem;color:#7aabdf;">📍 Dar es Salaam, Tanzania</li>
+          <li style="font-size:0.8rem;color:#7aabdf;">📱 Lipa kwa M-Pesa / Airtel</li>
+          <li style="font-size:0.8rem;color:#7aabdf;">📖 Magazeti: Bure Kabisa</li>
+          <li style="font-size:0.8rem;color:#7aabdf;">📦 Magazeti 100 Yanapatikana</li>
+          <li style="font-size:0.8rem;color:#7aabdf;">🌐 sadebooks.online</li>
+          <li style="font-size:0.8rem;color:#7aabdf;">🤝 Mauzo ya Jumla Yanawezekana</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div style="padding:24px 0 28px;border-bottom:1px solid #1e3a6e;display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between;">
+      <div>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;color:#fff;font-weight:700;margin-bottom:4px;">Jiunge na Habari za Sade Books</div>
+        <p style="font-size:0.78rem;color:#5a8acf;">Pata habari mpya za magazeti moja kwa moja kwenye WhatsApp yako</p>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <input type="text" placeholder="Nambari yako ya WhatsApp..." style="padding:9px 16px;border-radius:3px;border:1.5px solid #1e4db7;background:#0d1f4e;color:#fff;font-size:0.8rem;width:220px;outline:none;">
+        <button style="padding:9px 18px;background:#e63946;color:#fff;border:none;border-radius:3px;font-weight:600;font-size:0.8rem;cursor:pointer;letter-spacing:0.5px;">Jiunge →</button>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="padding-top:20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
+      <div style="font-size:0.72rem;color:#3a5c8a;">
+        © <strong style="color:#5a8acf;">2026</strong> Sade Books Digital Media — Haki Zote Zimehifadhiwa
+      </div>
+      <div style="display:flex;gap:20px;">
+        <a href="#" style="color:#3a5c8a;text-decoration:none;font-size:0.72rem;">Sera ya Faragha</a>
+        <a href="#" style="color:#3a5c8a;text-decoration:none;font-size:0.72rem;">Masharti ya Matumizi</a>
+        <a href="#" style="color:#3a5c8a;text-decoration:none;font-size:0.72rem;">Wasiliana Nasi</a>
+      </div>
+      <div style="font-size:0.68rem;color:#3a5c8a;letter-spacing:1px;">
+        TOLEO LA 2026 • MAGAZETI 100 • KISWAHILI
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
