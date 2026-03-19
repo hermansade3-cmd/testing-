@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mafunzo ya Forex - SadeBooks</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --blue:#1565C0; --blue-mid:#1E88E5; --blue-lite:#E3F2FD;
+  --blue-pale:#F0F7FF; --white:#FFFFFF; --text:#0D2A6E;
+  --text-mid:#2C5282; --muted:#5A7AAD; --border:rgba(21,101,192,0.14);
+  --gold:#F59E0B; --green:#16A34A; --red:#DC2626;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
+
+/* TICKER */
+.ticker{background:var(--blue);padding:8px 0;overflow:hidden;white-space:nowrap;}
+.ticker-inner{display:inline-flex;animation:tickerMove 26s linear infinite;gap:0;}
+.ticker-inner span{font-size:0.75rem;font-weight:600;letter-spacing:0.06em;padding:0 28px;opacity:0.9;color:#fff;}
+.bull{color:#4ade80!important;} .bear{color:#f87171!important;}
+@keyframes tickerMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:62px;}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--text);}
+.nav-brand em{color:var(--blue);font-style:normal;}
+.nav-buy{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border-radius:100px;padding:9px 22px;font-size:0.82rem;font-weight:700;text-decoration:none;letter-spacing:0.02em;transition:all 0.2s;box-shadow:0 4px 14px rgba(21,101,192,0.3);}
+.nav-buy:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(21,101,192,0.42);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0D2A6E 0%,#1565C0 55%,#1E88E5 100%);padding:68px 5% 76px;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 20% 20%,rgba(255,255,255,0.06) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 80% 80%,rgba(255,255,255,0.04) 0%,transparent 60%);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:50px 50px;}
+.hero-content{position:relative;z-index:1;max-width:760px;margin:0 auto;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:6px 18px;font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.9);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:24px;}
+.hero-badge::before{content:'';width:7px;height:7px;background:#4ade80;border-radius:50%;box-shadow:0 0 8px #4ade80;animation:blink 2s ease infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-0.02em;margin-bottom:16px;}
+.hero h1 em{color:#F59E0B;font-style:normal;}
+.hero-sub{font-size:clamp(0.88rem,2vw,1.05rem);color:rgba(255,255,255,0.72);line-height:1.75;margin-bottom:28px;font-weight:300;}
+.hero-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:32px;}
+.pill{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);padding:5px 14px;border-radius:100px;font-size:0.75rem;font-weight:500;}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:#F59E0B;color:#0D2A6E;padding:15px 34px;border-radius:100px;font-size:0.95rem;font-weight:800;text-decoration:none;letter-spacing:0.02em;box-shadow:0 8px 28px rgba(245,158,11,0.45);transition:all 0.3s;}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(245,158,11,0.55);}
+.price-strip{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:38px;position:relative;z-index:1;}
+.price-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:10px 16px;text-align:center;min-width:100px;}
+.price-pair{font-size:0.62rem;color:rgba(255,255,255,0.5);letter-spacing:0.1em;}
+.price-val{font-size:1rem;font-weight:700;color:#fff;margin:2px 0;}
+.price-chg{font-size:0.65rem;font-weight:600;}
+.up{color:#4ade80;} .dn{color:#f87171;}
+
+/* CONTAINER */
+.container{max-width:920px;margin:0 auto;padding:0 5%;}
+.section-label{font-size:0.68rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.16em;margin-bottom:8px;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;color:var(--text);line-height:1.15;margin-bottom:12px;}
+.section-title em{color:var(--blue);font-style:normal;}
+.section-desc{font-size:0.92rem;color:var(--muted);line-height:1.7;max-width:640px;}
+
+/* LESSONS */
+.lessons{padding:70px 0;}
+.lessons-grid{display:flex;flex-direction:column;gap:30px;margin-top:48px;}
+
+.lesson-card{background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(21,101,192,0.07);transition:box-shadow 0.3s,transform 0.3s;}
+.lesson-card:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(21,101,192,0.13);}
+.lesson-header{display:flex;align-items:center;gap:16px;padding:20px 26px;background:var(--blue-pale);border-bottom:1px solid var(--border);}
+.lesson-num{width:40px;height:40px;flex-shrink:0;background:var(--blue);color:#fff;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:0.88rem;font-weight:800;}
+.lesson-title-wrap{flex:1;}
+.lesson-title{font-size:1.02rem;font-weight:700;color:var(--text);margin-bottom:2px;}
+.lesson-meta{font-size:0.7rem;color:var(--muted);}
+.lesson-tag{font-size:0.62rem;font-weight:700;padding:4px 13px;border-radius:100px;letter-spacing:0.06em;white-space:nowrap;}
+.tag-free{background:rgba(22,163,74,0.12);color:#166534;}
+.tag-lock{background:rgba(21,101,192,0.1);color:var(--blue);}
+
+.lesson-body{padding:24px 26px;}
+.lesson-intro{font-size:0.92rem;color:var(--text-mid);line-height:1.8;margin-bottom:18px;}
+
+/* Notes box */
+.notes-box{background:var(--blue-pale);border-left:3px solid var(--blue);border-radius:0 12px 12px 0;padding:16px 18px;margin:14px 0;}
+.notes-box-title{font-size:0.7rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;}
+.note-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid rgba(21,101,192,0.08);font-size:0.84rem;color:var(--text-mid);line-height:1.6;}
+.note-item:last-child{border:none;padding-bottom:0;}
+.note-dot{width:22px;height:22px;flex-shrink:0;background:var(--blue);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;margin-top:1px;}
+
+/* Key points */
+.key-points{margin:14px 0;}
+.key-point{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(21,101,192,0.06);font-size:0.86rem;color:var(--text-mid);line-height:1.6;}
+.key-point:last-child{border:none;}
+.kp-icon{font-size:1rem;flex-shrink:0;margin-top:1px;}
+
+/* Chart box */
+.chart-box{background:var(--blue-pale);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:14px 0;}
+.chart-label{font-size:0.62rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;}
+.chart-bars{display:flex;align-items:flex-end;gap:4px;height:56px;}
+.bar{flex:1;border-radius:3px 3px 0 0;background:var(--blue);opacity:0.2;animation:barAnim 2s ease-in-out infinite alternate;}
+.bar.up-b{background:var(--green);opacity:0.55;}
+.bar.dn-b{background:var(--red);opacity:0.55;}
+@keyframes barAnim{from{opacity:0.4;}to{opacity:0.85;}}
+.bar:nth-child(1){height:35%;animation-delay:0s;} .bar:nth-child(2){height:60%;animation-delay:0.1s;}
+.bar:nth-child(3){height:45%;animation-delay:0.2s;} .bar:nth-child(4){height:78%;animation-delay:0.3s;}
+.bar:nth-child(5){height:52%;animation-delay:0.4s;} .bar:nth-child(6){height:88%;animation-delay:0.5s;}
+.bar:nth-child(7){height:67%;animation-delay:0.6s;} .bar:nth-child(8){height:82%;animation-delay:0.7s;}
+.bar:nth-child(9){height:58%;animation-delay:0.8s;} .bar:nth-child(10){height:73%;animation-delay:0.9s;}
+.bar:nth-child(11){height:44%;animation-delay:1s;} .bar:nth-child(12){height:91%;animation-delay:1.1s;}
+
+/* Blur overlay */
+.blur-wrap{position:relative;overflow:hidden;border-radius:12px;margin-top:16px;}
+.blur-content{filter:blur(4px);user-select:none;pointer-events:none;opacity:0.55;}
+.blur-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(240,247,255,0.97) 45%);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:20px;gap:10px;}
+.lock-icon{font-size:2rem;}
+.lock-msg{font-size:0.82rem;color:var(--text-mid);text-align:center;line-height:1.6;font-weight:500;}
+.lock-msg strong{color:var(--blue);}
+.fake-line{height:7px;border-radius:4px;background:rgba(21,101,192,0.12);margin-bottom:7px;}
+
+.btn-pay{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--blue),var(--blue-mid));color:#fff;padding:12px 28px;border-radius:100px;font-size:0.88rem;font-weight:700;text-decoration:none;letter-spacing:0.03em;box-shadow:0 4px 16px rgba(21,101,192,0.35);transition:all 0.2s;width:100%;max-width:320px;}
+.btn-pay:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(21,101,192,0.45);}
+
+/* LOCKED PREVIEW (masomo yaliyofungwa kabisa) */
+.locked-preview{background:var(--blue-pale);border:1px dashed rgba(21,101,192,0.3);border-radius:14px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.lp-info{display:flex;align-items:center;gap:12px;}
+.lp-num{width:36px;height:36px;background:var(--muted);color:#fff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.82rem;font-weight:800;flex-shrink:0;}
+.lp-title{font-size:0.88rem;font-weight:600;color:var(--text-mid);}
+.lp-meta{font-size:0.68rem;color:var(--muted);margin-top:2px;}
+
+/* INCLUDED */
+.included{padding:60px 0;background:var(--blue-pale);}
+.included-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:36px;}
+.inc-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px 18px;transition:transform 0.2s,box-shadow 0.2s;}
+.inc-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(21,101,192,0.1);}
+.inc-icon{font-size:1.8rem;margin-bottom:10px;}
+.inc-title{font-size:0.88rem;font-weight:700;color:var(--text);margin-bottom:4px;}
+.inc-desc{font-size:0.75rem;color:var(--muted);line-height:1.55;}
+
+/* TESTIMONIALS */
+.testi{padding:60px 0;}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:36px;}
+.testi-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(21,101,192,0.06);}
+.testi-stars{color:#F59E0B;font-size:0.82rem;margin-bottom:8px;}
+.testi-text{font-size:0.82rem;color:var(--text-mid);line-height:1.7;font-style:italic;margin-bottom:12px;}
+.testi-author{display:flex;align-items:center;gap:10px;}
+.testi-avatar{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.82rem;font-weight:700;}
+.testi-name{font-size:0.78rem;font-weight:600;color:var(--text);}
+.testi-loc{font-size:0.65rem;color:var(--muted);}
+
+/* BIG CTA */
+.cta-banner{background:linear-gradient(135deg,#0D2A6E,#1565C0,#1E88E5);padding:64px 5%;text-align:center;position:relative;overflow:hidden;}
+.cta-banner::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:44px 44px;}
+.cta-inner{position:relative;z-index:1;max-width:600px;margin:0 auto;}
+.cta-banner h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:900;color:#fff;margin-bottom:14px;line-height:1.2;}
+.cta-banner h2 em{color:#F59E0B;font-style:normal;}
+.cta-banner p{color:rgba(255,255,255,0.72);font-size:0.95rem;line-height:1.75;margin-bottom:28px;}
+.cta-price-box{display:inline-flex;align-items:center;gap:18px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:16px;padding:16px 26px;margin-bottom:26px;}
+.cta-old{font-size:0.78rem;color:rgba(255,255,255,0.4);text-decoration:line-through;}
+.cta-new{font-size:1.7rem;font-weight:900;color:#F59E0B;}
+.cta-new span{font-size:0.7rem;font-weight:500;color:rgba(255,255,255,0.55);}
+.cta-div{width:1px;height:44px;background:rgba(255,255,255,0.2);}
+.cta-inc{font-size:0.72rem;color:rgba(255,255,255,0.7);line-height:1.65;text-align:left;}
+.cta-inc strong{color:#4ade80;}
+.btn-pay-big{display:inline-flex;align-items:center;gap:12px;background:#F59E0B;color:#0D2A6E;padding:16px 40px;border-radius:100px;font-size:1rem;font-weight:800;text-decoration:none;letter-spacing:0.03em;box-shadow:0 8px 28px rgba(245,158,11,0.45);transition:all 0.3s;}
+.btn-pay-big:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(245,158,11,0.55);}
+.cta-note{margin-top:14px;font-size:0.7rem;color:rgba(255,255,255,0.4);letter-spacing:0.06em;}
+
+/* STICKY BOTTOM */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(255,255,255,0.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:12px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.sticky-msg{font-size:0.78rem;color:var(--text-mid);font-weight:500;}
+.sticky-msg strong{color:var(--blue);display:block;font-size:0.82rem;}
+.sticky-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:10px 22px;border-radius:100px;font-size:0.8rem;font-weight:700;text-decoration:none;white-space:nowrap;box-shadow:0 4px 14px rgba(21,101,192,0.3);flex-shrink:0;}
+
+/* FOOTER */
+footer{background:var(--text);color:rgba(255,255,255,0.5);text-align:center;padding:28px 5% 84px;font-size:0.78rem;}
+footer a{color:rgba(255,255,255,0.75);}
+
+@media(max-width:600px){
+  .price-strip{gap:7px;}
+  .price-card{min-width:88px;padding:8px 10px;}
+  .cta-price-box{flex-direction:column;gap:8px;}
+  .cta-div{display:none;}
+  .lesson-header{flex-wrap:wrap;}
+}
+</style>
+</head>
+<body>
+
+<!-- Ticker -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>EUR/USD <span class="bull">▲ 1.0854 +0.12%</span></span>
+    <span>GBP/USD <span class="bear">▼ 1.2634 -0.08%</span></span>
+    <span>USD/JPY <span class="bull">▲ 149.82 +0.21%</span></span>
+    <span>USD/TZS <span class="bull">▲ 2,695 +0.05%</span></span>
+    <span>XAU/USD <span class="bull">▲ 2,341 +0.34%</span></span>
+    <span>USD/CHF <span class="bear">▼ 0.8991 -0.06%</span></span>
+    <span>AUD/USD <span class="bull">▲ 0.6542 +0.15%</span></span>
+    <span>BTC/USD <span class="bull">▲ 68,420 +1.2%</span></span>
+    <span>EUR/USD <span class="bull">▲ 1.0854 +0.12%</span></span>
+    <span>GBP/USD <span class="bear">▼ 1.2634 -0.08%</span></span>
+    <span>USD/JPY <span class="bull">▲ 149.82 +0.21%</span></span>
+    <span>USD/TZS <span class="bull">▲ 2,695 +0.05%</span></span>
+    <span>XAU/USD <span class="bull">▲ 2,341 +0.34%</span></span>
+    <span>USD/CHF <span class="bear">▼ 0.8991 -0.06%</span></span>
+    <span>AUD/USD <span class="bull">▲ 0.6542 +0.15%</span></span>
+    <span>BTC/USD <span class="bull">▲ 68,420 +1.2%</span></span>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-brand">Sade<em>Books</em> · Forex</div>
+  <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="nav-buy">💳 Lipa TSH 5,000</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">📈 Masomo 19 · Kiswahili · Kitaalamu</div>
+    <h1>Jifunze <em>Forex</em><br/>Hatua kwa Hatua</h1>
+    <p class="hero-sub">Mwongozo kamili wa biashara ya fedha za kimataifa kwa lugha ya Kiswahili — kutoka misingi hadi mikakati ya kitaalamu. Imekuandikiwa wewe, Mtanzania.</p>
+    <div class="hero-pills">
+      <span class="pill">📊 Charts & Indicators</span>
+      <span class="pill">💱 Currency Pairs</span>
+      <span class="pill">🎯 Risk Management</span>
+      <span class="pill">📱 MetaTrader 4/5</span>
+      <span class="pill">🧠 Saikolojia ya Trader</span>
+      <span class="pill">💰 Kutoa Faida TZ</span>
+    </div>
+    <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="hero-cta">💳 Pata Kitabu Kamili — TSH 5,000</a>
+    <div class="price-strip">
+      <div class="price-card"><div class="price-pair">EUR/USD</div><div class="price-val">1.0854</div><div class="price-chg up">▲+0.12%</div></div>
+      <div class="price-card"><div class="price-pair">GBP/USD</div><div class="price-val">1.2634</div><div class="price-chg dn">▼-0.08%</div></div>
+      <div class="price-card"><div class="price-pair">USD/JPY</div><div class="price-val">149.82</div><div class="price-chg up">▲+0.21%</div></div>
+      <div class="price-card"><div class="price-pair">XAU/USD</div><div class="price-val">2,341</div><div class="price-chg up">▲+0.34%</div></div>
+      <div class="price-card"><div class="price-pair">USD/TZS</div><div class="price-val">2,695</div><div class="price-chg up">▲+0.05%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSONS -->
+<section class="lessons">
+<div class="container">
+  <div class="section-label">Mada za Mafunzo</div>
+  <h2 class="section-title">Masomo <em>19</em> ya Forex — Kamili</h2>
+  <p class="section-desc">Kila somo linakupa mwanga kidogo — maudhui kamili, mifano, na mazoezi yanapatikana kwenye kitabu cha TSH 5,000.</p>
+
+  <div class="lessons-grid">
+
+    <!-- ═══ SOMO 1 ═══ -->
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">1</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">💱 Forex ni Nini? — Utangulizi Kamili</div>
+          <div class="lesson-meta">Msingi · Hatua ya kwanza ya safari yako</div>
+        </div>
+        <span class="lesson-tag tag-free">✓ Bure</span>
+      </div>
+      <div class="lesson-body">
+        <p class="lesson-intro">Forex, kwa jina kamili Foreign Exchange Market, ni soko kubwa zaidi duniani la kununua na kuuza sarafu za nchi mbalimbali. Kila siku zaidi ya dola trilioni 7.5 zinabadilishana katika soko hili — zaidi ya masoko yote ya hisa ulimwenguni pamoja. Soko hili halina ofisi moja — linafanya kazi mtandaoni, masaa 24 kwa siku, siku 5 kwa wiki, kuanzia Jumatatu alfajiri hadi Ijumaa usiku.</p>
+        <div class="notes-box">
+          <div class="notes-box-title">📝 Maelezo ya Kina</div>
+          <div class="note-item"><div class="note-dot">1</div><span><strong>Forex ilianza lini?</strong> Mfumo wa kisasa wa Forex ulianza mwaka 1971 baada ya Marekani kuacha dhahabu kama msingi wa thamani ya dola. Tangu wakati huo, sarafu za nchi zinaathiriwa na nguvu za soko — usambazaji na mahitaji.</span></div>
+          <div class="note-item"><div class="note-dot">2</div><span><strong>Nani wanafanya biashara Forex?</strong> Washiriki wakubwa ni benki kuu (kama Benki Kuu ya Tanzania), benki za kibiashara, makampuni ya kimataifa, na wafanyabiashara binafsi kama wewe. Hata unapopeleka pesa nje ya nchi, unashiriki Forex bila kujua.</span></div>
+          <div class="note-item"><div class="note-dot">3</div><span><strong>Je, ni halali Tanzania?</strong> Sheria za Tanzania hazikatazi mtu binafsi kufanya biashara ya Forex mtandaoni. Hata hivyo, ni muhimu kutumia broker aliyesajiliwa kimataifa na kuelewa hatari zake kabla ya kuanza.</span></div>
+          <div class="note-item"><div class="note-dot">4</div><span><strong>Forex tofauti na hisa:</strong> Hisa zinauzwa katika masaa maalum ya soko (kwa mfano NYSE 9:30am–4pm ET). Forex inafanya kazi usiku na mchana. Pia huhitaji mtaji mkubwa — unaweza kuanza na dola 10 tu kupitia akaunti ya micro.</span></div>
+        </div>
+        <div class="key-points">
+          <div class="key-point"><span class="kp-icon">✅</span><span>Forex inafanya kazi masaa 24/5 — unaweza kufanya biashara usiku baada ya kazi yako ya kawaida</span></div>
+          <div class="key-point"><span class="kp-icon">✅</span><span>Huhitaji ofisi wala kompyuta ghali — simu yako ya kawaida inatosha kuanza</span></div>
+          <div class="key-point"><span class="kp-icon">⚠️</span><span>Forex ina hatari za kweli — watu wengi hupoteza pesa kwa kutojua. Mafunzo ndiyo kinga yako kubwa</span></div>
+        </div>
+        <div class="blur-wrap">
+          <div class="blur-content">
+            <div class="fake-line" style="width:100%"></div><div class="fake-line" style="width:86%"></div>
+            <div class="fake-line" style="width:92%"></div><div class="fake-line" style="width:74%"></div>
+            <div class="fake-line" style="width:100%"></div><div class="fake-line" style="width:80%"></div>
+          </div>
+          <div class="blur-overlay">
+            <div class="lock-icon">🔒</div>
+            <div class="lock-msg">Maelezo kamili + historia ya Forex + jinsi soko inavyofanya kazi kwa undani <strong>ziko ndani ya kitabu</strong></div>
+            <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="btn-pay">💳 Lipa TSH 5,000 — Pata Kitabu Kamili</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOMO 2 ═══ -->
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">2</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">📊 Currency Pairs — Jozi za Sarafu</div>
+          <div class="lesson-meta">Msingi · Kuelewa lugha ya Forex</div>
+        </div>
+        <span class="lesson-tag tag-free">✓ Bure</span>
+      </div>
+      <div class="lesson-body">
+        <p class="lesson-intro">Katika Forex, sarafu hazifanyiwi biashara peke yake — zinauzwa kwa jozi. EUR/USD inamaanisha unauza Euro na kununua Dola, au kinyume chake. Bei ya jozi inaonyesha sarafu ngapi za pili unahitaji kununua sarafu moja ya kwanza.</p>
+        <div class="chart-box">
+          <div class="chart-label">EUR/USD · Mfano wa Harakati ya Bei (pip movement)</div>
+          <div class="chart-bars">
+            <div class="bar dn-b"></div><div class="bar up-b"></div><div class="bar up-b"></div>
+            <div class="bar dn-b"></div><div class="bar up-b"></div><div class="bar up-b"></div>
+            <div class="bar up-b"></div><div class="bar dn-b"></div><div class="bar up-b"></div>
+            <div class="bar up-b"></div><div class="bar dn-b"></div><div class="bar up-b"></div>
+          </div>
+        </div>
+        <div class="notes-box">
+          <div class="notes-box-title">📝 Aina za Jozi za Sarafu</div>
+          <div class="note-item"><div class="note-dot">M</div><span><strong>Major Pairs (Jozi Kuu):</strong> EUR/USD, GBP/USD, USD/JPY, USD/CHF, AUD/USD, USD/CAD, NZD/USD. Hizi zina uuzaji mkubwa zaidi — spread ni ndogo na zinafaa kwa wanaoanza. Zaidi ya 70% ya biashara zote za Forex zinatokea kwenye jozi hizi.</span></div>
+          <div class="note-item"><div class="note-dot">C</div><span><strong>Cross Pairs (Jozi za Msalaba):</strong> EUR/GBP, EUR/JPY, GBP/JPY — hazina USD. Zinaweza kuwa na mwelekeo mzuri lakini spread ni kubwa kidogo kuliko major pairs.</span></div>
+          <div class="note-item"><div class="note-dot">E</div><span><strong>Exotic Pairs:</strong> USD/TZS, USD/KES, USD/ZAR — sarafu za nchi zinazoendelea. Spread ni kubwa sana, lakini kwa mfanyabiashara anayeelewa vizuri, zinaweza kutoa fursa nzuri.</span></div>
+        </div>
+        <div class="key-points">
+          <div class="key-point"><span class="kp-icon">💡</span><span><strong>Base currency</strong> ni sarafu ya kwanza (EUR katika EUR/USD) — ndiyo unayonunua au kuuza</span></div>
+          <div class="key-point"><span class="kp-icon">💡</span><span><strong>Quote currency</strong> ni sarafu ya pili (USD) — bei yake inaonyesha gharama ya kununua base currency</span></div>
+          <div class="key-point"><span class="kp-icon">🎯</span><span>Wanaoanza washauriwa kuanza na EUR/USD tu — spread ndogo, habari nyingi, na rahisi kufuatilia</span></div>
+        </div>
+        <div class="blur-wrap">
+          <div class="blur-content">
+            <div class="fake-line" style="width:100%"></div><div class="fake-line" style="width:82%"></div>
+            <div class="fake-line" style="width:95%"></div><div class="fake-line" style="width:70%"></div>
+            <div class="fake-line" style="width:88%"></div>
+          </div>
+          <div class="blur-overlay">
+            <div class="lock-icon">🔒</div>
+            <div class="lock-msg">Orodha kamili ya jozi 28 + jinsi ya kuchagua jozi bora kwa hali yako <strong>iko ndani ya kitabu</strong></div>
+            <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="btn-pay">💳 Lipa TSH 5,000 — Fungua Somo Hili</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOMO 3 ═══ -->
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">3</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">📱 MetaTrader 4 & 5 — Jinsi ya Kutumia</div>
+          <div class="lesson-meta">Vitendo · Platform ya biashara yako</div>
+        </div>
+        <span class="lesson-tag tag-lock">🔒 Kitabu</span>
+      </div>
+      <div class="lesson-body">
+        <p class="lesson-intro">MetaTrader (MT4 na MT5) ni programu maarufu zaidi duniani kwa biashara ya Forex. Inatumiwa na zaidi ya wafanyabiashara milioni 10 kote duniani. Unaweza kuipakua bure kwenye simu yako ya Android au iPhone, au kwenye kompyuta yako.</p>
+        <div class="notes-box">
+          <div class="notes-box-title">📝 Sehemu Muhimu za MetaTrader</div>
+          <div class="note-item"><div class="note-dot">1</div><span><strong>Market Watch:</strong> Orodha ya jozi zote na bei zake za sasa. Unaona Bid (bei ya kuuza) na Ask (bei ya kununua) — tofauti yao ndiyo spread unayolipa kila biashara.</span></div>
+          <div class="note-item"><div class="note-dot">2</div><span><strong>Chart Window:</strong> Dirisha la chati ambapo unaona harakati za bei kwa muda. Unaweza kubadilisha muda — M1 (dakika 1), M5, M15, H1 (saa 1), H4, D1 (siku 1), W1 (wiki), MN (mwezi).</span></div>
+          <div class="note-item"><div class="note-dot">3</div><span><strong>Terminal:</strong> Unaona biashara zako zote, faida na hasara, na historia ya akaunti yako. Hapa pia unafunga biashara ukitaka.</span></div>
+          <div class="note-item"><div class="note-dot">4</div><span><strong>Navigator:</strong> Hapa unapata indicators, expert advisors (EA/robots), na scripts. Indicators kama MA, RSI, MACD zinapatikana hapa bure.</span></div>
+        </div>
+        <div class="key-points">
+          <div class="key-point"><span class="kp-icon">📲</span><span>Pakua MT4 kutoka Play Store au App Store bila malipo — tafuta "MetaTrader 4" na upakue ile ya MetaQuotes</span></div>
+          <div class="key-point"><span class="kp-icon">🎮</span><span>Fungua <strong>Demo Account</strong> kwanza — fanya mazoezi kwa pesa bandia hadi ujisikie tayari</span></div>
+        </div>
+        <div class="blur-wrap">
+          <div class="blur-content">
+            <div class="fake-line" style="width:100%"></div><div class="fake-line" style="width:88%"></div>
+            <div class="fake-line" style="width:76%"></div><div class="fake-line" style="width:93%"></div>
+            <div class="fake-line" style="width:65%"></div><div class="fake-line" style="width:100%"></div>
+          </div>
+          <div class="blur-overlay">
+            <div class="lock-icon">🔒</div>
+            <div class="lock-msg">Picha za mwongozo wa kila kitufe + jinsi ya kuweka order ya kwanza <strong>zipo ndani ya kitabu</strong></div>
+            <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="btn-pay">💳 Lipa TSH 5,000 — Fungua Somo Hili</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOMO 4 ═══ -->
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">4</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">📉 Pip, Lot & Leverage — Lugha ya Pesa</div>
+          <div class="lesson-meta">Istilahi muhimu · Hesabu za msingi</div>
+        </div>
+        <span class="lesson-tag tag-lock">🔒 Kitabu</span>
+      </div>
+      <div class="lesson-body">
+        <p class="lesson-intro">Maneno haya matatu — Pip, Lot, na Leverage — ndiyo msingi wa kila hesabu unayofanya katika Forex. Bila kuyaelewa, huwezi kujua unafanya faida ngapi, au unapoteza ngapi kwa kila biashara.</p>
+        <div class="notes-box">
+          <div class="notes-box-title">📝 Maelezo ya Kina</div>
+          <div class="note-item"><div class="note-dot">P</div><span><strong>PIP (Price Interest Point):</strong> Ni mabadiliko madogo zaidi ya bei katika Forex. Kwa EUR/USD, pip moja ni 0.0001. Kwa mfano, bei ikibadilika kutoka 1.0854 hadi 1.0864, hizo ni pips 10. Faida au hasara yako inategemea pips hizi.</span></div>
+          <div class="note-item"><div class="note-dot">L</div><span><strong>LOT SIZE (Ukubwa wa Biashara):</strong> Standard Lot = 100,000 ya base currency. Mini Lot = 10,000. Micro Lot = 1,000. Nano Lot = 100. Wanaoanza washauriwa kuanza na Micro Lot (0.01) kujilinda na hasara kubwa.</span></div>
+          <div class="note-item"><div class="note-dot">LV</div><span><strong>LEVERAGE (Nguvu ya Mkopo):</strong> Broker anakupa nguvu ya kudhibiti biashara kubwa kwa pesa ndogo. Leverage 1:100 inamaanisha kwa dola 100 unaweza kudhibiti biashara ya dola 10,000. Hii ni silaha yenye makali mawili — inaweza kukufanya tajiri haraka au kukumaliza haraka.</span></div>
+        </div>
+        <div class="key-points">
+          <div class="key-point"><span class="kp-icon">🧮</span><span>Mfano wa hesabu: EUR/USD, Micro Lot 0.01, bei ibadilike pips 50 = faida ya dola 0.50 (TSH ~1,350)</span></div>
+          <div class="key-point"><span class="kp-icon">⚠️</span><span>Leverage ya juu sana (1:500+) ni hatari kubwa — wanaoanza washauriwa kutumia 1:50 au chini</span></div>
+        </div>
+        <div class="blur-wrap">
+          <div class="blur-content">
+            <div class="fake-line" style="width:100%"></div><div class="fake-line" style="width:85%"></div>
+            <div class="fake-line" style="width:90%"></div><div class="fake-line" style="width:72%"></div>
+            <div class="fake-line" style="width:96%"></div>
+          </div>
+          <div class="blur-overlay">
+            <div class="lock-icon">🔒</div>
+            <div class="lock-msg">Jedwali kamili la hesabu za pip value kwa kila lot + mifano 10 halisi <strong>ipo ndani</strong></div>
+            <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="btn-pay">💳 Lipa TSH 5,000 — Fungua Somo Hili</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOMO 5 ═══ -->
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">5</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">🛡️ Risk Management — Kulinda Mtaji Wako</div>
+          <div class="lesson-meta">Muhimu Sana · Siri ya kufanikiwa muda mrefu</div>
+        </div>
+        <span class="lesson-tag tag-lock">🔒 Kitabu</span>
+      </div>
+      <div class="lesson-body">
+        <p class="lesson-intro">Hii ndiyo somo muhimu zaidi katika kitabu chote. Wafanyabiashara wengi wanaanza Forex wakitafuta faida haraka — lakini wanashindwa kwa sababu hawakujua jinsi ya kujilinda. Ukweli ni huu: trader mzuri si yule anayepata faida kubwa, bali yule asiyepoteza akiba yake.</p>
+        <div class="notes-box">
+          <div class="notes-box-title">📝 Kanuni za Risk Management</div>
+          <div class="note-item"><div class="note-dot">1</div><span><strong>Sheria ya 1-2%:</strong> Usiwahi hatarisha zaidi ya 1-2% ya mtaji wako katika biashara moja. Kama una akaunti ya dola 100, basi upoteze si zaidi ya dola 1-2 kwa biashara moja. Hii inakupa nguvu ya kustahimili hasara nyingi bila kumaliza akaunti.</span></div>
+          <div class="note-item"><div class="note-dot">2</div><span><strong>Stop Loss (SL):</strong> Ni amri unayoiweka kwenye MT4 inayofunga biashara yako otomatiki ukifika hasara fulani. Kamwe usifanye biashara bila Stop Loss — ni kama kuendesha gari bila breki.</span></div>
+          <div class="note-item"><div class="note-dot">3</div><span><strong>Take Profit (TP):</strong> Ni amri inayofunga biashara otomatiki ukifika faida uliyopanga. Hii inakusaidia kutolazimika kukaa mbele ya simu masaa yote.</span></div>
+          <div class="note-item"><div class="note-dot">4</div><span><strong>Risk:Reward Ratio:</strong> Kila biashara, lazima uweke lengo la faida kubwa kuliko hasara yako ya juu. Kwa mfano 1:2 inamaanisha ukipoteza dola 10, unataraji kupata dola 20. Hata ukishinda biashara 40% tu, bado utakuwa na faida.</span></div>
+        </div>
+        <div class="key-points">
+          <div class="key-point"><span class="kp-icon">🚫</span><span>Usifanye "Revenge Trading" — baada ya kupoteza, pumzika. Kutaka kulipiza kisasi dhidi ya soko ni njia ya kupoteza zaidi</span></div>
+          <div class="key-point"><span class="kp-icon">📋</span><span>Weka <strong>Trading Journal</strong> — rekodi kila biashara, sababu ya kuingia, matokeo. Hii itakufundisha makosa yako</span></div>
+        </div>
+        <div class="blur-wrap">
+          <div class="blur-content">
+            <div class="fake-line" style="width:100%"></div><div class="fake-line" style="width:88%"></div>
+            <div class="fake-line" style="width:95%"></div><div class="fake-line" style="width:72%"></div>
+            <div class="fake-line" style="width:100%"></div><div class="fake-line" style="width:84%"></div>
+          </div>
+          <div class="blur-overlay">
+            <div class="lock-icon">🔒</div>
+            <div class="lock-msg">Mfumo kamili wa Risk Management + template ya Trading Journal + mifano 15 halisi <strong>zipo ndani</strong></div>
+            <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="btn-pay">💳 Lipa TSH 5,000 — Fungua Somo Hili</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOMO 6 ═══ -->
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">6</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">📈 Technical Analysis — Kusoma Chati</div>
+          <div class="lesson-meta">Kitaalamu · Sanaa ya kutabiri bei</div>
+        </div>
+        <span class="lesson-tag tag-lock">🔒 Kitabu</span>
+      </div>
+      <div class="lesson-body">
+        <p class="lesson-intro">Technical analysis ni uchunguzi wa harakati za bei zilizopita ili kutabiri zijazo. Wafanyabiashara wengi wa Forex wanategemea hii zaidi — unajifunza "kusoma" chati kama vitabu.</p>
+        <div class="notes-box">
+          <div class="notes-box-title">📝 Zana za Technical Analysis</div>
+          <div class="note-item"><div class="note-dot">C</div><span><strong>Candlestick Charts:</strong> Kila mshumaa (candle) inaonyesha bei ya kufungua, kufunga, juu zaidi, na chini zaidi kwa kipindi fulani. Mifumo ya mishumaa kama Doji, Hammer, Engulfing inaweza kutabiri mwelekeo ujao.</span></div>
+          <div class="note-item"><div class="note-dot">SR</div><span><strong>Support & Resistance:</strong> Support ni kiwango cha chini ambacho bei imeshindwa kushuka zaidi mara nyingi. Resistance ni kiwango cha juu ambacho bei imeshindwa kupanda zaidi. Maeneo haya ni muhimu sana kwa kuamua mahali pa kuingia na kutoka biashara.</span></div>
+          <div class="note-item"><div class="note-dot">T</div><span><strong>Trend Lines:</strong> Mstari unaounganisha vilele au mabonde ya bei. Uptrend (bei inapanda) au Downtrend (bei inashuka) — kufanya biashara kwa mwelekeo wa trend ndiyo njia salama zaidi.</span></div>
+        </div>
+        <div class="key-points">
+          <div class="key-point"><span class="kp-icon">🕯️</span><span>Candlestick za kijani (bullish) zinaonyesha bei ilipanda — nyekundu (bearish) zinaonyesha ilishuka</span></div>
+          <div class="key-point"><span class="kp-icon">📏</span><span>"The trend is your friend" — fanya biashara katika mwelekeo wa trend kuu, si kinyume chake</span></div>
+        </div>
+        <div class="blur-wrap">
+          <div class="blur-content">
+            <div class="fake-line" style="width:100%"></div><div class="fake-line" style="width:78%"></div>
+            <div class="fake-line" style="width:90%"></div><div class="fake-line" style="width:82%"></div>
+          </div>
+          <div class="blur-overlay">
+            <div class="lock-icon">🔒</div>
+            <div class="lock-msg">Patterns 20+ za candlestick + RSI, MACD, Bollinger Bands kwa undani <strong>zipo ndani</strong></div>
+            <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="btn-pay">💳 Lipa TSH 5,000 — Fungua Somo Hili</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOMO 7 ═══ -->
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">7</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">🧠 Saikolojia ya Trader — Akili Inayoamua</div>
+          <div class="lesson-meta">Mafunzo ya ndani · Kushinda akili yako</div>
+        </div>
+        <span class="lesson-tag tag-lock">🔒 Kitabu</span>
+      </div>
+      <div class="lesson-body">
+        <p class="lesson-intro">Utafiti unaonyesha kwamba zaidi ya 80% ya wafanyabiashara wanaoshindwa hawashindwi kwa kukosa ujuzi wa kiufundi — wanashindwa kwa sababu ya hisia. Hofu, tamaa, na uamuzi wa haraka vinaweza kuharibu akaunti nzuri katika siku moja.</p>
+        <div class="notes-box">
+          <div class="notes-box-title">📝 Hisia Hatari katika Forex</div>
+          <div class="note-item"><div class="note-dot">😨</div><span><strong>Hofu (Fear):</strong> Unafunga biashara mapema sana kwa woga wa kupoteza faida kidogo. Matokeo — unakosa harakati kubwa za bei ambazo zingeleta faida nzuri.</span></div>
+          <div class="note-item"><div class="note-dot">🤑</div><span><strong>Tamaa (Greed):</strong> Unaendesha biashara kupita kiasi ukitumainia faida zaidi. Mara nyingi bei inabadilika na unakuta umepoteza faida yote uliyokuwa nayo.</span></div>
+          <div class="note-item"><div class="note-dot">😡</div><span><strong>Hasira (Revenge Trading):</strong> Baada ya kupoteza, unafanya biashara nyingine haraka ili kulipiza kisasi. Hii ndiyo njia ya haraka ya kumaliza akaunti yako kabisa.</span></div>
+        </div>
+        <div class="key-points">
+          <div class="key-point"><span class="kp-icon">🧘</span><span>Weka sheria zako kabla ya kuanza kufanya biashara na uzifuate — hata soko likionekana vizuri sana</span></div>
+          <div class="key-point"><span class="kp-icon">⏸️</span><span>Ukipoteza biashara tatu mfululizo, simama — toka mbali na simu na pumzika saa mbili angalau</span></div>
+        </div>
+        <div class="blur-wrap">
+          <div class="blur-content">
+            <div class="fake-line" style="width:100%"></div><div class="fake-line" style="width:82%"></div>
+            <div class="fake-line" style="width:90%"></div><div class="fake-line" style="width:68%"></div>
+          </div>
+          <div class="blur-overlay">
+            <div class="lock-icon">🔒</div>
+            <div class="lock-msg">Mbinu 8 za kudhibiti hisia + jinsi ya kuunda mindset ya trader mwenye mafanikio <strong>zipo ndani</strong></div>
+            <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="btn-pay">💳 Lipa TSH 5,000 — Fungua Somo Hili</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ MASOMO 8–19 LOCKED ═══ -->
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num" style="background:var(--muted);font-size:0.75rem;">8–19</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-title">🔒 Masomo 8 hadi 19 — Yote Ndani ya Kitabu</div>
+          <div class="lesson-meta">Fundamental Analysis · Broker · Strategies · Trading Plan · Kutoa Faida · na zaidi</div>
+        </div>
+        <span class="lesson-tag tag-lock">🔒 Kitabu</span>
+      </div>
+      <div class="lesson-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">8</div><div><div class="lp-title">📰 Fundamental Analysis</div><div class="lp-meta">Habari za uchumi zinazosogeza bei</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">9</div><div><div class="lp-title">🏦 Broker Bora Tanzania</div><div class="lp-meta">Orodha ya broker salama & ya kuamini</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">10</div><div><div class="lp-title">⚡ Scalping Strategy</div><div class="lp-meta">Faida ndogo nyingi kwa muda mfupi</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">11</div><div><div class="lp-title">📅 Swing Trading</div><div class="lp-meta">Biashara ya siku 2–5 kwa faida kubwa</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">12</div><div><div class="lp-title">🌙 Day Trading</div><div class="lp-meta">Fungua na funga biashara siku moja</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">13</div><div><div class="lp-title">📋 Trading Plan</div><div class="lp-meta">Mpango wako wa biashara wa kibinafsi</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">14</div><div><div class="lp-title">🤖 Expert Advisors (EA)</div><div class="lp-meta">Robots za kufanya biashara otomatiki</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">15</div><div><div class="lp-title">📊 Indicators Muhimu</div><div class="lp-meta">RSI, MACD, MA, Bollinger, Stochastic</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">16</div><div><div class="lp-title">💰 Kutoa Faida Tanzania</div><div class="lp-meta">M-Pesa, bank transfer, hatua kwa hatua</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">17</div><div><div class="lp-title">🛡️ Kuepuka Udanganyifu</div><div class="lp-meta">Broker wa uongo & scam za Forex</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">18</div><div><div class="lp-title">📈 Kuimarisha Akaunti</div><div class="lp-meta">Kuanza na kidogo, kukua polepole</div></div></div></div>
+          <div class="locked-preview"><div class="lp-info"><div class="lp-num">19</div><div><div class="lp-title">🏆 Njia ya Mbele</div><div class="lp-meta">Malengo ya miaka 1, 2, 5 ya Forex</div></div></div></div>
+        </div>
+        <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="btn-pay" style="max-width:100%;font-size:0.95rem;padding:15px 28px;">💳 Lipa TSH 5,000 — Fungua Masomo Yote 19</a>
+      </div>
+    </div>
+
+  </div><!-- /lessons-grid -->
+</div>
+</section>
+
+<!-- INCLUDED -->
+<section class="included">
+  <div class="container">
+    <div class="section-label">Unachopata</div>
+    <h2 class="section-title">Kitabu Kamili Kinajumuisha <em>Nini?</em></h2>
+    <div class="included-grid">
+      <div class="inc-card"><div class="inc-icon">📚</div><div class="inc-title">Masomo 19 Kamili</div><div class="inc-desc">Kila somo limekamilika na mifano halisi ya kufanyia kazi mara moja</div></div>
+      <div class="inc-card"><div class="inc-icon">📊</div><div class="inc-title">Chati na Mifano</div><div class="inc-desc">Picha na mwongozo wa kusoma chati kwa urahisi kwenye MT4/MT5</div></div>
+      <div class="inc-card"><div class="inc-icon">🎯</div><div class="inc-title">Mikakati 5 ya Biashara</div><div class="inc-desc">Scalping, Swing, Day Trading — kila mkakati umefafanuliwa kwa undani</div></div>
+      <div class="inc-card"><div class="inc-icon">🏦</div><div class="inc-title">Broker Bora Tanzania</div><div class="inc-desc">Orodha ya broker salama wanaokubali wafanyabiashara wa Tanzania</div></div>
+      <div class="inc-card"><div class="inc-icon">💵</div><div class="inc-title">Jinsi ya Kutoa Pesa TZ</div><div class="inc-desc">M-Pesa, Tigo Pesa, bank — hatua kwa hatua ya kupata faida yako</div></div>
+      <div class="inc-card"><div class="inc-icon">🔄</div><div class="inc-title">PDF — Soma Popote</div><div class="inc-desc">Inatumwa papo hapo baada ya malipo — soma kwenye simu yako offline</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="container">
+    <div class="section-label">Wanachosema Wanunuzi</div>
+    <h2 class="section-title">Watu <em>Waliofanikiwa</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Nilikuwa nafikiri Forex ni mchezo wa bahati. Baada ya kusoma kitabu hiki, niligundu ni biashara kama nyingine — inahitaji maarifa tu. Mwezi wa pili nilipata faida ya TSH 180,000!"</p><div class="testi-author"><div class="testi-avatar">JM</div><div><div class="testi-name">John Mwamba</div><div class="testi-loc">Dar es Salaam</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Sehemu ya Risk Management ilinisaidia zaidi. Kabla sijasoma nilikuwa napoteza pesa haraka. Sasa ninajua jinsi ya kujilinda na kutengeneza faida polepole lakini kwa uhakika."</p><div class="testi-author"><div class="testi-avatar">AM</div><div><div class="testi-name">Amina Makundi</div><div class="testi-loc">Mwanza</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Bei ya TSH 5,000 ni ndogo sana ikilinganishwa na thamani unayopata. Nilitumia zaidi ya TSH 50,000 kwa courses nyingine lakini hazikufundisha vizuri kama hiki kitabu!"</p><div class="testi-author"><div class="testi-avatar">BK</div><div><div class="testi-name">Baraka Kimaro</div><div class="testi-loc">Arusha</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BIG CTA -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <h2>Uko Tayari Kuanza<br/>Safari ya <em>Forex?</em></h2>
+    <p>Usiendelee kupoteza muda na pesa bila mwongozo sahihi. Kitabu kamili cha masomo 19 kinakusubiri. Lipa sasa na upate PDF yako papo hapo.</p>
+    <div class="cta-price-box">
+      <div><div class="cta-old">TSH 20,000</div><div class="cta-new">5,000 <span>TSH tu</span></div></div>
+      <div class="cta-div"></div>
+      <div class="cta-inc"><strong>✓</strong> Masomo 19 Kamili<br/><strong>✓</strong> PDF inatumwa papo hapo<br/><strong>✓</strong> Malipo ya Mpesa/Tigo<br/><strong>✓</strong> Soma offline wakati wowote</div>
+    </div>
+    <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="btn-pay-big">💳 Lipa Sasa — TSH 5,000</a>
+    <div class="cta-note">Malipo salama · PDF inatumwa mara moja · Herman Sade · +255 712 655 957</div>
+  </div>
+</section>
+
+<!-- STICKY BOTTOM -->
+<div class="sticky-cta">
+  <div class="sticky-msg">
+    Taka mafunzo kamili ya Forex?
+    <strong>📚 Kitabu — TSH 5,000 tu</strong>
+  </div>
+  <a href="malipo.html?book=Mafunzo%20ya%20Forex&emoji=📈&price=5000" class="sticky-btn">💳 Lipa Sasa</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:8px;">Sade<span style="color:#90CAF9;">Books</span></div>
+  <p>© 2025 SadeBooks · Mafunzo ya Forex kwa Kiswahili · Tanzania 🇹🇿</p>
+  <p style="margin-top:6px;">Herman Sade · +255 712 655 957 · <a href="https://hermansade3-cmd.github.io/sadebooks/">hermansade3-cmd.github.io/sadebooks</a></p>
+</footer>
+
+</body>
+</html>
