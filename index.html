@@ -889,10 +889,7 @@ header h1 span {
 
 </head>
 <body>
-<a href="Sadebooks.apk" download>
-  ⬇️ Pakua SadeBooks APK
-</a>
-    
+
 
 <!-- Sidebar Overlay -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -983,7 +980,7 @@ header h1 span {
       🌐 <strong>UNAHITAJI WEBSITE?</strong> — Herman Sade anatengeneza websites za kisasa na za kitaalamu kwa bei nafuu kabisa!
       &nbsp;&nbsp;📞 Piga simu: <strong>0712 655 957</strong>
       &nbsp;&nbsp;💬 WhatsApp: <strong>+255 712 655 957</strong>
-      &nbsp;&nbsp;✉️ Barua pepe: <strong>hermansade3@gmail.com</strong>
+      &nbsp;&nbsp;✉️ Barua pepe: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfd7dacdd2ded1ccdedbda8cffd8d2ded6d391dcd0d2">[email&#160;protected]</a></strong>
       &nbsp;&nbsp;⚡ Website ya Biashara • Duka la Online • Responsive Design • Muundo wa Kipekee
       &nbsp;&nbsp;&nbsp;&nbsp;✅ Bei Nafuu · Ubora wa Juu · Tanzania 🇹🇿
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -993,7 +990,7 @@ header h1 span {
       🌐 <strong>UNAHITAJI WEBSITE?</strong> — Herman Sade anatengeneza websites za kisasa na za kitaalamu kwa bei nafuu kabisa!
       &nbsp;&nbsp;📞 Piga simu: <strong>0712 655 957</strong>
       &nbsp;&nbsp;💬 WhatsApp: <strong>+255 712 655 957</strong>
-      &nbsp;&nbsp;✉️ Barua pepe: <strong>hermansade3@gmail.com</strong>
+      &nbsp;&nbsp;✉️ Barua pepe: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f19994839c909f82909594c2b1969c90989ddf929e9c">[email&#160;protected]</a></strong>
       &nbsp;&nbsp;⚡ Website ya Biashara • Duka la Online • Responsive Design • Muundo wa Kipekee
       &nbsp;&nbsp;&nbsp;&nbsp;✅ Bei Nafuu · Ubora wa Juu · Tanzania 🇹🇿
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1080,6 +1077,9 @@ header h1 span {
                 <div class="hero-stat-label">Upatikanaji</div>
             </div>
         </div>
+
+
+
     </div>
 </div>
 
@@ -1115,7 +1115,7 @@ header h1 span {
 </section>
 
 <!-- Scripts -->
-<script src="script.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
 <!-- Books Section -->
     <section id="books">
         <div class="section-header">
@@ -3241,6 +3241,21 @@ header h1 span {
         </div>
     </section>
 
+<!-- ===== PAKUA APP — Sehemu Ndogo ===== -->
+<section style="background:#EFF6FF;border-top:1px solid rgba(21,101,192,0.12);padding:1.2rem 2rem;">
+  <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:38px;height:38px;background:linear-gradient(135deg,#1565C0,#1E88E5);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📚</div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:900;color:#0D2A6E;">SadeBooks <span style="color:#1565C0;">App</span></div>
+        <div style="font-size:0.68rem;color:#5A7AAD;">Android · APK · v1.0 · Kiswahili 🇹🇿</div>
+      </div>
+    </div>
+    <a href="Sadebooks.apk" download style="display:inline-flex;align-items:center;gap:8px;padding:9px 20px;background:linear-gradient(135deg,#1565C0,#1E88E5);color:#fff;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(21,101,192,0.32);white-space:nowrap;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">⬇️ Pakua App</a>
+  </div>
+</section>
+<!-- ===== MWISHO ===== -->
+
 <!-- Footer -->
     <footer>
         <div class="footer-inner">
@@ -3303,12 +3318,16 @@ header h1 span {
 <script>
 (function(){
   var btn=document.getElementById('scrollTopBtn');
-  window.addEventListener('scroll',function(){btn.style.display=window.scrollY>300?'flex':'none';});
-  btn.addEventListener('mouseenter',function(){btn.style.transform='scale(1.1) translateY(-3px)';});
-  btn.addEventListener('mouseleave',function(){btn.style.transform='scale(1)';});
+  if(!btn) return;
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 300){
+      btn.style.display='flex';
+    } else {
+      btn.style.display='none';
+    }
+  });
 })();
 </script>
+
 </body>
 </html>
-
-                        
