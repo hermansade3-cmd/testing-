@@ -1,6 +1,12 @@
 [
   {
-    "title": "Lishe Kitabu — Herman Sade",
+    "title": "Financial Literacy— SadeBooks",
+    "description": "Namna ya kupangilia pesa zako na kuzitumia NEEDS,WANTS, and DEMAND.",
+    "price": "BURE",
+    "file": "PDFs/SadeBooks-Ujuzi-wa-Fedha.pdf"
+  },
+  {
+    "title": "Lishe Kitabu — SadeBooks",
     "description": "Mwongozo kamili wa lishe bora kwa afya ya mwili na akili njema.",
     "price": "BURE",
     "file": "PDFs/Lishe_Kitabu_Herman_Sade.pdf"
