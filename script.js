@@ -5,7 +5,8 @@ function getEmoji(title) {
 const t = title.toLowerCase();
 if (t.includes('lishe') || t.includes('chakula') || t.includes('afya')) return '🥗';
 if (t.includes('uzazi') || t.includes('mama') || t.includes('mtoto')) return '👶';
-if (t.includes('biashara') || t.includes('fedha')) return '💼';
+if (t.includes('biashara') || t.includes('fedha')) return '💼'; 
+if (t.includes('financial') || t.includes('fedha')) return '💰';
 if (t.includes('elimu') || t.includes('soma')) return '📚';
 if (t.includes('dini') || t.includes('sala')) return '🕌';
 if (t.includes('kilimo') || t.includes('shamba')) return '🌾';
