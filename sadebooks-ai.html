@@ -707,7 +707,7 @@ WhatsApp: +255712655957
 `;
 
 // ─── API CONFIGURATION ────────────────────────────────────────────────────────
-const GROQ_KEY = 'gsk_0CffLm54yFBnn3muKsJz' + 'WGdyb3FYdOxwDHuoB8uVXdhNv9uMUUAp';
+const PROXY_URL = 'https://sadebooks-ai-proxy.hermansade3.workers.dev';
 
 const SYSTEM = `Wewe ni SadeBooks AI — msaidizi rasmi na mtaalamu wa duka la SadeBooks (sadebooks.com) nchini Tanzania.
 
@@ -823,17 +823,13 @@ async function sendMsg() {
   addMsg('ai', '', true);
 
   try {
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const res = await fetch(PROXY_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${GROQ_KEY}`
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        messages: [{ role: 'system', content: SYSTEM }, ...history],
-        temperature: 0.7,
-        max_tokens: 1024
+        messages: [{ role: 'system', content: SYSTEM }, ...history]
       })
     });
 
