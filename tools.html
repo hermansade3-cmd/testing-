@@ -3,831 +3,467 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🧰 Sade Tools</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<title>SadeCalc — Kikokotoo cha Chuo Tanzania</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --bg: #0d0f14;
-  --surface: #161a24;
-  --surface2: #1e2433;
-  --border: rgba(255,255,255,0.07);
-  --blue: #3b82f6;
-  --blue-glow: rgba(59,130,246,0.25);
-  --green: #22c55e;
-  --amber: #f59e0b;
-  --red: #ef4444;
-  --text: #f1f5f9;
-  --muted: #64748b;
-  --font: 'Sora', sans-serif;
-  --mono: 'JetBrains Mono', monospace;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* ─── BG GRID ─── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ─── HEADER ─── */
-header {
-  position: relative;
-  z-index: 10;
-  padding: 2rem 2rem 1.5rem;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(59,130,246,0.08) 0%, transparent 100%);
-}
-
-.header-logo {
-  font-size: 2rem;
-  margin-bottom: 0.3rem;
-}
-
-.header-title {
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #fff 30%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.header-sub {
-  font-size: 0.82rem;
-  color: var(--muted);
-  margin-top: 0.3rem;
-  letter-spacing: 0.05em;
-}
-
-/* ─── NAV TABS ─── */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 1.5rem;
-  background: rgba(13,15,20,0.92);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  flex-wrap: wrap;
-}
-
-.nav-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.4rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--muted);
-  border-radius: 100px;
-  font-family: var(--font);
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.nav-btn:hover {
-  border-color: var(--blue);
-  color: var(--text);
-  background: rgba(59,130,246,0.1);
-}
-
-.nav-btn.active {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: #fff;
-  box-shadow: 0 0 20px var(--blue-glow);
-}
-
-/* ─── MAIN CONTENT ─── */
-main {
-  position: relative;
-  z-index: 1;
-  max-width: 560px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
-}
-
-.tool { display: none; animation: fadeSlide 0.35s ease; }
-.tool.active { display: block; }
-
-@keyframes fadeSlide {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ─── SECTION HEADER ─── */
-.tool-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.tool-icon {
-  font-size: 2.5rem;
-  display: block;
-  margin-bottom: 0.6rem;
-  filter: drop-shadow(0 0 12px rgba(59,130,246,0.5));
-}
-
-.tool-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.3rem;
-}
-
-.tool-desc {
-  font-size: 0.82rem;
-  color: var(--muted);
-}
-
-/* ─── CARD ─── */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-
-/* ─── INPUTS ─── */
-.field {
-  margin-bottom: 1rem;
-}
-
-.field label {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.45rem;
-}
-
-.field input {
-  width: 100%;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.75rem 1rem;
-  color: var(--text);
-  font-family: var(--font);
-  font-size: 0.95rem;
-  outline: none;
-  transition: border 0.2s, box-shadow 0.2s;
-}
-
-.field input:focus {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
-}
-
-/* ─── BUTTONS ─── */
-.btn {
-  width: 100%;
-  padding: 0.85rem;
-  border: none;
-  border-radius: 12px;
-  font-family: var(--font);
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  margin-top: 0.5rem;
-}
-
-.btn-blue {
-  background: var(--blue);
-  color: #fff;
-  box-shadow: 0 4px 16px var(--blue-glow);
-}
-
-.btn-blue:hover {
-  background: #60a5fa;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px var(--blue-glow);
-}
-
-/* ─── RESULT BOX ─── */
-.result-box {
-  margin-top: 1.2rem;
-  padding: 1.2rem;
-  border-radius: 14px;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  text-align: center;
-  display: none;
-}
-
-.result-box.show { display: block; animation: fadeSlide 0.3s ease; }
-
-.result-label {
-  font-size: 0.72rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.4rem;
-}
-
-.result-value {
-  font-size: 2rem;
-  font-weight: 800;
-  font-family: var(--mono);
-  color: var(--blue);
-}
-
-.result-tag {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.25rem 0.8rem;
-  border-radius: 100px;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.tag-green { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
-.tag-amber { background: rgba(245,158,11,0.15); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
-.tag-red   { background: rgba(239,68,68,0.15);  color: var(--red);   border: 1px solid rgba(239,68,68,0.3); }
-.tag-blue  { background: rgba(59,130,246,0.15); color: var(--blue);  border: 1px solid rgba(59,130,246,0.3); }
-
-/* ─── CALCULATOR ─── */
-.calc-display {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1rem 1.2rem;
-  margin-bottom: 1.2rem;
-  text-align: right;
-}
-
-.calc-expr {
-  font-size: 0.75rem;
-  color: var(--muted);
-  font-family: var(--mono);
-  min-height: 1.2em;
-  margin-bottom: 0.3rem;
-}
-
-.calc-num {
-  font-family: var(--mono);
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: var(--text);
-  word-break: break-all;
-}
-
-.calc-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.6rem;
-}
-
-.calc-btn {
-  padding: 1rem 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--surface2);
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.calc-btn:hover { background: var(--surface); border-color: rgba(255,255,255,0.15); }
-.calc-btn:active { transform: scale(0.94); }
-
-.calc-btn.op {
-  background: rgba(59,130,246,0.12);
-  border-color: rgba(59,130,246,0.3);
-  color: var(--blue);
-}
-
-.calc-btn.op:hover { background: rgba(59,130,246,0.22); }
-
-.calc-btn.eq {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: #fff;
-  box-shadow: 0 4px 14px var(--blue-glow);
-}
-
-.calc-btn.eq:hover { background: #60a5fa; }
-
-.calc-btn.clear {
-  background: rgba(239,68,68,0.12);
-  border-color: rgba(239,68,68,0.3);
-  color: var(--red);
-}
-
-.calc-btn.clear:hover { background: rgba(239,68,68,0.22); }
-
-.calc-btn.wide { grid-column: span 2; }
-
-/* ─── CALENDAR ─── */
-.cal-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.2rem;
-}
-
-.cal-nav-btn {
-  width: 36px; height: 36px;
-  border: 1px solid var(--border);
-  background: var(--surface2);
-  border-radius: 10px;
-  color: var(--text);
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
-}
-
-.cal-nav-btn:hover { border-color: var(--blue); background: rgba(59,130,246,0.1); }
-
-.cal-month-label {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.cal-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.3rem;
-}
-
-.cal-day-name {
-  text-align: center;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  padding: 0.5rem 0;
-  text-transform: uppercase;
-}
-
-.cal-day {
-  text-align: center;
-  padding: 0.6rem 0.2rem;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-family: var(--mono);
-  color: var(--muted);
-  cursor: default;
-  transition: all 0.15s;
-}
-
-.cal-day.has-day {
-  color: var(--text);
-  background: var(--surface2);
-}
-
-.cal-day.has-day:hover {
-  background: rgba(59,130,246,0.15);
-  color: var(--blue);
-}
-
-.cal-day.today {
-  background: var(--blue) !important;
-  color: #fff !important;
-  font-weight: 700;
-  box-shadow: 0 0 12px var(--blue-glow);
-}
-
-.cal-day.sunday { color: var(--red); }
-.cal-day.has-day.sunday { color: #f87171; }
-
-/* ─── BMI SCALE ─── */
-.bmi-scale {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.4rem;
-  margin-top: 1rem;
-}
-
-.bmi-range {
-  padding: 0.6rem;
-  border-radius: 10px;
-  text-align: center;
-  border: 1px solid transparent;
-  transition: all 0.3s;
-}
-
-.bmi-range .r-label { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-.bmi-range .r-val { font-size: 0.8rem; font-weight: 700; margin-top: 0.2rem; font-family: var(--mono); }
-
-.bmi-range.thin  { background: rgba(59,130,246,0.08); }
-.bmi-range.normal { background: rgba(34,197,94,0.08); }
-.bmi-range.over  { background: rgba(245,158,11,0.08); }
-.bmi-range.obese { background: rgba(239,68,68,0.08); }
-.bmi-range.active-range { transform: scale(1.05); border-color: rgba(255,255,255,0.2); }
-
-/* ─── LOAN TABLE ─── */
-.loan-summary {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.8rem;
-  margin-top: 1rem;
-}
-
-.loan-card {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
-}
-
-.loan-card .lc-label {
-  font-size: 0.68rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.3rem;
-}
-
-.loan-card .lc-val {
-  font-size: 1.2rem;
-  font-weight: 700;
-  font-family: var(--mono);
-  color: var(--text);
-}
-
-.loan-card.highlight .lc-val { color: var(--green); }
-
-/* ─── FOOTER ─── */
-footer {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: 1.5rem;
-  border-top: 1px solid var(--border);
-  font-size: 0.75rem;
-  color: var(--muted);
-}
-
-footer span { color: var(--blue); }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 480px) {
-  .nav-btn { font-size: 0.78rem; padding: 0.5rem 1rem; }
-  .calc-btn { padding: 0.85rem 0.3rem; font-size: 1rem; }
-  .bmi-scale { grid-template-columns: repeat(2, 1fr); }
-}
+:root{--bg:#0a0e1a;--surface:#111827;--card:#1a2235;--border:#2a3a55;--accent:#00d4aa;--accent2:#f59e0b;--text:#e2e8f0;--muted:#64748b;--input-bg:#0d1420;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;}
+header{background:linear-gradient(135deg,#0d1a2e,#111827,#0a1628);border-bottom:1px solid var(--border);padding:18px 16px 14px;text-align:center;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 40%,rgba(0,212,170,.07) 0%,transparent 60%),radial-gradient(ellipse at 30% 70%,rgba(129,140,248,.05) 0%,transparent 50%);pointer-events:none;}
+.logo{font-family:'Syne',sans-serif;font-size:clamp(20px,5vw,30px);font-weight:800;letter-spacing:-1px;}
+.logo span{color:#00d4aa;}
+.tagline{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:2px;text-transform:uppercase;}
+.header-stats{display:flex;gap:16px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.hstat{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:4px;}
+.hstat b{color:#00d4aa;font-size:13px;}
+/* NAV */
+.nav-panel{background:var(--surface);border-bottom:2px solid var(--border);padding:12px 16px;}
+.nav-title{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.nav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px;}
+.nav-card{padding:9px 10px;border-radius:8px;border:1px solid var(--border);background:var(--card);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:7px;}
+.nav-card:hover{border-color:#00d4aa;transform:translateY(-1px);}
+.nav-card.active{border-color:#00d4aa;background:rgba(0,212,170,.08);}
+.nav-icon{font-size:16px;line-height:1;}
+.nav-info{flex:1;min-width:0;}
+.nav-label{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.nav-count{font-size:9px;color:var(--muted);margin-top:1px;}
+/* MAIN */
+.main{padding:14px;max-width:960px;margin:0 auto;}
+.category-panel{display:none;animation:fadeIn .25s ease;}
+.category-panel.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.cat-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:12px 14px;background:var(--card);border-radius:10px;border:1px solid var(--border);}
+.cat-icon{font-size:22px;}
+.cat-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.cat-sub{font-size:9px;color:var(--muted);margin-top:2px;}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;}
+.calc-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s;}
+.calc-card:hover{border-color:#00d4aa;}
+.calc-card-header{padding:10px 12px 8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px;}
+.calc-name{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;flex:1;}
+.calc-tag{font-size:8px;padding:2px 6px;border-radius:8px;border:1px solid;opacity:.8;white-space:nowrap;}
+.calc-body{padding:10px 12px;}
+.field{margin-bottom:8px;}
+.field label{display:block;font-size:9px;color:var(--muted);margin-bottom:3px;letter-spacing:.5px;text-transform:uppercase;}
+.field input,.field select{width:100%;background:var(--input-bg);border:1px solid var(--border);border-radius:5px;padding:6px 8px;color:var(--text);font-family:'DM Mono',monospace;font-size:11px;transition:border-color .2s;outline:none;}
+.field input[type="date"]{color-scheme:dark;}
+.field input:focus,.field select:focus{border-color:#00d4aa;}
+.field select option{background:var(--card);}
+.calc-btn{width:100%;padding:7px;border-radius:5px;border:none;background:#00d4aa;color:#0a0e1a;font-family:'Syne',sans-serif;font-weight:700;font-size:10px;cursor:pointer;letter-spacing:.5px;transition:opacity .2s,transform .1s;margin-top:2px;}
+.calc-btn:hover{opacity:.85;}
+.calc-btn:active{transform:scale(.98);}
+.result-box{margin-top:8px;background:var(--input-bg);border:1px solid #00d4aa;border-radius:5px;padding:8px 10px;font-size:11px;color:#00d4aa;display:none;line-height:1.7;}
+.result-box.show{display:block;}
+.result-box strong{color:#f59e0b;}
+.result-box .r-value{font-size:16px;font-family:'Syne',sans-serif;font-weight:800;color:#00d4aa;display:block;margin-top:3px;}
+.result-box.err{color:#f87171!important;border-color:#f87171!important;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;}
+/* CALENDAR */
+.cal-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.cal-wrap{grid-template-columns:1fr;}}
+.cal-box{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);}
+.cal-nav button{background:none;border:1px solid var(--border);color:var(--muted);cursor:pointer;font-size:13px;padding:3px 10px;border-radius:4px;transition:all .2s;}
+.cal-nav button:hover{color:var(--text);border-color:#00d4aa;}
+.cal-month-lbl{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.cal-inner{padding:10px 12px;}
+.cal-days-row{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px;}
+.cal-dlabel{text-align:center;font-size:9px;color:var(--muted);padding:2px 0;font-weight:600;}
+.cal-dates-row{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.cdate{text-align:center;font-size:10px;padding:4px 1px;border-radius:4px;position:relative;cursor:default;line-height:1.2;}
+.cdate.today{background:#00d4aa;color:#0a0e1a;font-weight:800;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin:auto;padding:0;}
+.cdate.holiday{color:#f59e0b;font-weight:700;}
+.cdate.holiday::after{content:'•';position:absolute;bottom:0;left:50%;transform:translateX(-50%);font-size:5px;color:#f59e0b;}
+.cdate.sunday{color:#f87171;}
+.cdate.faded{color:#222e44;}
+.hol-side{padding:10px 12px;}
+.hol-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);}
+.hol-item:last-child{border-bottom:none;}
+.hol-date{font-size:10px;color:#f59e0b;min-width:52px;font-weight:600;padding-top:1px;}
+.hol-name{font-size:10px;flex:1;line-height:1.4;}
+.hol-badge{font-size:8px;padding:2px 6px;border-radius:6px;background:rgba(0,212,170,.1);color:#00d4aa;border:1px solid rgba(0,212,170,.3);white-space:nowrap;}
+.hol-badge.upcoming{background:rgba(245,158,11,.1);color:#f59e0b;border-color:rgba(245,158,11,.3);}
+.holidays-box{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:12px;}
+.holidays-header{padding:10px 14px;border-bottom:1px solid var(--border);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;}
+.holidays-all{padding:6px 14px 10px;max-height:320px;overflow-y:auto;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="header-logo">🧰</div>
-  <div class="header-title">Sade Tools</div>
-  <div class="header-sub">Zana za kila siku · All-in-one toolkit</div>
+  <div class="logo">Sade<span>Calc</span></div>
+  <div class="tagline">Kikokotoo cha Masomo ya Chuo · Tanzania 🇹🇿</div>
+  <div class="header-stats">
+    <div class="hstat"><b>55+</b>&nbsp;Calculator</div>
+    <div class="hstat"><b>8</b>&nbsp;Makundi</div>
+    <div class="hstat"><b>20+</b>&nbsp;Sikukuu TZ</div>
+    <div class="hstat"><b id="live-time">--:--:--</b>&nbsp;Saa Sasa</div>
+  </div>
 </header>
 
-<nav class="nav">
-  <button class="nav-btn active" onclick="showTool('calc', this)">🧮 Calculator</button>
-  <button class="nav-btn" onclick="showTool('bmi', this)">⚕️ BMI</button>
-  <button class="nav-btn" onclick="showTool('loan', this)">💰 Mkopo</button>
-  <button class="nav-btn" onclick="showTool('calendar', this)">📅 Kalenda</button>
-</nav>
-
-<main>
-
-<!-- ═══ CALCULATOR ═══ -->
-<div id="calc" class="tool active">
-  <div class="tool-header">
-    <span class="tool-icon">🧮</span>
-    <div class="tool-title">Calculator</div>
-    <div class="tool-desc">Hesabu za kawaida na za sayansi</div>
+<div class="nav-panel">
+  <div class="nav-title">📌 Chagua Sehemu — Bonyeza Kufungua</div>
+  <div class="nav-grid">
+    <div class="nav-card active" onclick="showCat('math')" id="nav-math"><div class="nav-icon">🧮</div><div class="nav-info"><div class="nav-label">Hesabu Msingi</div><div class="nav-count">8 calculator</div></div></div>
+    <div class="nav-card" onclick="showCat('biz')" id="nav-biz"><div class="nav-icon">💼</div><div class="nav-info"><div class="nav-label">Biashara</div><div class="nav-count">8 calculator</div></div></div>
+    <div class="nav-card" onclick="showCat('tech')" id="nav-tech"><div class="nav-icon">💻</div><div class="nav-info"><div class="nav-label">Teknolojia</div><div class="nav-count">7 calculator</div></div></div>
+    <div class="nav-card" onclick="showCat('eng')" id="nav-eng"><div class="nav-icon">🏗️</div><div class="nav-info"><div class="nav-label">Uhandisi</div><div class="nav-count">8 calculator</div></div></div>
+    <div class="nav-card" onclick="showCat('health')" id="nav-health"><div class="nav-icon">🏥</div><div class="nav-info"><div class="nav-label">Afya</div><div class="nav-count">7 calculator</div></div></div>
+    <div class="nav-card" onclick="showCat('naval')" id="nav-naval"><div class="nav-icon">🚢</div><div class="nav-info"><div class="nav-label">Naval / Ship</div><div class="nav-count">8 calculator</div></div></div>
+    <div class="nav-card" onclick="showCat('general')" id="nav-general"><div class="nav-icon">🔢</div><div class="nav-info"><div class="nav-label">Jumla</div><div class="nav-count">7 calculator</div></div></div>
+    <div class="nav-card" onclick="showCat('calendar')" id="nav-calendar"><div class="nav-icon">📅</div><div class="nav-info"><div class="nav-label">Kalenda &amp; Sikukuu</div><div class="nav-count">Tanzania 2025–26</div></div></div>
   </div>
-  <div class="card">
-    <div class="calc-display">
-      <div class="calc-expr" id="calcExpr">&nbsp;</div>
-      <div class="calc-num" id="calcNum">0</div>
+</div>
+
+<div class="main">
+
+<!-- 1. HESABU MSINGI -->
+<div class="category-panel active" id="cat-math">
+  <div class="cat-header"><span class="cat-icon">🧮</span><div><div class="cat-title">Hesabu za Msingi</div><div class="cat-sub">Calculus · Linear Algebra · Statistics · Probability · Discrete Math</div></div></div>
+  <div class="calc-grid">
+    <div class="calc-card"><div class="calc-card-header"><span>∂</span><span class="calc-name">Derivative ya Polynomial</span><span class="calc-tag" style="color:#00d4aa;border-color:#00d4aa44">Calculus</span></div><div class="calc-body"><div class="field"><label>Coefficient (a)</label><input type="number" id="d_a" placeholder="3"></div><div class="field"><label>Power (n)</label><input type="number" id="d_n" placeholder="4"></div><button class="calc-btn" onclick="calcDerivative()">HESABU DERIVATIVE</button><div class="result-box" id="res_d"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>∫</span><span class="calc-name">Integral ya Polynomial</span><span class="calc-tag" style="color:#00d4aa;border-color:#00d4aa44">Calculus</span></div><div class="calc-body"><div class="field"><label>Coefficient (a)</label><input type="number" id="i_a" placeholder="5"></div><div class="field"><label>Power (n)</label><input type="number" id="i_n" placeholder="2"></div><button class="calc-btn" onclick="calcIntegral()">HESABU INTEGRAL</button><div class="result-box" id="res_i"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>⊞</span><span class="calc-name">Matrix Determinant 2×2</span><span class="calc-tag" style="color:#00d4aa;border-color:#00d4aa44">Linear Algebra</span></div><div class="calc-body"><div class="g2"><div class="field"><label>a</label><input type="number" id="m_a" placeholder="2"></div><div class="field"><label>b</label><input type="number" id="m_b" placeholder="3"></div><div class="field"><label>c</label><input type="number" id="m_c" placeholder="1"></div><div class="field"><label>d</label><input type="number" id="m_d" placeholder="4"></div></div><button class="calc-btn" onclick="calcDet()">HESABU det(A)</button><div class="result-box" id="res_m"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📊</span><span class="calc-name">Mean / Median / Mode</span><span class="calc-tag" style="color:#00d4aa;border-color:#00d4aa44">Statistics</span></div><div class="calc-body"><div class="field"><label>Namba (tenganisha kwa koma)</label><input type="text" id="stat_nums" placeholder="4,7,2,7,9,3"></div><button class="calc-btn" onclick="calcStats()">HESABU TAKWIMU</button><div class="result-box" id="res_stat"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>σ</span><span class="calc-name">Standard Deviation</span><span class="calc-tag" style="color:#00d4aa;border-color:#00d4aa44">Statistics</span></div><div class="calc-body"><div class="field"><label>Namba (koma)</label><input type="text" id="sd_nums" placeholder="10,20,30,40"></div><div class="field"><label>Aina</label><select id="sd_type"><option value="pop">Population (σ)</option><option value="samp">Sample (s)</option></select></div><button class="calc-btn" onclick="calcSD()">HESABU SD</button><div class="result-box" id="res_sd"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>#</span><span class="calc-name">GCD &amp; LCM</span><span class="calc-tag" style="color:#00d4aa;border-color:#00d4aa44">Discrete Math</span></div><div class="calc-body"><div class="g2"><div class="field"><label>Namba A</label><input type="number" id="g_a" placeholder="12"></div><div class="field"><label>Namba B</label><input type="number" id="g_b" placeholder="18"></div></div><button class="calc-btn" onclick="calcGCDLCM()">HESABU GCD &amp; LCM</button><div class="result-box" id="res_g"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>x²</span><span class="calc-name">Quadratic ax²+bx+c=0</span><span class="calc-tag" style="color:#00d4aa;border-color:#00d4aa44">Numerical</span></div><div class="calc-body"><div class="g3"><div class="field"><label>a</label><input type="number" id="nr_a" placeholder="1"></div><div class="field"><label>b</label><input type="number" id="nr_b" placeholder="-3"></div><div class="field"><label>c</label><input type="number" id="nr_c" placeholder="2"></div></div><button class="calc-btn" onclick="calcQuadratic()">PATA MIZIZI</button><div class="result-box" id="res_nr"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🎲</span><span class="calc-name">Probability ya Tukio</span><span class="calc-tag" style="color:#00d4aa;border-color:#00d4aa44">Probability</span></div><div class="calc-body"><div class="field"><label>Matukio mazuri</label><input type="number" id="p_f" placeholder="3"></div><div class="field"><label>Matukio yote</label><input type="number" id="p_t" placeholder="10"></div><button class="calc-btn" onclick="calcProb()">HESABU UWEZEKANO</button><div class="result-box" id="res_p"></div></div></div>
+  </div>
+</div>
+
+<!-- 2. BIASHARA -->
+<div class="category-panel" id="cat-biz">
+  <div class="cat-header"><span class="cat-icon">💼</span><div><div class="cat-title">Biashara &amp; Uchumi</div><div class="cat-sub">Accounting · Economics · Finance · VAT · NPV · Depreciation</div></div></div>
+  <div class="calc-grid">
+    <div class="calc-card"><div class="calc-card-header"><span>💰</span><span class="calc-name">Simple Interest</span><span class="calc-tag" style="color:#f59e0b;border-color:#f59e0b44">Finance</span></div><div class="calc-body"><div class="field"><label>Principal (P) — TSH</label><input type="number" id="si_p" placeholder="1000000"></div><div class="field"><label>Riba (R) — %</label><input type="number" id="si_r" placeholder="12"></div><div class="field"><label>Muda (T) — Miaka</label><input type="number" id="si_t" placeholder="3"></div><button class="calc-btn" style="background:#f59e0b" onclick="calcSI()">HESABU RIBA</button><div class="result-box" id="res_si"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📈</span><span class="calc-name">Compound Interest</span><span class="calc-tag" style="color:#f59e0b;border-color:#f59e0b44">Finance</span></div><div class="calc-body"><div class="field"><label>Principal — TSH</label><input type="number" id="ci_p" placeholder="1000000"></div><div class="field"><label>Kiwango (R) — %/mwaka</label><input type="number" id="ci_r" placeholder="10"></div><div class="field"><label>Muda (T) — Miaka</label><input type="number" id="ci_t" placeholder="5"></div><div class="field"><label>Mzunguko/Mwaka</label><select id="ci_n"><option value="1">Kila mwaka</option><option value="2">Nusu mwaka</option><option value="4">Kila Robo</option><option value="12">Kila Mwezi</option></select></div><button class="calc-btn" style="background:#f59e0b" onclick="calcCI()">HESABU</button><div class="result-box" id="res_ci"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>⚖️</span><span class="calc-name">Break-Even Analysis</span><span class="calc-tag" style="color:#f59e0b;border-color:#f59e0b44">Accounting</span></div><div class="calc-body"><div class="field"><label>Fixed Costs — TSH</label><input type="number" id="be_fc" placeholder="500000"></div><div class="field"><label>Bei ya Mauzo (P)</label><input type="number" id="be_p" placeholder="5000"></div><div class="field"><label>Variable Cost (VC)</label><input type="number" id="be_vc" placeholder="2000"></div><button class="calc-btn" style="background:#f59e0b" onclick="calcBE()">HESABU BREAK-EVEN</button><div class="result-box" id="res_be"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📊</span><span class="calc-name">ROI — Return on Investment</span><span class="calc-tag" style="color:#f59e0b;border-color:#f59e0b44">Finance</span></div><div class="calc-body"><div class="field"><label>Faida Halisi — TSH</label><input type="number" id="roi_p" placeholder="300000"></div><div class="field"><label>Mtaji Uliowekezwa — TSH</label><input type="number" id="roi_i" placeholder="1000000"></div><button class="calc-btn" style="background:#f59e0b" onclick="calcROI()">HESABU ROI</button><div class="result-box" id="res_roi"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📉</span><span class="calc-name">Depreciation (Straight-Line)</span><span class="calc-tag" style="color:#f59e0b;border-color:#f59e0b44">Accounting</span></div><div class="calc-body"><div class="field"><label>Thamani ya Awali — TSH</label><input type="number" id="dep_c" placeholder="10000000"></div><div class="field"><label>Salvage Value — TSH</label><input type="number" id="dep_s" placeholder="1000000"></div><div class="field"><label>Maisha (Miaka)</label><input type="number" id="dep_n" placeholder="5"></div><button class="calc-btn" style="background:#f59e0b" onclick="calcDep()">HESABU UPUNGUFU</button><div class="result-box" id="res_dep"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🔄</span><span class="calc-name">Price Elasticity of Demand</span><span class="calc-tag" style="color:#f59e0b;border-color:#f59e0b44">Economics</span></div><div class="calc-body"><div class="field"><label>ΔQ% — Mabadiliko ya Mahitaji</label><input type="number" id="el_dq" placeholder="-20"></div><div class="field"><label>ΔP% — Mabadiliko ya Bei</label><input type="number" id="el_dp" placeholder="10"></div><button class="calc-btn" style="background:#f59e0b" onclick="calcElast()">HESABU ELASTICITY</button><div class="result-box" id="res_el"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>💹</span><span class="calc-name">NPV — Net Present Value</span><span class="calc-tag" style="color:#f59e0b;border-color:#f59e0b44">Financial Math</span></div><div class="calc-body"><div class="field"><label>Mtaji wa Awali — TSH</label><input type="number" id="npv_c" placeholder="2000000"></div><div class="field"><label>Cash Flow/Mwaka</label><input type="number" id="npv_cf" placeholder="700000"></div><div class="field"><label>Discount Rate (r) — %</label><input type="number" id="npv_r" placeholder="10"></div><div class="field"><label>Miaka (n)</label><input type="number" id="npv_n" placeholder="5"></div><button class="calc-btn" style="background:#f59e0b" onclick="calcNPV()">HESABU NPV</button><div class="result-box" id="res_npv"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🧾</span><span class="calc-name">VAT Tanzania (18%)</span><span class="calc-tag" style="color:#f59e0b;border-color:#f59e0b44">Auditing</span></div><div class="calc-body"><div class="field"><label>Bei — TSH</label><input type="number" id="vat_p" placeholder="50000"></div><div class="field"><label>Aina</label><select id="vat_type"><option value="exc">Kabla ya VAT (Exclusive)</option><option value="inc">Baada ya VAT (Inclusive)</option></select></div><button class="calc-btn" style="background:#f59e0b" onclick="calcVAT()">HESABU VAT</button><div class="result-box" id="res_vat"></div></div></div>
+  </div>
+</div>
+
+<!-- 3. TEKNOLOJIA -->
+<div class="category-panel" id="cat-tech">
+  <div class="cat-header"><span class="cat-icon">💻</span><div><div class="cat-title">Teknolojia (CS / IT)</div><div class="cat-sub">Algorithms · Logic · Cryptography · Operations Research · Networking</div></div></div>
+  <div class="calc-grid">
+    <div class="calc-card"><div class="calc-card-header"><span>O</span><span class="calc-name">Big-O Complexity</span><span class="calc-tag" style="color:#818cf8;border-color:#818cf844">Algorithms</span></div><div class="calc-body"><div class="field"><label>Idadi ya Data (n)</label><input type="number" id="bo_n" placeholder="1000"></div><div class="field"><label>Aina ya Algorithm</label><select id="bo_type"><option value="o1">O(1) Constant</option><option value="on">O(n) Linear</option><option value="ologn">O(log n) Logarithmic</option><option value="onlogn">O(n log n)</option><option value="on2">O(n²) Quadratic</option><option value="o2n">O(2ⁿ) Exponential</option></select></div><button class="calc-btn" style="background:#818cf8" onclick="calcBigO()">HESABU OPERESHENI</button><div class="result-box" id="res_bo"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🔢</span><span class="calc-name">Number Base Converter</span><span class="calc-tag" style="color:#818cf8;border-color:#818cf844">Logic</span></div><div class="calc-body"><div class="field"><label>Namba</label><input type="text" id="base_n" placeholder="255"></div><div class="field"><label>Kutoka</label><select id="base_from"><option value="10">Decimal (10)</option><option value="2">Binary (2)</option><option value="8">Octal (8)</option><option value="16">Hex (16)</option></select></div><button class="calc-btn" style="background:#818cf8" onclick="calcBase()">BADILISHA MFUMO</button><div class="result-box" id="res_base"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>⊕</span><span class="calc-name">Boolean Logic Gates</span><span class="calc-tag" style="color:#818cf8;border-color:#818cf844">Logic</span></div><div class="calc-body"><div class="g2"><div class="field"><label>A</label><select id="bool_a"><option value="1">TRUE (1)</option><option value="0">FALSE (0)</option></select></div><div class="field"><label>B</label><select id="bool_b"><option value="1">TRUE (1)</option><option value="0">FALSE (0)</option></select></div></div><button class="calc-btn" style="background:#818cf8" onclick="calcBool()">HESABU GATES</button><div class="result-box" id="res_bool"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🔐</span><span class="calc-name">Caesar Cipher</span><span class="calc-tag" style="color:#818cf8;border-color:#818cf844">Cryptography</span></div><div class="calc-body"><div class="field"><label>Ujumbe</label><input type="text" id="cc_msg" placeholder="HABARI YAKO"></div><div class="field"><label>Mzunguko (Shift)</label><input type="number" id="cc_shift" placeholder="3" min="1" max="25"></div><div class="field"><label>Kitendo</label><select id="cc_action"><option value="enc">Ficha (Encrypt)</option><option value="dec">Fungua (Decrypt)</option></select></div><button class="calc-btn" style="background:#818cf8" onclick="calcCaesar()">TEKELEZA</button><div class="result-box" id="res_cc"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📐</span><span class="calc-name">Linear Programming (2-var)</span><span class="calc-tag" style="color:#818cf8;border-color:#818cf844">Ops Research</span></div><div class="calc-body"><div class="field"><label>Max Z = ax + by</label></div><div class="g2"><div class="field"><label>a</label><input type="number" id="lp_a" placeholder="5"></div><div class="field"><label>b</label><input type="number" id="lp_b" placeholder="4"></div></div><div class="field"><label>x ≤</label><input type="number" id="lp_x" placeholder="6"></div><div class="field"><label>y ≤</label><input type="number" id="lp_y" placeholder="8"></div><div class="field"><label>x+y ≤</label><input type="number" id="lp_xy" placeholder="10"></div><button class="calc-btn" style="background:#818cf8" onclick="calcLP()">MAXIMIZE Z</button><div class="result-box" id="res_lp"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>#</span><span class="calc-name">Hash Function (Division)</span><span class="calc-tag" style="color:#818cf8;border-color:#818cf844">Database</span></div><div class="calc-body"><div class="field"><label>Key</label><input type="number" id="hash_k" placeholder="254"></div><div class="field"><label>Table Size (m)</label><input type="number" id="hash_m" placeholder="11"></div><button class="calc-btn" style="background:#818cf8" onclick="calcHash()">HESABU INDEX</button><div class="result-box" id="res_hash"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🌐</span><span class="calc-name">IP Subnet Calculator</span><span class="calc-tag" style="color:#818cf8;border-color:#818cf844">Networking</span></div><div class="calc-body"><div class="field"><label>IP Address</label><input type="text" id="ip_addr" placeholder="192.168.1.0"></div><div class="field"><label>Subnet Mask</label><select id="ip_mask"><option value="24">/24 — 254 hosts</option><option value="16">/16 — 65534 hosts</option><option value="8">/8 — millions</option><option value="25">/25 — 126 hosts</option><option value="26">/26 — 62 hosts</option><option value="27">/27 — 30 hosts</option><option value="28">/28 — 14 hosts</option></select></div><button class="calc-btn" style="background:#818cf8" onclick="calcSubnet()">HESABU SUBNET</button><div class="result-box" id="res_ip"></div></div></div>
+  </div>
+</div>
+
+<!-- 4. UHANDISI -->
+<div class="category-panel" id="cat-eng">
+  <div class="cat-header"><span class="cat-icon">🏗️</span><div><div class="cat-title">Uhandisi (Engineering)</div><div class="cat-sub">Thermodynamics · Fluid · Structural · Circuit · Mechanics</div></div></div>
+  <div class="calc-grid">
+    <div class="calc-card"><div class="calc-card-header"><span>⚡</span><span class="calc-name">Sheria ya Ohm — V=IR</span><span class="calc-tag" style="color:#f472b6;border-color:#f472b644">Circuit</span></div><div class="calc-body"><div class="field"><label>Hesabu nini?</label><select id="ohm_find"><option value="V">Voltage (V)</option><option value="I">Current (I)</option><option value="R">Resistance (R)</option></select></div><div class="g2"><div class="field"><label>Thamani 1</label><input type="number" id="ohm_v1" placeholder="12"></div><div class="field"><label>Thamani 2</label><input type="number" id="ohm_v2" placeholder="4"></div></div><button class="calc-btn" style="background:#f472b6" onclick="calcOhm()">HESABU</button><div class="result-box" id="res_ohm"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>⚡</span><span class="calc-name">Nguvu ya Umeme P=VI</span><span class="calc-tag" style="color:#f472b6;border-color:#f472b644">Circuit</span></div><div class="calc-body"><div class="field"><label>Voltage (V)</label><input type="number" id="pw_v" placeholder="240"></div><div class="field"><label>Current (I) — A</label><input type="number" id="pw_i" placeholder="5"></div><button class="calc-btn" style="background:#f472b6" onclick="calcPower()">HESABU NGUVU</button><div class="result-box" id="res_pw"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🌡️</span><span class="calc-name">Joto la Dutu Q=mcΔT</span><span class="calc-tag" style="color:#f472b6;border-color:#f472b644">Thermo</span></div><div class="calc-body"><div class="field"><label>Masi (m) — kg</label><input type="number" id="th_m" placeholder="2"></div><div class="field"><label>Specific Heat (c) J/kg·K</label><input type="number" id="th_c" placeholder="4186"></div><div class="field"><label>ΔT — °C</label><input type="number" id="th_dt" placeholder="30"></div><button class="calc-btn" style="background:#f472b6" onclick="calcThermal()">HESABU JOTO</button><div class="result-box" id="res_th"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>💧</span><span class="calc-name">Shinikizo la Maji P=ρgh</span><span class="calc-tag" style="color:#f472b6;border-color:#f472b644">Fluid</span></div><div class="calc-body"><div class="field"><label>Msongamano ρ kg/m³</label><input type="number" id="pr_rho" placeholder="1000"></div><div class="field"><label>Kina (h) — m</label><input type="number" id="pr_h" placeholder="5"></div><button class="calc-btn" style="background:#f472b6" onclick="calcPressure()">HESABU SHINIKIZO</button><div class="result-box" id="res_pr"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📏</span><span class="calc-name">Mkazo wa Boriti σ=F/A</span><span class="calc-tag" style="color:#f472b6;border-color:#f472b644">Structural</span></div><div class="calc-body"><div class="field"><label>Nguvu (F) — N</label><input type="number" id="str_f" placeholder="50000"></div><div class="field"><label>Eneo (A) — m²</label><input type="number" id="str_a" placeholder="0.01"></div><button class="calc-btn" style="background:#f472b6" onclick="calcStress()">HESABU MKAZO</button><div class="result-box" id="res_str"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🚀</span><span class="calc-name">Mwendo v=u+at</span><span class="calc-tag" style="color:#f472b6;border-color:#f472b644">Mechanics</span></div><div class="calc-body"><div class="field"><label>Kasi ya Awali (u) m/s</label><input type="number" id="vel_u" placeholder="10"></div><div class="field"><label>Kuharakisha (a) m/s²</label><input type="number" id="vel_a" placeholder="5"></div><div class="field"><label>Muda (t) — sekunde</label><input type="number" id="vel_t" placeholder="4"></div><button class="calc-btn" style="background:#f472b6" onclick="calcVelocity()">HESABU MWENDO</button><div class="result-box" id="res_vel"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🔩</span><span class="calc-name">Torque τ=F·r·sinθ</span><span class="calc-tag" style="color:#f472b6;border-color:#f472b644">Mechanics</span></div><div class="calc-body"><div class="field"><label>Nguvu (F) — N</label><input type="number" id="tq_f" placeholder="100"></div><div class="field"><label>Umbali (r) — m</label><input type="number" id="tq_r" placeholder="0.5"></div><div class="field"><label>Pembe (θ) — Degrees</label><input type="number" id="tq_t" placeholder="90"></div><button class="calc-btn" style="background:#f472b6" onclick="calcTorque()">HESABU TORQUE</button><div class="result-box" id="res_tq"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🌡️</span><span class="calc-name">Ubadilishaji Joto °C/°F/K</span><span class="calc-tag" style="color:#f472b6;border-color:#f472b644">Thermo</span></div><div class="calc-body"><div class="field"><label>Thamani ya Joto</label><input type="number" id="tmp_val" placeholder="100"></div><div class="field"><label>Kutoka</label><select id="tmp_from"><option value="C">Celsius (°C)</option><option value="F">Fahrenheit (°F)</option><option value="K">Kelvin (K)</option></select></div><button class="calc-btn" style="background:#f472b6" onclick="calcTemp()">BADILISHA JOTO</button><div class="result-box" id="res_tmp"></div></div></div>
+  </div>
+</div>
+
+<!-- 5. AFYA -->
+<div class="category-panel" id="cat-health">
+  <div class="cat-header"><span class="cat-icon">🏥</span><div><div class="cat-title">Sayansi ya Afya</div><div class="cat-sub">Biostatistics · Epidemiology · Pharmacokinetics · Clinical</div></div></div>
+  <div class="calc-grid">
+    <div class="calc-card"><div class="calc-card-header"><span>⚖️</span><span class="calc-name">BMI Calculator</span><span class="calc-tag" style="color:#34d399;border-color:#34d39944">Health</span></div><div class="calc-body"><div class="field"><label>Uzito (kg)</label><input type="number" id="bmi_w" placeholder="70"></div><div class="field"><label>Urefu (m)</label><input type="number" id="bmi_h" placeholder="1.75" step="0.01"></div><button class="calc-btn" style="background:#34d399;color:#0a0e1a" onclick="calcBMI()">HESABU BMI</button><div class="result-box" id="res_bmi"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📊</span><span class="calc-name">Incidence Rate</span><span class="calc-tag" style="color:#34d399;border-color:#34d39944">Epidemiology</span></div><div class="calc-body"><div class="field"><label>Watu Wapya Walioathirika</label><input type="number" id="ep_new" placeholder="50"></div><div class="field"><label>Watu Wote Walioko Hatarini</label><input type="number" id="ep_pop" placeholder="10000"></div><div class="field"><label>Kipindi (Miaka)</label><input type="number" id="ep_yr" placeholder="1"></div><button class="calc-btn" style="background:#34d399;color:#0a0e1a" onclick="calcIncidence()">HESABU KIWANGO</button><div class="result-box" id="res_ep"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>💊</span><span class="calc-name">Kipimo cha Dawa mg/kg</span><span class="calc-tag" style="color:#34d399;border-color:#34d39944">Pharma</span></div><div class="calc-body"><div class="field"><label>Dose — mg/kg</label><input type="number" id="dr_dose" placeholder="5" step="0.1"></div><div class="field"><label>Uzito — kg</label><input type="number" id="dr_wt" placeholder="60"></div><div class="field"><label>Nguvu ya Dawa mg/mL</label><input type="number" id="dr_conc" placeholder="50"></div><button class="calc-btn" style="background:#34d399;color:#0a0e1a" onclick="calcDrug()">HESABU KIPIMO</button><div class="result-box" id="res_dr"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>⏳</span><span class="calc-name">Drug Half-Life (t½)</span><span class="calc-tag" style="color:#34d399;border-color:#34d39944">Pharma</span></div><div class="calc-body"><div class="field"><label>Dozi ya Awali — mg</label><input type="number" id="hl_d" placeholder="200"></div><div class="field"><label>t½ — Masaa</label><input type="number" id="hl_t" placeholder="6"></div><div class="field"><label>Baada ya Masaa ngapi?</label><input type="number" id="hl_x" placeholder="18"></div><button class="calc-btn" style="background:#34d399;color:#0a0e1a" onclick="calcHalfLife()">HESABU KIASI</button><div class="result-box" id="res_hl"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>χ²</span><span class="calc-name">Chi-Square Test 2×2</span><span class="calc-tag" style="color:#34d399;border-color:#34d39944">Biostatistics</span></div><div class="calc-body"><div class="g2"><div class="field"><label>a</label><input type="number" id="chi_a" placeholder="20"></div><div class="field"><label>b</label><input type="number" id="chi_b" placeholder="10"></div><div class="field"><label>c</label><input type="number" id="chi_c" placeholder="15"></div><div class="field"><label>d</label><input type="number" id="chi_d" placeholder="25"></div></div><button class="calc-btn" style="background:#34d399;color:#0a0e1a" onclick="calcChiSq()">HESABU χ²</button><div class="result-box" id="res_chi"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🔬</span><span class="calc-name">Prevalence Rate</span><span class="calc-tag" style="color:#34d399;border-color:#34d39944">Epidemiology</span></div><div class="calc-body"><div class="field"><label>Watu Walioathirika</label><input type="number" id="prev_c" placeholder="300"></div><div class="field"><label>Jumla ya Watu</label><input type="number" id="prev_p" placeholder="5000"></div><button class="calc-btn" style="background:#34d399;color:#0a0e1a" onclick="calcPrevalence()">HESABU PREVALENCE</button><div class="result-box" id="res_prev"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🩸</span><span class="calc-name">GFR — Kidney Function (CKD)</span><span class="calc-tag" style="color:#34d399;border-color:#34d39944">Clinical</span></div><div class="calc-body"><div class="field"><label>Creatinine mg/dL</label><input type="number" id="gfr_cr" placeholder="1.1" step="0.1"></div><div class="field"><label>Umri (Miaka)</label><input type="number" id="gfr_age" placeholder="40"></div><div class="field"><label>Jinsia</label><select id="gfr_sex"><option value="m">Mwanaume</option><option value="f">Mwanamke</option></select></div><button class="calc-btn" style="background:#34d399;color:#0a0e1a" onclick="calcGFR()">HESABU GFR</button><div class="result-box" id="res_gfr"></div></div></div>
+  </div>
+</div>
+
+<!-- 6. NAVAL -->
+<div class="category-panel" id="cat-naval">
+  <div class="cat-header"><span class="cat-icon">🚢</span><div><div class="cat-title">Naval / Ship Engineering</div><div class="cat-sub">Displacement · Stability · Propulsion · Buoyancy · Navigation · Fuel</div></div></div>
+  <div class="calc-grid">
+    <div class="calc-card"><div class="calc-card-header"><span>⚓</span><span class="calc-name">Displacement ya Meli</span><span class="calc-tag" style="color:#60a5fa;border-color:#60a5fa44">Naval Arch</span></div><div class="calc-body"><div class="g2"><div class="field"><label>Urefu L (m)</label><input type="number" id="sh_l" placeholder="120"></div><div class="field"><label>Upana B (m)</label><input type="number" id="sh_b" placeholder="20"></div><div class="field"><label>Kina T (m)</label><input type="number" id="sh_t" placeholder="7"></div><div class="field"><label>Cb</label><input type="number" id="sh_cb" placeholder="0.72" step="0.01"></div></div><button class="calc-btn" style="background:#60a5fa;color:#0a0e1a" onclick="calcDisp()">HESABU DISPLACEMENT</button><div class="result-box" id="res_sh"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🌊</span><span class="calc-name">Buoyancy (Archimedes)</span><span class="calc-tag" style="color:#60a5fa;border-color:#60a5fa44">Naval Arch</span></div><div class="calc-body"><div class="field"><label>Kiasi (V) — m³</label><input type="number" id="by_v" placeholder="500"></div><div class="field"><label>Msongamano ρ kg/m³</label><input type="number" id="by_rho" placeholder="1025" value="1025"></div><button class="calc-btn" style="background:#60a5fa;color:#0a0e1a" onclick="calcBuoy()">HESABU BUOYANCY</button><div class="result-box" id="res_by"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🌀</span><span class="calc-name">Froude Number</span><span class="calc-tag" style="color:#60a5fa;border-color:#60a5fa44">Hydro</span></div><div class="calc-body"><div class="field"><label>Kasi (v) — m/s</label><input type="number" id="fn_v" placeholder="8.5"></div><div class="field"><label>Urefu (L) — m</label><input type="number" id="fn_l" placeholder="120"></div><button class="calc-btn" style="background:#60a5fa;color:#0a0e1a" onclick="calcFroude()">HESABU Fn</button><div class="result-box" id="res_fn"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>⚙️</span><span class="calc-name">Nguvu ya Injini (EHP)</span><span class="calc-tag" style="color:#60a5fa;border-color:#60a5fa44">Propulsion</span></div><div class="calc-body"><div class="field"><label>Resistance (R) — kN</label><input type="number" id="ehp_r" placeholder="500"></div><div class="field"><label>Kasi (V) — m/s</label><input type="number" id="ehp_v" placeholder="7"></div><button class="calc-btn" style="background:#60a5fa;color:#0a0e1a" onclick="calcEHP()">HESABU EHP</button><div class="result-box" id="res_ehp"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📐</span><span class="calc-name">Metacentric Height GM</span><span class="calc-tag" style="color:#60a5fa;border-color:#60a5fa44">Stability</span></div><div class="calc-body"><div class="field"><label>BM — m</label><input type="number" id="gm_bm" placeholder="3.5" step="0.1"></div><div class="field"><label>BG — m</label><input type="number" id="gm_bg" placeholder="1.2" step="0.1"></div><button class="calc-btn" style="background:#60a5fa;color:#0a0e1a" onclick="calcGM()">HESABU GM</button><div class="result-box" id="res_gm"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>💨</span><span class="calc-name">Kasi: Knots ↔ km/h ↔ m/s</span><span class="calc-tag" style="color:#60a5fa;border-color:#60a5fa44">Navigation</span></div><div class="calc-body"><div class="field"><label>Thamani</label><input type="number" id="sp_val" placeholder="15"></div><div class="field"><label>Kutoka</label><select id="sp_from"><option value="knots">Knots</option><option value="kmh">km/h</option><option value="ms">m/s</option></select></div><button class="calc-btn" style="background:#60a5fa;color:#0a0e1a" onclick="calcSpeed()">BADILISHA KASI</button><div class="result-box" id="res_sp"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>⛽</span><span class="calc-name">Matumizi ya Mafuta (SFOC)</span><span class="calc-tag" style="color:#60a5fa;border-color:#60a5fa44">Marine Eng.</span></div><div class="calc-body"><div class="field"><label>Nguvu (P) — kW</label><input type="number" id="fc_p" placeholder="5000"></div><div class="field"><label>SFOC — g/kWh</label><input type="number" id="fc_sfoc" placeholder="180"></div><div class="field"><label>Muda wa Safari (h)</label><input type="number" id="fc_t" placeholder="24"></div><button class="calc-btn" style="background:#60a5fa;color:#0a0e1a" onclick="calcFuel()">HESABU MAFUTA</button><div class="result-box" id="res_fc"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🔁</span><span class="calc-name">Reynolds Number (Re)</span><span class="calc-tag" style="color:#60a5fa;border-color:#60a5fa44">Fluid Mech.</span></div><div class="calc-body"><div class="field"><label>Kasi (v) — m/s</label><input type="number" id="re_v" placeholder="5"></div><div class="field"><label>Urefu (L) — m</label><input type="number" id="re_l" placeholder="100"></div><div class="field"><label>ν — m²/s</label><input type="number" id="re_nu" placeholder="0.000001004" step="any" value="0.000001004"></div><button class="calc-btn" style="background:#60a5fa;color:#0a0e1a" onclick="calcReynolds()">HESABU Re</button><div class="result-box" id="res_re"></div></div></div>
+  </div>
+</div>
+
+<!-- 7. JUMLA -->
+<div class="category-panel" id="cat-general">
+  <div class="cat-header"><span class="cat-icon">🔢</span><div><div class="cat-title">Calculator za Jumla</div><div class="cat-sub">GPA · HESLB · PAYE · Sarafu · Vipimo · Geometry · Asilimia</div></div></div>
+  <div class="calc-grid">
+    <div class="calc-card"><div class="calc-card-header"><span>🎓</span><span class="calc-name">GPA Calculator</span><span class="calc-tag" style="color:#fb923c;border-color:#fb923c44">Academic</span></div><div class="calc-body"><div class="field"><label>Alama (tenganisha kwa koma)</label><input type="text" id="gpa_marks" placeholder="65,72,58,80,70"></div><div class="field"><label>Mfumo</label><select id="gpa_sys"><option value="4">GPA / 4.0</option><option value="5">GPA / 5.0</option></select></div><button class="calc-btn" style="background:#fb923c" onclick="calcGPA()">HESABU GPA</button><div class="result-box" id="res_gpa"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>🏦</span><span class="calc-name">HESLB Loan Calculator</span><span class="calc-tag" style="color:#fb923c;border-color:#fb923c44">Student Loan</span></div><div class="calc-body"><div class="field"><label>Mkopo wa HESLB — TSH</label><input type="number" id="hl2_loan" placeholder="5000000"></div><div class="field"><label>Mshahara Ukipata Kazi</label><input type="number" id="hl2_sal" placeholder="800000"></div><button class="calc-btn" style="background:#fb923c" onclick="calcHESLB()">HESABU MAREJESHO</button><div class="result-box" id="res_hl2"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>💵</span><span class="calc-name">Ubadilishaji wa Sarafu</span><span class="calc-tag" style="color:#fb923c;border-color:#fb923c44">Currency</span></div><div class="calc-body"><div class="field"><label>Kiasi</label><input type="number" id="cur_amt" placeholder="100"></div><div class="g2"><div class="field"><label>Kutoka</label><select id="cur_from"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option><option value="KES">KES</option><option value="TSH">TSH</option></select></div><div class="field"><label>Kwenda</label><select id="cur_to"><option value="TSH">TSH</option><option value="USD">USD</option><option value="EUR">EUR</option><option value="KES">KES</option></select></div></div><button class="calc-btn" style="background:#fb923c" onclick="calcCurrency()">BADILISHA</button><div class="result-box" id="res_cur"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📏</span><span class="calc-name">Ubadilishaji wa Vipimo</span><span class="calc-tag" style="color:#fb923c;border-color:#fb923c44">Units</span></div><div class="calc-body"><div class="field"><label>Thamani</label><input type="number" id="unit_val" placeholder="10"></div><div class="field"><label>Aina</label><select id="unit_type"><option value="km_mi">km → Miles</option><option value="mi_km">Miles → km</option><option value="kg_lb">kg → Pounds</option><option value="lb_kg">Pounds → kg</option><option value="m_ft">Metres → Feet</option><option value="ft_m">Feet → Metres</option><option value="L_gal">Litres → Gallons</option><option value="gal_L">Gallons → Litres</option></select></div><button class="calc-btn" style="background:#fb923c" onclick="calcUnits()">BADILISHA</button><div class="result-box" id="res_unit"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>👔</span><span class="calc-name">Mshahara &amp; PAYE Tanzania</span><span class="calc-tag" style="color:#fb923c;border-color:#fb923c44">Tax</span></div><div class="calc-body"><div class="field"><label>Mshahara wa Jumla/Mwezi — TSH</label><input type="number" id="pay_gross" placeholder="1500000"></div><button class="calc-btn" style="background:#fb923c" onclick="calcPAYE()">HESABU PAYE &amp; NSSF</button><div class="result-box" id="res_pay"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📐</span><span class="calc-name">Eneo &amp; Mzingo wa Maumbo</span><span class="calc-tag" style="color:#fb923c;border-color:#fb923c44">Geometry</span></div><div class="calc-body"><div class="field"><label>Umbo</label><select id="sh_type" onchange="updateShapeInputs()"><option value="circle">Duara</option><option value="rect">Mraba / Mstatili</option><option value="tri">Pembetatu</option><option value="trap">Trapezoid</option></select></div><div id="sh_inputs"><div class="field"><label>Radi (r)</label><input type="number" id="sh_r" placeholder="5"></div></div><button class="calc-btn" style="background:#fb923c" onclick="calcShape()">HESABU ENEO</button><div class="result-box" id="res_sh2"></div></div></div>
+
+    <div class="calc-card"><div class="calc-card-header"><span>📉</span><span class="calc-name">Asilimia &amp; Mabadiliko (%)</span><span class="calc-tag" style="color:#fb923c;border-color:#fb923c44">General</span></div><div class="calc-body"><div class="g2"><div class="field"><label>Thamani ya Awali</label><input type="number" id="pct_old" placeholder="5000"></div><div class="field"><label>Thamani Mpya</label><input type="number" id="pct_new" placeholder="6500"></div></div><div class="field"><label>AU: Hesabu x% ya namba</label></div><div class="g2"><div class="field"><label>% ya</label><input type="number" id="pct_pct" placeholder="15"></div><div class="field"><label>Namba</label><input type="number" id="pct_base" placeholder="200000"></div></div><button class="calc-btn" style="background:#fb923c" onclick="calcPct()">HESABU</button><div class="result-box" id="res_pct"></div></div></div>
+  </div>
+</div>
+
+<!-- 8. KALENDA -->
+<div class="category-panel" id="cat-calendar">
+  <div class="cat-header"><span class="cat-icon">📅</span><div><div class="cat-title">Kalenda &amp; Sikukuu za Tanzania</div><div class="cat-sub">Kalenda ya Miaka 2025–2026 · Sikukuu za Taifa na Dini · Hesabu za Tarehe</div></div></div>
+
+  <div class="cal-wrap">
+    <div class="cal-box">
+      <div class="cal-nav">
+        <button onclick="changeMonth(-1)">&#9664;</button>
+        <div class="cal-month-lbl" id="cal-month-label">—</div>
+        <button onclick="changeMonth(1)">&#9654;</button>
+      </div>
+      <div class="cal-inner">
+        <div class="cal-days-row">
+          <div class="cal-dlabel">J</div><div class="cal-dlabel">I</div><div class="cal-dlabel">J</div>
+          <div class="cal-dlabel">I</div><div class="cal-dlabel">A</div><div class="cal-dlabel">I</div>
+          <div class="cal-dlabel" style="color:#f87171">J</div>
+        </div>
+        <div class="cal-dates-row" id="cal-dates"></div>
+      </div>
     </div>
+    <div class="cal-box">
+      <div class="cal-nav"><span style="font-size:11px;color:var(--muted)">🗓️ Sikukuu za Mwezi Huu</span><span></span></div>
+      <div class="hol-side" id="cal-month-holidays"><div style="color:var(--muted);font-size:10px">Subiri kalenda ipakiwe...</div></div>
+    </div>
+  </div>
+
+  <div class="holidays-box" style="margin-top:12px">
+    <div class="holidays-header">🇹🇿 Sikukuu Zote Tanzania 2025–2026</div>
+    <div class="holidays-all" id="all-holidays"></div>
+  </div>
+
+  <div style="margin-top:14px">
+    <div class="cat-header"><span class="cat-icon">⏱️</span><div><div class="cat-title">Hesabu za Tarehe</div></div></div>
     <div class="calc-grid">
-      <!-- Row 1 -->
-      <button class="calc-btn clear wide" onclick="clearCalc()">⌫ C</button>
-      <button class="calc-btn op" onclick="appendCalc('%')">%</button>
-      <button class="calc-btn op" onclick="appendCalc('/')">÷</button>
-      <!-- Row 2 -->
-      <button class="calc-btn" onclick="appendCalc('7')">7</button>
-      <button class="calc-btn" onclick="appendCalc('8')">8</button>
-      <button class="calc-btn" onclick="appendCalc('9')">9</button>
-      <button class="calc-btn op" onclick="appendCalc('*')">×</button>
-      <!-- Row 3 -->
-      <button class="calc-btn" onclick="appendCalc('4')">4</button>
-      <button class="calc-btn" onclick="appendCalc('5')">5</button>
-      <button class="calc-btn" onclick="appendCalc('6')">6</button>
-      <button class="calc-btn op" onclick="appendCalc('-')">−</button>
-      <!-- Row 4 -->
-      <button class="calc-btn" onclick="appendCalc('1')">1</button>
-      <button class="calc-btn" onclick="appendCalc('2')">2</button>
-      <button class="calc-btn" onclick="appendCalc('3')">3</button>
-      <button class="calc-btn op" onclick="appendCalc('+')">+</button>
-      <!-- Row 5 -->
-      <button class="calc-btn wide" onclick="appendCalc('0')">0</button>
-      <button class="calc-btn" onclick="appendCalc('.')">.</button>
-      <button class="calc-btn eq" onclick="doCalc()">=</button>
+      <div class="calc-card"><div class="calc-card-header"><span>📅</span><span class="calc-name">Tofauti ya Tarehe</span><span class="calc-tag" style="color:#e879f9;border-color:#e879f944">Date</span></div><div class="calc-body"><div class="field"><label>Tarehe ya Kwanza</label><input type="date" id="dt1"></div><div class="field"><label>Tarehe ya Pili</label><input type="date" id="dt2"></div><button class="calc-btn" style="background:#e879f9" onclick="calcDateDiff()">HESABU TOFAUTI</button><div class="result-box" id="res_dt"></div></div></div>
+
+      <div class="calc-card"><div class="calc-card-header"><span>➕</span><span class="calc-name">Ongeza Siku kwenye Tarehe</span><span class="calc-tag" style="color:#e879f9;border-color:#e879f944">Date</span></div><div class="calc-body"><div class="field"><label>Tarehe ya Mwanzo</label><input type="date" id="da_start"></div><div class="field"><label>Ongeza Siku (±)</label><input type="number" id="da_days" placeholder="30"></div><button class="calc-btn" style="background:#e879f9" onclick="calcDateAdd()">HESABU TAREHE</button><div class="result-box" id="res_da"></div></div></div>
+
+      <div class="calc-card"><div class="calc-card-header"><span>🎂</span><span class="calc-name">Hesabu Umri</span><span class="calc-tag" style="color:#e879f9;border-color:#e879f944">Date</span></div><div class="calc-body"><div class="field"><label>Tarehe ya Kuzaliwa</label><input type="date" id="age_dob"></div><button class="calc-btn" style="background:#e879f9" onclick="calcAge()">HESABU UMRI</button><div class="result-box" id="res_age"></div></div></div>
     </div>
   </div>
 </div>
 
-<!-- ═══ BMI ═══ -->
-<div id="bmi" class="tool">
-  <div class="tool-header">
-    <span class="tool-icon">⚕️</span>
-    <div class="tool-title">BMI Calculator</div>
-    <div class="tool-desc">Pima uzito wa mwili wako kiafya</div>
-  </div>
-  <div class="card">
-    <div class="field">
-      <label>⚖️ Uzito (kg)</label>
-      <input type="number" id="weight" placeholder="Mfano: 70">
-    </div>
-    <div class="field">
-      <label>📏 Urefu (mita)</label>
-      <input type="number" id="height" placeholder="Mfano: 1.75" step="0.01">
-    </div>
-    <button class="btn btn-blue" onclick="calcBMI()">⚕️ Hesabu BMI Yangu</button>
-
-    <div class="result-box" id="bmiResult">
-      <div class="result-label">BMI Yako</div>
-      <div class="result-value" id="bmiNum">—</div>
-      <div id="bmiTag"></div>
-    </div>
-
-    <div class="bmi-scale" id="bmiScale" style="margin-top:1.2rem;">
-      <div class="bmi-range thin" id="r-thin">
-        <div class="r-label">😟 Konda</div>
-        <div class="r-val" style="color:#3b82f6;">&lt; 18.5</div>
-      </div>
-      <div class="bmi-range normal" id="r-normal">
-        <div class="r-label">😊 Kawaida</div>
-        <div class="r-val" style="color:#22c55e;">18.5–24.9</div>
-      </div>
-      <div class="bmi-range over" id="r-over">
-        <div class="r-label">😐 Nzito</div>
-        <div class="r-val" style="color:#f59e0b;">25–29.9</div>
-      </div>
-      <div class="bmi-range obese" id="r-obese">
-        <div class="r-label">⚠️ Unene</div>
-        <div class="r-val" style="color:#ef4444;">≥ 30</div>
-      </div>
-    </div>
-  </div>
 </div>
-
-<!-- ═══ LOAN ═══ -->
-<div id="loan" class="tool">
-  <div class="tool-header">
-    <span class="tool-icon">💰</span>
-    <div class="tool-title">Hesabu ya Mkopo</div>
-    <div class="tool-desc">Jua malipo yako ya kila mwezi</div>
-  </div>
-  <div class="card">
-    <div class="field">
-      <label>💵 Kiasi cha Mkopo (TSH / USD)</label>
-      <input type="number" id="amount" placeholder="Mfano: 1,000,000">
-    </div>
-    <div class="field">
-      <label>📈 Riba kwa Mwaka (%)</label>
-      <input type="number" id="interest" placeholder="Mfano: 12" step="0.1">
-    </div>
-    <div class="field">
-      <label>📅 Muda (Miaka)</label>
-      <input type="number" id="years" placeholder="Mfano: 3">
-    </div>
-    <button class="btn btn-blue" onclick="loanCalc()">💰 Hesabu Mkopo</button>
-
-    <div class="result-box" id="loanResult" style="display:none;">
-      <div class="loan-summary">
-        <div class="loan-card highlight">
-          <div class="lc-label">💳 Malipo/Mwezi</div>
-          <div class="lc-val" id="loanMonthly">—</div>
-        </div>
-        <div class="loan-card">
-          <div class="lc-label">📊 Jumla ya Malipo</div>
-          <div class="lc-val" id="loanTotal">—</div>
-        </div>
-        <div class="loan-card" style="grid-column: span 2;">
-          <div class="lc-label">💸 Jumla ya Riba</div>
-          <div class="lc-val" id="loanInterestTotal" style="color:var(--amber);">—</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ CALENDAR ═══ -->
-<div id="calendar" class="tool">
-  <div class="tool-header">
-    <span class="tool-icon">📅</span>
-    <div class="tool-title">Kalenda</div>
-    <div class="tool-desc">Angalia tarehe na mwaka</div>
-  </div>
-  <div class="card">
-    <div class="cal-nav">
-      <button class="cal-nav-btn" onclick="changeMonth(-1)">←</button>
-      <div class="cal-month-label" id="calLabel">—</div>
-      <button class="cal-nav-btn" onclick="changeMonth(1)">→</button>
-    </div>
-    <div class="cal-grid" id="calGrid"></div>
-  </div>
-</div>
-
-</main>
-
-<footer>
-  Imetengenezwa na ❤️ <span>Sade Digital</span> · Tanzania 🇹🇿
-</footer>
-
 <script>
-/* ── TAB SWITCHING ── */
-function showTool(id, btn) {
-  document.querySelectorAll('.tool').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if (btn) btn.classList.add('active');
+// NAV
+function showCat(cat){
+  document.querySelectorAll('.category-panel').forEach(p=>p.classList.toggle('active',p.id==='cat-'+cat));
+  document.querySelectorAll('.nav-card').forEach(n=>n.classList.toggle('active',n.id==='nav-'+cat));
+  if(cat==='calendar')renderCalendar();
 }
+function show(id,html,err=false){const el=document.getElementById(id);if(!el)return;el.innerHTML=html;el.className='result-box show'+(err?' err':'');}
+function fmt(n,d=2){return parseFloat(n.toFixed(d)).toLocaleString('sw');}
+setInterval(()=>{const t=new Date();const el=document.getElementById('live-time');if(el)el.textContent=t.toLocaleTimeString('sw-TZ',{hour:'2-digit',minute:'2-digit',second:'2-digit'});},1000);
 
-/* ── CALCULATOR ── */
-let calcExpr = '';
-let justCalc = false;
+// MATH
+function calcDerivative(){const a=+document.getElementById('d_a').value,n=+document.getElementById('d_n').value;if(isNaN(a)||isNaN(n))return show('res_d','⚠️ Weka namba',true);show('res_d','d/dx ['+a+'x^'+n+'] = <strong>'+(a*n)+'x^'+(n-1)+'</strong><span class="r-value">'+(a*n)+'x^('+(n-1)+')</span>');}
+function calcIntegral(){const a=+document.getElementById('i_a').value,n=+document.getElementById('i_n').value;if(n===-1)return show('res_i','= a·ln|x| + C');show('res_i','∫'+a+'x^'+n+' dx<span class="r-value">'+fmt(a/(n+1))+'x^'+(n+1)+' + C</span>');}
+function calcDet(){const a=+document.getElementById('m_a').value,b=+document.getElementById('m_b').value,c=+document.getElementById('m_c').value,d=+document.getElementById('m_d').value;const det=a*d-b*c;show('res_det'||'res_m','('+(a)+'×'+d+') − ('+b+'×'+c+')<span class="r-value">det = '+fmt(det)+'</span>'+(det===0?' ⚠️ Singular':''));document.getElementById('res_m').innerHTML='('+a+'×'+d+') − ('+b+'×'+c+')<span class="r-value">det = '+fmt(det)+'</span>'+(det===0?' ⚠️ Singular':'');document.getElementById('res_m').className='result-box show';}
+function calcStats(){const nums=document.getElementById('stat_nums').value.split(',').map(Number).filter(n=>!isNaN(n));if(!nums.length)return show('res_stat','⚠️ Weka namba',true);nums.sort((a,b)=>a-b);const mean=nums.reduce((s,x)=>s+x,0)/nums.length;const mid=Math.floor(nums.length/2);const median=nums.length%2?nums[mid]:(nums[mid-1]+nums[mid])/2;const freq={};nums.forEach(n=>{freq[n]=(freq[n]||0)+1;});const maxF=Math.max(...Object.values(freq));const mode=Object.entries(freq).filter(([,v])=>v===maxF).map(([k])=>k).join(', ');show('res_stat','Mean: '+fmt(mean)+'<br>Median: '+median+'<br>Mode: '+mode+'<span class="r-value">n = '+nums.length+'</span>');}
+function calcSD(){const nums=document.getElementById('sd_nums').value.split(',').map(Number).filter(n=>!isNaN(n));const type=document.getElementById('sd_type').value;if(nums.length<2)return show('res_sd','⚠️ Namba 2+',true);const mean=nums.reduce((s,x)=>s+x,0)/nums.length;const variance=nums.reduce((s,x)=>s+Math.pow(x-mean,2),0)/(type==='pop'?nums.length:nums.length-1);show('res_sd','Mean = '+fmt(mean)+'<br>Variance = '+fmt(variance)+'<span class="r-value">SD = '+fmt(Math.sqrt(variance))+'</span>');}
+function gcd(a,b){return b===0?a:gcd(b,a%b);}
+function calcGCDLCM(){const a=Math.abs(+document.getElementById('g_a').value),b=Math.abs(+document.getElementById('g_b').value);if(!a||!b)return show('res_g','⚠️',true);const g=gcd(a,b);show('res_g','GCD: '+g+'<span class="r-value">LCM = '+(a*b/g)+'</span>');}
+function calcQuadratic(){const a=+document.getElementById('nr_a').value,b=+document.getElementById('nr_b').value,c=+document.getElementById('nr_c').value;if(!a)return show('res_nr','⚠️ a≠0',true);const disc=b*b-4*a*c;if(disc<0)return show('res_nr','Δ = '+disc+' (Imaginary)<br>x = '+fmt(-b/(2*a))+' ± '+fmt(Math.sqrt(-disc)/(2*a))+'i');show('res_nr','Δ = '+fmt(disc)+'<br>x₁ = '+fmt((-b+Math.sqrt(disc))/(2*a))+'<span class="r-value">x₂ = '+fmt((-b-Math.sqrt(disc))/(2*a))+'</span>');}
+function calcProb(){const f=+document.getElementById('p_f').value,t=+document.getElementById('p_t').value;if(!t||f>t)return show('res_p','⚠️',true);show('res_p','P = '+f+'/'+t+'<span class="r-value">'+fmt(f/t,4)+' ('+fmt(f/t*100,2)+'%)</span>');}
 
-function appendCalc(v) {
-  const ops = ['+','-','*','/','.','%'];
-  if (justCalc && !ops.includes(v)) { calcExpr = ''; }
-  justCalc = false;
-  calcExpr += v;
-  const display = calcExpr
-    .replace(/\*/g,'×').replace(/\//g,'÷').replace(/-/g,'−');
-  document.getElementById('calcExpr').textContent = display;
-  document.getElementById('calcNum').textContent = calcExpr.slice(-1) || '0';
-}
+// BIASHARA
+function calcSI(){const p=+document.getElementById('si_p').value,r=+document.getElementById('si_r').value,t=+document.getElementById('si_t').value;const si=p*r*t/100;show('res_si','Riba = '+p.toLocaleString()+'×'+r+'%×'+t+'/100<span class="r-value">TSH '+fmt(si)+'</span>Jumla: TSH '+fmt(p+si));}
+function calcCI(){const p=+document.getElementById('ci_p').value,r=+document.getElementById('ci_r').value,t=+document.getElementById('ci_t').value,n=+document.getElementById('ci_n').value;const A=p*Math.pow(1+r/(100*n),n*t);show('res_ci','A = P(1+r/n)^nt<span class="r-value">TSH '+fmt(A)+'</span>Riba: TSH '+fmt(A-p));}
+function calcBE(){const fc=+document.getElementById('be_fc').value,p=+document.getElementById('be_p').value,vc=+document.getElementById('be_vc').value;if(p<=vc)return show('res_be','⚠️ P > VC lazima',true);const bep=fc/(p-vc);show('res_be','CM = '+(p-vc)+'<span class="r-value">BEP = '+fmt(bep)+' bidhaa</span>Mapato: TSH '+fmt(bep*p));}
+function calcROI(){const pr=+document.getElementById('roi_p').value,inv=+document.getElementById('roi_i').value;if(!inv)return show('res_roi','⚠️',true);show('res_roi','ROI = Faida/Mtaji × 100<span class="r-value">'+fmt(pr/inv*100)+'%</span>'+(pr>0?'✅ Faida':'❌ Hasara'));}
+function calcDep(){const c=+document.getElementById('dep_c').value,s=+document.getElementById('dep_s').value,n=+document.getElementById('dep_n').value;show('res_dep','('+c.toLocaleString()+' − '+s.toLocaleString()+') / '+n+'<span class="r-value">TSH '+fmt((c-s)/n)+' /mwaka</span>');}
+function calcElast(){const dq=+document.getElementById('el_dq').value,dp=+document.getElementById('el_dp').value;if(!dp)return show('res_el','⚠️',true);const e=dq/dp;show('res_el','PED = ΔQ%/ΔP%<span class="r-value">|PED| = '+fmt(Math.abs(e),3)+'</span>'+(Math.abs(e)>1?'Elastic':'Inelastic'));}
+function calcNPV(){const c=+document.getElementById('npv_c').value,cf=+document.getElementById('npv_cf').value,r=+document.getElementById('npv_r').value/100,n=+document.getElementById('npv_n').value;let pv=0;for(let i=1;i<=n;i++)pv+=cf/Math.pow(1+r,i);const npv=pv-c;show('res_npv','PV = TSH '+fmt(pv)+'<span class="r-value">NPV = TSH '+fmt(npv)+'</span>'+(npv>0?'✅ Faida':'❌ Hasara'));}
+function calcVAT(){const p=+document.getElementById('vat_p').value,type=document.getElementById('vat_type').value;if(type==='exc'){const vat=p*.18;show('res_vat','VAT (18%) = TSH '+fmt(vat)+'<span class="r-value">Jumla: TSH '+fmt(p+vat)+'</span>');}else{const excl=p/1.18;show('res_vat','VAT = TSH '+fmt(p-excl)+'<span class="r-value">Kabla ya VAT: TSH '+fmt(excl)+'</span>');}}
 
-function doCalc() {
-  try {
-    const res = Function('"use strict"; return (' + calcExpr + ')')();
-    document.getElementById('calcExpr').textContent =
-      calcExpr.replace(/\*/g,'×').replace(/\//g,'÷').replace(/-/g,'−') + ' =';
-    const pretty = Number.isInteger(res) ? res : parseFloat(res.toFixed(10));
-    document.getElementById('calcNum').textContent = pretty;
-    calcExpr = String(pretty);
-    justCalc = true;
-  } catch(e) {
-    document.getElementById('calcNum').textContent = '⚠️ Kosa';
-    calcExpr = '';
+// TECH
+function calcBigO(){const n=+document.getElementById('bo_n').value,type=document.getElementById('bo_type').value;if(!n)return show('res_bo','⚠️',true);const ops={o1:1,on:n,ologn:Math.log2(n),onlogn:n*Math.log2(n),on2:n*n,o2n:n<=50?Math.pow(2,n):Infinity};const names={o1:'O(1)',on:'O(n)',ologn:'O(log n)',onlogn:'O(n log n)',on2:'O(n²)',o2n:'O(2ⁿ)'};const op=ops[type];show('res_bo',names[type]+', n='+n+'<span class="r-value">'+(op===Infinity?'∞ (Too large)':fmt(op))+' ops</span>');}
+function calcBase(){const val=document.getElementById('base_n').value.trim(),from=+document.getElementById('base_from').value;const d=parseInt(val,from);if(isNaN(d))return show('res_base','⚠️ Namba mbaya',true);show('res_base','Dec: '+d+'<br>Bin: '+d.toString(2)+'<br>Oct: '+d.toString(8)+'<span class="r-value">Hex: '+d.toString(16).toUpperCase()+'</span>');}
+function calcBool(){const a=+document.getElementById('bool_a').value,b=+document.getElementById('bool_b').value;const tf=x=>'<span style="color:'+(x?'#34d399':'#f87171')+'">'+(x?'TRUE':'FALSE')+'</span>';show('res_bool','AND: '+tf(a&b)+' | OR: '+tf(a|b)+' | XOR: '+tf(a^b)+'<br>NAND: '+tf((a&b)?0:1)+' | NOR: '+tf((a|b)?0:1)+'<span class="r-value">NOT A: '+tf(a?0:1)+' | NOT B: '+tf(b?0:1)+'</span>');}
+function calcCaesar(){const msg=document.getElementById('cc_msg').value.toUpperCase();let shift=+document.getElementById('cc_shift').value;if(document.getElementById('cc_action').value==='dec')shift=26-shift;const res=msg.split('').map(c=>c>='A'&&c<='Z'?String.fromCharCode((c.charCodeAt(0)-65+shift)%26+65):c).join('');show('res_cc','Asili: '+msg+'<span class="r-value">'+res+'</span>');}
+function calcLP(){const a=+document.getElementById('lp_a').value,b=+document.getElementById('lp_b').value,cx=+document.getElementById('lp_x').value,cy=+document.getElementById('lp_y').value,cxy=+document.getElementById('lp_xy').value;const pts=[{x:0,y:0},{x:cx,y:0},{x:0,y:cy},{x:cxy,y:0},{x:0,y:cxy}].filter(p=>p.x<=cx&&p.y<=cy&&p.x+p.y<=cxy&&p.x>=0&&p.y>=0);const best=pts.reduce((m,p)=>a*p.x+b*p.y>a*m.x+b*m.y?p:m,pts[0]);show('res_lp','x='+best.x+', y='+best.y+'<span class="r-value">Z = '+fmt(a*best.x+b*best.y)+'</span>');}
+function calcHash(){const k=+document.getElementById('hash_k').value,m=+document.getElementById('hash_m').value;if(!m)return show('res_hash','⚠️',true);show('res_hash','h('+k+') = '+k+' mod '+m+'<span class="r-value">Index = '+(k%m)+'</span>');}
+function calcSubnet(){const cidr=+document.getElementById('ip_mask').value;const hosts=Math.pow(2,32-cidr)-2;const mask=~((1<<(32-cidr))-1)>>>0;const maskStr=[24,16,8,0].map(s=>(mask>>s)&255).join('.');show('res_ip','Subnet Mask: '+maskStr+'<br>CIDR: /'+cidr+'<span class="r-value">Hosts = '+hosts.toLocaleString()+'</span>');}
+
+// UHANDISI
+function calcOhm(){const find=document.getElementById('ohm_find').value,v1=+document.getElementById('ohm_v1').value,v2=+document.getElementById('ohm_v2').value;let res,lbl;if(find==='V'){res=v1*v2;lbl='V=I×R';}else if(find==='I'){if(!v2)return show('res_ohm','⚠️',true);res=v1/v2;lbl='I=V/R';}else{if(!v2)return show('res_ohm','⚠️',true);res=v1/v2;lbl='R=V/I';}show('res_ohm',lbl+'<span class="r-value">'+fmt(res)+' '+(find==='V'?'Volts':find==='I'?'A':'Ω')+'</span>');}
+function calcPower(){const v=+document.getElementById('pw_v').value,i=+document.getElementById('pw_i').value;show('res_pw','P=V×I='+v+'×'+i+'<span class="r-value">'+fmt(v*i)+' W ('+fmt(v*i/1000,3)+' kW)</span>');}
+function calcThermal(){const m=+document.getElementById('th_m').value,c=+document.getElementById('th_c').value,dt=+document.getElementById('th_dt').value;show('res_th','Q=m×c×ΔT<span class="r-value">'+fmt(m*c*dt)+' J ('+fmt(m*c*dt/1000,2)+' kJ)</span>');}
+function calcPressure(){const rho=+document.getElementById('pr_rho').value,h=+document.getElementById('pr_h').value;const P=rho*9.81*h;show('res_pr','P=ρgh<span class="r-value">'+fmt(P)+' Pa ('+fmt(P/1000,3)+' kPa)</span>');}
+function calcStress(){const f=+document.getElementById('str_f').value,a=+document.getElementById('str_a').value;if(!a)return show('res_str','⚠️',true);show('res_str','σ=F/A<span class="r-value">'+fmt(f/a)+' Pa ('+fmt(f/a/1e6,3)+' MPa)</span>');}
+function calcVelocity(){const u=+document.getElementById('vel_u').value,a=+document.getElementById('vel_a').value,t=+document.getElementById('vel_t').value;show('res_vel','v='+u+'+'+a+'×'+t+'<br>s='+fmt(u*t+.5*a*t*t)+' m<span class="r-value">v = '+fmt(u+a*t)+' m/s</span>');}
+function calcTorque(){const f=+document.getElementById('tq_f').value,r=+document.getElementById('tq_r').value,t=+document.getElementById('tq_t').value;show('res_tq','τ=F×r×sin(θ)<span class="r-value">'+fmt(f*r*Math.sin(t*Math.PI/180))+' N·m</span>');}
+function calcTemp(){const v=+document.getElementById('tmp_val').value,from=document.getElementById('tmp_from').value;let C,F,K;if(from==='C'){C=v;F=v*9/5+32;K=v+273.15;}else if(from==='F'){C=(v-32)*5/9;F=v;K=C+273.15;}else{K=v;C=v-273.15;F=C*9/5+32;}show('res_tmp','°C: '+fmt(C,2)+'<br>°F: '+fmt(F,2)+'<span class="r-value">K: '+fmt(K,2)+'</span>');}
+
+// AFYA
+function calcBMI(){const w=+document.getElementById('bmi_w').value,h=+document.getElementById('bmi_h').value;if(!h)return show('res_bmi','⚠️',true);const bmi=w/(h*h);const cat=bmi<18.5?'⚠️ Uzito Mdogo':bmi<25?'✅ Uzito Bora':bmi<30?'⚠️ Uzito Mkubwa':'❌ Mnene Sana';show('res_bmi','BMI='+w+'/'+h+'²<span class="r-value">'+fmt(bmi)+'</span>'+cat);}
+function calcIncidence(){const n=+document.getElementById('ep_new').value,p=+document.getElementById('ep_pop').value,y=+document.getElementById('ep_yr').value||1;if(!p)return show('res_ep','⚠️',true);show('res_ep','IR kwa 1,000<span class="r-value">'+fmt(n/(p*y)*1000,2)+'</span>');}
+function calcDrug(){const dose=+document.getElementById('dr_dose').value,wt=+document.getElementById('dr_wt').value,conc=+document.getElementById('dr_conc').value;const total=dose*wt;show('res_dr','Dozi = '+dose+'×'+wt+'<span class="r-value">'+fmt(total)+' mg</span>'+(conc?fmt(total/conc,2)+' mL':''));}
+function calcHalfLife(){const d=+document.getElementById('hl_d').value,t=+document.getElementById('hl_t').value,x=+document.getElementById('hl_x').value;if(!t)return show('res_hl','⚠️',true);show('res_hl','t/t½ = '+fmt(x/t)+'<span class="r-value">'+fmt(d*Math.pow(.5,x/t),3)+' mg imebaki</span>');}
+function calcChiSq(){const a=+document.getElementById('chi_a').value,b=+document.getElementById('chi_b').value,c=+document.getElementById('chi_c').value,d=+document.getElementById('chi_d').value;const n=a+b+c+d;const chi2=n*Math.pow(a*d-b*c,2)/((a+b)*(c+d)*(a+c)*(b+d));show('res_chi','χ² = '+fmt(chi2,4)+'<span class="r-value">'+(chi2>3.841?'✅ Significant (p<0.05)':'❌ Not Significant')+'</span>Critical = 3.841');}
+function calcPrevalence(){const c=+document.getElementById('prev_c').value,p=+document.getElementById('prev_p').value;if(!p)return show('res_prev','⚠️',true);show('res_prev',c+'/'+p+' × 100<span class="r-value">'+fmt(c/p*100,2)+'%</span>'+fmt(c/p*1000,2)+' kwa 1,000');}
+function calcGFR(){const cr=+document.getElementById('gfr_cr').value,age=+document.getElementById('gfr_age').value,sex=document.getElementById('gfr_sex').value;if(!cr||!age)return show('res_gfr','⚠️',true);let gfr=186*Math.pow(cr,-1.154)*Math.pow(age,-0.203);if(sex==='f')gfr*=0.742;const stage=gfr>=90?'G1 Normal':gfr>=60?'G2 Mild':gfr>=30?'G3 Moderate':gfr>=15?'G4 Severe':'G5 Kidney Failure';show('res_gfr','eGFR (MDRD)<span class="r-value">'+fmt(gfr,1)+' mL/min/1.73m²</span>'+stage);}
+
+// NAVAL
+function calcDisp(){const L=+document.getElementById('sh_l').value,B=+document.getElementById('sh_b').value,T=+document.getElementById('sh_t').value,Cb=+document.getElementById('sh_cb').value||.75;const V=L*B*T*Cb;show('res_sh','V='+L+'×'+B+'×'+T+'×'+Cb+'='+fmt(V)+' m³<span class="r-value">'+fmt(V*1.025/1000)+' tonnes</span>');}
+function calcBuoy(){const V=+document.getElementById('by_v').value,rho=+document.getElementById('by_rho').value||1025;show('res_by','Fb=ρgV<span class="r-value">'+fmt(rho*9.81*V/1000)+' kN</span>'+fmt(rho*9.81*V/9810,2)+' tonnes');}
+function calcFroude(){const v=+document.getElementById('fn_v').value,L=+document.getElementById('fn_l').value;if(!L)return show('res_fn','⚠️',true);const Fn=v/Math.sqrt(9.81*L);show('res_fn','Fn=v/√(gL)<span class="r-value">'+fmt(Fn,4)+'</span>'+(Fn<.3?'Displacement':Fn<.5?'Semi-displacement':'Planing'));}
+function calcEHP(){const R=+document.getElementById('ehp_r').value,V=+document.getElementById('ehp_v').value;show('res_ehp','EHP=R×V<span class="r-value">'+fmt(R*V)+' kW ('+fmt(R*V/.7457,0)+' HP)</span>');}
+function calcGM(){const BM=+document.getElementById('gm_bm').value,BG=+document.getElementById('gm_bg').value;const GM=BM-BG;show('res_gm','GM='+BM+'−'+BG+'<span class="r-value">'+fmt(GM)+' m</span>'+(GM>0?'✅ Imara':GM===0?'⚠️ Neutral':'❌ Haiko Imara!'));}
+function calcSpeed(){const val=+document.getElementById('sp_val').value,from=document.getElementById('sp_from').value;let ms=from==='knots'?val*.514444:from==='kmh'?val/3.6:val;show('res_sp','Knots: '+fmt(ms/.514444,3)+'<br>km/h: '+fmt(ms*3.6,3)+'<span class="r-value">m/s = '+fmt(ms,4)+'</span>');}
+function calcFuel(){const P=+document.getElementById('fc_p').value,sfoc=+document.getElementById('fc_sfoc').value,t=+document.getElementById('fc_t').value;const f=P*sfoc*t/1e6;show('res_fc','P×SFOC×t/10⁶<span class="r-value">'+fmt(f,3)+' tani ('+fmt(f*1000,1)+' kg)</span>');}
+function calcReynolds(){const v=+document.getElementById('re_v').value,L=+document.getElementById('re_l').value,nu=+document.getElementById('re_nu').value;if(!nu)return show('res_re','⚠️',true);const Re=v*L/nu;show('res_re','Re=vL/ν<span class="r-value">'+Re.toExponential(3)+'</span>'+(Re<5e5?'Laminar':Re<1e7?'Transitional':'Turbulent'));}
+
+// JUMLA
+function calcGPA(){const marks=document.getElementById('gpa_marks').value.split(',').map(Number).filter(n=>!isNaN(n));const sys=+document.getElementById('gpa_sys').value;if(!marks.length)return show('res_gpa','⚠️',true);const avg=marks.reduce((s,x)=>s+x,0)/marks.length;let gpa=sys===4?(avg>=70?4:avg>=60?3.5:avg>=50?3:avg>=40?2:1):(avg>=70?5:avg>=60?4:avg>=50?3:avg>=40?2:1);const grade=avg>=70?'A':avg>=60?'B':avg>=50?'C':avg>=40?'D':'F';show('res_gpa','Wastani: '+fmt(avg,1)+'% → Daraja '+grade+'<span class="r-value">GPA: '+gpa.toFixed(1)+' / '+sys+'</span>'+(avg>=40?'✅ Umefaulu':'❌ Hujafaulu'));}
+function calcHESLB(){const loan=+document.getElementById('hl2_loan').value;const rate=loan>5e6?.2:.15;const monthly=loan*rate/12;const years=Math.ceil(loan/(monthly*12));show('res_hl2','Mkopo: TSH '+loan.toLocaleString()+'<br>Kiwango: '+(rate*100)+'%/mwaka<span class="r-value">Malipo/Mwezi: TSH '+fmt(monthly)+'</span>Muda: ~'+years+' miaka');}
+const rates={USD:2600,EUR:2820,GBP:3280,KES:20.5,TSH:1};
+function calcCurrency(){const amt=+document.getElementById('cur_amt').value,from=document.getElementById('cur_from').value,to=document.getElementById('cur_to').value;const result=amt*rates[from]/rates[to];show('res_cur',amt+' '+from+'<span class="r-value">'+fmt(result,2)+' '+to+'</span><span style="color:var(--muted);font-size:9px">Viwango vya makadirio</span>');}
+function calcUnits(){const v=+document.getElementById('unit_val').value,type=document.getElementById('unit_type').value;const conv={km_mi:[1.60934,'km','Miles'],mi_km:[0.621371,'Miles','km'],kg_lb:[2.20462,'kg','lb'],lb_kg:[0.453592,'lb','kg'],m_ft:[3.28084,'m','Feet'],ft_m:[0.3048,'Feet','m'],L_gal:[3.78541,'L','Gal'],gal_L:[0.264172,'Gal','L']};const [f,fr,to]=conv[type];show('res_unit',v+' '+fr+'<span class="r-value">'+fmt(v/f,4)+' '+to+'</span>');}
+function calcPAYE(){const g=+document.getElementById('pay_gross').value;let tax=0;if(g<=270000)tax=0;else if(g<=520000)tax=(g-270000)*.09;else if(g<=760000)tax=22500+(g-520000)*.2;else if(g<=1000000)tax=70500+(g-760000)*.25;else tax=130500+(g-1000000)*.3;const nssf=g*.1;show('res_pay','Jumla: TSH '+g.toLocaleString()+'<br>PAYE: TSH '+fmt(tax)+'<br>NSSF(10%): TSH '+fmt(nssf)+'<span class="r-value">Net: TSH '+fmt(g-tax-nssf)+'</span>');}
+function updateShapeInputs(){const t=document.getElementById('sh_type').value;const el=document.getElementById('sh_inputs');const h=(html)=>{el.innerHTML=html;};if(t==='circle')h('<div class="field"><label>Radi (r)</label><input type="number" id="sh_r" placeholder="5"></div>');else if(t==='rect')h('<div class="g2"><div class="field"><label>Urefu</label><input type="number" id="sh_l2" placeholder="6"></div><div class="field"><label>Upana</label><input type="number" id="sh_w" placeholder="4"></div></div>');else if(t==='tri')h('<div class="g2"><div class="field"><label>Msingi</label><input type="number" id="sh_b2" placeholder="6"></div><div class="field"><label>Urefu</label><input type="number" id="sh_h2" placeholder="4"></div></div>');else h('<div class="field"><label>Msingi 1</label><input type="number" id="sh_a2" placeholder="5"></div><div class="field"><label>Msingi 2</label><input type="number" id="sh_b3" placeholder="3"></div><div class="field"><label>Urefu</label><input type="number" id="sh_h3" placeholder="4"></div>');}
+function calcShape(){const t=document.getElementById('sh_type').value;if(t==='circle'){const r=+document.getElementById('sh_r').value;show('res_sh2','Eneo = πr² = '+fmt(Math.PI*r*r,4)+'<span class="r-value">Mzingo = '+fmt(2*Math.PI*r,4)+'</span>');}else if(t==='rect'){const l=+(document.getElementById('sh_l2')||{value:0}).value,w=+(document.getElementById('sh_w')||{value:0}).value;show('res_sh2','Eneo = l×w<span class="r-value">'+fmt(l*w)+'</span>Mzingo: '+fmt(2*(l+w)));}else if(t==='tri'){const b=+(document.getElementById('sh_b2')||{value:0}).value,h=+(document.getElementById('sh_h2')||{value:0}).value;show('res_sh2','Eneo = ½bh<span class="r-value">'+fmt(.5*b*h)+'</span>');}else{const a=+(document.getElementById('sh_a2')||{value:0}).value,b=+(document.getElementById('sh_b3')||{value:0}).value,h=+(document.getElementById('sh_h3')||{value:0}).value;show('res_sh2','Eneo = ½(a+b)h<span class="r-value">'+fmt(.5*(a+b)*h)+'</span>');}}
+function calcPct(){const o=+document.getElementById('pct_old').value,n=+document.getElementById('pct_new').value,pp=+document.getElementById('pct_pct').value,pb=+document.getElementById('pct_base').value;let r='';if(o&&n){const ch=(n-o)/o*100;r+='Mabadiliko: '+(ch>0?'+':'')+fmt(ch,2)+'%<br>';}if(pp&&pb){r+=''+pp+'% ya '+pb.toLocaleString()+' = <strong>'+fmt(pp*pb/100)+'</strong>';}show('res_pct',r||'⚠️ Weka thamani',!r);}
+
+// DATE
+function calcDateDiff(){const d1=new Date(document.getElementById('dt1').value),d2=new Date(document.getElementById('dt2').value);if(isNaN(d1)||isNaN(d2))return show('res_dt','⚠️',true);const diff=Math.abs(d2-d1),days=Math.floor(diff/864e5);show('res_dt','Siku: '+days+'<br>Wiki: '+Math.floor(days/7)+'<br>Miezi: ~'+Math.floor(days/30)+'<span class="r-value">Miaka: ~'+Math.floor(days/365)+'</span>');}
+function calcDateAdd(){const s=new Date(document.getElementById('da_start').value),d=+document.getElementById('da_days').value;if(isNaN(s)||isNaN(d))return show('res_da','⚠️',true);const r=new Date(s.getTime()+d*864e5);show('res_da',s.toLocaleDateString('sw-TZ')+' + '+d+' siku<span class="r-value">'+r.toLocaleDateString('sw-TZ')+'</span>');}
+function calcAge(){const dob=new Date(document.getElementById('age_dob').value);if(isNaN(dob))return show('res_age','⚠️',true);const now=new Date();const y=now.getFullYear()-dob.getFullYear();const adj=(now.getMonth()<dob.getMonth()||(now.getMonth()===dob.getMonth()&&now.getDate()<dob.getDate()))?-1:0;const years=y+adj;const next=new Date(now.getFullYear()+(adj===0&&now.getMonth()===dob.getMonth()&&now.getDate()===dob.getDate()?1:0),dob.getMonth(),dob.getDate());if(next<=now)next.setFullYear(next.getFullYear()+1);const dLeft=Math.ceil((next-now)/864e5);show('res_age','Miaka: '+years+'<span class="r-value">Siku '+dLeft+' hadi siku ya kuzaliwa</span>');}
+
+// CALENDAR
+const MONTHS_SW=['Januari','Februari','Machi','Aprili','Mei','Juni','Juli','Agosti','Septemba','Oktoba','Novemba','Desemba'];
+const HOLIDAYS=[
+  {date:'2025-01-01',name:'Mwaka Mpya',type:'Taifa'},
+  {date:'2025-01-12',name:'Mapinduzi ya Zanzibar',type:'Taifa'},
+  {date:'2025-02-05',name:'Idd el-Fitr (Matarajio)',type:'Dini'},
+  {date:'2025-04-07',name:'Ijumaa Kuu (Good Friday)',type:'Dini'},
+  {date:'2025-04-09',name:'Pasaka (Easter Monday)',type:'Dini'},
+  {date:'2025-04-26',name:'Muungano wa Tanzania',type:'Taifa'},
+  {date:'2025-05-01',name:'Sikukuu ya Wafanyakazi',type:'Taifa'},
+  {date:'2025-06-07',name:"Idd el-Adha (Matarajio)",type:'Dini'},
+  {date:'2025-08-08',name:'Nane Nane — Siku ya Wakulima',type:'Taifa'},
+  {date:'2025-09-05',name:'Maulid (Matarajio)',type:'Dini'},
+  {date:'2025-10-14',name:'Siku ya Mwalimu Nyerere',type:'Taifa'},
+  {date:'2025-12-09',name:'Uhuru na Jamhuri',type:'Taifa'},
+  {date:'2025-12-25',name:'Krismasi (Christmas)',type:'Dini'},
+  {date:'2025-12-26',name:'Boxing Day',type:'Dini'},
+  {date:'2026-01-01',name:'Mwaka Mpya 2026',type:'Taifa'},
+  {date:'2026-01-12',name:'Mapinduzi ya Zanzibar',type:'Taifa'},
+  {date:'2026-03-29',name:'Ijumaa Kuu (Easter)',type:'Dini'},
+  {date:'2026-04-26',name:'Muungano wa Tanzania',type:'Taifa'},
+  {date:'2026-05-01',name:'Sikukuu ya Wafanyakazi',type:'Taifa'},
+  {date:'2026-08-08',name:'Nane Nane',type:'Taifa'},
+  {date:'2026-10-14',name:'Siku ya Mwalimu Nyerere',type:'Taifa'},
+  {date:'2026-12-09',name:'Uhuru na Jamhuri',type:'Taifa'},
+  {date:'2026-12-25',name:'Krismasi',type:'Dini'},
+];
+
+let calY=new Date().getFullYear(), calM=new Date().getMonth();
+function getHol(y,m,d){const s=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');return HOLIDAYS.find(h=>h.date===s);}
+function renderCalendar(){
+  const lbl=document.getElementById('cal-month-label');if(!lbl)return;
+  lbl.textContent=MONTHS_SW[calM]+' '+calY;
+  const firstDay=new Date(calY,calM,1).getDay();
+  const total=new Date(calY,calM+1,0).getDate();
+  const today=new Date();
+  const el=document.getElementById('cal-dates');el.innerHTML='';
+  const mhols=[];
+  for(let i=0;i<firstDay;i++){const d=document.createElement('div');d.className='cdate faded';el.appendChild(d);}
+  for(let d=1;d<=total;d++){
+    const div=document.createElement('div');
+    const hol=getHol(calY,calM,d);
+    const isToday=today.getFullYear()===calY&&today.getMonth()===calM&&today.getDate()===d;
+    const isSun=new Date(calY,calM,d).getDay()===0;
+    div.className='cdate'+(isToday?' today':'')+(hol&&!isToday?' holiday':'')+(isSun&&!isToday&&!hol?' sunday':'');
+    div.textContent=d;
+    if(hol){div.title=hol.name;mhols.push({d,hol});}
+    el.appendChild(div);
   }
+  const mhEl=document.getElementById('cal-month-holidays');
+  mhEl.innerHTML=mhols.length?mhols.map(({d,hol})=>'<div class="hol-item"><span class="hol-date">'+String(d).padStart(2,'0')+' '+MONTHS_SW[calM].slice(0,3)+'</span><span class="hol-name">'+hol.name+'</span><span class="hol-badge">'+hol.type+'</span></div>').join(''):'<div style="color:var(--muted);font-size:10px;padding:8px 0">Hakuna sikukuu mwezi huu</div>';
+  const all=document.getElementById('all-holidays');
+  const now=new Date();
+  all.innerHTML=HOLIDAYS.map(h=>{const hd=new Date(h.date);const up=hd>=now;return'<div class="hol-item"><span class="hol-date">'+h.date.slice(5).replace('-','/')+'</span><span class="hol-name">'+h.name+'</span><span class="hol-badge'+(up?' upcoming':'')+'">'+h.type+'</span></div>';}).join('');
 }
-
-function clearCalc() {
-  calcExpr = '';
-  justCalc = false;
-  document.getElementById('calcExpr').textContent = '\u00a0';
-  document.getElementById('calcNum').textContent = '0';
-}
-
-/* ── BMI ── */
-function calcBMI() {
-  const w = parseFloat(document.getElementById('weight').value);
-  const h = parseFloat(document.getElementById('height').value);
-  if (!w || !h || h <= 0) { alert('⚠️ Weka uzito na urefu sahihi!'); return; }
-
-  const bmi = w / (h * h);
-  let label, tagClass, emoji;
-  let activeId;
-
-  document.querySelectorAll('.bmi-range').forEach(r => r.classList.remove('active-range'));
-
-  if (bmi < 18.5) {
-    label = 'Konda Sana'; tagClass = 'tag-blue'; emoji = '😟'; activeId = 'r-thin';
-  } else if (bmi < 25) {
-    label = 'Uzito wa Kawaida'; tagClass = 'tag-green'; emoji = '😊'; activeId = 'r-normal';
-  } else if (bmi < 30) {
-    label = 'Nzito Kidogo'; tagClass = 'tag-amber'; emoji = '😐'; activeId = 'r-over';
-  } else {
-    label = 'Unene wa Hatari'; tagClass = 'tag-red'; emoji = '⚠️'; activeId = 'r-obese';
-  }
-
-  document.getElementById('r-' + activeId.split('-')[1]).classList.add('active-range');
-  document.getElementById('bmiNum').textContent = bmi.toFixed(1);
-  document.getElementById('bmiTag').innerHTML =
-    `<span class="result-tag ${tagClass}">${emoji} ${label}</span>`;
-  const rb = document.getElementById('bmiResult');
-  rb.classList.add('show');
-  rb.style.display = 'block';
-
-  if (activeId) document.getElementById(activeId).classList.add('active-range');
-}
-
-/* ── LOAN ── */
-function loanCalc() {
-  const a = parseFloat(document.getElementById('amount').value);
-  const r = parseFloat(document.getElementById('interest').value) / 100 / 12;
-  const n = parseFloat(document.getElementById('years').value) * 12;
-
-  if (!a || !n) { alert('⚠️ Jaza taarifa zote!'); return; }
-
-  let monthly;
-  if (r === 0) {
-    monthly = a / n;
-  } else {
-    const x = Math.pow(1 + r, n);
-    monthly = (a * x * r) / (x - 1);
-  }
-
-  const total = monthly * n;
-  const totalInterest = total - a;
-
-  const fmt = v => v.toLocaleString('en', {minimumFractionDigits:2, maximumFractionDigits:2});
-
-  document.getElementById('loanMonthly').textContent = fmt(monthly);
-  document.getElementById('loanTotal').textContent = fmt(total);
-  document.getElementById('loanInterestTotal').textContent = fmt(totalInterest);
-  document.getElementById('loanResult').style.display = 'block';
-}
-
-/* ── CALENDAR ── */
-const MONTHS_SW = ['Januari','Februari','Machi','Aprili','Mei','Juni',
-                   'Julai','Agosti','Septemba','Oktoba','Novemba','Desemba'];
-const DAYS_SW   = ['Ju','Wt','Jm','Al','Ij','St','Sa'];
-
-let calYear, calMonth;
-
-function initCal() {
-  const now = new Date();
-  calYear = now.getFullYear();
-  calMonth = now.getMonth();
-  renderCal();
-}
-
-function changeMonth(d) {
-  calMonth += d;
-  if (calMonth > 11) { calMonth = 0; calYear++; }
-  if (calMonth < 0)  { calMonth = 11; calYear--; }
-  renderCal();
-}
-
-function renderCal() {
-  const today = new Date();
-  const isCurrentMonth = today.getFullYear() === calYear && today.getMonth() === calMonth;
-
-  document.getElementById('calLabel').textContent = `${MONTHS_SW[calMonth]} ${calYear}`;
-
-  const firstDay = new Date(calYear, calMonth, 1).getDay();
-  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-
-  let html = DAYS_SW.map(d =>
-    `<div class="cal-day-name">${d}</div>`).join('');
-
-  // Empty cells before first day
-  for (let i = 0; i < firstDay; i++) {
-    html += `<div class="cal-day"></div>`;
-  }
-
-  for (let i = 1; i <= daysInMonth; i++) {
-    const dayOfWeek = (firstDay + i - 1) % 7;
-    const isSun = dayOfWeek === 0;
-    const isTodayDay = isCurrentMonth && i === today.getDate();
-    const cls = ['cal-day','has-day', isSun ? 'sunday':'', isTodayDay ? 'today':''].filter(Boolean).join(' ');
-    html += `<div class="${cls}">${i}</div>`;
-  }
-
-  document.getElementById('calGrid').innerHTML = html;
-}
-
-// Init on load
-initCal();
+function changeMonth(dir){calM+=dir;if(calM>11){calM=0;calY++;}else if(calM<0){calM=11;calY--;}renderCalendar();}
+window.addEventListener('load',()=>{
+  renderCalendar();
+  const t=new Date();
+  document.getElementById('dt1').valueAsDate=t;
+  document.getElementById('dt2').valueAsDate=t;
+  document.getElementById('da_start').valueAsDate=t;
+  document.getElementById('age_dob').value='2000-01-01';
+});
 </script>
 </body>
 </html>
