@@ -31,39 +31,6 @@
       #auth-loader .dot-spin span:nth-child(3){animation-delay:0.4s}
       @keyframes blink{0%,80%,100%{opacity:0.3}40%{opacity:1}}
     </style>
-    <!-- Loading screen -->
-    <div id="auth-loader">
-      <div class="logo">📚 SadeBooks</div>
-      <div class="dot-spin"><span></span><span></span><span></span></div>
-    </div>
-    <script type="module">
-      import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-      import{getAuth,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-      
-      // Timeout — kama Firebase haifanyi kazi ndani ya sekunde 6, nenda login
-      const timer = setTimeout(()=>{
-        window.location.href="login.html";
-      }, 6000);
-
-      initializeApp({
-        apiKey:"AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",
-        authDomain:"sadebooks-16523.firebaseapp.com",
-        projectId:"sadebooks-16523",
-        storageBucket:"sadebooks-16523.firebasestorage.app",
-        messagingSenderId:"304204101160",
-        appId:"1:304204101160:web:052e96dc7690fe9e3b271d"
-      });
-
-      onAuthStateChanged(getAuth(),(user)=>{
-        clearTimeout(timer);
-        if(!user){
-          window.location.href="login.html";
-        } else {
-          document.getElementById("auth-loader").remove();
-          document.body.style.visibility="visible";
-        }
-      });
-    </script>
     <!-- Mwisho Firebase Auth -->
 
     <!-- Google Analytics: Sade Books -->
@@ -1009,6 +976,48 @@ header h1 span {
 
 </head>
 <body>
+  <!-- Loading screen (lazima iwe ndani ya body, si head) -->
+  <div id="auth-loader">
+    <div class="logo">📚 SadeBooks</div>
+    <div class="dot-spin"><span></span><span></span><span></span></div>
+  </div>
+  <!-- Firebase Auth Check script -->
+  <script type="module">
+    import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import{getAuth,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    // Haraka: kama sessionStorage ina alama ya login, onyesha ukurasa mara moja
+    if(sessionStorage.getItem("sb_logged_in")==="1"){
+      document.getElementById("auth-loader").style.display="none";
+      document.body.style.visibility="visible";
+    }
+
+    // Timeout — kama Firebase haifanyi kazi ndani ya sekunde 6, nenda login
+    const timer = setTimeout(()=>{
+      window.location.href="login.html";
+    }, 6000);
+
+    initializeApp({
+      apiKey:"AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",
+      authDomain:"sadebooks-16523.firebaseapp.com",
+      projectId:"sadebooks-16523",
+      storageBucket:"sadebooks-16523.firebasestorage.app",
+      messagingSenderId:"304204101160",
+      appId:"1:304204101160:web:052e96dc7690fe9e3b271d"
+    });
+
+    onAuthStateChanged(getAuth(),(user)=>{
+      clearTimeout(timer);
+      if(!user){
+        sessionStorage.removeItem("sb_logged_in");
+        window.location.href="login.html";
+      } else {
+        sessionStorage.setItem("sb_logged_in","1");
+        document.getElementById("auth-loader").remove();
+        document.body.style.visibility="visible";
+      }
+    });
+  </script>
 
 
 <!-- Sidebar Overlay -->
