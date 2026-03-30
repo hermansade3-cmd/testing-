@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sade Books - Vitabu vya Kidigitali</title>
+    <!-- Firebase Auth Check -->
+    <style>body{visibility:hidden!important}</style>
+    <script type="module">
+      import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import{getAuth,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+      initializeApp({apiKey:"AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",authDomain:"sadebooks-16523.firebaseapp.com",projectId:"sadebooks-16523",storageBucket:"sadebooks-16523.firebasestorage.app",messagingSenderId:"304204101160",appId:"1:304204101160:web:052e96dc7690fe9e3b271d"});
+      onAuthStateChanged(getAuth(),(user)=>{
+        if(!user){window.location.replace("login.html");}
+        else{document.body.style.visibility="visible";}
+      });
+    </script>
+    <!-- Mwisho Firebase Auth -->
+
     <!-- Google Analytics: Sade Books -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DK6W813MF2"></script>
     <script>
@@ -14,29 +27,6 @@
     </script>
     <!-- Mwisho wa Google Analytics -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Firebase Auth: Ficha page mpaka icheck login -->
-    <style> body { visibility: hidden; } </style>
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-      const app = initializeApp({
-        apiKey: "AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",
-        authDomain: "sadebooks-16523.firebaseapp.com",
-        projectId: "sadebooks-16523",
-        storageBucket: "sadebooks-16523.firebasestorage.app",
-        messagingSenderId: "304204101160",
-        appId: "1:304204101160:web:052e96dc7690fe9e3b271d"
-      });
-      const auth = getAuth(app);
-      onAuthStateChanged(auth, (user) => {
-        if (!user) {
-          window.location.href = "login.html";
-        } else {
-          document.body.style.visibility = "visible";
-        }
-      });
-    </script>
-
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -1935,8 +1925,6 @@ header h1 span {
   });
 })();
 </script>
-
-
 
 </body>
 </html>
