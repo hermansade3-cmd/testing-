@@ -542,13 +542,13 @@
     </div>
 
     <div class="footer-note">
-      Kwa maswali: <a href="mailto:hermansade3@gmail.com">hermansade3@gmail.com</a><br/>
+      Kwa maswali: <a href="/cdn-cgi/l/email-protection#254d405748444b5644414016654248444c490b464a48"><span class="__cf_email__" data-cfemail="bfd7dacdd2ded1ccdedbda8cffd8d2ded6d391dcd0d2">[email&#160;protected]</span></a><br/>
       &copy; 2025 SadeBooks · <a href="privacy_and_terms.html">Masharti ya Matumizi</a>
     </div>
   </div>
 
   <!-- Firebase SDK -->
-  <script type="module">
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
       getAuth, onAuthStateChanged,
@@ -562,13 +562,13 @@
        Nenda: Firebase Console → Project Settings → Your apps
     ============================================================ */
     const firebaseConfig = {
-      apiKey:            "AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",
-      authDomain:        "sadebooks-16523.firebaseapp.com",
-      projectId:         "sadebooks-16523",
-      storageBucket:     "sadebooks-16523.firebasestorage.app",
-      messagingSenderId: "304204101160",
-      appId:             "1:304204101160:web:052e96dc7690fe9e3b271d",
-      measurementId:     "G-XDPQ3G43KK"
+      apiKey:            "AIzaSyBPkx-WMYTTongmbYGUy2w86wxF3QprNkQ",
+      authDomain:        "sadebooks-ce48b.firebaseapp.com",
+      projectId:         "sadebooks-ce48b",
+      storageBucket:     "sadebooks-ce48b.firebasestorage.app",
+      messagingSenderId: "746477327",
+      appId:             "1:746477327:web:6351c78b68827a0525507a",
+      measurementId:     "G-234Z9S8C67"
     };
     /* ============================================================ */
 
@@ -600,6 +600,7 @@
     }
 
     function showUserPanel(user) {
+      sessionStorage.setItem("sb_logged_in", "1");
       document.getElementById('authSection').style.display = 'none';
       const panel = document.getElementById('userPanel');
       panel.style.display = 'block';
@@ -683,6 +684,7 @@
     };
 
     window.doLogout = async () => {
+      sessionStorage.removeItem("sb_logged_in");
       await signOut(auth);
     };
 
@@ -705,9 +707,10 @@
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter') return;
       const loginActive = document.getElementById('loginPanel').classList.contains('active');
-      if (loginActive) window.doLogin();
-      else window.doRegister();
+      if (loginActive) doLogin();
+      else doRegister();
     });
+
   </script>
 </body>
 </html>
