@@ -6,762 +6,705 @@
   <title>Akaunti Yangu | SadeBooks</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --navy:       #0a1628;
-      --navy-mid:   #112240;
-      --navy-light: #1a3358;
-      --navy-card:  #0f1e38;
-      --gold:       #c9a84c;
-      --gold-light: #e8c96a;
-      --gold-dim:   rgba(201,168,76,0.13);
-      --gold-border:rgba(201,168,76,0.22);
-      --white:      #f5f0e8;
-      --white-dim:  rgba(245,240,232,0.6);
-      --white-faint:rgba(245,240,232,0.15);
-      --error:      #e05c5c;
-      --success:    #4caf50;
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+    :root{
+      --black:#0a0a0a;
+      --black-mid:#141414;
+      --black-soft:#1e1e1e;
+      --gray:#2a2a2a;
+      --gray-mid:#444;
+      --gray-light:#888;
+      --border:#e0e0e0;
+      --border-dark:#2a2a2a;
+      --white:#ffffff;
+      --white-dim:#f5f5f5;
+      --gold:#C9A84C;
+      --gold-light:#E8C96A;
+      --red:#e05c5c;
+      --green:#4caf50;
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
-
-    body {
-      min-height: 100vh;
-      background: var(--navy);
-      font-family: 'DM Sans', sans-serif;
-      color: var(--white);
+    body{
+      font-family:'DM Sans',sans-serif;
+      background:var(--white-dim);
+      color:var(--black);
+      min-height:100vh;
     }
 
-    /* ── Background ── */
-    body::before {
-      content:'';
-      position:fixed; inset:0;
-      background:
-        radial-gradient(ellipse 70% 50% at 15% 5%,  rgba(201,168,76,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 70% at 85% 95%, rgba(26,51,88,0.7)    0%, transparent 60%);
-      pointer-events:none; z-index:0;
+    /* ── TOP NAV ── */
+    .topbar{
+      background:var(--white);
+      border-bottom:1px solid var(--border);
+      padding:0 1.5rem;
+      height:56px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      position:sticky;
+      top:0;
+      z-index:100;
     }
-    .grid {
-      position:fixed; inset:0; z-index:0; pointer-events:none;
-      background-image:
-        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
-      background-size:48px 48px;
-    }
-
-    /* ── Navbar ── */
-    nav {
-      position:sticky; top:0; z-index:100;
-      background:rgba(10,22,40,0.92);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--gold-border);
-      padding:0 24px;
-      display:flex; align-items:center; justify-content:space-between;
-      height:60px;
-    }
-    .nav-logo {
+    .topbar-brand{
       font-family:'Playfair Display',serif;
-      font-size:1.25rem; font-weight:900;
-      background:linear-gradient(135deg,var(--gold-light),var(--gold));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      background-clip:text;
+      font-size:1.1rem;
+      font-weight:700;
+      color:var(--black);
       text-decoration:none;
+      display:flex;align-items:center;gap:8px;
     }
-    .nav-links { display:flex; gap:6px; }
-    .nav-links a {
-      padding:7px 14px;
-      color:var(--white-dim);
-      text-decoration:none; font-size:0.85rem; font-weight:500;
-      border-radius:8px; transition:all 0.2s;
-    }
-    .nav-links a:hover { background:var(--gold-dim); color:var(--white); }
-    .nav-links a.active { color:var(--gold); }
-
-    /* ── Page wrapper ── */
-    .page {
-      position:relative; z-index:1;
-      max-width:680px; margin:0 auto;
-      padding:36px 20px 60px;
-    }
-
-    /* ── Gate (not logged in) ── */
-    #gate {
-      text-align:center; padding:80px 20px;
-      animation: rise 0.6s cubic-bezier(.22,1,.36,1) both;
-    }
-    #gate .icon { font-size:3.5rem; margin-bottom:16px; }
-    #gate h2 { font-family:'Playfair Display',serif; font-size:1.6rem; margin-bottom:10px; }
-    #gate p  { color:var(--white-dim); margin-bottom:28px; }
-
-    /* ── Main account content ── */
-    #accountContent { display:none; animation: rise 0.6s cubic-bezier(.22,1,.36,1) both; }
-
-    @keyframes rise {
-      from { opacity:0; transform:translateY(28px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-
-    /* ── Section header ── */
-    .section-label {
-      font-size:0.72rem; font-weight:600;
-      letter-spacing:0.12em; text-transform:uppercase;
-      color:var(--gold); margin-bottom:12px;
-      display:flex; align-items:center; gap:8px;
-    }
-    .section-label::after {
-      content:''; flex:1; height:1px;
-      background:linear-gradient(90deg,var(--gold-border),transparent);
-    }
-
-    /* ── Card ── */
-    .card {
-      background:var(--navy-mid);
-      border:1px solid var(--gold-border);
-      border-radius:16px;
-      padding:24px;
-      margin-bottom:20px;
-      box-shadow:0 8px 32px rgba(0,0,0,0.3);
-      transition:border-color 0.2s;
-    }
-    .card:hover { border-color:rgba(201,168,76,0.35); }
-
-    /* ── Profile header ── */
-    .profile-header {
-      display:flex; align-items:center; gap:20px;
-      flex-wrap:wrap;
-    }
-    .avatar-wrap { position:relative; flex-shrink:0; }
-    .avatar-img, .avatar-ph {
-      width:80px; height:80px; border-radius:50%;
-      border:3px solid var(--gold);
-      box-shadow:0 0 0 6px var(--gold-dim);
-      object-fit:cover;
-    }
-    .avatar-ph {
-      background:linear-gradient(135deg,var(--gold-light),#a07820);
-      display:flex; align-items:center; justify-content:center;
-      font-size:2rem; font-weight:700; color:var(--navy);
-    }
-    .profile-info { flex:1; min-width:180px; }
-    .profile-name {
-      font-family:'Playfair Display',serif;
-      font-size:1.45rem; font-weight:700;
-      line-height:1.2; margin-bottom:4px;
-    }
-    .profile-email { font-size:0.85rem; color:var(--white-dim); margin-bottom:8px; }
-    .profile-badge {
-      display:inline-flex; align-items:center; gap:5px;
-      background:var(--gold-dim);
-      border:1px solid var(--gold-border);
-      border-radius:20px; padding:3px 12px;
-      font-size:0.75rem; color:var(--gold-light);
-      font-weight:600;
-    }
-    .provider-badge {
-      display:inline-flex; align-items:center; gap:5px;
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.1);
-      border-radius:20px; padding:3px 10px;
-      font-size:0.72rem; color:var(--white-dim);
-      margin-left:6px;
-    }
-
-    /* ── Stats row ── */
-    .stats-row {
-      display:grid; grid-template-columns:repeat(3,1fr);
-      gap:12px; margin-top:20px;
-    }
-    .stat-box {
-      background:var(--navy);
-      border:1px solid var(--gold-border);
-      border-radius:12px; padding:14px;
-      text-align:center;
-    }
-    .stat-val {
-      font-family:'Playfair Display',serif;
-      font-size:1.5rem; font-weight:700;
-      color:var(--gold-light);
-    }
-    .stat-lbl { font-size:0.72rem; color:var(--white-dim); margin-top:2px; }
-
-    /* ── Form fields ── */
-    .field { margin-bottom:16px; }
-    .field label {
-      display:block; font-size:0.78rem; font-weight:500;
-      color:var(--white-dim); margin-bottom:6px;
-      letter-spacing:0.04em; text-transform:uppercase;
-    }
-    .field input {
-      width:100%; padding:11px 14px;
-      background:var(--navy); border:1px solid var(--gold-border);
-      border-radius:10px; color:var(--white);
-      font-family:'DM Sans',sans-serif; font-size:0.93rem;
-      outline:none; transition:border-color 0.2s, box-shadow 0.2s;
-    }
-    .field input::placeholder { color:rgba(245,240,232,0.25); }
-    .field input:focus {
-      border-color:var(--gold);
-      box-shadow:0 0 0 3px rgba(201,168,76,0.1);
-    }
-    .field input:disabled {
-      opacity:0.5; cursor:not-allowed;
-    }
-
-    /* Password toggle */
-    .pw-wrap { position:relative; }
-    .pw-wrap input { padding-right:42px; }
-    .pw-eye {
-      position:absolute; right:13px; top:50%; transform:translateY(-50%);
-      background:none; border:none; cursor:pointer;
-      color:var(--white-dim); font-size:17px; padding:0;
+    .topbar-brand em{color:var(--gold);font-style:normal;}
+    .topbar-back{
+      display:flex;align-items:center;gap:6px;
+      color:var(--gray-light);
+      font-size:0.82rem;
+      text-decoration:none;
       transition:color 0.2s;
     }
-    .pw-eye:hover { color:var(--gold); }
+    .topbar-back:hover{color:var(--black);}
 
-    /* Strength bar */
-    .strength-bar {
-      height:4px; border-radius:2px;
-      background:rgba(255,255,255,0.08);
-      margin-top:8px; overflow:hidden;
+    /* ── LOADING ── */
+    #pageLoader{
+      position:fixed;inset:0;z-index:9999;
+      background:var(--white);
+      display:flex;align-items:center;justify-content:center;
     }
-    .strength-fill {
-      height:100%; border-radius:2px;
-      width:0; transition:width 0.3s, background 0.3s;
+    .loader-dot{
+      display:flex;gap:6px;
     }
-    .strength-text { font-size:0.72rem; margin-top:4px; color:var(--white-dim); }
-
-    /* ── Buttons ── */
-    .btn {
-      padding:11px 22px; border-radius:10px;
-      font-family:'DM Sans',sans-serif; font-size:0.9rem;
-      font-weight:600; cursor:pointer; border:none;
-      transition:all 0.22s; display:inline-flex;
-      align-items:center; gap:7px;
+    .loader-dot span{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--black);opacity:0.2;
+      animation:ldot 1.2s infinite;
     }
-    .btn-gold {
-      background:linear-gradient(135deg,var(--gold-light),var(--gold));
-      color:var(--navy);
-      box-shadow:0 4px 16px rgba(201,168,76,0.28);
-    }
-    .btn-gold:hover { transform:translateY(-1px); box-shadow:0 8px 24px rgba(201,168,76,0.38); }
-    .btn-gold:disabled { opacity:0.55; cursor:not-allowed; transform:none; }
+    .loader-dot span:nth-child(2){animation-delay:0.2s}
+    .loader-dot span:nth-child(3){animation-delay:0.4s}
+    @keyframes ldot{0%,80%,100%{opacity:0.2}40%{opacity:1}}
 
-    .btn-outline {
-      background:transparent;
-      border:1px solid var(--gold-border);
-      color:var(--white-dim);
-    }
-    .btn-outline:hover { background:var(--gold-dim); color:var(--white); border-color:var(--gold); }
-
-    .btn-danger {
-      background:transparent;
-      border:1px solid rgba(224,92,92,0.3);
-      color:#f08080;
-    }
-    .btn-danger:hover { background:rgba(224,92,92,0.1); border-color:rgba(224,92,92,0.6); }
-
-    .btn-full { width:100%; justify-content:center; }
-
-    .btn-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; }
-
-    /* Spinner */
-    .spinner {
-      width:15px; height:15px;
-      border:2px solid rgba(10,22,40,0.25);
-      border-top-color:var(--navy);
-      border-radius:50%; animation:spin 0.7s linear infinite;
-    }
-    @keyframes spin { to { transform:rotate(360deg); } }
-
-    /* ── Message box ── */
-    .msg {
-      padding:11px 14px; border-radius:9px;
-      font-size:0.84rem; margin-bottom:14px;
-      display:none; animation:fadeIn 0.3s ease;
-    }
-    .msg.error   { background:rgba(224,92,92,0.1);  border:1px solid rgba(224,92,92,0.3);  color:#f08080; }
-    .msg.success { background:rgba(76,175,80,0.1);  border:1px solid rgba(76,175,80,0.3);  color:#81c784; }
-    .msg.info    { background:var(--gold-dim);       border:1px solid var(--gold-border);   color:var(--gold-light); }
-    .msg.show    { display:block; }
-
-    @keyframes fadeIn {
-      from { opacity:0; transform:translateY(6px); }
-      to   { opacity:1; transform:translateY(0); }
+    /* ── LAYOUT ── */
+    .page{
+      max-width:680px;
+      margin:0 auto;
+      padding:2rem 1.25rem 4rem;
     }
 
-    /* ── Message textarea ── */
-    textarea {
-      width:100%; padding:12px 14px;
-      background:var(--navy); border:1px solid var(--gold-border);
-      border-radius:10px; color:var(--white);
-      font-family:'DM Sans',sans-serif; font-size:0.92rem;
-      resize:vertical; min-height:110px; outline:none;
-      transition:border-color 0.2s, box-shadow 0.2s;
-      line-height:1.6;
-    }
-    textarea::placeholder { color:rgba(245,240,232,0.25); }
-    textarea:focus {
-      border-color:var(--gold);
-      box-shadow:0 0 0 3px rgba(201,168,76,0.1);
-    }
-    .char-count {
-      text-align:right; font-size:0.72rem;
-      color:var(--white-dim); margin-top:5px;
-    }
-
-    /* Topic chips */
-    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
-    .chip {
-      padding:5px 13px;
-      background:var(--navy); border:1px solid var(--gold-border);
-      border-radius:20px; font-size:0.78rem; color:var(--white-dim);
-      cursor:pointer; transition:all 0.2s; user-select:none;
-    }
-    .chip:hover, .chip.selected {
-      background:var(--gold-dim); border-color:var(--gold);
-      color:var(--gold-light);
-    }
-
-    /* Sent confirmation */
-    .sent-wrap {
-      text-align:center; padding:20px 0;
-      animation:rise 0.5s cubic-bezier(.22,1,.36,1) both;
-    }
-    .sent-icon { font-size:3rem; margin-bottom:10px; }
-    .sent-title {
+    .page-title{
       font-family:'Playfair Display',serif;
-      font-size:1.1rem; margin-bottom:6px;
+      font-size:1.6rem;
+      font-weight:900;
+      color:var(--black);
+      margin-bottom:0.25rem;
     }
-    .sent-sub { font-size:0.83rem; color:var(--white-dim); }
-
-    /* ── Login page link button ── */
-    .btn-login-go {
-      display:inline-block; padding:13px 32px;
-      background:linear-gradient(135deg,var(--gold-light),var(--gold));
-      color:var(--navy); border-radius:10px;
-      font-weight:700; font-size:0.95rem;
-      text-decoration:none;
-      box-shadow:0 4px 18px rgba(201,168,76,0.3);
-      transition:all 0.25s;
-    }
-    .btn-login-go:hover { transform:translateY(-1px); box-shadow:0 8px 28px rgba(201,168,76,0.4); }
-
-    /* ── Divider ── */
-    .divider-line {
-      height:1px; background:var(--gold-border);
-      margin:20px 0;
+    .page-sub{
+      font-size:0.82rem;
+      color:var(--gray-light);
+      margin-bottom:2rem;
     }
 
-    /* Page title */
-    .page-title {
+    /* ── CARD ── */
+    .card{
+      background:var(--white);
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      margin-bottom:1.25rem;
+    }
+    .card-header{
+      padding:1rem 1.25rem;
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .card-title{
+      font-size:0.82rem;
+      font-weight:700;
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+      color:var(--gray-light);
+    }
+    .card-body{padding:1.25rem;}
+
+    /* ── AVATAR SECTION ── */
+    .avatar-section{
+      display:flex;
+      align-items:center;
+      gap:1.25rem;
+      padding:1.25rem;
+    }
+    .avatar-wrap{
+      position:relative;
+      flex-shrink:0;
+    }
+    .avatar-img{
+      width:72px;height:72px;
+      border-radius:50%;
+      border:3px solid var(--black);
+      object-fit:cover;
+      display:block;
+    }
+    .avatar-placeholder{
+      width:72px;height:72px;
+      border-radius:50%;
+      border:3px solid var(--black);
+      background:var(--black);
+      color:var(--white);
+      display:flex;align-items:center;justify-content:center;
       font-family:'Playfair Display',serif;
-      font-size:1.7rem; font-weight:900;
+      font-size:1.8rem;
+      font-weight:900;
+    }
+    .avatar-badge{
+      position:absolute;
+      bottom:2px;right:2px;
+      width:16px;height:16px;
+      background:var(--green);
+      border-radius:50%;
+      border:2px solid var(--white);
+    }
+    .avatar-info h2{
+      font-family:'Playfair Display',serif;
+      font-size:1.2rem;
+      font-weight:700;
+      margin-bottom:3px;
+    }
+    .avatar-info p{
+      font-size:0.8rem;
+      color:var(--gray-light);
+    }
+    .avatar-provider{
+      display:inline-flex;align-items:center;gap:4px;
+      margin-top:6px;
+      background:var(--white-dim);
+      border:1px solid var(--border);
+      border-radius:100px;
+      padding:3px 10px;
+      font-size:0.7rem;
+      color:var(--gray-mid);
+    }
+
+    /* ── FORM FIELDS ── */
+    .field{margin-bottom:1rem;}
+    .field label{
+      display:block;
+      font-size:0.75rem;
+      font-weight:600;
+      letter-spacing:0.05em;
+      text-transform:uppercase;
+      color:var(--gray-light);
       margin-bottom:6px;
     }
-    .page-sub { font-size:0.85rem; color:var(--white-dim); margin-bottom:28px; }
+    .field input, .field select{
+      width:100%;
+      padding:11px 14px;
+      border:1.5px solid var(--border);
+      border-radius:10px;
+      font-family:'DM Sans',sans-serif;
+      font-size:0.9rem;
+      color:var(--black);
+      background:var(--white);
+      outline:none;
+      transition:border-color 0.2s;
+    }
+    .field input:focus, .field select:focus{
+      border-color:var(--black);
+    }
+    .field input:disabled{
+      background:var(--white-dim);
+      color:var(--gray-light);
+      cursor:not-allowed;
+    }
+    .field-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:0.75rem;
+    }
+
+    /* ── BUTTONS ── */
+    .btn{
+      padding:10px 20px;
+      border-radius:10px;
+      font-family:'DM Sans',sans-serif;
+      font-size:0.88rem;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      transition:all 0.2s;
+      display:inline-flex;align-items:center;gap:6px;
+    }
+    .btn-black{
+      background:var(--black);
+      color:var(--white);
+    }
+    .btn-black:hover{background:var(--black-soft);}
+    .btn-black:disabled{opacity:0.5;cursor:not-allowed;}
+    .btn-outline{
+      background:transparent;
+      border:1.5px solid var(--border);
+      color:var(--black);
+    }
+    .btn-outline:hover{border-color:var(--black);}
+    .btn-red{
+      background:transparent;
+      border:1.5px solid rgba(224,92,92,0.3);
+      color:var(--red);
+    }
+    .btn-red:hover{background:rgba(224,92,92,0.06);}
+    .btn-full{width:100%;justify-content:center;}
+
+    /* ── PASSWORD WRAP ── */
+    .pw-wrap{position:relative;}
+    .pw-wrap input{padding-right:44px;}
+    .pw-eye{
+      position:absolute;right:12px;top:50%;transform:translateY(-50%);
+      background:none;border:none;cursor:pointer;
+      color:var(--gray-light);font-size:16px;
+    }
+    .pw-eye:hover{color:var(--black);}
+
+    /* ── SECURITY ITEMS ── */
+    .sec-item{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1rem 0;
+      border-bottom:1px solid var(--border);
+    }
+    .sec-item:last-child{border-bottom:none;}
+    .sec-left{display:flex;align-items:center;gap:12px;}
+    .sec-icon{
+      width:38px;height:38px;
+      border-radius:10px;
+      background:var(--white-dim);
+      border:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1rem;
+    }
+    .sec-label{font-size:0.88rem;font-weight:600;margin-bottom:2px;}
+    .sec-desc{font-size:0.75rem;color:var(--gray-light);}
+    .badge{
+      font-size:0.68rem;font-weight:600;
+      padding:3px 10px;border-radius:100px;
+    }
+    .badge-on{background:rgba(76,175,80,0.1);color:var(--green);}
+    .badge-off{background:rgba(0,0,0,0.06);color:var(--gray-mid);}
+
+    /* ── MSG BOX ── */
+    .msg{
+      padding:10px 14px;border-radius:8px;
+      font-size:0.82rem;margin-bottom:12px;
+      display:none;
+    }
+    .msg.show{display:block;}
+    .msg.success{background:rgba(76,175,80,0.1);border:1px solid rgba(76,175,80,0.3);color:#2e7d32;}
+    .msg.error{background:rgba(224,92,92,0.1);border:1px solid rgba(224,92,92,0.3);color:#c62828;}
+
+    /* ── SPINNER ── */
+    .spin{
+      display:inline-block;
+      width:14px;height:14px;
+      border:2px solid rgba(255,255,255,0.3);
+      border-top-color:white;
+      border-radius:50%;
+      animation:spinning 0.6s linear infinite;
+    }
+    .spin-dark{border:2px solid rgba(0,0,0,0.15);border-top-color:var(--black);}
+    @keyframes spinning{to{transform:rotate(360deg)}}
+
+    /* ── DANGER ZONE ── */
+    .danger-zone{
+      border:1.5px solid rgba(224,92,92,0.25);
+      border-radius:16px;
+      overflow:hidden;
+      margin-bottom:1.25rem;
+    }
+    .danger-header{
+      background:rgba(224,92,92,0.05);
+      padding:1rem 1.25rem;
+      border-bottom:1px solid rgba(224,92,92,0.15);
+    }
+    .danger-title{
+      font-size:0.82rem;font-weight:700;
+      letter-spacing:0.06em;text-transform:uppercase;
+      color:var(--red);
+    }
+    .danger-body{padding:1.25rem;}
+    .danger-desc{font-size:0.82rem;color:var(--gray-light);margin-bottom:1rem;}
 
     @media(max-width:480px){
-      .stats-row { grid-template-columns:repeat(3,1fr); }
-      .profile-name { font-size:1.2rem; }
-      .stat-val { font-size:1.2rem; }
+      .field-row{grid-template-columns:1fr;}
     }
   </style>
 </head>
 <body>
-<div class="grid"></div>
 
-<!-- Navbar -->
-<nav>
-  <a href="index.html" class="nav-logo">📚 SadeBooks</a>
-  <div class="nav-links">
-    <a href="index.html">Duka</a>
-    <a href="account.html" class="active">Akaunti</a>
-  </div>
-</nav>
+<!-- Page Loader -->
+<div id="pageLoader">
+  <div class="loader-dot"><span></span><span></span><span></span></div>
+</div>
 
-<div class="page">
+<!-- Topbar -->
+<div class="topbar">
+  <a href="index.html" class="topbar-back">← Rudi Dukani</a>
+  <a href="index.html" class="topbar-brand">Sade <em>Books</em></a>
+  <div style="width:80px;"></div>
+</div>
 
-  <!-- ===== GATE: not logged in ===== -->
-  <div id="gate">
-    <div class="icon">🔐</div>
-    <h2>Ingia kwanza</h2>
-    <p>Unahitaji kuwa umeingia ili kuona akaunti yako.</p>
-    <a href="login.html" class="btn-login-go">Ingia / Jisajili</a>
-  </div>
+<!-- Page Content -->
+<div class="page" id="pageContent" style="display:none;">
 
-  <!-- ===== MAIN ACCOUNT CONTENT ===== -->
-  <div id="accountContent">
+  <div class="page-title">Akaunti Yangu</div>
+  <p class="page-sub">Simamia taarifa na usalama wa akaunti yako</p>
 
-    <div class="page-title">Akaunti Yangu</div>
-    <div class="page-sub">Simamia taarifa zako za SadeBooks</div>
-
-    <!-- ── Profile Card ── -->
-    <div class="section-label">👤 Wasifu</div>
-    <div class="card">
-      <div class="profile-header">
-        <div class="avatar-wrap" id="avatarWrap"></div>
-        <div class="profile-info">
-          <div class="profile-name" id="dispName">—</div>
-          <div class="profile-email" id="dispEmail">—</div>
-          <div style="margin-top:6px;">
-            <span class="profile-badge">✅ Mwanachama</span>
-            <span class="provider-badge" id="providerBadge">—</span>
-          </div>
-        </div>
+  <!-- ── PROFILE CARD ── -->
+  <div class="card">
+    <div class="avatar-section">
+      <div class="avatar-wrap">
+        <div id="avatarEl"></div>
+        <div class="avatar-badge"></div>
       </div>
-
-      <div class="stats-row">
-        <div class="stat-box">
-          <div class="stat-val" id="statJoined">—</div>
-          <div class="stat-lbl">Alijiunga</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-val" id="statLogin">—</div>
-          <div class="stat-lbl">Mara za kuingia</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-val">📚</div>
-          <div class="stat-lbl">SadeBooks</div>
-        </div>
+      <div class="avatar-info">
+        <h2 id="dispName">—</h2>
+        <p id="dispEmail">—</p>
+        <div class="avatar-provider" id="dispProvider">—</div>
       </div>
     </div>
+  </div>
 
-    <!-- ── Update Display Name ── -->
-    <div class="section-label">✏️ Badilisha Jina</div>
-    <div class="card">
-      <div class="msg" id="nameMsg"></div>
-      <div class="field">
-        <label>Jina Jipya</label>
-        <input type="text" id="newName" placeholder="Weka jina jipya..."/>
-      </div>
-      <div class="btn-row">
-        <button class="btn btn-gold" id="nameBtn" onclick="updateName()">
-          <span>💾</span> Hifadhi Jina
-        </button>
-      </div>
+  <!-- ── TAARIFA BINAFSI ── -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">👤 Taarifa Binafsi</span>
+      <button class="btn btn-outline" id="editBtn" onclick="toggleEdit()">✏️ Hariri</button>
     </div>
-
-    <!-- ── Change Password ── -->
-    <div class="section-label">🔐 Badilisha Nywila</div>
-    <div class="card" id="pwCard">
-      <div class="msg" id="pwMsg"></div>
-      <div id="pwForm">
+    <div class="card-body">
+      <div id="profileMsg" class="msg"></div>
+      <div class="field-row">
         <div class="field">
-          <label>Nywila ya Sasa</label>
-          <div class="pw-wrap">
-            <input type="password" id="currentPw" placeholder="Nywila yako ya sasa"/>
-            <button class="pw-eye" onclick="togglePw('currentPw',this)">👁</button>
+          <label>Jina Kamili</label>
+          <input type="text" id="fieldName" disabled placeholder="Jina lako kamili"/>
+        </div>
+        <div class="field">
+          <label>Namba ya Simu</label>
+          <input type="tel" id="fieldPhone" disabled placeholder="+255 7XX XXX XXX"/>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Barua Pepe</label>
+          <input type="email" id="fieldEmail" disabled/>
+        </div>
+        <div class="field">
+          <label>Tarehe ya Kuzaliwa</label>
+          <input type="date" id="fieldDob" disabled/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Jinsia</label>
+        <select id="fieldGender" disabled>
+          <option value="">— Chagua —</option>
+          <option value="me">Mwanaume</option>
+          <option value="ke">Mwanamke</option>
+          <option value="other">Ningependa Nisitaje</option>
+        </select>
+      </div>
+      <div id="saveRow" style="display:none;margin-top:0.5rem;">
+        <button class="btn btn-black" id="saveBtn" onclick="saveProfile()">💾 Hifadhi Mabadiliko</button>
+        <button class="btn btn-outline" style="margin-left:8px;" onclick="cancelEdit()">Ghairi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── USALAMA ── -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">🔒 Usalama wa Akaunti</span>
+    </div>
+    <div class="card-body">
+      <div id="secMsg" class="msg"></div>
+
+      <!-- Change Password -->
+      <div class="sec-item">
+        <div class="sec-left">
+          <div class="sec-icon">🔑</div>
+          <div>
+            <div class="sec-label">Nywila</div>
+            <div class="sec-desc">Badilisha nywila ya akaunti yako</div>
           </div>
         </div>
+        <button class="btn btn-outline" onclick="togglePwForm()">Badilisha</button>
+      </div>
+
+      <!-- Password Form (hidden) -->
+      <div id="pwForm" style="display:none;padding:1rem 0 0.5rem;">
         <div class="field">
           <label>Nywila Mpya</label>
           <div class="pw-wrap">
-            <input type="password" id="newPw" placeholder="Nywila mpya (herufi 6+)" oninput="checkStrength(this.value)"/>
-            <button class="pw-eye" onclick="togglePw('newPw',this)">👁</button>
+            <input type="password" id="newPw" placeholder="Angalau herufi 6"/>
+            <button class="pw-eye" onclick="toggleEye('newPw',this)">👁</button>
           </div>
-          <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
-          <div class="strength-text" id="strengthText"></div>
         </div>
         <div class="field">
           <label>Thibitisha Nywila Mpya</label>
           <div class="pw-wrap">
             <input type="password" id="confirmPw" placeholder="Rudia nywila mpya"/>
-            <button class="pw-eye" onclick="togglePw('confirmPw',this)">👁</button>
+            <button class="pw-eye" onclick="toggleEye('confirmPw',this)">👁</button>
           </div>
         </div>
-        <div class="btn-row">
-          <button class="btn btn-gold" id="pwBtn" onclick="changePassword()">
-            <span>🔑</span> Badilisha Nywila
-          </button>
-        </div>
+        <button class="btn btn-black" id="pwBtn" onclick="changePassword()">🔐 Badilisha Nywila</button>
+        <button class="btn btn-outline" style="margin-left:8px;" onclick="togglePwForm()">Ghairi</button>
       </div>
-      <div id="pwGoogleNote" style="display:none;">
-        <div class="msg info show">
-          ℹ️ Umetumia Google Sign-in — nywila inaweza kubadilishwa kwenye akaunti yako ya Google tu.
+
+      <!-- Reset via Email -->
+      <div class="sec-item">
+        <div class="sec-left">
+          <div class="sec-icon">📧</div>
+          <div>
+            <div class="sec-label">Badilisha via Barua Pepe</div>
+            <div class="sec-desc">Tutakutumia barua ya kubadilisha nywila</div>
+          </div>
         </div>
+        <button class="btn btn-outline" onclick="sendResetEmail()">Tuma</button>
       </div>
+
+      <!-- 2FA -->
+      <div class="sec-item">
+        <div class="sec-left">
+          <div class="sec-icon">🛡️</div>
+          <div>
+            <div class="sec-label">Uthibitisho wa Hatua Mbili (2FA)</div>
+            <div class="sec-desc">Inapatikana kwa Blaze Plan ya Firebase</div>
+          </div>
+        </div>
+        <span class="badge badge-off">Haipatikani</span>
+      </div>
+
+      <!-- Active Session -->
+      <div class="sec-item">
+        <div class="sec-left">
+          <div class="sec-icon">📱</div>
+          <div>
+            <div class="sec-label">Kikao cha Sasa</div>
+            <div class="sec-desc" id="sessionInfo">Kifaa hiki · Sasa hivi</div>
+          </div>
+        </div>
+        <span class="badge badge-on">● Hai</span>
+      </div>
+
     </div>
+  </div>
 
-    <!-- ── Message to SadeBooks ── -->
-    <div class="section-label">💬 Wasiliana na SadeBooks</div>
-    <div class="card">
-      <div id="msgFormWrap">
-        <p style="font-size:0.88rem; color:var(--white-dim); margin-bottom:16px;">
-          Una swali, tatizo, au pendekezo? Tuma ujumbe wako hapa chini — tutajibu haraka iwezekanavyo kupitia barua pepe yako.
-        </p>
-
-        <!-- Topic chips -->
-        <div style="font-size:0.78rem; color:var(--white-dim); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.06em;">Chagua mada:</div>
-        <div class="chips" id="chips">
-          <div class="chip" onclick="selectChip(this)">📦 Agizo / Malipo</div>
-          <div class="chip" onclick="selectChip(this)">📥 Kupakua PDF</div>
-          <div class="chip" onclick="selectChip(this)">💡 Pendekezo</div>
-          <div class="chip" onclick="selectChip(this)">🐛 Tatizo la Kiufundi</div>
-          <div class="chip" onclick="selectChip(this)">❓ Swali Lingine</div>
-        </div>
-
-        <div class="msg" id="contactMsg"></div>
-
-        <div class="field">
-          <label>Ujumbe Wako</label>
-          <textarea id="contactText" placeholder="Andika ujumbe wako hapa..." maxlength="1000" oninput="updateCharCount()"></textarea>
-          <div class="char-count"><span id="charCount">0</span>/1000</div>
-        </div>
-
-        <button class="btn btn-gold btn-full" id="sendBtn" onclick="sendMessage()">
-          <span>📨</span> Tuma Ujumbe
-        </button>
-      </div>
-
-      <!-- Sent confirmation -->
-      <div class="sent-wrap" id="sentWrap" style="display:none;">
-        <div class="sent-icon">✅</div>
-        <div class="sent-title">Ujumbe Wako Umetumwa!</div>
-        <div class="sent-sub">Tutajibu haraka kupitia barua pepe yako.<br/>Asante kwa kuwasiliana na SadeBooks.</div>
-        <br/>
-        <button class="btn btn-outline" onclick="resetContactForm()" style="margin:0 auto;">
-          📝 Tuma Ujumbe Mwingine
-        </button>
-      </div>
+  <!-- ── TOKA ── -->
+  <div class="card">
+    <div class="card-body">
+      <button class="btn btn-outline btn-full" onclick="doLogout()" style="border-color:var(--border);color:var(--black);gap:8px;">
+        🚪 Toka kwenye Akaunti
+      </button>
     </div>
+  </div>
 
-    <!-- ── Danger Zone ── -->
-    <div class="section-label">⚠️ Hatua Nyingine</div>
-    <div class="card">
-      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
-        <div>
-          <div style="font-weight:600; margin-bottom:3px;">Toka kwenye Akaunti</div>
-          <div style="font-size:0.82rem; color:var(--white-dim);">Utahitaji kuingia tena wakati ujao.</div>
-        </div>
-        <button class="btn btn-danger" onclick="doLogout()">🚪 Toka</button>
-      </div>
+  <!-- ── DANGER ZONE ── -->
+  <div class="danger-zone">
+    <div class="danger-header">
+      <div class="danger-title">⚠️ Hatari — Eneo la Hatua Zisizoweza Kurudishwa</div>
     </div>
+    <div class="danger-body">
+      <p class="danger-desc">Kufuta akaunti kutaondoa data yako yote na haiwezekani kurudishwa.</p>
+      <button class="btn btn-red" onclick="confirmDelete()">🗑️ Futa Akaunti Yangu</button>
+    </div>
+  </div>
 
-  </div><!-- /accountContent -->
 </div><!-- /page -->
 
-<!-- Firebase -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import {
-    getAuth, onAuthStateChanged, signOut,
-    updateProfile, updatePassword,
-    reauthenticateWithCredential, EmailAuthProvider,
-    GoogleAuthProvider
-  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import{
+    getAuth,onAuthStateChanged,signOut,
+    updateProfile,updatePassword,
+    sendPasswordResetEmail,deleteUser,
+    EmailAuthProvider,reauthenticateWithCredential
+  }from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey:            "AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",
-    authDomain:        "sadebooks-16523.firebaseapp.com",
-    projectId:         "sadebooks-16523",
-    storageBucket:     "sadebooks-16523.firebasestorage.app",
-    messagingSenderId: "304204101160",
-    appId:             "1:304204101160:web:052e96dc7690fe9e3b271d",
-    measurementId:     "G-XDPQ3G43KK"
-  };
+  const app = initializeApp({
+    apiKey:"AIzaSyBPkx-WMYTTongmbYGUy2w86wxF3QprNkQ",
+    authDomain:"sadebooks-ce48b.firebaseapp.com",
+    projectId:"sadebooks-ce48b",
+    storageBucket:"sadebooks-ce48b.firebasestorage.app",
+    messagingSenderId:"746477327",
+    appId:"1:746477327:web:6351c78b68827a0525507a",
+    measurementId:"G-234Z9S8C67"
+  });
 
-  const app  = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   let currentUser = null;
 
-  // ── Auth state ───────────────────────────────────────────────
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      currentUser = user;
-      renderAccount(user);
-    } else {
-      document.getElementById('gate').style.display           = 'block';
-      document.getElementById('accountContent').style.display = 'none';
+  // ── Auth State ──
+  onAuthStateChanged(auth,(user)=>{
+    document.getElementById("pageLoader").style.display="none";
+    if(!user){
+      sessionStorage.removeItem("sb_logged_in");
+      window.location.href="login.html";
+      return;
     }
+    currentUser = user;
+    sessionStorage.setItem("sb_logged_in","1");
+    loadUserData(user);
+    document.getElementById("pageContent").style.display="block";
   });
 
-  function renderAccount(user) {
-    document.getElementById('gate').style.display           = 'none';
-    document.getElementById('accountContent').style.display = 'block';
+  function loadUserData(user){
+    const name   = user.displayName || "Mtumiaji";
+    const email  = user.email || "—";
+    const isGoogle = user.providerData.some(p=>p.providerId==="google.com");
 
     // Avatar
-    const wrap = document.getElementById('avatarWrap');
-    if (user.photoURL) {
-      wrap.innerHTML = `<img src="${user.photoURL}" class="avatar-img" alt="picha"/>`;
+    const av = document.getElementById("avatarEl");
+    if(user.photoURL){
+      av.innerHTML=`<img src="${user.photoURL}" class="avatar-img" alt=""/>`;
     } else {
-      const letter = (user.displayName || user.email || 'U')[0].toUpperCase();
-      wrap.innerHTML = `<div class="avatar-ph">${letter}</div>`;
+      const l = name[0].toUpperCase();
+      av.innerHTML=`<div class="avatar-placeholder">${l}</div>`;
     }
 
-    document.getElementById('dispName').textContent  = user.displayName || 'Hakuna jina';
-    document.getElementById('dispEmail').textContent = user.email || '';
-    document.getElementById('newName').value         = user.displayName || '';
+    document.getElementById("dispName").textContent    = name;
+    document.getElementById("dispEmail").textContent   = email;
+    document.getElementById("dispProvider").textContent= isGoogle ? "🔵 Google Account" : "✉️ Email & Nywila";
 
-    // Provider
-    const providers = user.providerData.map(p => p.providerId);
-    const isGoogle  = providers.includes('google.com');
-    document.getElementById('providerBadge').textContent = isGoogle ? '🔵 Google' : '📧 Barua Pepe';
+    // Fields
+    document.getElementById("fieldName").value  = name;
+    document.getElementById("fieldEmail").value = email;
 
-    // Hide password form for Google users
-    if (isGoogle) {
-      document.getElementById('pwForm').style.display      = 'none';
-      document.getElementById('pwGoogleNote').style.display = 'block';
+    // Load saved extras from localStorage
+    const saved = JSON.parse(localStorage.getItem("sb_profile_"+user.uid)||"{}");
+    if(saved.phone) document.getElementById("fieldPhone").value = saved.phone;
+    if(saved.dob)   document.getElementById("fieldDob").value   = saved.dob;
+    if(saved.gender)document.getElementById("fieldGender").value= saved.gender;
+
+    // Hide password change for Google users
+    if(isGoogle){
+      document.getElementById("pwForm").parentElement.style.display="none";
     }
 
-    // Stats
-    const created = user.metadata.creationTime
-      ? new Date(user.metadata.creationTime).getFullYear() : '—';
-    document.getElementById('statJoined').textContent = created;
-
-    const lastSign = user.metadata.lastSignInTime
-      ? formatDate(new Date(user.metadata.lastSignInTime)) : '—';
-    document.getElementById('statLogin').textContent = lastSign;
+    // Session info
+    const ua = navigator.userAgent;
+    const dev = /Android|iPhone/i.test(ua) ? "📱 Simu" : "💻 Kompyuta";
+    document.getElementById("sessionInfo").textContent = dev+" · "+new Date().toLocaleDateString("sw");
   }
 
-  function formatDate(d) {
-    return d.toLocaleDateString('sw-TZ', { day:'2-digit', month:'short' });
-  }
-
-  // ── Helpers ──────────────────────────────────────────────────
-  function showMsg(id, text, type = 'error') {
-    const el = document.getElementById(id);
-    el.textContent = text;
-    el.className   = `msg ${type} show`;
-    setTimeout(() => el.classList.remove('show'), 5000);
-  }
-
-  function setLoading(btnId, loading, label = '') {
-    const btn = document.getElementById(btnId);
-    if (!btn) return;
-    btn.disabled = loading;
-    btn.innerHTML = loading
-      ? '<span class="spinner"></span>Subiri...'
-      : label;
-  }
-
-  // ── Update Name ──────────────────────────────────────────────
-  window.updateName = async () => {
-    const name = document.getElementById('newName').value.trim();
-    if (!name) return showMsg('nameMsg', 'Weka jina kwanza.');
-    setLoading('nameBtn', true, '💾 Hifadhi Jina');
-    try {
-      await updateProfile(auth.currentUser, { displayName: name });
-      document.getElementById('dispName').textContent = name;
-      showMsg('nameMsg', '✅ Jina limesasishwa!', 'success');
-    } catch (e) {
-      showMsg('nameMsg', 'Hitilafu: ' + e.message);
-    }
-    setLoading('nameBtn', false, '💾 Hifadhi Jina');
+  // ── Toggle Edit ──
+  window.toggleEdit = ()=>{
+    const fields = ["fieldName","fieldPhone","fieldDob","fieldGender"];
+    fields.forEach(id=>{
+      const el = document.getElementById(id);
+      el.disabled = !el.disabled;
+    });
+    document.getElementById("saveRow").style.display="flex";
+    document.getElementById("editBtn").style.display="none";
   };
 
-  // ── Change Password ──────────────────────────────────────────
-  window.changePassword = async () => {
-    const cur  = document.getElementById('currentPw').value;
-    const nw   = document.getElementById('newPw').value;
-    const conf = document.getElementById('confirmPw').value;
+  window.cancelEdit = ()=>{
+    loadUserData(currentUser);
+    const fields = ["fieldName","fieldPhone","fieldDob","fieldGender"];
+    fields.forEach(id=>document.getElementById(id).disabled=true);
+    document.getElementById("saveRow").style.display="none";
+    document.getElementById("editBtn").style.display="inline-flex";
+  };
 
-    if (!cur)          return showMsg('pwMsg', 'Weka nywila ya sasa.');
-    if (nw.length < 6) return showMsg('pwMsg', 'Nywila mpya lazima iwe herufi 6+.');
-    if (nw !== conf)   return showMsg('pwMsg', 'Nywila mpya hazifanani.');
-
-    setLoading('pwBtn', true, '🔑 Badilisha Nywila');
-    try {
-      const cred = EmailAuthProvider.credential(auth.currentUser.email, cur);
-      await reauthenticateWithCredential(auth.currentUser, cred);
-      await updatePassword(auth.currentUser, nw);
-      showMsg('pwMsg', '✅ Nywila imebadilishwa kikamilifu!', 'success');
-      ['currentPw','newPw','confirmPw'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('strengthFill').style.width = '0';
-      document.getElementById('strengthText').textContent = '';
-    } catch (e) {
-      const msgs = {
-        'auth/wrong-password':        'Nywila ya sasa si sahihi.',
-        'auth/weak-password':         'Nywila mpya ni dhaifu sana.',
-        'auth/requires-recent-login': 'Toka na uingie tena kisha jaribu.',
-        'auth/invalid-credential':    'Nywila ya sasa si sahihi.'
+  window.saveProfile = async()=>{
+    const btn = document.getElementById("saveBtn");
+    btn.innerHTML='<span class="spin"></span> Inahifadhi...';
+    btn.disabled=true;
+    const newName = document.getElementById("fieldName").value.trim();
+    try{
+      await updateProfile(currentUser,{displayName:newName});
+      // Save extras to localStorage
+      const extras = {
+        phone:  document.getElementById("fieldPhone").value,
+        dob:    document.getElementById("fieldDob").value,
+        gender: document.getElementById("fieldGender").value
       };
-      showMsg('pwMsg', msgs[e.code] || 'Hitilafu: ' + e.message);
+      localStorage.setItem("sb_profile_"+currentUser.uid, JSON.stringify(extras));
+      showMsg("profileMsg","✅ Taarifa zimehifadhiwa!","success");
+      document.getElementById("dispName").textContent = newName;
+      window.cancelEdit();
+    }catch(e){
+      showMsg("profileMsg","❌ Hitilafu: "+e.message,"error");
     }
-    setLoading('pwBtn', false, '🔑 Badilisha Nywila');
+    btn.innerHTML='💾 Hifadhi Mabadiliko';
+    btn.disabled=false;
   };
 
-  // ── Password Strength ────────────────────────────────────────
-  window.checkStrength = (pw) => {
-    const fill = document.getElementById('strengthFill');
-    const text = document.getElementById('strengthText');
-    let score = 0;
-    if (pw.length >= 6)  score++;
-    if (pw.length >= 10) score++;
-    if (/[A-Z]/.test(pw))  score++;
-    if (/[0-9]/.test(pw))  score++;
-    if (/[^A-Za-z0-9]/.test(pw)) score++;
-    const levels = [
-      { w:'0%',   c:'transparent', t:'' },
-      { w:'25%',  c:'#e05c5c', t:'Dhaifu sana' },
-      { w:'50%',  c:'#e8963c', t:'Dhaifu' },
-      { w:'70%',  c:'#e8c93c', t:'Wastani' },
-      { w:'90%',  c:'#4caf50', t:'Nzuri' },
-      { w:'100%', c:'#2e7d32', t:'Imara sana ✅' }
-    ];
-    const l = levels[Math.min(score, 5)];
-    fill.style.width      = l.w;
-    fill.style.background = l.c;
-    text.textContent      = l.t;
-    text.style.color      = l.c;
+  // ── Password ──
+  window.togglePwForm=()=>{
+    const f=document.getElementById("pwForm");
+    f.style.display = f.style.display==="none"?"block":"none";
   };
 
-  // ── Toggle Password visibility ────────────────────────────────
-  window.togglePw = (id, btn) => {
-    const inp = document.getElementById(id);
-    inp.type   = inp.type === 'password' ? 'text' : 'password';
-    btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+  window.changePassword=async()=>{
+    const np = document.getElementById("newPw").value;
+    const cp = document.getElementById("confirmPw").value;
+    if(np.length<6) return showMsg("secMsg","Nywila lazima iwe herufi 6+","error");
+    if(np!==cp)     return showMsg("secMsg","Nywila hazilingani","error");
+    const btn=document.getElementById("pwBtn");
+    btn.innerHTML='<span class="spin"></span> Inabadilisha...';btn.disabled=true;
+    try{
+      await updatePassword(currentUser,np);
+      showMsg("secMsg","✅ Nywila imebadilishwa!","success");
+      document.getElementById("newPw").value="";
+      document.getElementById("confirmPw").value="";
+      window.togglePwForm();
+    }catch(e){
+      if(e.code==="auth/requires-recent-login"){
+        showMsg("secMsg","Tafadhali toka na uingie tena, kisha jaribu kubadilisha nywila.","error");
+      } else {
+        showMsg("secMsg","❌ "+e.message,"error");
+      }
+    }
+    btn.innerHTML='🔐 Badilisha Nywila';btn.disabled=false;
   };
 
-  // ── Contact / Message ─────────────────────────────────────────
-  window.selectChip = (el) => {
-    document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
+  window.sendResetEmail=async()=>{
+    try{
+      await sendPasswordResetEmail(auth,currentUser.email);
+      showMsg("secMsg","✅ Barua imetumwa kwa "+currentUser.email,"success");
+    }catch(e){
+      showMsg("secMsg","❌ "+e.message,"error");
+    }
   };
 
-  window.updateCharCount = () => {
-    const len = document.getElementById('contactText').value.length;
-    document.getElementById('charCount').textContent = len;
-  };
-
-  window.sendMessage = async () => {
-    const user    = auth.currentUser;
-    const chip    = document.querySelector('.chip.selected');
-    const msgText = document.getElementById('contactText').value.trim();
-    const topic   = chip ? chip.textContent.trim() : 'Hakuna mada';
-
-    if (!msgText) return showMsg('contactMsg', 'Andika ujumbe kwanza.');
-    if (msgText.length < 10) return showMsg('contactMsg', 'Ujumbe ni mfupi sana. Andika zaidi.');
-
-    setLoading('sendBtn', true, '📨 Tuma Ujumbe');
-
-    // Send via mailto (opens email client) — OR use EmailJS / Firebase for real sending
-    const subject = encodeURIComponent(`SadeBooks | ${topic} — ${user?.displayName || user?.email}`);
-    const body    = encodeURIComponent(
-      `Mada: ${topic}\n\nJina: ${user?.displayName || '—'}\nBarua Pepe: ${user?.email || '—'}\n\nUjumbe:\n${msgText}\n\n---\nKutumwa kupitia account.html ya SadeBooks`
-    );
-
-    // Open mail client
-    window.location.href = `mailto:hermansade3@gmail.com?subject=${subject}&body=${body}`;
-
-    setTimeout(() => {
-      setLoading('sendBtn', false, '📨 Tuma Ujumbe');
-      document.getElementById('msgFormWrap').style.display = 'none';
-      document.getElementById('sentWrap').style.display    = 'block';
-    }, 800);
-  };
-
-  window.resetContactForm = () => {
-    document.getElementById('contactText').value         = '';
-    document.getElementById('charCount').textContent     = '0';
-    document.getElementById('msgFormWrap').style.display = 'block';
-    document.getElementById('sentWrap').style.display    = 'none';
-    document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
-  };
-
-  // ── Logout ────────────────────────────────────────────────────
-  window.doLogout = async () => {
+  // ── Logout ──
+  window.doLogout=async()=>{
+    sessionStorage.removeItem("sb_logged_in");
     await signOut(auth);
-    window.location.href = 'login.html';
+    window.location.href="login.html";
   };
+
+  // ── Delete Account ──
+  window.confirmDelete=()=>{
+    const ok = confirm("⚠️ Una uhakika unataka kufuta akaunti yako?\n\nHatua hii haiwezi kurudishwa.");
+    if(!ok) return;
+    const pw = prompt("Weka nywila yako kuthibitisha:");
+    if(!pw) return;
+    const cred = EmailAuthProvider.credential(currentUser.email, pw);
+    reauthenticateWithCredential(currentUser, cred)
+      .then(()=>deleteUser(currentUser))
+      .then(()=>{
+        sessionStorage.removeItem("sb_logged_in");
+        alert("Akaunti imefutwa.");
+        window.location.href="login.html";
+      })
+      .catch(e=>alert("Hitilafu: "+e.message));
+  };
+
+  // ── Helpers ──
+  window.toggleEye=(id,btn)=>{
+    const i=document.getElementById(id);
+    i.type=i.type==="password"?"text":"password";
+    btn.textContent=i.type==="password"?"👁":"🙈";
+  };
+
+  function showMsg(id,text,type){
+    const el=document.getElementById(id);
+    el.textContent=text;
+    el.className="msg "+type+" show";
+    setTimeout(()=>el.classList.remove("show"),5000);
+  }
 </script>
 </body>
 </html>
