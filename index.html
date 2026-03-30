@@ -6,7 +6,6 @@
     <title>Sade Books - Vitabu vya Kidigitali</title>
     <!-- Firebase Auth Check -->
     <style>
-      body{visibility:hidden!important}
       #auth-loader{
         position:fixed;inset:0;z-index:99999;
         background:#0a1628;
@@ -989,13 +988,12 @@ header h1 span {
     // Haraka: kama sessionStorage ina alama ya login, onyesha ukurasa mara moja
     if(sessionStorage.getItem("sb_logged_in")==="1"){
       document.getElementById("auth-loader").style.display="none";
-      document.body.style.visibility="visible";
     }
 
-    // Timeout — kama Firebase haifanyi kazi ndani ya sekunde 6, nenda login
+    // Timeout — kama Firebase haifanyi kazi ndani ya sekunde 8, nenda login
     const timer = setTimeout(()=>{
       window.location.href="login.html";
-    }, 6000);
+    }, 8000);
 
     initializeApp({
       apiKey:"AIzaSyBPkx-WMYTTongmbYGUy2w86wxF3QprNkQ",
@@ -1015,7 +1013,6 @@ header h1 span {
       } else {
         sessionStorage.setItem("sb_logged_in","1");
         document.getElementById("auth-loader").remove();
-        document.body.style.visibility="visible";
       }
     });
   </script>
