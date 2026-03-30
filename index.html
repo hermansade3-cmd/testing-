@@ -11,8 +11,11 @@
       import{getAuth,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
       initializeApp({apiKey:"AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",authDomain:"sadebooks-16523.firebaseapp.com",projectId:"sadebooks-16523",storageBucket:"sadebooks-16523.firebasestorage.app",messagingSenderId:"304204101160",appId:"1:304204101160:web:052e96dc7690fe9e3b271d"});
       onAuthStateChanged(getAuth(),(user)=>{
-        if(!user){window.location.replace("login.html");}
-        else{document.body.style.visibility="visible";}
+        if(!user){
+          window.location.href="https://hermansade3-cmd.github.io/sadebooks/login.html";
+        } else {
+          document.body.style.visibility="visible";
+        }
       });
     </script>
     <!-- Mwisho Firebase Auth -->
