@@ -553,7 +553,7 @@
     import {
       getAuth, onAuthStateChanged,
       signInWithEmailAndPassword, createUserWithEmailAndPassword,
-      signInWithPopup, GoogleAuthProvider,
+      signInWithRedirect, getRedirectResult, GoogleAuthProvider,
       sendPasswordResetEmail, updateProfile, signOut
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -663,12 +663,22 @@
       }
     };
 
+    // ── Handle redirect result (baada ya kurudi kutoka Google) ──
+    getRedirectResult(auth).then((result) => {
+      if (result && result.user) {
+        sessionStorage.setItem("sb_logged_in", "1");
+        window.location.href = "index.html";
+      }
+    }).catch((e) => {
+      if (e.code !== 'auth/popup-closed-by-user')
+        showMsg('Google Sign-in imeshindwa. Jaribu tena.');
+    });
+
     window.doGoogle = async () => {
       try {
-        await signInWithPopup(auth, provider);
+        await signInWithRedirect(auth, provider);
       } catch (e) {
-        if (e.code !== 'auth/popup-closed-by-user')
-          showMsg('Google Sign-in imeshindwa. Jaribu tena.');
+        showMsg('Google Sign-in imeshindwa. Jaribu tena.');
       }
     };
 
