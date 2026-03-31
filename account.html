@@ -490,6 +490,45 @@
     </div>
   </div>
 
+  <!-- ── CHAT WITH ADMIN ── -->
+  <div class="card" id="chatCard">
+    <div class="card-header" onclick="toggleChat()" style="cursor:pointer;user-select:none;">
+      <span class="card-title">💬 Mawasiliano na Admin</span>
+      <span id="chatToggleIcon" style="font-size:0.85rem;color:var(--gray-light);">▼ Fungua</span>
+    </div>
+    <div id="chatBody" style="display:none;">
+      <!-- Messages area -->
+      <div id="chatMessages" style="
+        height:320px;overflow-y:auto;padding:1rem;
+        display:flex;flex-direction:column;gap:10px;
+        background:var(--white-dim);
+        border-bottom:1px solid var(--border);
+      ">
+        <div id="chatEmpty" style="text-align:center;color:var(--gray-light);font-size:0.82rem;margin:auto;">
+          Hakuna ujumbe bado. Anza mazungumzo! 👋
+        </div>
+      </div>
+      <!-- Input area -->
+      <div style="padding:0.75rem 1rem;display:flex;gap:8px;background:var(--white);">
+        <input type="text" id="chatInput" placeholder="Andika ujumbe..." style="
+          flex:1;padding:10px 14px;
+          border:1.5px solid var(--border);
+          border-radius:100px;
+          font-family:'DM Sans',sans-serif;
+          font-size:0.88rem;outline:none;
+          transition:border-color 0.2s;
+        " onkeydown="if(event.key==='Enter')sendChatMsg()" onfocus="this.style.borderColor='var(--black)'" onblur="this.style.borderColor='var(--border)'"/>
+        <button onclick="sendChatMsg()" style="
+          width:40px;height:40px;border-radius:50%;
+          background:var(--black);color:var(--white);
+          border:none;cursor:pointer;font-size:1rem;
+          display:flex;align-items:center;justify-content:center;
+          transition:background 0.2s;flex-shrink:0;
+        ">➤</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ── TOKA ── -->
   <div class="card">
     <div class="card-body">
@@ -520,6 +559,10 @@
     sendPasswordResetEmail,deleteUser,
     EmailAuthProvider,reauthenticateWithCredential
   }from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import{
+    getFirestore,collection,addDoc,query,orderBy,
+    onSnapshot,serverTimestamp,doc,setDoc,getDoc
+  }from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const app = initializeApp({
     apiKey:"AIzaSyBPkx-WMYTTongmbYGUy2w86wxF3QprNkQ",
@@ -532,18 +575,153 @@
   });
 
   const auth = getAuth(app);
+  const db   = getFirestore(app);
   let currentUser = null;
+  let chatUnsubscribe = null;
+
+  // ── ADMIN EMAIL ── Badilisha hii kuwa email yako ya admin
+  const ADMIN_EMAIL = "hermansade3@gmail.com";
+
+  // ── Chat Functions ──
+  window.toggleChat = ()=>{
+    const body = document.getElementById("chatBody");
+    const icon = document.getElementById("chatToggleIcon");
+    const open = body.style.display==="none";
+    body.style.display = open ? "block" : "none";
+    icon.textContent   = open ? "▲ Funga" : "▼ Fungua";
+    if(open && currentUser) loadChat();
+  };
+
+  function loadChat(){
+    if(chatUnsubscribe) chatUnsubscribe();
+    const isAdmin = currentUser.email === ADMIN_EMAIL;
+    // Admin anaona chats zote — mteja anaona chat yake tu
+    const chatId = isAdmin ? null : currentUser.uid;
+
+    if(isAdmin){
+      // Admin: onyesha orodha ya chats zote
+      loadAdminView();
+    } else {
+      // Mteja: onyesha chat yake
+      loadUserChat(currentUser.uid, currentUser.displayName||currentUser.email);
+    }
+  }
+
+  function loadUserChat(uid, name){
+    const msgsRef = collection(db,"chats",uid,"messages");
+    const q = query(msgsRef, orderBy("time","asc"));
+    const box = document.getElementById("chatMessages");
+
+    chatUnsubscribe = onSnapshot(q,(snap)=>{
+      if(snap.empty){
+        box.innerHTML=`<div id="chatEmpty" style="text-align:center;color:var(--gray-light);font-size:0.82rem;margin:auto;">Hakuna ujumbe bado. Anza mazungumzo! 👋</div>`;
+        return;
+      }
+      box.innerHTML="";
+      snap.forEach(d=>{
+        const m = d.data();
+        const isMe = m.sender==="user";
+        const time = m.time?.toDate ? m.time.toDate().toLocaleTimeString("sw",{hour:"2-digit",minute:"2-digit"}) : "";
+        box.innerHTML += `
+          <div style="display:flex;flex-direction:column;align-items:${isMe?"flex-end":"flex-start"};">
+            <div style="
+              max-width:75%;padding:9px 13px;border-radius:${isMe?"16px 16px 4px 16px":"16px 16px 16px 4px"};
+              background:${isMe?"var(--black)":"var(--white)"};
+              color:${isMe?"var(--white)":"var(--black)"};
+              border:${isMe?"none":"1px solid var(--border)"};
+              font-size:0.88rem;line-height:1.5;
+            ">${m.text}</div>
+            <span style="font-size:0.68rem;color:var(--gray-light);margin-top:3px;">${isMe?"Wewe":"Admin"} · ${time}</span>
+          </div>`;
+      });
+      box.scrollTop = box.scrollHeight;
+    });
+
+    // Hifadhi jina la mtumiaji kwenye chats collection
+    setDoc(doc(db,"chats",uid),{name,email:currentUser.email,lastSeen:serverTimestamp()},{merge:true});
+  }
+
+  function loadAdminView(){
+    const box = document.getElementById("chatMessages");
+    box.innerHTML=`<div style="text-align:center;color:var(--gray-light);font-size:0.82rem;padding:1rem;">⏳ Inapakia mazungumzo...</div>`;
+
+    // Badilisha chat area kuwa admin panel
+    const inputArea = document.querySelector("#chatBody > div:last-child");
+    inputArea.innerHTML=`
+      <div style="padding:0.75rem 1rem;background:var(--white);border-top:1px solid var(--border);">
+        <div id="adminUserList" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;"></div>
+        <div style="display:flex;gap:8px;">
+          <input type="text" id="chatInput" placeholder="Jibu mteja..." style="
+            flex:1;padding:10px 14px;border:1.5px solid var(--border);
+            border-radius:100px;font-family:'DM Sans',sans-serif;
+            font-size:0.88rem;outline:none;" 
+            onkeydown="if(event.key==='Enter')sendChatMsg()"
+          />
+          <button onclick="sendChatMsg()" style="
+            width:40px;height:40px;border-radius:50%;
+            background:var(--black);color:var(--white);
+            border:none;cursor:pointer;font-size:1rem;
+            display:flex;align-items:center;justify-content:center;flex-shrink:0;">➤</button>
+        </div>
+      </div>`;
+
+    // Pata wateja wote
+    const chatsRef = collection(db,"chats");
+    onSnapshot(chatsRef,(snap)=>{
+      const userList = document.getElementById("adminUserList");
+      if(!userList) return;
+      userList.innerHTML="";
+      snap.forEach(d=>{
+        const u = d.data();
+        if(!u.email || u.email===ADMIN_EMAIL) return;
+        const btn = document.createElement("button");
+        btn.textContent = "👤 "+(u.name||u.email);
+        btn.style.cssText="padding:4px 12px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);font-size:0.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;";
+        btn.onclick = ()=>{
+          document.querySelectorAll("#adminUserList button").forEach(b=>b.style.background="var(--white)");
+          btn.style.background="var(--black)";
+          btn.style.color="var(--white)";
+          window._adminChatUid = d.id;
+          loadUserChat(d.id, u.name||u.email);
+        };
+        userList.appendChild(btn);
+      });
+      if(userList.children.length===0){
+        userList.innerHTML=`<span style="font-size:0.75rem;color:var(--gray-light);">Hakuna wateja bado</span>`;
+      }
+    });
+  }
+
+  window.sendChatMsg = async ()=>{
+    const input = document.getElementById("chatInput");
+    const text = input.value.trim();
+    if(!text || !currentUser) return;
+
+    const isAdmin = currentUser.email === ADMIN_EMAIL;
+    const uid = isAdmin ? window._adminChatUid : currentUser.uid;
+    if(!uid) return;
+
+    input.value="";
+    await addDoc(collection(db,"chats",uid,"messages"),{
+      text,
+      sender: isAdmin ? "admin" : "user",
+      time: serverTimestamp()
+    });
+
+    // Update last message
+    await setDoc(doc(db,"chats",uid),{lastMessage:text,lastTime:serverTimestamp()},{merge:true});
+  };
 
   // ── Auth State ──
   onAuthStateChanged(auth,(user)=>{
     document.getElementById("pageLoader").style.display="none";
     if(!user){
-      sessionStorage.removeItem("sb_logged_in");
+      localStorage.removeItem("sb_auth");
       window.location.href="login.html";
       return;
     }
     currentUser = user;
-    sessionStorage.setItem("sb_logged_in","1");
+    localStorage.setItem("sb_auth","1");
     loadUserData(user);
     document.getElementById("pageContent").style.display="block";
   });
