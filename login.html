@@ -488,16 +488,6 @@
         </div>
         <span class="forgot-link" onclick="sendReset()">Umesahau nywila?</span>
         <button class="btn-primary" id="loginBtn" onclick="doLogin()">Ingia</button>
-        <div class="divider">au</div>
-        <button class="btn-google" onclick="doGoogle()">
-          <svg class="google-icon" viewBox="0 0 48 48">
-            <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.6 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.4 6.5 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/>
-            <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.1 18.9 12 24 12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.4 6.5 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
-            <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.8 36 24 36c-5.2 0-9.7-3.4-11.3-8H6.4C9.8 35.6 16.4 44 24 44z"/>
-            <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4 5.6l6.2 5.2C41 35.4 44 30.1 44 24c0-1.3-.1-2.6-.4-3.9z"/>
-          </svg>
-          Ingia kwa Google
-        </button>
       </div>
 
       <!-- REGISTER FORM -->
@@ -518,16 +508,6 @@
           </div>
         </div>
         <button class="btn-primary" id="registerBtn" onclick="doRegister()">Jisajili</button>
-        <div class="divider">au</div>
-        <button class="btn-google" onclick="doGoogle()">
-          <svg class="google-icon" viewBox="0 0 48 48">
-            <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.6 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.4 6.5 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/>
-            <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.1 18.9 12 24 12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.4 6.5 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
-            <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.8 36 24 36c-5.2 0-9.7-3.4-11.3-8H6.4C9.8 35.6 16.4 44 24 44z"/>
-            <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4 5.6l6.2 5.2C41 35.4 44 30.1 44 24c0-1.3-.1-2.6-.4-3.9z"/>
-          </svg>
-          Jisajili kwa Google
-        </button>
       </div>
     </div>
 
@@ -537,7 +517,7 @@
       <div class="user-name" id="userName">—</div>
       <div class="user-email" id="userEmail">—</div>
       <div class="welcome-badge">✅ Umeingia kikamilifu kwenye SadeBooks</div>
-      <a href="index.html" class="btn-goto">🏠 Nenda Dukani</a>
+      <a href="https://hermansade3-cmd.github.io/sadebooks/index.html" class="btn-goto">🏠 Nenda Dukani</a>
       <button class="btn-logout" onclick="doLogout()">🚪 Toka</button>
     </div>
 
@@ -548,33 +528,26 @@
   </div>
 
   <!-- Firebase SDK -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
+  <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
       getAuth, onAuthStateChanged,
       signInWithEmailAndPassword, createUserWithEmailAndPassword,
-      signInWithRedirect, getRedirectResult, GoogleAuthProvider,
       sendPasswordResetEmail, updateProfile, signOut
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    /* ============================================================
-       🔧 BADILISHA hapa na Firebase config YAKO
-       Nenda: Firebase Console → Project Settings → Your apps
-    ============================================================ */
     const firebaseConfig = {
-      apiKey:            "AIzaSyDPLiwB8kOIpCvbA4Qocqrgqi3AU525KzQ",
-      authDomain:        "sadebooks-16523.firebaseapp.com",
-      projectId:         "sadebooks-16523",
-      storageBucket:     "sadebooks-16523.firebasestorage.app",
-      messagingSenderId: "304204101160",
-      appId:             "1:304204101160:web:052e96dc7690fe9e3b271d",
-      measurementId:     "G-XDPQ3G43KK"
+      apiKey:            "AIzaSyBPkx-WMYTTongmbYGUy2w86wxF3QprNkQ",
+      authDomain:        "sadebooks-ce48b.firebaseapp.com",
+      projectId:         "sadebooks-ce48b",
+      storageBucket:     "sadebooks-ce48b.firebasestorage.app",
+      messagingSenderId: "746477327",
+      appId:             "1:746477327:web:6351c78b68827a0525507a",
+      measurementId:     "G-234Z9S8C67"
     };
-    /* ============================================================ */
 
-    const app      = initializeApp(firebaseConfig);
-    const auth     = getAuth(app);
-    const provider = new GoogleAuthProvider();
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
     // ── Observe auth state ──────────────────────────────────────
     onAuthStateChanged(auth, (user) => {
@@ -660,25 +633,6 @@
           'auth/weak-password':        'Nywila ni dhaifu sana.'
         };
         showMsg(msgs[e.code] || 'Hitilafu: ' + e.message);
-      }
-    };
-
-    // ── Handle redirect result (baada ya kurudi kutoka Google) ──
-    getRedirectResult(auth).then((result) => {
-      if (result && result.user) {
-        sessionStorage.setItem("sb_logged_in", "1");
-        window.location.href = "index.html";
-      }
-    }).catch((e) => {
-      if (e.code !== 'auth/popup-closed-by-user')
-        showMsg('Google Sign-in imeshindwa. Jaribu tena.');
-    });
-
-    window.doGoogle = async () => {
-      try {
-        await signInWithRedirect(auth, provider);
-      } catch (e) {
-        showMsg('Google Sign-in imeshindwa. Jaribu tena.');
       }
     };
 
