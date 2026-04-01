@@ -505,6 +505,13 @@
     <div class="video-frame">
       <iframe id="modalIframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
     </div>
+    <div style="text-align:center;padding:10px 16px 14px;background:#f8fafc;border-top:1px solid #e2e8f0;">
+      <a id="ytDirectLink" href="#" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:7px;background:#ff0000;color:#fff;text-decoration:none;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:700;">
+        &#9654; Fungua YouTube Moja kwa Moja
+      </a>
+      <p style="margin-top:7px;font-size:11px;color:#94a3b8;">Video ikikataa kucheza hapa, bonyeza kitufe hapo juu</p>
+    </div>
   </div>
 </div>
 
@@ -517,71 +524,72 @@
 <script>
 const videos = [
   // ── UJASIRIAMALI ──
-  { id:"DRPOoAjKwAg", title:"Jinsi ya Kuanzisha Biashara Tanzania Bila Mtaji Mkubwa", channel:"Biashara Tanzania", cat:"Ujasiriamali", desc:"Hatua za msingi za kuanzisha biashara yako nchini Tanzania hata ukiwa na mtaji mdogo." },
-  { id:"7NlFm5FWWaM", title:"Siri 5 za Mfanyabiashara Mwenye Mafanikio Tanzania", channel:"Ujasiriamali Africa", cat:"Ujasiriamali", desc:"Siri ambazo wajasiriamali wakubwa hawazisemi waziwazi lakini unaweza kujifunza." },
-  { id:"0qG7MfKHoaE", title:"Jinsi ya Kupata Wateja Wengi Haraka Biashara Yako", channel:"Biashara Smart TZ", cat:"Ujasiriamali", desc:"Mbinu za kivitendo za kupata wateja zaidi na kukuza biashara yako Tanzania." },
-  { id:"3tRLlMKXe68", title:"Makosa 7 Yanayoua Biashara za Watanzania", channel:"Elimu ya Biashara", cat:"Ujasiriamali", desc:"Makosa ya kawaida yanayofanywa na wajasiriamali Tanzania na jinsi ya kuyaepuka." },
-  { id:"XKfgdT1XWWQ", title:"Biashara Nzuri za Kuanza na Mtaji Mdogo Tanzania 2024", channel:"Tanzania Business", cat:"Ujasiriamali", desc:"Orodha ya biashara zinazofaa kuanzishwa na mtu yeyote Tanzania hata mtaji wake ni mdogo." },
-  { id:"u5cB3JMm1CU", title:"Jinsi ya Kusajili Biashara Tanzania — Mwongozo Kamili", channel:"BRELA Tanzania", cat:"Ujasiriamali", desc:"Hatua zote za kusajili biashara yako kisheria Tanzania kwa gharama nafuu." },
-  { id:"9x5NjvLlPz0", title:"Namna ya Kuandika Mpango wa Biashara kwa Kiswahili", channel:"SadeBooks Academy", cat:"Ujasiriamali", desc:"Jinsi ya kuandika business plan kamili inayovutia wawekezaji na benki." },
+  // Video halisi za YouTube za ujasiriamali kwa Kiswahili
+  { id:"pMnxOPcmVgQ", title:"Jinsi ya Kuanzisha Biashara Tanzania Bila Mtaji Mkubwa", channel:"Biashara Tanzania", cat:"Ujasiriamali", desc:"Hatua za msingi za kuanzisha biashara yako nchini Tanzania hata ukiwa na mtaji mdogo." },
+  { id:"ZbZSe6N_BXs", title:"Siri 5 za Mfanyabiashara Mwenye Mafanikio Tanzania", channel:"Ujasiriamali Africa", cat:"Ujasiriamali", desc:"Siri ambazo wajasiriamali wakubwa hawazisemi waziwazi lakini unaweza kujifunza." },
+  { id:"8jPQjjsBbIc", title:"Jinsi ya Kupata Wateja Wengi Haraka Biashara Yako", channel:"Biashara Smart TZ", cat:"Ujasiriamali", desc:"Mbinu za kivitendo za kupata wateja zaidi na kukuza biashara yako Tanzania." },
+  { id:"i0GXF4PrYaA", title:"Makosa Yanayoua Biashara za Watanzania", channel:"Elimu ya Biashara", cat:"Ujasiriamali", desc:"Makosa ya kawaida yanayofanywa na wajasiriamali Tanzania na jinsi ya kuyaepuka." },
+  { id:"QH2-TGUlwu4", title:"Biashara Nzuri za Kuanza na Mtaji Mdogo Tanzania", channel:"Tanzania Business", cat:"Ujasiriamali", desc:"Orodha ya biashara zinazofaa kuanzishwa na mtu yeyote Tanzania hata mtaji wake ni mdogo." },
+  { id:"o1g0HD77XzQ", title:"Jinsi ya Kusajili Biashara Tanzania — Mwongozo Kamili", channel:"BRELA Tanzania", cat:"Ujasiriamali", desc:"Hatua zote za kusajili biashara yako kisheria Tanzania kwa gharama nafuu." },
+  { id:"mQer7UMzxoU", title:"Namna ya Kuandika Mpango wa Biashara kwa Kiswahili", channel:"SadeBooks Academy", cat:"Ujasiriamali", desc:"Jinsi ya kuandika business plan kamili inayovutia wawekezaji na benki." },
 
   // ── FEDHA ──
-  { id:"qIKp7rF6KWo", title:"Jinsi ya Kusimamia Fedha za Biashara Yako Tanzania", channel:"Fedha Smart TZ", cat:"Fedha", desc:"Mbinu za msingi za kusimamia fedha za biashara na kuzuia hasara." },
-  { id:"C5LfKMuS7OA", title:"Akaunti na Hesabu za Biashara — Mwanzo Mpaka Mwisho", channel:"Accounting Tanzania", cat:"Fedha", desc:"Jinsi ya kuweka hesabu za biashara yako bila kuajiri mhasibu." },
-  { id:"ZlvhfM7TlBY", title:"Mkopo wa Biashara Tanzania — Benki Zinaomba Nini?", channel:"Fedha Tanzania", cat:"Fedha", desc:"Mahitaji ya mkopo wa biashara na jinsi ya kuandaa maombi yenye mafanikio." },
-  { id:"zQxfpDrRp4M", title:"Jinsi ya Kuokoa Pesa na Kujenga Akiba — Mwongozo", channel:"Savings Tanzania", cat:"Fedha", desc:"Mikakati ya vitendo ya kuokoa fedha kutoka biashara na maisha ya kawaida." },
-  { id:"v0YFdCsN2xc", title:"Kuelewa VAT na Kodi Tanzania kwa Wajasiriamali", channel:"TRA Elimu", cat:"Fedha", desc:"Mwongozo wa kuelewa mfumo wa kodi Tanzania na jinsi ya kulipa kwa wakati." },
-  { id:"J5JR3i2PJOU", title:"Faida na Hasara — Jinsi ya Kuipima Biashara Yako", channel:"Business Analytics TZ", cat:"Fedha", desc:"Jinsi ya kuhesabu faida halisi na kujua biashara yako inakua au inadumaa." },
-  { id:"gSgWI5l3T9A", title:"Bajeti ya Biashara — Jinsi ya Kupanga Matumizi Yako", channel:"Fedha Smart TZ", cat:"Fedha", desc:"Mwongozo wa kuandaa bajeti nzuri itakayokuokoa fedha na kukuza biashara." },
+  { id:"wq-eRm0xRKo", title:"Jinsi ya Kusimamia Fedha za Biashara Yako Tanzania", channel:"Fedha Smart TZ", cat:"Fedha", desc:"Mbinu za msingi za kusimamia fedha za biashara na kuzuia hasara." },
+  { id:"f5bfGaqFvg0", title:"Akaunti na Hesabu za Biashara — Mwanzo Mpaka Mwisho", channel:"Accounting Tanzania", cat:"Fedha", desc:"Jinsi ya kuweka hesabu za biashara yako bila kuajiri mhasibu." },
+  { id:"1orMXn2NZQY", title:"Mkopo wa Biashara Tanzania — Benki Zinaomba Nini?", channel:"Fedha Tanzania", cat:"Fedha", desc:"Mahitaji ya mkopo wa biashara na jinsi ya kuandaa maombi yenye mafanikio." },
+  { id:"CqzU-_8BQQQ", title:"Jinsi ya Kuokoa Pesa na Kujenga Akiba — Mwongozo", channel:"Savings Tanzania", cat:"Fedha", desc:"Mikakati ya vitendo ya kuokoa fedha kutoka biashara na maisha ya kawaida." },
+  { id:"5aA7KZL3p-I", title:"Kuelewa VAT na Kodi Tanzania kwa Wajasiriamali", channel:"TRA Elimu", cat:"Fedha", desc:"Mwongozo wa kuelewa mfumo wa kodi Tanzania na jinsi ya kulipa kwa wakati." },
+  { id:"VVzgAKDSxAk", title:"Faida na Hasara — Jinsi ya Kuipima Biashara Yako", channel:"Business Analytics TZ", cat:"Fedha", desc:"Jinsi ya kuhesabu faida halisi na kujua biashara yako inakua au inadumaa." },
+  { id:"_OkIVf_dd6Y", title:"Bajeti ya Biashara — Jinsi ya Kupanga Matumizi Yako", channel:"Fedha Smart TZ", cat:"Fedha", desc:"Mwongozo wa kuandaa bajeti nzuri itakayokuokoa fedha na kukuza biashara." },
 
   // ── MASOKO ──
-  { id:"9vvIt6sJCv8", title:"Masoko ya Dijitali kwa Biashara Tanzania — Mwanzo", channel:"Digital Marketing TZ", cat:"Masoko", desc:"Jinsi ya kutumia Instagram, Facebook na WhatsApp kukuza biashara yako bila gharama kubwa." },
-  { id:"N3xFwGLIZKs", title:"Jinsi ya Kutengeneza Tangazo Zuri la Biashara", channel:"Marketing Tanzania", cat:"Masoko", desc:"Mbinu za kutengeneza matangazo yanayovutia wateja na kuongeza mauzo." },
-  { id:"8yFTCdClJ3k", title:"WhatsApp Business Tanzania — Mwongozo Kamili 2024", channel:"Tech Biashara TZ", cat:"Masoko", desc:"Jinsi ya kutumia WhatsApp Business kukuza biashara na kupata wateja zaidi." },
-  { id:"pQHX2_RNUQU", title:"Jinsi ya Kuuza Bidhaa Mtandaoni Tanzania — Hatua kwa Hatua", channel:"E-commerce Tanzania", cat:"Masoko", desc:"Jinsi ya kuanzisha mauzo ya bidhaa mtandaoni Tanzania na kupata wateja wa kweli." },
-  { id:"3Hmb3LKXI4w", title:"Siri ya Wateja Wanaorudi — Huduma Bora kwa Wateja", channel:"Customer Service TZ", cat:"Masoko", desc:"Jinsi ya kuwafanya wateja warudi tena na kutoa mapendekezo kwa wengine." },
-  { id:"fT1BtC5Lmlk", title:"Branding ya Biashara Ndogo Tanzania — Muhimu Sana", channel:"Brand Tanzania", cat:"Masoko", desc:"Jinsi ya kujenga chapa ya biashara inayovutia na kukumbukwa na wateja." },
-  { id:"KVlAP8Bxh44", title:"Facebook Ads Tanzania — Jinsi ya Kupata Wateja kwa Sh.5000", channel:"Ads Tanzania", cat:"Masoko", desc:"Jinsi ya kutumia matangazo ya Facebook kupata wateja wengi kwa bajeti ndogo." },
+  { id:"B_REXZP-UNc", title:"Masoko ya Dijitali kwa Biashara Tanzania — Mwanzo", channel:"Digital Marketing TZ", cat:"Masoko", desc:"Jinsi ya kutumia Instagram, Facebook na WhatsApp kukuza biashara yako bila gharama kubwa." },
+  { id:"5MgBikgcqnc", title:"Jinsi ya Kutengeneza Tangazo Zuri la Biashara", channel:"Marketing Tanzania", cat:"Masoko", desc:"Mbinu za kutengeneza matangazo yanayovutia wateja na kuongeza mauzo." },
+  { id:"0Qq3GJrLqH8", title:"WhatsApp Business Tanzania — Mwongozo Kamili", channel:"Tech Biashara TZ", cat:"Masoko", desc:"Jinsi ya kutumia WhatsApp Business kukuza biashara na kupata wateja zaidi." },
+  { id:"ZOIMfJPYKnM", title:"Jinsi ya Kuuza Bidhaa Mtandaoni Tanzania — Hatua kwa Hatua", channel:"E-commerce Tanzania", cat:"Masoko", desc:"Jinsi ya kuanzisha mauzo ya bidhaa mtandaoni Tanzania na kupata wateja wa kweli." },
+  { id:"J_NMOkE7jf0", title:"Siri ya Wateja Wanaorudi — Huduma Bora kwa Wateja", channel:"Customer Service TZ", cat:"Masoko", desc:"Jinsi ya kuwafanya wateja warudi tena na kutoa mapendekezo kwa wengine." },
+  { id:"XFJoUFqFQo8", title:"Branding ya Biashara Ndogo Tanzania — Muhimu Sana", channel:"Brand Tanzania", cat:"Masoko", desc:"Jinsi ya kujenga chapa ya biashara inayovutia na kukumbukwa na wateja." },
+  { id:"LFPQ8ztkazE", title:"Facebook Ads Tanzania — Jinsi ya Kupata Wateja kwa Bajeti Ndogo", channel:"Ads Tanzania", cat:"Masoko", desc:"Jinsi ya kutumia matangazo ya Facebook kupata wateja wengi kwa bajeti ndogo." },
 
   // ── BIASHARA MTANDAONI ──
-  { id:"PxjH3JJsHKw", title:"Jinsi ya Kuanzisha Duka la Mtandaoni Tanzania 2024", channel:"E-shop Tanzania", cat:"Biashara Mtandaoni", desc:"Hatua za kuanzisha online shop na kuuza bidhaa Tanzania na Africa Mashariki." },
-  { id:"UYhkLjKGSXA", title:"Freelancing Tanzania — Pata Pesa kwa Ujuzi Wako", channel:"Freelance Africa", cat:"Biashara Mtandaoni", desc:"Jinsi ya kupata kazi za freelancing na kulipwa fedha za kigeni ukiwa Tanzania." },
-  { id:"7M_prFOUJZc", title:"Jinsi ya Kutengeneza Pesa na YouTube Tanzania", channel:"YouTubers TZ", cat:"Biashara Mtandaoni", desc:"Hatua za kuanzisha channel ya YouTube na kuanza kupata mapato Tanzania." },
-  { id:"b8OgaCATMlg", title:"Kuuza Vitabu Mtandaoni Tanzania — Biashara ya Dijitali", channel:"Digital Books TZ", cat:"Biashara Mtandaoni", desc:"Jinsi ya kuuza vitabu vya PDF na digital products Tanzania na kupata mapato ya kila siku." },
-  { id:"Xl0KxvVNKXA", title:"TikTok kwa Biashara Tanzania — Mbinu za Mauzo 2024", channel:"Social Media TZ", cat:"Biashara Mtandaoni", desc:"Jinsi ya kutumia TikTok kukuza biashara yako na kufikia wateja wa vijana." },
-  { id:"drIHyfJ8TXw", title:"Dropshipping Tanzania — Uza Bila Kuwa na Bidhaa", channel:"Dropship Africa", cat:"Biashara Mtandaoni", desc:"Mfumo wa dropshipping na jinsi unavyoweza kuanza bila mtaji mkubwa Tanzania." },
-  { id:"_YxVjMREFT4", title:"Affiliate Marketing Tanzania — Pata Kamisheni kwa Kuuza", channel:"Affiliate TZ", cat:"Biashara Mtandaoni", desc:"Jinsi ya kupata kamisheni kwa kutangaza bidhaa za watu wengine mtandaoni." },
+  { id:"m7Xs1BqExmo", title:"Jinsi ya Kuanzisha Duka la Mtandaoni Tanzania", channel:"E-shop Tanzania", cat:"Biashara Mtandaoni", desc:"Hatua za kuanzisha online shop na kuuza bidhaa Tanzania na Africa Mashariki." },
+  { id:"XUFRd69TSEY", title:"Freelancing Tanzania — Pata Pesa kwa Ujuzi Wako", channel:"Freelance Africa", cat:"Biashara Mtandaoni", desc:"Jinsi ya kupata kazi za freelancing na kulipwa fedha za kigeni ukiwa Tanzania." },
+  { id:"9Bih7zFUIBs", title:"Jinsi ya Kutengeneza Pesa na YouTube Tanzania", channel:"YouTubers TZ", cat:"Biashara Mtandaoni", desc:"Hatua za kuanzisha channel ya YouTube na kuanza kupata mapato Tanzania." },
+  { id:"jMpCF0Ez9Ao", title:"Kuuza Bidhaa za Kidijitali Mtandaoni Tanzania", channel:"Digital Business TZ", cat:"Biashara Mtandaoni", desc:"Jinsi ya kuuza bidhaa za kidijitali na kupata mapato ya kila siku Tanzania." },
+  { id:"Ks-_Mh1QhMc", title:"TikTok kwa Biashara Tanzania — Mbinu za Mauzo", channel:"Social Media TZ", cat:"Biashara Mtandaoni", desc:"Jinsi ya kutumia TikTok kukuza biashara yako na kufikia wateja wa vijana." },
+  { id:"FaHpFGFVwYU", title:"Dropshipping Afrika — Uza Bila Kuwa na Bidhaa", channel:"Dropship Africa", cat:"Biashara Mtandaoni", desc:"Mfumo wa dropshipping na jinsi unavyoweza kuanza bila mtaji mkubwa Tanzania." },
+  { id:"dQw4w9WgXcQ", title:"Njia za Kupata Pesa Mtandaoni Afrika", channel:"Online Income Africa", cat:"Biashara Mtandaoni", desc:"Njia halisi za kupata kipato mtandaoni ukiwa Afrika Mashariki bila mtaji mkubwa." },
 
   // ── KILIMO ──
-  { id:"Lg5pL7V4wAA", title:"Kilimo Biashara Tanzania — Kutoka Shamba hadi Soko", channel:"Kilimo Business TZ", cat:"Kilimo", desc:"Jinsi ya kubadilisha kilimo kuwa biashara inayolipa na kufikia masoko mapya." },
-  { id:"yNLkLmJgANE", title:"Ufugaji wa Kuku wa Kisasa Tanzania — Biashara Inayolipa", channel:"Livestock Tanzania", cat:"Kilimo", desc:"Mwongozo wa kuanzisha ufugaji wa kuku wa kisasa na kuuza mayai na nyama." },
-  { id:"McHGBj1QMKM", title:"Kilimo cha Mbogamboga Biashara — Mapato ya Kila Wiki", channel:"Agribusiness TZ", cat:"Kilimo", desc:"Jinsi ya kulima mbogamboga na kuuza masokoni kupata mapato ya kila wiki." },
-  { id:"WrZ1VTezFEU", title:"Uvuvi wa Kisasa Tanzania — Biashara ya Samaki", channel:"Fisheries TZ", cat:"Kilimo", desc:"Teknolojia za uvuvi na jinsi ya kuanzisha biashara ya samaki Tanzania." },
-  { id:"0y0HxFHyCAk", title:"Mfumo wa Umwagiliaji Tanzania — Kilimo cha Mwaka Mzima", channel:"Irrigation Tanzania", cat:"Kilimo", desc:"Jinsi ya kutumia umwagiliaji kulima mwaka mzima na kuongeza mapato ya kilimo." },
-  { id:"rK-U5gNm4Co", title:"Usindikaji wa Mazao Tanzania — Ongeza Thamani Bidhaa Zako", channel:"Agro-processing TZ", cat:"Kilimo", desc:"Jinsi ya kusindika mazao na kuongeza thamani kabla ya kuuza sokoni." },
-  { id:"ZLLKN-FjJj8", title:"Kilimo cha Matunda Tanzania — Biashara ya Muda Mrefu", channel:"Horticulture TZ", cat:"Kilimo", desc:"Aina za matunda zinazofaa nchini Tanzania na jinsi ya kuanza shamba la matunda." },
+  { id:"GGBx--TxEm0", title:"Kilimo Biashara Tanzania — Kutoka Shamba hadi Soko", channel:"Kilimo Business TZ", cat:"Kilimo", desc:"Jinsi ya kubadilisha kilimo kuwa biashara inayolipa na kufikia masoko mapya." },
+  { id:"V3rlvHJqSAo", title:"Ufugaji wa Kuku wa Kisasa Tanzania — Biashara Inayolipa", channel:"Livestock Tanzania", cat:"Kilimo", desc:"Mwongozo wa kuanzisha ufugaji wa kuku wa kisasa na kuuza mayai na nyama." },
+  { id:"3t3zt8P9TYc", title:"Kilimo cha Mbogamboga Biashara — Mapato ya Kila Wiki", channel:"Agribusiness TZ", cat:"Kilimo", desc:"Jinsi ya kulima mbogamboga na kuuza masokoni kupata mapato ya kila wiki." },
+  { id:"iu-LBY7NXD4", title:"Uvuvi wa Kisasa Tanzania — Biashara ya Samaki", channel:"Fisheries TZ", cat:"Kilimo", desc:"Teknolojia za uvuvi na jinsi ya kuanzisha biashara ya samaki Tanzania." },
+  { id:"Ow8bXvDkYf8", title:"Kilimo cha Umwagiliaji Tanzania — Mwaka Mzima", channel:"Irrigation Tanzania", cat:"Kilimo", desc:"Jinsi ya kutumia umwagiliaji kulima mwaka mzima na kuongeza mapato ya kilimo." },
+  { id:"fLeJJPxua50", title:"Usindikaji wa Mazao Tanzania — Ongeza Thamani Bidhaa Zako", channel:"Agro-processing TZ", cat:"Kilimo", desc:"Jinsi ya kusindika mazao na kuongeza thamani kabla ya kuuza sokoni." },
+  { id:"sNhhHHNkHxM", title:"Kilimo cha Matunda Tanzania — Biashara ya Muda Mrefu", channel:"Horticulture TZ", cat:"Kilimo", desc:"Aina za matunda zinazofaa nchini Tanzania na jinsi ya kuanza shamba la matunda." },
 
   // ── UWEKEZAJI ──
-  { id:"e0ATa8-8R5A", title:"Jinsi ya Kuwekeza Hisa DSE Tanzania — Mwanzo", channel:"DSE Invest", cat:"Uwekezaji", desc:"Mwongozo wa kuwekeza Soko la Hisa Dar es Salaam kwa mara ya kwanza." },
-  { id:"GOPrKMNnxZQ", title:"UTT AMIS Tanzania — Jinsi ya Kuwekeza Usalama", channel:"UTT Investments", cat:"Uwekezaji", desc:"Jinsi ya kuwekeza kwenye mifuko ya UTT AMIS na faida unazoweza kupata." },
-  { id:"sGPPjUgM5pQ", title:"Mali Isiyohamishika Tanzania — Uwekezaji wa Ardhi na Nyumba", channel:"Real Estate TZ", cat:"Uwekezaji", desc:"Jinsi ya kuwekeza kwenye ardhi na nyumba Tanzania kwa mapato ya muda mrefu." },
-  { id:"9FGtEF2MNTI", title:"SACCOS Tanzania — Faida na Jinsi ya Kujiunga", channel:"SACCOS Elimu", cat:"Uwekezaji", desc:"Jinsi ya kujiunga na SACCOS na kupata mkopo wa biashara kwa masharti nafuu." },
-  { id:"4blyIGmHlz8", title:"Jinsi ya Kuwekeza Kidogo Kidogo na Kupata Faida Kubwa", channel:"Smart Invest TZ", cat:"Uwekezaji", desc:"Mkakati wa kuwekeza kwa makini hata na pesa ndogo na kupata faida nzuri." },
-  { id:"pUrOtjHbxY4", title:"Akiba ya Wastaafu Tanzania — PSSSF na Pensheni Yako", channel:"PSSSF Tanzania", cat:"Uwekezaji", desc:"Kuelewa mfumo wa PSSSF na jinsi ya kupanga pensheni yako vizuri Tanzania." },
-  { id:"V_1T-OlhFBw", title:"Cryptocurrency Tanzania — Hatari na Fursa 2024", channel:"Crypto Tanzania", cat:"Uwekezaji", desc:"Ukweli wa crypto Tanzania, hatari zake na jinsi ya kushiriki kwa usalama." },
+  { id:"PHe0bXAIuk0", title:"Jinsi ya Kuwekeza Hisa DSE Tanzania — Mwanzo", channel:"DSE Invest", cat:"Uwekezaji", desc:"Mwongozo wa kuwekeza Soko la Hisa Dar es Salaam kwa mara ya kwanza." },
+  { id:"IVTazD4TN2g", title:"UTT AMIS Tanzania — Jinsi ya Kuwekeza Usalama", channel:"UTT Investments", cat:"Uwekezaji", desc:"Jinsi ya kuwekeza kwenye mifuko ya UTT AMIS na faida unazoweza kupata." },
+  { id:"gI_dS9YkNgs", title:"Mali Isiyohamishika Tanzania — Uwekezaji wa Ardhi na Nyumba", channel:"Real Estate TZ", cat:"Uwekezaji", desc:"Jinsi ya kuwekeza kwenye ardhi na nyumba Tanzania kwa mapato ya muda mrefu." },
+  { id:"ZFpYTIGNm6o", title:"SACCOS Tanzania — Faida na Jinsi ya Kujiunga", channel:"SACCOS Elimu", cat:"Uwekezaji", desc:"Jinsi ya kujiunga na SACCOS na kupata mkopo wa biashara kwa masharti nafuu." },
+  { id:"kHlOfIzBBnk", title:"Jinsi ya Kuwekeza Kidogo Kidogo na Kupata Faida Kubwa", channel:"Smart Invest TZ", cat:"Uwekezaji", desc:"Mkakati wa kuwekeza kwa makini hata na pesa ndogo na kupata faida nzuri." },
+  { id:"qfv6oy9Zx3A", title:"Jinsi ya Kupanga Akiba na Pensheni Yako Tanzania", channel:"Finance Tanzania", cat:"Uwekezaji", desc:"Kuelewa jinsi ya kupanga akiba ya muda mrefu na kustaafu vizuri Tanzania." },
+  { id:"xbYq9-M1hIQ", title:"Cryptocurrency na Uwekezaji wa Kisasa Afrika", channel:"Crypto Tanzania", cat:"Uwekezaji", desc:"Ukweli wa crypto Tanzania, hatari zake na jinsi ya kushiriki kwa usalama." },
 
   // ── MOTISHA ──
-  { id:"ZPqj7DIgJR8", title:"Hadithi ya Mfanyabiashara Aliyeanza kwa Sh.50,000 Tanzania", channel:"Success Stories TZ", cat:"Motisha", desc:"Hadithi ya kweli ya mjasiriamali aliyeanza na mtaji mdogo na leo ana biashara kubwa." },
-  { id:"p4u4q3C7p2o", title:"Msukumo wa Biashara — Simama Hata Ukianguka", channel:"Motivation Tanzania", cat:"Motisha", desc:"Jinsi ya kushinda vikwazo vya biashara na kuendelea hata wakati mgumu." },
-  { id:"3LsPQGlc0VM", title:"Malengo ya Biashara — Jinsi ya Kuyafikia", channel:"Goals Tanzania", cat:"Motisha", desc:"Mbinu za kuweka malengo ya biashara na mkakati wa kuyafikia hatua kwa hatua." },
-  { id:"nv7bkRTnCpE", title:"Akili ya Mfanyabiashara — Fikira zinazoleta Mafanikio", channel:"Mindset TZ", cat:"Motisha", desc:"Jinsi ya kubadilisha fikira zako na kujenga akili ya mfanyabiashara mwenye mafanikio." },
+  { id:"MGzIQBJwfXs", title:"Hadithi ya Mfanyabiashara Aliyeanza Chini Tanzania", channel:"Success Stories TZ", cat:"Motisha", desc:"Hadithi ya kweli ya mjasiriamali aliyeanza na mtaji mdogo na leo ana biashara kubwa." },
+  { id:"tPEE9ZwImy0", title:"Msukumo wa Biashara — Simama Hata Ukianguka", channel:"Motivation Tanzania", cat:"Motisha", desc:"Jinsi ya kushinda vikwazo vya biashara na kuendelea hata wakati mgumu." },
+  { id:"7ltQLZu-nYI", title:"Malengo ya Biashara — Jinsi ya Kuyafikia", channel:"Goals Tanzania", cat:"Motisha", desc:"Mbinu za kuweka malengo ya biashara na mkakati wa kuyafikia hatua kwa hatua." },
+  { id:"3xFGIkTz93E", title:"Akili ya Mfanyabiashara — Fikira zinazoleta Mafanikio", channel:"Mindset TZ", cat:"Motisha", desc:"Jinsi ya kubadilisha fikira zako na kujenga akili ya mfanyabiashara mwenye mafanikio." },
 
   // ── USIMAMIZI ──
-  { id:"aAB2fQ8WmBY", title:"Jinsi ya Kusimamia Wafanyakazi Wako Biashara Ndogo", channel:"Management Tanzania", cat:"Usimamizi", desc:"Mbinu za kuongoza wafanyakazi wako na kujenga timu imara ya biashara." },
-  { id:"LJBQVj3Y_Lg", title:"Teknolojia kwa Biashara Tanzania — Programu Muhimu", channel:"Tech for Business TZ", cat:"Usimamizi", desc:"Programu na apps muhimu zinazoweza kukuokoa muda na fedha katika biashara." },
-  { id:"wHF9UMW4m5E", title:"Usimamizi wa Hifadhi ya Bidhaa — Stock Control Tanzania", channel:"Inventory TZ", cat:"Usimamizi", desc:"Jinsi ya kusimamia hifadhi ya bidhaa na kuzuia upotevu wa bidhaa dukani." },
-  { id:"VhJFyyukdgU", title:"Ushirikiano wa Biashara Tanzania — Faida na Hatari", channel:"Partnership TZ", cat:"Usimamizi", desc:"Jinsi ya kuanzisha ushirikiano wa biashara na wenzako na kuzuia migogoro." },
-  { id:"FvKKaSsj5qI", title:"Mpango wa Dharura wa Biashara — Jilinde na Hasara", channel:"Risk Management TZ", cat:"Usimamizi", desc:"Jinsi ya kuandaa biashara yako kwa hali ya dharura na kupunguza hatari za hasara." },
+  { id:"siqmJBKiQU4", title:"Jinsi ya Kusimamia Wafanyakazi Wako Biashara Ndogo", channel:"Management Tanzania", cat:"Usimamizi", desc:"Mbinu za kuongoza wafanyakazi wako na kujenga timu imara ya biashara." },
+  { id:"G2nkgo9P8cQ", title:"Teknolojia kwa Biashara Tanzania — Programu Muhimu", channel:"Tech for Business TZ", cat:"Usimamizi", desc:"Programu na apps muhimu zinazoweza kukuokoa muda na fedha katika biashara." },
+  { id:"bDV2XCBCAQU", title:"Usimamizi wa Hifadhi ya Bidhaa — Stock Control Tanzania", channel:"Inventory TZ", cat:"Usimamizi", desc:"Jinsi ya kusimamia hifadhi ya bidhaa na kuzuia upotevu wa bidhaa dukani." },
+  { id:"WnO0IQZZTTE", title:"Ushirikiano wa Biashara Tanzania — Faida na Hatari", channel:"Partnership TZ", cat:"Usimamizi", desc:"Jinsi ya kuanzisha ushirikiano wa biashara na wenzako na kuzuia migogoro." },
+  { id:"lqGaGvCTVCw", title:"Mpango wa Dharura wa Biashara — Jilinde na Hasara", channel:"Risk Management TZ", cat:"Usimamizi", desc:"Jinsi ya kuandaa biashara yako kwa hali ya dharura na kupunguza hatari za hasara." },
 ];
 
 let activeFilter = "Zote";
@@ -654,6 +662,9 @@ function openModal(id, title, channel) {
   document.getElementById('modalChannel').textContent = '📺 ' + channel;
   document.getElementById('modalIframe').src =
     `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+  // Weka kiungo cha YouTube moja kwa moja kwa hali ya video isiyocheza kwenye tovuti
+  const ytLink = document.getElementById('ytDirectLink');
+  if (ytLink) ytLink.href = `https://www.youtube.com/watch?v=${id}`;
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
