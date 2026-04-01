@@ -1,705 +1,174 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SadeBooks — Video za Ujasiriamali</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --blue:       #1a4b8c;
-      --blue-mid:   #2563b8;
-      --blue-light: #3b82f6;
-      --blue-pale:  #dbeafe;
-      --blue-xpale: #eff6ff;
-      --white:      #ffffff;
-      --gray-50:    #f8fafc;
-      --gray-100:   #f1f5f9;
-      --gray-200:   #e2e8f0;
-      --gray-400:   #94a3b8;
-      --gray-600:   #475569;
-      --dark:       #0f172a;
-      --red:        #dc2626;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video za Biashara na Vyakula - Sadebooks</title>
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<style>
 
-    body {
-      background: var(--white);
-      color: var(--dark);
-      font-family: 'Cairo', sans-serif;
-      min-height: 100vh;
-    }
+body{
+font-family:Arial, sans-serif;
+background:#f5f5f5;
+margin:0;
+padding:0;
+}
 
-    /* ══════════════ HEADER ══════════════ */
-    .hero {
-      background: linear-gradient(135deg, var(--blue) 0%, #1e5ba8 50%, var(--blue-light) 100%);
-      padding: 50px 20px 60px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.06) 0%, transparent 40%),
-                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 30%);
-    }
-    /* Geometric pattern */
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0; right: 0;
-      height: 48px;
-      background: var(--white);
-      clip-path: ellipse(60% 100% at 50% 100%);
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 30px;
-      padding: 6px 16px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.9);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      position: relative;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 6vw, 3.2rem);
-      color: #fff;
-      font-weight: 900;
-      line-height: 1.1;
-      position: relative;
-      margin-bottom: 14px;
-    }
-    .hero h1 span { color: #93c5fd; }
-    .hero p {
-      font-size: 15px;
-      color: rgba(255,255,255,0.72);
-      position: relative;
-      max-width: 520px;
-      margin: 0 auto 24px;
-    }
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      position: relative;
-    }
-    .hero-stat {
-      text-align: center;
-    }
-    .hero-stat strong {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: #fff;
-      font-weight: 900;
-    }
-    .hero-stat span {
-      font-size: 11px;
-      color: rgba(255,255,255,0.6);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
+h1{
+text-align:center;
+padding:20px;
+background:#111;
+color:white;
+}
 
-    /* ══════════════ TOOLBAR ══════════════ */
-    .toolbar {
-      position: sticky;
-      top: 0;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--gray-200);
-      z-index: 50;
-      padding: 14px 20px;
-    }
-    .toolbar-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .search-wrap {
-      flex: 1;
-      min-width: 200px;
-      position: relative;
-    }
-    .search-icon {
-      position: absolute;
-      left: 12px; top: 50%;
-      transform: translateY(-50%);
-      color: var(--gray-400);
-      font-size: 15px;
-    }
-    #searchInput {
-      width: 100%;
-      padding: 9px 12px 9px 38px;
-      border: 1.5px solid var(--gray-200);
-      border-radius: 10px;
-      font-family: 'Cairo', sans-serif;
-      font-size: 14px;
-      color: var(--dark);
-      background: var(--gray-50);
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    #searchInput:focus {
-      border-color: var(--blue-light);
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
-      background: var(--white);
-    }
-    .filter-tabs {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .filter-btn {
-      padding: 7px 14px;
-      border-radius: 8px;
-      border: 1.5px solid var(--gray-200);
-      background: var(--white);
-      font-family: 'Cairo', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--gray-600);
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .filter-btn:hover { border-color: var(--blue-light); color: var(--blue); }
-    .filter-btn.active {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
-    }
+.video-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:30px;
+max-width:1200px;
+margin:auto;
+}
 
-    /* ══════════════ COUNT ══════════════ */
-    .count-bar {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 14px 20px 4px;
-      font-size: 13px;
-      color: var(--gray-400);
-    }
-    .count-bar strong { color: var(--blue); }
+.video-card{
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
+transition:transform 0.3s;
+}
 
-    /* ══════════════ GRID ══════════════ */
-    .videos-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 12px 20px 48px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
+.video-card:hover{
+transform:scale(1.05);
+}
 
-    /* ══════════════ VIDEO CARD ══════════════ */
-    .video-card {
-      background: var(--white);
-      border: 1.5px solid var(--gray-200);
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.28s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    .video-card:hover {
-      border-color: var(--blue-light);
-      box-shadow: 0 8px 28px rgba(26,75,140,0.13);
-      transform: translateY(-4px);
-    }
+video{
+width:100%;
+height:auto;
+display:block;
+}
 
-    /* Thumbnail */
-    .thumb-wrap {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%; /* 16:9 */
-      background: var(--gray-100);
-      overflow: hidden;
-    }
-    .thumb-wrap img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-    .video-card:hover .thumb-wrap img { transform: scale(1.04); }
-    .thumb-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(15,23,42,0);
-      transition: background 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .video-card:hover .thumb-overlay {
-      background: rgba(15,23,42,0.35);
-    }
-    .play-circle {
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transform: scale(0.7);
-      transition: all 0.3s;
-    }
-    .play-circle svg { width: 20px; height: 20px; fill: var(--blue); margin-left: 3px; }
-    .video-card:hover .play-circle {
-      opacity: 1;
-      transform: scale(1);
-    }
-    /* YT badge */
-    .yt-badge {
-      position: absolute;
-      top: 10px; left: 10px;
-      background: var(--red);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 4px;
-      letter-spacing: 0.5px;
-    }
-    /* Category tag on thumb */
-    .cat-tag {
-      position: absolute;
-      bottom: 10px; left: 10px;
-      background: rgba(26,75,140,0.9);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.3px;
-    }
+.video-title{
+padding:10px;
+font-weight:bold;
+text-align:center;
+}
 
-    /* Card body */
-    .card-body {
-      padding: 16px 16px 14px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1.4;
-      margin-bottom: 8px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .card-desc {
-      font-size: 12.5px;
-      color: var(--gray-400);
-      line-height: 1.5;
-      flex: 1;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      margin-bottom: 12px;
-    }
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--gray-100);
-      padding-top: 10px;
-    }
-    .card-channel {
-      font-size: 11.5px;
-      color: var(--blue-mid);
-      font-weight: 600;
-    }
-    .watch-btn {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--blue-pale);
-      color: var(--blue);
-      border: none;
-      border-radius: 7px;
-      padding: 5px 12px;
-      font-family: 'Cairo', sans-serif;
-      font-size: 11.5px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-decoration: none;
-    }
-    .watch-btn:hover { background: var(--blue); color: #fff; }
-
-    /* ══════════════ MODAL ══════════════ */
-    .modal-overlay {
-      position: fixed; inset: 0;
-      background: rgba(15,23,42,0.85);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-    .modal-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .modal {
-      background: var(--white);
-      border-radius: 20px;
-      width: 100%;
-      max-width: 820px;
-      overflow: hidden;
-      transform: scale(0.92) translateY(20px);
-      transition: transform 0.3s;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
-    }
-    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
-    .modal-header {
-      background: linear-gradient(135deg, var(--blue), var(--blue-mid));
-      padding: 16px 20px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
-    .modal-header h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      color: #fff;
-      flex: 1;
-      line-height: 1.3;
-    }
-    .modal-header p {
-      font-size: 12px;
-      color: rgba(255,255,255,0.65);
-      margin-top: 3px;
-    }
-    .close-btn {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: #fff;
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.2s;
-    }
-    .close-btn:hover { background: rgba(255,255,255,0.35); }
-    .video-frame {
-      position: relative;
-      padding-top: 56.25%;
-      background: #000;
-    }
-    .video-frame iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      border: none;
-    }
-
-    /* ══════════════ EMPTY STATE ══════════════ */
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--gray-400);
-      grid-column: 1/-1;
-    }
-    .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
-    .empty-state h3 { font-size: 18px; color: var(--gray-600); margin-bottom: 8px; }
-
-    /* ══════════════ FOOTER ══════════════ */
-    .page-footer {
-      background: var(--gray-50);
-      border-top: 1px solid var(--gray-200);
-      text-align: center;
-      padding: 28px 20px;
-      font-size: 13px;
-      color: var(--gray-400);
-    }
-    .page-footer strong { color: var(--blue); }
-
-    @media (max-width: 640px) {
-      .videos-grid { grid-template-columns: 1fr; padding: 12px 12px 40px; }
-      .hero-stats { gap: 20px; }
-      .filter-tabs { gap: 4px; }
-      .filter-btn { padding: 6px 10px; font-size: 11px; }
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">📺 &nbsp; SadeBooks ✦ Maktaba ya Video</div>
-  <h1>Mafunzo ya <span>Ujasiriamali</span><br>kwa Kiswahili</h1>
-  <p>Video 50 bora za biashara, masoko, fedha na ujasiriamali zilizochaguliwa kwa Watanzania</p>
-  <div class="hero-stats">
-    <div class="hero-stat"><strong>50</strong><span>Video</span></div>
-    <div class="hero-stat"><strong>8</strong><span>Mada</span></div>
-    <div class="hero-stat"><strong>100%</strong><span>Bure</span></div>
-  </div>
+<h1>Video za Biashara, Ujasiriamali na Vyakula</h1>
+
+<div class="video-grid">
+
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/371433640.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Kupika Chakula cha Biashara</div>
 </div>
 
-<!-- TOOLBAR -->
-<div class="toolbar">
-  <div class="toolbar-inner">
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="Tafuta video... (mfano: mtaji, masoko, biashara)">
-    </div>
-    <div class="filter-tabs" id="filterTabs">
-      <button class="filter-btn active" data-cat="Zote">Zote</button>
-      <button class="filter-btn" data-cat="Ujasiriamali">Ujasiriamali</button>
-      <button class="filter-btn" data-cat="Fedha">Fedha</button>
-      <button class="filter-btn" data-cat="Masoko">Masoko</button>
-      <button class="filter-btn" data-cat="Biashara Mtandaoni">Mtandaoni</button>
-      <button class="filter-btn" data-cat="Kilimo">Kilimo</button>
-      <button class="filter-btn" data-cat="Uwekezaji">Uwekezaji</button>
-      <button class="filter-btn" data-cat="Motisha">Motisha</button>
-      <button class="filter-btn" data-cat="Usimamizi">Usimamizi</button>
-    </div>
-  </div>
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/434045526.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Mjasiriamali Akifanya Kazi</div>
 </div>
 
-<div class="count-bar" id="countBar">Inaonyesha <strong>50</strong> kati ya video 50</div>
-
-<!-- GRID -->
-<div class="videos-grid" id="videosGrid"></div>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal" id="modal">
-    <div class="modal-header">
-      <div>
-        <h3 id="modalTitle">Kichwa cha Video</h3>
-        <p id="modalChannel">Channel</p>
-      </div>
-      <button class="close-btn" id="closeModal">✕</button>
-    </div>
-    <div class="video-frame">
-      <iframe id="modalIframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-    </div>
-    <div style="text-align:center;padding:10px 16px 14px;background:#f8fafc;border-top:1px solid #e2e8f0;">
-      <a id="ytDirectLink" href="#" target="_blank" rel="noopener"
-         style="display:inline-flex;align-items:center;gap:7px;background:#ff0000;color:#fff;text-decoration:none;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:700;">
-        &#9654; Fungua YouTube Moja kwa Moja
-      </a>
-      <p style="margin-top:7px;font-size:11px;color:#94a3b8;">Video ikikataa kucheza hapa, bonyeza kitufe hapo juu</p>
-    </div>
-  </div>
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/3959545.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Business Meeting</div>
 </div>
 
-<!-- FOOTER -->
-<div class="page-footer">
-  Ukurasa huu ni sehemu ya <strong>SadeBooks</strong> — Duka la Vitabu vya Kiswahili ·
-  Video zote ni za YouTube na zinaweza kutazamwa bila malipo
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/4089092.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Kuanzisha Biashara</div>
 </div>
 
-<script>
-const videos = [
-  // ── UJASIRIAMALI ──
-  // Video halisi za YouTube za ujasiriamali kwa Kiswahili
-  { id:"pMnxOPcmVgQ", title:"Jinsi ya Kuanzisha Biashara Tanzania Bila Mtaji Mkubwa", channel:"Biashara Tanzania", cat:"Ujasiriamali", desc:"Hatua za msingi za kuanzisha biashara yako nchini Tanzania hata ukiwa na mtaji mdogo." },
-  { id:"ZbZSe6N_BXs", title:"Siri 5 za Mfanyabiashara Mwenye Mafanikio Tanzania", channel:"Ujasiriamali Africa", cat:"Ujasiriamali", desc:"Siri ambazo wajasiriamali wakubwa hawazisemi waziwazi lakini unaweza kujifunza." },
-  { id:"8jPQjjsBbIc", title:"Jinsi ya Kupata Wateja Wengi Haraka Biashara Yako", channel:"Biashara Smart TZ", cat:"Ujasiriamali", desc:"Mbinu za kivitendo za kupata wateja zaidi na kukuza biashara yako Tanzania." },
-  { id:"i0GXF4PrYaA", title:"Makosa Yanayoua Biashara za Watanzania", channel:"Elimu ya Biashara", cat:"Ujasiriamali", desc:"Makosa ya kawaida yanayofanywa na wajasiriamali Tanzania na jinsi ya kuyaepuka." },
-  { id:"QH2-TGUlwu4", title:"Biashara Nzuri za Kuanza na Mtaji Mdogo Tanzania", channel:"Tanzania Business", cat:"Ujasiriamali", desc:"Orodha ya biashara zinazofaa kuanzishwa na mtu yeyote Tanzania hata mtaji wake ni mdogo." },
-  { id:"o1g0HD77XzQ", title:"Jinsi ya Kusajili Biashara Tanzania — Mwongozo Kamili", channel:"BRELA Tanzania", cat:"Ujasiriamali", desc:"Hatua zote za kusajili biashara yako kisheria Tanzania kwa gharama nafuu." },
-  { id:"mQer7UMzxoU", title:"Namna ya Kuandika Mpango wa Biashara kwa Kiswahili", channel:"SadeBooks Academy", cat:"Ujasiriamali", desc:"Jinsi ya kuandika business plan kamili inayovutia wawekezaji na benki." },
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/4206981.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Kupika Restaurant</div>
+</div>
 
-  // ── FEDHA ──
-  { id:"wq-eRm0xRKo", title:"Jinsi ya Kusimamia Fedha za Biashara Yako Tanzania", channel:"Fedha Smart TZ", cat:"Fedha", desc:"Mbinu za msingi za kusimamia fedha za biashara na kuzuia hasara." },
-  { id:"f5bfGaqFvg0", title:"Akaunti na Hesabu za Biashara — Mwanzo Mpaka Mwisho", channel:"Accounting Tanzania", cat:"Fedha", desc:"Jinsi ya kuweka hesabu za biashara yako bila kuajiri mhasibu." },
-  { id:"1orMXn2NZQY", title:"Mkopo wa Biashara Tanzania — Benki Zinaomba Nini?", channel:"Fedha Tanzania", cat:"Fedha", desc:"Mahitaji ya mkopo wa biashara na jinsi ya kuandaa maombi yenye mafanikio." },
-  { id:"CqzU-_8BQQQ", title:"Jinsi ya Kuokoa Pesa na Kujenga Akiba — Mwongozo", channel:"Savings Tanzania", cat:"Fedha", desc:"Mikakati ya vitendo ya kuokoa fedha kutoka biashara na maisha ya kawaida." },
-  { id:"5aA7KZL3p-I", title:"Kuelewa VAT na Kodi Tanzania kwa Wajasiriamali", channel:"TRA Elimu", cat:"Fedha", desc:"Mwongozo wa kuelewa mfumo wa kodi Tanzania na jinsi ya kulipa kwa wakati." },
-  { id:"VVzgAKDSxAk", title:"Faida na Hasara — Jinsi ya Kuipima Biashara Yako", channel:"Business Analytics TZ", cat:"Fedha", desc:"Jinsi ya kuhesabu faida halisi na kujua biashara yako inakua au inadumaa." },
-  { id:"_OkIVf_dd6Y", title:"Bajeti ya Biashara — Jinsi ya Kupanga Matumizi Yako", channel:"Fedha Smart TZ", cat:"Fedha", desc:"Mwongozo wa kuandaa bajeti nzuri itakayokuokoa fedha na kukuza biashara." },
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/371433652.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Chef Akipika</div>
+</div>
 
-  // ── MASOKO ──
-  { id:"B_REXZP-UNc", title:"Masoko ya Dijitali kwa Biashara Tanzania — Mwanzo", channel:"Digital Marketing TZ", cat:"Masoko", desc:"Jinsi ya kutumia Instagram, Facebook na WhatsApp kukuza biashara yako bila gharama kubwa." },
-  { id:"5MgBikgcqnc", title:"Jinsi ya Kutengeneza Tangazo Zuri la Biashara", channel:"Marketing Tanzania", cat:"Masoko", desc:"Mbinu za kutengeneza matangazo yanayovutia wateja na kuongeza mauzo." },
-  { id:"0Qq3GJrLqH8", title:"WhatsApp Business Tanzania — Mwongozo Kamili", channel:"Tech Biashara TZ", cat:"Masoko", desc:"Jinsi ya kutumia WhatsApp Business kukuza biashara na kupata wateja zaidi." },
-  { id:"ZOIMfJPYKnM", title:"Jinsi ya Kuuza Bidhaa Mtandaoni Tanzania — Hatua kwa Hatua", channel:"E-commerce Tanzania", cat:"Masoko", desc:"Jinsi ya kuanzisha mauzo ya bidhaa mtandaoni Tanzania na kupata wateja wa kweli." },
-  { id:"J_NMOkE7jf0", title:"Siri ya Wateja Wanaorudi — Huduma Bora kwa Wateja", channel:"Customer Service TZ", cat:"Masoko", desc:"Jinsi ya kuwafanya wateja warudi tena na kutoa mapendekezo kwa wengine." },
-  { id:"XFJoUFqFQo8", title:"Branding ya Biashara Ndogo Tanzania — Muhimu Sana", channel:"Brand Tanzania", cat:"Masoko", desc:"Jinsi ya kujenga chapa ya biashara inayovutia na kukumbukwa na wateja." },
-  { id:"LFPQ8ztkazE", title:"Facebook Ads Tanzania — Jinsi ya Kupata Wateja kwa Bajeti Ndogo", channel:"Ads Tanzania", cat:"Masoko", desc:"Jinsi ya kutumia matangazo ya Facebook kupata wateja wengi kwa bajeti ndogo." },
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/371433649.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Food Business</div>
+</div>
 
-  // ── BIASHARA MTANDAONI ──
-  { id:"m7Xs1BqExmo", title:"Jinsi ya Kuanzisha Duka la Mtandaoni Tanzania", channel:"E-shop Tanzania", cat:"Biashara Mtandaoni", desc:"Hatua za kuanzisha online shop na kuuza bidhaa Tanzania na Africa Mashariki." },
-  { id:"XUFRd69TSEY", title:"Freelancing Tanzania — Pata Pesa kwa Ujuzi Wako", channel:"Freelance Africa", cat:"Biashara Mtandaoni", desc:"Jinsi ya kupata kazi za freelancing na kulipwa fedha za kigeni ukiwa Tanzania." },
-  { id:"9Bih7zFUIBs", title:"Jinsi ya Kutengeneza Pesa na YouTube Tanzania", channel:"YouTubers TZ", cat:"Biashara Mtandaoni", desc:"Hatua za kuanzisha channel ya YouTube na kuanza kupata mapato Tanzania." },
-  { id:"jMpCF0Ez9Ao", title:"Kuuza Bidhaa za Kidijitali Mtandaoni Tanzania", channel:"Digital Business TZ", cat:"Biashara Mtandaoni", desc:"Jinsi ya kuuza bidhaa za kidijitali na kupata mapato ya kila siku Tanzania." },
-  { id:"Ks-_Mh1QhMc", title:"TikTok kwa Biashara Tanzania — Mbinu za Mauzo", channel:"Social Media TZ", cat:"Biashara Mtandaoni", desc:"Jinsi ya kutumia TikTok kukuza biashara yako na kufikia wateja wa vijana." },
-  { id:"FaHpFGFVwYU", title:"Dropshipping Afrika — Uza Bila Kuwa na Bidhaa", channel:"Dropship Africa", cat:"Biashara Mtandaoni", desc:"Mfumo wa dropshipping na jinsi unavyoweza kuanza bila mtaji mkubwa Tanzania." },
-  { id:"dQw4w9WgXcQ", title:"Njia za Kupata Pesa Mtandaoni Afrika", channel:"Online Income Africa", cat:"Biashara Mtandaoni", desc:"Njia halisi za kupata kipato mtandaoni ukiwa Afrika Mashariki bila mtaji mkubwa." },
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/4038519.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Entrepreneur Work</div>
+</div>
 
-  // ── KILIMO ──
-  { id:"GGBx--TxEm0", title:"Kilimo Biashara Tanzania — Kutoka Shamba hadi Soko", channel:"Kilimo Business TZ", cat:"Kilimo", desc:"Jinsi ya kubadilisha kilimo kuwa biashara inayolipa na kufikia masoko mapya." },
-  { id:"V3rlvHJqSAo", title:"Ufugaji wa Kuku wa Kisasa Tanzania — Biashara Inayolipa", channel:"Livestock Tanzania", cat:"Kilimo", desc:"Mwongozo wa kuanzisha ufugaji wa kuku wa kisasa na kuuza mayai na nyama." },
-  { id:"3t3zt8P9TYc", title:"Kilimo cha Mbogamboga Biashara — Mapato ya Kila Wiki", channel:"Agribusiness TZ", cat:"Kilimo", desc:"Jinsi ya kulima mbogamboga na kuuza masokoni kupata mapato ya kila wiki." },
-  { id:"iu-LBY7NXD4", title:"Uvuvi wa Kisasa Tanzania — Biashara ya Samaki", channel:"Fisheries TZ", cat:"Kilimo", desc:"Teknolojia za uvuvi na jinsi ya kuanzisha biashara ya samaki Tanzania." },
-  { id:"Ow8bXvDkYf8", title:"Kilimo cha Umwagiliaji Tanzania — Mwaka Mzima", channel:"Irrigation Tanzania", cat:"Kilimo", desc:"Jinsi ya kutumia umwagiliaji kulima mwaka mzima na kuongeza mapato ya kilimo." },
-  { id:"fLeJJPxua50", title:"Usindikaji wa Mazao Tanzania — Ongeza Thamani Bidhaa Zako", channel:"Agro-processing TZ", cat:"Kilimo", desc:"Jinsi ya kusindika mazao na kuongeza thamani kabla ya kuuza sokoni." },
-  { id:"sNhhHHNkHxM", title:"Kilimo cha Matunda Tanzania — Biashara ya Muda Mrefu", channel:"Horticulture TZ", cat:"Kilimo", desc:"Aina za matunda zinazofaa nchini Tanzania na jinsi ya kuanza shamba la matunda." },
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/3843433.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Kitchen Work</div>
+</div>
 
-  // ── UWEKEZAJI ──
-  { id:"PHe0bXAIuk0", title:"Jinsi ya Kuwekeza Hisa DSE Tanzania — Mwanzo", channel:"DSE Invest", cat:"Uwekezaji", desc:"Mwongozo wa kuwekeza Soko la Hisa Dar es Salaam kwa mara ya kwanza." },
-  { id:"IVTazD4TN2g", title:"UTT AMIS Tanzania — Jinsi ya Kuwekeza Usalama", channel:"UTT Investments", cat:"Uwekezaji", desc:"Jinsi ya kuwekeza kwenye mifuko ya UTT AMIS na faida unazoweza kupata." },
-  { id:"gI_dS9YkNgs", title:"Mali Isiyohamishika Tanzania — Uwekezaji wa Ardhi na Nyumba", channel:"Real Estate TZ", cat:"Uwekezaji", desc:"Jinsi ya kuwekeza kwenye ardhi na nyumba Tanzania kwa mapato ya muda mrefu." },
-  { id:"ZFpYTIGNm6o", title:"SACCOS Tanzania — Faida na Jinsi ya Kujiunga", channel:"SACCOS Elimu", cat:"Uwekezaji", desc:"Jinsi ya kujiunga na SACCOS na kupata mkopo wa biashara kwa masharti nafuu." },
-  { id:"kHlOfIzBBnk", title:"Jinsi ya Kuwekeza Kidogo Kidogo na Kupata Faida Kubwa", channel:"Smart Invest TZ", cat:"Uwekezaji", desc:"Mkakati wa kuwekeza kwa makini hata na pesa ndogo na kupata faida nzuri." },
-  { id:"qfv6oy9Zx3A", title:"Jinsi ya Kupanga Akiba na Pensheni Yako Tanzania", channel:"Finance Tanzania", cat:"Uwekezaji", desc:"Kuelewa jinsi ya kupanga akiba ya muda mrefu na kustaafu vizuri Tanzania." },
-  { id:"xbYq9-M1hIQ", title:"Cryptocurrency na Uwekezaji wa Kisasa Afrika", channel:"Crypto Tanzania", cat:"Uwekezaji", desc:"Ukweli wa crypto Tanzania, hatari zake na jinsi ya kushiriki kwa usalama." },
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/3987544.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Small Business</div>
+</div>
 
-  // ── MOTISHA ──
-  { id:"MGzIQBJwfXs", title:"Hadithi ya Mfanyabiashara Aliyeanza Chini Tanzania", channel:"Success Stories TZ", cat:"Motisha", desc:"Hadithi ya kweli ya mjasiriamali aliyeanza na mtaji mdogo na leo ana biashara kubwa." },
-  { id:"tPEE9ZwImy0", title:"Msukumo wa Biashara — Simama Hata Ukianguka", channel:"Motivation Tanzania", cat:"Motisha", desc:"Jinsi ya kushinda vikwazo vya biashara na kuendelea hata wakati mgumu." },
-  { id:"7ltQLZu-nYI", title:"Malengo ya Biashara — Jinsi ya Kuyafikia", channel:"Goals Tanzania", cat:"Motisha", desc:"Mbinu za kuweka malengo ya biashara na mkakati wa kuyafikia hatua kwa hatua." },
-  { id:"3xFGIkTz93E", title:"Akili ya Mfanyabiashara — Fikira zinazoleta Mafanikio", channel:"Mindset TZ", cat:"Motisha", desc:"Jinsi ya kubadilisha fikira zako na kujenga akili ya mfanyabiashara mwenye mafanikio." },
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/371433654.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Restaurant Business</div>
+</div>
 
-  // ── USIMAMIZI ──
-  { id:"siqmJBKiQU4", title:"Jinsi ya Kusimamia Wafanyakazi Wako Biashara Ndogo", channel:"Management Tanzania", cat:"Usimamizi", desc:"Mbinu za kuongoza wafanyakazi wako na kujenga timu imara ya biashara." },
-  { id:"G2nkgo9P8cQ", title:"Teknolojia kwa Biashara Tanzania — Programu Muhimu", channel:"Tech for Business TZ", cat:"Usimamizi", desc:"Programu na apps muhimu zinazoweza kukuokoa muda na fedha katika biashara." },
-  { id:"bDV2XCBCAQU", title:"Usimamizi wa Hifadhi ya Bidhaa — Stock Control Tanzania", channel:"Inventory TZ", cat:"Usimamizi", desc:"Jinsi ya kusimamia hifadhi ya bidhaa na kuzuia upotevu wa bidhaa dukani." },
-  { id:"WnO0IQZZTTE", title:"Ushirikiano wa Biashara Tanzania — Faida na Hatari", channel:"Partnership TZ", cat:"Usimamizi", desc:"Jinsi ya kuanzisha ushirikiano wa biashara na wenzako na kuzuia migogoro." },
-  { id:"lqGaGvCTVCw", title:"Mpango wa Dharura wa Biashara — Jilinde na Hasara", channel:"Risk Management TZ", cat:"Usimamizi", desc:"Jinsi ya kuandaa biashara yako kwa hali ya dharura na kupunguza hatari za hasara." },
-];
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/4048863.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Cooking Skills</div>
+</div>
 
-let activeFilter = "Zote";
-let searchTerm   = "";
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/4038531.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Startup Business</div>
+</div>
 
-function renderGrid() {
-  const grid = document.getElementById('videosGrid');
-  const countBar = document.getElementById('countBar');
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/4149056.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Kitchen Restaurant</div>
+</div>
 
-  const filtered = videos.filter(v => {
-    const matchCat = activeFilter === "Zote" || v.cat === activeFilter;
-    const q = searchTerm.toLowerCase();
-    const matchSearch = !q ||
-      v.title.toLowerCase().includes(q) ||
-      v.desc.toLowerCase().includes(q) ||
-      v.cat.toLowerCase().includes(q) ||
-      v.channel.toLowerCase().includes(q);
-    return matchCat && matchSearch;
-  });
+<div class="video-card">
+<video controls>
+<source src="https://player.vimeo.com/external/3129595.sd.mp4" type="video/mp4">
+</video>
+<div class="video-title">Food Preparation</div>
+</div>
 
-  countBar.innerHTML = `Inaonyesha <strong>${filtered.length}</strong> kati ya video ${videos.length}`;
+</div>
 
-  if (filtered.length === 0) {
-    grid.innerHTML = `
-      <div class="empty-state">
-        <div class="icon">🔍</div>
-        <h3>Hakuna video zilizopatikana</h3>
-        <p>Jaribu neno tofauti au chagua mada nyingine</p>
-      </div>`;
-    return;
-  }
-
-  grid.innerHTML = filtered.map(v => `
-    <div class="video-card" onclick="openModal('${v.id}','${escHtml(v.title)}','${escHtml(v.channel)}')">
-      <div class="thumb-wrap">
-        <img
-          src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg"
-          alt="${escHtml(v.title)}"
-          loading="lazy"
-          onerror="this.src='https://img.youtube.com/vi/${v.id}/default.jpg'"
-        >
-        <div class="thumb-overlay">
-          <div class="play-circle">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </div>
-        <span class="yt-badge">▶ YouTube</span>
-        <span class="cat-tag">${v.cat}</span>
-      </div>
-      <div class="card-body">
-        <div class="card-title">${v.title}</div>
-        <div class="card-desc">${v.desc}</div>
-        <div class="card-footer">
-          <span class="card-channel">📺 ${v.channel}</span>
-          <a class="watch-btn" onclick="event.stopPropagation();openModal('${v.id}','${escHtml(v.title)}','${escHtml(v.channel)}')">
-            ▶ Tazama
-          </a>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function escHtml(s) {
-  return s.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-}
-
-function openModal(id, title, channel) {
-  document.getElementById('modalTitle').textContent   = title;
-  document.getElementById('modalChannel').textContent = '📺 ' + channel;
-  document.getElementById('modalIframe').src =
-    `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-  // Weka kiungo cha YouTube moja kwa moja kwa hali ya video isiyocheza kwenye tovuti
-  const ytLink = document.getElementById('ytDirectLink');
-  if (ytLink) ytLink.href = `https://www.youtube.com/watch?v=${id}`;
-  document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.getElementById('modalIframe').src = '';
-  document.body.style.overflow = '';
-}
-
-// Filter buttons
-document.getElementById('filterTabs').addEventListener('click', e => {
-  const btn = e.target.closest('.filter-btn');
-  if (!btn) return;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  activeFilter = btn.dataset.cat;
-  renderGrid();
-});
-
-// Search
-document.getElementById('searchInput').addEventListener('input', e => {
-  searchTerm = e.target.value;
-  renderGrid();
-});
-
-// Close modal
-document.getElementById('closeModal').addEventListener('click', closeModal);
-document.getElementById('modalOverlay').addEventListener('click', e => {
-  if (e.target === document.getElementById('modalOverlay')) closeModal();
-});
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-// Init
-renderGrid();
-</script>
 </body>
 </html>
