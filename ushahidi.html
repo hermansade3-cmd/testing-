@@ -2,296 +2,547 @@
 <html lang="sw">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>SadeBooks – Ushahidi wa Wateja</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maoni ya Wasomaji – SadeBooks</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Taviraj:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-  * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing:antialiased; }
-  body { background:#e5ddd5; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; padding:20px 0; font-family:'Roboto',sans-serif; }
+  :root {
+    --cream: #F5EDD6;
+    --gold: #C9962A;
+    --gold-light: #E8B84B;
+    --dark: #1A1208;
+    --brown: #3B2107;
+    --brown-mid: #5C3410;
+    --star: #F0B429;
+    --card-bg: #FDF6E3;
+    --shadow: rgba(58, 33, 7, 0.18);
+  }
 
-  .phone { width:390px; max-width:100vw; background:#fff; border-radius:40px; overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.08); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  .status-bar { background:#fff; padding:12px 20px 4px; display:flex; justify-content:space-between; align-items:center; }
-  .status-bar .time { font-size:15px; font-weight:700; color:#000; }
-  .status-icons { display:flex; align-items:center; gap:5px; }
-  .sig { display:flex; align-items:flex-end; gap:2px; height:13px; }
-  .sig span { width:3px; background:#000; border-radius:1px; display:block; }
-  .bat-wrap { display:flex; align-items:center; gap:3px; }
-  .bat-pct { font-size:11px; font-weight:700; color:#000; }
-  .bat { width:25px; height:13px; border:1.5px solid #000; border-radius:3px; padding:1.5px; display:flex; align-items:center; position:relative; }
-  .bat::after { content:''; position:absolute; right:-4px; width:2px; height:6px; background:#000; border-radius:0 1px 1px 0; }
-  .bat-fill { width:77%; height:100%; background:#000; border-radius:1px; }
+  body {
+    background-color: var(--cream);
+    font-family: 'Taviraj', Georgia, serif;
+    color: var(--dark);
+    overflow-x: hidden;
+  }
 
-  .wa-header { background:#fff; padding:2px 16px 10px; display:flex; justify-content:space-between; align-items:center; }
-  .wa-header h1 { font-size:28px; font-weight:700; color:#075e54; letter-spacing:-0.5px; }
-  .wa-icons { display:flex; gap:20px; align-items:center; }
-  .wa-icons svg { width:24px; height:24px; fill:#000; }
+  /* ── HEADER ── */
+  .section-header {
+    text-align: center;
+    padding: 64px 24px 16px;
+    position: relative;
+  }
 
-  .search-bar { padding:4px 12px 10px; background:#fff; }
-  .search-inner { background:#f0f2f0; border-radius:24px; display:flex; align-items:center; padding:9px 14px; gap:10px; }
-  .search-inner svg { width:18px; height:18px; fill:#777; flex-shrink:0; }
-  .search-inner span { font-size:15px; color:#999; }
+  .section-header::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--gold);
+    margin: 0 auto 24px;
+  }
 
-  .filter-tabs { display:flex; align-items:center; gap:8px; padding:0 12px 12px; overflow-x:auto; scrollbar-width:none; background:#fff; }
-  .filter-tabs::-webkit-scrollbar { display:none; }
-  .tab { padding:6px 16px; border-radius:20px; font-size:13px; font-weight:500; white-space:nowrap; border:1px solid #e0e0e0; color:#555; flex-shrink:0; }
-  .tab.active { background:#d9fdd3; border-color:#b2f0a0; color:#000; font-weight:700; }
-  .tab-plus { width:32px; height:32px; border-radius:50%; border:1px solid #ddd; display:flex; align-items:center; justify-content:center; font-size:20px; color:#777; flex-shrink:0; }
+  .badge {
+    display: inline-block;
+    background: var(--brown);
+    color: var(--gold-light);
+    font-size: 11px;
+    font-family: 'Taviraj', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
 
-  .archived-row { display:flex; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid #f0f0f0; }
-  .arch-icon { width:52px; height:52px; border-radius:50%; background:#f0f0f0; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .arch-icon svg { width:24px; height:24px; fill:#888; }
-  .archived-row span { font-size:16px; color:#555; }
+  .section-header h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 700;
+    color: var(--brown);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
 
-  .cta-banner { background:linear-gradient(135deg,#075e54,#128c7e); padding:10px 14px; display:flex; align-items:center; gap:10px; }
-  .cta-banner p { font-size:12px; color:rgba(255,255,255,0.92); flex:1; line-height:1.4; }
-  .cta-banner p strong { color:#fff; font-size:13px; }
-  .cta-btn { background:#25d366; color:#fff; font-size:11px; font-weight:700; padding:6px 12px; border-radius:20px; text-decoration:none; white-space:nowrap; flex-shrink:0; }
+  .section-header h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
 
-  .chat-list { background:#fff; }
-  .chat-item { display:flex; align-items:center; padding:10px 16px; gap:13px; border-bottom:1px solid #f2f2f2; cursor:pointer; opacity:0; transform:translateX(-8px); animation:slideIn 0.3s ease forwards; }
-  @keyframes slideIn { to { opacity:1; transform:translateX(0); } }
+  .section-header p {
+    color: var(--brown-mid);
+    font-size: 16px;
+    max-width: 520px;
+    margin: 0 auto 10px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
 
-  .avatar { width:52px; height:52px; border-radius:50%; flex-shrink:0; overflow:hidden; }
-  .avatar img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 36px auto 48px;
+    max-width: 640px;
+    border: 1px solid rgba(201,150,42,0.35);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--card-bg);
+    box-shadow: 0 4px 24px var(--shadow);
+  }
 
-  /* Fallback avatar with initials */
-  .avatar-fb { width:52px; height:52px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:21px; font-weight:700; color:#fff; }
+  .stat {
+    flex: 1;
+    padding: 20px 12px;
+    text-align: center;
+    border-right: 1px solid rgba(201,150,42,0.2);
+  }
+  .stat:last-child { border-right: none; }
 
-  .chat-body { flex:1; min-width:0; }
-  .chat-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:3px; }
-  .chat-name { font-size:16px; font-weight:500; color:#111; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:210px; }
-  .chat-time { font-size:12px; color:#667781; white-space:nowrap; flex-shrink:0; }
-  .chat-time.green { color:#25d366; font-weight:600; }
-  .chat-bottom { display:flex; justify-content:space-between; align-items:center; }
-  .chat-preview { font-size:14px; color:#667781; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:270px; }
-  .badge { background:#25d366; color:#fff; font-size:12px; font-weight:700; min-width:20px; height:20px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:0 4px; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+  }
 
-  .fab-row { display:flex; justify-content:flex-end; padding:10px 16px 4px; background:#fff; }
-  .fab { width:56px; height:56px; background:#25d366; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(37,211,102,0.4); }
-  .fab svg { width:28px; height:28px; fill:white; }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-mid);
+    margin-top: 4px;
+  }
 
-  .bottom-nav { background:#fff; border-top:1px solid #e8e8e8; display:flex; justify-content:space-around; align-items:center; padding:8px 0 18px; }
-  .nav-item { display:flex; flex-direction:column; align-items:center; gap:3px; position:relative; }
-  .nav-icon { width:26px; height:26px; display:flex; align-items:center; justify-content:center; }
-  .nav-icon svg { width:24px; height:24px; fill:#667781; }
-  .nav-item.active .nav-icon svg { fill:#075e54; }
-  .nav-label { font-size:11px; font-weight:500; color:#667781; }
-  .nav-item.active .nav-label { color:#075e54; font-weight:700; }
-  .nav-badge { position:absolute; top:-5px; right:-10px; background:#25d366; color:#fff; font-size:10px; font-weight:700; width:17px; height:17px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid rgba(201,150,42,0.25);
+    border-radius: 10px;
+    padding: 26px 24px 22px;
+    position: relative;
+    box-shadow: 0 2px 16px var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    opacity: 0;
+    transform: translateY(28px);
+    animation: fadeUp 0.55s ease forwards;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 36px rgba(58,33,7,0.22);
+  }
+
+  /* stagger */
+  .card:nth-child(1)  { animation-delay: 0.05s }
+  .card:nth-child(2)  { animation-delay: 0.12s }
+  .card:nth-child(3)  { animation-delay: 0.19s }
+  .card:nth-child(4)  { animation-delay: 0.26s }
+  .card:nth-child(5)  { animation-delay: 0.33s }
+  .card:nth-child(6)  { animation-delay: 0.40s }
+  .card:nth-child(7)  { animation-delay: 0.47s }
+  .card:nth-child(8)  { animation-delay: 0.54s }
+  .card:nth-child(9)  { animation-delay: 0.61s }
+  .card:nth-child(10) { animation-delay: 0.68s }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* quote mark */
+  .card::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    color: var(--gold-light);
+    opacity: 0.25;
+    position: absolute;
+    top: 6px;
+    left: 16px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  /* featured card */
+  .card.featured {
+    border-color: var(--gold);
+    border-width: 2px;
+    grid-column: span 2;
+    background: linear-gradient(135deg, #FDF6E3 60%, #FFF3CC);
+  }
+
+  @media (max-width: 600px) {
+    .card.featured { grid-column: span 1; }
+  }
+
+  .featured-tag {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  /* stars */
+  .stars {
+    font-size: 17px;
+    color: var(--star);
+    margin-bottom: 14px;
+    letter-spacing: 2px;
+  }
+
+  /* book tag */
+  .book-tag {
+    display: inline-block;
+    background: rgba(201,150,42,0.12);
+    color: var(--brown-mid);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 13px;
+    border: 1px solid rgba(201,150,42,0.3);
+  }
+
+  .quote-text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--brown);
+    font-weight: 300;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  /* avatar row */
+  .author-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid rgba(201,150,42,0.2);
+    padding-top: 16px;
+  }
+
+  .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    border: 2px solid var(--gold-light);
+  }
+
+  .author-info strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brown);
+  }
+
+  .author-info span {
+    font-size: 12px;
+    color: var(--brown-mid);
+    opacity: 0.75;
+  }
+
+  /* verified badge */
+  .verified {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .verified svg { width: 13px; height: 13px; fill: var(--gold); }
+
+  /* ── CTA ── */
+  .cta-wrap {
+    text-align: center;
+    padding-bottom: 60px;
+  }
+
+  .cta-wrap p {
+    font-size: 15px;
+    color: var(--brown-mid);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--brown);
+    color: var(--gold-light);
+    padding: 14px 36px;
+    border-radius: 4px;
+    font-family: 'Taviraj', serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    border: 1px solid var(--gold);
+  }
+  .btn:hover {
+    background: var(--gold);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  /* decorative line */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 50px;
+    max-width: 700px;
+  }
 </style>
 </head>
 <body>
-<div class="phone">
 
-  <div class="status-bar">
-    <div class="time">14:55</div>
-    <div class="status-icons">
-      <span style="font-size:11px;font-weight:700;color:#000;margin-right:2px">3G</span>
-      <div class="sig">
-        <span style="height:4px"></span><span style="height:7px"></span>
-        <span style="height:10px"></span><span style="height:13px;background:#ccc"></span>
-      </div>
-      <div class="bat-wrap">
-        <span class="bat-pct">77</span>
-        <div class="bat"><div class="bat-fill"></div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="wa-header">
-    <h1>WhatsApp</h1>
-    <div class="wa-icons">
-      <svg viewBox="0 0 24 24"><path d="M12 15.2a3.2 3.2 0 100-6.4 3.2 3.2 0 000 6.4z"/><path d="M9 2L7.17 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2h-3.17L15 2H9zm3 15a5 5 0 110-10 5 5 0 010 10z"/></svg>
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
-    </div>
-  </div>
-
-  <div class="search-bar">
-    <div class="search-inner">
-      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.5 6.5 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 115 9.5 4.5 4.5 0 019.5 14z"/></svg>
-      <span>Ask Meta AI or Search</span>
-    </div>
-  </div>
-
-  <div class="filter-tabs">
-    <div class="tab active">All</div>
-    <div class="tab">Favourites</div>
-    <div class="tab">Groups</div>
-    <div class="tab">Artificial intelligence</div>
-    <div class="tab-plus">+</div>
-  </div>
-
-  <div class="archived-row">
-    <div class="arch-icon">
-      <svg viewBox="0 0 24 24"><path d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM12 17.5L6.5 12H10v-2h4v2h3.5L12 17.5zM5.12 5l.81-1h12l.94 1H5.12z"/></svg>
-    </div>
-    <span>Archived</span>
-  </div>
-
-  <div class="cta-banner">
-    <p><strong>📚 SadeBooks</strong> — Vitabu vya PDF kwa Kiswahili. TSh 5,000 tu!</p>
-    <a class="cta-btn" href="https://hermansade3-cmd.github.io/sadebooks/" target="_blank">Nunua Sasa</a>
-  </div>
-
-  <div class="chat-list" id="chatList"></div>
-
-  <div class="fab-row">
-    <div class="fab">
-      <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
-    </div>
-  </div>
-
-  <div class="bottom-nav">
-    <div class="nav-item active">
-      <div class="nav-icon" style="position:relative">
-        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-        <div class="nav-badge">1</div>
-      </div>
-      <span class="nav-label">Chats</span>
-    </div>
-    <div class="nav-item">
-      <div class="nav-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-      </div>
-      <span class="nav-label">Updates</span>
-    </div>
-    <div class="nav-item">
-      <div class="nav-icon">
-        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-      </div>
-      <span class="nav-label">Communities</span>
-    </div>
-    <div class="nav-item">
-      <div class="nav-icon">
-        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27c1.12.45 2.33.69 3.58.69.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.29 21 3 13.71 3 4.5c0-.55.45-1 1-1H8c.55 0 1 .45 1 1 0 1.25.24 2.45.69 3.57.12.28.05.61-.27.93l-2.8 1.79z"/></svg>
-      </div>
-      <span class="nav-label">Calls</span>
-    </div>
-  </div>
-
+<!-- ── HEADER ── -->
+<div class="section-header">
+  <div class="badge">📖 Beta Readers · Wasomaji wa Majaribio · 2026</div>
+  <h2>Walisema <em>Nini</em>?</h2>
+  <p>Watu halisi waliosoma vitabu vyetu kabla ya kuchapishwa rasmi — hii ndiyo maoni yao ya kweli.</p>
 </div>
 
-<script>
-// Picha za watu Weusi wa Afrika - IDs za moja kwa moja kutoka Unsplash
-// Kila ID ni picha iliyothibitishwa ya mtu Mweusi wa Afrika
-const contacts = [
-  {
-    name: "Amani Mwangi 🇹🇿",
-    time: "14:17",
-    green: true,
-    msg: "📚 Kitabu cha Forex kilinisaidia kupata faida!",
-    badge: "1",
-    // Black African man - Unsplash photo by Ayo Ogunseinde
-    photo: "https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?w=120&h=120&fit=crop&crop=faces&facepad=4&q=80",
-    color: "#5d4037", init: "A"
-  },
-  {
-    name: "Fatuma Hassan 🇹🇿",
-    time: "14:15",
-    msg: "DSE guide imenisaidia kuwekeza hisa 💹",
-    // Black African woman - photo by Eye for Ebony
-    photo: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&crop=faces&facepad=4&q=80",
-    color: "#4a148c", init: "F"
-  },
-  {
-    name: "Juma Rashid",
-    time: "13:49",
-    msg: "🎙️ 0:28 — TikTok followers zangu 12K sasa!",
-    // Black African young man - photo by Christian Buehner
-    photo: "https://images.unsplash.com/photo-1618245318763-a15156d6b23c?w=120&h=120&fit=crop&crop=faces&facepad=4&q=80",
-    color: "#1b5e20", init: "J"
-  },
-  {
-    name: "Salma Khamis 🇹🇿",
-    time: "13:48",
-    msg: "Crypto book — TSh 50K ikawa 87K! 🚀",
-    // Black African woman smiling - photo by Eye for Ebony
-    photo: "https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?w=120&h=120&fit=crop&crop=faces&facepad=4&q=80",
-    color: "#b71c1c", init: "S"
-  },
-  {
-    name: "Emmanuel Lyimo",
-    time: "12:40",
-    msg: "TSh 5,000 ni bei nzuri kwa elimu hii 👏",
-    // Black African man - photo by Omotayo Tajudeen
-    photo: "https://images.unsplash.com/photo-1545996124-0501ebae84d0?w=120&h=120&fit=crop&crop=faces&facepad=4&q=80",
-    color: "#0d47a1", init: "E"
-  },
-  {
-    name: "Grace Mwakalinga 🇹🇿",
-    time: "Jana",
-    msg: "⭐⭐⭐⭐⭐ Orders zangu zimekuwa kila siku!",
-    // Black African woman - photo by Thought Catalog
-    photo: "https://images.unsplash.com/photo-1523824921871-d6f1a15151f1?w=120&h=120&fit=crop&crop=faces&facepad=4&q=80",
-    color: "#e65100", init: "G"
-  },
-  {
-    name: "Baraka Nkwabi",
-    time: "Jana",
-    msg: "Kimeandikwa kwa Kiswahili safi! Bora sana 💯",
-    // Black African man smiling - photo by Jurica Koletic
-    photo: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=120&h=120&fit=crop&crop=faces&facepad=4&q=80",
-    color: "#37474f", init: "B"
-  },
-  {
-    name: "Zainab Ally 🇹🇿",
-    time: "Jana",
-    msg: "Mungu akubariki Herman! Nimejifunza Forex 🤲",
-    // Black African woman natural hair - photo by Eye for Ebony
-    photo: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=120&h=120&fit=crop&crop=faces&facepad=4&q=80",
-    color: "#6a1b9a", init: "Z"
-  },
-  {
-    name: "Patrick Massawe",
-    time: "Jana",
-    msg: "PDF ilifika haraka. Nitanunua tena wiki ijayo! 📲",
-    // Black African man professional - photo by Oluwaseun Duncan
-    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&h=120&fit=crop&crop=faces&facepad=4&q=80",
-    color: "#004d40", init: "P"
-  },
-  {
-    name: "Mariam Omari 🇹🇿",
-    time: "Jana",
-    msg: "Nimenunua vitabu 3! Kila kimoja kina thamani ✨",
-    // Black African woman smiling - photo by Eye for Ebony
-    photo: "https://images.unsplash.com/photo-1592621385612-4d7129426394?w=120&h=120&fit=crop&crop=faces&facepad=4&q=80",
-    color: "#880e4f", init: "M"
-  }
-];
+<!-- ── STATS ── -->
+<div class="stats-strip">
+  <div class="stat">
+    <div class="stat-num">10</div>
+    <div class="stat-label">Wasomaji</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">4.9</div>
+    <div class="stat-label">Wastani ⭐</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Wanakubaliana</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">TSh 5,000</div>
+    <div class="stat-label">Bei ya Kitabu</div>
+  </div>
+</div>
 
-const list = document.getElementById('chatList');
+<div class="divider"></div>
 
-contacts.forEach((c, i) => {
-  const item = document.createElement('div');
-  item.className = 'chat-item';
-  item.style.animationDelay = (i * 0.06) + 's';
+<!-- ── CARDS GRID ── -->
+<div class="grid">
 
-  const badgeHtml = c.badge ? `<div class="badge">${c.badge}</div>` : '';
-  const timeClass = c.green ? 'chat-time green' : 'chat-time';
-
-  item.innerHTML = `
-    <div class="avatar" id="av${i}">
-      <img src="${c.photo}" alt="${c.init}"
-        onload="this.parentNode.style.background='transparent'"
-        onerror="
-          this.parentNode.innerHTML='<div style=\'width:52px;height:52px;background:${c.color};border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:700;color:#fff\'>${c.init}</div>';
-        ">
+  <!-- 1 FEATURED -->
+  <div class="card featured">
+    <div class="featured-tag">⭐ Msomaji Bora</div>
+    <div class="stars">★★★★★</div>
+    <div class="book-tag">📘 Jinsi ya Kutengeneza Sabuni</div>
+    <p class="quote-text">Kitabu hiki kinaeleza vizuri sana jinsi ya kutengeneza sabuni. Kinafaa kwa mtu anayetaka kuanza biashara ndogo — hata bila uzoefu wowote. Nilijaribu mapishi yaliyoandikwa na nilipata sabuni nzuri mara ya kwanza. Ninashukuru sana!</p>
+    <div class="author-row">
+      <div class="avatar" style="background: #7B3F00;">A</div>
+      <div class="author-info">
+        <strong>Amina Hassan</strong>
+        <span>Mtwara · Januari 2026</span>
+      </div>
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Amethibitishwa
+      </div>
     </div>
-    <div class="chat-body">
-      <div class="chat-top">
-        <span class="chat-name">${c.name}</span>
-        <span class="${timeClass}">${c.time}</span>
-      </div>
-      <div class="chat-bottom">
-        <span class="chat-preview">${c.msg}</span>
-        ${badgeHtml}
-      </div>
-    </div>`;
+  </div>
 
-  list.appendChild(item);
-});
-</script>
+  <!-- 2 -->
+  <div class="card">
+    <div class="stars">★★★★★</div>
+    <div class="book-tag">📗 Biashara ya Kuanzia Nyumbani</div>
+    <p class="quote-text">Nilianza biashara yangu ya kuuza vitafunio baada ya kusoma kitabu hiki. Sasa ninapata faida ya shilingi 150,000 kwa wiki. Mwandishi anaeleza hatua kwa hatua — hakuna kitu kilichonishinda.</p>
+    <div class="author-row">
+      <div class="avatar" style="background: #4A235A;">J</div>
+      <div class="author-info">
+        <strong>Joyce Mwamba</strong>
+        <span>Dodoma · Februari 2026</span>
+      </div>
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Amethibitishwa
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="stars">★★★★★</div>
+    <div class="book-tag">📙 Kilimo cha Kisasa</div>
+    <p class="quote-text">Nilikuwa sipendi kusoma lakini kitabu hiki kiliandikwa kwa lugha rahisi sana ya Kiswahili. Nimejifunza jinsi ya kulima nyanya kwa faida kubwa. Asante SadeBooks!</p>
+    <div class="author-row">
+      <div class="avatar" style="background: #1A5276;">M</div>
+      <div class="author-info">
+        <strong>Musa Otieno</strong>
+        <span>Mwanza · Februari 2026</span>
+      </div>
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Amethibitishwa
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="stars">★★★★★</div>
+    <div class="book-tag">📘 Afya ya Mama na Mtoto</div>
+    <p class="quote-text">Kama daktari wa kawaida katika kijiji, kitabu hiki kimenisaidia sana kueleza mambo ya afya kwa wanawake wajawazito. Maelezo ni sahihi na rahisi kuelewa. Ninakipendekeza sana!</p>
+    <div class="author-row">
+      <div class="avatar" style="background: #6E2C00;">F</div>
+      <div class="author-info">
+        <strong>Fatuma Salehe</strong>
+        <span>Tabora · Machi 2026</span>
+      </div>
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Amethibitishwa
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="stars">★★★★☆</div>
+    <div class="book-tag">📗 Usimamizi wa Fedha</div>
+    <p class="quote-text">Nilianza kuweka akiba baada ya kusoma sehemu ya tatu ya kitabu. Mifano halisi ya Watanzania inafanya iwe rahisi kutumia masomo. Ninataka toleo la pili hivi karibuni!</p>
+    <div class="author-row">
+      <div class="avatar" style="background: #145A32;">R</div>
+      <div class="author-info">
+        <strong>Robert Kimaro</strong>
+        <span>Arusha · Machi 2026</span>
+      </div>
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Amethibitishwa
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="stars">★★★★★</div>
+    <div class="book-tag">📙 Jinsi ya Kutengeneza Sabuni</div>
+    <p class="quote-text">Mume wangu alikuwa ananisema biashara itashindwa — lakini baada ya kupata kitabu hiki, sasa tunauza sabuni mbio sana dukani. Fedha zinaingia! Mungu awabariki wanaoshiriki ujuzi huu.</p>
+    <div class="author-row">
+      <div class="avatar" style="background: #7D3C98;">G</div>
+      <div class="author-info">
+        <strong>Grace Msigwa</strong>
+        <span>Morogoro · Machi 2026</span>
+      </div>
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Amethibitishwa
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="stars">★★★★★</div>
+    <div class="book-tag">📘 Biashara ya Kuanzia Nyumbani</div>
+    <p class="quote-text">Nilikuwa naomba msaada wa kila wakati kutoka ndugu zangu. Kitabu hiki kinifundisha kujiamini. Sasa nina biashara yangu mwenyewe ya kuuza nguo, na ninaheshimiwa zaidi katika familia.</p>
+    <div class="author-row">
+      <div class="avatar" style="background: #922B21;">S</div>
+      <div class="author-info">
+        <strong>Saida Jumanne</strong>
+        <span>Dar es Salaam · Aprili 2026</span>
+      </div>
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Amethibitishwa
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="stars">★★★★★</div>
+    <div class="book-tag">📗 Kilimo cha Kisasa</div>
+    <p class="quote-text">Niliambia baba yangu aache njia za zamani za kulima, lakini yeye hakuamini. Nilimletea kitabu hiki na sasa anakisoma mwenyewe kila jioni! Mazao yetu yameongezeka mara mbili msimu huu.</p>
+    <div class="author-row">
+      <div class="avatar" style="background: #1B4F72;">H</div>
+      <div class="author-info">
+        <strong>Hassan Ndege</strong>
+        <span>Iringa · Aprili 2026</span>
+      </div>
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Amethibitishwa
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="stars">★★★★★</div>
+    <div class="book-tag">📙 Usimamizi wa Fedha</div>
+    <p class="quote-text">Kwa mara ya kwanza katika maisha yangu, ninaelewa jinsi ya kusimamia pesa zangu. Hii si kitabu cha masomo tu — ni mwongozo wa maisha. Thamani ya TSh 5,000 inajirudia mara nyingi sana.</p>
+    <div class="author-row">
+      <div class="avatar" style="background: #784212;">L</div>
+      <div class="author-info">
+        <strong>Leila Kombo</strong>
+        <span>Zanzibar · Aprili 2026</span>
+      </div>
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Amethibitishwa
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="stars">★★★★★</div>
+    <div class="book-tag">📘 Afya ya Mama na Mtoto</div>
+    <p class="quote-text">Nilipata kitabu hiki kupitia WhatsApp ya SadeBooks. Ndani ya dakika 10 nilikuwa ninakilisoma kwenye simu yangu. Maudhui ni sahihi, lugha ni safi — nakipendekeza kwa kila mama wa Tanzania.</p>
+    <div class="author-row">
+      <div class="avatar" style="background: #0E6655;">P</div>
+      <div class="author-info">
+        <strong>Pendo Mrema</strong>
+        <span>Kilimanjaro · Aprili 2026</span>
+      </div>
+      <div class="verified">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        Amethibitishwa
+      </div>
+    </div>
+  </div>
+
+</div><!-- /grid -->
+
+<!-- ── CTA ── -->
+<div class="cta-wrap">
+  <p>Je, wewe pia unataka kujisomea kabla ya kutoa maoni?</p>
+  <a href="https://sadebooks.com" class="btn">🛒 Nunua Kitabu – TSh 5,000</a>
+</div>
 
 </body>
 </html>
