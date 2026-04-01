@@ -19,6 +19,84 @@
 <!-- Canonical URL -->
 <link rel="canonical" href="https://hermansade3-cmd.github.io/sadebooks/">
     <title>Sade Books - Vitabu vya Kidigitali</title>
+    <!-- Pop-up ya Machaguo ya Kuingia -->
+    <style>
+      /* ── CHOICE OVERLAY ── */
+      #choiceOverlay {
+        position: fixed; inset: 0; z-index: 99999;
+        background: rgba(10,22,40,0.82);
+        backdrop-filter: blur(6px);
+        display: flex; align-items: center; justify-content: center;
+        padding: 20px;
+        animation: fadeOverlay 0.35s ease;
+      }
+      @keyframes fadeOverlay {
+        from { opacity: 0; } to { opacity: 1; }
+      }
+      #choiceOverlay.hide {
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .choice-card {
+        background: #112240;
+        border: 1px solid rgba(201,168,76,0.25);
+        border-radius: 22px;
+        padding: 36px 28px 28px;
+        max-width: 360px; width: 100%;
+        text-align: center;
+        box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+        animation: riseCard 0.4s cubic-bezier(.22,1,.36,1) both;
+      }
+      @keyframes riseCard {
+        from { opacity:0; transform: translateY(28px) scale(0.96); }
+        to   { opacity:1; transform: translateY(0) scale(1); }
+      }
+      .choice-logo { font-size: 2.4rem; margin-bottom: 10px; }
+      .choice-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.45rem; font-weight: 900;
+        color: #C9A84C; margin-bottom: 6px;
+      }
+      .choice-sub {
+        font-size: 0.82rem; color: rgba(245,240,232,0.55);
+        margin-bottom: 28px; line-height: 1.5;
+      }
+      .choice-btn {
+        display: block; width: 100%;
+        padding: 14px 20px; border-radius: 12px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.95rem; font-weight: 700;
+        cursor: pointer; text-decoration: none;
+        transition: all 0.22s; border: none; margin-bottom: 12px;
+      }
+      .choice-btn-primary {
+        background: linear-gradient(135deg, #C9A84C, #a07820);
+        color: #1A1208;
+        box-shadow: 0 6px 20px rgba(201,168,76,0.35);
+      }
+      .choice-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(201,168,76,0.5);
+      }
+      .choice-btn-secondary {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(245,240,232,0.18) !important;
+        color: rgba(245,240,232,0.8);
+      }
+      .choice-btn-secondary:hover {
+        background: rgba(255,255,255,0.1);
+        color: #f5f0e8;
+      }
+      .choice-divider {
+        display: flex; align-items: center; gap: 10px;
+        margin: 4px 0 12px;
+      }
+      .choice-divider::before, .choice-divider::after {
+        content: ''; flex: 1;
+        height: 1px; background: rgba(201,168,76,0.15);
+      }
+      .choice-divider span { font-size: 0.72rem; color: rgba(245,240,232,0.35); }
+    </style>
     <!-- Mwisho Firebase Auth -->
     <style>
     /* ===== ACCOUNT BUTTON ===== */
@@ -1041,6 +1119,25 @@ header h1 span {
 </head>
 <body>
   <!-- Loading screen (lazima iwe ndani ya body, si head) -->
+  <!-- Pop-up ya Machaguo -->
+  <div id="choiceOverlay">
+    <div class="choice-card">
+      <div class="choice-logo">📚</div>
+      <div class="choice-title">Karibu SadeBooks</div>
+      <div class="choice-sub">Duka la vitabu vya kidijitali kwa Kiswahili 🇹🇿</div>
+
+      <a href="login.html" class="choice-btn choice-btn-primary">
+        👤 Ingia / Jisajili na Account
+      </a>
+
+      <div class="choice-divider"><span>au</span></div>
+
+      <button class="choice-btn choice-btn-secondary" onclick="continueWithout()">
+        🚀 Endelea Bila Account
+      </button>
+    </div>
+  </div>
+
   <!-- Firebase Auth Check script -->
   <script type="module">
     import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -1058,60 +1155,87 @@ header h1 span {
 
     const auth = getAuth(app);
 
-    // Kama hajalogini kabla, peleka login mara moja bila kusubiri
-    if(!localStorage.getItem('sb_logged_in')){
-      window.location.replace("login.html");
+    // Funga pop-up kwa njia laini
+    function hideChoice() {
+      const ov = document.getElementById('choiceOverlay');
+      if (!ov) return;
+      ov.classList.add('hide');
+      setTimeout(() => ov && ov.remove(), 300);
     }
 
-    // Firebase inathibitisha nyuma ya pazia
-    onAuthStateChanged(auth,(user)=>{
-      if(!user){
-        localStorage.removeItem('sb_logged_in');
-        window.location.replace("login.html");
-      } else {
-        localStorage.setItem('sb_logged_in','1');
+    // Kama amechagua "Bila Account" awali, onyesha moja kwa moja
+    if (localStorage.getItem('sb_no_account') === '1') {
+      hideChoice();
+    }
 
-        // Weka taarifa za mtumiaji kwenye navbar
-        const name   = user.displayName || user.email.split("@")[0];
+    // Endelea bila account
+    window.continueWithout = () => {
+      localStorage.setItem('sb_no_account', '1');
+      localStorage.removeItem('sb_logged_in');
+      hideChoice();
+    };
+
+    // Firebase inathibitisha nyuma
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Ameingia — funga pop-up, onyesha taarifa
+        localStorage.setItem('sb_logged_in', '1');
+        localStorage.removeItem('sb_no_account');
+        hideChoice();
+
+        const name   = user.displayName || user.email.split('@')[0];
         const letter = name[0].toUpperCase();
 
-        const btn = document.getElementById("accountBtn");
-        btn.style.display = "flex";
-        document.getElementById("navShopBtn").style.display = "none";
+        const btn = document.getElementById('accountBtn');
+        if (btn) btn.style.display = 'flex';
+        const shopBtn = document.getElementById('navShopBtn');
+        if (shopBtn) shopBtn.style.display = 'none';
 
-        const navAv  = document.getElementById("navAvatar");
-        const dropAv = document.getElementById("dropAvatar");
-        if(user.photoURL){
-          navAv.innerHTML  = `<img src="${user.photoURL}" alt=""/>`;
-          dropAv.innerHTML = `<img src="${user.photoURL}" alt=""/>`;
+        const navAv  = document.getElementById('navAvatar');
+        const dropAv = document.getElementById('dropAvatar');
+        if (user.photoURL) {
+          if (navAv)  navAv.innerHTML  = `<img src="${user.photoURL}" alt=""/>`;
+          if (dropAv) dropAv.innerHTML = `<img src="${user.photoURL}" alt=""/>`;
         } else {
-          navAv.textContent  = letter;
-          dropAv.textContent = letter;
+          if (navAv)  navAv.textContent  = letter;
+          if (dropAv) dropAv.textContent = letter;
         }
 
-        document.getElementById("navName").textContent  = name.split(" ")[0];
-        document.getElementById("dropName").textContent  = name;
-        document.getElementById("dropEmail").textContent = user.email;
+        const navName   = document.getElementById('navName');
+        const dropName  = document.getElementById('dropName');
+        const dropEmail = document.getElementById('dropEmail');
+        if (navName)   navName.textContent   = name.split(' ')[0];
+        if (dropName)  dropName.textContent  = name;
+        if (dropEmail) dropEmail.textContent = user.email;
+
+      } else {
+        // Hajaingia — kama hakuchagua "bila account", onyesha pop-up
+        localStorage.removeItem('sb_logged_in');
+        if (localStorage.getItem('sb_no_account') !== '1') {
+          // Onyesha pop-up (tayari ipo kwenye HTML)
+        }
       }
     });
 
-    // Logout — futa cache pia
-    window.doLogout = async ()=>{
+    // Logout
+    window.doLogout = async () => {
       localStorage.removeItem('sb_logged_in');
+      localStorage.removeItem('sb_no_account');
       await signOut(auth);
-      window.location.replace("login.html");
+      // Onyesha pop-up tena baada ya kutoka
+      window.location.reload();
     };
 
     // Toggle dropdown
-    window.toggleDropdown = ()=>{
-      document.getElementById("accountDropdown").classList.toggle("show");
+    window.toggleDropdown = () => {
+      document.getElementById('accountDropdown').classList.toggle('show');
     };
 
     // Funga dropdown ukibonyeza nje
-    document.addEventListener("click",(e)=>{
-      const btn = document.getElementById("accountBtn");
-      const dd  = document.getElementById("accountDropdown");
-      if(btn && !btn.contains(e.target)) dd.classList.remove("show");
+    document.addEventListener('click', (e) => {
+      const btn = document.getElementById('accountBtn');
+      const dd  = document.getElementById('accountDropdown');
+      if (btn && dd && !btn.contains(e.target)) dd.classList.remove('show');
     });
   </script>
 
