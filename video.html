@@ -3,150 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapishi ya Kiswahili - Website Yangu</title>
+    <title>Jiko Modern | Mapishi 10 Bora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Mtindo wa jumla */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
+        :root {
+            --primary: #ff4757;
+            --secondary: #2f3542;
+            --accent: #ffa502;
+            --bg: #f1f2f6;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
-            color: #333;
+            padding: 0;
         }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--secondary);
+            overflow-x: hidden;
+        }
+
+        /* Header ya Kisasa */
         header {
-            text-align: center;
-            padding: 40px 0;
-            background: #e67e22;
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
             color: white;
-            border-radius: 8px;
-            margin-bottom: 30px;
+            padding: 60px 20px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+            margin-bottom: 40px;
         }
 
-        h1 { margin: 0; font-size: 2.5rem; }
-        p { font-size: 1.1rem; }
+        header h1 { font-size: 3rem; margin-bottom: 10px; }
+        header p { font-size: 1.2rem; opacity: 0.9; }
 
-        /* Mpangilio wa Video (Grid) */
+        /* Grid ya Video */
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: auto;
+            padding: 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
-        /* Kadi ya kila video */
-        .recipe-card {
-            background: white;
-            border-radius: 12px;
+        /* Kadi za Video (Glassmorphism) */
+        .v-card {
+            background: var(--card-bg);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .recipe-card:hover {
-            transform: translateY(-5px);
+        .v-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 71, 87, 0.15);
         }
 
-        /* Responsive Video Container */
-        .video-wrapper {
+        .v-header {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%; /* 16:9 */
             height: 0;
-            overflow: hidden;
         }
 
-        .video-wrapper iframe {
+        .v-header iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             border: 0;
         }
 
-        .recipe-info {
+        .v-body {
             padding: 20px;
         }
 
-        .recipe-info h3 {
-            margin: 0 0 10px 0;
-            color: #d35400;
+        .v-body h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #2f3542;
+        }
+
+        .tag {
+            background: #ff475715;
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
         }
 
         footer {
             text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #777;
+            padding: 50px 20px;
+            background: #2f3542;
+            color: white;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Jiko la Nyumbani</h1>
-        <p>Jifunze mapishi bora ya Kiswahili kutoka kwa wataalamu</p>
+        <h1>🍳 Jiko Modern</h1>
+        <p>Gundua ladha halisi ya Kiswahili kupitia video 10 bora</p>
     </header>
 
     <div class="container">
 
-        <div class="recipe-card">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/E_rRDWSTdXc" allowfullscreen></iframe>
-            </div>
-            <div class="recipe-info">
-                <h3>Pilau ya Kuku</h3>
-                <p>Namna ya kupika pilau yenye harufu nzuri na ladha halisi bila kutumia viungo vingi vya duka.</p>
-            </div>
-        </div>
-
-        <div class="recipe-card">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/4RjqR0DBQu8" allowfullscreen></iframe>
-            </div>
-            <div class="recipe-info">
-                <h3>Chapati Laini</h3>
-                <p>Siri ya kutengeneza chapati za kusukuma zinazovunjika zenyewe na kukaa laini kwa muda mrefu.</p>
+        <div class="v-card">
+            <div class="v-header"><iframe src="https://www.youtube.com/embed/E_rRDWSTdXc"></iframe></div>
+            <div class="v-body">
+                <span class="tag">Chakula Kikuu</span>
+                <h3>Pilau ya Kuku Tamu</h3>
+                <p>Njia rahisi ya kupika pilau yenye harufu nzuri bila kuunguza viungo.</p>
             </div>
         </div>
 
-        <div class="recipe-card">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/BiZgShc9jL8" allowfullscreen></iframe>
+        <div class="v-card">
+            <div class="v-header"><iframe src="https://www.youtube.com/embed/4RjqR0DBQu8"></iframe></div>
+            <div class="v-body">
+                <span class="tag">Vitafunio</span>
+                <h3>Chapati za Kusukuma</h3>
+                <p>Siri ya kupata chapati laini zenye matabaka mengi.</p>
             </div>
-            <div class="recipe-info">
+        </div>
+
+        <div class="v-card">
+            <div class="v-header"><iframe src="https://www.youtube.com/embed/BiZgShc9jL8"></iframe></div>
+            <div class="v-body">
+                <span class="tag">Mlo wa Sherehe</span>
                 <h3>Mandi ya Mbuzi</h3>
-                <p>Pata ladha ya kipekee ya wali wa Mandi uliopikwa kitaalamu na nyama ya mbuzi laini.</p>
+                <p>Ladha ya kipekee ya wali wa mandi uliopikwa kitaalamu.</p>
             </div>
         </div>
 
-        <div class="recipe-card">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/M9sR298XFbc" allowfullscreen></iframe>
-            </div>
-            <div class="recipe-info">
+        <div class="v-card">
+            <div class="v-header"><iframe src="https://www.youtube.com/embed/M9sR298XFbc"></iframe></div>
+            <div class="v-body">
+                <span class="tag">Special</span>
                 <h3>Sambusa za Nyama</h3>
-                <p>Jifunze kukunja sambusa na kutengeneza mandanda (shits) bora kwa ajili ya biashara au nyumbani.</p>
+                <p>Jifunze kukunja sambusa na kupata mandanda ya kukausha.</p>
             </div>
         </div>
 
-        <div class="recipe-card">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/L35g8RF2Q5c" allowfullscreen></iframe>
-            </div>
-            <div class="recipe-info">
+        <div class="v-card">
+            <div class="v-header"><iframe src="https://www.youtube.com/embed/L35g8RF2Q5c"></iframe></div>
+            <div class="v-body">
+                <span class="tag">Pwani</span>
                 <h3>Wali wa Nazi</h3>
-                <p>Pishi rahisi la wali wa nazi unaonukia vizuri, unaoendana na mchuzi wa samaki au maharage.</p>
+                <p>Pishi rahisi linaloendana na mchuzi wa samaki au maharage.</p>
+            </div>
+        </div>
+
+        <div class="v-card">
+            <div class="v-header"><iframe src="https://www.youtube.com/embed/G3gmgVugRmQ"></iframe></div>
+            <div class="v-body">
+                <span class="tag">Chakula Kikuu</span>
+                <h3>Biryani ya Nyama</h3>
+                <p>Jinsi ya kupika biryani ya kishua yenye rosta nzito na tamu.</p>
+            </div>
+        </div>
+
+        <div class="v-card">
+            <div class="v-header"><iframe src="https://www.youtube.com/embed/i4ZhHmXiPdM"></iframe></div>
+            <div class="v-body">
+                <span class="tag">Breakfast</span>
+                <h3>Vitumbua vya Mchele</h3>
+                <p>Siri ya vitumbua laini vinavyoyeyuka mdomoni.</p>
+            </div>
+        </div>
+
+        <div class="v-card">
+            <div class="v-header"><iframe src="https://www.youtube.com/embed/ttLDUefJbt0"></iframe></div>
+            <div class="v-body">
+                <span class="tag">Zanzibar Style</span>
+                <h3>Kuku wa Kupaka</h3>
+                <p>Kuku wa kupakwa tui zito la nazi—ladha halisi ya Zanzibar.</p>
+            </div>
+        </div>
+
+        <div class="v-card">
+            <div class="v-header"><iframe src="https://www.youtube.com/embed/7RUfbVO3V4g"></iframe></div>
+            <div class="v-body">
+                <span class="tag">Vitafunio</span>
+                <h3>Bagia za Dengu</h3>
+                <p>Jinsi ya kupika bagia kavu na zenye ladha ya viungo.</p>
+            </div>
+        </div>
+
+        <div class="v-card">
+            <div class="v-header"><iframe src="https://www.youtube.com/embed/jrAsZpX2IOM"></iframe></div>
+            <div class="v-body">
+                <span class="tag">Seafood</span>
+                <h3>Mchuzi wa Samaki wa Nazi</h3>
+                <p>Pata mchuzi wa nazi mtamu sana kwa ajili ya kuliwa na wali.</p>
             </div>
         </div>
 
     </div>
 
     <footer>
-        &copy; 2024 Mapishi Yangu Website. Haki zote zimehifadhiwa.
+        <p>&copy; Sadebooks, ❤️ 2026 Jiko Modern | Mapishi Yako Kiganjani</p>
     </footer>
 
 </body>
-</html>
+                    </html>
+    
