@@ -1,174 +1,124 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video za Biashara na Vyakula - Sadebooks</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video za Biashara na Vyakula - Sadebooks</title>
 
-<style>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
 
-body{
-font-family:Arial, sans-serif;
-background:#f5f5f5;
-margin:0;
-padding:0;
-}
+        h1 {
+            text-align: center;
+            padding: 30px;
+            background: #1a1a1a;
+            color: white;
+            margin: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
 
-h1{
-text-align:center;
-padding:20px;
-background:#111;
-color:white;
-}
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 40px 20px;
+            max-width: 1300px;
+            margin: auto;
+        }
 
-.video-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:30px;
-max-width:1200px;
-margin:auto;
-}
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.video-card{
-background:white;
-border-radius:10px;
-overflow:hidden;
-box-shadow:0 5px 15px rgba(0,0,0,0.15);
-transition:transform 0.3s;
-}
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
 
-.video-card:hover{
-transform:scale(1.05);
-}
+        video {
+            width: 100%;
+            height: 200px; /* Inafanya kadi zote ziwe na urefu sawa */
+            object-fit: cover; /* Inazuia video zisijivute vibaya */
+            display: block;
+            background: #000;
+        }
 
-video{
-width:100%;
-height:auto;
-display:block;
-}
+        .video-title {
+            padding: 15px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.1rem;
+            border-top: 1px solid #eee;
+        }
 
-.video-title{
-padding:10px;
-font-weight:bold;
-text-align:center;
-}
-
-</style>
+        /* Responsive kwa simu */
+        @media (max-width: 600px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Video za Biashara, Ujasiriamali na Vyakula</h1>
+    <h1>Video za Biashara, Ujasiriamali na Vyakula</h1>
 
-<div class="video-grid">
+    <div class="video-grid">
 
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/371433640.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Kupika Chakula cha Biashara</div>
-</div>
+        <div class="video-card">
+            <video controls poster="https://images.pexels.com/photos/2284166/pexels-photo-2284166.jpeg?auto=compress&cs=tinysrgb&w=600">
+                <source src="https://videos.pexels.com/video-files/3754637/3754637-sd_640_360_25fps.mp4" type="video/mp4">
+                Browser yako haisupport video hizi.
+            </video>
+            <div class="video-title">Mbinu za Kupika Kitaalamu</div>
+        </div>
 
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/434045526.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Mjasiriamali Akifanya Kazi</div>
-</div>
+        <div class="video-card">
+            <video controls poster="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600">
+                <source src="https://videos.pexels.com/video-files/3129595/3129595-sd_640_360_30fps.mp4" type="video/mp4">
+            </video>
+            <div class="video-title">Mjasiriamali Kazini</div>
+        </div>
 
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/3959545.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Business Meeting</div>
-</div>
+        <div class="video-card">
+            <video controls poster="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600">
+                <source src="https://videos.pexels.com/video-files/3195444/3195444-sd_640_360_25fps.mp4" type="video/mp4">
+            </video>
+            <div class="video-title">Usimamizi wa Mgahawa</div>
+        </div>
 
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/4089092.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Kuanzisha Biashara</div>
-</div>
+        <div class="video-card">
+            <video controls poster="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=600">
+                <source src="https://videos.pexels.com/video-files/3143371/3143371-sd_640_360_25fps.mp4" type="video/mp4">
+            </video>
+            <div class="video-title">Mipango ya Biashara</div>
+        </div>
 
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/4206981.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Kupika Restaurant</div>
-</div>
+        <div class="video-card">
+            <video controls poster="https://images.pexels.com/photos/461060/pexels-photo-461060.jpeg?auto=compress&cs=tinysrgb&w=600">
+                <source src="https://videos.pexels.com/video-files/4255477/4255477-sd_640_360_25fps.mp4" type="video/mp4">
+            </video>
+            <div class="video-title">Biashara ya Bakery</div>
+        </div>
 
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/371433652.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Chef Akipika</div>
-</div>
+        <div class="video-card">
+            <video controls poster="https://images.pexels.com/photos/8867431/pexels-photo-8867431.jpeg?auto=compress&cs=tinysrgb&w=600">
+                <source src="https://videos.pexels.com/video-files/8867661/8867661-sd_640_360_25fps.mp4" type="video/mp4">
+            </video>
+            <div class="video-title">Huduma kwa Wateja</div>
+        </div>
 
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/371433649.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Food Business</div>
-</div>
-
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/4038519.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Entrepreneur Work</div>
-</div>
-
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/3843433.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Kitchen Work</div>
-</div>
-
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/3987544.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Small Business</div>
-</div>
-
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/371433654.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Restaurant Business</div>
-</div>
-
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/4048863.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Cooking Skills</div>
-</div>
-
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/4038531.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Startup Business</div>
-</div>
-
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/4149056.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Kitchen Restaurant</div>
-</div>
-
-<div class="video-card">
-<video controls>
-<source src="https://player.vimeo.com/external/3129595.sd.mp4" type="video/mp4">
-</video>
-<div class="video-title">Food Preparation</div>
-</div>
-
-</div>
+    </div>
 
 </body>
 </html>
