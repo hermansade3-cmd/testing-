@@ -19,32 +19,6 @@
 <!-- Canonical URL -->
 <link rel="canonical" href="https://hermansade3-cmd.github.io/sadebooks/">
     <title>Sade Books - Vitabu vya Kidigitali</title>
-    <!-- Firebase Auth Check -->
-    <style>
-      #auth-loader{
-        position:fixed;inset:0;z-index:99999;
-        background:#0a1628;
-        display:flex;flex-direction:column;
-        align-items:center;justify-content:center;
-        gap:16px;
-      }
-      #auth-loader .logo{
-        font-size:2rem;font-weight:900;
-        font-family:Georgia,serif;
-        color:#C9A84C;letter-spacing:2px;
-      }
-      #auth-loader .dot-spin{
-        display:flex;gap:8px;
-      }
-      #auth-loader .dot-spin span{
-        width:10px;height:10px;border-radius:50%;
-        background:#C9A84C;opacity:0.3;
-        animation:blink 1.2s infinite;
-      }
-      #auth-loader .dot-spin span:nth-child(2){animation-delay:0.2s}
-      #auth-loader .dot-spin span:nth-child(3){animation-delay:0.4s}
-      @keyframes blink{0%,80%,100%{opacity:0.3}40%{opacity:1}}
-    </style>
     <!-- Mwisho Firebase Auth -->
     <style>
     /* ===== ACCOUNT BUTTON ===== */
@@ -129,6 +103,9 @@
       gtag('config', 'G-DK6W813MF2');
     </script>
     <!-- Mwisho wa Google Analytics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1064,10 +1041,6 @@ header h1 span {
 </head>
 <body>
   <!-- Loading screen (lazima iwe ndani ya body, si head) -->
-  <div id="auth-loader">
-    <div class="logo">📚 SadeBooks</div>
-    <div class="dot-spin"><span></span><span></span><span></span></div>
-  </div>
   <!-- Firebase Auth Check script -->
   <script type="module">
     import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -1085,23 +1058,28 @@ header h1 span {
 
     const auth = getAuth(app);
 
+    // Kama hajalogini kabla, peleka login mara moja bila kusubiri
+    if(!localStorage.getItem('sb_logged_in')){
+      window.location.replace("login.html");
+    }
+
+    // Firebase inathibitisha nyuma ya pazia
     onAuthStateChanged(auth,(user)=>{
       if(!user){
-        window.location.href="login.html";
+        localStorage.removeItem('sb_logged_in');
+        window.location.replace("login.html");
       } else {
-        document.getElementById("auth-loader").remove();
+        localStorage.setItem('sb_logged_in','1');
 
         // Weka taarifa za mtumiaji kwenye navbar
-        const name  = user.displayName || user.email.split("@")[0];
+        const name   = user.displayName || user.email.split("@")[0];
         const letter = name[0].toUpperCase();
 
-        // Nav button
         const btn = document.getElementById("accountBtn");
         btn.style.display = "flex";
         document.getElementById("navShopBtn").style.display = "none";
 
-        // Avatar — picha au herufi
-        const navAv = document.getElementById("navAvatar");
+        const navAv  = document.getElementById("navAvatar");
         const dropAv = document.getElementById("dropAvatar");
         if(user.photoURL){
           navAv.innerHTML  = `<img src="${user.photoURL}" alt=""/>`;
@@ -1117,10 +1095,11 @@ header h1 span {
       }
     });
 
-    // Logout
+    // Logout — futa cache pia
     window.doLogout = async ()=>{
+      localStorage.removeItem('sb_logged_in');
       await signOut(auth);
-      window.location.href="login.html";
+      window.location.replace("login.html");
     };
 
     // Toggle dropdown
@@ -1586,7 +1565,7 @@ header h1 span {
             <!-- 1. Ujasiriamali: Wakati wa Uchumi -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/wakati wa ujasiriamali.png" alt="Wakati wa Ujasiriamali" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/wakati wa ujasiriamali.png" alt="Wakati wa Ujasiriamali" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                     <div class="book-badge" style="background:#f59e0b;color:#000;font-size:0.6rem;padding:3px 8px;">⭐ Maarufu</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
@@ -1606,7 +1585,7 @@ header h1 span {
             <!-- 2. Changamoto 12 za Ujasiriamali -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/changamoto 12 za ujasiriamali.png" alt="Changamoto 12 za Ujasiriamali" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/changamoto 12 za ujasiriamali.png" alt="Changamoto 12 za Ujasiriamali" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                     <div class="book-badge" style="background:#ef4444;color:#fff;font-size:0.6rem;padding:3px 8px;">🔥 Hot</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
@@ -1626,7 +1605,7 @@ header h1 span {
             <!-- 3. Tofauti 10: Mwajiriwa vs Mjasiriamali -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/Mwajiriwa vs mjasiriamali.png" alt="Mwajiriwa vs Mjasiriamali" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/Mwajiriwa vs mjasiriamali.png" alt="Mwajiriwa vs Mjasiriamali" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                     <div class="book-badge" style="background:#22c55e;color:#fff;font-size:0.6rem;padding:3px 8px;">✨ Mpya</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
@@ -1646,7 +1625,7 @@ header h1 span {
             <!-- 4. Jinsi ya Kutengeneza Batiki -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/file_00000000021c722f88af921c27198e07.png" alt="Jinsi ya Kutengeneza Batiki" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/file_00000000021c722f88af921c27198e07.png" alt="Jinsi ya Kutengeneza Batiki" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
                     <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
@@ -1665,7 +1644,7 @@ header h1 span {
             <!-- 5. Jinsi ya Kutengeneza Chaki -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/Chaki.jpg" alt="Jinsi ya Kutengeneza Chaki" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/Chaki.jpg" alt="Jinsi ya Kutengeneza Chaki" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
                     <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
@@ -1684,7 +1663,7 @@ header h1 span {
             <!-- 6. Jinsi ya Kupika Keki -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/nanasi na ndizi.jpg" alt="Jinsi ya Kupika Keki ya Ndizi na Nanasi" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/nanasi na ndizi.jpg" alt="Jinsi ya Kupika Keki ya Ndizi na Nanasi" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                     <div class="book-badge" style="background:#f59e0b;color:#000;font-size:0.6rem;padding:3px 8px;">⭐ Maarufu</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
@@ -1704,7 +1683,7 @@ header h1 span {
             <!-- 7. Utengenezaji wa Mishumaa -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/mshumaa.jpg" alt="Utengenezaji wa Mishumaa" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/mshumaa.jpg" alt="Utengenezaji wa Mishumaa" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
                     <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
@@ -1723,7 +1702,7 @@ header h1 span {
             <!-- 8. Achali ya Embe -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/Achali ya embe.png" alt="Jinsi ya Kutengeneza Achali ya Embe" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/Achali ya embe.png" alt="Jinsi ya Kutengeneza Achali ya Embe" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                     <div class="book-badge" style="background:#22c55e;color:#fff;font-size:0.6rem;padding:3px 8px;">✨ Mpya</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
@@ -1743,7 +1722,7 @@ header h1 span {
             <!-- 9. Tomato Source -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/Tomato souce.jpg" alt="Jinsi ya Kutengeneza Tomato Source" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/Tomato souce.jpg" alt="Jinsi ya Kutengeneza Tomato Source" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                     <div class="book-badge" style="background:#ef4444;color:#fff;font-size:0.6rem;padding:3px 8px;">🔥 Hot</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
@@ -1763,7 +1742,7 @@ header h1 span {
             <!-- 10. Sabuni ya Magadi -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/sabuni ya magadi.png" alt="Jinsi ya Kutengeneza Sabuni ya Magadi" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/sabuni ya magadi.png" alt="Jinsi ya Kutengeneza Sabuni ya Magadi" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
                     <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
@@ -1782,7 +1761,7 @@ header h1 span {
             <!-- 11. Tambi za Dengu -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/tambi.jpg" alt="Jinsi ya Kupika Tambi za Dengu" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/tambi.jpg" alt="Jinsi ya Kupika Tambi za Dengu" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
                     <div class="book-category" style="font-size:0.6rem;">Chakula</div>
@@ -1801,7 +1780,7 @@ header h1 span {
             <!-- 12. Jiki/Dawa ya Madoa -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/Jiki.png" alt="Jinsi ya Kutengeneza Jiki" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/Jiki.png" alt="Jinsi ya Kutengeneza Jiki" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                     <div class="book-badge" style="background:#22c55e;color:#fff;font-size:0.6rem;padding:3px 8px;">✨ Mpya</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
@@ -1821,7 +1800,7 @@ header h1 span {
             <!-- 13. Shampoo -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/shampoo.jpg" alt="Jinsi ya Kutengeneza Shampoo" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/shampoo.jpg" alt="Jinsi ya Kutengeneza Shampoo" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
                     <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
@@ -1840,7 +1819,7 @@ header h1 span {
             <!-- 14. Mafuta ya Kujipaka (Mgando) -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/mafuta ya mgando.jpg" alt="Jinsi ya Kutengeneza Mafuta ya Mgando" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/mafuta ya mgando.jpg" alt="Jinsi ya Kutengeneza Mafuta ya Mgando" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
                     <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
@@ -1859,7 +1838,7 @@ header h1 span {
             <!-- 15. Sabuni ya Maji -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/file_00000000de5c722f98de83031d1b0ef1.png" alt="Jinsi ya Kutengeneza Sabuni ya Maji" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/file_00000000de5c722f98de83031d1b0ef1.png" alt="Jinsi ya Kutengeneza Sabuni ya Maji" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                     <div class="book-badge" style="background:#ef4444;color:#fff;font-size:0.6rem;padding:3px 8px;">🔥 Hot</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
@@ -1879,7 +1858,7 @@ header h1 span {
             <!-- 16. Sabuni za Miche (Bar Soap) -->
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
-                    <img src="images/file_000000009ee871f5afaee98cea8417cc.png" alt="Jinsi ya Kutengeneza Sabuni za Miche" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
+                    <img loading="lazy" src="images/file_000000009ee871f5afaee98cea8417cc.png" alt="Jinsi ya Kutengeneza Sabuni za Miche" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                     <div class="book-badge" style="background:#f59e0b;color:#000;font-size:0.6rem;padding:3px 8px;">⭐ Maarufu</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
