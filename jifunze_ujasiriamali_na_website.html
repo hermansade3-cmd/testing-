@@ -3,358 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- SEO Meta Tags -->
 <meta name="description" content="Jifunze Ujasiriamali na Kuunda Website kwa Kiswahili - SadeBooks. Vitabu vya biashara online, teknolojia, coding na ujasiriamali wa kisasa. Bei TSH 5,000 Tanzania.">
 <meta name="keywords" content="ujasiriamali website kiswahili, jifunze coding kiswahili, biashara online tanzania, vitabu teknolojia kiswahili, kuunda website vitabu, sadebooks ujasiriamali">
 <meta name="author" content="SadeBooks">
 <meta name="robots" content="index, follow">
-
-<!-- Open Graph -->
 <meta property="og:title" content="Jifunze Ujasiriamali na Website - SadeBooks">
 <meta property="og:description" content="Vitabu vya ujasiriamali wa kisasa na teknolojia kwa Kiswahili. Jifunze kuunda website na biashara online. Bei TSH 5,000 tu!">
 <meta property="og:url" content="https://hermansade3-cmd.github.io/sadebooks/jifunze_ujasiriamali_na_website.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="sw_TZ">
-
-<!-- Canonical URL -->
 <link rel="canonical" href="https://hermansade3-cmd.github.io/sadebooks/jifunze_ujasiriamali_na_website.html">
-
 <title>Jifunze Ujasiriamali na Kuunda Website kwa Kiswahili | SadeBooks Tanzania</title>
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-
 :root{
-  --bg:#f0f4ff;
-  --white:#ffffff;
-  --dark:#0a0f1e;
-  --dark2:#111827;
-  --blue:#1d4ed8;
-  --blue2:#2563eb;
-  --blue3:#3b82f6;
-  --blue-pale:#eff6ff;
-  --blue-mid:#dbeafe;
-  --gold:#f59e0b;
-  --text:#0f172a;
-  --muted:#64748b;
-  --border:#e2e8f0;
-  --font:'Sora',sans-serif;
-  --mono:'JetBrains Mono',monospace;
+  --bg:#f0f4ff;--white:#ffffff;--dark:#0a0f1e;--dark2:#111827;
+  --blue:#1d4ed8;--blue2:#2563eb;--blue3:#3b82f6;--blue-pale:#eff6ff;
+  --blue-mid:#dbeafe;--gold:#f59e0b;--text:#0f172a;--muted:#64748b;
+  --border:#e2e8f0;--font:'Sora',sans-serif;--mono:'JetBrains Mono',monospace;
 }
-
 html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;}
 
-body{
-  font-family:var(--font);
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-}
-
-/* ── TOP NAV ── */
-.topnav{
-  position:sticky;top:0;z-index:200;
-  background:rgba(10,15,30,0.96);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(255,255,255,0.07);
-  padding:0 2rem;
-  height:62px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:1rem;
-}
-.topnav-brand{
-  font-family:var(--font);font-weight:800;font-size:1.2rem;
-  color:#fff;letter-spacing:-0.02em;white-space:nowrap;
-}
+/* TOP NAV */
+.topnav{position:sticky;top:0;z-index:200;background:rgba(10,15,30,0.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.07);padding:0 2rem;height:62px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.topnav-brand{font-family:var(--font);font-weight:800;font-size:1.2rem;color:#fff;letter-spacing:-0.02em;white-space:nowrap;}
 .topnav-brand em{color:var(--gold);font-style:normal;}
-.topnav-tabs{
-  display:flex;gap:0.3rem;
-  background:rgba(255,255,255,0.06);
-  border-radius:12px;padding:4px;
-}
-.topnav-tab{
-  padding:0.45rem 1.2rem;border-radius:9px;
-  font-size:0.82rem;font-weight:600;
-  cursor:pointer;border:none;
-  background:transparent;color:rgba(255,255,255,0.55);
-  transition:all 0.2s;font-family:var(--font);
-}
+.topnav-tabs{display:flex;gap:0.3rem;background:rgba(255,255,255,0.06);border-radius:12px;padding:4px;}
+.topnav-tab{padding:0.45rem 1.2rem;border-radius:9px;font-size:0.82rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,0.55);transition:all 0.2s;font-family:var(--font);}
 .topnav-tab.active{background:#fff;color:var(--dark);}
 .topnav-tab:hover:not(.active){color:#fff;background:rgba(255,255,255,0.1);}
-/* ── HERO BANNER ── */
-.hero{
-  background:linear-gradient(135deg,#0a0f1e 0%,#0d1a3e 40%,#1a2a6e 70%,#1d4ed8 100%);
-  padding:4rem 2rem 3.5rem;
-  text-align:center;position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background-image:radial-gradient(rgba(59,130,246,0.12) 1px,transparent 1px);
-  background-size:32px 32px;
-}
-.hero::after{
-  content:'';position:absolute;
-  bottom:-60px;left:50%;transform:translateX(-50%);
-  width:600px;height:200px;
-  background:radial-gradient(ellipse,rgba(59,130,246,0.2) 0%,transparent 70%);
-  pointer-events:none;
-}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0a0f1e 0%,#0d1a3e 40%,#1a2a6e 70%,#1d4ed8 100%);padding:4rem 2rem 3.5rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(59,130,246,0.12) 1px,transparent 1px);background-size:32px 32px;}
+.hero::after{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:600px;height:200px;background:radial-gradient(ellipse,rgba(59,130,246,0.2) 0%,transparent 70%);pointer-events:none;}
 .hero-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:0.4rem;
-  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
-  border-radius:100px;padding:0.3rem 1rem;
-  font-size:0.7rem;font-weight:700;letter-spacing:0.12em;
-  text-transform:uppercase;color:rgba(255,255,255,0.75);
-  margin-bottom:1.2rem;
-}
-.hero-title{
-  font-size:clamp(1.8rem,5vw,3.2rem);font-weight:800;
-  color:#fff;letter-spacing:-0.03em;line-height:1.1;
-  margin-bottom:0.8rem;
-}
+.hero-tag{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:0.3rem 1rem;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:1.2rem;}
+.hero-title{font-size:clamp(1.8rem,5vw,3.2rem);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:0.8rem;}
 .hero-title em{color:var(--gold);font-style:normal;}
-.hero-sub{
-  font-size:0.9rem;color:rgba(255,255,255,0.55);
-  line-height:1.7;max-width:500px;margin:0 auto;
-}
-.hero-stats{
-  display:flex;justify-content:center;gap:2.5rem;
-  margin-top:2rem;flex-wrap:wrap;
-}
+.hero-sub{font-size:0.9rem;color:rgba(255,255,255,0.55);line-height:1.7;max-width:500px;margin:0 auto;}
+.hero-stats{display:flex;justify-content:center;gap:2.5rem;margin-top:2rem;flex-wrap:wrap;}
 .hero-stat{text-align:center;}
-.hero-stat-num{
-  font-family:var(--mono);font-size:1.6rem;font-weight:600;
-  color:#fff;
-}
+.hero-stat-num{font-family:var(--mono);font-size:1.6rem;font-weight:600;color:#fff;}
 .hero-stat-label{font-size:0.68rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;}
 
-/* ── SECTION TABS ── */
-.section-nav{
-  background:var(--dark2);
-  border-bottom:1px solid rgba(255,255,255,0.06);
-  display:flex;justify-content:center;gap:0;
-  position:sticky;top:62px;z-index:100;
-  overflow-x:auto;scrollbar-width:none;
-}
+/* SECTION NAV */
+.section-nav{background:var(--dark2);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;justify-content:center;gap:0;position:sticky;top:62px;z-index:100;overflow-x:auto;scrollbar-width:none;}
 .section-nav::-webkit-scrollbar{display:none;}
-.snav-btn{
-  display:flex;align-items:center;gap:0.5rem;
-  padding:1rem 2rem;
-  background:transparent;border:none;
-  color:rgba(255,255,255,0.45);
-  font-family:var(--font);font-size:0.85rem;font-weight:600;
-  cursor:pointer;transition:all 0.2s;
-  border-bottom:3px solid transparent;white-space:nowrap;
-}
+.snav-btn{display:flex;align-items:center;gap:0.5rem;padding:1rem 2rem;background:transparent;border:none;color:rgba(255,255,255,0.45);font-family:var(--font);font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;border-bottom:3px solid transparent;white-space:nowrap;}
 .snav-btn:hover{color:rgba(255,255,255,0.8);}
 .snav-btn.active{color:#fff;border-bottom-color:var(--blue3);}
 .snav-divider{width:1px;background:rgba(255,255,255,0.06);margin:0.7rem 0;}
 
-/* ── SECTION PANEL ── */
+/* SECTION PANEL */
 .section-panel{display:none;}
 .section-panel.active{display:block;}
 
-/* ── FILTER BAR ── */
-.filter-bar{
-  background:var(--white);
-  border-bottom:1px solid var(--border);
-  padding:0.9rem 2rem;
-  display:flex;align-items:center;gap:0.6rem;
-  flex-wrap:wrap;
-}
-.filter-label{
-  font-size:0.7rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:0.1em;color:var(--muted);margin-right:0.3rem;
-}
-.filter-btn{
-  padding:0.4rem 0.9rem;border-radius:8px;
-  border:1.5px solid var(--border);background:var(--bg);
-  color:var(--muted);font-family:var(--font);font-size:0.78rem;
-  font-weight:600;cursor:pointer;transition:all 0.18s;
-}
-.filter-btn:hover,.filter-btn.active{
-  border-color:var(--blue3);color:var(--blue2);
-  background:var(--blue-pale);
-}
-.filter-count{
-  margin-left:auto;font-size:0.75rem;color:var(--muted);
-  white-space:nowrap;
-}
+/* FILTER BAR */
+.filter-bar{background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;}
+.filter-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-right:0.3rem;}
+.filter-btn{padding:0.4rem 0.9rem;border-radius:8px;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);font-family:var(--font);font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.18s;}
+.filter-btn:hover,.filter-btn.active{border-color:var(--blue3);color:var(--blue2);background:var(--blue-pale);}
+.filter-count{margin-left:auto;font-size:0.75rem;color:var(--muted);white-space:nowrap;}
 
-/* ── BOOKS GRID ── */
-.books-section{
-  padding:2rem;
-  max-width:1400px;margin:0 auto;
-}
-.books-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:1.2rem;
-}
+/* BOOKS GRID */
+.books-section{padding:2rem;max-width:1400px;margin:0 auto;}
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;}
 
-/* ── BOOK CARD ── */
-.book-card{
-  background:var(--white);
-  border:1.5px solid var(--border);
-  border-radius:18px;
-  overflow:hidden;
-  transition:all 0.28s cubic-bezier(0.23,1,0.32,1);
-  position:relative;
-}
-.book-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 40px rgba(29,78,216,0.12);
-  border-color:#bfdbfe;
-}
-.book-cover{
-  height:140px;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:6px;position:relative;overflow:hidden;
-}
-.book-cover::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,0.3) 100%);
-}
-.book-emoji{font-size:2.4rem;position:relative;z-index:2;}
-.book-cover-title{
-  font-size:0.52rem;color:rgba(255,255,255,0.85);font-weight:600;
-  text-align:center;padding:0 8px;position:relative;z-index:2;
-  line-height:1.3;
-}
-.book-badge{
-  position:absolute;top:8px;right:8px;z-index:3;
-  padding:2px 8px;border-radius:100px;
-  font-size:0.58rem;font-weight:700;
-}
+/* BOOK CARD */
+.book-card{background:var(--white);border:1.5px solid var(--border);border-radius:18px;overflow:hidden;transition:all 0.28s cubic-bezier(0.23,1,0.32,1);position:relative;}
+.book-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(29,78,216,0.12);border-color:#bfdbfe;}
+
+/* COVER with real image */
+.book-cover{height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:relative;overflow:hidden;}
+.book-cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;}
+.book-card:hover .book-cover-img{transform:scale(1.06);}
+.book-cover-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.55) 100%);}
+.book-emoji{font-size:2.4rem;position:relative;z-index:2;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.5));}
+.book-cover-title{font-size:0.58rem;color:rgba(255,255,255,0.9);font-weight:700;text-align:center;padding:0 8px;position:relative;z-index:2;line-height:1.3;text-shadow:0 1px 4px rgba(0,0,0,0.5);}
+.book-badge{position:absolute;top:8px;right:8px;z-index:3;padding:2px 8px;border-radius:100px;font-size:0.58rem;font-weight:700;}
 .badge-new{background:#22c55e;color:#fff;}
 .badge-hot{background:#ef4444;color:#fff;}
 .badge-top{background:var(--gold);color:#0a0f1e;}
 
 .book-body{padding:0.9rem;}
-.book-cat{
-  font-size:0.58rem;font-weight:700;letter-spacing:0.12em;
-  text-transform:uppercase;color:var(--blue2);margin-bottom:0.3rem;
-}
-.book-title{
-  font-size:0.82rem;font-weight:700;color:var(--text);
-  line-height:1.3;margin-bottom:0.7rem;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-}
-.book-footer{
-  display:flex;align-items:center;justify-content:space-between;gap:0.5rem;
-}
-.book-price{
-  display:flex;flex-direction:column;
-}
+.book-cat{font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue2);margin-bottom:0.3rem;}
+.book-title{font-size:0.82rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:0.5rem;}
+.book-desc{font-size:0.72rem;color:var(--muted);line-height:1.55;margin-bottom:0.7rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.book-footer{display:flex;align-items:center;justify-content:space-between;gap:0.5rem;}
+.book-price{display:flex;flex-direction:column;}
 .price-label{font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
-.price-val{
-  font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--text);
-  line-height:1.1;
-}
-
-/* ── ACTIONS ── */
+.price-val{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--text);line-height:1.1;}
 .book-actions{display:flex;align-items:center;gap:0.4rem;}
-
-.btn-buy{
-  background:var(--blue2);color:#fff;
-  border:none;border-radius:9px;
-  padding:0.45rem 0.85rem;
-  font-family:var(--font);font-size:0.75rem;font-weight:700;
-  cursor:pointer;transition:all 0.2s;text-decoration:none;
-  display:inline-block;white-space:nowrap;
-}
+.btn-buy{background:var(--blue2);color:#fff;border:none;border-radius:9px;padding:0.45rem 0.85rem;font-family:var(--font);font-size:0.75rem;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;white-space:nowrap;}
 .btn-buy:hover{background:var(--blue);transform:translateY(-1px);}
 
-/* ── SECTION HEADER STRIP ── */
-.section-strip{
-  padding:2.5rem 2rem 0.5rem;
-  max-width:1400px;margin:0 auto;
-  display:flex;align-items:flex-end;justify-content:space-between;
-  flex-wrap:wrap;gap:1rem;
-}
-.strip-left{}
-.strip-badge{
-  display:inline-flex;align-items:center;gap:0.4rem;
-  padding:0.28rem 0.9rem;border-radius:100px;
-  font-size:0.65rem;font-weight:700;letter-spacing:0.12em;
-  text-transform:uppercase;margin-bottom:0.5rem;
-}
-.strip-title{
-  font-size:clamp(1.3rem,3vw,2rem);font-weight:800;
-  color:var(--text);letter-spacing:-0.02em;line-height:1.1;
-}
+/* SECTION HEADER STRIP */
+.section-strip{padding:2.5rem 2rem 0.5rem;max-width:1400px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.strip-badge{display:inline-flex;align-items:center;gap:0.4rem;padding:0.28rem 0.9rem;border-radius:100px;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem;}
+.strip-title{font-size:clamp(1.3rem,3vw,2rem);font-weight:800;color:var(--text);letter-spacing:-0.02em;line-height:1.1;}
 .strip-title em{font-style:normal;}
-.strip-desc{
-  font-size:0.82rem;color:var(--muted);margin-top:0.4rem;
-  max-width:500px;line-height:1.6;
-}
-.strip-count{
-  font-family:var(--mono);font-size:0.75rem;color:var(--muted);
-  background:var(--blue-pale);border:1px solid var(--blue-mid);
-  padding:0.3rem 0.8rem;border-radius:8px;white-space:nowrap;
-}
+.strip-desc{font-size:0.82rem;color:var(--muted);margin-top:0.4rem;max-width:500px;line-height:1.6;}
+.strip-count{font-family:var(--mono);font-size:0.75rem;color:var(--muted);background:var(--blue-pale);border:1px solid var(--blue-mid);padding:0.3rem 0.8rem;border-radius:8px;white-space:nowrap;}
 
-/* ── FOOTER ── */
-footer{
-  background:var(--dark);
-  padding:2.5rem 2rem;
-  text-align:center;
-  margin-top:4rem;
-}
+footer{background:var(--dark);padding:2.5rem 2rem;text-align:center;margin-top:4rem;}
 footer p{font-size:0.78rem;color:rgba(255,255,255,0.3);}
 footer span{color:var(--gold);}
 
-/* ── TOAST ── */
-.toast{
-  position:fixed;bottom:2rem;right:2rem;z-index:9999;
-  background:var(--dark2);color:#fff;
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:14px;padding:0.9rem 1.4rem;
-  font-size:0.82rem;font-weight:600;
-  box-shadow:0 8px 32px rgba(0,0,0,0.4);
-  transform:translateY(80px);opacity:0;
-  transition:all 0.35s cubic-bezier(0.23,1,0.32,1);
-  pointer-events:none;max-width:280px;
-}
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;background:var(--dark2);color:#fff;border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:0.9rem 1.4rem;font-size:0.82rem;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,0.4);transform:translateY(80px);opacity:0;transition:all 0.35s cubic-bezier(0.23,1,0.32,1);pointer-events:none;max-width:280px;}
 .toast.show{transform:translateY(0);opacity:1;}
 
-/* ── SCROLL TO TOP ── */
-#scrollTopBtn{
-  position:fixed;bottom:2rem;left:2rem;z-index:9999;
-  width:46px;height:46px;border-radius:50%;
-  background:var(--blue2);color:#fff;border:none;
-  font-size:1.2rem;cursor:pointer;
-  box-shadow:0 4px 20px rgba(37,99,235,0.4);
-  display:none;align-items:center;justify-content:center;
-  transition:all 0.2s;
-}
+#scrollTopBtn{position:fixed;bottom:2rem;left:2rem;z-index:9999;width:46px;height:46px;border-radius:50%;background:var(--blue2);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 20px rgba(37,99,235,0.4);display:none;align-items:center;justify-content:center;transition:all 0.2s;}
 #scrollTopBtn:hover{background:var(--blue);transform:translateY(-2px);}
 
-/* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .books-grid{grid-template-columns:repeat(2,1fr);gap:0.8rem;}
-  .books-section{padding:1.2rem;}
-  .hero{padding:2.5rem 1.2rem 2rem;}
-  .topnav{padding:0 1rem;}
-  .topnav-brand{font-size:1rem;}
-  .hero-stats{gap:1.5rem;}
-  .filter-bar{padding:0.7rem 1rem;}
-  .section-strip{padding:1.5rem 1rem 0.5rem;}
-}
-@media(max-width:420px){
-  .books-grid{grid-template-columns:repeat(2,1fr);gap:0.6rem;}
-  .book-cover{height:110px;}
-  .book-emoji{font-size:1.8rem;}
-  .topnav-tabs{display:none;}
-}
+@media(max-width:768px){.books-grid{grid-template-columns:repeat(2,1fr);gap:0.8rem;}.books-section{padding:1.2rem;}.hero{padding:2.5rem 1.2rem 2rem;}.topnav{padding:0 1rem;}.topnav-brand{font-size:1rem;}.hero-stats{gap:1.5rem;}.filter-bar{padding:0.7rem 1rem;}.section-strip{padding:1.5rem 1rem 0.5rem;}}
+@media(max-width:420px){.books-grid{grid-template-columns:repeat(2,1fr);gap:0.6rem;}.book-cover{height:120px;}.book-emoji{font-size:1.8rem;}.topnav-tabs{display:none;}}
 </style>
 </head>
 <body>
 
-<!-- ── TOPBAR LINKS ── -->
+<!-- TOPBAR LINKS -->
 <div style="background:#050e1f;padding:4px 8px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;line-height:1;">
 <style>.tbl{display:inline-block;color:#93c5fd;text-decoration:none;font-family:'Sora',sans-serif;font-size:0.66rem;font-weight:600;padding:3px 7px;border-radius:4px;transition:.15s;margin:0 1px;}.tbl:hover{background:#1e40af;color:#fff;}.tbd{color:#ffffff22;font-size:.6rem;}</style>
 <a class="tbl" href="about.html">ℹ️ About</a><span class="tbd"> · </span>
@@ -370,7 +140,7 @@ footer span{color:var(--gold);}
 <a class="tbl" href="contact.html">📞 Contact</a>
 </div>
 
-<!-- ── TOP NAV ── -->
+<!-- TOP NAV -->
 <nav class="topnav">
   <div class="topnav-brand">Sade <em>Books</em></div>
   <div class="topnav-tabs">
@@ -379,7 +149,7 @@ footer span{color:var(--gold);}
   </div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-tag">📚 Duka la Vitabu vya Kidigitali</div>
@@ -394,29 +164,23 @@ footer span{color:var(--gold);}
   </div>
 </div>
 
-<!-- ── SECTION NAV ── -->
+<!-- SECTION NAV -->
 <div class="section-nav">
   <button class="snav-btn active" id="snav-ujasiriamali" onclick="switchSection('ujasiriamali',null,this)">💼 Vitabu vya Ujasiriamali <span style="background:rgba(255,255,255,0.1);border-radius:100px;padding:1px 8px;font-size:0.7rem;margin-left:4px;">50</span></button>
   <div class="snav-divider"></div>
   <button class="snav-btn" id="snav-digital" onclick="switchSection('digital',null,this)">🌐 Mafunzo ya Kidigitali <span style="background:rgba(255,255,255,0.1);border-radius:100px;padding:1px 8px;font-size:0.7rem;margin-left:4px;">50</span></button>
 </div>
 
-<!-- ══════════════════════════════════════════
-     SEHEMU 1: UJASIRIAMALI
-══════════════════════════════════════════ -->
+<!-- SEHEMU 1: UJASIRIAMALI -->
 <div class="section-panel active" id="panel-ujasiriamali">
-
-  <!-- Strip -->
   <div class="section-strip">
     <div class="strip-left">
       <div class="strip-badge" style="background:#fffbeb;color:#d97706;border:1px solid #fde68a;">💼 Ujasiriamali</div>
       <div class="strip-title">Vitabu vya <em style="color:#d97706;">Kutengeneza Biashara</em></div>
       <div class="strip-desc">Kutengeneza sabuni, jiko, shampoo, vifaa na biashara nyingi za nyumbani na sokoni.</div>
     </div>
-    <div class="strip-count">📚 Vitabu 50</div>
+    <div class="strip-count" id="u-count">📚 Vitabu 50</div>
   </div>
-
-  <!-- Filter -->
   <div class="filter-bar">
     <span class="filter-label">🔍 Chujio:</span>
     <button class="filter-btn active" onclick="filterBooks('u','all',this)">Zote</button>
@@ -426,30 +190,22 @@ footer span{color:var(--gold);}
     <button class="filter-btn" onclick="filterBooks('u','ujenzi',this)">🏗️ Ujenzi</button>
     <button class="filter-btn" onclick="filterBooks('u','biashara',this)">💰 Biashara</button>
     <button class="filter-btn" onclick="filterBooks('u','usafi',this)">🧹 Usafi</button>
-    <span class="filter-count" id="u-count">Vitabu 50</span>
   </div>
-
   <div class="books-section">
     <div class="books-grid" id="grid-ujasiriamali"></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     SEHEMU 2: TEKNOLOJIA / DIGITAL
-══════════════════════════════════════════ -->
+<!-- SEHEMU 2: TEKNOLOJIA -->
 <div class="section-panel" id="panel-digital">
-
-  <!-- Strip -->
   <div class="section-strip">
     <div class="strip-left">
       <div class="strip-badge" style="background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;">🌐 Teknolojia</div>
       <div class="strip-title">Mafunzo ya <em style="color:#1d4ed8;">Kidigitali</em></div>
       <div class="strip-desc">Jifunza kutengeneza website, programu, na kutumia teknolojia ya kisasa kupata pesa.</div>
     </div>
-    <div class="strip-count">💻 Vitabu 50</div>
+    <div class="strip-count" id="d-count">💻 Vitabu 50</div>
   </div>
-
-  <!-- Filter -->
   <div class="filter-bar">
     <span class="filter-label">🔍 Chujio:</span>
     <button class="filter-btn active" onclick="filterBooks('d','all',this)">Zote</button>
@@ -459,321 +215,414 @@ footer span{color:var(--gold);}
     <button class="filter-btn" onclick="filterBooks('d','ai',this)">🤖 AI</button>
     <button class="filter-btn" onclick="filterBooks('d','pesa',this)">💵 Pesa Mtandao</button>
     <button class="filter-btn" onclick="filterBooks('d','tools',this)">🔧 Zana</button>
-    <span class="filter-count" id="d-count">Vitabu 50</span>
   </div>
-
   <div class="books-section">
     <div class="books-grid" id="grid-digital"></div>
   </div>
 </div>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
   <p>© 2026 <span>Sade Books</span> · Imetengenezwa na ❤️ Herman Sade · Tanzania 🇹🇿</p>
   <p style="margin-top:0.4rem;">Vitabu vyote ni PDF · Malipo: M-Pesa, Tigopesa, Airtel Money</p>
 </footer>
 
-<!-- Scroll top -->
 <button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-/* ════════════════════════════════
-   DATA: VITABU VYA UJASIRIAMALI (50)
-════════════════════════════════ */
+/* ══════════════════════════════════════
+   VITABU VYA UJASIRIAMALI (50)
+══════════════════════════════════════ */
 const ujasiriamaliBooks = [
   // SABUNI
   {id:'u1',emoji:'🧼',title:'Kutengeneza Sabuni ya Unga',cat:'sabuni',tag:'hot',
-   bg:'linear-gradient(135deg,#1e3a8a,#2563eb)',covers:'Sabuni ya Unga'},
+   img:'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&q=80',
+   desc:'Sabuni ya unga (washing powder) ni biashara inayohitajika kila nyumba. Kitabu hiki kinakufundisha viungo vyote — LABSA, soda ash, sodium sulphate, na filler. Jinsi ya kupima, kuchanganya, na kufunga kwenye mifuko. Faida kubwa, mtaji mdogo. Anza leo!'},
   {id:'u2',emoji:'🧴',title:'Sabuni ya Maji — Liquid Soap',cat:'sabuni',tag:'top',
-   bg:'linear-gradient(135deg,#1d4ed8,#60a5fa)',covers:'Liquid Soap'},
+   img:'https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?w=400&q=80',
+   desc:'Sabuni ya maji (liquid soap) inahitajika hospitali, ofisi, nyumbani na migahawani. Kitabu kinakueleza viungo: sulphonic (LABSA), SLEC, glycerin, soda ash na rangi. Utengenezaji wa lita 20 kwa wakati mmoja. Jinsi ya kuuza kwa bei nzuri na faida ya haraka.'},
   {id:'u3',emoji:'🪥',title:'Sabuni ya Kuogea — Bar Soap',cat:'sabuni',tag:'new',
-   bg:'linear-gradient(135deg,#1e40af,#3b82f6)',covers:'Bar Soap'},
+   img:'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=400&q=80',
+   desc:'Sabuni za miche (bar soap) zinauzwa kila kijiji Tanzania. Caustic soda kilo 1, mafuta lita 6, sodium siliket gramu 500. Loweka caustic soda siku 5 kwanza — hii ndiyo hatua wengi wanaikosa. Unaweza pia kutengeneza sabuni za tiba kwa kutumia Aloe Vera, ubuyu au mafuta ya nazi.'},
   {id:'u4',emoji:'💆',title:'Shampoo ya Asili Nyumbani',cat:'sabuni',tag:'hot',
-   bg:'linear-gradient(135deg,#1e3a8a,#7dd3fc)',covers:'Shampoo'},
+   img:'https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400&q=80',
+   desc:'Shampoo inauzwa saluni na madukani kila siku. Unahitaji sulphonic acid, slec, soda ash, glycerin, centrimide na CDE. Kwanza weka slec, mimina sulphonic acid na koroga upande mmoja. Hatua ya centrimide na sodium sulphate ndiyo inayofanya shampoo iwe laini na yenye povu nzuri. Siri muhimu za harufu nzuri ndani.'},
   {id:'u5',emoji:'🧽',title:'Sabuni ya Kuosha Vyombo',cat:'sabuni',
-   bg:'linear-gradient(135deg,#0369a1,#38bdf8)',covers:'Dish Soap'},
+   img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&q=80',
+   desc:'Dish soap ni biashara ya kila siku. Rejareja na jumla. Kitabu kinajumuisha formula ya bei nafuu — LABSA, SLES, NaCl, rangi na harufu. Jinsi ya kufunga lita ndogo (250ml, 500ml, 1L) kwa masoko tofauti. Hesabu kamili za faida na gharama za uzalishaji.'},
   {id:'u6',emoji:'🫧',title:'Dettol ya Nyumbani — Disinfectant',cat:'sabuni',
-   bg:'linear-gradient(135deg,#075985,#0ea5e9)',covers:'Disinfectant'},
+   img:'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80',
+   desc:'Dawa ya kuua vijidudu (disinfectant) ilipanda mahitaji baada ya COVID-19. Pine oil, PCMX (chloroxylenol), isopropanol na emulsifier. Inaweza kutengenezwa nyumbani kwa mtaji wa TSh 50,000 ukizalisha lita 100. Jinsi ya kupata leseni na kuuza hospitali na shule.'},
   {id:'u7',emoji:'🌸',title:'Sabuni ya Watoto — Baby Soap',cat:'sabuni',tag:'new',
-   bg:'linear-gradient(135deg,#1e3a8a,#93c5fd)',covers:'Baby Soap'},
+   img:'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&q=80',
+   desc:'Baby soap inahitaji uangalifu wa hali ya juu — pH ya 5.5 hadi 6.5 ili isiumize ngozi laini ya mtoto. Kitabu kinakufundisha viungo salama: glycerin, chamomile extract, aloe vera na emulsifier bila kemikali hatari. Packaging nzuri ya kuvutia wazazi. Faida kubwa kwenye soko la watoto.'},
   {id:'u8',emoji:'✨',title:'Laundry Detergent — Unga wa Nguo',cat:'sabuni',
-   bg:'linear-gradient(135deg,#1d4ed8,#a5f3fc)',covers:'Detergent'},
+   img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80',
+   desc:'Detergent ya nguo inauzwa kila duka la rejareja. LABSA, sodium sulphate, sodium carbonate, optical brightener na harufu. Jinsi ya kupima pH sahihi ili nguo zisiharibiwe. Ufungaji wa kilo 1, 2, na 5 kwa soko la jumla. Takwimu za faida kwa kila kilo iliyouzwa.'},
 
   // CHAKULA
   {id:'u9',emoji:'🍳',title:'Kutengeneza Jiko la Mkaa Bora',cat:'chakula',tag:'top',
-   bg:'linear-gradient(135deg,#111827,#374151)',covers:'Jiko la Mkaa'},
+   img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80',
+   desc:'Jiko la mkaa bora (energy saving jiko) linaokoa mafuta hadi 40%. Jiwe jekundu, udongo, cement na chuma. Jinsi ya kupima saizi sahihi ya mlango wa hewa na nafasi ya mkaa. Biashara nzuri sana vijijini na mijini. Bei ya jiko moja TSh 15,000 — faida TSh 8,000 kwa jiko moja. Uzalishaji wa majiko 10 kwa siku.'},
   {id:'u10',emoji:'🥜',title:'Biashara ya Karanga — Siagi ya Karanga',cat:'chakula',tag:'hot',
-   bg:'linear-gradient(135deg,#78350f,#d97706)',covers:'Siagi Karanga'},
+   img:'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400&q=80',
+   desc:'Siagi ya karanga (peanut butter) inapendwa sana Tanzania. Karanga za Tanzania ni bora kuliko zote. Jinsi ya kukaanga, kusaga, kuchanganya mafuta ya alizeti na chumvi. Ufungaji wa gramu 200, 500 na kilo 1. Jinsi ya kufikia maduka makubwa na supermarkets. Faida ya asilimia 60% kwa kila gunia.'},
   {id:'u11',emoji:'🍞',title:'Mkate na Mandazi — Biashara ya Nyumbani',cat:'chakula',
-   bg:'linear-gradient(135deg,#92400e,#f59e0b)',covers:'Mkate & Mandazi'},
+   img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80',
+   desc:'Mkate na mandazi ni biashara rahisi na yenye faida. Unga wa ngano, sukari, chumvi, chachu na mafuta. Usiri wa mandazi laini na yenye povu nzuri. Jinsi ya kuandaa oveni ya bei nafuu nyumbani. Hesabu za faida: unga mfuko 1 (TSh 35,000) unazalisha mandazi 200 ya TSh 500 kila moja — faida TSh 65,000.'},
   {id:'u12',emoji:'🥤',title:'Juice ya Matunda — Kutengeneza na Kuuza',cat:'chakula',tag:'new',
-   bg:'linear-gradient(135deg,#14532d,#22c55e)',covers:'Juice ya Matunda'},
+   img:'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80',
+   desc:'Juice ya matunda ya asili inapendwa sana mjini. Maembe, nanasi, passion fruit, chenza na watermelon. Jinsi ya kuhifadhi bila kemikali hatari kwa kutumia citric acid asili. Ufungaji wa chupa za PET 250ml na 500ml. Jinsi ya kuuza shule, ofisi na hotels. Leseni na usafi wa chakula (TFDA).'},
   {id:'u13',emoji:'🍯',title:'Asali ya Nyuki — Ufugaji na Biashara',cat:'chakula',
-   bg:'linear-gradient(135deg,#713f12,#f97316)',covers:'Asali ya Nyuki'},
+   img:'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&q=80',
+   desc:'Asali ya nyuki ni biashara yenye faida kubwa. Sanduku la kisasa la nyuki (Kenya Top Bar Hive) linaongeza uzalishaji mara tatu. Jinsi ya kuchagua mahali pazuri pa kuweka mizinga. Uvunaji salama bila kukimbia na nyuki. Usafi na ufungaji wa asali. Faida: kilo 1 ya asali safi inauzwa TSh 15,000 hadi 25,000.'},
   {id:'u14',emoji:'🌶️',title:'Viungo vya Kupikia — Biashara ya Spice',cat:'chakula',
-   bg:'linear-gradient(135deg,#7f1d1d,#ef4444)',covers:'Viungo'},
+   img:'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=80',
+   desc:'Viungo (spices) vinauzwa kila soko Tanzania. Pilipili, bizari, tangawizi, karamu na zafarani. Jinsi ya kukausha, kusaga na kufunga vizuri kwa kuhifadhi harufu. Brand yako ya viungo na jinsi ya kuiuza. Usindikaji wa kilo 10 kwa siku. Takwimu za soko la viungo Tanzania na Afrika Mashariki.'},
   {id:'u15',emoji:'🧁',title:'Keki na Mikate — Bakery ya Nyumbani',cat:'chakula',tag:'hot',
-   bg:'linear-gradient(135deg,#701a75,#d946ef)',covers:'Keki & Bakery'},
+   img:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80',
+   desc:'Biashara ya keki (bakery) inakua haraka Tanzania. Keki za birthday, harusi, na matukio. Jinsi ya kupika keki ya sponge, keki ya chokoleti na cupcakes. Mapambo ya icing na fondant. Jinsi ya kupiga bei vizuri — keki ya harusi TSh 150,000 hadi 500,000. Masoko: maagizo ya WhatsApp na Instagram.'},
   {id:'u16',emoji:'🥛',title:'Maziwa ya Soya — Utengenezaji na Faida',cat:'chakula',
-   bg:'linear-gradient(135deg,#0c4a6e,#0ea5e9)',covers:'Maziwa Soya'},
+   img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=80',
+   desc:'Maziwa ya soya ni mbadala wa bei nafuu kwa maziwa ya ng\'ombe. Soya kilo 1 inazalisha lita 3 za maziwa. Jinsi ya kuloweka, kusaga, kupiga moto na kuchuja. Kuongeza harufu ya vanilla au chokoleti. Ufungaji na uuzaji sokoni. Bidhaa nyingine za soya: tofu, soya chunks na unga wa soya.'},
   {id:'u17',emoji:'🍫',title:'Chokoleti ya Nyumbani — Biashara Tamu',cat:'chakula',tag:'new',
-   bg:'linear-gradient(135deg,#451a03,#c2410c)',covers:'Chokoleti'},
+   img:'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=400&q=80',
+   desc:'Chokoleti ya asili inaweza kutengenezwa nyumbani kwa faida kubwa. Cocoa powder, cocoa butter, sukari ya unga na vanilla. Jinsi ya kupiga moto sahihi bila kuchoma. Molds za maumbo tofauti. Ufungaji wa kisasa wa zawadi. Masoko: maduka ya zawadi, maduka makubwa na maagizo ya WhatsApp.'},
   {id:'u18',emoji:'🥗',title:'Chakula cha Watoto — Kutengeneza na Kuuza',cat:'chakula',
-   bg:'linear-gradient(135deg,#065f46,#10b981)',covers:'Chakula Watoto'},
+   img:'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=80',
+   desc:'Uji wa virutubishi kwa watoto (baby food) unakosekana sana Tanzania. Unga wa mahindi, mtama, soya na mboga za majani kwa uwiano sahihi. Vitamini na madini yanayohitajika. Jinsi ya kupata idhini ya TFDA. Ufungaji na bei. Watoto 4 hadi 24 miezi wanahitaji chakula maalum cha nguvu.'},
 
   // KILIMO
   {id:'u19',emoji:'🌱',title:'Kilimo cha Nyanya — Faida Kubwa',cat:'kilimo',tag:'top',
-   bg:'linear-gradient(135deg,#14532d,#16a34a)',covers:'Kilimo Nyanya'},
+   img:'https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=400&q=80',
+   desc:'Nyanya ni zao la faida kubwa Tanzania. Aina bora: Rio Grande, Tengeru 97, Heinz 1370. Udongo, mbolea, umwagiliaji na dawa za wadudu. Jinsi ya kupanda kwa mistari na nafasi sahihi. Matatizo ya mara kwa mara — ukungu, viwavi na virus. Masoko ya Kariakoo na kuuza moja kwa moja hoteli. Faida TSh 2-5 milioni kwa ekari.'},
   {id:'u20',emoji:'🥬',title:'Mboga za Majani — Kilimo cha Mijini',cat:'kilimo',
-   bg:'linear-gradient(135deg,#052e16,#22c55e)',covers:'Mboga Majani'},
+   img:'https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?w=400&q=80',
+   desc:'Kilimo cha mboga (urban farming) kinaweza kufanywa nyumba, balcony au shamba dogo. Mchicha, spinach, kabichi, lettuce na sukumawiki. Jinsi ya kutumia maboksi, mifuko na vyombo vya plastiki. Umwagiliaji wa drip kwa gharama ndogo. Kuuza sokoni na majirani kila wiki. Faida ya haraka ndani ya siku 30.'},
   {id:'u21',emoji:'🍌',title:'Kilimo cha Ndizi — Mwongozo Kamili',cat:'kilimo',
-   bg:'linear-gradient(135deg,#713f12,#eab308)',covers:'Kilimo Ndizi'},
+   img:'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=400&q=80',
+   desc:'Ndizi ni zao muhimu Tanzania — Kagera, Kilimanjaro na Mbeya. Aina bora: Mchare, Kisukari, Bokoboko na Plantain. Utayarishaji wa shamba, upandaji na utunzaji. Mbolea sahihi na maji ya kutosha. Magonjwa makuu: Panama disease, bunchy top na black sigatoka. Kuvuna na usafirishaji. Faida ya ekari moja kwa mwaka.'},
   {id:'u22',emoji:'🌾',title:'Kilimo cha Mahindi kwa Faida',cat:'kilimo',tag:'hot',
-   bg:'linear-gradient(135deg,#78350f,#f59e0b)',covers:'Kilimo Mahindi'},
+   img:'https://images.unsplash.com/photo-1601329420547-1cff8ef36cb4?w=400&q=80',
+   desc:'Mahindi ni zao la chakula na biashara Tanzania. Mbegu bora: SC403, DK8031, Seedco SC403. Mbolea sahihi — DAP upandaji, CAN baadaye. Dawa za wadudu wa fall armyworm. Wakati sahihi wa kuvuna na kukausha. Kuhifadhi bila kupoteza na wadudu. Uuzaji wa gunia — bei za soko la Arusha, Dodoma na Dar es Salaam.'},
   {id:'u23',emoji:'🐔',title:'Ufugaji wa Kuku — Biashara Nzuri',cat:'kilimo',
-   bg:'linear-gradient(135deg,#7c2d12,#fb923c)',covers:'Ufugaji Kuku'},
+   img:'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=400&q=80',
+   desc:'Ufugaji wa kuku wa kisasa (broiler na layer) ni biashara inayolipa haraka. Broiler: siku 42 tayari kuuzwa. Layer: mayai 300 kwa mwaka. Banda zuri, chakula bora, maji safi na chanjo. Magonjwa makuu: Newcastle, Marek na Gumboro. Hesabu za faida: kuku 100 wa broiler — faida TSh 400,000 kwa miezi 2.'},
   {id:'u24',emoji:'🐟',title:'Ufugaji wa Samaki — Aquaculture',cat:'kilimo',tag:'new',
-   bg:'linear-gradient(135deg,#0c4a6e,#0284c7)',covers:'Ufugaji Samaki'},
+   img:'https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=400&q=80',
+   desc:'Ufugaji wa samaki (fish farming) unakua Tanzania. Tilapia na catfish wanafaa bora. Bwawa la mita 10x10 linaweza kuzalisha kilo 500 kwa mwaka. Chakula cha samaki, maji safi na usimamizi. Muda wa kuvuna: miezi 6-8. Soko la samaki ni kubwa sana — hotels, supermarkets na masoko. Faida kwa bwawa moja.'},
   {id:'u25',emoji:'🌻',title:'Kilimo cha Maua — Biashara ya Mapambo',cat:'kilimo',
-   bg:'linear-gradient(135deg,#713f12,#f59e0b)',covers:'Kilimo Maua'},
+   img:'https://images.unsplash.com/photo-1490750967868-88df5691cc59?w=400&q=80',
+   desc:'Kilimo cha maua kinakua haraka Tanzania. Roses, Carnations, Lilies na maua ya asili. Ardhi yenye rutuba, umwagiliaji wa drip na greenhouse. Masoko: maduka ya maua, harusi, mazishi na nyumba za Mungu. Jinsi ya kufunga na kupeleka haraka. Soko la nje ya nchi — Kenya, UAE na Ulaya linatoa faida kubwa.'},
 
   // UJENZI / UFUNDI
   {id:'u26',emoji:'🧱',title:'Utengenezaji wa Matofali — Biashara',cat:'ujenzi',tag:'hot',
-   bg:'linear-gradient(135deg,#1c1917,#57534e)',covers:'Matofali'},
+   img:'https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=400&q=80',
+   desc:'Matofali ya saruji yanatengenezwa kila mahali Tanzania. Cement, mchanga na maji kwa uwiano sahihi. Mashine ya kutengeneza matofali (block making machine). Matofali ya aina tofauti: hollow block, solid block na paving block. Jinsi ya kupanga uzalishaji wa matofali 1,000 kwa siku. Masoko: wajenzi, contractors na serikali.'},
   {id:'u27',emoji:'🪟',title:'Ufundi wa Chuma — Welding Biashara',cat:'ujenzi',
-   bg:'linear-gradient(135deg,#0f172a,#334155)',covers:'Welding'},
+   img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80',
+   desc:'Welding ni ufundi unaolipa sana Tanzania. Milango, madirisha, uzio, gari na vifaa vya ofisi. Arc welding, MIG welding na oxy-acetylene. Jinsi ya kupata order za kubwa kutoka kwa contractors. Bei za kazi tofauti. Kifaa muhimu cha kuanza — welding machine, grinder na tools nyingine. Faida ya fundi wa uzoefu.'},
   {id:'u28',emoji:'🪑',title:'Utengenezaji wa Samani — Seremala',cat:'ujenzi',tag:'top',
-   bg:'linear-gradient(135deg,#451a03,#92400e)',covers:'Samani Seremala'},
+   img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80',
+   desc:'Useremala (carpentry) ni biashara inayolipa Tanzania. Meza, viti, vitanda, makabati na milango. Mbao za asili: mvule, mninga, mlinga na msaji. Zana muhimu: randa, msumari, gimlet na sander. Jinsi ya kupata wateja wa ofisi na nyumba mpya. Bidhaa za bei ya juu: furniture za kisasa na custom-made.'},
   {id:'u29',emoji:'🎨',title:'Upigaji Rangi — Painting Biashara',cat:'ujenzi',
-   bg:'linear-gradient(135deg,#1e1b4b,#4338ca)',covers:'Painting'},
+   img:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&q=80',
+   desc:'Kupiga rangi (painting) ni kazi ya haraka na faida nzuri. Nyumba mpya, ofisi, mali za zamani na magari. Aina za rangi: emulsion, gloss, primer na undercoat. Jinsi ya kuandaa uso (preparation) — hii ndiyo siri ya rangi kudumu. Bei ya chumba kimoja, nyumba nzima na jengo. Jinsi ya kupata wateja na kushinda zabuni.'},
   {id:'u30',emoji:'💡',title:'Ufundi wa Umeme — Electrical Biashara',cat:'ujenzi',tag:'new',
-   bg:'linear-gradient(135deg,#1e3a8a,#f59e0b)',covers:'Umeme'},
+   img:'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=400&q=80',
+   desc:'Ufundi wa umeme ni kazi ya lazima kila wakati. Wiring ya nyumba, ofisi na viwanda. Ufungaji wa solar panels, inverter na betri. Marekebisho ya matatizo ya umeme. Leseni ya TANESCO na usalama. Zana muhimu: multimeter, screwdrivers, cable tester. Faida ya mfundi wa uzoefu — TSh 50,000 hadi 200,000 kwa kazi.'},
 
-  // BIASHARA YA PESA
+  // BIASHARA
   {id:'u31',emoji:'💰',title:'Jinsi ya Kuanzisha Biashara Ndogo',cat:'biashara',tag:'top',
-   bg:'linear-gradient(135deg,#064e3b,#059669)',covers:'Biashara Ndogo'},
+   img:'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&q=80',
+   desc:'Kuanzisha biashara kunahitaji mpango imara. Kitabu hiki kinakufundisha: kuchagua biashara inayofaa, kuandika business plan, kupata mtaji, kujisajili TRA na BRELA, kuchagua mahali pazuri, na kuandika hesabu. Makosa 10 ya kawaida yanayofanya biashara zishindwe — na jinsi ya kuyaepuka. Mwongozo wa hatua kwa hatua.'},
   {id:'u32',emoji:'📊',title:'Hesabu za Biashara — Usimamizi wa Fedha',cat:'biashara',
-   bg:'linear-gradient(135deg,#134e4a,#0d9488)',covers:'Hesabu Biashara'},
+   img:'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80',
+   desc:'Biashara nyingi zinashindwa kwa sababu ya hesabu mbaya. Jinsi ya kuhesabu bei ya kuuza (pricing), faida halisi na gharama zote. Vitabu vya hesabu: cashbook, ledger na P&L statement. Kutofautisha pesa za biashara na pesa za nyumbani. Jinsi ya kuomba mkopo benki kwa nyaraka sahihi.'},
   {id:'u33',emoji:'🤝',title:'Masoko na Kutangaza Biashara Yako',cat:'biashara',tag:'hot',
-   bg:'linear-gradient(135deg,#1e3a8a,#3b82f6)',covers:'Masoko'},
+   img:'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&q=80',
+   desc:'Biashara bila wateja si biashara. Jinsi ya kutangaza kwa bajeti ndogo — WhatsApp, Facebook, TikTok na pamoja. Kutengeneza kadi za biashara, banner na flyer nzuri. Ushirika na biashara nyingine. Jinsi ya kupata wateja wa kwanza na kuwafanya warudishe wenzao. Mbinu za uuzaji zinazolingana na soko la Tanzania.'},
   {id:'u34',emoji:'📱',title:'Biashara ya Kuuza Simu na Vifaa',cat:'biashara',
-   bg:'linear-gradient(135deg,#0f172a,#1e40af)',covers:'Kuuza Simu'},
+   img:'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=400&q=80',
+   desc:'Biashara ya simu ni yenye faida na inakua haraka Tanzania. Kuuza simu mpya, za pili, accessories na ku-repair. Jinsi ya kupata wauzaji wa jumla (wholesalers) wa bei nzuri. Screen replacement, charging port na battery — faida kubwa. Jinsi ya kulinda duka dhidi ya wizi na bidhaa fake. Mtaji unaohitajika na faida ya kila mwezi.'},
   {id:'u35',emoji:'🚗',title:'Biashara ya Usafiri — Bodaboda Hadi Taxi',cat:'biashara',tag:'new',
-   bg:'linear-gradient(135deg,#111827,#374151)',covers:'Biashara Usafiri'},
+   img:'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&q=80',
+   desc:'Biashara ya usafiri Tanzania — bodaboda, taxi, daladala na lori. Jinsi ya kuanza na pikipiki au gari moja. Hesabu za faida ya kila siku. Usimamizi wa madereva wako. Bima, leseni na mahitaji ya kisheria. Jinsi ya kutumia Uber, Bolt na Yango kupata abiria zaidi. Kupanua biashara — kuweka magari zaidi.'},
   {id:'u36',emoji:'👗',title:'Biashara ya Nguo — Mitumba na Mpya',cat:'biashara',
-   bg:'linear-gradient(135deg,#701a75,#a21caf)',covers:'Biashara Nguo'},
+   img:'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80',
+   desc:'Biashara ya nguo ni maarufu Tanzania. Mitumba (second-hand) ya kutoka Kenya na Dar. Nguo mpya za kuagiza China na Dubai. Jinsi ya kuchagua nguo zinazopendwa sokoni. Bei ya jumla na rejareja. Duka la mitumba au online shop — faida ya kila aina. Msimu wa harusi na sikukuu — wakati wa faida kubwa.'},
   {id:'u37',emoji:'💈',title:'Saluni ya Nywele — Kuanzisha na Kukuza',cat:'biashara',tag:'hot',
-   bg:'linear-gradient(135deg,#7c2d12,#dc2626)',covers:'Saluni'},
+   img:'https://images.unsplash.com/photo-1560066984-138daaa0de3b?w=400&q=80',
+   desc:'Saluni ya nywele (hair salon) ni biashara inayolipa siku zote. Vifaa vya kuanzia: kiti, kioo, dryer, clipper na kinu. Huduma za kuvutia wateja — kukata, kunyoa, braiding, weave na treatment. Bei za huduma tofauti. Jinsi ya kuweka wateja wa kudumu. Siri za kuendesha saluni yenye faida — usafi, muziki na heshima.'},
   {id:'u38',emoji:'📦',title:'Biashara ya Kusambaza Bidhaa (Supply)',cat:'biashara',
-   bg:'linear-gradient(135deg,#1e3a8a,#6366f1)',covers:'Kusambaza'},
+   img:'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&q=80',
+   desc:'Distribution business inahitajika sana Tanzania. Kusambaza bidhaa za wauzaji wakubwa kwa maduka madogo. Jinsi ya kupata mkataba wa usambazaji (distributorship). Lori au pikipiki — kuanza ndogo. Kufuatilia madeni ya wateja vizuri. Bidhaa zinazofaa: vinywaji, sabuni, chakula na sigara. Faida ya asilimia 5-15 kwa kila bidhaa.'},
 
   // USAFI / NYUMBA
   {id:'u39',emoji:'🏠',title:'Biashara ya Usafi wa Nyumba',cat:'usafi',tag:'new',
-   bg:'linear-gradient(135deg,#0c4a6e,#0369a1)',covers:'Usafi Nyumba'},
+   img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&q=80',
+   desc:'Cleaning business inakua sana Tanzania. Kusafisha nyumba, ofisi, hotels na baada ya matukio. Vifaa muhimu: hoover, mop, kemikali za kusafisha. Jinsi ya kupanga bei kwa chumba au jengo nzima. Wateja wa ofisi na apartments hulipa vizuri zaidi. Jinsi ya kuajiri wasaidizi na kupanua biashara. Mkataba wa usafi wa mara kwa mara.'},
   {id:'u40',emoji:'🧹',title:'Kutengeneza Mfagio na Vifaa vya Usafi',cat:'usafi',
-   bg:'linear-gradient(135deg,#052e16,#15803d)',covers:'Vifaa Usafi'},
+   img:'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=400&q=80',
+   desc:'Vifaa vya usafi kama mfagio, ufagio na mop vinatengenezwa kwa nyenzo za bei nafuu. Mfagio wa plastiki: PVC pipe, bristles za polypropylene. Mop wa kitambaa au microfiber. Ufungaji na branding yako. Masoko: maduka ya rejareja, supermarkets na hospitali. Faida ya kila bidhaa na kiasi cha uzalishaji kwa wiki.'},
   {id:'u41',emoji:'🌿',title:'Dawa za Wadudu — Asili na Kemikali',cat:'usafi',
-   bg:'linear-gradient(135deg,#14532d,#4ade80)',covers:'Dawa Wadudu'},
+   img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80',
+   desc:'Wadudu (pests) ni tatizo kubwa Tanzania — mende, panya, mbu na nzi. Dawa za asili: neem oil, cedar oil, pyrethrum. Dawa za kemikali: permethrin, deltamethrin. Jinsi ya kuchanganya, kufunga na kuweka lebo salama. Huduma ya pest control kwa ofisi na nyumba. Bei za dawa sokoni na faida ya biashara hii.'},
   {id:'u42',emoji:'🪣',title:'Uzalishaji wa Ndoo na Bidhaa za Plastiki',cat:'usafi',tag:'hot',
-   bg:'linear-gradient(135deg,#0369a1,#38bdf8)',covers:'Bidhaa Plastiki'},
+   img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80',
+   desc:'Bidhaa za plastiki (ndoo, beseni, bilauri) zinauzwa kila mahali Tanzania. Mashine ya injection molding na blow molding. Malighafi: polypropylene (PP) na HDPE granules. Saizi tofauti na rangi za kuvutia. Jinsi ya kupata wanunuzi wa jumla. Mtaji unaohitajika na faida ya mwezi wa kwanza. Soko la ndoo Tanzania ni kubwa sana.'},
   {id:'u43',emoji:'🕯️',title:'Utengenezaji wa Mishumaa na Difuse',cat:'usafi',tag:'new',
-   bg:'linear-gradient(135deg,#713f12,#fbbf24)',covers:'Mishumaa'},
+   img:'https://images.unsplash.com/photo-1602028915047-37269d369887?w=400&q=80',
+   desc:'Mishumaa (candles) na room diffusers ni biashara ya kisasa inayokua. Paraffin wax, soy wax au beeswax. Wicks, molds na harufu (fragrance oils). Candles za zawadi, spa na sherehe. Reed diffusers na car fresheners. Ufungaji mzuri na bei. Masoko: mitandao ya kijamii, boutiques na maduka ya zawadi. Biashara nzuri ya valentine na Krismasi.'},
   {id:'u44',emoji:'🧺',title:'Utengenezaji wa Vikapu na Mikoba',cat:'usafi',
-   bg:'linear-gradient(135deg,#78350f,#d97706)',covers:'Vikapu'},
+   img:'https://images.unsplash.com/photo-1544816155-12df9643f363?w=400&q=80',
+   desc:'Vikapu vya makete (sisal baskets) na mikoba ni bidhaa zinazopendwa nje ya nchi. Ukindu, makete na nyasi za asili. Jinsi ya kutengeneza mifumo ya rangi ya kuvutia. Mikoba ya kitanzania inauuzwa hadi Ulaya kwa bei ya juu. Ushirikiano na NGOs na vikundi vya wanawake. Biashara hii inaweza kufanywa nyumbani hata usiku.'},
   {id:'u45',emoji:'🌊',title:'Maji Safi — Kuchuja na Kuuza',cat:'usafi',
-   bg:'linear-gradient(135deg,#0c4a6e,#22d3ee)',covers:'Maji Safi'},
+   img:'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&q=80',
+   desc:'Biashara ya maji safi (water purification) inakua Tanzania. Mashine ya kuchuja maji: reverse osmosis, UV purification. Kujaza maji kwenye galoni za lita 5, 10 na 20. Usambazaji wa maji ofisi na nyumba. Leseni ya EWURA na viwango vya afya. Faida: galoni ya lita 20 inauuzwa TSh 2,500 — gharama ya uzalishaji TSh 500 tu.'},
   {id:'u46',emoji:'🎁',title:'Biashara ya Zawadi na Gift Wrapping',cat:'biashara',
-   bg:'linear-gradient(135deg,#7c3aed,#a78bfa)',covers:'Zawadi'},
+   img:'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&q=80',
+   desc:'Biashara ya zawadi (gift business) inafanya vizuri siku za sherehe. Valentine, Christmas, Mother\'s Day, birthdays na harusi. Gift hampers, flowers na personalized gifts. Jinsi ya kufunga vizuri (gift wrapping) ili zawadi ione ya thamani. Masoko ya online na pickup. Maagizo ya last minute — jinsi ya kushughulikia haraka. Faida kubwa kwa msimu wa sherehe.'},
   {id:'u47',emoji:'📰',title:'Utengenezaji wa Magazeti ya Mtaa',cat:'biashara',
-   bg:'linear-gradient(135deg,#1e3a8a,#6366f1)',covers:'Magazeti'},
+   img:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80',
+   desc:'Gazeti la mtaa au wilaya linaweza kuwa biashara nzuri. Habari za mtaa, matangazo ya biashara na tangazo za serikali. Uchapishaji wa bei nafuu kwa risograph au digital printing. Usambazaji wa masoko, maduka na ofisi. Matangazo (advertisements) ndiyo chanzo kikuu cha mapato. Jinsi ya kupata wateja wa kutangaza.'},
   {id:'u48',emoji:'🎪',title:'Biashara ya Matukio — Events Management',cat:'biashara',tag:'new',
-   bg:'linear-gradient(135deg,#701a75,#c026d3)',covers:'Events'},
+   img:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80',
+   desc:'Events management ni biashara ya glamour na faida. Harusi, birthday parties, graduation, mikutano ya biashara. Tent, meza, viti, PA system, catering na mapambo. Jinsi ya kupanga matukio makubwa bila msongo wa mawazo. Bei za huduma tofauti. Kujenga timu nzuri ya wasaidizi. Masoko: mitandao ya kijamii na referrals.'},
   {id:'u49',emoji:'🖨️',title:'Biashara ya Uchapishaji — Printing Shop',cat:'biashara',tag:'hot',
-   bg:'linear-gradient(135deg,#1e3a8a,#2d6be4)',covers:'Printing'},
+   img:'https://images.unsplash.com/photo-1562564055-71e051d33c19?w=400&q=80',
+   desc:'Printing shop inahitajika Tanzania kwa kila biashara. Kadi za biashara, banners, flyers, vitabu na T-shirts. Mashine ya kuanza: digital printer, heat press na laminator. Programu za kubuni: Canva na CorelDRAW. Jinsi ya kushinda order za serikali na makampuni makubwa. Faida ya kadi 1,000 za biashara — TSh 80,000 kwa siku moja ya kazi.'},
   {id:'u50',emoji:'🍕',title:'Kuanzisha Restaurant Ndogo — Mwongozo',cat:'chakula',tag:'top',
-   bg:'linear-gradient(135deg,#7f1d1d,#b91c1c)',covers:'Restaurant'},
+   img:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80',
+   desc:'Restaurant ndogo (mama ntilie hadi café) ni biashara inayolipa Tanzania. Chakula cha wateja wa kawaida: wali, chips, nyama na samaki. Jinsi ya kuchagua mahali pazuri — karibu ofisi au shule. Menyu rahisi na ya bei nzuri. Meza 10 za wateja wanne kila moja = mapato ya TSh 400,000 kwa siku. Usimamizi wa chakula, uchafu na wafanyakazi.'},
 ];
 
-/* ════════════════════════════════
-   DATA: VITABU VYA KIDIGITALI (50)
-════════════════════════════════ */
+/* ══════════════════════════════════════
+   VITABU VYA KIDIGITALI (50)
+══════════════════════════════════════ */
 const digitalBooks = [
   // HTML/CSS
   {id:'d1',emoji:'🏗️',title:'HTML kwa Wanaoanza — Msingi Kamili',cat:'html',tag:'top',
-   bg:'linear-gradient(135deg,#0f172a,#1e3a8a)',covers:'HTML Msingi'},
+   img:'https://images.unsplash.com/photo-1621839673705-6617adf9e890?w=400&q=80',
+   desc:'HTML ndiyo msingi wa kila tovuti. Kitabu hiki kinaeleza tags zote muhimu: div, span, h1-h6, p, a, img, form na mengi zaidi. Jinsi ya kuunda muundo sahihi wa ukurasa. Semantic HTML kwa SEO nzuri. Mazoezi ya vitendo — tengeneza ukurasa wako wa kwanza ndani ya masaa mawili. Hakuna uzoefu unaohitajika.'},
   {id:'d2',emoji:'🎨',title:'CSS ya Kisasa — Styling Yenye Mvuto',cat:'html',tag:'hot',
-   bg:'linear-gradient(135deg,#1e3a8a,#3b82f6)',covers:'CSS Kisasa'},
+   img:'https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=400&q=80',
+   desc:'CSS inapamba HTML na kufanya tovuti iwe nzuri. Colors, fonts, margins, padding na borders. Variables za CSS kwa usimamizi rahisi. Pseudo-classes (:hover, :focus, :nth-child). Box model — dhana muhimu ambayo wote wanakosea mwanzoni. Media queries kwa responsive design. Mazoezi ya kutengeneza card nzuri za bidhaa.'},
   {id:'d3',emoji:'📱',title:'Responsive Design — Tovuti ya Simu',cat:'html',tag:'new',
-   bg:'linear-gradient(135deg,#1d4ed8,#60a5fa)',covers:'Responsive'},
+   img:'https://images.unsplash.com/photo-1512941937938-a272e42db34f?w=400&q=80',
+   desc:'Zaidi ya 70% ya watumiaji wa internet Tanzania wanatumia simu. Tovuti yako lazima ionekane vizuri simu, tablet na kompyuta. Viewport meta tag, media queries na breakpoints. Mobile-first approach. Mazoezi ya kubadilisha tovuti ya desktop kuwa ya simu bila kufuta. Bootstrap framework kwa mwanzo haraka.'},
   {id:'d4',emoji:'🃏',title:'CSS Flexbox na Grid — Mwongozo Kamili',cat:'html',
-   bg:'linear-gradient(135deg,#1e40af,#818cf8)',covers:'Flexbox Grid'},
+   img:'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=400&q=80',
+   desc:'Flexbox na Grid zinabadilisha jinsi ya kuweka vipande vya ukurasa. Flexbox: display:flex, justify-content, align-items, flex-wrap. Grid: grid-template-columns, gap, grid-area. Jinsi ya kutumia Flexbox kwa navigation na Grid kwa layout ya cards. Mfano wa vitendo wa SadeBooks grid ya vitabu.'},
   {id:'d5',emoji:'✨',title:'CSS Animations — Kuongeza Uhai Tovutini',cat:'html',
-   bg:'linear-gradient(135deg,#312e81,#6366f1)',covers:'CSS Animations'},
+   img:'https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&q=80',
+   desc:'Animations zinaifanya tovuti ionekane ya kisasa. @keyframes, transition, transform na animation property. Hover effects, loading spinners na slide-in effects. Jinsi ya kufanya animation isikasirishe mtumiaji — timing na easing. Kuchunguza prefers-reduced-motion kwa accessibility. Mifano 20 ya animations zinazotumika sana.'},
   {id:'d6',emoji:'🖼️',title:'HTML Forms na Input — Kujifunza Kwa Vitendo',cat:'html',
-   bg:'linear-gradient(135deg,#1e3a8a,#93c5fd)',covers:'HTML Forms'},
+   img:'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&q=80',
+   desc:'Forms ndiyo njia ya mtumiaji kuwasiliana na tovuti. Input types: text, email, password, number, date, file, checkbox na radio. Form validation kwa HTML5 (required, pattern, min, max). Jinsi ya kutengeneza fomu ya usajili, kuingia na malipo. Styling nzuri ya forms kwa CSS. Accessibility — labels sahihi kwa kila input.'},
 
   // JAVASCRIPT
   {id:'d7',emoji:'⚡',title:'JavaScript kwa Wanaoanza',cat:'js',tag:'top',
-   bg:'linear-gradient(135deg,#713f12,#f59e0b)',covers:'JavaScript'},
+   img:'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&q=80',
+   desc:'JavaScript inafanya tovuti iweze kufanya kazi. Variables (let, const, var), data types (string, number, boolean, array, object). Functions, loops (for, while), na conditions (if/else). Jinsi ya kuandika code safi na rahisi kuelewa. Debugging kwa browser console. Mfano wa vitendo wa kutengeneza calculator rahisi — ndani ya saa 3.'},
   {id:'d8',emoji:'🔄',title:'JavaScript DOM — Kubadilisha Ukurasa',cat:'js',tag:'hot',
-   bg:'linear-gradient(135deg,#78350f,#fbbf24)',covers:'DOM JS'},
+   img:'https://images.unsplash.com/photo-1593720216276-0caa6452e004?w=400&q=80',
+   desc:'DOM (Document Object Model) inakuruhusu kubadilisha HTML kwa JavaScript. querySelector, getElementById, innerHTML, textContent. addEventListener kwa click, keypress na form submit. Kuongeza na kuondoa elements dynamically. Jinsi ya kutengeneza modal, dropdown na accordion kwa JavaScript peke yake. Mifano 15 ya vitendo.'},
   {id:'d9',emoji:'📡',title:'Fetch API — Kupata Data Mtandaoni',cat:'js',
-   bg:'linear-gradient(135deg,#92400e,#f97316)',covers:'Fetch API'},
+   img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80',
+   desc:'Fetch API inakuruhusu kupata data kutoka server bila kuload upya ukurasa. async/await na Promise. JSON.parse na JSON.stringify. Jinsi ya kutengeneza loading spinner wakati data inafika. Error handling — nini kufanya wakati request inashindwa. Mfano wa vitendo: kuonyesha vitabu vya SadeBooks kutoka JSON file.'},
   {id:'d10',emoji:'🧩',title:'JavaScript ES6+ — Vipengele Vipya',cat:'js',tag:'new',
-   bg:'linear-gradient(135deg,#713f12,#fde68a)',covers:'ES6+'},
+   img:'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=80',
+   desc:'ES6+ imeboresha JavaScript sana. Arrow functions (=>), template literals, destructuring, spread operator, default parameters. Modules (import/export). Optional chaining (?.) na nullish coalescing (??). Array methods za kisasa: map, filter, reduce, find, some, every. Jinsi ya kuandika code fupi na yenye nguvu zaidi.'},
   {id:'d11',emoji:'📦',title:'NPM na Node.js — Mwanzo wa Backend',cat:'js',
-   bg:'linear-gradient(135deg,#14532d,#22c55e)',covers:'NPM Node'},
+   img:'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=400&q=80',
+   desc:'Node.js inaendesha JavaScript kwenye server. npm init, package.json na kuinstall packages. Express.js framework kwa server rahisi. Kuunda REST API inayojibu GET na POST requests. Kusoma na kuandika files kwa Node.js. Deployment kwenye Render au Railway bure. Jinsi ya backend inaunganishwa na frontend ya HTML.'},
   {id:'d12',emoji:'⚛️',title:'React.js — Kutengeneza App za Kisasa',cat:'js',tag:'hot',
-   bg:'linear-gradient(135deg,#0c4a6e,#0ea5e9)',covers:'React.js'},
+   img:'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&q=80',
+   desc:'React ni library maarufu sana ya JavaScript. Components, JSX, props na state. useState na useEffect hooks. Jinsi ya kutengeneza SPA (Single Page Application). React Router kwa navigation bila refresh. Kutengeneza bookstore app kamili kwa React — hata mfano wa SadeBooks. Build kwa Vite na deploy GitHub Pages bure.'},
   {id:'d13',emoji:'🗃️',title:'LocalStorage na JSON — Kuhifadhi Data',cat:'js',
-   bg:'linear-gradient(135deg,#1e3a8a,#38bdf8)',covers:'LocalStorage'},
+   img:'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=400&q=80',
+   desc:'LocalStorage inakuruhusu kuhifadhi data kwenye browser ya mtumiaji. JSON.stringify/parse, localStorage.setItem/getItem/removeItem. Kutengeneza cart ya bidhaa inayokumbuka baada ya refresh. Hifadhi ya mipangilio ya mtumiaji. Tofauti kati ya localStorage, sessionStorage na cookies. Mfano wa vitendo: favoriting vitabu na ukurasa wa mwisho uliosomwa.'},
   {id:'d14',emoji:'🎮',title:'Kutengeneza Game kwa JavaScript',cat:'js',tag:'new',
-   bg:'linear-gradient(135deg,#4c1d95,#7c3aed)',covers:'JS Games'},
+   img:'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80',
+   desc:'Michezo ya browser ni njia nzuri ya kujifunza JavaScript. Canvas API, game loop (requestAnimationFrame), collision detection. Kutengeneza Snake Game, Flappy Bird clone na memory card game. Keyboard na touch events kwa simu. Kuongeza score, lives na levels. Jinsi ya share game yako na marafiki — deploy bure GitHub Pages.'},
 
   // DESIGN
   {id:'d15',emoji:'🎨',title:'UI/UX Design — Kutengeneza Muundo Mzuri',cat:'design',tag:'top',
-   bg:'linear-gradient(135deg,#2e1065,#7c3aed)',covers:'UI/UX Design'},
+   img:'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&q=80',
+   desc:'UI (User Interface) na UX (User Experience) ni taaluma muhimu. Tofauti kati ya UI na UX. Principles za design: hierarchy, contrast, alignment, proximity. Jinsi ya kufanya wireframes na mockups. Design thinking process — kuelewa mtumiaji kwanza. Portfolio ya designer na jinsi ya kupata kazi za design Tanzania na kimataifa.'},
   {id:'d16',emoji:'🖌️',title:'Figma kwa Wanaoanza — Mwongozo',cat:'design',
-   bg:'linear-gradient(135deg,#4c1d95,#a855f7)',covers:'Figma'},
+   img:'https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=400&q=80',
+   desc:'Figma ni programu bora ya design — bure na ya mtandaoni. Frames, shapes, text na components. Auto-layout kwa responsive designs. Prototyping — kuonyesha jinsi app inavyofanya kazi. Kushirikiana na timu kwenye project moja. Kuhamisha design kutoka Figma kwenda HTML/CSS. Plugin muhimu za Figma.'},
   {id:'d17',emoji:'🎭',title:'Rangi katika Usanifu — Color Theory',cat:'design',
-   bg:'linear-gradient(135deg,#3b0764,#e879f9)',covers:'Color Theory'},
+   img:'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&q=80',
+   desc:'Rangi zina nguvu kubwa katika design. Color wheel, primary, secondary na tertiary colors. Schemes: complementary, analogous, triadic. Psychology ya rangi — kwa nini huduma za afya zinatumia bluu, na chakula kinatumia nyekundu. Kutengeneza palette nzuri kwa brand yako. Tools: Coolors.co na Adobe Color.'},
   {id:'d18',emoji:'✍️',title:'Typography — Kuchagua Fonti Bora',cat:'design',tag:'new',
-   bg:'linear-gradient(135deg,#1e1b4b,#6366f1)',covers:'Typography'},
+   img:'https://images.unsplash.com/photo-1485988412941-77a35537dae4?w=400&q=80',
+   desc:'Typography ni sanaa ya maneno. Serif, sans-serif, monospace na display fonts. Font pairing — kuoanisha fonti mbili vizuri. Font size, line-height na letter-spacing. Google Fonts bure na jinsi ya kuziunganisha. Jinsi ya kuchagua fonti inayolingana na brand yako. Makosa 10 ya kawaida katika typography na jinsi ya kuyaepuka.'},
   {id:'d19',emoji:'📐',title:'Design Grids — Mpangilio wa Ukurasa',cat:'design',
-   bg:'linear-gradient(135deg,#312e81,#818cf8)',covers:'Design Grids'},
+   img:'https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=400&q=80',
+   desc:'Grid system inapanga vipande vya ukurasa kwa usawa na urembo. 12-column grid, margins na gutters. Jinsi ya kubuni layout ya magazine, tovuti na app. Golden ratio katika design. Whitespace — nguvu ya nafasi tupu. Jinsi ya kutumia grids Figma na CSS Grid pamoja. Mifano ya layouts maarufu zilizotumia grids vizuri.'},
   {id:'d20',emoji:'🌙',title:'Dark Mode Design — Mwongozo wa Giza',cat:'design',tag:'hot',
-   bg:'linear-gradient(135deg,#0f172a,#1e3a8a)',covers:'Dark Mode'},
+   img:'https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=400&q=80',
+   desc:'Dark mode imekuwa trend kubwa sana. Jinsi ya kuchagua rangi za mwanga zinazoonekana vizuri kwenye giza. Contrast ratio muhimu kwa accessibility (WCAG). CSS prefers-color-scheme kwa kubadilisha moja kwa moja. Toggle switch ya dark/light mode kwa JavaScript. Rangi za SadeBooks kwenye dark mode — navy na gold zinafanya kazi vizuri sana.'},
 
   // AI
   {id:'d21',emoji:'🤖',title:'ChatGPT kwa Biashara — Mwongozo wa AI',cat:'ai',tag:'top',
-   bg:'linear-gradient(135deg,#064e3b,#059669)',covers:'ChatGPT'},
+   img:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&q=80',
+   desc:'ChatGPT na AI zinaibadilisha biashara. Jinsi ya kutumia ChatGPT kuandika maandishi ya biashara, matangazo na emails. Prompt engineering — jinsi ya kuuliza maswali vizuri kupata majibu bora. Kutumia AI kwa Excel, PowerPoint na Google Docs. Biashara zinazofaa na AI Tanzania. Jinsi ya kuzuia makosa ya AI — verify kila wakati.'},
   {id:'d22',emoji:'🧠',title:'Kutengeneza Chatbot kwa Tovuti',cat:'ai',tag:'hot',
-   bg:'linear-gradient(135deg,#065f46,#10b981)',covers:'Chatbot'},
+   img:'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=400&q=80',
+   desc:'Chatbot inaweza kujibu maswali ya wateja 24/7. Groq API na Gemini API — bure na za haraka. Kutengeneza chatbot wa Kiswahili kama SadeGPT. Kuweka kwenye tovuti yako ya HTML na GitHub Pages. Kuongeza system prompt ili chatbot akuwe msaidizi wa biashara yako. Jinsi ya ku-train chatbot kwa maarifa ya biashara yako.'},
   {id:'d23',emoji:'📸',title:'AI ya Picha — Midjourney na DALL-E',cat:'ai',
-   bg:'linear-gradient(135deg,#4c1d95,#7c3aed)',covers:'AI Picha'},
+   img:'https://images.unsplash.com/photo-1686191128892-3b37add4c844?w=400&q=80',
+   desc:'AI inaweza kutengeneza picha za ajabu. Midjourney, DALL-E, Stable Diffusion na Ideogram. Jinsi ya kuandika prompt nzuri kwa picha unayotaka. Picha za matangazo, logos, book covers na social media. Jinsi ya kutumia Canva AI na Microsoft Designer bure. Haki za picha za AI — unaweza kuuza bidhaa zilizoundwa na AI?'},
   {id:'d24',emoji:'🔍',title:'SEO kwa AI — Kupata Wateja Zaidi',cat:'ai',tag:'new',
-   bg:'linear-gradient(135deg,#1e3a8a,#0ea5e9)',covers:'SEO + AI'},
+   img:'https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=400&q=80',
+   desc:'SEO (Search Engine Optimization) inafanya tovuti yako ionekane Google. Keywords za Kiswahili zinazotafutwa Tanzania. Meta tags, headings na content sahihi. Backlinks na domain authority. Google Search Console bure — kufuatilia tovuti yako. AI kuandika content ya SEO. Jinsi SadeBooks inavyoonekana kwenye search ya "vitabu vya kiswahili".'},
   {id:'d25',emoji:'📝',title:'Kuandika kwa AI — Content Creation',cat:'ai',
-   bg:'linear-gradient(135deg,#1e3a8a,#6366f1)',covers:'AI Content'},
+   img:'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&q=80',
+   desc:'Maudhui (content) ndiyo mfalme wa masoko ya kisasa. Kuandika blog posts, maelezo ya bidhaa na social media. Jinsi ya kutumia AI kuongeza kasi ya kuandika bila kupoteza ubora. Editing na proofreading kwa Kiswahili. Jinsi ya kuandika kwa sauti yako mwenyewe hata ukitumia AI. Content calendar — kupanga machapisho wiki moja mbele.'},
   {id:'d26',emoji:'📊',title:'Data Analysis kwa AI — Kujifunza Data',cat:'ai',tag:'hot',
-   bg:'linear-gradient(135deg,#134e4a,#0d9488)',covers:'AI Data'},
+   img:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80',
+   desc:'Data analysis inasaidia maamuzi bora ya biashara. Excel na Google Sheets kwa hesabu za biashara. ChatGPT kwa kuchambua data yako bila coding. Python pandas kwa wale wanaotaka zaidi. Kutengeneza charts na graphs zinazoeleweka. Jinsi ya kutafsiri data ya SadeBooks — vitabu vipi vinavyouzwa zaidi na lini.'},
 
   // PESA MTANDAO
   {id:'d27',emoji:'💵',title:'Freelancing Online — Pata Pesa Mtandaoni',cat:'pesa',tag:'top',
-   bg:'linear-gradient(135deg,#14532d,#16a34a)',covers:'Freelancing'},
+   img:'https://images.unsplash.com/photo-1498758536662-35b82cd15e29?w=400&q=80',
+   desc:'Freelancing inakuwezesha kufanya kazi nyumbani na kupata dola. Fiverr, Upwork, Toptal na Freelancer. Huduma zinazolipa: web design, writing, translation na data entry. Kutengeneza profile inayovutia wateja wa kimataifa. Bei ya kazi yako — usidiscount sana mwanzoni. Jinsi ya kupokea malipo Tanzania — Wise na PayPal.'},
   {id:'d28',emoji:'🛒',title:'Kuuza Mtandaoni — E-commerce Tanzania',cat:'pesa',tag:'hot',
-   bg:'linear-gradient(135deg,#1e3a8a,#3b82f6)',covers:'E-Commerce'},
+   img:'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=80',
+   desc:'E-commerce Tanzania inakua haraka. Kuuza kwenye Facebook, Instagram na WhatsApp. Kutengeneza online shop yako mwenyewe kwa HTML na GitHub Pages bure. Ushirikiano na Jumia na Kilimall. Malipo ya M-Pesa, Tigopesa na Airtel Money. Usafirishaji wa bidhaa — DHL, Posta ya Tanzania na courier wa mtaa. Jinsi ya kushughulikia malalamiko ya wateja.'},
   {id:'d29',emoji:'📲',title:'Social Media Marketing — Kutangaza Biashara',cat:'pesa',
-   bg:'linear-gradient(135deg,#701a75,#c026d3)',covers:'Social Media'},
+   img:'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80',
+   desc:'Masoko ya kijamii ni nguvu kubwa kwa biashara ndogo. Facebook ads, Instagram reels na TikTok. Jinsi ya kutengeneza content inayopendwa na kushirikishwa. Wakati bora wa kuchapisha. Kufuatilia analytics — likes na shares si muhimu, conversions ndiyo. Budget ya TSh 10,000 kwa day ya Facebook ad inaweza kufanya mengi Tanzania.'},
   {id:'d30',emoji:'🎥',title:'YouTube Tanzania — Kutengeneza Pesa',cat:'pesa',tag:'new',
-   bg:'linear-gradient(135deg,#7f1d1d,#dc2626)',covers:'YouTube'},
+   img:'https://images.unsplash.com/photo-1611162616305-c69d394fd685?w=400&q=80',
+   desc:'YouTube channel inaweza kuwa chanzo cha mapato ya kudumu. Niche nzuri Tanzania: ujasiriamali, masomo, mapishi na burudani. Camera ya simu na mwanga mzuri — inatosha kuanza. SEO ya YouTube — title, description na tags kwa Kiswahili. AdSense — mahitaji: subscribers 1,000 na masaa 4,000 ya kutazamwa. Sponsorships na affiliate marketing.'},
   {id:'d31',emoji:'📧',title:'Email Marketing — Wateja Kupitia Barua',cat:'pesa',
-   bg:'linear-gradient(135deg,#1e3a8a,#0369a1)',covers:'Email Marketing'},
+   img:'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=400&q=80',
+   desc:'Email marketing ina ROI kubwa zaidi kuliko social media. Mailchimp na ConvertKit — bure kwa orodha ndogo. Jinsi ya kukusanya emails za wateja. Sequence ya welcome, promotion na habari. Subject line inayofanya watu wafungue barua pepe. Viwango vya open rate na click rate — Tanzania vs ulimwengu. Automation ya emails kwa SadeBooks.'},
   {id:'d32',emoji:'🏪',title:'Duka la Mtandaoni — Kuanzisha Shop',cat:'pesa',tag:'hot',
-   bg:'linear-gradient(135deg,#064e3b,#22c55e)',covers:'Online Shop'},
+   img:'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&q=80',
+   desc:'Kuanzisha duka la mtandaoni lako mwenyewe. Domain jina, hosting au GitHub Pages bure. Kutengeneza shop page yenye bidhaa, bei na picha nzuri. Mfumo wa order — WhatsApp, Google Forms au checkout ya HTML. Malipo ya simu Tanzania. Jinsi ya kutengeneza duka kama SadeBooks kwa HTML, CSS na JavaScript peke yake — bila database.'},
   {id:'d33',emoji:'💎',title:'Dropshipping Tanzania — Biashara Bila Stock',cat:'pesa',tag:'new',
-   bg:'linear-gradient(135deg,#312e81,#6366f1)',covers:'Dropshipping'},
+   img:'https://images.unsplash.com/photo-1586880244406-556ebe35f282?w=400&q=80',
+   desc:'Dropshipping — unamuuzia mteja bila kuhifadhi bidhaa. Mzalishaji anapeleka moja kwa moja. AliExpress, China suppliers na warehouse za Kenya. Niche nzuri Tanzania: nguo za mitindo, vifaa vya simu na bidhaa za nyumba. Jinsi ya kusimamia bei na delivery time. Matatizo makuu — customs na wateja wasio na subira. Jinsi ya kuzitatua.'},
 
   // ZANA/TOOLS
   {id:'d34',emoji:'🚀',title:'GitHub Pages — Chapisha Tovuti Bure',cat:'tools',tag:'top',
-   bg:'linear-gradient(135deg,#0f172a,#1e293b)',covers:'GitHub Pages'},
+   img:'https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&q=80',
+   desc:'GitHub Pages inakuruhusu kuchapisha tovuti bure kwa umri wote. Kuanzisha account ya GitHub, kutengeneza repository na ku-upload HTML. Custom domain — jinsi ya kuunganisha domain yako na GitHub Pages. GitHub Actions kwa automatic deployment. Jinsi SadeBooks inaishi GitHub Pages — repository structure na jinsi ya ku-update. Mipaka ya GitHub Pages — nini inaweza na nini haiwezi.'},
   {id:'d35',emoji:'🔧',title:'VS Code — Mazingira Bora ya Kuandika Code',cat:'tools',
-   bg:'linear-gradient(135deg,#1e3a8a,#2563eb)',covers:'VS Code'},
+   img:'https://images.unsplash.com/photo-1588064011404-57ed724c53bb?w=400&q=80',
+   desc:'VS Code ni editor bora zaidi — na bure. Install, settings na shortcuts muhimu. Extensions zinazoboresha kazi: Prettier, ESLint, Live Server, GitLens na Bracket Pair. IntelliSense na autocomplete. Debugger ya JavaScript na Python. Terminal iliyojengwa ndani. Jinsi ya kutumia VS Code na GitHub pamoja. Themes nzuri na jinsi ya kubadilisha icons.'},
   {id:'d36',emoji:'🗄️',title:'Firebase — Database ya Bure kwa Tovuti',cat:'tools',tag:'hot',
-   bg:'linear-gradient(135deg,#78350f,#f59e0b)',covers:'Firebase'},
+   img:'https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=400&q=80',
+   desc:'Firebase ni platform ya Google inayotoa database, authentication na hosting bure. Firestore database — kuandika, kusoma na kufuta data. Firebase Authentication — Google login, email/password. Firebase Hosting kwa tovuti. Jinsi SadeGPT ilitumia Firebase — chat history ya kila mtumiaji. Mipaka ya tier ya bure na unapoanza kulipa.'},
   {id:'d37',emoji:'🌐',title:'Domain na Hosting — Mwongozo Kamili',cat:'tools',
-   bg:'linear-gradient(135deg,#0c4a6e,#0ea5e9)',covers:'Domain & Host'},
+   img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80',
+   desc:'Domain (.com, .co.tz) na hosting ni lazima kwa tovuti ya professional. Jinsi ya kununua domain kwa bei nzuri — Namecheap, GoDaddy. Hosting za bei nafuu: Hostinger, Netlify (bure) na Render (bure). DNS settings — kuunganisha domain na hosting. SSL certificate (HTTPS) — bure kwa Cloudflare. Tofauti kati ya shared hosting, VPS na cloud hosting.'},
   {id:'d38',emoji:'🔒',title:'Usalama wa Tovuti — HTTPS na Security',cat:'tools',tag:'new',
-   bg:'linear-gradient(135deg,#1e3a8a,#6366f1)',covers:'Web Security'},
+   img:'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&q=80',
+   desc:'Usalama wa tovuti unalinda wewe na wateja wako. HTTPS na SSL certificate — jinsi ya kupata bure. Password hashing — usihifadhi password wazi. Input validation na sanitization kwa kuzuia XSS na SQL injection. CORS na security headers. Jinsi ya kukagua tovuti yako kwa udhaifu (vulnerability scanning). Backup — kuhifadhi nakala ya data muhimu.'},
   {id:'d39',emoji:'⚡',title:'WordPress kwa Watanzania — Mwanzo',cat:'tools',
-   bg:'linear-gradient(135deg,#0369a1,#0ea5e9)',covers:'WordPress'},
+   img:'https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&q=80',
+   desc:'WordPress inatumika na 40% ya tovuti zote duniani. Install kwa cPanel hosting — dakika 5. Themes bure na za kulipa. Plugins muhimu: Yoast SEO, WooCommerce, Contact Form 7. Kutengeneza blog, duka la bidhaa na tovuti ya biashara. Jinsi ya kubadilisha lugha ya WordPress kuwa Kiswahili. Usalama wa WordPress — jinsi ya kuzuia hack.'},
   {id:'d40',emoji:'📊',title:'Google Analytics — Kufuatilia Wageni',cat:'tools',
-   bg:'linear-gradient(135deg,#064e3b,#16a34a)',covers:'Analytics'},
+   img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80',
+   desc:'Google Analytics inakuonyesha nani anatembelea tovuti yako. Install ya tracking code, goals na events. Taarifa muhimu: wageni wapya vs waliozidi, bounce rate na time on site. Jinsi ya kujua pages zipi zinazopendwa zaidi. Conversion tracking kwa malipo na downloads. SadeBooks inatumia Google Analytics (G-DK6W813MF2) — jinsi data inavyoonekana.'},
   {id:'d41',emoji:'🎬',title:'Video Editing — Kuhariri Video kwa Simu',cat:'tools',tag:'hot',
-   bg:'linear-gradient(135deg,#7f1d1d,#ef4444)',covers:'Video Editing'},
+   img:'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&q=80',
+   desc:'Video content inashinda picha na maandishi. CapCut, VN na InShot — bure kwenye simu. Kukata, kuunganisha, kuongeza muziki na maandishi. Reels za Instagram na TikTok — mfumo sahihi. Transitions zinazoonekana za kisasa. Subtitles na jinsi ya kuzifanya automatically. Color grading rahisi kwa simu. Jinsi ya export kwa ubora wa juu bila kuchukua MB nyingi.'},
   {id:'d42',emoji:'🤳',title:'Canva — Muundo wa Picha na Matangazo',cat:'tools',tag:'new',
-   bg:'linear-gradient(135deg,#4c1d95,#a855f7)',covers:'Canva Design'},
+   img:'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&q=80',
+   desc:'Canva ni programu ya design inayotumika na mamilioni. Bure na ya kulipa (Pro). Templates za flyers, social media posts, presentations na logos. Brand Kit — rangi, fonti na logo yako moja yote. Jinsi ya kutengeneza matangazo ya SadeBooks kwa Canva. Background remover na AI features za Canva. Kushiriki designs na timu yako.'},
   {id:'d43',emoji:'📋',title:'Notion — Kupanga Maisha na Biashara',cat:'tools',
-   bg:'linear-gradient(135deg,#0f172a,#334155)',covers:'Notion'},
+   img:'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&q=80',
+   desc:'Notion ni chombo cha kupanga kila kitu — notes, database, wiki na task manager. Kutengeneza workspace ya biashara yako. Database za wateja, orders na inventory. Templates zilizopo tayari kwa biashara. Jinsi ya kushirikiana na timu kwenye Notion. Notion AI kwa kuandika na kufupisha haraka. Tofauti kati ya Notion bure na ya kulipa.'},
   {id:'d44',emoji:'💬',title:'WhatsApp Business — Biashara kwa WhatsApp',cat:'pesa',tag:'hot',
-   bg:'linear-gradient(135deg,#14532d,#22c55e)',covers:'WhatsApp Biz'},
+   img:'https://images.unsplash.com/photo-1611746869696-d09bce200020?w=400&q=80',
+   desc:'WhatsApp Business ni zana bora ya biashara Tanzania. Kutengeneza katalogi ya bidhaa, quick replies na auto-greeting. Broadcast lists kwa kutuma ujumbe wa matangazo. WhatsApp Web kwa kazi kwenye kompyuta. Jinsi ya kusimamia maagizo kupitia WhatsApp bila kuchanganyikiwa. Labels za kuhifadhi wateja na maagizo. WhatsApp API kwa biashara kubwa.'},
   {id:'d45',emoji:'📱',title:'Kutengeneza App ya Android — Mwanzo',cat:'tools',tag:'top',
-   bg:'linear-gradient(135deg,#064e3b,#059669)',covers:'Android App'},
+   img:'https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=400&q=80',
+   desc:'App ya Android inaweza kutengenezwa hata bila kujua Java. MIT App Inventor — drag and drop kwa wanaoanza. React Native kwa code moja inayofanya kazi Android na iPhone. Progressive Web App (PWA) — tovuti yako inayofanya kazi kama app. Google Play Store — jinsi ya kupakia app na kupata mapato. APK distribution bila Play Store kwa wateja wa Tanzania.'},
   {id:'d46',emoji:'🔗',title:'API Integration — Kuunganisha Mifumo',cat:'js',
-   bg:'linear-gradient(135deg,#1e3a8a,#0284c7)',covers:'API Integration'},
+   img:'https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=400&q=80',
+   desc:'API inaunganisha programu mbalimbali. REST API vs GraphQL. Authentication: API keys, OAuth na Bearer tokens. Jinsi ya kusoma API documentation. Mifano ya vitendo: weather API, currency conversion na maps. Jinsi ya kuunganisha M-Pesa API kwa malipo. GitHub API kwa kuonyesha repositories zako. Rate limiting na jinsi ya kushughulikia errors.'},
   {id:'d47',emoji:'🗺️',title:'Google Maps API — Kutumia Ramani',cat:'js',
-   bg:'linear-gradient(135deg,#7f1d1d,#dc2626)',covers:'Google Maps'},
+   img:'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&q=80',
+   desc:'Google Maps API inakuwezesha kuunganisha ramani kwenye tovuti yako. API key ya bure (hadi mipaka). Kuonyesha location ya biashara yako. Custom markers na info windows. Directions API kwa kuonyesha njia ya kufika. Geocoding — kutafsiri anwani kuwa coordinates. Jinsi ya kuongeza ramani ya Tanzania kwenye tovuti yako kwa mistari 20 ya code.'},
   {id:'d48',emoji:'💳',title:'Malipo ya Mtandaoni — M-Pesa API',cat:'tools',tag:'new',
-   bg:'linear-gradient(135deg,#14532d,#16a34a)',covers:'M-Pesa API'},
+   img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80',
+   desc:'Malipo ya M-Pesa na Tigopesa kwenye tovuti yako. Vodacom M-Pesa API na Tigo Pesa API — jinsi ya kupata access. Push payment na pull payment. Jinsi malipo ya SadeBooks inavyofanya kazi — malipo moja kwa moja kwa namba ya simu. Hifadhi ya historia ya malipo. Jinsi ya kuunganisha bila backend — kutumia WhatsApp confirmation kwa biashara ndogo.'},
   {id:'d49',emoji:'📜',title:'JSON na REST API — Kuelewa Data',cat:'js',
-   bg:'linear-gradient(135deg,#78350f,#f59e0b)',covers:'REST API'},
+   img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80',
+   desc:'JSON (JavaScript Object Notation) ndiyo lugha ya data ya kisasa. Syntax ya JSON — objects, arrays, strings, numbers. Tofauti kati ya JSON na XML. REST API principles — endpoints, methods (GET, POST, PUT, DELETE). Postman kwa kujaribu APIs. Kutengeneza mock API kwa json-server. Jinsi SadeBooks inavyohifadhi data ya vitabu kwenye JavaScript arrays.'},
   {id:'d50',emoji:'🏆',title:'Portfolio ya Mtaalamu — Jinsi ya Kuunda',cat:'design',tag:'top',
-   bg:'linear-gradient(135deg,#0f172a,#1e3a8a)',covers:'Portfolio'},
+   img:'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&q=80',
+   desc:'Portfolio nzuri ni tiketi yako ya kupata kazi na wateja. Muundo wa portfolio — about, projects, skills na contact. Kuchagua projects bora za kuonyesha. Kuandika maelezo ya kila project — tatizo ulilotatua na jinsi ulivyofanya. Photographing kazi yako vizuri. Deploy portfolio GitHub Pages bure. Portfolio ya Herman Sade kama mfano — developer na mwandishi wa Kiswahili.'},
 ];
 
-/* ════════════════════════════════
+/* ══════════════════════════════════════
    RENDER CARDS
-════════════════════════════════ */
+══════════════════════════════════════ */
 function badgeHTML(tag){
   if(!tag) return '';
-  const map = {hot:'badge-hot',new:'badge-new',top:'badge-top'};
-  const txt = {hot:'🔥 Hot',new:'✨ Mpya',top:'⭐ Top'};
+  const map={hot:'badge-hot',new:'badge-new',top:'badge-top'};
+  const txt={hot:'🔥 Hot',new:'✨ Mpya',top:'⭐ Top'};
   return `<div class="book-badge ${map[tag]}">${txt[tag]}</div>`;
 }
 
 function renderBooks(arr, containerId){
   const container = document.getElementById(containerId);
-  container.innerHTML = arr.map(b => {
-    return `
-    <div class="book-card" data-cat="${b.cat}" data-section="${containerId}">
-      <div class="book-cover" style="background:${b.bg};">
+  container.innerHTML = arr.map(b => `
+    <div class="book-card" data-cat="${b.cat}">
+      <div class="book-cover">
+        <img class="book-cover-img" src="${b.img}" alt="${b.title}" loading="lazy" onerror="this.style.display='none'">
+        <div class="book-cover-overlay"></div>
         ${badgeHTML(b.tag)}
         <span class="book-emoji">${b.emoji}</span>
-        <span class="book-cover-title">${b.covers}</span>
+        <span class="book-cover-title">${b.title}</span>
       </div>
       <div class="book-body">
         <div class="book-cat">${b.cat.toUpperCase()}</div>
         <div class="book-title">${b.title}</div>
+        <div class="book-desc">${b.desc}</div>
         <div class="book-footer">
           <div class="book-price">
             <span class="price-label">TSH</span>
             <span class="price-val">5,000</span>
           </div>
           <div class="book-actions">
-            <a href="malipo.html?book=${encodeURIComponent(b.title)}&emoji=${encodeURIComponent(b.emoji)}" class="btn-buy">Nunua</a>
+            <a href="malipo.html?book=${encodeURIComponent(b.title)}&emoji=${encodeURIComponent(b.emoji)}" class="btn-buy">Nunua →</a>
           </div>
         </div>
       </div>
-    </div>`;
-  }).join('');
+    </div>`).join('');
 }
 
-/* ════════════════════════════════
+/* ══════════════════════════════════════
    SWITCH SECTION
-════════════════════════════════ */
+══════════════════════════════════════ */
 function switchSection(sec, topBtn, snavBtn){
   document.querySelectorAll('.section-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.snav-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.topnav-tab').forEach(b=>b.classList.remove('active'));
-
   document.getElementById('panel-'+sec).classList.add('active');
   document.getElementById('snav-'+sec).classList.add('active');
   if(topBtn) topBtn.classList.add('active');
-  else {
-    document.querySelectorAll('.topnav-tab').forEach(b=>{
-      if(b.textContent.toLowerCase().includes(sec==='ujasiriamali'?'ujasiriamali':'teknolojia'))
-        b.classList.add('active');
-    });
-  }
+  else document.querySelectorAll('.topnav-tab').forEach(b=>{
+    if(b.textContent.toLowerCase().includes(sec==='ujasiriamali'?'ujasiriamali':'teknolojia'))
+      b.classList.add('active');
+  });
   window.scrollTo({top:62,behavior:'smooth'});
 }
 
-/* ════════════════════════════════
+/* ══════════════════════════════════════
    FILTER
-════════════════════════════════ */
+══════════════════════════════════════ */
 function filterBooks(section, cat, btn){
   const gridId = section==='u' ? 'grid-ujasiriamali' : 'grid-digital';
   const countId = section==='u' ? 'u-count' : 'd-count';
@@ -786,34 +635,21 @@ function filterBooks(section, cat, btn){
     if(show) visible++;
   });
   document.getElementById(countId).textContent = `Vitabu ${visible}`;
-  // Update active filter btn
-  const parentBar = btn.closest('.filter-bar');
-  parentBar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.closest('.filter-bar').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
 }
 
-/* ════════════════════════════════
-   TOAST
-════════════════════════════════ */
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(()=>t.classList.remove('show'),2500);
-}
-
-/* ════════════════════════════════
+/* ══════════════════════════════════════
    SCROLL TOP
-════════════════════════════════ */
+══════════════════════════════════════ */
 const scrollBtn = document.getElementById('scrollTopBtn');
 window.addEventListener('scroll',()=>{
-  scrollBtn.style.display = window.scrollY>400?'flex':'none';
+  scrollBtn.style.display = window.scrollY>400 ? 'flex' : 'none';
 });
 
-/* ════════════════════════════════
+/* ══════════════════════════════════════
    INIT
-════════════════════════════════ */
+══════════════════════════════════════ */
 renderBooks(ujasiriamaliBooks,'grid-ujasiriamali');
 renderBooks(digitalBooks,'grid-digital');
 </script>
