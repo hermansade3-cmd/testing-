@@ -531,7 +531,7 @@
       </button>
 
     <div class="footer-note">
-      Kwa maswali: <a href="/cdn-cgi/l/email-protection#254d405748444b5644414016654248444c490b464a48"><span class="__cf_email__" data-cfemail="bfd7dacdd2ded1ccdedbda8cffd8d2ded6d391dcd0d2">[email&#160;protected]</span></a><br/>
+      Kwa maswali: <a href="mailto:hermansade3@gmail.com">hermansade3@gmail.com</a><br/>
       &copy; 2025 SadeBooks · <a href="privacy_and_terms.html">Masharti ya Matumizi</a>
     </div>
   </div>
@@ -635,6 +635,10 @@
       try {
         const cred = await createUserWithEmailAndPassword(auth, email, pw);
         await updateProfile(cred.user, { displayName: name });
+        // Baada ya updateProfile Firebase haipigii tena onAuthStateChanged,
+        // kwa hivyo tunaita showUserPanel mwenyewe moja kwa moja.
+        showMsg('✅ Akaunti imeundwa! Karibu, ' + name + '!', 'success');
+        setTimeout(() => showUserPanel(cred.user), 800);
       } catch (e) {
         setLoading('registerBtn', false);
         const msgs = {
