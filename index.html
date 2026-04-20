@@ -24,7 +24,7 @@
       /* ── CHOICE OVERLAY ── */
       #choiceOverlay {
         position: fixed; inset: 0; z-index: 99999;
-        background: rgba(10,22,40,0.82);
+        background: rgba(7,20,20,0.88);
         backdrop-filter: blur(6px);
         display: flex; align-items: center; justify-content: center;
         padding: 20px;
@@ -38,8 +38,8 @@
         transition: opacity 0.25s ease;
       }
       .choice-card {
-        background: #112240;
-        border: 1px solid rgba(201,168,76,0.25);
+        background: #0d2a2a;
+        border: 1px solid rgba(46,196,182,0.3);
         border-radius: 22px;
         padding: 36px 28px 28px;
         max-width: 360px; width: 100%;
@@ -55,10 +55,10 @@
       .choice-title {
         font-family: 'Playfair Display', serif;
         font-size: 1.45rem; font-weight: 900;
-        color: #C9A84C; margin-bottom: 6px;
+        color: #2ec4b6; margin-bottom: 6px;
       }
       .choice-sub {
-        font-size: 0.82rem; color: rgba(245,240,232,0.55);
+        font-size: 0.82rem; color: rgba(255,255,255,0.55);
         margin-bottom: 28px; line-height: 1.5;
       }
       .choice-btn {
@@ -70,22 +70,22 @@
         transition: all 0.22s; border: none; margin-bottom: 12px;
       }
       .choice-btn-primary {
-        background: linear-gradient(135deg, #C9A84C, #a07820);
-        color: #1A1208;
-        box-shadow: 0 6px 20px rgba(201,168,76,0.35);
+        background: linear-gradient(135deg, #2ec4b6, #1a8a80);
+        color: #071414;
+        box-shadow: 0 6px 20px rgba(46,196,182,0.35);
       }
       .choice-btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 28px rgba(201,168,76,0.5);
+        box-shadow: 0 10px 28px rgba(46,196,182,0.5);
       }
       .choice-btn-secondary {
         background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(245,240,232,0.18) !important;
-        color: rgba(245,240,232,0.8);
+        border: 1px solid rgba(46,196,182,0.2) !important;
+        color: rgba(255,255,255,0.8);
       }
       .choice-btn-secondary:hover {
-        background: rgba(255,255,255,0.1);
-        color: #f5f0e8;
+        background: rgba(46,196,182,0.1);
+        color: #2ec4b6;
       }
       .choice-divider {
         display: flex; align-items: center; gap: 10px;
@@ -93,9 +93,9 @@
       }
       .choice-divider::before, .choice-divider::after {
         content: ''; flex: 1;
-        height: 1px; background: rgba(201,168,76,0.15);
+        height: 1px; background: rgba(46,196,182,0.2);
       }
-      .choice-divider span { font-size: 0.72rem; color: rgba(245,240,232,0.35); }
+      .choice-divider span { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
     </style>
     <!-- Mwisho Firebase Auth -->
     <style>
@@ -104,24 +104,24 @@
       display:none;
       align-items:center;
       gap:8px;
-      background:rgba(201,168,76,0.15);
-      border:1px solid rgba(201,168,76,0.4);
+      background:rgba(46,196,182,0.15);
+      border:1px solid rgba(46,196,182,0.4);
       border-radius:100px;
       padding:6px 14px 6px 8px;
       cursor:pointer;
-      color:#1A1208;
+      color:#ffffff;
       font-family:'DM Sans',sans-serif;
       font-size:0.82rem;
       font-weight:600;
       transition:all 0.2s;
       position:relative;
     }
-    #accountBtn:hover { background:rgba(201,168,76,0.3); border-color:#C9A84C; }
+    #accountBtn:hover { background:rgba(46,196,182,0.3); border-color:#2ec4b6; }
     #accountBtn .acc-avatar {
       width:28px;height:28px;border-radius:50%;
-      background:linear-gradient(135deg,#C9A84C,#a07820);
+      background:linear-gradient(135deg,#2ec4b6,#1a8a80);
       display:flex;align-items:center;justify-content:center;
-      font-size:0.85rem;font-weight:700;color:#1A1208;
+      font-size:0.85rem;font-weight:700;color:#071414;
       flex-shrink:0;overflow:hidden;
     }
     #accountBtn .acc-avatar img { width:100%;height:100%;object-fit:cover; }
@@ -131,8 +131,8 @@
       top:calc(100% + 10px);
       right:0;
       width:240px;
-      background:#112240;
-      border:1px solid rgba(201,168,76,0.25);
+      background:#0d2a2a;
+      border:1px solid rgba(46,196,182,0.25);
       border-radius:14px;
       box-shadow:0 16px 48px rgba(0,0,0,0.5);
       z-index:9999;
@@ -143,32 +143,32 @@
     #accountDropdown.show { display:block; }
     .drop-header {
       padding:16px;
-      background:rgba(201,168,76,0.07);
-      border-bottom:1px solid rgba(201,168,76,0.15);
+      background:rgba(46,196,182,0.07);
+      border-bottom:1px solid rgba(46,196,182,0.15);
       display:flex;align-items:center;gap:12px;
     }
     .drop-avatar {
       width:42px;height:42px;border-radius:50%;
-      background:linear-gradient(135deg,#C9A84C,#a07820);
+      background:linear-gradient(135deg,#2ec4b6,#1a8a80);
       display:flex;align-items:center;justify-content:center;
-      font-size:1.2rem;font-weight:700;color:#1A1208;
-      flex-shrink:0;overflow:hidden;border:2px solid #C9A84C;
+      font-size:1.2rem;font-weight:700;color:#071414;
+      flex-shrink:0;overflow:hidden;border:2px solid #2ec4b6;
     }
     .drop-avatar img { width:100%;height:100%;object-fit:cover; }
-    .drop-name { font-weight:700;font-size:0.9rem;color:#f5f0e8; }
-    .drop-email { font-size:0.72rem;color:rgba(245,240,232,0.5);margin-top:2px; }
+    .drop-name { font-weight:700;font-size:0.9rem;color:#f0fffe; }
+    .drop-email { font-size:0.72rem;color:rgba(255,255,255,0.5);margin-top:2px; }
     .drop-item {
       display:flex;align-items:center;gap:10px;
       padding:12px 16px;
-      color:rgba(245,240,232,0.8);
+      color:rgba(255,255,255,0.8);
       font-size:0.85rem;
       text-decoration:none;
       transition:background 0.15s;
       cursor:pointer;border:none;background:none;
       width:100%;font-family:'DM Sans',sans-serif;
     }
-    .drop-item:hover { background:rgba(201,168,76,0.1);color:#f5f0e8; }
-    .drop-divider { height:1px;background:rgba(201,168,76,0.12);margin:4px 0; }
+    .drop-item:hover { background:rgba(46,196,182,0.1);color:#2ec4b6; }
+    .drop-divider { height:1px;background:rgba(46,196,182,0.12);margin:4px 0; }
     .drop-item.logout { color:#f08080; }
     .drop-item.logout:hover { background:rgba(224,92,92,0.08); }
     </style>
@@ -189,42 +189,73 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-            --gold: #C9A84C;
-            --gold-light: #E8C96A;
-            --gold-pale: #FDF6E3;
-            --dark: #1A1208;
-            --dark-mid: #2D2010;
-            --brown: #5C3D1E;
-            --cream: #FAF4E8;
+            --gold: #2ec4b6;
+            --gold-light: #56d5ca;
+            --gold-pale: #e0faf8;
+            --dark: #181c20;
+            --dark-mid: #1e2a2a;
+            --brown: #1a3232;
+            --cream: #111718;
             --white: #FFFFFF;
-            --text: #3A2A10;
-            --text-light: #7A6540;
+            --text: #e8f5f4;
+            --text-light: #7ecec8;
+            --teal: #2ec4b6;
+            --teal-dark: #1a8a80;
+            --teal-glow: rgba(46,196,182,0.18);
         }
 
 html { scroll-behavior: smooth; }
 
 body {
             font-family: 'DM Sans', sans-serif;
-            background: var(--cream);
+            background: #111718;
             color: var(--text);
             overflow-x: hidden;
         }
+
+/* ===== WAVE DECORATION ===== */
+.wave-section {
+    position: relative;
+    overflow: hidden;
+}
+.wave-section::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -10%;
+    width: 120%; height: 140px;
+    background: var(--teal);
+    border-radius: 0 0 50% 50%;
+    opacity: 0.13;
+    pointer-events: none;
+    z-index: 0;
+}
+.wave-section::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -10%;
+    width: 120%; height: 140px;
+    background: var(--teal);
+    border-radius: 50% 50% 0 0;
+    opacity: 0.09;
+    pointer-events: none;
+    z-index: 0;
+}
 
 /* ===== HERO WRAPPER — quarter width layout ===== */
 .hero-wrapper {
     display: flex;
     min-height: auto;
-    background: #f8fafc;
+    background: #111718;
 }
 
-/* Left panel — blue hero (quarter width) */
+/* Left panel — dark teal hero (quarter width) */
 header {
     position: relative;
     width: 30%;
     min-width: 260px;
     max-width: 380px;
     min-height: auto;
-    background: linear-gradient(160deg, #0f172a 0%, #1e3a8a 55%, #1d4ed8 100%);
+    background: linear-gradient(160deg, #0d1f1e 0%, #113030 55%, #1a4a44 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -235,19 +266,33 @@ header {
     flex-shrink: 0;
 }
 
-/* Subtle glow top */
+/* Teal wave glow top */
 header::before {
     content: '';
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(96,165,250,0.18) 0%, transparent 65%),
-        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(29,78,216,0.25) 0%, transparent 60%);
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(46,196,182,0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(26,138,128,0.2) 0%, transparent 60%);
     pointer-events: none;
 }
 
-/* Decorative circle hidden — replaced by animated rings */
-header::after { display: none; }
+/* Decorative wave shape */
+header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -60px;
+    width: 220px; height: 220px;
+    background: rgba(46,196,182,0.12);
+    border-radius: 50% 40% 60% 30%;
+    pointer-events: none;
+    z-index: 0;
+    animation: blobMove 7s ease-in-out infinite alternate;
+}
+@keyframes blobMove {
+    from { transform: translate(0,0) scale(1); }
+    to   { transform: translate(20px,15px) scale(1.08); }
+}
 
 /* ===== SPINNING RINGS ===== */
 .spin-rings {
@@ -262,8 +307,8 @@ header::after { display: none; }
     position: absolute; inset: 0;
     border-radius: 50%;
     border: 2px solid transparent;
-    border-top-color: #60a5fa;
-    border-right-color: rgba(96,165,250,0.25);
+    border-top-color: #2ec4b6;
+    border-right-color: rgba(46,196,182,0.25);
     animation: spinLeft 8s linear infinite;
 }
 .ring-white {
@@ -277,7 +322,7 @@ header::after { display: none; }
 .ring-dash {
     position: absolute; inset: -20px;
     border-radius: 50%;
-    border: 1px dashed rgba(96,165,250,0.2);
+    border: 1px dashed rgba(46,196,182,0.2);
     animation: spinLeft 22s linear infinite;
 }
 .orbit-outer {
@@ -333,7 +378,7 @@ header::after { display: none; }
 
 .logo-dot {
     width: 5px; height: 5px;
-    background: #f59e0b;
+    background: #2ec4b6;
     border-radius: 50%;
 }
 
@@ -348,7 +393,7 @@ header h1 {
 }
 
 header h1 span {
-    color: #f59e0b;
+    color: #2ec4b6;
     display: block;
 }
 
@@ -371,8 +416,8 @@ header h1 span {
 }
 
 .btn-primary {
-    background: #f59e0b;
-    color: #0f172a;
+    background: #2ec4b6;
+    color: #0d1f1e;
     padding: 0.75rem 1.8rem;
     border: none;
     border-radius: 100px;
@@ -387,9 +432,9 @@ header h1 span {
 }
 
 .btn-primary:hover {
-    background: #fbbf24;
+    background: #56d5ca;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(245,158,11,0.4);
+    box-shadow: 0 8px 24px rgba(46,196,182,0.45);
 }
 
 .btn-outline {
@@ -408,20 +453,31 @@ header h1 span {
 }
 
 .btn-outline:hover {
-    border-color: #f59e0b;
-    color: #f59e0b;
+    border-color: #2ec4b6;
+    color: #2ec4b6;
     transform: translateY(-2px);
 }
 
-/* Right side — white content area */
+/* Right side — dark content area */
 .hero-right {
     flex: 1;
-    background: #ffffff;
+    background: #151c1c;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+}
+.hero-right::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 300px; height: 300px;
+    background: rgba(46,196,182,0.07);
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 /* Desktop: make stats grid wider */
@@ -439,14 +495,14 @@ header h1 span {
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.4rem, 3vw, 2.2rem);
     font-weight: 700;
-    color: #0f172a;
+    color: #ffffff;
     margin-bottom: 0.5rem;
 }
 
-.hero-right-title em { color: #1d4ed8; font-style: normal; }
+.hero-right-title em { color: #2ec4b6; font-style: normal; }
 
 .hero-right-desc {
-    color: #64748b;
+    color: rgba(255,255,255,0.55);
     font-size: 0.9rem;
     line-height: 1.7;
     max-width: 400px;
@@ -463,23 +519,23 @@ header h1 span {
 }
 
 .hero-stat-card {
-    background: #f1f5f9;
+    background: rgba(46,196,182,0.08);
     border-radius: 16px;
     padding: 1.2rem;
     text-align: center;
-    border: 1px solid #e2e8f0;
+    border: 1px solid rgba(46,196,182,0.2);
 }
 
 .hero-stat-num {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #1d4ed8;
+    color: #2ec4b6;
 }
 
 .hero-stat-label {
     font-size: 0.7rem;
-    color: #64748b;
+    color: rgba(255,255,255,0.5);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-top: 0.2rem;
@@ -521,19 +577,19 @@ header h1 span {
 .scroll-line {
             width: 1px;
             height: 50px;
-            background: linear-gradient(to bottom, rgba(201,168,76,0.6), transparent);
+            background: linear-gradient(to bottom, rgba(46,196,182,0.6), transparent);
             animation: scrollPulse 2s infinite;
         }
 
 /* Stats bar */
         .stats-bar {
-            background: var(--dark-mid);
+            background: #0d1f1e;
             padding: 1.4rem 2rem;
             display: flex;
             justify-content: center;
             gap: clamp(2rem, 6vw, 5rem);
             flex-wrap: wrap;
-            border-bottom: 1px solid rgba(201,168,76,0.15);
+            border-bottom: 1px solid rgba(46,196,182,0.2);
         }
 
 .stat {
@@ -544,12 +600,12 @@ header h1 span {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
             font-weight: 700;
-            color: #C9A84C;
+            color: #2ec4b6;
         }
 
 .stat-label {
             font-size: 0.72rem;
-            color: #333333;
+            color: rgba(255,255,255,0.45);
             letter-spacing: 0.1em;
             text-transform: uppercase;
             margin-top: 0.1rem;
@@ -560,9 +616,9 @@ header h1 span {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(250,244,232,0.92);
+            background: rgba(13,31,30,0.96);
             backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(201,168,76,0.2);
+            border-bottom: 1px solid rgba(46,196,182,0.2);
             padding: 1rem 2rem;
             display: flex;
             align-items: center;
@@ -574,10 +630,10 @@ header h1 span {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             font-weight: 700;
-            color: #000000;
+            color: #ffffff;
         }
 
-.nav-brand em { color: var(--gold); font-style: normal; }
+.nav-brand em { color: var(--teal); font-style: normal; }
 
 .nav-links {
             display: flex;
@@ -587,13 +643,13 @@ header h1 span {
 
 .nav-links a {
             text-decoration: none;
-            color: #1A1208;
+            color: rgba(255,255,255,0.7);
             font-size: 0.88rem;
             font-weight: 500;
             transition: color 0.2s;
         }
 
-.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover { color: var(--teal); }
 
 /* ===== SECTION TITLE ===== */
         .section-header {
@@ -607,9 +663,9 @@ header h1 span {
             font-weight: 600;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: var(--gold);
-            background: rgba(201,168,76,0.1);
-            border: 1px solid rgba(201,168,76,0.25);
+            color: var(--teal);
+            background: rgba(46,196,182,0.1);
+            border: 1px solid rgba(46,196,182,0.3);
             padding: 0.3rem 1rem;
             border-radius: 100px;
             margin-bottom: 1rem;
@@ -619,17 +675,17 @@ header h1 span {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 5vw, 3.2rem);
             font-weight: 700;
-            color: #000000;
+            color: #ffffff;
             line-height: 1.15;
         }
 
 .section-title em {
             font-style: italic;
-            color: var(--gold);
+            color: var(--teal);
         }
 
 .section-desc {
-            color: #333333;
+            color: rgba(255,255,255,0.5);
             font-size: 1rem;
             margin-top: 0.8rem;
             max-width: 480px;
@@ -640,9 +696,10 @@ header h1 span {
 
 /* ===== BOOKS SECTION ===== */
         #books {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 0;
+            max-width: none;
+            margin: 0;
+            background: #111718;
         }
 
 .books-grid {
@@ -658,10 +715,10 @@ header h1 span {
 }
 
 .book-card {
-            background: var(--white);
+            background: #1a2626;
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid rgba(201,168,76,0.15);
+            border: 1px solid rgba(46,196,182,0.18);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             group: true;
@@ -669,7 +726,7 @@ header h1 span {
 
 .book-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(26,18,8,0.15), 0 0 0 1px rgba(201,168,76,0.3);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(46,196,182,0.4);
         }
 
 .book-cover {
@@ -729,7 +786,7 @@ header h1 span {
             font-weight: 600;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: #1565C0;
+            color: #2ec4b6;
             margin-bottom: 0.5rem;
         }
 
@@ -737,14 +794,14 @@ header h1 span {
             font-family: 'Playfair Display', serif;
             font-size: 1.2rem;
             font-weight: 700;
-            color: #000000;
+            color: #ffffff;
             line-height: 1.3;
             margin-bottom: 0.5rem;
         }
 
 .book-desc {
             font-size: 0.84rem;
-            color: #333333;
+            color: rgba(255,255,255,0.55);
             line-height: 1.6;
             margin-bottom: 1.2rem;
         }
@@ -771,7 +828,7 @@ header h1 span {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             font-weight: 700;
-            color: #000000;
+            color: #2ec4b6;
         }
 
 .price-currency {
@@ -782,14 +839,14 @@ header h1 span {
         }
 
 .btn-buy {
-            background: var(--dark);
-            color: var(--white);
+            background: #2ec4b6;
+            color: #0d1f1e;
             padding: 0.65rem 1.4rem;
             border: none;
             border-radius: 100px;
             font-family: 'DM Sans', sans-serif;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
@@ -798,15 +855,25 @@ header h1 span {
         }
 
 .btn-buy:hover {
-            background: var(--gold);
-            color: var(--dark);
+            background: #56d5ca;
+            color: #0d1f1e;
             transform: scale(1.05);
         }
 
 /* ===== FEATURES SECTION ===== */
         #features {
-            background: var(--dark);
+            background: linear-gradient(160deg, #0d1f1e 0%, #113030 60%, #0d1f1e 100%);
             padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        #features::before {
+            content: '';
+            position: absolute;
+            top: -100px; right: -100px;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(46,196,182,0.1) 0%, transparent 70%);
+            pointer-events: none;
         }
 
 .features-inner {
@@ -823,19 +890,21 @@ header h1 span {
 
 .feature-card {
             padding: 2rem;
-            border: 1px solid rgba(201,168,76,0.15);
+            border: 1px solid rgba(46,196,182,0.18);
             border-radius: 16px;
-            transition: border-color 0.3s;
+            background: rgba(46,196,182,0.04);
+            transition: border-color 0.3s, background 0.3s;
         }
 
 .feature-card:hover {
-            border-color: rgba(201,168,76,0.4);
+            border-color: rgba(46,196,182,0.5);
+            background: rgba(46,196,182,0.08);
         }
 
 .feature-icon {
             width: 48px;
             height: 48px;
-            background: rgba(201,168,76,0.12);
+            background: rgba(46,196,182,0.15);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -859,10 +928,26 @@ header h1 span {
 
 /* ===== FOOTER ===== */
         footer {
-            background: var(--dark);
-            border-top: 1px solid rgba(201,168,76,0.15);
+            background: #0a1818;
+            border-top: 1px solid rgba(46,196,182,0.2);
             padding: 3rem 2rem 2rem;
         }
+
+.footer-brand h3 em {
+            color: var(--teal);
+            font-style: normal;
+        }
+
+.footer-links h5 {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 1rem;
+        }
+
+.footer-links a:hover { color: var(--teal); }
 
 .footer-inner {
             max-width: 1100px;
@@ -975,14 +1060,14 @@ header h1 span {
 .hamburger {
     display: flex; flex-direction: column; justify-content: center;
     gap: 5px; width: 40px; height: 40px;
-    background: rgba(201,168,76,0.12);
-    border: 1.5px solid rgba(201,168,76,0.5);
+    background: rgba(46,196,182,0.12);
+    border: 1.5px solid rgba(46,196,182,0.5);
     border-radius: 10px; cursor: pointer; padding: 10px;
     transition: all 0.2s; flex-shrink: 0;
 }
-.hamburger:hover { background: rgba(201,168,76,0.22); border-color: #C9A84C; }
+.hamburger:hover { background: rgba(46,196,182,0.22); border-color: #2ec4b6; }
 .hamburger span {
-    display: block; height: 2px; background: #C9A84C;
+    display: block; height: 2px; background: #2ec4b6;
     border-radius: 2px; transition: all 0.3s cubic-bezier(.16,1,.3,1);
     transform-origin: center;
 }
@@ -1002,8 +1087,8 @@ header h1 span {
 .sidebar {
     position: fixed; top: 0; left: 0;
     width: 270px; height: 100vh;
-    background: linear-gradient(170deg, #0A1628 0%, #0D2245 60%, #0A1628 100%);
-    border-right: 1px solid rgba(201,168,76,0.25);
+    background: linear-gradient(170deg, #071414 0%, #0d2a2a 60%, #071414 100%);
+    border-right: 1px solid rgba(46,196,182,0.25);
     box-shadow: 8px 0 40px rgba(0,0,0,0.7);
     z-index: 999; display: flex; flex-direction: column;
     transform: translateX(-100%);
@@ -1017,50 +1102,49 @@ header h1 span {
     display: flex; align-items: center;
     justify-content: space-between;
     padding: 1.4rem 1.3rem 1rem;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-    flex-shrink: 0; /* never shrink header */
+    border-bottom: 1px solid rgba(46,196,182,0.2);
+    flex-shrink: 0;
 }
 .sidebar-brand {
     font-family: 'Playfair Display', serif;
     font-size: 1.35rem; font-weight: 700; color: #fff;
 }
-.sidebar-brand em { color: #C9A84C; font-style: normal; }
+.sidebar-brand em { color: #2ec4b6; font-style: normal; }
 
 .sidebar-close {
     width: 32px; height: 32px;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 8px; color: #C9A84C;
+    background: rgba(46,196,182,0.1);
+    border: 1px solid rgba(46,196,182,0.3);
+    border-radius: 8px; color: #2ec4b6;
     font-size: 13px; cursor: pointer; transition: all 0.2s;
 }
-.sidebar-close:hover { background: rgba(201,168,76,0.25); color: #E8C96A; }
+.sidebar-close:hover { background: rgba(46,196,182,0.25); color: #56d5ca; }
 
 .sidebar-divider {
     height: 1px; margin: 0 1.3rem 0.7rem;
-    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(46,196,182,0.4), transparent);
     flex-shrink: 0;
 }
 .sidebar-label {
     font-size: 0.6rem; font-weight: 700;
     letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(201,168,76,0.7); padding: 0 1.3rem 0.5rem;
+    color: rgba(46,196,182,0.7); padding: 0 1.3rem 0.5rem;
     flex-shrink: 0;
 }
 .sidebar-nav {
     display: flex; flex-direction: column;
     padding: 0 0.7rem 0.7rem; gap: 1px;
     flex: 1;
-    overflow-y: auto;           /* ← scroll hapa ndio muhimu */
+    overflow-y: auto;
     overscroll-behavior: contain;
-    /* scrollbar ndogo na nzuri */
     scrollbar-width: thin;
-    scrollbar-color: rgba(201,168,76,0.35) transparent;
+    scrollbar-color: rgba(46,196,182,0.35) transparent;
 }
 .sidebar-nav::-webkit-scrollbar { width: 4px; }
 .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
 .sidebar-nav::-webkit-scrollbar-thumb {
-    background: rgba(201,168,76,0.35);
+    background: rgba(46,196,182,0.35);
     border-radius: 4px;
 }
 .sidebar-link {
@@ -1069,28 +1153,28 @@ header h1 span {
     color: rgba(255,255,255,0.85) !important;
     text-decoration: none; font-size: 0.88rem; font-weight: 500;
     border: 1px solid transparent; transition: all 0.2s ease;
-    flex-shrink: 0; /* kila kiungo kionyeshe kamili */
+    flex-shrink: 0;
 }
 .sidebar-link span { font-size: 1rem; width: 22px; text-align: center; flex-shrink: 0; }
 .sidebar-link:hover {
-    background: rgba(201,168,76,0.15);
-    border-color: rgba(201,168,76,0.35);
-    color: #C9A84C !important;
+    background: rgba(46,196,182,0.15);
+    border-color: rgba(46,196,182,0.35);
+    color: #2ec4b6 !important;
     transform: translateX(4px);
 }
 .sidebar-footer {
     padding: 1rem 1.3rem; text-align: center;
-    color: rgba(201,168,76,0.5); font-size: 0.7rem;
+    color: rgba(46,196,182,0.5); font-size: 0.7rem;
     letter-spacing: 0.12em; text-transform: uppercase;
-    border-top: 1px solid rgba(201,168,76,0.15);
-    flex-shrink: 0; /* footer ibaki chini daima */
+    border-top: 1px solid rgba(46,196,182,0.15);
+    flex-shrink: 0;
 }
     </style>
     <link rel="stylesheet" href="style.css">
     <style>
-    /* ===== SIDEBAR OVERRIDE — Lazima iwe navy giza ===== */
+    /* ===== SIDEBAR OVERRIDE — Lazima iwe teal giza ===== */
     .sidebar {
-        background: linear-gradient(170deg, #0A1628 0%, #0D2245 60%, #0A1628 100%) !important;
+        background: linear-gradient(170deg, #071414 0%, #0d2a2a 60%, #071414 100%) !important;
     }
     .sidebar-top, .sidebar-footer, .sidebar-divider, .sidebar-label {
         background-color: transparent !important;
@@ -1102,20 +1186,95 @@ header h1 span {
         min-height: 0 !important;
     }
     .sidebar-link {
-        color: #111111 !important;
+        color: rgba(255,255,255,0.85) !important;
         background-color: transparent !important;
     }
     .sidebar-link:hover {
-        background: rgba(201,168,76,0.15) !important;
-        color: #C9A84C !important;
+        background: rgba(46,196,182,0.15) !important;
+        color: #2ec4b6 !important;
     }
-    .sidebar-brand { color: #000000 !important; }
-    .sidebar-brand em { color: #C9A84C !important; }
-    .sidebar-label { color: rgba(201,168,76,0.7) !important; }
-    .sidebar-footer { color: rgba(201,168,76,0.5) !important; }
-    .sidebar-close { color: #C9A84C !important; }
+    .sidebar-brand { color: #ffffff !important; }
+    .sidebar-brand em { color: #2ec4b6 !important; }
+    .sidebar-label { color: rgba(46,196,182,0.7) !important; }
+    .sidebar-footer { color: rgba(46,196,182,0.5) !important; }
+    .sidebar-close { color: #2ec4b6 !important; }
     </style>
 
+
+<style>
+/* ===== GLOBAL DARK TEAL THEME OVERRIDES ===== */
+body { background: #111718 !important; }
+
+/* Wave shape between hero and books */
+.hero-wrapper + * { position: relative; }
+
+/* Teal wave divider */
+.teal-wave-divider {
+    width: 100%;
+    line-height: 0;
+    overflow: hidden;
+    background: #111718;
+}
+.teal-wave-divider svg {
+    display: block;
+    width: 100%;
+    height: 60px;
+}
+
+/* Badge colors fix */
+.book-badge { font-weight: 700 !important; }
+
+/* Ticker bar update */
+#ticker-ad {
+    background: linear-gradient(90deg, #071414 0%, #0d2a2a 50%, #071414 100%) !important;
+    border-top: 2px solid rgba(46,196,182,0.5) !important;
+    border-bottom: 2px solid rgba(46,196,182,0.5) !important;
+}
+#ticker-ad > div:first-child {
+    background: #2ec4b6 !important;
+    color: #071414 !important;
+}
+.ticker-msg strong { color: #56d5ca !important; }
+
+/* Hero header h1 fix */
+header h1 { color: #ffffff !important; }
+header h1 span { color: #2ec4b6 !important; }
+
+/* Logo badge */
+.logo-badge {
+    background: rgba(46,196,182,0.1) !important;
+    border: 1px solid rgba(46,196,182,0.3) !important;
+}
+.logo-badge span { color: rgba(255,255,255,0.85) !important; }
+.logo-dot { background: #2ec4b6 !important; }
+
+/* Btn primary fix */
+.btn-primary {
+    background: #2ec4b6 !important;
+    color: #071414 !important;
+}
+.btn-outline {
+    border-color: rgba(46,196,182,0.4) !important;
+    color: rgba(255,255,255,0.75) !important;
+}
+.btn-outline:hover { border-color: #2ec4b6 !important; color: #2ec4b6 !important; }
+
+/* Features section heading */
+#features .section-title { color: #ffffff !important; }
+
+/* Book card text fix */
+.book-card .book-body h3 { color: #ffffff !important; }
+
+/* Wave shape after hero */
+.hero-bottom-wave {
+    background: #111718;
+    position: relative;
+    margin-top: -2px;
+}
+
+/* Scroll hint */
+.scroll-hint span { color: rgba(46,196,182,0.5) !important; }
+</style>
 </head>
 <body>
   <!-- Loading screen (lazima iwe ndani ya body, si head) -->
@@ -1406,9 +1565,9 @@ header h1 span {
 <!-- ===== QUICK ACCESS PAGES SECTION ===== -->
 <style>
 .quick-pages-section {
-  background: linear-gradient(135deg, #0A1628 0%, #0D2245 50%, #0A1628 100%);
+  background: linear-gradient(135deg, #071414 0%, #0d2a2a 50%, #071414 100%);
   padding: 1.6rem 1.2rem 1.4rem;
-  border-bottom: 2px solid rgba(201,168,76,0.25);
+  border-bottom: 2px solid rgba(46,196,182,0.25);
   position: relative;
   overflow: hidden;
 }
@@ -1416,7 +1575,7 @@ header h1 span {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(96,165,250,0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(46,196,182,0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 .quick-pages-label {
@@ -1426,7 +1585,7 @@ header h1 span {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(201,168,76,0.7);
+  color: rgba(46,196,182,0.7);
   margin-bottom: 1rem;
   position: relative;
   z-index: 1;
@@ -1459,16 +1618,16 @@ header h1 span {
   justify-content: center;
   gap: 0.35rem;
   padding: 0.75rem 0.4rem 0.7rem;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(201,168,76,0.15);
+  background: rgba(46,196,182,0.04);
+  border: 1px solid rgba(46,196,182,0.15);
   border-radius: 14px;
   text-decoration: none;
   transition: all 0.22s cubic-bezier(.16,1,.3,1);
   cursor: pointer;
 }
 .qp-card:hover {
-  background: rgba(201,168,76,0.12);
-  border-color: rgba(201,168,76,0.5);
+  background: rgba(46,196,182,0.12);
+  border-color: rgba(46,196,182,0.5);
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.35);
 }
@@ -1490,7 +1649,7 @@ header h1 span {
   line-height: 1.3;
 }
 .qp-card:hover .qp-name {
-  color: #C9A84C;
+  color: #2ec4b6;
 }
 /* Animate in on load */
 .qp-card {
@@ -1635,7 +1794,7 @@ header h1 span {
                 <defs>
                     <path id="outerCircle" d="M 135,135 m -115,0 a 115,115 0 1,1 230,0 a 115,115 0 1,1 -230,0"/>
                 </defs>
-                <text font-family="DM Sans, sans-serif" font-size="10.5" font-weight="600" letter-spacing="3.5" fill="rgba(96,165,250,0.85)">
+                <text font-family="DM Sans, sans-serif" font-size="10.5" font-weight="600" letter-spacing="3.5" fill="rgba(46,196,182,0.85)">
                     <textPath href="#outerCircle">
                         📚 VITABU VYA PDF · KISWAHILI · TANZANIA · SADE BOOKS · SOMA NA UJIFUNZE ·&nbsp;
                     </textPath>
@@ -1649,7 +1808,7 @@ header h1 span {
                 <defs>
                     <path id="innerCircle" d="M 105,105 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/>
                 </defs>
-                <text font-family="DM Sans, sans-serif" font-size="9.5" font-weight="500" letter-spacing="4" fill="rgba(255,255,255,0.55)">
+                <text font-family="DM Sans, sans-serif" font-size="9.5" font-weight="500" letter-spacing="4" fill="rgba(46,196,182,0.55)">
                     <textPath href="#innerCircle">
                         ✦ NUNUA · SOMA · JIFUNZE · UKUE · HERMAN SADE ✦&nbsp;
                     </textPath>
@@ -1672,12 +1831,17 @@ header h1 span {
     </div>
 </div>
 
+<!-- TEAL WAVE TOP -->
+<div style="background:#111718;line-height:0;overflow:hidden;">
+  <svg viewBox="0 0 1200 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:50px;">
+    <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#071414"/>
+  </svg>
+</div>
 
-
-<section id="vitabu-bure" style="background:linear-gradient(160deg,#1A1208 0%,#2D2010 50%,#1A1208 100%);padding:5rem 2rem;position:relative;">
+<section id="vitabu-bure" style="background:linear-gradient(160deg,#071414 0%,#0d2a2a 50%,#071414 100%);padding:5rem 2rem;position:relative;">
   <div style="max-width:860px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:2.5rem;">
-      <h2 style="color:#fff;">Vitabu <em style="color:#C9A84C;">Bure</em> Kabisa</h2>
+      <h2 style="color:#fff;">Vitabu <em style="color:#2ec4b6;">Bure</em> Kabisa</h2>
       <p style="color:rgba(255,255,255,0.45);">Soma na pakua vitabu hivi bila kulipa chochote — zawadi kutoka kwa Herman Sade.</p>
     </div>
     <!-- HAPA script.js itachomeka vitabu -->
@@ -1688,7 +1852,8 @@ header h1 span {
 <!-- Scripts -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
 <!-- Books Section -->
-    <section id="books">
+    <section id="books" style="background:#111718;">
+        <div style="max-width:1200px;margin:0 auto;padding:6rem 2rem;">
         <div class="section-header">
             <div class="section-tag">📚 Mkusanyiko Wetu</div>
             <h2 class="section-title">Vitabu <em>Vyetu</em> Bora</h2>
@@ -1702,16 +1867,16 @@ header h1 span {
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
                     <img loading="lazy" src="images/wakati wa ujasiriamali.png" alt="Wakati wa Ujasiriamali" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
-                    <div class="book-badge" style="background:#f59e0b;color:#000;font-size:0.6rem;padding:3px 8px;">⭐ Maarufu</div>
+                    <div class="book-badge" style="background:#2ec4b6;color:#071414;font-size:0.6rem;padding:3px 8px;">⭐ Maarufu</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Ujasiriamali</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Ujasiriamali</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Wakati wa Ujasiriamali</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Kila mwaka Tanzania inazalisha wahitimu 40,000+. Wengi wanatembea na bahasha za vyeti bila kupata ajira. Ujasiriamali ndiyo mkombozi — mjasiriamali ni mbunifu anayenadi ubunifu wake sokoni. Lakini tatizo ni kwamba...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Kila mwaka Tanzania inazalisha wahitimu 40,000+. Wengi wanatembea na bahasha za vyeti bila kupata ajira. Ujasiriamali ndiyo mkombozi — mjasiriamali ni mbunifu anayenadi ubunifu wake sokoni. Lakini tatizo ni kwamba...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Wakati%20wa%20Ujasiriamali&emoji=🚀" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1725,13 +1890,13 @@ header h1 span {
                     <div class="book-badge" style="background:#ef4444;color:#fff;font-size:0.6rem;padding:3px 8px;">🔥 Hot</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Ujasiriamali</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Ujasiriamali</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Changamoto 12 za Ujasiriamali</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Je, una mtaji kidogo? Unashindwa kupata masoko? Ukosefu wa elimu unakuzuia? Changamoto hizi 12 zinawakabili wajasiriamali wengi Tanzania. Kitabu hiki kinaeleza tatizo moja kwa moja, na suluhisho lake ni...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Je, una mtaji kidogo? Unashindwa kupata masoko? Ukosefu wa elimu unakuzuia? Changamoto hizi 12 zinawakabili wajasiriamali wengi Tanzania. Kitabu hiki kinaeleza tatizo moja kwa moja, na suluhisho lake ni...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Changamoto%2012%20za%20Ujasiriamali&emoji=⚡" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1745,13 +1910,13 @@ header h1 span {
                     <div class="book-badge" style="background:#22c55e;color:#fff;font-size:0.6rem;padding:3px 8px;">✨ Mpya</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Ujasiriamali</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Ujasiriamali</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Mwajiriwa vs Mjasiriamali</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Mwajiriwa hupumzika likizoni — mjasiriamali hafanyi hivyo. Mwajiriwa hufikiri pesa ni kila kitu — mjasiriamali anafahamu muda ndio utajiri. Tofauti 10 hizi zitakubadilisha mawazo yako kabisa. Je, wewe ni nani kweli...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Mwajiriwa hupumzika likizoni — mjasiriamali hafanyi hivyo. Mwajiriwa hufikiri pesa ni kila kitu — mjasiriamali anafahamu muda ndio utajiri. Tofauti 10 hizi zitakubadilisha mawazo yako kabisa. Je, wewe ni nani kweli...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Mwajiriwa%20vs%20Mjasiriamali&emoji=🔄" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1764,13 +1929,13 @@ header h1 span {
                     <img loading="lazy" src="images/file_00000000021c722f88af921c27198e07.png" alt="Jinsi ya Kutengeneza Batiki" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Uzalishaji</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kutengeneza Batiki</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Batiki ni biashara inayolipa sana Tanzania. Unahitaji vibanio, sponji, mshumaa na madawa maalum. Hatua ya kwanza ni kugonga mshumaa kwenye kitambaa cha pamba kwa picha za tembo, twiga au maua. Kisha rangi inawekwa kwa njia ya...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Batiki ni biashara inayolipa sana Tanzania. Unahitaji vibanio, sponji, mshumaa na madawa maalum. Hatua ya kwanza ni kugonga mshumaa kwenye kitambaa cha pamba kwa picha za tembo, twiga au maua. Kisha rangi inawekwa kwa njia ya...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Jinsi%20ya%20Kutengeneza%20Batiki&emoji=🎨" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1783,13 +1948,13 @@ header h1 span {
                     <img loading="lazy" src="images/Chaki.jpg" alt="Jinsi ya Kutengeneza Chaki" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Uzalishaji</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kutengeneza Chaki</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Chaki zinauzwa kila shule Tanzania na mahitaji ni makubwa sana. Unahitaji chokaa nyeupe, maji, rangi na maumbo tu. Mchanganyiko huu unakoroga kwa dakika 15 kisha unaweka kwenye maumbo. Hatua inayofuata kabla chaki hazijauzwa ni...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Chaki zinauzwa kila shule Tanzania na mahitaji ni makubwa sana. Unahitaji chokaa nyeupe, maji, rangi na maumbo tu. Mchanganyiko huu unakoroga kwa dakika 15 kisha unaweka kwenye maumbo. Hatua inayofuata kabla chaki hazijauzwa ni...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Jinsi%20ya%20Kutengeneza%20Chaki&emoji=✏️" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1800,16 +1965,16 @@ header h1 span {
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
                     <img loading="lazy" src="images/nanasi na ndizi.jpg" alt="Jinsi ya Kupika Keki ya Ndizi na Nanasi" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
-                    <div class="book-badge" style="background:#f59e0b;color:#000;font-size:0.6rem;padding:3px 8px;">⭐ Maarufu</div>
+                    <div class="book-badge" style="background:#2ec4b6;color:#071414;font-size:0.6rem;padding:3px 8px;">⭐ Maarufu</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Chakula</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Chakula</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kupika Keki ya Ndizi na Nanasi</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Keki hii ya kipekee inachanganya ndizi mbivu, nanasi na korosho iliyookwa. Unga wa ngano gramu 720, mayai 4, sukari gramu 360 na vanilla — changanya kila kitu kwa mpangilio maalum. Siri ya keki hii kutokukauka ni...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Keki hii ya kipekee inachanganya ndizi mbivu, nanasi na korosho iliyookwa. Unga wa ngano gramu 720, mayai 4, sukari gramu 360 na vanilla — changanya kila kitu kwa mpangilio maalum. Siri ya keki hii kutokukauka ni...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Jinsi%20ya%20Kupika%20Keki&emoji=🎂" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1822,13 +1987,13 @@ header h1 span {
                     <img loading="lazy" src="images/mshumaa.jpg" alt="Utengenezaji wa Mishumaa" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Uzalishaji</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Utengenezaji wa Mishumaa</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Mishumaa inahitajika kila wakati — nyumbani, makanisani, hotelini. Unahitaji paraffin wax, asidi boriki, stearine na utambi. Kwanza loweka utambi kwa dakika 5 kwenye asidi boriki. Kisha unaandaa maumbo na... hatua inayofuata ndiyo siri ya mishumaa kudumu muda mrefu.</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Mishumaa inahitajika kila wakati — nyumbani, makanisani, hotelini. Unahitaji paraffin wax, asidi boriki, stearine na utambi. Kwanza loweka utambi kwa dakika 5 kwenye asidi boriki. Kisha unaandaa maumbo na... hatua inayofuata ndiyo siri ya mishumaa kudumu muda mrefu.</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Utengenezaji%20wa%20Mishumaa&emoji=🕯️" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1842,13 +2007,13 @@ header h1 span {
                     <div class="book-badge" style="background:#22c55e;color:#fff;font-size:0.6rem;padding:3px 8px;">✨ Mpya</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Chakula</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Chakula</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kutengeneza Achali ya Embe</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Achali ya embe inapendwa sana Tanzania na inaweza kuuzwa vizuri. Unahitaji embe, nyanya, vitunguu, siki na viungo. Kata embe vipande vidogo bila kugusa kokwa, kisha anika juani nusu saa. Baada ya siku tano ya kuhifadhi...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Achali ya embe inapendwa sana Tanzania na inaweza kuuzwa vizuri. Unahitaji embe, nyanya, vitunguu, siki na viungo. Kata embe vipande vidogo bila kugusa kokwa, kisha anika juani nusu saa. Baada ya siku tano ya kuhifadhi...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Achali%20ya%20Embe&emoji=🥭" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1862,13 +2027,13 @@ header h1 span {
                     <div class="book-badge" style="background:#ef4444;color:#fff;font-size:0.6rem;padding:3px 8px;">🔥 Hot</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Chakula</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Chakula</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kutengeneza Tomato Source</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Sosi ya nyanya inatumika kila jiko Tanzania. Unahitaji nyanya zilizoiva gramu 900, siki mls 50 na viungo. Saga nyanya vizuri, changanya na supuya viungo, chemsha mpaka uzito ubaki nusu. Kemikali ya kuhifadhi na hatua ya mwisho ni...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Sosi ya nyanya inatumika kila jiko Tanzania. Unahitaji nyanya zilizoiva gramu 900, siki mls 50 na viungo. Saga nyanya vizuri, changanya na supuya viungo, chemsha mpaka uzito ubaki nusu. Kemikali ya kuhifadhi na hatua ya mwisho ni...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Jinsi%20ya%20Kutengeneza%20Tomato%20Source&emoji=🍅" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1881,13 +2046,13 @@ header h1 span {
                     <img loading="lazy" src="images/sabuni ya magadi.png" alt="Jinsi ya Kutengeneza Sabuni ya Magadi" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Uzalishaji</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kutengeneza Sabuni ya Magadi</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Sabuni ya magadi inauzwa kila siku Tanzania. Caustic soda kilo 3, mafuta ya mawese lita 20, sodium silket, maji lita 10 na rangi ya bluu. Koroga caustic soda na maji kwa saa 24 kwanza. Hatua ya kutia rangi na namna ya kukata sabuni vizuri ni...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Sabuni ya magadi inauzwa kila siku Tanzania. Caustic soda kilo 3, mafuta ya mawese lita 20, sodium silket, maji lita 10 na rangi ya bluu. Koroga caustic soda na maji kwa saa 24 kwanza. Hatua ya kutia rangi na namna ya kukata sabuni vizuri ni...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Sabuni%20ya%20Magadi&emoji=🧼" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1900,13 +2065,13 @@ header h1 span {
                     <img loading="lazy" src="images/tambi.jpg" alt="Jinsi ya Kupika Tambi za Dengu" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Chakula</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Chakula</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kupika Tambi za Dengu</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Tambi za dengu ni vitafunio vinavyopendwa na watu wengi. Unahitaji unga wa dengu ½ kilo, unga wa mchele, binzari, pilipili manga na mafuta ya alizeti. Kanda donge gumu, acha likae nusu saa. Mashine ya kupikia tambi ndiyo siri ya...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Tambi za dengu ni vitafunio vinavyopendwa na watu wengi. Unahitaji unga wa dengu ½ kilo, unga wa mchele, binzari, pilipili manga na mafuta ya alizeti. Kanda donge gumu, acha likae nusu saa. Mashine ya kupikia tambi ndiyo siri ya...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Tambi%20za%20Dengu&emoji=🍜" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1920,13 +2085,13 @@ header h1 span {
                     <div class="book-badge" style="background:#22c55e;color:#fff;font-size:0.6rem;padding:3px 8px;">✨ Mpya</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Uzalishaji</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kutengeneza Jiki (Dawa ya Madoa)</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Jiki inauzwa kila duka la rejareja Tanzania. Unahitaji chloride acid na maji distilled tu. Vaa gloves, mask na miwani ya usalama. Changanya chloride acid robo kilo na maji lita 10, koroga hadi iyeyuke. Baada ya dakika 20 utaona tabaka mbili — siri ya...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Jiki inauzwa kila duka la rejareja Tanzania. Unahitaji chloride acid na maji distilled tu. Vaa gloves, mask na miwani ya usalama. Changanya chloride acid robo kilo na maji lita 10, koroga hadi iyeyuke. Baada ya dakika 20 utaona tabaka mbili — siri ya...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Jinsi%20ya%20Kutengeneza%20Jiki&emoji=🧹" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1939,13 +2104,13 @@ header h1 span {
                     <img loading="lazy" src="images/shampoo.jpg" alt="Jinsi ya Kutengeneza Shampoo" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Uzalishaji</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kutengeneza Shampoo</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Shampoo inauzwa saluni na madukani kila siku. Unahitaji sulphonic acid, slec, soda ash, glycerin, centrimide na CDE. Kwanza weka slec, mimina sulphonic acid na koroga upande mmoja. Hatua ya centrimide na sodium sulphate ndiyo inayofanya shampoo...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Shampoo inauzwa saluni na madukani kila siku. Unahitaji sulphonic acid, slec, soda ash, glycerin, centrimide na CDE. Kwanza weka slec, mimina sulphonic acid na koroga upande mmoja. Hatua ya centrimide na sodium sulphate ndiyo inayofanya shampoo...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Jinsi%20ya%20Kutengeneza%20Shampoo&emoji=💆" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1958,13 +2123,13 @@ header h1 span {
                     <img loading="lazy" src="images/mafuta ya mgando.jpg" alt="Jinsi ya Kutengeneza Mafuta ya Mgando" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Uzalishaji</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kutengeneza Mafuta ya Mgando</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Mafuta ya kujipaka (mgando) inapendwa sana na wanawake Tanzania. Unahitaji micro wax kilo 1, white oil lita 2 na perfume vijiko 2 tu. Weka micro wax kwenye sufuria, weka jikoni hadi iyeyuke. Siri muhimu ni wakati wa kutia perfume na halijoto inayofaa ili...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Mafuta ya kujipaka (mgando) inapendwa sana na wanawake Tanzania. Unahitaji micro wax kilo 1, white oil lita 2 na perfume vijiko 2 tu. Weka micro wax kwenye sufuria, weka jikoni hadi iyeyuke. Siri muhimu ni wakati wa kutia perfume na halijoto inayofaa ili...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Mafuta%20ya%20Mgando&emoji=💊" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1978,13 +2143,13 @@ header h1 span {
                     <div class="book-badge" style="background:#ef4444;color:#fff;font-size:0.6rem;padding:3px 8px;">🔥 Hot</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Uzalishaji</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kutengeneza Sabuni ya Maji</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Sabuni ya maji (liquid soap) inahitajika hospitali, ofisi, nyumbani na hoteli zote. Unahitaji sulphonic (LABSA), slec, glycerin, soda ash na pafyumu ya lemon. Changanya sulphonic na slec kwanza, kisha soda ash katika maji lita 5. Angalizo muhimu: chumvi ikizidi...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Sabuni ya maji (liquid soap) inahitajika hospitali, ofisi, nyumbani na hoteli zote. Unahitaji sulphonic (LABSA), slec, glycerin, soda ash na pafyumu ya lemon. Changanya sulphonic na slec kwanza, kisha soda ash katika maji lita 5. Angalizo muhimu: chumvi ikizidi...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Sabuni%20ya%20Maji&emoji=🫧" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -1995,16 +2160,16 @@ header h1 span {
             <div class="book-card">
                 <div class="book-cover" style="height:150px;position:relative;">
                     <img loading="lazy" src="images/file_000000009ee871f5afaee98cea8417cc.png" alt="Jinsi ya Kutengeneza Sabuni za Miche" style="width:100%;height:100%;object-fit:cover;border-radius:4px 4px 0 0;">
-                    <div class="book-badge" style="background:#f59e0b;color:#000;font-size:0.6rem;padding:3px 8px;">⭐ Maarufu</div>
+                    <div class="book-badge" style="background:#2ec4b6;color:#071414;font-size:0.6rem;padding:3px 8px;">⭐ Maarufu</div>
                 </div>
                 <div class="book-body" style="padding:0.75rem;">
-                    <div class="book-category" style="font-size:0.6rem;">Uzalishaji</div>
+                    <div class="book-category" style="font-size:0.6rem;color:#2ec4b6;">Uzalishaji</div>
                     <h3 style="font-size:0.82rem;margin-bottom:0.4rem;">Jinsi ya Kutengeneza Sabuni za Miche</h3>
-                    <p style="font-size:0.68rem;color:#555;line-height:1.5;margin-bottom:0.5rem;">Sabuni za miche (bar soap) zinauzwa kila kijiji Tanzania. Caustic soda kilo 1, mafuta lita 6, sodium siliket gramu 500. Loweka caustic soda siku 5 kwanza — hii ndiyo hatua wengi wanaikosa. Unaweza pia kutengeneza sabuni za tiba kwa kutumia Aloe Vera, ubuyu au...</p>
+                    <p style="font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:0.5rem;">Sabuni za miche (bar soap) zinauzwa kila kijiji Tanzania. Caustic soda kilo 1, mafuta lita 6, sodium siliket gramu 500. Loweka caustic soda siku 5 kwanza — hii ndiyo hatua wengi wanaikosa. Unaweza pia kutengeneza sabuni za tiba kwa kutumia Aloe Vera, ubuyu au...</p>
                     <div class="book-footer" style="margin-top:0.5rem;">
                         <div class="book-price">
                             <span class="price-label" style="font-size:0.58rem;">TSH</span>
-                            <span class="price-value" style="font-size:0.95rem;">5,000</span>
+                            <span class="price-value" style="font-size:0.95rem;color:#2ec4b6;">5,000</span>
                         </div>
                         <a href="malipo.html?book=Sabuni%20za%20Miche&emoji=🧱" class="btn-buy" style="padding:0.4rem 0.8rem;font-size:0.72rem;">Nunua →</a>
                     </div>
@@ -2016,11 +2181,18 @@ header h1 span {
 
 
 
+
+<!-- TEAL WAVE TOP -->
+<div style="background:#111718;line-height:0;overflow:hidden;">
+  <svg viewBox="0 0 1200 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:50px;">
+    <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#071414"/>
+  </svg>
+</div>
 <!-- Features Section -->
     <section id="features">
         <div class="features-inner">
             <div class="section-header">
-                <div class="section-tag" style="color:var(--gold)">✨ Kwa Nini Sisi</div>
+                <div class="section-tag" style="color:#2ec4b6">✨ Kwa Nini Sisi</div>
                 <h2 class="section-title" style="color:var(--white)">Huduma Zetu <em>Bora</em></h2>
                 <p class="section-desc" style="color:rgba(255,255,255,0.45)">Tunakupa uzoefu bora wa ununuzi wa vitabu vya kidigitali</p>
             </div>
@@ -2050,37 +2222,37 @@ header h1 span {
     </section>
 
 <!-- ===== PAKUA APP ===== -->
-<section style="background:linear-gradient(135deg,#1A1208 0%,#2D2010 50%,#1A1208 100%);border-top:2px solid rgba(201,168,76,0.35);border-bottom:2px solid rgba(201,168,76,0.35);padding:2.2rem 2rem;position:relative;overflow:hidden;">
+<section style="background:linear-gradient(135deg,#071414 0%,#0d2a2a 50%,#071414 100%);border-top:2px solid rgba(46,196,182,0.35);border-bottom:2px solid rgba(46,196,182,0.35);padding:2.2rem 2rem;position:relative;overflow:hidden;">
   <!-- Glow ya mapambo -->
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(201,168,76,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(46,196,182,0.08) 0%,transparent 70%);pointer-events:none;"></div>
   <div style="max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;position:relative;z-index:1;">
     <!-- Kushoto: icon + maandishi -->
     <div style="display:flex;align-items:center;gap:16px;">
-      <!-- Icon yenye ring ya gold -->
+      <!-- Icon yenye ring ya teal -->
       <div style="position:relative;flex-shrink:0;">
-        <div style="width:54px;height:54px;background:linear-gradient(135deg,#C9A84C,#E8C96A);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 6px 24px rgba(201,168,76,0.4);">📱</div>
-        <div style="position:absolute;top:-3px;right:-3px;width:14px;height:14px;background:#22c55e;border-radius:50%;border:2px solid #1A1208;display:flex;align-items:center;justify-content:center;">
+        <div style="width:54px;height:54px;background:linear-gradient(135deg,#2ec4b6,#56d5ca);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 6px 24px rgba(46,196,182,0.4);">📱</div>
+        <div style="position:absolute;top:-3px;right:-3px;width:14px;height:14px;background:#22c55e;border-radius:50%;border:2px solid #071414;display:flex;align-items:center;justify-content:center;">
           <div style="width:5px;height:5px;background:#fff;border-radius:50%;"></div>
         </div>
       </div>
       <!-- Maandishi -->
       <div>
-        <div style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:#fff;line-height:1.2;">SadeBooks <em style="color:#C9A84C;font-style:normal;">App</em></div>
-        <div style="font-size:0.7rem;color:rgba(201,168,76,0.75);margin-top:2px;letter-spacing:0.04em;">Android · APK · v1.0 · Kiswahili 🇹🇿</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:#fff;line-height:1.2;">SadeBooks <em style="color:#2ec4b6;font-style:normal;">App</em></div>
+        <div style="font-size:0.7rem;color:rgba(46,196,182,0.75);margin-top:2px;letter-spacing:0.04em;">Android · APK · v1.0 · Kiswahili 🇹🇿</div>
         <div style="display:flex;align-items:center;gap:6px;margin-top:5px;">
           <span style="font-size:0.62rem;color:rgba(255,255,255,0.45);">✓ Bure Kabisa</span>
-          <span style="color:rgba(201,168,76,0.3);font-size:0.6rem;">|</span>
+          <span style="color:rgba(46,196,182,0.3);font-size:0.6rem;">|</span>
           <span style="font-size:0.62rem;color:rgba(255,255,255,0.45);">✓ Hakuna Matangazo</span>
-          <span style="color:rgba(201,168,76,0.3);font-size:0.6rem;">|</span>
+          <span style="color:rgba(46,196,182,0.3);font-size:0.6rem;">|</span>
           <span style="font-size:0.62rem;color:rgba(255,255,255,0.45);">✓ Soma Offline</span>
         </div>
       </div>
     </div>
     <!-- Kulia: kitufe cha kupakua -->
     <a href="Sadebooks.apk" download
-      style="display:inline-flex;align-items:center;gap:10px;padding:13px 28px;background:linear-gradient(135deg,#C9A84C,#E8C96A);color:#1A1208;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:800;text-decoration:none;box-shadow:0 8px 28px rgba(201,168,76,0.45);white-space:nowrap;letter-spacing:0.02em;transition:all 0.3s ease;"
-      onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 14px 36px rgba(201,168,76,0.6)'"
-      onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 8px 28px rgba(201,168,76,0.45)'">
+      style="display:inline-flex;align-items:center;gap:10px;padding:13px 28px;background:linear-gradient(135deg,#2ec4b6,#56d5ca);color:#071414;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:800;text-decoration:none;box-shadow:0 8px 28px rgba(46,196,182,0.45);white-space:nowrap;letter-spacing:0.02em;transition:all 0.3s ease;"
+      onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 14px 36px rgba(46,196,182,0.6)'"
+      onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 8px 28px rgba(46,196,182,0.45)'">
       <span style="font-size:1.1rem;">⬇️</span>
       <span>Pakua App Bure</span>
     </a>
@@ -2146,7 +2318,7 @@ header h1 span {
 })();
 </script>
 <!-- SCROLL TO TOP -->
-<button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:28px;right:22px;z-index:9999;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#C9A84C,#E8C96A);color:#1A1208;border:none;font-size:1.4rem;font-weight:900;cursor:pointer;box-shadow:0 6px 24px rgba(201,168,76,0.5);display:none;align-items:center;justify-content:center;transition:all 0.3s ease;" title="Rudi Juu">↑</button>
+<button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:28px;right:22px;z-index:9999;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#2ec4b6,#56d5ca);color:#071414;border:none;font-size:1.4rem;font-weight:900;cursor:pointer;box-shadow:0 6px 24px rgba(46,196,182,0.5);display:none;align-items:center;justify-content:center;transition:all 0.3s ease;" title="Rudi Juu">↑</button>
 <script>
 (function(){
   var btn=document.getElementById('scrollTopBtn');
